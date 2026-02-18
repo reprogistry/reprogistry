@@ -1,0 +1,163 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-02-17T07:28:15.878Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:8.5.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "oembed-parser@3.0.3",
+			"name": "oembed-parser",
+			"version": "3.0.3",
+			"location": "https://registry.npmjs.org/oembed-parser/-/oembed-parser-3.0.3.tgz",
+			"integrity": "sha512-9xSdFOZBCY++C0Fw8HAX+H7/P27waHOLObYyZUz9ayhc9QHVQ4ObNsqu7slIw7MWO7sJpb8/tBt3zCChu23LmQ==",
+			"publishedAt": "2022-05-01T02:27:05.654Z",
+			"publishedWith": {
+				"node": "16.14.2",
+				"npm": "8.6.0"
+			},
+			"dependencies": {
+				"axios": "^0.27.2",
+				"bellajs": "^11.0.2"
+			}
+		},
+		"source": {
+			"integrity": "sha512-epyorwJktjGp9Oh/FG328MpmGaSA6ZDXyBlhswx0kWO5TYzmh1X94FvvzOFNmILaD7GOoCV7PWCxL9pbLnQLsg==",
+			"location": "git+ssh://git@github.com/ndaidong/oembed-parser.git",
+			"spec": "github:ndaidong/oembed-parser#1dfd7ca67cd8ef4dc585a5b8bb86cb66400866b7"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"dist/cjs/oembed-parser.js": {
+					"diff": "--- published/dist/cjs/oembed-parser.js\n+++ rebuilt/dist/cjs/oembed-parser.js\n@@ -1,4 +1,4 @@\n-// oembed-parser@3.0.3, by @ndaidong - built with esbuild at 2022-05-01T02:26:24.406Z - published under MIT license\n+// oembed-parser@3.0.2, by @ndaidong - built with esbuild at 2022-04-24T04:05:44.858Z - published under MIT license\n var __create = Object.create;\n var __defProp = Object.defineProperty;\n var __getOwnPropDesc = Object.getOwnPropertyDescriptor;\n@@ -37,9 +37,9 @@\n var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, \"default\", { value: mod, enumerable: true }) : target, mod));\n var __toCommonJS = (mod) => __copyProps(__defProp({}, \"__esModule\", { value: true }), mod);\n \n-// node_modules/.pnpm/axios@0.27.2/node_modules/axios/lib/helpers/bind.js\n+// node_modules/.pnpm/axios@0.26.1/node_modules/axios/lib/helpers/bind.js\n var require_bind = __commonJS({\n-  \"node_modules/.pnpm/axios@0.27.2/node_modules/axios/lib/helpers/bind.js\"(exports, module2) {\n+  \"node_modules/.pnpm/axios@0.26.1/node_modules/axios/lib/helpers/bind.js\"(exports, module2) {\n     \"use strict\";\n     module2.exports = function bind(fn, thisArg) {\n       return function wrap() {\n@@ -53,24 +53,12 @@\n   }\n });\n \n-// node_modules/.pnpm/axios@0.27.2/node_modules/axios/lib/utils.js\n+// node_modules/.pnpm/axios@0.26.1/node_modules/axios/lib/utils.js\n var require_utils = __commonJS({\n-  \"node_modules/.pnpm/axios@0.27.2/node_modules/axios/lib/utils.js\"(exports, module2) {\n+  \"node_modules/.pnpm/axios@0.26.1/node_modules/axios/lib/utils.js\"(exports, module2) {\n     \"use strict\";\n     var bind = require_bind();\n     var toString = Object.prototype.toString;\n-    var kindOf = function(cache) {\n-      return function(thing) {\n-        var str = toString.call(thing);\n-        return cache[str] || (cache[str] = str.slice(8, -1).toLowerCase());\n-      };\n-    }(/* @__PURE__ */ Object.create(null));\n-    function kindOfTest(type) {\n-      type = type.toLowerCase();\n-      return function isKindOf(thing) {\n-        return kindOf(thing) === type;\n-      };\n-    }\n     function isArray2(val) {\n       return Array.isArray(val);\n     }\n@@ -80,7 +68,12 @@\n     function isBuffer(val) {\n       return val !== null && !isUndefined2(val) && val.constructor !== null && !isUndefined2(val.constructor) && typeof val.constructor.isBuffer === \"function\" && val.constructor.isBuffer(val);\n     }\n-    var isArrayBuffer = kindOfTest(\"ArrayBuffer\");\n+    function isArrayBuffer(val) {\n+      return toString.call(val) === \"[object ArrayBuffer]\";\n+    }\n+    function isFormData(val) {\n+      return toString.call(val) === \"[object FormData]\";\n+    }\n     function isArrayBufferView(val) {\n       var result;\n       if (typeof ArrayBuffer !== \"undefined\" && ArrayBuffer.isView) {\n@@ -100,27 +93,30 @@\n       return val !== null && typeof val === \"object\";\n     }\n     function isPlainObject(val) {\n-      if (kindOf(val) !== \"object\") {\n+      if (toString.call(val) !== \"[object Object]\") {\n         return false;\n       }\n       var prototype = Object.getPrototypeOf(val);\n       return prototype === null || prototype === Object.prototype;\n     }\n-    var isDate2 = kindOfTest(\"Date\");\n-    var isFile = kindOfTest(\"File\");\n-    var isBlob = kindOfTest(\"Blob\");\n-    var isFileList = kindOfTest(\"FileList\");\n+    function isDate2(val) {\n+      return toString.call(val) === \"[object Date]\";\n+    }\n+    function isFile(val) {\n+      return toString.call(val) === \"[object File]\";\n+    }\n+    function isBlob(val) {\n+      return toString.call(val) === \"[object Blob]\";\n+    }\n     function isFunction2(val) {\n       return toString.call(val) === \"[object Function]\";\n     }\n     function isStream(val) {\n       return isObject2(val) && isFunction2(val.pipe);\n     }\n-    function isFormData(thing) {\n-      var pattern = \"[object FormData]\";\n-      return thing && (typeof FormData === \"function\" && thing instanceof FormData || toString.call(thing) === pattern || isFunction2(thing.toString) && thing.toString() === pattern);\n+    function isURLSearchParams(val) {\n+      return toString.call(val) === \"[object URLSearchParams]\";\n     }\n-    var isURLSearchParams = kindOfTest(\"URLSearchParams\");\n     function trim(str) {\n       return str.trim ? str.trim() : str.replace(/^\\s+|\\s+$/g, \"\");\n",
+					"match": false,
+					"packageHash": "d2828baf462c32ce2aa70b15a4468fa4ba26aa8279882fd3f7a7c58a8987c37f",
+					"size": 454045,
+					"sourceHash": "c6cb420bce7847227989db039be5c44ee73b691879ace6835c4242a06fd75a7a",
+					"status": "content"
+				},
+				"dist/cjs/package.json": {
+					"diff": "--- published/dist/cjs/package.json\n+++ rebuilt/dist/cjs/package.json\n@@ -1,5 +1,5 @@\n {\n   \"name\": \"oembed-parser-cjs\",\n-  \"version\": \"3.0.3\",\n+  \"version\": \"3.0.2\",\n   \"main\": \"./oembed-parser.js\"\n }\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "4ed5e15785086be683d4d6964253db7696a610008a67464b123401a6173785fc",
+					"size": 87,
+					"sourceHash": "a3114d61652659b660beb6f37efbe4357098b624907623c91b53cf39ef8f0add",
+					"status": "content"
+				},
+				"dist/cjs/providers.latest.js": {
+					"diff": "--- published/dist/cjs/providers.latest.js\n+++ rebuilt/dist/cjs/providers.latest.js\n@@ -1,4 +1,4 @@\n-// provider data, synchronized at 2022-05-01T01:53:50.390Z\n+// provider data, synchronized at 2022-04-24T04:05:40.938Z\n \n /* eslint-disable */ \n \n@@ -391,20 +391,6 @@\n     ]\n   },\n   {\n-    \"provider_name\": \"Bumper\",\n-    \"provider_url\": \"http://www.bumper.com\",\n-    \"endpoints\": [\n-      {\n-        \"schemes\": [\n-          \"https://www.bumper.com/oembed/bumper\",\n-          \"https://www.bumper.com/oembed-s/bumper\"\n-        ],\n-        \"url\": \"https://www.bumper.com/oembed/bumper\",\n-        \"discovery\": true\n-      }\n-    ]\n-  },\n-  {\n     \"provider_name\": \"Buttondown\",\n     \"provider_url\": \"https://buttondown.email/\",\n     \"endpoints\": [\n@@ -1425,19 +1411,6 @@\n     ]\n   },\n   {\n-    \"provider_name\": \"HASH\",\n-    \"provider_url\": \"https://hash.ai\",\n-    \"endpoints\": [\n-      {\n-        \"schemes\": [\n-          \"https://core.hash.ai/@*\"\n-        ],\n-        \"url\": \"https://api.hash.ai/oembed\",\n-        \"discovery\": false\n-      }\n-    ]\n-  },\n-  {\n     \"provider_name\": \"hearthis.at\",\n     \"provider_url\": \"https://hearthis.at/\",\n     \"endpoints\": [\n@@ -3162,7 +3135,7 @@\n           \"https://open.spotify.com/*\",\n           \"spotify:*\"\n         ],\n-        \"url\": \"https://open.spotify.com/oembed\",\n+        \"url\": \"https://open.spotify.com/oembed/\",\n         \"discovery\": true\n       }\n     ]\n@@ -3292,22 +3265,10 @@\n       {\n         \"schemes\": [\n           \"https://sway.com/*\",\n-          \"https://www.sway.com/*\"\n-        ],\n-        \"url\": \"https://sway.com/api/v1.0/oembed\",\n-        \"discovery\": true\n-      }\n-    ]\n-  },\n-  {\n-    \"provider_name\": \"Sway Office\",\n-    \"provider_url\": \"https://sway.office.com\",\n-    \"endpoints\": [\n-      {\n-        \"schemes\": [\n+          \"https://www.sway.com/*\",\n           \"https://sway.office.com/*\"\n         ],\n-        \"url\": \"https://sway.office.com/api/v1.0/oembed\",\n+        \"url\": \"https://sway.com/api/v1.0/oembed\",\n         \"discovery\": true\n       }\n     ]\n@@ -3680,19 +3641,6 @@\n     ]\n   },\n   {\n-    \"provider_name\": \"VidMount\",\n-    \"provider_url\": \"https://vidmount.com/\",\n-    \"endpoints\": [\n-      {\n-        \"schemes\": [\n-          \"https://vidmount.com/*\"\n-        ],\n-        \"url\": \"https://vidmount.com/oembed\",\n-        \"discovery\": true\n-      }\n-    ]\n-  },\n-  {\n",
+					"match": false,
+					"packageHash": "04923f2b45cad1d37982e8dfff63f7148f39c21d9713bfb55c6f72e7418256f9",
+					"size": 93084,
+					"sourceHash": "7f529ba2eafc2531de9383e6784152ed380310ef13d61e2f169fec184353046e",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 3,
+				"matchingFiles": 38,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.926829268292683,
+				"totalFiles": 41
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "asynckit",
+				"version": "0.4.0"
+			},
+			{
+				"name": "axios",
+				"version": "0.27.2"
+			},
+			{
+				"name": "bellajs",
+				"version": "11.2.0"
+			},
+			{
+				"name": "call-bind-apply-helpers",
+				"version": "1.0.2"
+			},
+			{
+				"name": "combined-stream",
+				"version": "1.0.8"
+			},
+			{
+				"name": "delayed-stream",
+				"version": "1.0.0"
+			},
+			{
+				"name": "dunder-proto",
+				"version": "1.0.1"
+			},
+			{
+				"name": "es-define-property",
+				"version": "1.0.1"
+			},
+			{
+				"name": "es-errors",
+				"version": "1.3.0"
+			},
+			{
+				"name": "es-object-atoms",
+				"version": "1.1.1"
+			},
+			{
+				"name": "es-set-tostringtag",
+				"version": "2.1.0"
+			},
+			{
+				"name": "follow-redirects",
+				"version": "1.15.11"
+			},
+			{
+				"name": "form-data",
+				"version": "4.0.5"
+			},
+			{
+				"name": "function-bind",
+				"version": "1.1.2"
+			},
+			{
+				"name": "get-intrinsic",
+				"version": "1.3.0"
+			},
+			{
+				"name": "get-proto",
+				"version": "1.0.1"
+			},
+			{
+				"name": "gopd",
+				"version": "1.2.0"
+			},
+			{
+				"name": "has-symbols",
+				"version": "1.1.0"
+			},
+			{
+				"name": "has-tostringtag",
+				"version": "1.0.2"
+			},
+			{
+				"name": "hasown",
+				"version": "2.0.2"
+			},
+			{
+				"name": "math-intrinsics",
+				"version": "1.1.0"
+			},
+			{
+				"name": "mime-db",
+				"version": "1.52.0"
+			},
+			{
+				"name": "mime-types",
+				"version": "2.1.35"
+			}
+		]
+	}
+]

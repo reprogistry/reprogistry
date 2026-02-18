@@ -1,0 +1,536 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-02-17T07:33:57.792Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:8.19.2",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "oembed-parser@3.1.6-rc1",
+			"name": "oembed-parser",
+			"version": "3.1.6-rc1",
+			"location": "https://registry.npmjs.org/oembed-parser/-/oembed-parser-3.1.6-rc1.tgz",
+			"integrity": "sha512-+h4I5MA6mNRFkKPx2498zpMcv+Q6epVK0+sdIRjgDO0ClBIM3AfCD+L6E4ghPP5owVLN86T1j/Fxi+veuJ7YQQ==",
+			"publishedAt": "2022-12-01T02:59:50.325Z",
+			"publishedWith": {
+				"node": "18.12.1",
+				"npm": "8.19.3"
+			},
+			"dependencies": {
+				"cross-fetch": "^3.1.5"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+ssh://git@github.com/ndaidong/oembed-parser.git",
+			"spec": "github:ndaidong/oembed-parser#HEAD"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".github/workflows/ci-test.yml": {
+					"match": false,
+					"packageHash": "589858f2cac829713ea4b91a5d4c584c86fd1cd1f13b804e8620e788b23e0f25",
+					"size": 1083,
+					"status": "missing-in-source"
+				},
+				".github/workflows/codeql-analysis.yml": {
+					"match": false,
+					"packageHash": "a8e673a92b349de480599cbca2b8fbefda82b448ce5a3ddd12278576fc38b4fa",
+					"size": 2431,
+					"status": "missing-in-source"
+				},
+				"CONTRIBUTING.md": {
+					"diff": "--- published/CONTRIBUTING.md\n+++ rebuilt/CONTRIBUTING.md\n@@ -1,24 +1,10 @@\n-# Contributing to oembed-parser\n+# Contributing to `@extractus/oembed-extractor`\n \n-While `oembed-parser` is just a simple library with personal purpose, I'm happy if it can be useful for you too.\n+Glad to see you here.\n \n-Anyway, I hope it always gets better, so pull requests are welcome, though larger proposals should be discussed first.\n-\n-As an OSS, it should follow the Unix philosophy: \"do one thing and do it well\".\n-\n-## Installation\n-\n-- Ensure you have `node` and `npm` installed.\n-- After cloning the repository, run `npm install` in the root of the repository.\n-- Run `npm test` to ensure that everything works correctly in your environment.\n-\n-Because test suite includes the cases of Facebook/Instagram oembed link, you need to set the environment variables `FACEBOOK_APP_ID` and `FACEBOOK_CLIENT_TOKEN`.\n-Otherwise the test will fail. Please refer [this section](https://github.com/ndaidong/oembed-parser#facebook-and-instagram) for more info.\n-\n-Once it works well, you can start modifying your fork.\n-\n-In this process, you can use [`npm run eval` command](https://github.com/ndaidong/oembed-parser#quick-evaluation) to evaluate your changes.\n+Collaborations and pull requests are always welcomed, though larger proposals should be discussed first.\n \n+As an OSS, it's better to follow the Unix philosophy: \"do one thing and do it well\".\n \n ## Third-party libraries\n \n@@ -29,13 +15,11 @@\n \n ## Coding convention\n \n-Please follow [standardjs](https://standardjs.com/) style guide.\n-\n Make sure your code lints before opening a pull request.\n \n \n ```bash\n-cd oembed-parser\n+cd oembed-extractor\n \n # check coding convention issue\n npm run lint\n@@ -52,18 +36,18 @@\n Be sure to run the unit test suite before opening a pull request. An example test run is shown below.\n \n ```bash\n-cd oembed-parser\n+cd oembed-extractor\n npm test\n ```\n \n-![oembed-parser unit test](https://i.imgur.com/Nr5BgUx.png)\n+![oembed-extractor unit test](https://i.imgur.com/Nr5BgUx.png)\n \n If test coverage decreased, please check test scripts and try to improve this number.\n \n \n ## Documentation\n \n-If you've changed APIs, please update README and [the examples](https://github.com/ndaidong/oembed-parser/tree/main/examples).\n+If you've changed APIs, please update README and [the examples](examples).\n \n \n ## Clean commit histories\n@@ -82,6 +66,6 @@\n \n ## License\n \n-By contributing to `oembed-parser`, you agree that your contributions will be licensed under its [MIT license](https://github.com/ndaidong/oembed-parser/blob/main/LICENSE).\n+By contributing to `@extractus/oembed-extractor`, you agree that your contributions will be licensed under its [MIT license](LICENSE).\n \n ---\n",
+					"match": false,
+					"packageHash": "5f8bbd29b751bb7862fd796644a3cc77a9285d387e9fedb1ffac0faed0ccaf97",
+					"size": 2893,
+					"sourceHash": "e184354a711263d4dc099a9d609b9da370188d0bf5dce610edfcb926fd1c6f38",
+					"status": "content"
+				},
+				"LICENSE": {
+					"diff": "--- published/LICENSE\n+++ rebuilt/LICENSE\n@@ -1,6 +1,6 @@\n-MIT License\n+The MIT License (MIT)\n \n-Copyright (c) 2017 Dong Nguyen\n+Copyright (c) 2017 Extractus\n \n Permission is hereby granted, free of charge, to any person obtaining a copy\n of this software and associated documentation files (the \"Software\"), to deal\n",
+					"match": false,
+					"packageHash": "d79c5c8da6dac096190b46b4f49a03c3d5ab06b115ff7e28689daf7535c473b8",
+					"size": 1068,
+					"sourceHash": "42ece6671ab4faff53b300e60bb0f0e8d71ae350c5d26c69a448cc10d51bd59e",
+					"status": "content"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,17 +1,277 @@\n-# This package has been renamed\n \n-Hello everybody,\n+# oembed-extractor\n \n-Since v3.1.6, `oembed-parser` has been renamed to `@extractus/oembed-extractor`.\n+Extract oEmbed content from given URL.\n \n-Here is the new location:\n+[![NPM](https://badge.fury.io/js/@extractus%2Foembed-extractor.svg)](https://badge.fury.io/js/@extractus%2Foembed-extractor)\n+![CodeQL](https://github.com/extractus/oembed-extractor/workflows/CodeQL/badge.svg)\n+[![CI test](https://github.com/extractus/oembed-extractor/workflows/ci-test/badge.svg)](https://github.com/extractus/oembed-extractor/actions)\n \n-- https://www.npmjs.com/package/@extractus/oembed-extractor\n+## Demo\n \n-APIs and usage remain unchanged.\n+- [Give it a try!](https://extractus-demo.vercel.app/oembed)\n \n-We moved it to [a new organization](https://github.com/extractus) in the hope that more talented collaborators will continue to develop it.\n+## Install & Usage\n \n-Thank you for using this library.\n+### Node.js\n+\n+```bash\n+npm i @extractus/oembed-extractor\n+\n+# pnpm\n+pnpm i @extractus/oembed-extractor\n+\n+# yarn\n+yarn add @extractus/oembed-extractor\n+```\n+\n+```ts\n+import { extract } from '@extractus/oembed-extractor'\n+\n+const result = await extract('https://www.youtube.com/watch?v=x2bqscVkGxk')\n+console.log(result)\n+```\n+\n+### Deno\n+\n+```ts\n+import { extract } from 'npm:@extractus/oembed-extractor'\n+```\n+\n+### Browser\n+\n+```ts\n+import { extract } from \"https://esm.sh/@extractus/oembed-extractor@latest\"\n+```\n+\n+## APIs\n+\n+### `.extract()`\n+\n+Load and extract oembed data.\n+\n+#### Syntax\n+\n+```ts\n+extract(String url)\n+extract(String url, Object params)\n+extract(String url, Object params, Object fetchOptions)\n+```\n+\n+#### Parameters\n+\n+##### `url` *required*\n+\n+URL of a valid oEmbed resource, e.g. `https://www.youtube.com/watch?v=x2bqscVkGxk`\n+\n+##### `params` *optional*\n+\n+Optional argument `params` can be useful when you want to specify some additional customizations.\n+\n+Here are several popular params:\n+\n+- `maxwidth`: max width of embed size\n+- `maxheight`: max height of embed size\n+- `theme`: e.g, `dark` or `light`\n+- `lang`: e.g, 'en', 'fr', 'cn', 'vi', etc\n+\n+Note that some params are supported by these providers but not by the others.\n+Please see the provider's oEmbed API docs carefully for exact information.\n+\n+##### `fetchOptions` *optional*\n+\n+`fetchOptions` is an object that can have the following properties:\n+\n+- `headers`: to set request headers\n+- `proxy`: another endpoint to forward the request to\n+- `agent`: a HTTP proxy agent\n+- `signal`: AbortController signal or AbortSignal timeout to terminate the request\n+\n",
+					"match": false,
+					"packageHash": "d17df6683439153f05a065f8e5c824d670b759d71580148acec965ef7492c2ed",
+					"size": 435,
+					"sourceHash": "eb5808880a3adc852db4ab8efdba4c302a57faa443bcc3b74c3a66c1671faac1",
+					"status": "content"
+				},
+				"SECURITY.md": {
+					"diff": "--- published/SECURITY.md\n+++ rebuilt/SECURITY.md\n@@ -12,6 +12,6 @@\n \n You can report low severity vulnerabilities as GitHub issues.\n \n-More severe vulnerabilities should be reported to my email ndaidong@gmail.com or Twitter [@ndaidong](https://twitter.com/ndaidong).\n+More severe vulnerabilities should be reported to email extractus.security@skiff.com.\n \n ---\n",
+					"match": false,
+					"packageHash": "bcf8d5ffd1eef5fc1416fcd6a9ec07ba14a04aa09aa641bdca6279990e803b5e",
+					"size": 612,
+					"sourceHash": "bc1a34e053baa7d59a5c8b3ef473e1eceab50700f8b300b0f36e21034da08247",
+					"status": "content"
+				},
+				"build.js": {
+					"match": false,
+					"packageHash": "361b9815cd39d23bcf920841657e7921bb0fd1cb4c92dd32d1069594f2d5ff94",
+					"size": 1414,
+					"status": "missing-in-source"
+				},
+				"build.test.js": {
+					"match": false,
+					"packageHash": "0b8d9f849265cf4f979723bab05e4b4f7048695a7d1b4e40b4559c3b6851b022",
+					"size": 1418,
+					"status": "missing-in-source"
+				},
+				"cjs-eval.js": {
+					"match": false,
+					"packageHash": "2fb06a26d50b69fa14d5d3327ca5a17e231fc41c0524f6fe2cf6082474baa757",
+					"size": 407,
+					"status": "missing-in-source"
+				},
+				"dist/cjs/index.d.ts": {
+					"match": false,
+					"packageHash": "ccadfae11a65955cdd107e65dad989af5e846fe15eec8b0d365182f0e7e0d073",
+					"size": 4619,
+					"status": "missing-in-source"
+				},
+				"dist/cjs/oembed-parser.js": {
+					"match": false,
+					"packageHash": "89b38b20ecdc1248581f31a0272a44c951d10c3da122426e78afd718a538955e",
+					"size": 437087,
+					"status": "missing-in-source"
+				},
+				"dist/cjs/package.json": {
+					"match": false,
+					"packageHash": "250eb1032de76dbd1a773c841c0986a5559d99500588dce368f335751005b845",
+					"size": 86,
+					"status": "missing-in-source"
+				},
+				"dist/oembed-parser.esm.js": {
+					"match": false,
+					"packageHash": "9e46aebc60c88302a1b74ac7813a811b091eafa8bfb8152fbfd775a01594d3fc",
+					"size": 43137,
+					"status": "missing-in-source"
+				},
+				"eval.js": {
+					"diff": "--- published/eval.js\n+++ rebuilt/eval.js\n@@ -5,10 +5,12 @@\n \n const run = async (url) => {\n   try {\n-    const art = await extract(url)\n-    console.log(art)\n+    console.time('extract-oembed')\n+    const oembed = await extract(url)\n+    console.log(oembed)\n+    console.timeEnd('extract-oembed')\n   } catch (err) {\n-    console.trace(err)\n+    console.log(err.message)\n   }\n }\n \n",
+					"match": false,
+					"packageHash": "15297d937d37a4cc2cd06d7fe58dacd0b14c26cbb3a12cdcb3409b03cc564968",
+					"size": 387,
+					"sourceHash": "ea199458ca44d17c66bf787743293ffd461a05ca897230d8bc0b50ac7fc178e9",
+					"status": "content"
+				},
+				"examples/browser-oembed-parser/README.md": {
+					"match": false,
+					"packageHash": "a667ac6d90aa0a16696a4800ebd8194d595812239f01f89ce8f01e877a1319c2",
+					"size": 770,
+					"status": "missing-in-source"
+				},
+				"examples/browser-oembed-parser/package.json": {
+					"match": false,
+					"packageHash": "971c50a7eb17863e174c63687b57ceac3ab702547f9e9dc3f9787e273ec0c27b",
+					"size": 199,
+					"status": "missing-in-source"
+				},
+				"examples/browser-oembed-parser/public/chota.min.css": {
+					"match": false,
+					"packageHash": "1d89ebbd30258d97cd441a3389c498d9ec138a03b037d7df539ba7dceeb3a242",
+					"size": 18228,
+					"status": "missing-in-source"
+				},
+				"examples/browser-oembed-parser/public/index.html": {
+					"match": false,
+					"packageHash": "95d6013f7d0aba9377738384676c6e195a41d6a3f6ad15b2f8ccc52db36dd6aa",
+					"size": 2634,
+					"status": "missing-in-source"
+				},
+				"examples/browser-oembed-parser/server.js": {
+					"match": false,
+					"packageHash": "b4439e2fe73061dd7b8be059e412838d0a8a3ebaff1f7af67a5d2b0ee2f9fe7a",
+					"size": 582,
+					"status": "missing-in-source"
+				},
+				"examples/bun-oembed-parser/README.md": {
+					"match": false,
+					"packageHash": "e62da146043ff824cfbba277a294e1fbef4b2ffcf0529a78a08e76639acbbbe0",
+					"size": 232,
+					"status": "missing-in-source"
+				},
+				"examples/bun-oembed-parser/index.ts": {
+					"match": false,
+					"packageHash": "aa4f98be2fd34c6cee251bf933fc5437e162753d8d6267a41adbb9f0ece3893b",
+					"size": 710,
+					"status": "missing-in-source"
+				},
+				"examples/bun-oembed-parser/package.json": {
+					"match": false,
+					"packageHash": "49af5be7568859e2edb0bf6ea0c18b24bd4cd98c9d5ad5c6550bdef3c89c5851",
+					"size": 189,
+					"status": "missing-in-source"
+				},
+				"examples/bun-oembed-parser/tsconfig.json": {
+					"match": false,
+					"packageHash": "8c5b4f8adcccfef3e592f85e93ebe8faf9da2b03f58f556fbdbc4fac62d53925",
+					"size": 170,
+					"status": "missing-in-source"
+				},
+				"examples/deno-oembed-parser/README.md": {
+					"match": false,
+					"packageHash": "d4099f136ba87a6035f233451e2e3c30115745efdff11cffab2f2f5f7f491c58",
+					"size": 259,
+					"status": "missing-in-source"
+				},
+				"examples/deno-oembed-parser/index.ts": {
+					"match": false,
+					"packageHash": "727e793429f5a071aed3d39f1126f0d931a52034916cfe93bfd9b6c1a7b4feeb",
+					"size": 832,
+					"status": "missing-in-source"
+				},
+				"examples/node-oembed-parser/README.md": {
+					"match": false,
+					"packageHash": "ce8741bb82ec3d0eaaabc3583253c6300ca72c046665f6b3ede59740dd68ba86",
+					"size": 221,
+					"status": "missing-in-source"
+				},
+				"examples/node-oembed-parser/index.js": {
+					"match": false,
+					"packageHash": "4f9c9af8a5f25cc692e6f0c13a58a2e9b1167e960353f85e4f79e64bdf06ef48",
+					"size": 699,
+					"status": "missing-in-source"
+				},
+				"examples/node-oembed-parser/package.json": {
+					"match": false,
+					"packageHash": "95e253d0df8f0e7ea69e6095a1706344ac7820514dc860ae7e007ababfc838d2",
+					"size": 231,
+					"status": "missing-in-source"
+				},
+				"examples/tsnode-oembed-parser/README.md": {
+					"match": false,
+					"packageHash": "6cba1c43190c5fb937e5ef20229a0dd8e330ac1fbe1c78f4b89df5c0dbcf18c5",
+					"size": 265,
+					"status": "missing-in-source"
+				},
+				"examples/tsnode-oembed-parser/index.ts": {
+					"match": false,
+					"packageHash": "5ed4736f1525d61793002b8e78eaa23d9e67babf52257e3ab1d737b49acd53a6",
+					"size": 699,
+					"status": "missing-in-source"
+				},
+				"examples/tsnode-oembed-parser/package.json": {
+					"match": false,
+					"packageHash": "2072914f567e35dceb23775de3656c21d2a03729e7d2af152a5ac77633850fb7",
+					"size": 303,
+					"status": "missing-in-source"
+				},
+				"examples/tsnode-oembed-parser/tsconfig.json": {
+					"match": false,
+					"packageHash": "da067b00098439ef20678d2bd257cadc505367a929e1e7154f00439ba5fac479",
+					"size": 204,
+					"status": "missing-in-source"
+				},
+				"index.d.ts": {
+					"diff": "--- published/index.d.ts\n+++ rebuilt/index.d.ts\n@@ -1,5 +1,5 @@\n-// Type definitions for oembed-parser\n-// Project: https://www.npmjs.com/package/oembed-parser\n+// Type definitions for oembed-extractor\n+// Project: https://github.com/extractus/oembed-extractor\n // Definitions by: BendingBender <https://github.com/BendingBender>\n //                 CodeBast4rd <https://github.com/CodeBast4rd>\n //                 Marc McIntosh <https://github.com/MarcMcIntosh>\n@@ -145,6 +145,16 @@\n    * default: null\n    */\n   proxy?: ProxyConfig;\n+  /**\n+   * http proxy agent\n+   * default: null\n+   */\n+  agent?: object;\n+  /**\n+   * signal to terminate request\n+   * default: null\n+   */\n+  signal?: object;\n }\n \n export function extract(url: string, params?: Params, fetchOptions?: FetchOptions): Promise<OembedData>;\n",
+					"match": false,
+					"packageHash": "ccadfae11a65955cdd107e65dad989af5e846fe15eec8b0d365182f0e7e0d073",
+					"size": 4619,
+					"sourceHash": "9d3ab8c8335d247a0ab5fc7fa60bec39f14473a14d330d424543ffb656b57a38",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,54 +1,45 @@\n {\n-  \"version\": \"3.1.6rc1\",\n-  \"name\": \"oembed-parser\",\n+  \"version\": \"4.0.9\",\n+  \"name\": \"@extractus/oembed-extractor\",\n   \"description\": \"Get oEmbed data from given URL.\",\n-  \"homepage\": \"https://www.npmjs.com/package/oembed-parser\",\n+  \"homepage\": \"https://github.com/extractus/oembed-extractor\",\n   \"repository\": {\n     \"type\": \"git\",\n-    \"url\": \"git@github.com:ndaidong/oembed-parser.git\"\n+    \"url\": \"git@github.com:extractus/oembed-extractor.git\"\n   },\n-  \"author\": \"@ndaidong\",\n+  \"author\": \"@extractus\",\n   \"main\": \"./src/main.js\",\n   \"type\": \"module\",\n-  \"exports\": {\n-    \"import\": \"./src/main.js\",\n-    \"require\": \"./dist/cjs/oembed-parser.js\"\n-  },\n   \"imports\": {\n     \"cross-fetch\": \"./src/deno/cross-fetch.js\"\n   },\n   \"browser\": {\n-    \"cross-fetch\": \"./src/deno/cross-fetch.js\"\n+    \"cross-fetch\": \"./src/deno/cross-fetch.js\",\n+    \"linkedom\": \"./src/browser/linkedom.js\"\n   },\n   \"types\": \"./index.d.ts\",\n   \"engines\": {\n-    \"node\": \">= 14\"\n+    \"node\": \">= 18\"\n   },\n   \"scripts\": {\n-    \"lint\": \"standard .\",\n-    \"lint:fix\": \"standard --fix\",\n+    \"lint\": \"eslint .\",\n+    \"lint:fix\": \"eslint --fix .\",\n     \"pretest\": \"npm run lint\",\n-    \"test\": \"NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules jest --verbose --coverage=true\",\n+    \"test\": \"node --test --experimental-test-coverage\",\n     \"eval\": \"node eval\",\n-    \"eval:cjs\": \"node cjs-eval\",\n     \"sync\": \"node sync\",\n-    \"build\": \"node build src/main.js\",\n     \"reset\": \"node reset\"\n   },\n   \"dependencies\": {\n-    \"cross-fetch\": \"^3.1.5\"\n+    \"cross-fetch\": \"^4.1.0\",\n+    \"linkedom\": \"^0.18.12\"\n   },\n   \"devDependencies\": {\n-    \"esbuild\": \"^0.15.15\",\n-    \"jest\": \"^29.3.1\",\n-    \"nock\": \"^13.2.9\",\n-    \"standard\": \"^17.0.0\"\n-  },\n-  \"standard\": {\n-    \"ignore\": [\n-      \"/dist\",\n-      \"/examples\"\n-    ]\n+    \"@eslint/js\": \"^9.34.0\",\n+    \"eslint\": \"^9.34.0\",\n+    \"globals\": \"^16.3.0\",\n+    \"https-proxy-agent\": \"^7.0.6\",\n+    \"nock\": \"^14.0.10\"\n   },\n   \"keywords\": [\n     \"oembed\",\n",
+					"match": false,
+					"packageHash": "60c28936fb2a68c2cb795a258ddd9318eaabf7743f310223d33320e3b0197e95",
+					"size": 1345,
+					"sourceHash": "0017ac7624151a9fb1cf2628ec271006f20a08446a226d38f522d7e5408304be",
+					"status": "content"
+				},
+				"reset.js": {
+					"diff": "--- published/reset.js\n+++ rebuilt/reset.js\n@@ -6,9 +6,9 @@\n import {\n   existsSync,\n   unlinkSync\n-} from 'fs'\n+} from 'node:fs'\n \n-import { execSync } from 'child_process'\n+import { execSync } from 'node:child_process'\n \n const dirs = [\n   'dist',\n@@ -16,14 +16,14 @@\n   '.nyc_output',\n   'coverage',\n   'node_modules',\n-  '.nuxt'\n+  '.nuxt',\n ]\n \n const files = [\n   'yarn.lock',\n   'pnpm-lock.yaml',\n   'package-lock.json',\n-  'coverage.lcov'\n+  'coverage.lcov',\n ]\n \n dirs.forEach((d) => {\n",
+					"match": false,
+					"packageHash": "d39be62573d1702fd0003fb76905b836d450b43f304de9526f1790138b6d1fa6",
+					"size": 440,
+					"sourceHash": "bbeebe04710fa00efba0ca6fa909b08dd016524d7388c15af7411d3578e9476f",
+					"status": "content"
+				},
+				"src/main.js": {
+					"diff": "--- published/src/main.js\n+++ rebuilt/src/main.js\n@@ -1,9 +1,7 @@\n-/**\n- * oembed parser\n- * @ndaidong\n- **/\n+// main.js\n \n import { isValid as isValidURL } from './utils/linker.js'\n+import extractWithDiscovery from './utils/autoDiscovery.js'\n import fetchEmbed from './utils/fetchEmbed.js'\n \n import { getEndpoint } from './utils/provider.js'\n@@ -13,12 +11,10 @@\n     throw new Error('Invalid input URL')\n   }\n   const endpoint = getEndpoint(url)\n-  if (!endpoint) {\n-    throw new Error(`No provider found with given url \"${url}\"`)\n-  }\n \n-  const data = await fetchEmbed(url, params, endpoint, options)\n-  return data\n+  return endpoint\n+    ? fetchEmbed(url, params, endpoint, options)\n+    : extractWithDiscovery(url, params, options)\n }\n \n export {\n",
+					"match": false,
+					"packageHash": "3c378b43f4c50e193a1c71b1fd68588c5f5f745448d2c55bfafaa586eca19706",
+					"size": 650,
+					"sourceHash": "7da5c54c86c318e5cc2b4edf76a06e8108ca6dbc8f4a93289b0670741fd0a1fa",
+					"status": "content"
+				},
+				"src/main.test.js": {
+					"diff": "--- published/src/main.test.js\n+++ rebuilt/src/main.test.js\n@@ -1,5 +1,9 @@\n-// main\n-/* eslint-env jest */\n+// main.test\n+\n+import { describe, it } from 'node:test'\n+import assert from 'node:assert'\n+\n+import { HttpsProxyAgent } from 'https-proxy-agent'\n \n import nock from 'nock'\n \n@@ -10,14 +14,17 @@\n   setProviderList\n } from './main.js'\n \n+const env = process.env || {}\n+const PROXY_SERVER = env.PROXY_SERVER || ''\n+\n const required = [\n   'type',\n-  'version'\n+  'version',\n ]\n \n const optional = [\n   'provider_url',\n-  'provider_name'\n+  'provider_name',\n ]\n \n const RichTypeKeys = [\n@@ -25,7 +32,7 @@\n   'width',\n   'height',\n   ...optional,\n-  ...required\n+  ...required,\n ]\n \n const PhotoTypeKeys = [\n@@ -33,21 +40,21 @@\n   'width',\n   'height',\n   ...optional,\n-  ...required\n+  ...required,\n ]\n \n const InstagramKeys = [\n   'html',\n   'width',\n   ...optional,\n-  ...required\n+  ...required,\n ]\n \n const parseUrl = (url) => {\n   const re = new URL(url)\n   return {\n     baseUrl: `${re.protocol}//${re.host}`,\n-    path: re.pathname\n+    path: re.pathname,\n   }\n }\n \n@@ -67,7 +74,7 @@\n   })\n }\n \n-const hasInstagramKeys = (o) => {\n+export const hasInstagramKeys = (o) => {\n   return InstagramKeys.every((k) => {\n     return hasProperty(o, k)\n   })\n@@ -84,15 +91,15 @@\n     'http://badcom/146753785',\n     'https://674458092126388225',\n     'http://www.ted.com/talks/something-does-not-exist',\n-    'https://soundcloud^(*%%$%^$$%$$*&(&)())'\n+    'https://soundcloud^(*%%$%^$$%$$*&(&)())',\n   ]\n \n   badSamples.forEach((url) => {\n-    test(`testing extract bad url \"${url}\"`, async () => {\n+    it(`testing extract bad url \"${url}\"`, async () => {\n       try {\n         await extract(url)\n       } catch (err) {\n-        expect(err).toBeTruthy()\n+        assert.ok(err)\n       }\n     })\n   })\n@@ -102,96 +109,68 @@\n   const cases = [\n     {\n       input: {\n",
+					"match": false,
+					"packageHash": "fa5ff4ea6de8e517e715f86a6743516005c051e6edefc27b97d2b02e7ddf0fdd",
+					"size": 5657,
+					"sourceHash": "f3f5fb54a24f0ba1ef821bd7028b6e6d68a891dfedec49080622fcdb2f416c36",
+					"status": "content"
+				},
+				"src/utils/fetchEmbed.js": {
+					"diff": "--- published/src/utils/fetchEmbed.js\n+++ rebuilt/src/utils/fetchEmbed.js\n@@ -1,6 +1,6 @@\n // utils -> fetchEmbed\n \n-import retrieve from './retrieve.js'\n+import { getJson } from './retrieve.js'\n import { getDomain } from './linker.js'\n \n const isFacebookGraphDependent = (url) => {\n@@ -14,11 +14,11 @@\n   return `${appId}|${clientToken}`\n }\n \n-export default async (url, params = {}, endpoint = '', options = {}) => {\n+export default async (url, params = {}, endpoint = '', options = {}) => { // eslint-disable-line\n   const query = {\n     url,\n     format: 'json',\n-    ...params\n+    ...params,\n   }\n \n   if (query.maxwidth <= 0) {\n@@ -34,6 +34,7 @@\n \n   const queryParams = new URLSearchParams(query).toString()\n   const link = endpoint + '?' + queryParams\n-  const body = retrieve(link, options)\n+  const body = await getJson(link, options)\n+  body.method = 'provider-api'\n   return body\n }\n",
+					"match": false,
+					"packageHash": "7a83de0dc9fc229f9c4669e6b1bc9a543d08c530f4ebd394568f47eae83d41da",
+					"size": 908,
+					"sourceHash": "b5860f01504ce02935b2f246746e38cd2e568d2a4cf3af8db90f7b85cea2eb6b",
+					"status": "content"
+				},
+				"src/utils/fetchEmbed.test.js": {
+					"diff": "--- published/src/utils/fetchEmbed.test.js\n+++ rebuilt/src/utils/fetchEmbed.test.js\n@@ -1,5 +1,7 @@\n // fetchEmbed.test\n-/* eslint-env jest */\n+\n+import { describe, it } from 'node:test'\n+import assert from 'node:assert'\n \n import nock from 'nock'\n \n@@ -10,7 +12,7 @@\n   const re = new URL(url)\n   return {\n     baseUrl: `${re.protocol}//${re.host}`,\n-    path: re.pathname\n+    path: re.pathname,\n   }\n }\n \n@@ -18,80 +20,80 @@\n   const cases = [\n     {\n       input: {\n-        url: 'https://youtu.be/qQpb1oCernE',\n-        file: './test-data/youtube.json'\n+        url: 'https://youtu.be/iQzwqZgr8Hc',\n+        file: './test-data/youtube.json',\n       },\n       expected: {\n         provider_name: 'YouTube',\n-        type: 'video'\n-      }\n+        type: 'video',\n+      },\n     },\n     {\n       input: {\n         url: 'https://twitter.com/ndaidong/status/1173592062878314497',\n-        file: './test-data/twitter.json'\n+        file: './test-data/twitter.json',\n       },\n       expected: {\n         provider_name: 'Twitter',\n-        type: 'rich'\n-      }\n+        type: 'rich',\n+      },\n     },\n     {\n       input: {\n         url: 'https://twitter.com/ndaidong/status/1173592062878314497?theme=dark',\n-        file: './test-data/twitter-dark.json'\n+        file: './test-data/twitter-dark.json',\n       },\n       expected: {\n         provider_name: 'Twitter',\n-        type: 'rich'\n-      }\n-    },\n-    {\n-      input: {\n-        url: 'https://www.facebook.com/facebook/videos/10153231379946729/',\n-        params: {\n-          access_token: '845078789498971|8ff3ab4ddd45b8f018b35c4fb7edac62'\n-        },\n-        file: './test-data/facebook.json'\n+        type: 'rich',\n       },\n-      expected: {\n-        provider_name: 'Facebook',\n-        type: 'video'\n-      }\n     },\n+    // {\n+    //   input: {\n+    //     url: 'https://www.facebook.com/facebook/videos/10153231379946729/',\n+    //     params: {\n+    //       access_token: '845078789498971|8ff3ab4ddd45b8f018b35c4fb7edac62',\n+    //     },\n+    //     file: './test-data/facebook.json',\n+    //   },\n+    //   expected: {\n+    //     provider_name: 'Facebook',\n+    //     type: 'video',\n+    //   },\n+    // },\n     {\n       input: {\n         url: 'http://farm4.static.flickr.com/3123/2341623661_7c99f48bbf_m.jpg',\n-        file: './test-data/flickr-default.json'\n+        file: './test-data/flickr-default.json',\n       },\n       expected: {\n         provider_name: 'Flickr',\n         type: 'photo',\n         maxwidth: 1024,\n-        maxheight: 683\n-      }\n+        maxheight: 683,\n",
+					"match": false,
+					"packageHash": "c4a7f357cdabce7ae3997545e08eee8a246a307f14e754826f0c87f2dcab781b",
+					"size": 3154,
+					"sourceHash": "9b249f1ef454c359012efb678edc15acb795d84938495f6a4362ccc326f3929f",
+					"status": "content"
+				},
+				"src/utils/linker.js": {
+					"diff": "--- published/src/utils/linker.js\n+++ rebuilt/src/utils/linker.js\n@@ -4,7 +4,7 @@\n   try {\n     const ourl = new URL(url)\n     return ourl !== null && ourl.protocol.startsWith('http')\n-  } catch (err) {\n+  } catch {\n     return false\n   }\n }\n",
+					"match": false,
+					"packageHash": "5be67b1f7620e8ffcd442a54ef4a74957f51ba0c3c3892d082b367fb9b8af7cf",
+					"size": 307,
+					"sourceHash": "630492a4b73bf53969c19e5b6cae93c4614ba696a39aba7886925547f3918bf6",
+					"status": "content"
+				},
+				"src/utils/linker.test.js": {
+					"diff": "--- published/src/utils/linker.test.js\n+++ rebuilt/src/utils/linker.test.js\n@@ -1,5 +1,7 @@\n // linker.test\n-/* eslint-env jest */\n+\n+import { describe, it } from 'node:test'\n+import assert from 'node:assert'\n \n import { isValid as isValidURL } from './linker.js'\n \n@@ -7,41 +9,41 @@\n   const cases = [\n     {\n       url: 'https://www.23hq.com',\n-      expected: true\n+      expected: true,\n     },\n     {\n       url: 'https://secure.actblue.com',\n-      expected: true\n+      expected: true,\n     },\n     {\n       url: 'https://docs.microsoft.com/en-us/azure/iot-edge/quickstart?view=iotedge-2018-06',\n-      expected: true\n+      expected: true,\n     },\n     {\n       url: 'http://192.168.1.199:8081/example/page',\n-      expected: true\n+      expected: true,\n     },\n     {\n       url: 'ftp://192.168.1.199:8081/example/page',\n-      expected: false\n+      expected: false,\n     },\n     {\n       url: '',\n-      expected: false\n+      expected: false,\n     },\n     {\n       url: null,\n-      expected: false\n+      expected: false,\n     },\n     {\n       url: { a: 'x' },\n-      expected: false\n-    }\n+      expected: false,\n+    },\n   ]\n   cases.forEach(({ url, expected }) => {\n-    test(`isValidURL(\"${url}\") must return \"${expected}\"`, () => {\n+    it(`isValidURL(\"${url}\") must return \"${expected}\"`, () => {\n       const result = isValidURL(url)\n-      expect(result).toEqual(expected)\n+      assert.equal(result, expected)\n     })\n   })\n })\n",
+					"match": false,
+					"packageHash": "ba98efba554fd1c7d06442a1722a94e81884042129ab2f5e2c56af94f3b21e6d",
+					"size": 955,
+					"sourceHash": "27249ac6da4a1030a62dcfb21e84dc38e4a891e655d0848f81f7237dfff5206a",
+					"status": "content"
+				},
+				"src/utils/provider.js": {
+					"diff": "--- published/src/utils/provider.js\n+++ rebuilt/src/utils/provider.js\n@@ -17,13 +17,13 @@\n }\n \n const removeProtocol = (url) => {\n-  return url.replace('https://', '').replace('http://', '')\n+  return url.replace('https://', '//').replace('http://', '//')\n }\n \n export const simplify = (providers = []) => {\n   return providers.map((item) => {\n     const {\n-      endpoints\n+      endpoints,\n     } = item\n     return endpoints.map((endpoint) => {\n       const { schemes = [], url } = endpoint\n@@ -31,7 +31,7 @@\n \n       return {\n         s: patterns,\n-        e: removeProtocol(url).replace(/\\{format\\}/g, 'json')\n+        e: removeProtocol(url).replace(/\\{format\\}/g, 'json'),\n       }\n     })\n   }).reduce((prev, curr) => {\n@@ -43,14 +43,14 @@\n   return providers.map((provider) => {\n     const { e: endpoint, s: schemes } = provider\n     return {\n-      endpoint: `https://${endpoint}`,\n-      schemes: schemes.map(toRegExp)\n+      endpoint: `https:${endpoint}`,\n+      schemes: schemes.map(toRegExp),\n     }\n   })\n }\n \n const store = {\n-  providers: providersFromList(defaultProviderList)\n+  providers: providersFromList(defaultProviderList),\n }\n \n export const get = () => {\n@@ -87,7 +87,7 @@\n       return {\n         schemes,\n         endpoint,\n-        url\n+        url,\n       }\n     }\n   }\n@@ -108,5 +108,5 @@\n   find,\n   has,\n   get,\n-  set\n+  set,\n }\n",
+					"match": false,
+					"packageHash": "49a9c2c238dec6ae7a6869aa96975c938beff49455ac63098cc5efbafcf01184",
+					"size": 2419,
+					"sourceHash": "ffa5487f86c9d2156127105ccf894d7c681b5dc90fb652ba72f8ea0b45daac53",
+					"status": "content"
+				},
+				"src/utils/provider.test.js": {
+					"diff": "--- published/src/utils/provider.test.js\n+++ rebuilt/src/utils/provider.test.js\n@@ -1,57 +1,43 @@\n // provider.test\n-/* eslint-env jest */\n+\n+import { describe, it } from 'node:test'\n+import assert from 'node:assert'\n \n import provider from './provider.js'\n \n describe('test if provider.find() works correctly', () => {\n   const cases = [\n     {\n-      url: 'https://www.facebook.com/video.php?v=999999999',\n-      fetchEndpoint: 'https://graph.facebook.com/v10.0/oembed_video'\n-    },\n-    {\n-      url: 'https://www.facebook.com/someone/photos/somephoto',\n-      fetchEndpoint: 'https://graph.facebook.com/v10.0/oembed_post'\n-    },\n-    {\n-      url: 'https://www.facebook.com/someone/page',\n-      fetchEndpoint: 'https://graph.facebook.com/v10.0/oembed_page'\n-    },\n-    {\n-      url: 'http://instagram.com/someone/p/somepage',\n-      fetchEndpoint: 'https://graph.facebook.com/v10.0/instagram_oembed'\n-    },\n-    {\n       url: 'https://www.edumedia-sciences.com/en/media/558-heredity',\n-      fetchEndpoint: 'https://www.edumedia-sciences.com/oembed.json'\n+      fetchEndpoint: 'https://www.edumedia-sciences.com/oembed.json',\n     },\n     {\n       url: 'https://vimeo.com/999999',\n-      fetchEndpoint: 'https://vimeo.com/api/oembed.json'\n+      fetchEndpoint: 'https://vimeo.com/api/oembed.json',\n     },\n     {\n       url: 'https://www.youtube.com/watch?v=9999999',\n-      fetchEndpoint: 'https://www.youtube.com/oembed'\n-    }\n+      fetchEndpoint: 'https://www.youtube.com/oembed',\n+    },\n   ]\n \n   cases.forEach(({ url, fetchEndpoint }) => {\n-    test(`provider.find(\"${url}\") must return \"${fetchEndpoint}\"`, () => {\n+    it(`provider.find(\"${url}\") must return \"${fetchEndpoint}\"`, () => {\n       const foundedProvider = provider.find(url)\n-      expect(foundedProvider.endpoint).toEqual(fetchEndpoint)\n+      assert.equal(foundedProvider.endpoint, fetchEndpoint)\n     })\n   })\n \n-  test('provider.find(\"{}\") must return null', () => {\n-    expect(provider.find({})).toEqual(null)\n+  it('provider.find(\"{}\") must return null', () => {\n+    assert.equal(provider.find({}), null)\n   })\n \n-  test('provider.find(\"abcdef\") must return null', () => {\n-    expect(provider.find('abcdef')).toEqual(null)\n+  it('provider.find(\"abcdef\") must return null', () => {\n+    assert.equal(provider.find('abcdef'), null)\n   })\n \n-  test('provider.find(\"https://somethingdoesnotexist.com\") must return null', () => {\n-    expect(provider.find('https://somethingdoesnotexist.com')).toEqual(null)\n+  it('provider.find(\"https://somethingdoesnotexist.com\") must return null', () => {\n+    assert.equal(provider.find('https://somethingdoesnotexist.com'), null)\n   })\n })\n \n@@ -63,11 +49,11 @@\n       endpoints: [\n         {\n           schemes: [\n-            'https://store.alpha.com/*'\n+            'https://store.alpha.com/*',\n           ],\n-          url: 'https://api.alpha.com/oembed'\n-        }\n-      ]\n+          url: 'https://api.alpha.com/oembed',\n+        },\n+      ],\n     },\n     {\n       provider_name: 'Beta',\n@@ -75,17 +61,17 @@\n       endpoints: [\n         {\n           schemes: [\n-            'https://store.beta.com/*'\n+            'https://store.beta.com/*',\n           ],\n-          url: 'https://api.beta.com/oembed'\n-        }\n",
+					"match": false,
+					"packageHash": "1ba3fc93812e32d4a1ad0b93f7c72fc49a07775c5dbd06fe28ceff3111c3d903",
+					"size": 2612,
+					"sourceHash": "2215e129f05e19a3847904e6c1791b727ca06a4a6d64638d09f18a07c08f8df4",
+					"status": "content"
+				},
+				"src/utils/providers.latest.js": {
+					"diff": "--- published/src/utils/providers.latest.js\n+++ rebuilt/src/utils/providers.latest.js\n@@ -1,2036 +1,2465 @@\n-// provider data, synchronized at 2022-11-22T04:14:50.180Z\n+// provider data, synchronized at 2025-09-04T09:00:29.575Z\n \n /* eslint-disable */ \n \n export const providers = [\n   {\n     \"s\": [\n-      \"www\\\\.23hq\\\\.com/*/photo/*\"\n+      \"//www\\\\.23hq\\\\.com/*/photo/*\"\n     ],\n-    \"e\": \"www.23hq.com/23/oembed\"\n+    \"e\": \"//www.23hq.com/23/oembed\"\n   },\n   {\n     \"s\": [\n-      \"store\\\\.abraia\\\\.me/*\"\n+      \"//playout\\\\.3qsdn\\\\.com/embed/*\"\n     ],\n-    \"e\": \"api.abraia.me/oembed\"\n+    \"e\": \"//playout.3qsdn.com/oembed\"\n   },\n   {\n     \"s\": [\n-      \"play\\\\.acast\\\\.com/s/*\"\n+      \"//store\\\\.abraia\\\\.me/*\"\n     ],\n-    \"e\": \"oembed.acast.com/v1/embed-player\"\n+    \"e\": \"//api.abraia.me/oembed\"\n   },\n   {\n     \"s\": [\n-      \"secure\\\\.actblue\\\\.com/donate/*\"\n+      \"//play\\\\.acast\\\\.com/s/*\"\n     ],\n-    \"e\": \"secure.actblue.com/cf/oembed\"\n+    \"e\": \"//oembed.acast.com/v1/embed-player\"\n   },\n   {\n     \"s\": [\n-      \"adilo\\\\.bigcommand\\\\.com/watch/*\"\n+      \"//secure\\\\.actblue\\\\.com/donate/*\"\n     ],\n-    \"e\": \"adilo.bigcommand.com/web/oembed\"\n+    \"e\": \"//secure.actblue.com/cf/oembed\"\n   },\n   {\n     \"s\": [\n-      \"play\\\\.adpaths\\\\.com/experience/*\"\n+      \"//adilo\\\\.bigcommand\\\\.com/watch/*\"\n     ],\n-    \"e\": \"play.adpaths.com/oembed/*\"\n+    \"e\": \"//adilo.bigcommand.com/web/oembed\"\n   },\n   {\n     \"s\": [\n-      \"v\\\\.afree\\\\.ca/ST/\",\n-      \"vod\\\\.afreecatv\\\\.com/ST/\",\n-      \"vod\\\\.afreecatv\\\\.com/PLAYER/STATION/\",\n-      \"play\\\\.afreecatv\\\\.com/\"\n+      \"//vod\\\\.afreecatv\\\\.com/player/\",\n+      \"//v\\\\.afree\\\\.ca/ST/\",\n+      \"//vod\\\\.afreecatv\\\\.com/ST/\",\n+      \"//vod\\\\.afreecatv\\\\.com/PLAYER/STATION/\",\n+      \"//play\\\\.afreecatv\\\\.com/\"\n     ],\n-    \"e\": \"openapi.afreecatv.com/oembed/embedinfo\"\n+    \"e\": \"//openapi.afreecatv.com/oembed/embedinfo\"\n   },\n   {\n     \"s\": [\n-      \"altium\\\\.com/viewer/*\"\n+      \"//altium\\\\.com/viewer/*\"\n     ],\n-    \"e\": \"viewer.altium.com/shell/oembed\"\n+    \"e\": \"//viewer.altium.com/shell/oembed\"\n   },\n   {\n     \"s\": [\n-      \"app\\\\.altrulabs\\\\.com/*/*?answer_id=*\",\n-      \"app\\\\.altrulabs\\\\.com/player/*\"\n+      \"//app\\\\.altrulabs\\\\.com/*/*?answer_id=*\",\n+      \"//app\\\\.altrulabs\\\\.com/player/*\"\n     ],\n-    \"e\": \"api.altrulabs.com/api/v1/social/oembed\"\n+    \"e\": \"//api.altrulabs.com/api/v1/social/oembed\"\n   },\n   {\n     \"s\": [\n-      \"live\\\\.amcharts\\\\.com/*\"\n+      \"//live\\\\.amcharts\\\\.com/*\"\n     ],\n-    \"e\": \"live.amcharts.com/oembed\"\n+    \"e\": \"//live.amcharts.com/oembed\"\n   },\n   {\n     \"s\": [\n",
+					"match": false,
+					"packageHash": "b1a730d78a291db4b6d25f153c1dcc5cfddb3f4d9255a35d2b1c6f9a94580748",
+					"size": 38386,
+					"sourceHash": "8a792c5ff57f777bc366fc819fa396dd846dd92bc3947c35daee52523dc1d94d",
+					"status": "content"
+				},
+				"src/utils/providers.orginal.json": {
+					"match": false,
+					"packageHash": "fd12d47de4d674cc21514131f798a72f8384a4b1d93f15f0043142df66400619",
+					"size": 99982,
+					"status": "missing-in-source"
+				},
+				"src/utils/providers.prev.js": {
+					"match": false,
+					"packageHash": "06f909716626f809a88e789ed319cb64f6e66495da6a030ea7ce1b3d66a91ff4",
+					"size": 38386,
+					"status": "missing-in-source"
+				},
+				"src/utils/retrieve.js": {
+					"diff": "--- published/src/utils/retrieve.js\n+++ rebuilt/src/utils/retrieve.js\n@@ -2,26 +2,51 @@\n \n import fetch from 'cross-fetch'\n \n-const profetch = async (url, proxy = {}) => {\n+const profetch = async (url, options = {}) => {\n+  const { proxy = {}, signal = null } = options\n   const {\n     target,\n-    headers = {}\n+    headers = {},\n   } = proxy\n   const res = await fetch(target + encodeURIComponent(url), {\n-    headers\n+    headers,\n+    signal,\n   })\n   return res\n }\n \n-export default async (url, options = {}) => {\n+export const getHtml = async (url, options = {}) => {\n   const {\n     headers = {\n-      'user-agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:104.0) Gecko/20100101 Firefox/104.0'\n+      'user-agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0',\n     },\n-    proxy = null\n+    proxy = null,\n+    agent = null,\n+    signal = null,\n   } = options\n \n-  const res = proxy ? await profetch(url, proxy) : await fetch(url, { headers })\n+  const res = proxy ? await profetch(url, { proxy, signal }) : await fetch(url, { headers, agent, signal })\n+\n+  const status = res.status\n+  if (status >= 400) {\n+    throw new Error(`Request failed with error code ${status}`)\n+  }\n+\n+  const text = await res.text()\n+  return text\n+}\n+\n+export const getJson = async (url, options = {}) => {\n+  const {\n+    headers = {\n+      'user-agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0',\n+    },\n+    proxy = null,\n+    agent = null,\n+    signal = null,\n+  } = options\n+\n+  const res = proxy ? await profetch(url, { proxy, signal }) : await fetch(url, { headers, agent, signal })\n \n   const status = res.status\n   if (status >= 400) {\n@@ -31,7 +56,7 @@\n   try {\n     const text = await res.text()\n     return JSON.parse(text.trim())\n-  } catch (err) {\n+  } catch {\n     throw new Error('Failed to convert data to JSON object')\n   }\n }\n",
+					"match": false,
+					"packageHash": "ef126a1c523035104dd31630dc2dc4a6befe10923dc7ab993432d261b2f5eaae",
+					"size": 815,
+					"sourceHash": "caaa5f0624d2773eed9f2d61254aae03e051b3829b6425be7e018096bb7fcf93",
+					"status": "content"
+				},
+				"src/utils/retrieve.test.js": {
+					"diff": "--- published/src/utils/retrieve.test.js\n+++ rebuilt/src/utils/retrieve.test.js\n@@ -1,59 +1,61 @@\n // retrieve.test\n-/* eslint-env jest */\n+\n+import { describe, it } from 'node:test'\n+import assert from 'node:assert'\n \n import nock from 'nock'\n \n-import retrieve from './retrieve.js'\n+import { getJson } from './retrieve.js'\n \n const parseUrl = (url) => {\n   const re = new URL(url)\n   return {\n     baseUrl: `${re.protocol}//${re.host}`,\n-    path: re.pathname\n+    path: re.pathname,\n   }\n }\n \n-describe('test retrieve() method', () => {\n-  test('test retrieve from good source', async () => {\n+describe('test getJson() method', () => {\n+  it('test getJson from good source', async () => {\n     const url = 'https://some.where/good/source'\n     const { baseUrl, path } = parseUrl(url)\n     nock(baseUrl).get(path).reply(200, { data: { name: 'oembed-parser' } }, {\n-      'Content-Type': 'application/json'\n+      'Content-Type': 'application/json',\n     })\n-    const result = await retrieve(url)\n-    expect(result.data.name).toEqual('oembed-parser')\n+    const result = await getJson(url)\n+    assert.equal(result.data.name, 'oembed-parser')\n     nock.cleanAll()\n   })\n \n-  test('test retrieve using proxy', async () => {\n+  it('test getJson using proxy', async () => {\n     const url = 'https://some.where/good/source-with-proxy'\n     const { baseUrl, path } = parseUrl(url)\n     nock(baseUrl).get(path).reply(200, { data: { name: 'oembed-parser' } }, {\n-      'Content-Type': 'application/json'\n+      'Content-Type': 'application/json',\n     })\n     nock('https://proxy-server.com')\n       .get('/api/proxy?url=https%3A%2F%2Fsome.where%2Fgood%2Fsource-with-proxy')\n       .reply(200, { data: { name: 'oembed-parser' } })\n \n-    const result = await retrieve(url, {\n+    const result = await getJson(url, {\n       proxy: {\n-        target: 'https://proxy-server.com/api/proxy?url='\n-      }\n+        target: 'https://proxy-server.com/api/proxy?url=',\n+      },\n     })\n-    expect(result.data.name).toEqual('oembed-parser')\n+    assert.equal(result.data.name, 'oembed-parser')\n     nock.cleanAll()\n   })\n \n-  test('test retrieve invalid json reponsse', async () => {\n+  it('test getJson invalid json reponsse', async () => {\n     const url = 'https://some.where/bad/source'\n     const { baseUrl, path } = parseUrl(url)\n     nock(baseUrl).get(path).reply(200, 'this is not json string', {\n-      'Content-Type': 'application/json'\n+      'Content-Type': 'application/json',\n     })\n     try {\n-      await retrieve(url)\n+      await getJson(url)\n     } catch (err) {\n-      expect(err).toBeTruthy()\n+      assert.ok(err)\n     }\n     nock.cleanAll()\n   })\n",
+					"match": false,
+					"packageHash": "e648d8a90085497326c871a1f8a115e93e08904b7c2df26d3199551daaba16a1",
+					"size": 1728,
+					"sourceHash": "907d740f6ca10e390da015315fc373f13622b7bc6efa25eb0081290ce16e3c72",
+					"status": "content"
+				},
+				"sync.js": {
+					"diff": "--- published/sync.js\n+++ rebuilt/sync.js\n@@ -3,9 +3,9 @@\n import {\n   copyFileSync,\n   writeFileSync\n-} from 'fs'\n+} from 'node:fs'\n \n-import retrieve from './src/utils/retrieve.js'\n+import { getJson } from './src/utils/retrieve.js'\n import { simplify } from './src/utils/provider.js'\n \n const source = 'https://oembed.com/providers.json'\n@@ -23,7 +23,7 @@\n \n const sync = async () => {\n   try {\n-    const result = await retrieve(source)\n+    const result = await getJson(source)\n     saveOriginal(result, orginal)\n \n     const arr = simplify(result)\n@@ -42,7 +42,7 @@\n         '/* eslint-disable */ ',\n         '',\n         `export const providers = ${data}`,\n-        ''\n+        '',\n       ].join('\\n'),\n       'utf8'\n     )\n",
+					"match": false,
+					"packageHash": "7bd822557d92a8e27d2f871eb8a4236952a863f30a37effa8d19461b1482dd78",
+					"size": 1161,
+					"sourceHash": "37f57bc4e1cc7cd3e8fd18e1bd9993611a353d76839be74a106a9a8d76b310af",
+					"status": "content"
+				},
+				"test-data/facebook.json": {
+					"match": false,
+					"packageHash": "2b10283ed3bb1df9d039e476b6e17c2731a619dd93f03a0f1874e838ae9c3777",
+					"size": 1184,
+					"status": "missing-in-source"
+				},
+				"test-data/flickr-default.json": {
+					"match": false,
+					"packageHash": "be46b56c74f1ac8187a093e600ef6e47ed63e688aff1f0f4887339f8e0ff5333",
+					"size": 1069,
+					"status": "missing-in-source"
+				},
+				"test-data/flickr-sizelimit.json": {
+					"match": false,
+					"packageHash": "09d10efa02d33d1ac3549d3270276675c6ba05212c2068badbacf24a8580c2ab",
+					"size": 1063,
+					"status": "missing-in-source"
+				},
+				"test-data/flickr_2iYctUr.json": {
+					"match": false,
+					"packageHash": "c0383ede1d6c9646716fe2b48d1d07ef21958b1f27988737c68a15bf99beabef",
+					"size": 1105,
+					"status": "missing-in-source"
+				},
+				"test-data/flickr_2iYctUr_640x480.json": {
+					"match": false,
+					"packageHash": "fb0cd438140c7fa34cea846c7f951c2e8ae8b33fe7a42463f258f0a83cc3eb0f",
+					"size": 1103,
+					"status": "missing-in-source"
+				},
+				"test-data/instagram_ic7kRDqOlt.json": {
+					"match": false,
+					"packageHash": "9bfe62df02530c259986fe83291229573728a95701ab38c8e490de7f00f7d617",
+					"size": 295,
+					"status": "missing-in-source"
+				},
+				"test-data/twitter-dark.json": {
+					"match": false,
+					"packageHash": "adc1acf532950a4c61a1895f8871225428b8aa3504d96251f7a1b4d974606769",
+					"size": 987,
+					"status": "missing-in-source"
+				},
+				"test-data/twitter.json": {
+					"match": false,
+					"packageHash": "2e86f11084010a09a5d504614a0bf21246dbcada1c0c8a3f6e33900c86472069",
+					"size": 966,
+					"status": "missing-in-source"
+				},
+				"test-data/youtube.json": {
+					"match": false,
+					"packageHash": "b6cb0df3a7cce8cdc5fa506e205c8adaf3f5119b084fd6391d0f2b512035338c",
+					"size": 653,
+					"status": "missing-in-source"
+				},
+				"test-data/youtube_ciS8aCrX-9s.json": {
+					"match": false,
+					"packageHash": "b68fb63c51699fc93df94827534619e26d4e2117fe826b3d453510843f7ebd38",
+					"size": 643,
+					"status": "missing-in-source"
+				},
+				"eslint.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/browser/linkedom.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/utils/autoDiscovery.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/utils/autoDiscovery.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 20,
+				"matchingFiles": 1,
+				"missingInPackage": 4,
+				"missingInSource": 39,
+				"score": 0.015625,
+				"totalFiles": 64
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "boolbase",
+				"version": "1.0.0"
+			},
+			{
+				"name": "cross-fetch",
+				"version": "4.1.0"
+			},
+			{
+				"name": "css-select",
+				"version": "5.2.2"
+			},
+			{
+				"name": "css-what",
+				"version": "6.2.2"
+			},
+			{
+				"name": "cssom",
+				"version": "0.5.0"
+			},
+			{
+				"name": "dom-serializer",
+				"version": "2.0.0"
+			},
+			{
+				"name": "domelementtype",
+				"version": "2.3.0"
+			},
+			{
+				"name": "domhandler",
+				"version": "5.0.3"
+			},
+			{
+				"name": "domutils",
+				"version": "3.2.2"
+			},
+			{
+				"name": "entities",
+				"version": "4.5.0"
+			},
+			{
+				"name": "html-escaper",
+				"version": "3.0.3"
+			},
+			{
+				"name": "htmlparser2",
+				"version": "10.1.0"
+			},
+			{
+				"name": "entities",
+				"version": "7.0.1"
+			},
+			{
+				"name": "linkedom",
+				"version": "0.18.12"
+			},
+			{
+				"name": "node-fetch",
+				"version": "2.7.0"
+			},
+			{
+				"name": "nth-check",
+				"version": "2.1.1"
+			},
+			{
+				"name": "tr46",
+				"version": "0.0.3"
+			},
+			{
+				"name": "uhyphen",
+				"version": "0.2.0"
+			},
+			{
+				"name": "webidl-conversions",
+				"version": "3.0.1"
+			},
+			{
+				"name": "whatwg-url",
+				"version": "5.0.0"
+			}
+		]
+	}
+]
