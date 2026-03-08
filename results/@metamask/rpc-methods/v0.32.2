@@ -1,0 +1,4662 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-03-08T00:18:24.988Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:9.5.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "@metamask/rpc-methods@0.32.2",
+			"name": "@metamask/rpc-methods",
+			"version": "0.32.2",
+			"location": "https://registry.npmjs.org/@metamask/rpc-methods/-/rpc-methods-0.32.2.tgz",
+			"integrity": "sha512-UmY4PsxamCPi5J6oH2Z+d1caGIFSGtZ+CMYDUYGLKi52+BC7jkw9tExDVcU0xuGUg7TuB20QnoelIGFHo5yiCg==",
+			"publishedAt": "2023-03-30T18:30:38.926Z",
+			"publishedWith": {
+				"node": "18.15.0",
+				"npm": "9.5.0"
+			},
+			"dependencies": {
+				"nanoid": "^3.1.31",
+				"superstruct": "^1.0.3",
+				"@noble/hashes": "^1.1.3",
+				"eth-rpc-errors": "^4.0.2",
+				"@metamask/types": "^1.1.0",
+				"@metamask/utils": "^5.0.0",
+				"@metamask/key-tree": "^7.0.0",
+				"@metamask/snaps-ui": "^0.32.2",
+				"@metamask/snaps-utils": "^0.32.2",
+				"@metamask/browser-passworder": "^4.0.2",
+				"@metamask/permission-controller": "^3.1.0"
+			}
+		},
+		"source": {
+			"integrity": "sha512-4wW5hrR+6uKvGQ7/ZAEgh7kV+WfgFe6FDdkvzVAMS0MLzlWTE7OqsyqeWp/ayD1JJrFaFqm4OkvmuZ7MyarYZQ==",
+			"location": "git+https://github.com/MetaMask/snaps-monorepo.git",
+			"spec": "github:MetaMask/snaps-monorepo#9400f735f06c7b28665b3008b069174e449d782b"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,3 +1,130 @@\n-# @metamask/rpc-methods\n+# snaps-monorepo\n \n-JSON-RPC methods for MetaMask Snaps functionality.\n+Monorepo for experimental snaps dependencies.\n+\n+## Contributing\n+\n+### Installing\n+\n+Run `yarn install` in the project root directory.\n+Do **not** run any installation commands in individual workspaces.\n+\n+If you add a dependency with a lifecycle script, said dependency must be added to the `devDependencies` and `lavamoat.allow-scripts` config of the root `package.json` file.\n+This is currently the only way to use `@lavamoat/allow-scripts` in monorepos.\n+\n+### Building\n+\n+Run `yarn build` to build all packages in correct order.\n+If you encounter any errors, try `yarn build:clean`, and if that fails, check the TypeScript configuration (see below).\n+\n+You can also run `yarn build` in a specific package / workspace, although you have to ensure that its dependencies have been built.\n+\n+Repository-wide watching is currently not possible due to the build processes of some packages.\n+\n+### Using packages in other projects during development/testing\n+\n+When developing changes to packages within this repository that a different project depends upon, you may wish to load those changes into the project and test them locally or in CI before publishing proper releases of those packages. To solve that problem, this repository provides a mechanism to publish \"preview\" versions of packages to GitHub Package Registry. These versions can then be used in the project like any other version, provided the project is configured to use that registry.\n+\n+#### As a MetaMask contributor\n+\n+If you're a MetaMask contributor, you can create these preview versions via draft pull requests:\n+\n+1. Navigate to your settings within GitHub and [create a classic access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token#creating-a-personal-access-token-classic). Make sure to give this token the `packages:read` scope.\n+2. Switch to your project locally and add/edit the appropriate file with the following content, filling in the appropriate areas:\n+\n+   - **Yarn 1 (classic) or NPM**\n+\n+     Add the following in `.npmrc`\n+\n+     ```\n+     @metamask:registry=https://npm.pkg.github.com\n+     //npm.pkg.github.com/:_authToken=<your personal access token>\n+     ```\n+\n+   - **Yarn >= 2 (berry):**\n+\n+     Add the following in `.yarnrc.yml`\n+\n+     ```\n+     npmScopes:\n+        metamask:\n+           npmAlwaysAuth: true\n+           npmAuthToken: <your personal access token>\n+           npmRegistryServer: 'https://npm.pkg.github.com'\n+     ```\n+\n+   Make sure not to commit these changes.\n+\n+3. Go to GitHub and open up a pull request for this repository, then post a comment on the PR with the text `@metamaskbot publish-preview`. (This triggers the `publish-preview` GitHub action.)\n+4. After a few minutes, you will see a new comment indicating that all packages have been published with the format `<package name>-<commit id>`.\n+5. Switch back to your project locally and update `package.json` by replacing the versions for the packages you've changed in your PR using the new version format (e.g. `1.2.3-e2df9b4` instead of `~1.2.3`), then run `yarn install`.\n+6. Repeat steps 3-5 after pushing new changes to your PR to generate and use new preview versions.\n+\n+#### As an independent contributor\n+\n+If you're a contributor and you've forked this repository, you can create preview versions for a branch via provided scripts:\n+\n+1. Navigate to your settings within GitHub and [create a **classic** access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token#creating-a-personal-access-token-classic). Make sure to give this token the `packages:read` scope.\n+2. Switch to your project locally and add/edit the appropriate file with the following content, filling in the appropriate areas.\n+\n+   - **Yarn 1 (classic) or NPM:**\n+\n+     Add the following in `.npmrc`\n+\n+     ```\n+     @<your GitHub username>:registry=https://npm.pkg.github.com\n+     //npm.pkg.github.com/:_authToken=<your personal access token>\n+     ```\n+\n+   - **Yarn >= 2 (berry):**\n+\n+     Add the following in `.yarnrc.yml`\n+\n+     ```\n+     npmScopes:\n+        <your GitHub username>:\n+           npmAlwaysAuth: true\n+           npmAuthToken: <your personal access token>\n+           npmRegistryServer: 'https://npm.pkg.github.com'\n+     ```\n+\n+   Make sure not to commit these changes.\n+\n+3. Open the `package.json` for each package that you want to publish and change the scope in the name from `@metamask` to `@<your GitHub username>`.\n+4. Switch to your fork of this repository locally and run `yarn prepare-preview-builds \"$(git rev-parse --short HEAD)\" && yarn build && yarn publish-previews` to generate preview versions for all packages based on the current branch and publish them to GitHub Package Registry. Take note of the version that is published; it should look like `1.2.3-e2df9b4` instead of `1.2.3`.\n+5. Switch back to your project and update `package.json` by replacing the versions for all packages you've changed using the version that was output in the previous step, then run `yarn install`.\n",
+					"match": false,
+					"packageHash": "aca3b0087efca23201cd77d77bb2f53b9a08d7105f0793045e5244b63e981ec1",
+					"size": 76,
+					"sourceHash": "7d7f78be6bfaee3bffe2a89534dcf6771ef5eb9f5d1728750bfd9d9b7c8625b2",
+					"status": "content"
+				},
+				"dist/__fixtures__/entropy.d.ts": {
+					"match": false,
+					"packageHash": "11556eba7734aa5d1969ffa898515b64cedada98bc075f81c255136d37a4de0b",
+					"size": 262,
+					"status": "missing-in-source"
+				},
+				"dist/__fixtures__/entropy.js": {
+					"match": false,
+					"packageHash": "a5fa692ebfa86fe82d8a6879265d71220f74d6ad228f79039271bec9f686e147",
+					"size": 1277,
+					"status": "missing-in-source"
+				},
+				"dist/__fixtures__/entropy.js.map": {
+					"match": false,
+					"packageHash": "4ea6e9fb264549f6c2643726cd92ee07add58a3648ab2f760f688e2cda1a6dd9",
+					"size": 1687,
+					"status": "missing-in-source"
+				},
+				"dist/__fixtures__/index.d.ts": {
+					"match": false,
+					"packageHash": "78f33dea5d26f75e7eadf3990a2d33c939d911e4726f2421b002010b6a7a2ff8",
+					"size": 27,
+					"status": "missing-in-source"
+				},
+				"dist/__fixtures__/index.js": {
+					"match": false,
+					"packageHash": "f271d5e58fe1a7bff85d339ffd449e825ab3d16ff77b63c4f7aac813e4c59b42",
+					"size": 835,
+					"status": "missing-in-source"
+				},
+				"dist/__fixtures__/index.js.map": {
+					"match": false,
+					"packageHash": "93fc3996d009873a36e680bcb1869b3533113e710225049c223b6abe41bbdabc",
+					"size": 195,
+					"status": "missing-in-source"
+				},
+				"dist/index.d.ts": {
+					"match": false,
+					"packageHash": "603f15fd94810cd7e7d38795ffaeae808c92e49804518ca0226c47b47006fbd7",
+					"size": 314,
+					"status": "missing-in-source"
+				},
+				"dist/index.js": {
+					"match": false,
+					"packageHash": "762faad5430eddc402b033bc54ad3e2f330b46e838023cacc055c1409afac72a",
+					"size": 1425,
+					"status": "missing-in-source"
+				},
+				"dist/index.js.map": {
+					"match": false,
+					"packageHash": "3301e381b6b580d34ea58342b69e1d699d2c308ba956e80c5ac826b5e989a558",
+					"size": 578,
+					"status": "missing-in-source"
+				},
+				"dist/permitted/common/snapInstallation.d.ts": {
+					"match": false,
+					"packageHash": "add86835436e2ed8c2b230a9b3817436781fbfe72ad7f8b6fa43e6f0d2b97fa5",
+					"size": 971,
+					"status": "missing-in-source"
+				},
+				"dist/permitted/common/snapInstallation.js": {
+					"match": false,
+					"packageHash": "b645928b02a7ded68bc3ba20eb19ac3794d7935fac6c6cca662748e9e6719208",
+					"size": 1448,
+					"status": "missing-in-source"
+				},
+				"dist/permitted/common/snapInstallation.js.map": {
+					"match": false,
+					"packageHash": "a6c791f8a9247e3be70e325ec780dc53829735e3c17735f42fc049d7ef0e1602",
+					"size": 2249,
+					"status": "missing-in-source"
+				},
+				"dist/permitted/getSnaps.d.ts": {
+					"match": false,
+					"packageHash": "c7b9aff7fc6de4026f962b0ab53d877045b5bd3b6d9ddbf1bae2979c75e32dc0",
+					"size": 485,
+					"status": "missing-in-source"
+				},
+				"dist/permitted/getSnaps.js": {
+					"match": false,
+					"packageHash": "eea34c5dea31ece03b5aaa631898dc9730776419c866b1da3a97e59cb61fcef5",
+					"size": 1149,
+					"status": "missing-in-source"
+				},
+				"dist/permitted/getSnaps.js.map": {
+					"match": false,
+					"packageHash": "cb9f3f530e70517a3375df9ad24033f9b35c8c0954b91c332511054142a7b5b8",
+					"size": 2194,
+					"status": "missing-in-source"
+				},
+				"dist/permitted/index.d.ts": {
+					"match": false,
+					"packageHash": "c74821b9df03fbf0367965e054244778a94b5739cdea3b81f1b0b082cb3000ac",
+					"size": 1173,
+					"status": "missing-in-source"
+				},
+				"dist/permitted/index.js": {
+					"match": false,
+					"packageHash": "4eff921065ed000dd19c0a158e95e432c32231015b1cc4f6b3bf23458369f8ee",
+					"size": 688,
+					"status": "missing-in-source"
+				},
+				"dist/permitted/index.js.map": {
+					"match": false,
+					"packageHash": "d145436420e77cae0430b66bbcaf24c7d6310cbd28bf1a43d942eda47b8e2461",
+					"size": 978,
+					"status": "missing-in-source"
+				},
+				"dist/permitted/invokeSnapSugar.d.ts": {
+					"match": false,
+					"packageHash": "a4f0cf2f3a5105a3f667754f46e8abd534a3949dcb75dda3deed5efa764d7a98",
+					"size": 1380,
+					"status": "missing-in-source"
+				},
+				"dist/permitted/invokeSnapSugar.js": {
+					"match": false,
+					"packageHash": "77326137da8513d22a1963d3031dac305e3b5e534d276ca03515847931d40951",
+					"size": 2275,
+					"status": "missing-in-source"
+				},
+				"dist/permitted/invokeSnapSugar.js.map": {
+					"match": false,
+					"packageHash": "22d27c388b4c9d898b9cb9f17d93cc8c5e366fd6fa91687db2392aaf225e04bf",
+					"size": 3609,
+					"status": "missing-in-source"
+				},
+				"dist/permitted/requestSnaps.d.ts": {
+					"match": false,
+					"packageHash": "3d5c21a2eafc3a6d168d7203235617fa5dad8537f92f53750c9a5aed99909118",
+					"size": 2309,
+					"status": "missing-in-source"
+				},
+				"dist/permitted/requestSnaps.js": {
+					"match": false,
+					"packageHash": "7b7f8b2b5b7a2d7532e90bee3cc2f7e08c559e49a35399e1b8fc0f473c3c2bc0",
+					"size": 5560,
+					"status": "missing-in-source"
+				},
+				"dist/permitted/requestSnaps.js.map": {
+					"match": false,
+					"packageHash": "8671556e1f1b8702ad9fa388db16f25512f641de2932dc88fdfbf7fe49134c0a",
+					"size": 9978,
+					"status": "missing-in-source"
+				},
+				"dist/request.d.ts": {
+					"match": false,
+					"packageHash": "07e476ea64a0a42183fe04bf1f1fed60b1435159ff07ca4ba031e106a3338fd3",
+					"size": 4345,
+					"status": "missing-in-source"
+				},
+				"dist/request.js": {
+					"match": false,
+					"packageHash": "b3ed143a7c7c1dd02686326b36548187f2c1851be8105fa4adaf5a8d966aae82",
+					"size": 112,
+					"status": "missing-in-source"
+				},
+				"dist/request.js.map": {
+					"match": false,
+					"packageHash": "c54eed03f674ffb2b8cbda2163fb2201cc0db41243ba4d0597c17d7ae2235062",
+					"size": 4621,
+					"status": "missing-in-source"
+				},
+				"dist/restricted/caveats/index.d.ts": {
+					"match": false,
+					"packageHash": "f496dc56701ddc0ae5cdc9436961499fb743e90a65d220f944bd40f346b873bf",
+					"size": 629,
+					"status": "missing-in-source"
+				},
+				"dist/restricted/caveats/index.js": {
+					"match": false,
+					"packageHash": "ab9e23f742bc098a87ba64189af0884e3ba9cfdc35d792a7a12b7af65946d100",
+					"size": 1141,
+					"status": "missing-in-source"
+				},
+				"dist/restricted/caveats/index.js.map": {
+					"match": false,
+					"packageHash": "60f88f37609d065b9d087e8dd0cc691970f2fec3375bf3dfed0e54801568deb0",
+					"size": 1631,
+					"status": "missing-in-source"
+				},
+				"dist/restricted/caveats/permittedCoinTypes.d.ts": {
+					"match": false,
+					"packageHash": "2af231e60b7a06d7732525e664e23fda19a1a321361084a9115dfbf34dfb7ded",
+					"size": 1402,
+					"status": "missing-in-source"
+				},
+				"dist/restricted/caveats/permittedCoinTypes.js": {
+					"match": false,
+					"packageHash": "40a94d16b9c624948865e65211e2822a835de69ec0ddae675225ff374bf4302b",
+					"size": 3381,
+					"status": "missing-in-source"
+				},
+				"dist/restricted/caveats/permittedCoinTypes.js.map": {
+					"match": false,
+					"packageHash": "6107759300b1c105e5e5871b3d92698cf29e9631561a4908e0e8bb489990249e",
+					"size": 5183,
+					"status": "missing-in-source"
+				},
+				"dist/restricted/caveats/permittedDerivationPaths.d.ts": {
+					"match": false,
+					"packageHash": "ab146d649200089f83f6098580107a00ae8f378c17d1d00a24c48c728a40a7fc",
+					"size": 1627,
+					"status": "missing-in-source"
+				},
+				"dist/restricted/caveats/permittedDerivationPaths.js": {
+					"match": false,
+					"packageHash": "c50ff996ad09bd6fd529c6dc0fe8b307d2af639684a823330b28bc24b8d90b90",
+					"size": 3324,
+					"status": "missing-in-source"
+				},
+				"dist/restricted/caveats/permittedDerivationPaths.js.map": {
+					"match": false,
+					"packageHash": "de44efc8b4b7fac07d6bc263112307a84f9383c3f4ce0b2b158b3aba97fe61a5",
+					"size": 4890,
+					"status": "missing-in-source"
+				},
+				"dist/restricted/caveats/snapIds.d.ts": {
+					"match": false,
+					"packageHash": "c1fe0267acdcc74b7cace10a6a3476c2b6a6b1e16b63df3df3de96b7acc9bb3f",
+					"size": 531,
+					"status": "missing-in-source"
+				},
+				"dist/restricted/caveats/snapIds.js": {
+					"match": false,
+					"packageHash": "f35b3ce86db89518b23f21af297f9add36884c5f22cb6de3606ae0084047cecd",
+					"size": 1721,
+					"status": "missing-in-source"
+				},
+				"dist/restricted/caveats/snapIds.js.map": {
+					"match": false,
+					"packageHash": "df501a642cc0152c9afe05b5a77969c13eeedc59d6cc4ec0b28d5a4d40da0716",
+					"size": 3065,
+					"status": "missing-in-source"
+				},
+				"dist/restricted/dialog.d.ts": {
+					"match": false,
+					"packageHash": "6934c99bcc17c0d29b2666d7db3bbe92387b8d2973bd10fb4e81c7ec921543d8",
+					"size": 3999,
+					"status": "missing-in-source"
+				},
+				"dist/restricted/dialog.js": {
+					"match": false,
+					"packageHash": "1554d0c8fa3bf0e5166766bfcdd56392a62d72399ac213083b5ce8b73a9dd22f",
+					"size": 5693,
+					"status": "missing-in-source"
+				},
+				"dist/restricted/dialog.js.map": {
+					"match": false,
+					"packageHash": "9684e045baaa2b6fe5a986d63c4262170bf277d6d18d93214e1fde8552e8bce2",
+					"size": 9786,
+					"status": "missing-in-source"
+				},
+				"dist/restricted/getBip32Entropy.d.ts": {
+					"match": false,
+					"packageHash": "54b9491c2abdf5940a402f69be4aa09e729cf8107b3bb9b8b33881af1b386b4a",
+					"size": 2215,
+					"status": "missing-in-source"
+				},
+				"dist/restricted/getBip32Entropy.js": {
+					"match": false,
+					"packageHash": "7129b80dc514e956d53a6ca2cbc83d87f1eea6b6b75699806b206f038c1513a9",
+					"size": 3012,
+					"status": "missing-in-source"
+				},
+				"dist/restricted/getBip32Entropy.js.map": {
+					"match": false,
+					"packageHash": "c727819437bcabb5adf9c2da602197428c33c00722139adac78c20980efbfd5a",
+					"size": 5665,
+					"status": "missing-in-source"
+				},
+				"dist/restricted/getBip32PublicKey.d.ts": {
+					"match": false,
+					"packageHash": "b8a567caf4a03be864458335896c8045f2ad47d522202505db6099e55e6bd987",
+					"size": 2782,
+					"status": "missing-in-source"
+				},
+				"dist/restricted/getBip32PublicKey.js": {
+					"match": false,
+					"packageHash": "daf44e62e7619e21ed495cfd8937955b1a39ac4fb75df6d4a07a91bc9f35ff77",
+					"size": 3577,
+					"status": "missing-in-source"
+				},
+				"dist/restricted/getBip32PublicKey.js.map": {
+					"match": false,
+					"packageHash": "bb7beab89341cd2d04b5574307107e10383e24041f94da1cdf1bfb6a4789d6f9",
+					"size": 6501,
+					"status": "missing-in-source"
+				},
+				"dist/restricted/getBip44Entropy.d.ts": {
+					"match": false,
+					"packageHash": "715a33ea018efabb620f1e273bf32623ae0107f90dbbd27377615132627daff6",
+					"size": 2264,
+					"status": "missing-in-source"
+				},
+				"dist/restricted/getBip44Entropy.js": {
+					"match": false,
+					"packageHash": "4bf188239ec460e1ce6f93ffa3ccf1bd815c70941ac42b0bc4105be0eccc12b8",
+					"size": 2938,
+					"status": "missing-in-source"
+				},
+				"dist/restricted/getBip44Entropy.js.map": {
+					"match": false,
+					"packageHash": "480fca9cb85dfc58575caba49f2c04d057487227ef5c9c7106f906ed554cf602",
+					"size": 5394,
+					"status": "missing-in-source"
+				},
+				"dist/restricted/getEntropy.d.ts": {
+					"match": false,
+					"packageHash": "9d943ef079afdd96a7d4bdfd4301d59d50ff39c9023508e3f7fa6105e57227bf",
+					"size": 2591,
+					"status": "missing-in-source"
+				},
+				"dist/restricted/getEntropy.js": {
+					"match": false,
+					"packageHash": "4be82b9e90f24693b91cff94490610a071fce6fb97925e6e7f69262bc4893508",
+					"size": 2287,
+					"status": "missing-in-source"
+				},
+				"dist/restricted/getEntropy.js.map": {
+					"match": false,
+					"packageHash": "f7ac1c1faabe520d2831d83ab4544374d754a759ae984f3262b9bf3e1f4509a2",
+					"size": 4877,
+					"status": "missing-in-source"
+				},
+				"dist/restricted/index.d.ts": {
+					"match": false,
+					"packageHash": "a4b71668c85090cbd692449d31a3310f2c3caeeca9d99b92d8cc3baf97b53e7c",
+					"size": 11229,
+					"status": "missing-in-source"
+				},
+				"dist/restricted/index.js": {
+					"match": false,
+					"packageHash": "eff17361fa5d27c5fcfe5ca1478a255346650c69cb96fd65599d7d90bbd330aa",
+					"size": 2636,
+					"status": "missing-in-source"
+				},
+				"dist/restricted/index.js.map": {
+					"match": false,
+					"packageHash": "258656949acb7a40acefbbb3f02e237320da280e64a2e418ee0998fdf3b4e3a1",
+					"size": 2482,
+					"status": "missing-in-source"
+				},
+				"dist/restricted/invokeSnap.d.ts": {
+					"match": false,
+					"packageHash": "856191e5351d525ee966a571b2e00791b1ea219a72300c67acde3bf7b2d5b1f8",
+					"size": 3084,
+					"status": "missing-in-source"
+				},
+				"dist/restricted/invokeSnap.js": {
+					"match": false,
+					"packageHash": "537aec2cda12091ba4bb92bcb4a73e5281e3981ca06b99719a605b4991bd1f25",
+					"size": 4572,
+					"status": "missing-in-source"
+				},
+				"dist/restricted/invokeSnap.js.map": {
+					"match": false,
+					"packageHash": "e5783d58a98cb440f9390ae348d3a1c1a7d05e4d82d8dfb61921fd2761b4db70",
+					"size": 8628,
+					"status": "missing-in-source"
+				},
+				"dist/restricted/manageState.d.ts": {
+					"match": false,
+					"packageHash": "a0f30149aaef5ee511e051f1ab2da6d2a9ea0146b827f5f289588aa9cdf45626",
+					"size": 4900,
+					"status": "missing-in-source"
+				},
+				"dist/restricted/manageState.js": {
+					"match": false,
+					"packageHash": "230b05414f89ab0f5da1aa91101a66a5d6d14345fc593fe0075c9e89152f378f",
+					"size": 9429,
+					"status": "missing-in-source"
+				},
+				"dist/restricted/manageState.js.map": {
+					"match": false,
+					"packageHash": "2ad1e937baa69865657592cf2e157d6985545b009b1b6862d1162c4bbdfae1a0",
+					"size": 14961,
+					"status": "missing-in-source"
+				},
+				"dist/restricted/notify.d.ts": {
+					"match": false,
+					"packageHash": "0fbbc930fcc9d9ff9c002b389bca0cb112d3acb589d8589b073d90003ce19210",
+					"size": 3584,
+					"status": "missing-in-source"
+				},
+				"dist/restricted/notify.js": {
+					"match": false,
+					"packageHash": "66540d62627de20087ae913e50fbd5b0b31dafc8b29e774b530725a4f193dc7f",
+					"size": 4143,
+					"status": "missing-in-source"
+				},
+				"dist/restricted/notify.js.map": {
+					"match": false,
+					"packageHash": "97a5e84e02411a17cf2fabf079358ff49101958fb7f87c4112b4b69c8451ad0f",
+					"size": 7142,
+					"status": "missing-in-source"
+				},
+				"dist/utils.d.ts": {
+					"match": false,
+					"packageHash": "f543cb50e4e5e12821ad3f55a12cb2d43d7802466562503a60a5d0f2f6b2011e",
+					"size": 3650,
+					"status": "missing-in-source"
+				},
+				"dist/utils.js": {
+					"match": false,
+					"packageHash": "573ef5d41e093060db4109eed40563ed9e8811314cc1247851a69df447f8efb5",
+					"size": 4573,
+					"status": "missing-in-source"
+				},
+				"dist/utils.js.map": {
+					"match": false,
+					"packageHash": "a92933af24be9abcd290c33a22749b5307ea0587fb51b169c90233c06acfdd89",
+					"size": 8126,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,44 +1,55 @@\n {\n-  \"name\": \"@metamask/rpc-methods\",\n+  \"name\": \"root\",\n   \"version\": \"0.32.2\",\n-  \"description\": \"MetaMask Snap RPC method implementations.\",\n+  \"private\": true,\n   \"repository\": {\n     \"type\": \"git\",\n     \"url\": \"https://github.com/MetaMask/snaps-monorepo.git\"\n   },\n-  \"main\": \"dist/index.js\",\n-  \"types\": \"dist/index.d.ts\",\n-  \"files\": [\n-    \"dist/\"\n+  \"workspaces\": [\n+    \"packages/*\"\n   ],\n   \"scripts\": {\n-    \"test\": \"jest && yarn posttest\",\n-    \"posttest\": \"jest-it-up --margin 0.25\",\n-    \"test:ci\": \"yarn test\",\n+    \"setup\": \"yarn install\",\n+    \"postinstall\": \"simple-git-hooks\",\n+    \"publish:all\": \"./scripts/publish-all.sh\",\n+    \"link-packages\": \"./scripts/link-packages.sh\",\n     \"lint:eslint\": \"eslint . --cache --ext js,ts\",\n-    \"lint:misc\": \"prettier '**/*.json' '**/*.md' '!CHANGELOG.md' --ignore-path ../../.gitignore\",\n-    \"lint\": \"yarn lint:eslint && yarn lint:misc --check\",\n-    \"lint:fix\": \"yarn lint:eslint --fix && yarn lint:misc --write\",\n-    \"lint:changelog\": \"yarn auto-changelog validate\",\n-    \"build\": \"tsc --project tsconfig.build.json\",\n+    \"lint:misc\": \"prettier '**/*.json' '**/*.md' '!**/CHANGELOG.md' '**/*.yml' '**/*.html'\",\n+    \"lint:changelogs\": \"yarn workspaces foreach --parallel --verbose run lint:changelog\",\n+    \"lint:tsconfig\": \"node scripts/verify-tsconfig.mjs\",\n+    \"lint\": \"yarn lint:tsconfig && yarn lint:eslint && yarn lint:misc --check\",\n+    \"lint:fix\": \"yarn lint:tsconfig && yarn lint:eslint --fix && yarn lint:misc --write\",\n+    \"build\": \"yarn build:tsc && yarn build:post-tsc\",\n     \"build:clean\": \"yarn clean && yarn build\",\n-    \"clean\": \"rimraf '*.tsbuildinfo' 'dist/*'\",\n-    \"prepare-manifest:preview\": \"../../scripts/prepare-preview-manifest.sh\",\n-    \"publish:preview\": \"yarn npm publish --tag preview\",\n-    \"publish:package\": \"../../scripts/publish-package.sh\"\n-  },\n-  \"dependencies\": {\n-    \"@metamask/browser-passworder\": \"^4.0.2\",\n-    \"@metamask/key-tree\": \"^7.0.0\",\n-    \"@metamask/permission-controller\": \"^3.1.0\",\n-    \"@metamask/snaps-ui\": \"^0.32.2\",\n-    \"@metamask/snaps-utils\": \"^0.32.2\",\n-    \"@metamask/types\": \"^1.1.0\",\n-    \"@metamask/utils\": \"^5.0.0\",\n-    \"@noble/hashes\": \"^1.1.3\",\n-    \"eth-rpc-errors\": \"^4.0.2\",\n-    \"nanoid\": \"^3.1.31\",\n-    \"superstruct\": \"^1.0.3\"\n+    \"build:tsc\": \"tsc --build tsconfig.build.json\",\n+    \"build:post-tsc\": \"yarn workspaces foreach --parallel --topological --verbose run build:post-tsc\",\n+    \"clean\": \"yarn workspaces foreach --parallel --verbose run clean\",\n+    \"test\": \"yarn workspaces foreach --parallel --verbose run test\",\n+    \"test:browser\": \"yarn workspaces foreach --verbose run test:browser\",\n+    \"test:prepare\": \"yarn workspace @metamask/snaps-execution-environments run build:test\",\n+    \"child-workspace-package-names-as-json\": \"ts-node scripts/child-workspace-package-names-as-json.ts\",\n+    \"prepare-preview-builds\": \"yarn workspaces foreach --parallel run prepare-manifest:preview\",\n+    \"publish-previews\": \"yarn workspaces foreach --parallel run publish:preview\"\n+  },\n+  \"simple-git-hooks\": {\n+    \"pre-commit\": \"yarn lint-staged && yarn dedupe --check\"\n+  },\n+  \"lint-staged\": {\n+    \"*.{js,ts}\": [\n+      \"eslint --fix\"\n+    ],\n+    \"!(CHANGELOG).{json,yml,md}\": [\n+      \"prettier --write\"\n+    ]\n+  },\n+  \"resolutions\": {\n+    \"@babel/core\": \"patch:@babel/core@npm%3A7.21.0#./.yarn/patches/@babel-core-npm-7.21.0-fb3817b0e5.patch\",\n+    \"@lavamoat/lavapack@^3.3.0\": \"patch:@lavamoat/lavapack@npm%3A3.3.0#./.yarn/patches/@lavamoat-lavapack-npm-3.3.0-5a61b5374d.patch\",\n+    \"@types/mocha@^10.0.1\": \"patch:@types/mocha@npm:10.0.1#.yarn/patches/@types-mocha-npm-10.0.1-7c94e9e170.patch\",\n+    \"jest-fetch-mock@^3.0.3\": \"patch:jest-fetch-mock@npm:3.0.3#.yarn/patches/jest-fetch-mock-npm-3.0.3-ac072ca8af.patch\",\n+    \"lavamoat-browserify@^15.5.0\": \"patch:lavamoat-browserify@npm%3A15.5.0#./.yarn/patches/lavamoat-browserify-npm-15.5.0-ce0bbe5e4c.patch\",\n+    \"luxon@^3.2.1\": \"patch:luxon@npm%3A3.3.0#./.yarn/patches/luxon-npm-3.3.0-bdbae9bfd5.patch\"\n   },\n   \"devDependencies\": {\n     \"@lavamoat/allow-scripts\": \"^2.0.3\",\n@@ -47,10 +58,11 @@\n     \"@metamask/eslint-config-jest\": \"^11.0.0\",\n     \"@metamask/eslint-config-nodejs\": \"^11.0.1\",\n     \"@metamask/eslint-config-typescript\": \"^11.0.0\",\n+    \"@types/jest\": \"^27.5.1\",\n     \"@types/node\": \"^14.14.25\",\n     \"@typescript-eslint/eslint-plugin\": \"^5.42.1\",\n     \"@typescript-eslint/parser\": \"^5.42.1\",\n-    \"deepmerge\": \"^4.2.2\",\n+    \"chromedriver\": \"^110.0.0\",\n     \"eslint\": \"^8.27.0\",\n",
+					"match": false,
+					"packageHash": "eee0aada5a906082863284c5a956f2c5a8d724b0279e8014f66ae03bbc2775d7",
+					"size": 2636,
+					"sourceHash": "4c9582b52772cb736d3ed9b5e5ff7503bb271d90fbe627c181327d2289242439",
+					"status": "content"
+				},
+				".editorconfig": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".gitattributes": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/CODEOWNERS": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/dependabot.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/build-lint-test.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/create-release-pr.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/main.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/publish-preview.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/publish-release.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".nvmrc": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".prettierignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".prettierrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".yarn/patches/@babel-core-npm-7.21.0-fb3817b0e5.patch": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".yarn/patches/@lavamoat-lavapack-npm-3.3.0-5a61b5374d.patch": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".yarn/patches/@types-mocha-npm-10.0.1-7c94e9e170.patch": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".yarn/patches/jest-fetch-mock-npm-3.0.3-ac072ca8af.patch": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".yarn/patches/lavamoat-browserify-npm-15.5.0-ce0bbe5e4c.patch": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".yarn/patches/luxon-npm-3.3.0-bdbae9bfd5.patch": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".yarn/plugins/@yarnpkg/plugin-allow-scripts.cjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".yarn/plugins/@yarnpkg/plugin-workspace-tools.cjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".yarn/releases/yarn-3.4.1.cjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".yarnrc.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"jest.config.base.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/bls-signer/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/bls-signer/index.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/bls-signer/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/bls-signer/snap.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/bls-signer/snap.manifest.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/bls-signer/src/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/browserify/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/browserify/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/browserify/babel.config.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/browserify/gulpfile.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/browserify/index.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/browserify/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/browserify/snap.manifest.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/browserify/src/snap.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/browserify/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/ethers-js/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/ethers-js/index.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/ethers-js/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/ethers-js/snap.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/ethers-js/snap.manifest.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/ethers-js/src/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/insights/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/insights/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/insights/index.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/insights/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/insights/snap.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/insights/snap.manifest.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/insights/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/insights/src/insights.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/insights/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/ipfs/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/ipfs/index.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/ipfs/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/ipfs/snap.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/ipfs/snap.manifest.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/ipfs/src/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/ipfs/src/ipfs.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/notifications/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/notifications/index.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/notifications/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/notifications/snap.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/notifications/snap.manifest.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/notifications/src/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/rollup/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/rollup/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/rollup/babel.config.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/rollup/index.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/rollup/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/rollup/rollup.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/rollup/snap.manifest.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/rollup/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/rollup/src/snap.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/rollup/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/signer/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/signer/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/signer/packages/bitcoin/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/signer/packages/bitcoin/index.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/signer/packages/bitcoin/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/signer/packages/bitcoin/snap.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/signer/packages/bitcoin/snap.manifest.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/signer/packages/bitcoin/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/signer/packages/bitcoin/src/snap.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/signer/packages/core/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/signer/packages/core/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/signer/packages/core/snap.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/signer/packages/core/snap.manifest.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/signer/packages/core/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/signer/packages/core/src/snap.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/signer/packages/ethereum/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/signer/packages/ethereum/index.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/signer/packages/ethereum/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/signer/packages/ethereum/snap.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/signer/packages/ethereum/snap.manifest.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/signer/packages/ethereum/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/signer/packages/ethereum/src/snap.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/typescript/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/typescript/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/typescript/index.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/typescript/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/typescript/snap.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/typescript/snap.manifest.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/typescript/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/typescript/src/message.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/typescript/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/wasm/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/wasm/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/wasm/assembly/program.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/wasm/index.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/wasm/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/wasm/snap.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/wasm/snap.manifest.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/wasm/src/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/wasm/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/webpack/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/webpack/babel.config.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/webpack/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/webpack/snap.manifest.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/webpack/src/index.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/webpack/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/webpack/src/snap.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/webpack/src/types/vendor/hook-shell-script-webpack-plugin.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/webpack/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/examples/webpack/webpack.config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/multichain-provider/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/multichain-provider/CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/multichain-provider/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/multichain-provider/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/multichain-provider/jest.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/multichain-provider/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/multichain-provider/src/MultiChainProvider.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/multichain-provider/src/MultiChainProvider.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/multichain-provider/src/Provider.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/multichain-provider/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/multichain-provider/tsconfig.build.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/multichain-provider/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/jest.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/src/__fixtures__/entropy.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/src/__fixtures__/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/src/permitted/common/snapInstallation.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/src/permitted/getSnaps.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/src/permitted/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/src/permitted/invokeSnapSugar.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/src/permitted/invokeSnapSugar.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/src/permitted/requestSnaps.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/src/permitted/requestSnaps.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/src/request.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/src/request.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/src/restricted/caveats/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/src/restricted/caveats/permittedCoinTypes.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/src/restricted/caveats/permittedCoinTypes.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/src/restricted/caveats/permittedDerivationPaths.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/src/restricted/caveats/permittedDerivationPaths.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/src/restricted/caveats/snapIds.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/src/restricted/caveats/snapIds.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/src/restricted/dialog.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/src/restricted/dialog.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/src/restricted/getBip32Entropy.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/src/restricted/getBip32Entropy.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/src/restricted/getBip32PublicKey.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/src/restricted/getBip32PublicKey.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/src/restricted/getBip44Entropy.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/src/restricted/getBip44Entropy.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/src/restricted/getEntropy.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/src/restricted/getEntropy.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/src/restricted/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/src/restricted/invokeSnap.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/src/restricted/invokeSnap.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/src/restricted/manageState.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/src/restricted/manageState.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/src/restricted/notify.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/src/restricted/notify.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/src/utils.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/src/utils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/tsconfig.build.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rpc-methods/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-browserify-plugin/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-browserify-plugin/CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-browserify-plugin/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-browserify-plugin/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-browserify-plugin/jest.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-browserify-plugin/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-browserify-plugin/src/__mocks__/fs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-browserify-plugin/src/__snapshots__/plugin.test.ts.snap": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-browserify-plugin/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-browserify-plugin/src/plugin.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-browserify-plugin/src/plugin.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-browserify-plugin/tsconfig.build.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-browserify-plugin/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/jest.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/scripts/updateReadme.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/__mocks__/fs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/builders.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/cli.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/cli.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/cmds/build/build.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/cmds/build/buildHandler.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/cmds/build/bundle.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/cmds/build/bundle.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/cmds/build/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/cmds/build/utils.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/cmds/build/utils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/cmds/eval/evalHandler.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/cmds/eval/evalHandler.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/cmds/eval/index.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/cmds/eval/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/cmds/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/cmds/init/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/cmds/init/init.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/cmds/init/initHandler.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/cmds/init/initHandler.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/cmds/init/initUtils.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/cmds/init/initUtils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/cmds/manifest/index.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/cmds/manifest/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/cmds/manifest/manifestHandler.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/cmds/manifest/manifestHandler.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/cmds/serve/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/cmds/serve/serve.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/cmds/serve/serveHandler.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/cmds/serve/serveUtils.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/cmds/serve/serveUtils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/cmds/watch/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/cmds/watch/watchHandler.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/cmds/watch/watchHandler.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/main.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/main.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/test-utils/fs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/test-utils/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/types/snaps-cli.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/types/yargs.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/utils/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/utils/misc.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/utils/misc.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/utils/snap-config.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/src/utils/snap-config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/test/setup.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/tsconfig.build.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-cli/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/coverage.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/jest.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/scripts/coverage.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/scripts/generate-fixtures.sh": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/cronjob/CronjobController.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/cronjob/CronjobController.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/cronjob/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/fsm.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/fsm.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/logging.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/multichain/MultiChainController.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/multichain/MultiChainController.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/multichain/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/multichain/matching.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/multichain/matching.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/multichain/middleware.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/multichain/middleware.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/services/AbstractExecutionService.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/services/AbstractExecutionService.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/services/ExecutionService.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/services/browser.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/services/browser.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/services/iframe/IframeExecutionService.test.browser.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/services/iframe/IframeExecutionService.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/services/iframe/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/services/iframe/test/index.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/services/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/services/node/NodeProcessExecutionService.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/services/node/NodeProcessExecutionService.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/services/node/NodeThreadExecutionService.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/services/node/NodeThreadExecutionService.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/services/node/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/services/offscreen/OffscreenExecutionService.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/services/offscreen/OffscreenExecutionService.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/services/offscreen/OffscreenPostMessageStream.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/services/offscreen/OffscreenPostMessageStream.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/services/offscreen/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/services/offscreen/vendor/offscreen.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/snaps/RequestQueue.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/snaps/RequestQueue.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/snaps/SnapController.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/snaps/SnapController.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/snaps/Timer.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/snaps/Timer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/snaps/endowments/cronjob.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/snaps/endowments/cronjob.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/snaps/endowments/enum.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/snaps/endowments/ethereum-provider.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/snaps/endowments/ethereum-provider.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/snaps/endowments/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/snaps/endowments/keyring.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/snaps/endowments/keyring.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/snaps/endowments/long-running.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/snaps/endowments/long-running.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/snaps/endowments/network-access.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/snaps/endowments/network-access.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/snaps/endowments/rpc.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/snaps/endowments/rpc.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/snaps/endowments/transaction-insight.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/snaps/endowments/transaction-insight.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/snaps/endowments/web-assembly.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/snaps/endowments/web-assembly.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/snaps/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/snaps/location/http.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/snaps/location/http.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/snaps/location/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/snaps/location/local.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/snaps/location/local.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/snaps/location/location.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/snaps/location/location.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/snaps/location/npm.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/snaps/location/npm.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/snaps/registry/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/snaps/registry/json.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/snaps/registry/json.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/snaps/registry/registry.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/snaps/selectors.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/test-utils/controller.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/test-utils/cronjob.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/test-utils/execution-environment.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/test-utils/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/test-utils/location.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/test-utils/mock.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/test-utils/multichain.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/test-utils/registry.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/test-utils/service.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/test-utils/sleep.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/utils.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/src/utils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/tsconfig.build.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/tsconfig.local.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-controllers/wdio.config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/coverage.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/jest.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/jest.environment.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/lavamoat/browserify/iframe/policy.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/lavamoat/browserify/node-process/policy.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/lavamoat/browserify/node-thread/policy.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/lavamoat/browserify/offscreen/policy.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/lavamoat/browserify/policy-override.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/lavamoat/build-system/policy-override.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/lavamoat/build-system/policy.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/scripts/build.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/scripts/coverage.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/BaseSnapExecutor.test.browser.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/BaseSnapExecutor.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/commands.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/commands.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/endowments/commonEndowmentFactory.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/endowments/crypto.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/endowments/crypto.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/endowments/date.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/endowments/date.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/endowments/endowments.test.browser.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/endowments/index.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/endowments/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/endowments/interval.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/endowments/interval.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/endowments/math.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/endowments/math.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/endowments/network.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/endowments/network.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/endowments/textDecoder.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/endowments/textEncoder.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/endowments/timeout.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/endowments/timeout.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/globalEvents.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/globalEvents.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/globalObject.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/globalObject.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/keyring.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/lockdown/lockdown-events.test.browser.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/lockdown/lockdown-events.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/lockdown/lockdown-more.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/lockdown/lockdown.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/sortParams.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/sortParams.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/test-utils/endowments.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/test-utils/executor.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/test-utils/hardening.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/test-utils/logger.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/utils.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/utils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/validation.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/common/validation.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/globals.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/iframe/IFrameSnapExecutor.test.browser.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/iframe/IFrameSnapExecutor.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/iframe/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/logging.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/node-process/ChildProcessSnapExecutor.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/node-process/ChildProcessSnapExecutor.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/node-process/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/node-thread/ThreadSnapExecutor.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/node-thread/ThreadSnapExecutor.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/node-thread/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/offscreen/OffscreenSnapExecutor.test.browser.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/offscreen/OffscreenSnapExecutor.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/offscreen/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/src/openrpc.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/tsconfig.build.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-execution-environments/wdio.config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-rollup-plugin/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-rollup-plugin/CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-rollup-plugin/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-rollup-plugin/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-rollup-plugin/jest.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-rollup-plugin/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-rollup-plugin/src/__fixtures__/source-map.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-rollup-plugin/src/__mocks__/fs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-rollup-plugin/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-rollup-plugin/src/plugin.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-rollup-plugin/src/plugin.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-rollup-plugin/tsconfig.build.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-rollup-plugin/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-types/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-types/CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-types/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-types/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-types/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-types/src/global.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-types/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-types/src/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-types/tsconfig.build.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-types/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-ui/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-ui/CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-ui/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-ui/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-ui/jest.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-ui/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-ui/src/builder.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-ui/src/builder.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-ui/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-ui/src/nodes.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-ui/src/validation.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-ui/src/validation.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-ui/tsconfig.build.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-ui/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/coverage.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/jest.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/scripts/coverage.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/__mocks__/fs/promises.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/__mocks__/fs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/caveats.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/caveats.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/checksum.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/checksum.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/cronjob.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/cronjob.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/deep-clone.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/default-endowments.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/entropy.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/eval-worker.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/eval.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/eval.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/fs.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/fs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/handlers.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/iframe.test.browser.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/iframe.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/index.browser.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/json-rpc.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/json-rpc.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/logging.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/logging.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/manifest/index.browser.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/manifest/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/manifest/manifest.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/manifest/manifest.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/manifest/validation.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/manifest/validation.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/mock.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/mock.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/namespace.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/namespace.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/notification.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/notification.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/npm.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/path.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/path.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/post-process.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/post-process.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/snaps.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/snaps.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/test-utils/common.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/test-utils/controller.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/test-utils/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/test-utils/manifest.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/test-utils/sleep.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/test-utils/snap.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/test-utils/spy.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/test-utils/stream.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/types.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/versions.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/versions.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/virtual-file/VirtualFile.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/virtual-file/VirtualFile.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/virtual-file/index.browser.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/virtual-file/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/virtual-file/toVirtualFile.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/src/virtual-file/toVirtualFile.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/tsconfig.build.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-utils/wdio.config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-webpack-plugin/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-webpack-plugin/CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-webpack-plugin/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-webpack-plugin/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-webpack-plugin/jest.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-webpack-plugin/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-webpack-plugin/src/__snapshots__/plugin.test.ts.snap": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-webpack-plugin/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-webpack-plugin/src/plugin.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-webpack-plugin/src/plugin.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-webpack-plugin/tsconfig.build.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/snaps-webpack-plugin/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/child-workspace-package-names-as-json.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/generate-preview-build-message.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/link-packages.sh": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/prepare-preview-manifest.sh": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/publish-all.sh": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/publish-package.sh": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/verify-tsconfig.mjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tsconfig.build.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tsconfig.packages.build.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tsconfig.packages.json": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 1,
+				"missingInPackage": 567,
+				"missingInSource": 69,
+				"score": 0.001564945226917058,
+				"totalFiles": 639
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "@babel/code-frame",
+				"version": "7.29.0"
+			},
+			{
+				"name": "@babel/compat-data",
+				"version": "7.29.0"
+			},
+			{
+				"name": "@babel/core",
+				"version": "7.29.0"
+			},
+			{
+				"name": "@babel/generator",
+				"version": "7.29.1"
+			},
+			{
+				"name": "@babel/helper-annotate-as-pure",
+				"version": "7.27.3"
+			},
+			{
+				"name": "@babel/helper-compilation-targets",
+				"version": "7.28.6"
+			},
+			{
+				"name": "@babel/helper-create-class-features-plugin",
+				"version": "7.28.6"
+			},
+			{
+				"name": "@babel/helper-create-regexp-features-plugin",
+				"version": "7.28.5"
+			},
+			{
+				"name": "@babel/helper-define-polyfill-provider",
+				"version": "0.6.7"
+			},
+			{
+				"name": "@babel/helper-globals",
+				"version": "7.28.0"
+			},
+			{
+				"name": "@babel/helper-member-expression-to-functions",
+				"version": "7.28.5"
+			},
+			{
+				"name": "@babel/helper-module-imports",
+				"version": "7.28.6"
+			},
+			{
+				"name": "@babel/helper-module-transforms",
+				"version": "7.28.6"
+			},
+			{
+				"name": "@babel/helper-optimise-call-expression",
+				"version": "7.27.1"
+			},
+			{
+				"name": "@babel/helper-plugin-utils",
+				"version": "7.28.6"
+			},
+			{
+				"name": "@babel/helper-remap-async-to-generator",
+				"version": "7.27.1"
+			},
+			{
+				"name": "@babel/helper-replace-supers",
+				"version": "7.28.6"
+			},
+			{
+				"name": "@babel/helper-skip-transparent-expression-wrappers",
+				"version": "7.27.1"
+			},
+			{
+				"name": "@babel/helper-string-parser",
+				"version": "7.27.1"
+			},
+			{
+				"name": "@babel/helper-validator-identifier",
+				"version": "7.28.5"
+			},
+			{
+				"name": "@babel/helper-validator-option",
+				"version": "7.27.1"
+			},
+			{
+				"name": "@babel/helper-wrap-function",
+				"version": "7.28.6"
+			},
+			{
+				"name": "@babel/helpers",
+				"version": "7.28.6"
+			},
+			{
+				"name": "@babel/parser",
+				"version": "7.29.0"
+			},
+			{
+				"name": "@babel/plugin-bugfix-firefox-class-in-computed-class-key",
+				"version": "7.28.5"
+			},
+			{
+				"name": "@babel/plugin-bugfix-safari-class-field-initializer-scope",
+				"version": "7.27.1"
+			},
+			{
+				"name": "@babel/plugin-bugfix-safari-id-destructuring-collision-in-function-expression",
+				"version": "7.27.1"
+			},
+			{
+				"name": "@babel/plugin-bugfix-v8-spread-parameters-in-optional-chaining",
+				"version": "7.27.1"
+			},
+			{
+				"name": "@babel/plugin-bugfix-v8-static-class-fields-redefine-readonly",
+				"version": "7.28.6"
+			},
+			{
+				"name": "@babel/plugin-proposal-class-properties",
+				"version": "7.18.6"
+			},
+			{
+				"name": "@babel/plugin-proposal-nullish-coalescing-operator",
+				"version": "7.18.6"
+			},
+			{
+				"name": "@babel/plugin-proposal-object-rest-spread",
+				"version": "7.20.7"
+			},
+			{
+				"name": "@babel/plugin-proposal-optional-chaining",
+				"version": "7.21.0"
+			},
+			{
+				"name": "@babel/plugin-proposal-private-property-in-object",
+				"version": "7.21.0-placeholder-for-preset-env.2"
+			},
+			{
+				"name": "@babel/plugin-syntax-import-assertions",
+				"version": "7.28.6"
+			},
+			{
+				"name": "@babel/plugin-syntax-import-attributes",
+				"version": "7.28.6"
+			},
+			{
+				"name": "@babel/plugin-syntax-jsx",
+				"version": "7.28.6"
+			},
+			{
+				"name": "@babel/plugin-syntax-nullish-coalescing-operator",
+				"version": "7.8.3"
+			},
+			{
+				"name": "@babel/plugin-syntax-object-rest-spread",
+				"version": "7.8.3"
+			},
+			{
+				"name": "@babel/plugin-syntax-optional-chaining",
+				"version": "7.8.3"
+			},
+			{
+				"name": "@babel/plugin-syntax-typescript",
+				"version": "7.28.6"
+			},
+			{
+				"name": "@babel/plugin-syntax-unicode-sets-regex",
+				"version": "7.18.6"
+			},
+			{
+				"name": "@babel/plugin-transform-arrow-functions",
+				"version": "7.27.1"
+			},
+			{
+				"name": "@babel/plugin-transform-async-generator-functions",
+				"version": "7.29.0"
+			},
+			{
+				"name": "@babel/plugin-transform-async-to-generator",
+				"version": "7.28.6"
+			},
+			{
+				"name": "@babel/plugin-transform-block-scoped-functions",
+				"version": "7.27.1"
+			},
+			{
+				"name": "@babel/plugin-transform-block-scoping",
+				"version": "7.28.6"
+			},
+			{
+				"name": "@babel/plugin-transform-class-properties",
+				"version": "7.28.6"
+			},
+			{
+				"name": "@babel/plugin-transform-class-static-block",
+				"version": "7.28.6"
+			},
+			{
+				"name": "@babel/plugin-transform-classes",
+				"version": "7.28.6"
+			},
+			{
+				"name": "@babel/plugin-transform-computed-properties",
+				"version": "7.28.6"
+			},
+			{
+				"name": "@babel/plugin-transform-destructuring",
+				"version": "7.28.5"
+			},
+			{
+				"name": "@babel/plugin-transform-dotall-regex",
+				"version": "7.28.6"
+			},
+			{
+				"name": "@babel/plugin-transform-duplicate-keys",
+				"version": "7.27.1"
+			},
+			{
+				"name": "@babel/plugin-transform-duplicate-named-capturing-groups-regex",
+				"version": "7.29.0"
+			},
+			{
+				"name": "@babel/plugin-transform-dynamic-import",
+				"version": "7.27.1"
+			},
+			{
+				"name": "@babel/plugin-transform-explicit-resource-management",
+				"version": "7.28.6"
+			},
+			{
+				"name": "@babel/plugin-transform-exponentiation-operator",
+				"version": "7.28.6"
+			},
+			{
+				"name": "@babel/plugin-transform-export-namespace-from",
+				"version": "7.27.1"
+			},
+			{
+				"name": "@babel/plugin-transform-for-of",
+				"version": "7.27.1"
+			},
+			{
+				"name": "@babel/plugin-transform-function-name",
+				"version": "7.27.1"
+			},
+			{
+				"name": "@babel/plugin-transform-json-strings",
+				"version": "7.28.6"
+			},
+			{
+				"name": "@babel/plugin-transform-literals",
+				"version": "7.27.1"
+			},
+			{
+				"name": "@babel/plugin-transform-logical-assignment-operators",
+				"version": "7.28.6"
+			},
+			{
+				"name": "@babel/plugin-transform-member-expression-literals",
+				"version": "7.27.1"
+			},
+			{
+				"name": "@babel/plugin-transform-modules-amd",
+				"version": "7.27.1"
+			},
+			{
+				"name": "@babel/plugin-transform-modules-commonjs",
+				"version": "7.28.6"
+			},
+			{
+				"name": "@babel/plugin-transform-modules-systemjs",
+				"version": "7.29.0"
+			},
+			{
+				"name": "@babel/plugin-transform-modules-umd",
+				"version": "7.27.1"
+			},
+			{
+				"name": "@babel/plugin-transform-named-capturing-groups-regex",
+				"version": "7.29.0"
+			},
+			{
+				"name": "@babel/plugin-transform-new-target",
+				"version": "7.27.1"
+			},
+			{
+				"name": "@babel/plugin-transform-nullish-coalescing-operator",
+				"version": "7.28.6"
+			},
+			{
+				"name": "@babel/plugin-transform-numeric-separator",
+				"version": "7.28.6"
+			},
+			{
+				"name": "@babel/plugin-transform-object-rest-spread",
+				"version": "7.28.6"
+			},
+			{
+				"name": "@babel/plugin-transform-object-super",
+				"version": "7.27.1"
+			},
+			{
+				"name": "@babel/plugin-transform-optional-catch-binding",
+				"version": "7.28.6"
+			},
+			{
+				"name": "@babel/plugin-transform-optional-chaining",
+				"version": "7.28.6"
+			},
+			{
+				"name": "@babel/plugin-transform-parameters",
+				"version": "7.27.7"
+			},
+			{
+				"name": "@babel/plugin-transform-private-methods",
+				"version": "7.28.6"
+			},
+			{
+				"name": "@babel/plugin-transform-private-property-in-object",
+				"version": "7.28.6"
+			},
+			{
+				"name": "@babel/plugin-transform-property-literals",
+				"version": "7.27.1"
+			},
+			{
+				"name": "@babel/plugin-transform-regenerator",
+				"version": "7.29.0"
+			},
+			{
+				"name": "@babel/plugin-transform-regexp-modifiers",
+				"version": "7.28.6"
+			},
+			{
+				"name": "@babel/plugin-transform-reserved-words",
+				"version": "7.27.1"
+			},
+			{
+				"name": "@babel/plugin-transform-runtime",
+				"version": "7.29.0"
+			},
+			{
+				"name": "@babel/plugin-transform-shorthand-properties",
+				"version": "7.27.1"
+			},
+			{
+				"name": "@babel/plugin-transform-spread",
+				"version": "7.28.6"
+			},
+			{
+				"name": "@babel/plugin-transform-sticky-regex",
+				"version": "7.27.1"
+			},
+			{
+				"name": "@babel/plugin-transform-template-literals",
+				"version": "7.27.1"
+			},
+			{
+				"name": "@babel/plugin-transform-typeof-symbol",
+				"version": "7.27.1"
+			},
+			{
+				"name": "@babel/plugin-transform-typescript",
+				"version": "7.28.6"
+			},
+			{
+				"name": "@babel/plugin-transform-unicode-escapes",
+				"version": "7.27.1"
+			},
+			{
+				"name": "@babel/plugin-transform-unicode-property-regex",
+				"version": "7.28.6"
+			},
+			{
+				"name": "@babel/plugin-transform-unicode-regex",
+				"version": "7.27.1"
+			},
+			{
+				"name": "@babel/plugin-transform-unicode-sets-regex",
+				"version": "7.28.6"
+			},
+			{
+				"name": "@babel/preset-env",
+				"version": "7.29.0"
+			},
+			{
+				"name": "babel-plugin-polyfill-corejs3",
+				"version": "0.14.1"
+			},
+			{
+				"name": "@babel/preset-modules",
+				"version": "0.1.6-no-external-plugins"
+			},
+			{
+				"name": "@babel/preset-typescript",
+				"version": "7.28.5"
+			},
+			{
+				"name": "@babel/template",
+				"version": "7.28.6"
+			},
+			{
+				"name": "@babel/traverse",
+				"version": "7.29.0"
+			},
+			{
+				"name": "@babel/types",
+				"version": "7.29.0"
+			},
+			{
+				"name": "@ethereumjs/common",
+				"version": "3.2.0"
+			},
+			{
+				"name": "@ethereumjs/rlp",
+				"version": "4.0.1"
+			},
+			{
+				"name": "@ethereumjs/tx",
+				"version": "4.2.0"
+			},
+			{
+				"name": "@ethereumjs/util",
+				"version": "8.1.0"
+			},
+			{
+				"name": "@jridgewell/gen-mapping",
+				"version": "0.3.13"
+			},
+			{
+				"name": "@jridgewell/remapping",
+				"version": "2.3.5"
+			},
+			{
+				"name": "@jridgewell/resolve-uri",
+				"version": "3.1.2"
+			},
+			{
+				"name": "@jridgewell/sourcemap-codec",
+				"version": "1.5.5"
+			},
+			{
+				"name": "@jridgewell/trace-mapping",
+				"version": "0.3.31"
+			},
+			{
+				"name": "@metamask/approval-controller",
+				"version": "2.1.1"
+			},
+			{
+				"name": "@metamask/base-controller",
+				"version": "2.0.0"
+			},
+			{
+				"name": "@metamask/browser-passworder",
+				"version": "4.3.0"
+			},
+			{
+				"name": "@metamask/utils",
+				"version": "8.5.0"
+			},
+			{
+				"name": "semver",
+				"version": "7.7.4"
+			},
+			{
+				"name": "uuid",
+				"version": "9.0.1"
+			},
+			{
+				"name": "@metamask/controller-utils",
+				"version": "3.4.0"
+			},
+			{
+				"name": "@metamask/key-tree",
+				"version": "7.1.1"
+			},
+			{
+				"name": "@metamask/utils",
+				"version": "6.2.0"
+			},
+			{
+				"name": "@metamask/object-multiplex",
+				"version": "1.3.0"
+			},
+			{
+				"name": "isarray",
+				"version": "1.0.0"
+			},
+			{
+				"name": "readable-stream",
+				"version": "2.3.8"
+			},
+			{
+				"name": "safe-buffer",
+				"version": "5.1.2"
+			},
+			{
+				"name": "string_decoder",
+				"version": "1.1.1"
+			},
+			{
+				"name": "@metamask/permission-controller",
+				"version": "3.2.0"
+			},
+			{
+				"name": "@metamask/post-message-stream",
+				"version": "6.2.0"
+			},
+			{
+				"name": "process-nextick-args",
+				"version": "1.0.7"
+			},
+			{
+				"name": "readable-stream",
+				"version": "2.3.3"
+			},
+			{
+				"name": "string_decoder",
+				"version": "1.0.3"
+			},
+			{
+				"name": "@metamask/providers",
+				"version": "10.2.1"
+			},
+			{
+				"name": "fast-deep-equal",
+				"version": "2.0.1"
+			},
+			{
+				"name": "@metamask/safe-event-emitter",
+				"version": "2.0.0"
+			},
+			{
+				"name": "@metamask/scure-bip39",
+				"version": "2.1.1"
+			},
+			{
+				"name": "@noble/hashes",
+				"version": "1.3.3"
+			},
+			{
+				"name": "@scure/base",
+				"version": "1.1.9"
+			},
+			{
+				"name": "@metamask/snaps-registry",
+				"version": "1.2.2"
+			},
+			{
+				"name": "@metamask/utils",
+				"version": "7.1.0"
+			},
+			{
+				"name": "@metamask/subject-metadata-controller",
+				"version": "2.0.0"
+			},
+			{
+				"name": "@metamask/superstruct",
+				"version": "3.2.1"
+			},
+			{
+				"name": "@metamask/types",
+				"version": "1.1.0"
+			},
+			{
+				"name": "@metamask/utils",
+				"version": "5.0.2"
+			},
+			{
+				"name": "@noble/curves",
+				"version": "1.4.2"
+			},
+			{
+				"name": "@noble/hashes",
+				"version": "1.4.0"
+			},
+			{
+				"name": "@noble/ed25519",
+				"version": "1.7.5"
+			},
+			{
+				"name": "@noble/hashes",
+				"version": "1.8.0"
+			},
+			{
+				"name": "@noble/secp256k1",
+				"version": "1.7.2"
+			},
+			{
+				"name": "@scure/base",
+				"version": "1.2.6"
+			},
+			{
+				"name": "@scure/bip32",
+				"version": "1.4.0"
+			},
+			{
+				"name": "@scure/bip39",
+				"version": "1.3.0"
+			},
+			{
+				"name": "@spruceid/siwe-parser",
+				"version": "1.1.3"
+			},
+			{
+				"name": "@types/bn.js",
+				"version": "5.2.0"
+			},
+			{
+				"name": "@types/chrome",
+				"version": "0.0.136"
+			},
+			{
+				"name": "@types/debug",
+				"version": "4.1.12"
+			},
+			{
+				"name": "@types/deep-freeze-strict",
+				"version": "1.1.2"
+			},
+			{
+				"name": "@types/filesystem",
+				"version": "0.0.36"
+			},
+			{
+				"name": "@types/filewriter",
+				"version": "0.0.33"
+			},
+			{
+				"name": "@types/har-format",
+				"version": "1.2.16"
+			},
+			{
+				"name": "@types/ms",
+				"version": "2.1.0"
+			},
+			{
+				"name": "@types/node",
+				"version": "14.18.63"
+			},
+			{
+				"name": "@types/pbkdf2",
+				"version": "3.1.2"
+			},
+			{
+				"name": "@types/secp256k1",
+				"version": "4.0.7"
+			},
+			{
+				"name": "@xstate/fsm",
+				"version": "2.1.0"
+			},
+			{
+				"name": "abort-controller",
+				"version": "3.0.0"
+			},
+			{
+				"name": "acorn-node",
+				"version": "1.8.2"
+			},
+			{
+				"name": "acorn",
+				"version": "7.4.1"
+			},
+			{
+				"name": "acorn-walk",
+				"version": "7.2.0"
+			},
+			{
+				"name": "ansi-regex",
+				"version": "5.0.1"
+			},
+			{
+				"name": "anymatch",
+				"version": "3.1.3"
+			},
+			{
+				"name": "apg-js",
+				"version": "4.4.0"
+			},
+			{
+				"name": "asn1.js",
+				"version": "4.10.1"
+			},
+			{
+				"name": "bn.js",
+				"version": "4.12.3"
+			},
+			{
+				"name": "assert",
+				"version": "1.5.1"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.3"
+			},
+			{
+				"name": "util",
+				"version": "0.10.4"
+			},
+			{
+				"name": "available-typed-arrays",
+				"version": "1.0.7"
+			},
+			{
+				"name": "babel-plugin-polyfill-corejs2",
+				"version": "0.4.16"
+			},
+			{
+				"name": "babel-plugin-polyfill-corejs3",
+				"version": "0.13.0"
+			},
+			{
+				"name": "babel-plugin-polyfill-regenerator",
+				"version": "0.6.7"
+			},
+			{
+				"name": "babelify",
+				"version": "10.0.0"
+			},
+			{
+				"name": "balanced-match",
+				"version": "1.0.2"
+			},
+			{
+				"name": "base-x",
+				"version": "3.0.11"
+			},
+			{
+				"name": "base64-js",
+				"version": "1.5.1"
+			},
+			{
+				"name": "baseline-browser-mapping",
+				"version": "2.10.0"
+			},
+			{
+				"name": "binary-extensions",
+				"version": "2.3.0"
+			},
+			{
+				"name": "bl",
+				"version": "4.1.0"
+			},
+			{
+				"name": "buffer",
+				"version": "5.7.1"
+			},
+			{
+				"name": "blakejs",
+				"version": "1.2.1"
+			},
+			{
+				"name": "bn.js",
+				"version": "5.2.3"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "1.1.12"
+			},
+			{
+				"name": "braces",
+				"version": "3.0.3"
+			},
+			{
+				"name": "brorand",
+				"version": "1.1.0"
+			},
+			{
+				"name": "browser-pack",
+				"version": "6.1.0"
+			},
+			{
+				"name": "through2",
+				"version": "2.0.5"
+			},
+			{
+				"name": "browser-resolve",
+				"version": "2.0.0"
+			},
+			{
+				"name": "browserify",
+				"version": "17.0.1"
+			},
+			{
+				"name": "browserify-aes",
+				"version": "1.2.0"
+			},
+			{
+				"name": "browserify-cipher",
+				"version": "1.0.1"
+			},
+			{
+				"name": "browserify-des",
+				"version": "1.0.2"
+			},
+			{
+				"name": "browserify-rsa",
+				"version": "4.1.1"
+			},
+			{
+				"name": "browserify-sign",
+				"version": "4.2.5"
+			},
+			{
+				"name": "browserify-zlib",
+				"version": "0.2.0"
+			},
+			{
+				"name": "buffer",
+				"version": "5.2.1"
+			},
+			{
+				"name": "concat-stream",
+				"version": "1.6.2"
+			},
+			{
+				"name": "glob",
+				"version": "7.2.3"
+			},
+			{
+				"name": "browserslist",
+				"version": "4.28.1"
+			},
+			{
+				"name": "bs58",
+				"version": "4.0.1"
+			},
+			{
+				"name": "bs58check",
+				"version": "2.1.2"
+			},
+			{
+				"name": "buffer",
+				"version": "6.0.3"
+			},
+			{
+				"name": "buffer-from",
+				"version": "1.1.2"
+			},
+			{
+				"name": "buffer-xor",
+				"version": "1.0.3"
+			},
+			{
+				"name": "builtin-status-codes",
+				"version": "3.0.0"
+			},
+			{
+				"name": "cached-path-relative",
+				"version": "1.1.0"
+			},
+			{
+				"name": "call-bind",
+				"version": "1.0.8"
+			},
+			{
+				"name": "call-bind-apply-helpers",
+				"version": "1.0.2"
+			},
+			{
+				"name": "call-bound",
+				"version": "1.0.4"
+			},
+			{
+				"name": "caniuse-lite",
+				"version": "1.0.30001777"
+			},
+			{
+				"name": "chokidar",
+				"version": "3.6.0"
+			},
+			{
+				"name": "cipher-base",
+				"version": "1.0.7"
+			},
+			{
+				"name": "color-convert",
+				"version": "2.0.1"
+			},
+			{
+				"name": "color-name",
+				"version": "1.1.4"
+			},
+			{
+				"name": "combine-source-map",
+				"version": "0.8.0"
+			},
+			{
+				"name": "convert-source-map",
+				"version": "1.1.3"
+			},
+			{
+				"name": "source-map",
+				"version": "0.5.7"
+			},
+			{
+				"name": "concat-map",
+				"version": "0.0.1"
+			},
+			{
+				"name": "concat-stream",
+				"version": "2.0.0"
+			},
+			{
+				"name": "console-browserify",
+				"version": "1.2.0"
+			},
+			{
+				"name": "constants-browserify",
+				"version": "1.0.0"
+			},
+			{
+				"name": "convert-source-map",
+				"version": "2.0.0"
+			},
+			{
+				"name": "core-js-compat",
+				"version": "3.48.0"
+			},
+			{
+				"name": "core-util-is",
+				"version": "1.0.3"
+			},
+			{
+				"name": "crc-32",
+				"version": "1.2.2"
+			},
+			{
+				"name": "create-ecdh",
+				"version": "4.0.4"
+			},
+			{
+				"name": "create-hash",
+				"version": "1.2.0"
+			},
+			{
+				"name": "create-hmac",
+				"version": "1.1.7"
+			},
+			{
+				"name": "cron-parser",
+				"version": "4.9.0"
+			},
+			{
+				"name": "crypto-browserify",
+				"version": "3.12.1"
+			},
+			{
+				"name": "dash-ast",
+				"version": "1.0.0"
+			},
+			{
+				"name": "debug",
+				"version": "4.4.3"
+			},
+			{
+				"name": "deep-freeze-strict",
+				"version": "1.1.1"
+			},
+			{
+				"name": "define-data-property",
+				"version": "1.1.4"
+			},
+			{
+				"name": "define-properties",
+				"version": "1.2.1"
+			},
+			{
+				"name": "defined",
+				"version": "1.0.1"
+			},
+			{
+				"name": "deps-sort",
+				"version": "2.0.1"
+			},
+			{
+				"name": "des.js",
+				"version": "1.1.0"
+			},
+			{
+				"name": "detect-browser",
+				"version": "5.3.0"
+			},
+			{
+				"name": "detective",
+				"version": "5.2.1"
+			},
+			{
+				"name": "diffie-hellman",
+				"version": "5.0.3"
+			},
+			{
+				"name": "domain-browser",
+				"version": "1.2.0"
+			},
+			{
+				"name": "dunder-proto",
+				"version": "1.0.1"
+			},
+			{
+				"name": "duplexer2",
+				"version": "0.1.4"
+			},
+			{
+				"name": "electron-to-chromium",
+				"version": "1.5.307"
+			},
+			{
+				"name": "elliptic",
+				"version": "6.6.1"
+			},
+			{
+				"name": "emoji-regex",
+				"version": "8.0.0"
+			},
+			{
+				"name": "end-of-stream",
+				"version": "1.4.5"
+			},
+			{
+				"name": "es-define-property",
+				"version": "1.0.1"
+			},
+			{
+				"name": "es-errors",
+				"version": "1.3.0"
+			},
+			{
+				"name": "es-object-atoms",
+				"version": "1.1.1"
+			},
+			{
+				"name": "escalade",
+				"version": "3.2.0"
+			},
+			{
+				"name": "esutils",
+				"version": "2.0.3"
+			},
+			{
+				"name": "eth-ens-namehash",
+				"version": "2.0.8"
+			},
+			{
+				"name": "eth-rpc-errors",
+				"version": "4.0.3"
+			},
+			{
+				"name": "ethereum-cryptography",
+				"version": "2.2.1"
+			},
+			{
+				"name": "ethereumjs-util",
+				"version": "7.1.5"
+			},
+			{
+				"name": "ethereum-cryptography",
+				"version": "0.1.3"
+			},
+			{
+				"name": "ethjs-unit",
+				"version": "0.1.6"
+			},
+			{
+				"name": "bn.js",
+				"version": "4.11.6"
+			},
+			{
+				"name": "event-target-shim",
+				"version": "5.0.1"
+			},
+			{
+				"name": "events",
+				"version": "3.3.0"
+			},
+			{
+				"name": "evp_bytestokey",
+				"version": "1.0.3"
+			},
+			{
+				"name": "extension-port-stream",
+				"version": "2.1.1"
+			},
+			{
+				"name": "fast-deep-equal",
+				"version": "3.1.3"
+			},
+			{
+				"name": "fast-json-stable-stringify",
+				"version": "2.1.0"
+			},
+			{
+				"name": "fast-safe-stringify",
+				"version": "2.1.1"
+			},
+			{
+				"name": "fill-range",
+				"version": "7.1.1"
+			},
+			{
+				"name": "for-each",
+				"version": "0.3.5"
+			},
+			{
+				"name": "fs-constants",
+				"version": "1.0.0"
+			},
+			{
+				"name": "fs.realpath",
+				"version": "1.0.0"
+			},
+			{
+				"name": "fsevents",
+				"version": "2.3.3"
+			},
+			{
+				"name": "function-bind",
+				"version": "1.1.2"
+			},
+			{
+				"name": "generator-function",
+				"version": "2.0.1"
+			},
+			{
+				"name": "gensync",
+				"version": "1.0.0-beta.2"
+			},
+			{
+				"name": "get-assigned-identifiers",
+				"version": "1.2.0"
+			},
+			{
+				"name": "get-caller-file",
+				"version": "2.0.5"
+			},
+			{
+				"name": "get-intrinsic",
+				"version": "1.3.0"
+			},
+			{
+				"name": "get-proto",
+				"version": "1.0.1"
+			},
+			{
+				"name": "glob-parent",
+				"version": "5.1.2"
+			},
+			{
+				"name": "gopd",
+				"version": "1.2.0"
+			},
+			{
+				"name": "gunzip-maybe",
+				"version": "1.4.2"
+			},
+			{
+				"name": "browserify-zlib",
+				"version": "0.1.4"
+			},
+			{
+				"name": "pako",
+				"version": "0.2.9"
+			},
+			{
+				"name": "has-property-descriptors",
+				"version": "1.0.2"
+			},
+			{
+				"name": "has-symbols",
+				"version": "1.1.0"
+			},
+			{
+				"name": "has-tostringtag",
+				"version": "1.0.2"
+			},
+			{
+				"name": "hash-base",
+				"version": "3.0.5"
+			},
+			{
+				"name": "hash.js",
+				"version": "1.1.7"
+			},
+			{
+				"name": "hasown",
+				"version": "2.0.2"
+			},
+			{
+				"name": "hmac-drbg",
+				"version": "1.0.1"
+			},
+			{
+				"name": "htmlescape",
+				"version": "1.1.1"
+			},
+			{
+				"name": "https-browserify",
+				"version": "1.0.0"
+			},
+			{
+				"name": "idna-uts46-hx",
+				"version": "2.3.1"
+			},
+			{
+				"name": "punycode",
+				"version": "2.1.0"
+			},
+			{
+				"name": "ieee754",
+				"version": "1.2.1"
+			},
+			{
+				"name": "immer",
+				"version": "9.0.21"
+			},
+			{
+				"name": "inflight",
+				"version": "1.0.6"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.4"
+			},
+			{
+				"name": "inline-source-map",
+				"version": "0.6.3"
+			},
+			{
+				"name": "insert-module-globals",
+				"version": "7.2.1"
+			},
+			{
+				"name": "is-arguments",
+				"version": "1.2.0"
+			},
+			{
+				"name": "is-binary-path",
+				"version": "2.1.0"
+			},
+			{
+				"name": "is-buffer",
+				"version": "1.1.6"
+			},
+			{
+				"name": "is-callable",
+				"version": "1.2.7"
+			},
+			{
+				"name": "is-core-module",
+				"version": "2.16.1"
+			},
+			{
+				"name": "is-deflate",
+				"version": "1.0.0"
+			},
+			{
+				"name": "is-extglob",
+				"version": "2.1.1"
+			},
+			{
+				"name": "is-generator-function",
+				"version": "1.1.2"
+			},
+			{
+				"name": "is-glob",
+				"version": "4.0.3"
+			},
+			{
+				"name": "is-gzip",
+				"version": "1.0.0"
+			},
+			{
+				"name": "is-hex-prefixed",
+				"version": "1.0.0"
+			},
+			{
+				"name": "is-number",
+				"version": "7.0.0"
+			},
+			{
+				"name": "is-regex",
+				"version": "1.2.1"
+			},
+			{
+				"name": "is-stream",
+				"version": "2.0.1"
+			},
+			{
+				"name": "is-typed-array",
+				"version": "1.1.15"
+			},
+			{
+				"name": "is-url",
+				"version": "1.2.4"
+			},
+			{
+				"name": "isarray",
+				"version": "2.0.5"
+			},
+			{
+				"name": "js-sha3",
+				"version": "0.5.7"
+			},
+			{
+				"name": "js-tokens",
+				"version": "4.0.0"
+			},
+			{
+				"name": "jsesc",
+				"version": "3.1.0"
+			},
+			{
+				"name": "json-rpc-engine",
+				"version": "6.1.0"
+			},
+			{
+				"name": "json-rpc-middleware-stream",
+				"version": "4.2.3"
+			},
+			{
+				"name": "@metamask/safe-event-emitter",
+				"version": "3.1.2"
+			},
+			{
+				"name": "json5",
+				"version": "2.2.3"
+			},
+			{
+				"name": "jsonparse",
+				"version": "1.3.1"
+			},
+			{
+				"name": "JSONStream",
+				"version": "1.3.5"
+			},
+			{
+				"name": "keccak",
+				"version": "3.0.4"
+			},
+			{
+				"name": "labeled-stream-splicer",
+				"version": "2.0.2"
+			},
+			{
+				"name": "lodash.debounce",
+				"version": "4.0.8"
+			},
+			{
+				"name": "lodash.memoize",
+				"version": "3.0.4"
+			},
+			{
+				"name": "lru-cache",
+				"version": "5.1.1"
+			},
+			{
+				"name": "luxon",
+				"version": "3.7.2"
+			},
+			{
+				"name": "math-intrinsics",
+				"version": "1.1.0"
+			},
+			{
+				"name": "md5.js",
+				"version": "1.3.5"
+			},
+			{
+				"name": "micro-ftch",
+				"version": "0.3.1"
+			},
+			{
+				"name": "miller-rabin",
+				"version": "4.0.1"
+			},
+			{
+				"name": "minimalistic-assert",
+				"version": "1.0.1"
+			},
+			{
+				"name": "minimalistic-crypto-utils",
+				"version": "1.0.1"
+			},
+			{
+				"name": "minimatch",
+				"version": "3.1.5"
+			},
+			{
+				"name": "minimist",
+				"version": "1.2.8"
+			},
+			{
+				"name": "mkdirp-classic",
+				"version": "0.5.3"
+			},
+			{
+				"name": "module-deps",
+				"version": "6.2.3"
+			},
+			{
+				"name": "ms",
+				"version": "2.1.3"
+			},
+			{
+				"name": "nanoid",
+				"version": "3.3.11"
+			},
+			{
+				"name": "node-addon-api",
+				"version": "2.0.2"
+			},
+			{
+				"name": "node-gyp-build",
+				"version": "4.8.4"
+			},
+			{
+				"name": "node-releases",
+				"version": "2.0.36"
+			},
+			{
+				"name": "normalize-path",
+				"version": "3.0.0"
+			},
+			{
+				"name": "number-to-bn",
+				"version": "1.7.0"
+			},
+			{
+				"name": "object-inspect",
+				"version": "1.13.4"
+			},
+			{
+				"name": "object-keys",
+				"version": "1.1.1"
+			},
+			{
+				"name": "object.assign",
+				"version": "4.1.7"
+			},
+			{
+				"name": "once",
+				"version": "1.4.0"
+			},
+			{
+				"name": "os-browserify",
+				"version": "0.3.0"
+			},
+			{
+				"name": "pako",
+				"version": "1.0.11"
+			},
+			{
+				"name": "parents",
+				"version": "1.0.1"
+			},
+			{
+				"name": "parse-asn1",
+				"version": "5.1.9"
+			},
+			{
+				"name": "path-browserify",
+				"version": "1.0.1"
+			},
+			{
+				"name": "path-is-absolute",
+				"version": "1.0.1"
+			},
+			{
+				"name": "path-is-inside",
+				"version": "1.0.2"
+			},
+			{
+				"name": "path-parse",
+				"version": "1.0.7"
+			},
+			{
+				"name": "path-platform",
+				"version": "0.11.15"
+			},
+			{
+				"name": "pbkdf2",
+				"version": "3.1.5"
+			},
+			{
+				"name": "peek-stream",
+				"version": "1.1.3"
+			},
+			{
+				"name": "duplexify",
+				"version": "3.7.1"
+			},
+			{
+				"name": "picocolors",
+				"version": "1.1.1"
+			},
+			{
+				"name": "picomatch",
+				"version": "2.3.1"
+			},
+			{
+				"name": "pony-cause",
+				"version": "2.1.11"
+			},
+			{
+				"name": "possible-typed-array-names",
+				"version": "1.1.0"
+			},
+			{
+				"name": "process",
+				"version": "0.11.10"
+			},
+			{
+				"name": "process-nextick-args",
+				"version": "2.0.1"
+			},
+			{
+				"name": "public-encrypt",
+				"version": "4.0.3"
+			},
+			{
+				"name": "pump",
+				"version": "3.0.4"
+			},
+			{
+				"name": "pumpify",
+				"version": "1.5.1"
+			},
+			{
+				"name": "pump",
+				"version": "2.0.1"
+			},
+			{
+				"name": "punycode",
+				"version": "1.4.1"
+			},
+			{
+				"name": "qs",
+				"version": "6.14.2"
+			},
+			{
+				"name": "querystring-es3",
+				"version": "0.2.1"
+			},
+			{
+				"name": "randombytes",
+				"version": "2.1.0"
+			},
+			{
+				"name": "randomfill",
+				"version": "1.0.4"
+			},
+			{
+				"name": "read-only-stream",
+				"version": "2.0.0"
+			},
+			{
+				"name": "readable-stream",
+				"version": "3.6.2"
+			},
+			{
+				"name": "readable-web-to-node-stream",
+				"version": "3.0.4"
+			},
+			{
+				"name": "readable-stream",
+				"version": "4.7.0"
+			},
+			{
+				"name": "readdirp",
+				"version": "3.6.0"
+			},
+			{
+				"name": "regenerate",
+				"version": "1.4.2"
+			},
+			{
+				"name": "regenerate-unicode-properties",
+				"version": "10.2.2"
+			},
+			{
+				"name": "regexpu-core",
+				"version": "6.4.0"
+			},
+			{
+				"name": "regjsgen",
+				"version": "0.8.0"
+			},
+			{
+				"name": "regjsparser",
+				"version": "0.13.0"
+			},
+			{
+				"name": "require-directory",
+				"version": "2.1.1"
+			},
+			{
+				"name": "resolve",
+				"version": "1.22.11"
+			},
+			{
+				"name": "rfdc",
+				"version": "1.4.1"
+			},
+			{
+				"name": "ripemd160",
+				"version": "2.0.3"
+			},
+			{
+				"name": "hash-base",
+				"version": "3.1.2"
+			},
+			{
+				"name": "rlp",
+				"version": "2.2.7"
+			},
+			{
+				"name": "safe-buffer",
+				"version": "5.2.1"
+			},
+			{
+				"name": "safe-regex-test",
+				"version": "1.1.0"
+			},
+			{
+				"name": "scrypt-js",
+				"version": "3.0.1"
+			},
+			{
+				"name": "secp256k1",
+				"version": "4.0.4"
+			},
+			{
+				"name": "node-addon-api",
+				"version": "5.1.0"
+			},
+			{
+				"name": "semver",
+				"version": "6.3.1"
+			},
+			{
+				"name": "serve-handler",
+				"version": "6.1.7"
+			},
+			{
+				"name": "bytes",
+				"version": "3.0.0"
+			},
+			{
+				"name": "content-disposition",
+				"version": "0.5.2"
+			},
+			{
+				"name": "mime-db",
+				"version": "1.33.0"
+			},
+			{
+				"name": "mime-types",
+				"version": "2.1.18"
+			},
+			{
+				"name": "path-to-regexp",
+				"version": "3.3.0"
+			},
+			{
+				"name": "range-parser",
+				"version": "1.2.0"
+			},
+			{
+				"name": "ses",
+				"version": "0.18.4"
+			},
+			{
+				"name": "set-function-length",
+				"version": "1.2.2"
+			},
+			{
+				"name": "setimmediate",
+				"version": "1.0.5"
+			},
+			{
+				"name": "sha.js",
+				"version": "2.4.12"
+			},
+			{
+				"name": "shasum-object",
+				"version": "1.0.1"
+			},
+			{
+				"name": "shell-quote",
+				"version": "1.8.3"
+			},
+			{
+				"name": "side-channel",
+				"version": "1.1.0"
+			},
+			{
+				"name": "side-channel-list",
+				"version": "1.0.0"
+			},
+			{
+				"name": "side-channel-map",
+				"version": "1.0.1"
+			},
+			{
+				"name": "side-channel-weakmap",
+				"version": "1.0.2"
+			},
+			{
+				"name": "simple-concat",
+				"version": "1.0.1"
+			},
+			{
+				"name": "stream-browserify",
+				"version": "3.0.0"
+			},
+			{
+				"name": "stream-combiner2",
+				"version": "1.1.1"
+			},
+			{
+				"name": "stream-http",
+				"version": "3.2.0"
+			},
+			{
+				"name": "stream-shift",
+				"version": "1.0.3"
+			},
+			{
+				"name": "stream-splicer",
+				"version": "2.0.1"
+			},
+			{
+				"name": "string_decoder",
+				"version": "1.3.0"
+			},
+			{
+				"name": "string-width",
+				"version": "4.2.3"
+			},
+			{
+				"name": "is-fullwidth-code-point",
+				"version": "3.0.0"
+			},
+			{
+				"name": "strip-ansi",
+				"version": "6.0.1"
+			},
+			{
+				"name": "strip-hex-prefix",
+				"version": "1.0.0"
+			},
+			{
+				"name": "subarg",
+				"version": "1.0.0"
+			},
+			{
+				"name": "superstruct",
+				"version": "1.0.4"
+			},
+			{
+				"name": "supports-preserve-symlinks-flag",
+				"version": "1.0.0"
+			},
+			{
+				"name": "syntax-error",
+				"version": "1.4.0"
+			},
+			{
+				"name": "through",
+				"version": "2.3.8"
+			},
+			{
+				"name": "timers-browserify",
+				"version": "1.4.2"
+			},
+			{
+				"name": "to-buffer",
+				"version": "1.2.2"
+			},
+			{
+				"name": "to-regex-range",
+				"version": "5.0.1"
+			},
+			{
+				"name": "tty-browserify",
+				"version": "0.0.1"
+			},
+			{
+				"name": "typed-array-buffer",
+				"version": "1.0.3"
+			},
+			{
+				"name": "typedarray",
+				"version": "0.0.6"
+			},
+			{
+				"name": "umd",
+				"version": "3.0.3"
+			},
+			{
+				"name": "undeclared-identifiers",
+				"version": "1.1.3"
+			},
+			{
+				"name": "unicode-canonical-property-names-ecmascript",
+				"version": "2.0.1"
+			},
+			{
+				"name": "unicode-match-property-ecmascript",
+				"version": "2.0.0"
+			},
+			{
+				"name": "unicode-match-property-value-ecmascript",
+				"version": "2.2.1"
+			},
+			{
+				"name": "unicode-property-aliases-ecmascript",
+				"version": "2.2.0"
+			},
+			{
+				"name": "update-browserslist-db",
+				"version": "1.2.3"
+			},
+			{
+				"name": "url",
+				"version": "0.11.4"
+			},
+			{
+				"name": "util",
+				"version": "0.12.5"
+			},
+			{
+				"name": "util-deprecate",
+				"version": "1.0.2"
+			},
+			{
+				"name": "validate-npm-package-name",
+				"version": "5.0.1"
+			},
+			{
+				"name": "vm-browserify",
+				"version": "1.1.2"
+			},
+			{
+				"name": "webextension-polyfill",
+				"version": "0.12.0"
+			},
+			{
+				"name": "webextension-polyfill-ts",
+				"version": "0.25.0"
+			},
+			{
+				"name": "webextension-polyfill",
+				"version": "0.7.0"
+			},
+			{
+				"name": "webpack-sources",
+				"version": "3.3.4"
+			},
+			{
+				"name": "which-typed-array",
+				"version": "1.1.20"
+			},
+			{
+				"name": "wrappy",
+				"version": "1.0.2"
+			},
+			{
+				"name": "xtend",
+				"version": "4.0.2"
+			},
+			{
+				"name": "y18n",
+				"version": "5.0.8"
+			},
+			{
+				"name": "yallist",
+				"version": "3.1.1"
+			},
+			{
+				"name": "yargs-parser",
+				"version": "20.2.9"
+			},
+			{
+				"name": "convert-source-map",
+				"version": "1.9.0"
+			},
+			{
+				"name": "ansi-styles",
+				"version": "4.3.0"
+			},
+			{
+				"name": "cliui",
+				"version": "7.0.4"
+			},
+			{
+				"name": "wrap-ansi",
+				"version": "7.0.0"
+			},
+			{
+				"name": "yargs",
+				"version": "16.2.0"
+			},
+			{
+				"name": "tar-stream",
+				"version": "2.2.0"
+			}
+		]
+	}
+]
