@@ -1,0 +1,845 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-03-28T18:00:45.664Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:11.12.1",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "grunt-uncss@0.1.0",
+			"name": "grunt-uncss",
+			"version": "0.1.0",
+			"location": "https://registry.npmjs.org/grunt-uncss/-/grunt-uncss-0.1.0.tgz",
+			"integrity": "sha512-IElUXepJbFKu9wiip0ZEB8WimHx/P27/BQJxqT5xqHYArAxpnXXswTMVjMQ1I/ngB9rVQuJWaIDvBGJHEDVdug==",
+			"publishedAt": "2013-09-22T20:00:12.419Z",
+			"publishedWith": {
+				"node": null,
+				"npm": "1.3.5"
+			},
+			"dependencies": {
+				"underscore": "~1.4.4",
+				"uncss": "~0.4.1-0"
+			}
+		},
+		"source": {
+			"integrity": "sha512-5HAImuM3PtlCJYFqcCyHI8NaRZDBrZmY8EuwxSPbTUtZLQmRJy6xJUXzRvEIe6Q5ftxy9BO3WrdgM8TAJAt+Ug==",
+			"location": "git://github.com/addyosmani/grunt-uncss.git",
+			"spec": "github:addyosmani/grunt-uncss#HEAD"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".jshintrc": {
+					"match": false,
+					"packageHash": "5f3af558177bd89bc36a4848ef917a0715dba0df4ef75e5156b29635da61638c",
+					"size": 206,
+					"status": "missing-in-source"
+				},
+				".npmignore": {
+					"match": false,
+					"packageHash": "04240062f7d1252a0f506b4f2fdaa142f6f65b1e44f601fcdd32491c3a6bfb29",
+					"size": 33,
+					"status": "missing-in-source"
+				},
+				".sizecache.json": {
+					"match": false,
+					"packageHash": "292ab8bebe04e3f7673d39c05ca2c27a4f6534f2f6263a9b462f393662299f64",
+					"size": 432,
+					"status": "missing-in-source"
+				},
+				"LICENSE-MIT": {
+					"match": false,
+					"packageHash": "cdf0dd218dd51eef3ed97a73832d1d2039001ebf392b52e967a4e7d7e2b3a5fe",
+					"size": 1055,
+					"status": "missing-in-source"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,55 +1,75 @@\n # grunt-uncss\n \n-A grunt task for generating CSS files containing only those styles used in your project. *Note: this project has not yet been released*\n+[![Built with Grunt](https://gruntjs.com/cdn/builtwith.svg)](https://gruntjs.com/) [![Build Status](https://github.com/uncss/grunt-uncss/workflows/Tests/badge.svg)](https://github.com/uncss/grunt-uncss/actions?workflow=Tests)\n \n-## Preview\n+>A grunt task for removing unused CSS from your projects with [UnCSS](https://github.com/uncss/uncss).\n \n-Taking a Bootstrap project using >120KB of CSS down to 20KB. The trimming process does not yet generate 1:1 expected output, but it's close.\n+## Getting Started\n \n-![](http://i.imgur.com/0QhdbOd.gif)\n+If you haven't used [Grunt](https://gruntjs.com/) before, be sure to check out the\n+[Getting Started](https://gruntjs.com/getting-started) guide, as it explains how to create\n+a [Gruntfile](https://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins.\n+Once you're familiar with that process, you may install this plugin with this command:\n \n-## The problem\n+```shell\n+npm install grunt-uncss --save-dev\n+```\n \n-Many developers use less than 10% of the CSS included with projects like Twitter Bootstrap. As a result, they can end up with fairly bloated stylesheets which can significantly increase page load time and affect performance. `grunt-uncss` is an attempt to help with by generating a CSS file containing only the CSS actually used in your project.\n+Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:\n \n-## Research and alternative solutions\n+```js\n+grunt.loadNpmTasks('grunt-uncss');\n+```\n+\n+**Issues with the output should be reported on the UnCSS [issue tracker](https://github.com/uncss/uncss/issues).**\n \n-There have been many efforts to try solving the problem of finding unused CSS in the past. Opera created [ucss](https://github.com/operasoftware/ucss), @aanand created [deadweight](https://github.com/aanand/deadweight), Brian Le Roux [CSS Slap Chop](https://github.com/brianleroux/css-slap-chop) and there were a number of client-side solutions also crafted, such as [Helium-CSS](https://github.com/geuis/helium-css) and [CSSESS](https://github.com/driverdan/cssess).\n+## Preview\n \n-The challenge with many of these projects is that whilst they solve the problem of discovering unused CSS, they don't actually generate what you're really after - a leaner build of your project CSS containing only those rules you used. Finding that a more recent project called [uncss](https://github.com/giakki/uncss) did try tackling this, I set out to create a grunt task that would add this to your build chain.\n+Taking a multi-page project using Bootstrap with >120KB of CSS down to 11KB.\n \n-Edit: I am currently also investigating [mincss](http://www.peterbe.com/plog/mincss) which might do what I'm after but is a Python script.\n+![Demo](https://i.imgur.com/uhWMALH.gif)\n \n-## Limitations\n+## Uncss task\n \n-This project currently has a number of important limitations. `uncss` currently doesn't run with PhantomJS, meaning styles that are dynamically added via JavaScript are not taken into account. There are also cases where not all styles are getting correctly parsed out.\n+*Run this task with the `grunt uncss` command.*\n \n-A better solution to this would be hooking into `helium` (mentioned earlier). Unfortunately, getting it working as a module we can use via grunt is non-trivial work, however this is currently being tackled as part of the [helium-cli](https://github.com/villadora/helium-cli) project. \n+Task targets, files and options may be specified according to the grunt [Configuring tasks](https://gruntjs.com/configuring-tasks) guide.\n \n-Once it has been released and is in a stable state I intend on moving this project over to using it.\n+## Options\n \n-## Configuration\n+Options are passed to [UnCSS](https://github.com/uncss/uncss#within-nodejs). In addition this task defines an extra option:\n \n+### report\n \n-Sample configuration:\n+* Choices: `'min'`, `'gzip'`\n+* Default: `'min'`\n \n-```\n-    uncss: {\n-      bootstrap: {\n+Report minification result or both minification and gzip results.\n+This is useful to see exactly how well clean-css is performing but using `'gzip'` will make the task take 5-10x longer to complete. [Example output](https://github.com/sindresorhus/maxmin#readme).\n+\n+## Usage examples\n+\n+Use the `grunt-uncss` task by specifying a target destination (file) for your cleaned CSS.\n+Below this is `dist/css/tidy.css`.\n+\n+Along-side, specify the input HTML files you would like scanned for used selectors.\n+In this case `app/index.html` and `app/about.html` are the two files we would like checked.\n+\n+```js\n+uncss: {\n+    dist: {\n         files: {\n-          'dist/css/tidy.css': [\n-          'app/index.html',\n-          'app/test2.html']\n+            'dist/css/tidy.css': ['app/index.html', 'app/about.html']\n         }\n-      }\n-    },\n+    }\n+}\n ```\n \n-Which you can then use alongside a processor like `processhtml` to\n-rewrite the location of your stylesheet to `tidy.css` using a block\n-like:\n+Which you can then use alongside a processor like\n+[processhtml](https://github.com/dciccale/grunt-processhtml) to\n+rewrite the location of your stylesheet to `tidy.css` using a block like:\n",
+					"match": false,
+					"packageHash": "eea9e084d5e9efc69ab073c3499808adc2be43d40cbeeca2157f805b138ebfac",
+					"size": 3375,
+					"sourceHash": "b27941fa4463b6b3d0fdd5f366ef74e9fad5a1f4c7b29274dbb0e888ce4752c7",
+					"status": "content"
+				},
+				"app/404.html": {
+					"match": false,
+					"packageHash": "4f2117ec8ba3f5a88ae0010f2b72e64fb9fde0c2745c6e72b4082ea4e7114298",
+					"size": 4459,
+					"status": "missing-in-source"
+				},
+				"app/about.html": {
+					"match": false,
+					"packageHash": "6131c827317dd17cfc5d5e1cbc96941dfefad6061a782600a6b1270ffb146107",
+					"size": 4776,
+					"status": "missing-in-source"
+				},
+				"app/apple-touch-icon-114x114-precomposed.png": {
+					"match": false,
+					"packageHash": "938aae38b655e9f6bdb9890e7f9bb20ee558213e2efa1f2574582425bfba2af3",
+					"size": 1189,
+					"status": "missing-in-source"
+				},
+				"app/apple-touch-icon-144x144-precomposed.png": {
+					"match": false,
+					"packageHash": "100c5fb1741630d9cbc3b87d95e3be675ad794b7012abf0da138fff0339408e5",
+					"size": 1475,
+					"status": "missing-in-source"
+				},
+				"app/apple-touch-icon-57x57-precomposed.png": {
+					"match": false,
+					"packageHash": "8131fbd8d6709e83ba786128b123f87e6803c2231fa07e15530fc5d8969ae486",
+					"size": 730,
+					"status": "missing-in-source"
+				},
+				"app/apple-touch-icon-72x72-precomposed.png": {
+					"match": false,
+					"packageHash": "9f5a3c196e37f4817b587308b697e19a1ddfe87eb5abb9ceaf92f2178a8678bc",
+					"size": 854,
+					"status": "missing-in-source"
+				},
+				"app/apple-touch-icon-precomposed.png": {
+					"match": false,
+					"packageHash": "8131fbd8d6709e83ba786128b123f87e6803c2231fa07e15530fc5d8969ae486",
+					"size": 730,
+					"status": "missing-in-source"
+				},
+				"app/apple-touch-icon.png": {
+					"match": false,
+					"packageHash": "8131fbd8d6709e83ba786128b123f87e6803c2231fa07e15530fc5d8969ae486",
+					"size": 730,
+					"status": "missing-in-source"
+				},
+				"app/crossdomain.xml": {
+					"match": false,
+					"packageHash": "76ee2ca9430245ea4165cd16bd74b05d68a9d786eb43c69926e480d30840634e",
+					"size": 603,
+					"status": "missing-in-source"
+				},
+				"app/css/bootstrap.css": {
+					"match": false,
+					"packageHash": "420b3d68e87c190370d928c51daff4d027603e7b21d5071afb3640ca2081c9c9",
+					"size": 119892,
+					"status": "missing-in-source"
+				},
+				"app/css/main.css": {
+					"match": false,
+					"packageHash": "c5d4a2520de1af40ccac8be8dd825cac4cab95bab96a841ded5625e3c5c71d86",
+					"size": 5678,
+					"status": "missing-in-source"
+				},
+				"app/css/normalize.css": {
+					"match": false,
+					"packageHash": "06ba38d215e3141d85b6f477a394fa71c8f97e811429a8f1730dd8dc1c8291a7",
+					"size": 9802,
+					"status": "missing-in-source"
+				},
+				"app/css/offcanvas.css": {
+					"match": false,
+					"packageHash": "647cdc8fd9a7e39680667c5019fae64002825a326b1f9ff7fe38db5752f44528",
+					"size": 844,
+					"status": "missing-in-source"
+				},
+				"app/favicon.ico": {
+					"match": false,
+					"packageHash": "36a6f4ba02692dd0d4f25aa288e598a8f36d5e1a18513f0bdbbc0ada9f5b729d",
+					"size": 766,
+					"status": "missing-in-source"
+				},
+				"app/humans.txt": {
+					"match": false,
+					"packageHash": "d5a845c367f9797db3429d1408cae40a7219615c2a70ab430e1077b0e55ef7b0",
+					"size": 206,
+					"status": "missing-in-source"
+				},
+				"app/img/.npmignore": {
+					"match": false,
+					"packageHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+					"size": 0,
+					"status": "missing-in-source"
+				},
+				"app/index.html": {
+					"match": false,
+					"packageHash": "9932872242899e1b147be8dc56289f7c0bdf292836882f6f7a81882db48ad017",
+					"size": 6927,
+					"status": "missing-in-source"
+				},
+				"app/js/main.js": {
+					"match": false,
+					"packageHash": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+					"size": 1,
+					"status": "missing-in-source"
+				},
+				"app/js/plugins.js": {
+					"match": false,
+					"packageHash": "267f86b986829cb9a3c46b9fcdbc56783bb923005ba5ef5b27efce504e72ecfa",
+					"size": 733,
+					"status": "missing-in-source"
+				},
+				"app/js/vendor/jquery-1.9.1.min.js": {
+					"match": false,
+					"packageHash": "aa084d3968ab19898ebbed807ebc134b622fab78a888e7b36ae8386841636801",
+					"size": 92630,
+					"status": "missing-in-source"
+				},
+				"app/js/vendor/modernizr-2.6.2.min.js": {
+					"match": false,
+					"packageHash": "cf25ec18f223f4c51ce1128a42e644cdc2244d88f89d1a51440d9dbe51f4efe8",
+					"size": 15414,
+					"status": "missing-in-source"
+				},
+				"app/robots.txt": {
+					"match": false,
+					"packageHash": "310ff22db8ee2e8cc9306f320cc3238d083122c50c1049d7f408b11ea2e03a5a",
+					"size": 32,
+					"status": "missing-in-source"
+				},
+				"dist/about.html": {
+					"match": false,
+					"packageHash": "d75938c4e6c986994ee07cb13cbaa154c51959f3fb747fa4f8ec9d31a08000f1",
+					"size": 4541,
+					"status": "missing-in-source"
+				},
+				"dist/apple-touch-icon-114x114-precomposed.png": {
+					"match": false,
+					"packageHash": "938aae38b655e9f6bdb9890e7f9bb20ee558213e2efa1f2574582425bfba2af3",
+					"size": 1189,
+					"status": "missing-in-source"
+				},
+				"dist/apple-touch-icon-144x144-precomposed.png": {
+					"match": false,
+					"packageHash": "100c5fb1741630d9cbc3b87d95e3be675ad794b7012abf0da138fff0339408e5",
+					"size": 1475,
+					"status": "missing-in-source"
+				},
+				"dist/apple-touch-icon-57x57-precomposed.png": {
+					"match": false,
+					"packageHash": "8131fbd8d6709e83ba786128b123f87e6803c2231fa07e15530fc5d8969ae486",
+					"size": 730,
+					"status": "missing-in-source"
+				},
+				"dist/apple-touch-icon-72x72-precomposed.png": {
+					"match": false,
+					"packageHash": "9f5a3c196e37f4817b587308b697e19a1ddfe87eb5abb9ceaf92f2178a8678bc",
+					"size": 854,
+					"status": "missing-in-source"
+				},
+				"dist/apple-touch-icon-precomposed.png": {
+					"match": false,
+					"packageHash": "8131fbd8d6709e83ba786128b123f87e6803c2231fa07e15530fc5d8969ae486",
+					"size": 730,
+					"status": "missing-in-source"
+				},
+				"dist/apple-touch-icon.png": {
+					"match": false,
+					"packageHash": "8131fbd8d6709e83ba786128b123f87e6803c2231fa07e15530fc5d8969ae486",
+					"size": 730,
+					"status": "missing-in-source"
+				},
+				"dist/crossdomain.xml": {
+					"match": false,
+					"packageHash": "76ee2ca9430245ea4165cd16bd74b05d68a9d786eb43c69926e480d30840634e",
+					"size": 603,
+					"status": "missing-in-source"
+				},
+				"dist/css/tidy.css": {
+					"match": false,
+					"packageHash": "0961023c5a3cf9ac0f981dd7f301d594078ff9b6ff7264064c1752a1501e39b7",
+					"size": 19941,
+					"status": "missing-in-source"
+				},
+				"dist/favicon.ico": {
+					"match": false,
+					"packageHash": "36a6f4ba02692dd0d4f25aa288e598a8f36d5e1a18513f0bdbbc0ada9f5b729d",
+					"size": 766,
+					"status": "missing-in-source"
+				},
+				"dist/humans.txt": {
+					"match": false,
+					"packageHash": "d5a845c367f9797db3429d1408cae40a7219615c2a70ab430e1077b0e55ef7b0",
+					"size": 206,
+					"status": "missing-in-source"
+				},
+				"dist/index.html": {
+					"match": false,
+					"packageHash": "0a5611f215cdc7d44140e1c9a6947bb157aa609a4c6712554bb89e0923cbd9ef",
+					"size": 6692,
+					"status": "missing-in-source"
+				},
+				"dist/js/main.js": {
+					"match": false,
+					"packageHash": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+					"size": 1,
+					"status": "missing-in-source"
+				},
+				"dist/js/plugins.js": {
+					"match": false,
+					"packageHash": "267f86b986829cb9a3c46b9fcdbc56783bb923005ba5ef5b27efce504e72ecfa",
+					"size": 733,
+					"status": "missing-in-source"
+				},
+				"dist/js/vendor/jquery-1.9.1.min.js": {
+					"match": false,
+					"packageHash": "aa084d3968ab19898ebbed807ebc134b622fab78a888e7b36ae8386841636801",
+					"size": 92630,
+					"status": "missing-in-source"
+				},
+				"dist/js/vendor/modernizr-2.6.2.min.js": {
+					"match": false,
+					"packageHash": "cf25ec18f223f4c51ce1128a42e644cdc2244d88f89d1a51440d9dbe51f4efe8",
+					"size": 15414,
+					"status": "missing-in-source"
+				},
+				"dist/robots.txt": {
+					"match": false,
+					"packageHash": "310ff22db8ee2e8cc9306f320cc3238d083122c50c1049d7f408b11ea2e03a5a",
+					"size": 32,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,53 +1,68 @@\n {\n   \"name\": \"grunt-uncss\",\n   \"description\": \"A grunt task for generating CSS files containing only those styles used in your project.\",\n-  \"version\": \"0.1.0\",\n-  \"homepage\": \"https://github.com/addyosmani/grunt-uncss\",\n-  \"author\": {\n-    \"name\": \"Addy Osmani\",\n-    \"email\": \"addyosmani@gmail.com\"\n-  },\n+  \"version\": \"0.10.1\",\n+  \"homepage\": \"https://github.com/uncss/grunt-uncss\",\n+  \"author\": \"Addy Osmani <addyosmani@gmail.com> (https://addyosmani.com/)\",\n+  \"maintainers\": [\n+    \"Addy Osmani <addyosmani@gmail.com> (https://addyosmani.com/)\",\n+    \"XhmikosR <xhmikosr@gmail.com> (https://github.com/XhmikosR)\"\n+  ],\n   \"repository\": {\n     \"type\": \"git\",\n-    \"url\": \"git://github.com/addyosmani/grunt-uncss.git\"\n+    \"url\": \"git+https://github.com/uncss/grunt-uncss.git\"\n   },\n   \"bugs\": {\n-    \"url\": \"https://github.com/addyosmani/grunt-uncss/issues\"\n+    \"url\": \"https://github.com/uncss/grunt-uncss/issues\"\n   },\n-  \"licenses\": [\n-    {\n-      \"type\": \"MIT\",\n-      \"url\": \"https://github.com/addyosmani/grunt-uncss/blob/master/LICENSE-MIT\"\n-    }\n+  \"license\": \"MIT\",\n+  \"keywords\": [\n+    \"gruntplugin\",\n+    \"uncss\",\n+    \"css\"\n+  ],\n+  \"files\": [\n+    \"tasks/*.js\"\n   ],\n-  \"main\": \"Gruntfile.js\",\n   \"engines\": {\n-    \"node\": \">= 0.8.0\"\n+    \"node\": \">=14.18.0\"\n   },\n   \"scripts\": {\n-    \"test\": \"grunt test\"\n+    \"mocha\": \"mocha \\\"tests/*.js\\\"\",\n+    \"xo\": \"xo\",\n+    \"fix\": \"xo --fix\",\n+    \"test\": \"npm run xo && grunt test && npm run mocha\"\n   },\n-  \"peerDependencies\": {\n-    \"grunt\": \"~0.4.1\"\n+  \"dependencies\": {\n+    \"chalk\": \"^4.1.2\",\n+    \"maxmin\": \"^3.0.0\",\n+    \"uncss\": \"^0.17.3\"\n   },\n   \"devDependencies\": {\n-    \"grunt-contrib-jshint\": \"~0.3.0\",\n-    \"grunt-contrib-clean\": \"~0.4.0\",\n-    \"grunt-contrib-nodeunit\": \"~0.1.2\",\n-    \"grunt\": \"~0.4.1\",\n-    \"grunt-contrib-watch\": \"~0.3.1\",\n-    \"grunt-contrib-connect\": \"~0.3.0\",\n-    \"grunt-processhtml\": \"~0.1.1\",\n-    \"grunt-contrib-copy\": \"~0.4.1\",\n-    \"grunt-compare-size\": \"~0.4.0-rc.3\"\n+    \"chai\": \"^4.3.6\",\n+    \"grunt\": \"^1.5.3\",\n+    \"mocha\": \"^10.2.0\",\n+    \"time-grunt\": \"^2.0.0\",\n+    \"xo\": \"^0.53.1\"\n   },\n-  \"keywords\": [\n-    \"gruntplugin\",\n-    \"uncss\",\n-    \"css\"\n-  ],\n-  \"dependencies\": {\n-    \"underscore\": \"~1.4.4\",\n-    \"uncss\": \"~0.4.1-0\"\n+  \"peerDependencies\": {\n+    \"grunt\": \">=0.4.0\"\n+  },\n+  \"xo\": {\n+    \"space\": 4,\n+    \"ignores\": [\n+      \"tests/app/**\"\n+    ],\n+    \"rules\": {\n+      \"capitalized-comments\": \"off\",\n+      \"comma-dangle\": \"off\",\n+      \"object-curly-spacing\": [\n+        \"error\",\n+        \"always\"\n+      ],\n",
+					"match": false,
+					"packageHash": "01fb9cd86ac3f3bc5717090623131fde052d7233a9125dd70c2b002b4425b3da",
+					"size": 1271,
+					"sourceHash": "138d0bb1be90ad95b8e7b9ae8b00b211c9539d79351a6622cb726fb1e04e1a96",
+					"status": "content"
+				},
+				"tasks/uncss.js": {
+					"diff": "--- published/tasks/uncss.js\n+++ rebuilt/tasks/uncss.js\n@@ -1,53 +1,70 @@\n-/*\n+/**\n  * grunt-uncss\n- * https://github.com/addyosmani/grunt-uncss\n+ * https://github.com/uncss/grunt-uncss\n  *\n- * Copyright (c) 2013 Addy Osmani\n+ * Copyright (c) 2020 Addy Osmani\n  * Licensed under the MIT license.\n  */\n \n+'use strict';\n \n-module.exports = function(grunt) {\n-\n-  'use strict';\n-\n-  var uncss  = require('uncss');\n-  var path   = require('path');\n-\n-  grunt.registerMultiTask('uncss', 'Remove unused CSS', function() {\n-\n-    var done = this.async();\n-\n-    var options = this.options({\n-      compress:false\n-    });\n-\n-    this.files.forEach(function(f) {\n-\n-      // Check path validity\n-      var valid = f.src.filter(function(filepath) {\n-        if (!grunt.file.exists(filepath)) {\n-          grunt.log.warn('Source file \"' + filepath + '\" not found.');\n-          return false;\n-        } else {\n-          return true;\n-        }\n-      });\n-\n-      // If valid, continue\n-      uncss(valid, options, function (output) {\n-        try{\n-          grunt.file.write(f.dest, output);\n-          grunt.log.writeln('File ' + f.dest + ' created.');\n-        } catch (e) {\n-          grunt.log.error(e);\n-          grunt.fail.warn('Writing file failed.');\n+const uncss = require('uncss');\n+const chalk = require('chalk');\n+const maxmin = require('maxmin');\n+\n+module.exports = function (grunt) {\n+    grunt.registerMultiTask('uncss', 'Remove unused CSS', function () {\n+        const done = this.async();\n+        const options = this.options({\n+            report: 'min'\n+        });\n+\n+        for (const file of this.files) {\n+            const src = file.src.filter(filepath => {\n+                if (/^https?:\\/\\//.test(filepath)) {\n+                    // This is a remote file: leave it in src array for uncss to handle.\n+                    return true;\n+                }\n+\n+                if (!grunt.file.exists(filepath)) {\n+                    // Warn on and remove invalid local source files (if nonull was set).\n+                    grunt.log.warn(`Source file ${chalk.cyan(filepath)} not found.`);\n+                    return false;\n+                }\n+\n+                return true;\n+            });\n+\n+            if (src.length === 0 && file.src.length === 0) {\n+                grunt.fail.warn(`Destination (${file.dest}) not written because src files were empty.`);\n+            }\n+\n+            try {\n+                uncss(src, options, (error, output, report) => {\n+                    if (error) {\n+                        throw error;\n+                    }\n+\n+                    grunt.file.write(file.dest, output);\n+                    grunt.log.writeln(`File ${chalk.cyan(file.dest)} created: ${maxmin(report.original, output, options.report === 'gzip')}`);\n+\n+                    if (typeof options.reportFile !== 'undefined' && options.reportFile.length > 0) {\n+                        grunt.file.write(options.reportFile, JSON.stringify(report));\n+                    }\n+\n+                    done();\n+                });\n+            } catch (error) {\n+                const err = new Error('Uncss failed.');\n+\n",
+					"match": false,
+					"packageHash": "cdca7ea682fc25708e7286429d4fd81a3ebebfc0ac7ff40eb55bf9771e94ab13",
+					"size": 1080,
+					"sourceHash": "1e069a082ba085d2dc2b064ccf6ca85bfbe0cca84cb5ac859f4afc90bbea38ba",
+					"status": "content"
+				},
+				"LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 3,
+				"matchingFiles": 0,
+				"missingInPackage": 1,
+				"missingInSource": 43,
+				"score": 0,
+				"totalFiles": 47
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "abab",
+				"version": "2.0.6"
+			},
+			{
+				"name": "acorn",
+				"version": "6.4.2"
+			},
+			{
+				"name": "acorn-globals",
+				"version": "4.3.4"
+			},
+			{
+				"name": "acorn-walk",
+				"version": "6.2.0"
+			},
+			{
+				"name": "ajv",
+				"version": "6.12.6"
+			},
+			{
+				"name": "ansi-styles",
+				"version": "4.3.0"
+			},
+			{
+				"name": "array-equal",
+				"version": "1.0.0"
+			},
+			{
+				"name": "asn1",
+				"version": "0.2.6"
+			},
+			{
+				"name": "assert-plus",
+				"version": "1.0.0"
+			},
+			{
+				"name": "async-limiter",
+				"version": "1.0.1"
+			},
+			{
+				"name": "asynckit",
+				"version": "0.4.0"
+			},
+			{
+				"name": "aws-sign2",
+				"version": "0.7.0"
+			},
+			{
+				"name": "aws4",
+				"version": "1.11.0"
+			},
+			{
+				"name": "balanced-match",
+				"version": "1.0.2"
+			},
+			{
+				"name": "bcrypt-pbkdf",
+				"version": "1.0.2"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "1.1.11"
+			},
+			{
+				"name": "browser-process-hrtime",
+				"version": "1.0.0"
+			},
+			{
+				"name": "caseless",
+				"version": "0.12.0"
+			},
+			{
+				"name": "chalk",
+				"version": "4.1.2"
+			},
+			{
+				"name": "color-convert",
+				"version": "2.0.1"
+			},
+			{
+				"name": "color-name",
+				"version": "1.1.4"
+			},
+			{
+				"name": "combined-stream",
+				"version": "1.0.8"
+			},
+			{
+				"name": "commander",
+				"version": "2.20.3"
+			},
+			{
+				"name": "concat-map",
+				"version": "0.0.1"
+			},
+			{
+				"name": "core-util-is",
+				"version": "1.0.2"
+			},
+			{
+				"name": "cssesc",
+				"version": "3.0.0"
+			},
+			{
+				"name": "cssom",
+				"version": "0.3.8"
+			},
+			{
+				"name": "cssstyle",
+				"version": "1.4.0"
+			},
+			{
+				"name": "dashdash",
+				"version": "1.14.1"
+			},
+			{
+				"name": "data-urls",
+				"version": "1.1.0"
+			},
+			{
+				"name": "deep-is",
+				"version": "0.1.4"
+			},
+			{
+				"name": "delayed-stream",
+				"version": "1.0.0"
+			},
+			{
+				"name": "domexception",
+				"version": "1.0.1"
+			},
+			{
+				"name": "duplexer",
+				"version": "0.1.2"
+			},
+			{
+				"name": "ecc-jsbn",
+				"version": "0.1.2"
+			},
+			{
+				"name": "escape-string-regexp",
+				"version": "1.0.5"
+			},
+			{
+				"name": "escodegen",
+				"version": "1.14.3"
+			},
+			{
+				"name": "esprima",
+				"version": "4.0.1"
+			},
+			{
+				"name": "estraverse",
+				"version": "4.3.0"
+			},
+			{
+				"name": "esutils",
+				"version": "2.0.3"
+			},
+			{
+				"name": "extend",
+				"version": "3.0.2"
+			},
+			{
+				"name": "extsprintf",
+				"version": "1.3.0"
+			},
+			{
+				"name": "fast-deep-equal",
+				"version": "3.1.3"
+			},
+			{
+				"name": "fast-json-stable-stringify",
+				"version": "2.1.0"
+			},
+			{
+				"name": "fast-levenshtein",
+				"version": "2.0.6"
+			},
+			{
+				"name": "figures",
+				"version": "3.2.0"
+			},
+			{
+				"name": "forever-agent",
+				"version": "0.6.1"
+			},
+			{
+				"name": "form-data",
+				"version": "2.3.3"
+			},
+			{
+				"name": "fs.realpath",
+				"version": "1.0.0"
+			},
+			{
+				"name": "getpass",
+				"version": "0.1.7"
+			},
+			{
+				"name": "glob",
+				"version": "7.1.7"
+			},
+			{
+				"name": "gzip-size",
+				"version": "5.1.1"
+			},
+			{
+				"name": "har-schema",
+				"version": "2.0.0"
+			},
+			{
+				"name": "har-validator",
+				"version": "5.1.5"
+			},
+			{
+				"name": "has-flag",
+				"version": "4.0.0"
+			},
+			{
+				"name": "html-encoding-sniffer",
+				"version": "1.0.2"
+			},
+			{
+				"name": "html-tags",
+				"version": "1.2.0"
+			},
+			{
+				"name": "http-signature",
+				"version": "1.2.0"
+			},
+			{
+				"name": "iconv-lite",
+				"version": "0.4.24"
+			},
+			{
+				"name": "indexes-of",
+				"version": "1.0.1"
+			},
+			{
+				"name": "inflight",
+				"version": "1.0.6"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.4"
+			},
+			{
+				"name": "is-absolute-url",
+				"version": "3.0.3"
+			},
+			{
+				"name": "is-html",
+				"version": "1.1.0"
+			},
+			{
+				"name": "is-typedarray",
+				"version": "1.0.0"
+			},
+			{
+				"name": "isstream",
+				"version": "0.1.2"
+			},
+			{
+				"name": "jsbn",
+				"version": "0.1.1"
+			},
+			{
+				"name": "jsdom",
+				"version": "14.1.0"
+			},
+			{
+				"name": "json-schema",
+				"version": "0.4.0"
+			},
+			{
+				"name": "json-schema-traverse",
+				"version": "0.4.1"
+			},
+			{
+				"name": "json-stringify-safe",
+				"version": "5.0.1"
+			},
+			{
+				"name": "jsprim",
+				"version": "1.4.2"
+			},
+			{
+				"name": "levn",
+				"version": "0.3.0"
+			},
+			{
+				"name": "lodash",
+				"version": "4.17.21"
+			},
+			{
+				"name": "lodash.sortby",
+				"version": "4.7.0"
+			},
+			{
+				"name": "maxmin",
+				"version": "3.0.0"
+			},
+			{
+				"name": "mime-db",
+				"version": "1.52.0"
+			},
+			{
+				"name": "mime-types",
+				"version": "2.1.35"
+			},
+			{
+				"name": "minimatch",
+				"version": "3.0.8"
+			},
+			{
+				"name": "nwsapi",
+				"version": "2.2.0"
+			},
+			{
+				"name": "oauth-sign",
+				"version": "0.9.0"
+			},
+			{
+				"name": "once",
+				"version": "1.4.0"
+			},
+			{
+				"name": "optionator",
+				"version": "0.8.3"
+			},
+			{
+				"name": "parse5",
+				"version": "5.1.0"
+			},
+			{
+				"name": "path-is-absolute",
+				"version": "1.0.1"
+			},
+			{
+				"name": "performance-now",
+				"version": "2.1.0"
+			},
+			{
+				"name": "picocolors",
+				"version": "0.2.1"
+			},
+			{
+				"name": "pify",
+				"version": "4.0.1"
+			},
+			{
+				"name": "pn",
+				"version": "1.1.0"
+			},
+			{
+				"name": "postcss",
+				"version": "7.0.39"
+			},
+			{
+				"name": "postcss-selector-parser",
+				"version": "6.0.2"
+			},
+			{
+				"name": "prelude-ls",
+				"version": "1.1.2"
+			},
+			{
+				"name": "pretty-bytes",
+				"version": "5.6.0"
+			},
+			{
+				"name": "psl",
+				"version": "1.8.0"
+			},
+			{
+				"name": "punycode",
+				"version": "2.1.1"
+			},
+			{
+				"name": "qs",
+				"version": "6.5.3"
+			},
+			{
+				"name": "request",
+				"version": "2.88.2"
+			},
+			{
+				"name": "request-promise-core",
+				"version": "1.1.4"
+			},
+			{
+				"name": "request-promise-native",
+				"version": "1.0.9"
+			},
+			{
+				"name": "safe-buffer",
+				"version": "5.2.1"
+			},
+			{
+				"name": "safer-buffer",
+				"version": "2.1.2"
+			},
+			{
+				"name": "saxes",
+				"version": "3.1.11"
+			},
+			{
+				"name": "source-map",
+				"version": "0.6.1"
+			},
+			{
+				"name": "sshpk",
+				"version": "1.17.0"
+			},
+			{
+				"name": "stealthy-require",
+				"version": "1.1.1"
+			},
+			{
+				"name": "supports-color",
+				"version": "7.2.0"
+			},
+			{
+				"name": "symbol-tree",
+				"version": "3.2.4"
+			},
+			{
+				"name": "tough-cookie",
+				"version": "2.5.0"
+			},
+			{
+				"name": "tr46",
+				"version": "1.0.1"
+			},
+			{
+				"name": "tunnel-agent",
+				"version": "0.6.0"
+			},
+			{
+				"name": "tweetnacl",
+				"version": "0.14.5"
+			},
+			{
+				"name": "type-check",
+				"version": "0.3.2"
+			},
+			{
+				"name": "uncss",
+				"version": "0.17.3"
+			},
+			{
+				"name": "uniq",
+				"version": "1.0.1"
+			},
+			{
+				"name": "uri-js",
+				"version": "4.4.1"
+			},
+			{
+				"name": "uuid",
+				"version": "3.4.0"
+			},
+			{
+				"name": "verror",
+				"version": "1.10.0"
+			},
+			{
+				"name": "w3c-hr-time",
+				"version": "1.0.2"
+			},
+			{
+				"name": "w3c-xmlserializer",
+				"version": "1.1.2"
+			},
+			{
+				"name": "webidl-conversions",
+				"version": "4.0.2"
+			},
+			{
+				"name": "whatwg-encoding",
+				"version": "1.0.5"
+			},
+			{
+				"name": "whatwg-mimetype",
+				"version": "2.3.0"
+			},
+			{
+				"name": "whatwg-url",
+				"version": "7.1.0"
+			},
+			{
+				"name": "word-wrap",
+				"version": "1.2.3"
+			},
+			{
+				"name": "wrappy",
+				"version": "1.0.2"
+			},
+			{
+				"name": "ws",
+				"version": "6.2.2"
+			},
+			{
+				"name": "xml-name-validator",
+				"version": "3.0.0"
+			},
+			{
+				"name": "xmlchars",
+				"version": "2.2.0"
+			}
+		]
+	}
+]

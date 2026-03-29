@@ -1,0 +1,665 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-03-28T17:59:04.262Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:11.12.1",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "grunt-uncss@0.3.4",
+			"name": "grunt-uncss",
+			"version": "0.3.4",
+			"location": "https://registry.npmjs.org/grunt-uncss/-/grunt-uncss-0.3.4.tgz",
+			"integrity": "sha512-S3MJXnFDJ8z2AzyUkvtvzQI+R3h1GRgcxbt9H1Oi7JS3Jd1NqqDTwxzhRM9pFKGkWfYWqw7B0Q7Zs49U9eeIRg==",
+			"publishedAt": "2014-05-26T22:51:14.534Z",
+			"publishedWith": {
+				"node": null,
+				"npm": "1.4.3"
+			},
+			"dependencies": {
+				"chalk": "~0.4.0",
+				"maxmin": "~0.2.0",
+				"uncss": "~0.8.1",
+				"underscore": "~1.6.0"
+			}
+		},
+		"source": {
+			"integrity": "sha512-MOgb9KuY594SH4rTQoqRjI+yw+F2xcHRPeYi29YhJNqsYLhv1+ohVMBEzUbi7Yuj5v9MBpXSbDU8bIGePrGg5g==",
+			"location": "https://github.com/addyosmani/grunt-uncss.git",
+			"spec": "github:addyosmani/grunt-uncss#v0.3.4"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"CHANGELOG.md": {
+					"diff": "--- published/CHANGELOG.md\n+++ rebuilt/CHANGELOG.md\n@@ -1,7 +1,3 @@\n-## v0.3.4\n-* Update dependencies\n-* Update README.md\n-\n ## v0.3.3\n * Update \"uncss\"\n \n",
+					"match": false,
+					"packageHash": "c3ccc024522c522bb99a132cdeb54b9630a5db5327a024bfb2140a217d638b77",
+					"size": 1065,
+					"sourceHash": "13f2969b722ed4fabf5a4ffe8bf17cde8b6f9347372e877ccd072613ced28319",
+					"status": "content"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -5,7 +5,7 @@\n [![Dependency Status](https://david-dm.org/addyosmani/grunt-uncss.svg?theme=shields.io)](https://david-dm.org/addyosmani/grunt-uncss)\n [![devDependency Status](https://david-dm.org/addyosmani/grunt-uncss/dev-status.svg?theme=shields.io)](https://david-dm.org/addyosmani/grunt-uncss#info=devDependencies)\n \n->A grunt task for removing unused CSS from your projects with [UnCSS](https://github.com/giakki/uncss). Works across multiple files and supports dynamically injected CSS via PhantomJS.\n+>A grunt task for removing unused CSS from your projects. Works across multiple files and supports dynamically injected CSS via PhantomJS.\n \n ## Preview\n \n@@ -17,10 +17,7 @@\n \n This plugin requires Grunt `~0.4.0`\n \n-If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the\n-[Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create\n-a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins.\n-Once you're familiar with that process, you may install this plugin with this command:\n+If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:\n \n ```shell\n npm install grunt-uncss --save-dev\n@@ -38,11 +35,11 @@\n \n Task targets, files and options may be specified according to the grunt [Configuring tasks](http://gruntjs.com/configuring-tasks) guide.\n \n+Remove unused CSS from projects using [uncss](https://github.com/giakki/uncss).\n \n ### Usage\n \n-Use the `grunt-uncss` task by specifying a target destination (file) for your cleaned CSS.\n-Below this is `dist/css/tidy.css`.\n+Use the `grunt-uncss` task by specifying a target destination (file) for your cleaned CSS. Below this is `dist/css/tidy.css`.\n \n Along-side, specify the input HTML files you would like scanned for used selectors.\n In this case `app/index.html` and `app/about.html` are the two files we would like checked.\n@@ -147,12 +144,16 @@\n // Remove unused CSS across multiple files and ignore specific selectors\n uncss: {\n   dist: {\n-    options: {\n-      ignore: ['#added_at_runtime', '.created_by_jQuery']\n-    },\n     files: {\n       'dist/css/tidy.css': ['app/index.html', 'app/about.html']\n+      }\n+    },\n+    options: {\n+      ignore: ['#added_at_runtime', '.created_by_jQuery']\n     }\n+  },\n+  options: {\n+    ignore: ['#added_at_runtime', '.created_by_jQuery']\n   }\n }\n ```\n@@ -163,17 +164,16 @@\n There is a test project included under the `tests/app` directory which you can build by running `grunt` after an `npm install`.\n It also includes a `grunt compare_size` task for getting a feel of the before and after CSS sizes:\n \n-![grunt compare_size](http://i.imgur.com/bUseCPh.png)\n+![](http://i.imgur.com/bUseCPh.png)\n \n \n ## The problem\n \n-User-interface libraries like [Bootstrap](http://getbootstrap.com), [TopCoat](http://topcoat.io)\n-and so on are fairly prolific, however many developers use less than 10% of the CSS they provide\n-(when opting for the full build, which most do). As a result, they can end up with fairly bloated\n-stylesheets which can significantly increase page load time and affect performance.\n-`grunt-uncss` is an attempt to help with by generating a CSS file containing only the CSS used\n-in your project, based on selector testing.\n+User-interface libraries like [Bootstrap](http://getbootstrap.com), [TopCoat](http://topcoat.io) and so on are fairly prolific, however many developers\n+use less than 10% of the CSS they provide (when opting for the full build, which most do). As a result, they can\n+end up with fairly bloated stylesheets which can significantly increase page load time and affect performance.\n+`grunt-uncss` is an attempt to help with by generating a CSS file containing only the CSS used in your project,\n+based on selector testing.\n \n ## Research and alternative solutions\n \n@@ -185,7 +185,7 @@\n \n Unfortunately, most of these solutions don't actually generate what you're really after - a leaner build\n of your project CSS containing only those rules you used. Finding that a more recent project called\n-[UnCSS](https://github.com/giakki/uncss) did try tackling this, I set out to share some of the problems we\n+[uncss](https://github.com/giakki/uncss) did try tackling this, I set out to share some of the problems we\n need to solve in this space with the developer and build a Grunt task to enable usage of it in builds more\n easily.\n \n@@ -194,19 +194,14 @@\n \n ## Coverage\n \n-* [Spring-cleaning unused CSS with Grunt, Gulp & other build systems](http://addyosmani.com/blog/removing-unused-css/)\n * [Automating the removal of unused CSS - VelocityConf](http://www.youtube.com/watch?v=833xr1MyE30)\n * [Use Grunt and UnCSS to speed up the load time of your site](http://xdamman.com/website-optimization-grunt-uncss)\n * [Automating Front-end Workflow (slides)](https://speakerdeck.com/addyosmani/automating-front-end-workflow)\n * [Automatically removing unused CSS - Windows](http://deanhume.com/Home/BlogPost/automatically-removing-unused-css-using-grunt/6101)\n-* [Workflow for responsive email with Grunt and UnCSS](https://medium.com/p/32d607879082)\n",
+					"match": false,
+					"packageHash": "a6e27a0489a4d8ee55ae9a987905e4a156b35429151c4a364c4cb36c1e7a90f5",
+					"size": 9009,
+					"sourceHash": "d38a18347955c9c2bcd03a0df0ffb78a16c0a7134e3751d9473779734a098506",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 3,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.6,
+				"totalFiles": 5
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "amdefine",
+				"version": "1.0.1"
+			},
+			{
+				"name": "ansi-regex",
+				"version": "0.2.1"
+			},
+			{
+				"name": "ansi-styles",
+				"version": "1.0.0"
+			},
+			{
+				"name": "asn1",
+				"version": "0.1.11"
+			},
+			{
+				"name": "assert-plus",
+				"version": "0.1.5"
+			},
+			{
+				"name": "atob",
+				"version": "1.1.3"
+			},
+			{
+				"name": "aws-sign2",
+				"version": "0.5.0"
+			},
+			{
+				"name": "bcrypt-pbkdf",
+				"version": "1.0.2"
+			},
+			{
+				"name": "bl",
+				"version": "1.0.3"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.4"
+			},
+			{
+				"name": "isarray",
+				"version": "1.0.0"
+			},
+			{
+				"name": "process-nextick-args",
+				"version": "1.0.7"
+			},
+			{
+				"name": "readable-stream",
+				"version": "2.0.6"
+			},
+			{
+				"name": "boom",
+				"version": "0.4.2"
+			},
+			{
+				"name": "browserify-zlib",
+				"version": "0.1.4"
+			},
+			{
+				"name": "buffer-from",
+				"version": "1.1.2"
+			},
+			{
+				"name": "caseless",
+				"version": "0.11.0"
+			},
+			{
+				"name": "chalk",
+				"version": "0.4.0"
+			},
+			{
+				"name": "combined-stream",
+				"version": "0.0.7"
+			},
+			{
+				"name": "concat-stream",
+				"version": "1.6.2"
+			},
+			{
+				"name": "readable-stream",
+				"version": "2.3.8"
+			},
+			{
+				"name": "string_decoder",
+				"version": "1.1.1"
+			},
+			{
+				"name": "core-util-is",
+				"version": "1.0.3"
+			},
+			{
+				"name": "cryptiles",
+				"version": "0.2.2"
+			},
+			{
+				"name": "css",
+				"version": "2.0.0"
+			},
+			{
+				"name": "ctype",
+				"version": "0.5.3"
+			},
+			{
+				"name": "dashdash",
+				"version": "1.14.1"
+			},
+			{
+				"name": "assert-plus",
+				"version": "1.0.0"
+			},
+			{
+				"name": "delayed-stream",
+				"version": "0.0.5"
+			},
+			{
+				"name": "ecc-jsbn",
+				"version": "0.1.2"
+			},
+			{
+				"name": "escape-string-regexp",
+				"version": "1.0.5"
+			},
+			{
+				"name": "extend",
+				"version": "3.0.2"
+			},
+			{
+				"name": "extract-zip",
+				"version": "1.5.0"
+			},
+			{
+				"name": "concat-stream",
+				"version": "1.5.0"
+			},
+			{
+				"name": "debug",
+				"version": "0.7.4"
+			},
+			{
+				"name": "mkdirp",
+				"version": "0.5.0"
+			},
+			{
+				"name": "extsprintf",
+				"version": "1.3.0"
+			},
+			{
+				"name": "fd-slicer",
+				"version": "1.0.1"
+			},
+			{
+				"name": "figures",
+				"version": "1.7.0"
+			},
+			{
+				"name": "forever-agent",
+				"version": "0.5.2"
+			},
+			{
+				"name": "form-data",
+				"version": "0.1.4"
+			},
+			{
+				"name": "async",
+				"version": "0.9.2"
+			},
+			{
+				"name": "fs-extra",
+				"version": "0.26.7"
+			},
+			{
+				"name": "graceful-fs",
+				"version": "4.2.11"
+			},
+			{
+				"name": "generate-function",
+				"version": "2.3.1"
+			},
+			{
+				"name": "generate-object-property",
+				"version": "1.2.0"
+			},
+			{
+				"name": "getpass",
+				"version": "0.1.7"
+			},
+			{
+				"name": "gzip-size",
+				"version": "0.2.0"
+			},
+			{
+				"name": "har-validator",
+				"version": "2.0.6"
+			},
+			{
+				"name": "ansi-regex",
+				"version": "2.1.1"
+			},
+			{
+				"name": "ansi-styles",
+				"version": "2.2.1"
+			},
+			{
+				"name": "chalk",
+				"version": "1.1.3"
+			},
+			{
+				"name": "commander",
+				"version": "2.20.3"
+			},
+			{
+				"name": "has-ansi",
+				"version": "2.0.0"
+			},
+			{
+				"name": "strip-ansi",
+				"version": "3.0.1"
+			},
+			{
+				"name": "supports-color",
+				"version": "2.0.0"
+			},
+			{
+				"name": "has-ansi",
+				"version": "0.1.0"
+			},
+			{
+				"name": "has-color",
+				"version": "0.1.7"
+			},
+			{
+				"name": "hasha",
+				"version": "2.2.0"
+			},
+			{
+				"name": "hawk",
+				"version": "1.0.0"
+			},
+			{
+				"name": "hoek",
+				"version": "0.9.1"
+			},
+			{
+				"name": "http-signature",
+				"version": "0.10.1"
+			},
+			{
+				"name": "is-my-ip-valid",
+				"version": "1.0.1"
+			},
+			{
+				"name": "is-my-json-valid",
+				"version": "2.20.6"
+			},
+			{
+				"name": "is-property",
+				"version": "1.0.2"
+			},
+			{
+				"name": "is-stream",
+				"version": "1.1.0"
+			},
+			{
+				"name": "is-typedarray",
+				"version": "1.0.0"
+			},
+			{
+				"name": "isexe",
+				"version": "2.0.0"
+			},
+			{
+				"name": "isstream",
+				"version": "0.1.2"
+			},
+			{
+				"name": "jsbn",
+				"version": "0.1.1"
+			},
+			{
+				"name": "json-schema",
+				"version": "0.4.0"
+			},
+			{
+				"name": "json-stringify-safe",
+				"version": "5.0.1"
+			},
+			{
+				"name": "jsonfile",
+				"version": "2.4.0"
+			},
+			{
+				"name": "jsonpointer",
+				"version": "5.0.1"
+			},
+			{
+				"name": "jsprim",
+				"version": "1.4.2"
+			},
+			{
+				"name": "kew",
+				"version": "0.7.0"
+			},
+			{
+				"name": "klaw",
+				"version": "1.3.1"
+			},
+			{
+				"name": "maxmin",
+				"version": "0.2.2"
+			},
+			{
+				"name": "ansi-styles",
+				"version": "1.1.0"
+			},
+			{
+				"name": "chalk",
+				"version": "0.5.1"
+			},
+			{
+				"name": "strip-ansi",
+				"version": "0.3.0"
+			},
+			{
+				"name": "mime",
+				"version": "1.2.11"
+			},
+			{
+				"name": "mime-db",
+				"version": "1.52.0"
+			},
+			{
+				"name": "mime-types",
+				"version": "2.1.35"
+			},
+			{
+				"name": "minimist",
+				"version": "0.0.8"
+			},
+			{
+				"name": "node-phantom-simple",
+				"version": "1.2.0"
+			},
+			{
+				"name": "node-uuid",
+				"version": "1.4.8"
+			},
+			{
+				"name": "oauth-sign",
+				"version": "0.3.0"
+			},
+			{
+				"name": "object-assign",
+				"version": "4.1.1"
+			},
+			{
+				"name": "pako",
+				"version": "0.2.9"
+			},
+			{
+				"name": "path-is-absolute",
+				"version": "1.0.1"
+			},
+			{
+				"name": "pend",
+				"version": "1.2.0"
+			},
+			{
+				"name": "phantomjs",
+				"version": "1.9.20"
+			},
+			{
+				"name": "assert-plus",
+				"version": "0.2.0"
+			},
+			{
+				"name": "async",
+				"version": "2.6.4"
+			},
+			{
+				"name": "aws-sign2",
+				"version": "0.6.0"
+			},
+			{
+				"name": "boom",
+				"version": "2.10.1"
+			},
+			{
+				"name": "combined-stream",
+				"version": "1.0.8"
+			},
+			{
+				"name": "cryptiles",
+				"version": "2.0.5"
+			},
+			{
+				"name": "delayed-stream",
+				"version": "1.0.0"
+			},
+			{
+				"name": "forever-agent",
+				"version": "0.6.1"
+			},
+			{
+				"name": "form-data",
+				"version": "1.0.1"
+			},
+			{
+				"name": "hawk",
+				"version": "3.1.3"
+			},
+			{
+				"name": "hoek",
+				"version": "2.16.3"
+			},
+			{
+				"name": "http-signature",
+				"version": "1.1.1"
+			},
+			{
+				"name": "lodash",
+				"version": "4.17.23"
+			},
+			{
+				"name": "oauth-sign",
+				"version": "0.8.2"
+			},
+			{
+				"name": "qs",
+				"version": "5.2.1"
+			},
+			{
+				"name": "request",
+				"version": "2.67.0"
+			},
+			{
+				"name": "sntp",
+				"version": "1.0.9"
+			},
+			{
+				"name": "tough-cookie",
+				"version": "2.2.2"
+			},
+			{
+				"name": "which",
+				"version": "1.2.14"
+			},
+			{
+				"name": "pinkie",
+				"version": "2.0.4"
+			},
+			{
+				"name": "pinkie-promise",
+				"version": "2.0.1"
+			},
+			{
+				"name": "pretty-bytes",
+				"version": "0.1.2"
+			},
+			{
+				"name": "process-nextick-args",
+				"version": "2.0.1"
+			},
+			{
+				"name": "progress",
+				"version": "1.1.8"
+			},
+			{
+				"name": "qs",
+				"version": "0.6.6"
+			},
+			{
+				"name": "request",
+				"version": "2.36.0"
+			},
+			{
+				"name": "request-progress",
+				"version": "2.0.1"
+			},
+			{
+				"name": "resolve-url",
+				"version": "0.2.1"
+			},
+			{
+				"name": "rimraf",
+				"version": "2.2.8"
+			},
+			{
+				"name": "safe-buffer",
+				"version": "5.1.2"
+			},
+			{
+				"name": "safer-buffer",
+				"version": "2.1.2"
+			},
+			{
+				"name": "sntp",
+				"version": "0.2.4"
+			},
+			{
+				"name": "source-map",
+				"version": "0.1.43"
+			},
+			{
+				"name": "source-map-resolve",
+				"version": "0.1.4"
+			},
+			{
+				"name": "source-map-url",
+				"version": "0.2.0"
+			},
+			{
+				"name": "sshpk",
+				"version": "1.18.0"
+			},
+			{
+				"name": "asn1",
+				"version": "0.2.6"
+			},
+			{
+				"name": "string_decoder",
+				"version": "0.10.31"
+			},
+			{
+				"name": "stringstream",
+				"version": "0.0.6"
+			},
+			{
+				"name": "strip-ansi",
+				"version": "0.1.1"
+			},
+			{
+				"name": "supports-color",
+				"version": "0.2.0"
+			},
+			{
+				"name": "throttleit",
+				"version": "1.0.1"
+			},
+			{
+				"name": "tldts",
+				"version": "7.0.27"
+			},
+			{
+				"name": "tldts-core",
+				"version": "7.0.27"
+			},
+			{
+				"name": "tough-cookie",
+				"version": "6.0.1"
+			},
+			{
+				"name": "tunnel-agent",
+				"version": "0.4.3"
+			},
+			{
+				"name": "tweetnacl",
+				"version": "0.14.5"
+			},
+			{
+				"name": "typedarray",
+				"version": "0.0.6"
+			},
+			{
+				"name": "uncss",
+				"version": "0.8.3"
+			},
+			{
+				"name": "commander",
+				"version": "2.2.0"
+			},
+			{
+				"name": "underscore",
+				"version": "1.6.0"
+			},
+			{
+				"name": "urix",
+				"version": "0.1.0"
+			},
+			{
+				"name": "util-deprecate",
+				"version": "1.0.2"
+			},
+			{
+				"name": "verror",
+				"version": "1.10.0"
+			},
+			{
+				"name": "core-util-is",
+				"version": "1.0.2"
+			},
+			{
+				"name": "xtend",
+				"version": "4.0.2"
+			},
+			{
+				"name": "yauzl",
+				"version": "2.4.1"
+			}
+		]
+	}
+]
