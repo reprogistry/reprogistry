@@ -1,0 +1,1456 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-03-29T09:53:26.115Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:5.6.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "nemo@4.4.0-alpha.1",
+			"name": "nemo",
+			"version": "4.4.0-alpha.1",
+			"location": "https://registry.npmjs.org/nemo/-/nemo-4.4.0-alpha.1.tgz",
+			"integrity": "sha512-8EkrSSeYZG+7PvsZtKwSenFGVJHszKhq01DnAMvWzrc+O3UVceSZ9gb0KHgT42F2H/StKK8V6Ic4rd2Xw8eXXQ==",
+			"publishedAt": "2018-06-25T15:42:22.633Z",
+			"publishedWith": {
+				"node": "8.11.1",
+				"npm": "5.6.0"
+			},
+			"dependencies": {
+				"glob": "^7.1.1",
+				"uuid": "^3.2.1",
+				"async": "^2.5.0",
+				"debug": "^2.6.3",
+				"mocha": "^4",
+				"influx": "^5.0.7",
+				"moment": "^2.21.0",
+				"express": "^4.16.2",
+				"graphql": "^0.11.7",
+				"threads": "^0.7.2",
+				"fs-extra": "^5.0.0",
+				"minimist": "^1.2.0",
+				"cli-table": "^0.3.1",
+				"commander": "^2.14.1",
+				"nemo-core": "^1.0.0",
+				"nemo-view": "^3.1.0",
+				"filenamify": "^2.0.0",
+				"mochawesome": "^3.0.2",
+				"lodash.merge": "^4.6.1",
+				"circular-json": "^0.5.1",
+				"express-graphql": "^0.6.12"
+			}
+		},
+		"source": {
+			"integrity": "sha512-vakKIXA8fsXmMobvRRhf4mVExu2phtPQ4v+UQMU1TG5uHkfCNQbKaUo2Gd5oKAJatv+tn7h/zjHAQ/tfRsBElA==",
+			"location": "git+https://github.com/krakenjs/nemo.git",
+			"spec": "github:krakenjs/nemo#ee5acab3ebf8ffce3f15ee9689d7d054caca9f3d"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".eslintrc.js": {
+					"diff": "--- published/.eslintrc.js\n+++ rebuilt/.eslintrc.js\n@@ -1,7 +1,8 @@\n module.exports = {\n   \"env\": {\n     \"node\": true,\n-    \"es6\": true\n+    \"es6\": true,\n+    \"mocha\": true\n   },\n \n   \"plugins\": [\"es6-recommended\"],\n@@ -40,7 +41,7 @@\n     //\n     \"comma-dangle\": 2, // disallow or enforce trailing commas\n     \"no-cond-assign\": 2, // disallow assignment in conditional expressions\n-    \"no-console\": 1, // disallow use of console (off by default in the node environment)\n+    \"no-console\": 0, // disallow use of console (off by default in the node environment)\n     \"no-constant-condition\": 2, // disallow use of constant expressions in conditions\n     \"no-control-regex\": 2, // disallow control characters in regular expressions\n     \"no-debugger\": 2, // disallow use of debugger\n",
+					"match": false,
+					"packageHash": "0d2d1191863ecdc459fadd316b5acbf0a9811bc3348821669e75ffaab557c0c4",
+					"size": 13863,
+					"sourceHash": "24ab28ae0b41d435d5764173c73a346c0e0f758f4894aaf37d43c14f971958ec",
+					"status": "content"
+				},
+				".travis.yml": {
+					"diff": "--- published/.travis.yml\n+++ rebuilt/.travis.yml\n@@ -1,4 +1,10 @@\n+os: osx\n+\n language: node_js\n+\n node_js:\n-  - \"8\"\n-sudo: false\n+  - \"10\"\n+  - \"12\"\n+\n+addons:\n+  chrome: stable\n",
+					"match": false,
+					"packageHash": "7d35fec0675dfd154ca07535dd6616a2b390aadda159714ecccdced6ea310035",
+					"size": 47,
+					"sourceHash": "4fcd7df0ad30c5eea6c4fbfb6d94172d96950b1c9b88cd6c10548ffd41ac6f2d",
+					"status": "content"
+				},
+				"CHANGELOG.md": {
+					"diff": "--- published/CHANGELOG.md\n+++ rebuilt/CHANGELOG.md\n@@ -1,4 +1,118 @@\n-## UNRELEASED\n+## 4.13.1 \n+\n+- npm audit fix for some vulnerabilities\n+- upgrade to mocha@9\n+\n+## 4.12.2\n+\n+- fix usage of uuid to comply with uuid@8\n+\n+## 4.12.1\n+\n+- fix usage of Mkdirp where we were promisifying (in the scaffold feature), but new version of Mkdirp already returns a promise\n+## 4.12.0\n+\n+### Breaking Changes\n+- Updated `chromedriver` dependency to version 81, which requires Node 10\n+- Updated minimum requirement to `Node 10` from `Node 8`\n+\n+### Fix\n+\n+- Instantiate and injects `nemo` into context on the global `beforeEach` hook when `driverPerTest` is `true`\n+- Updated dependency to Mocha 7.1.1 since that is the version that fixes start event firing too early, before it can be monitored. https://github.com/mochajs/mocha/issues/2753\n+\n+### Feature\n+\n+- Added `before:root` event\n+\n+## 4.11.1\n+\n+- fix type error that is causing when describe.skip is used (https://github.com/krakenjs/nemo/pull/75)\n+- skip creating nemo instance when suite has empty tests  (https://github.com/krakenjs/nemo/pull/76)\n+\n+## 4.11.0\n+\n+- added suite:before, test:before, suite events (see https://github.com/krakenjs/nemo/pull/71)\n+\n+## 4.10.0\n+\n+- greenkeeper dependency updates\n+- add config to force zero exit code (see https://github.com/krakenjs/nemo/pull/64)\n+\n+## 4.9.6\n+\n+- merge/publish greenkeeper update PR https://github.com/krakenjs/nemo/pull/66\n+\n+## 4.9.5\n+\n+- fix nemo-core npm audit issues\n+\n+## 4.9.4\n+\n+- Feature: More flexible \"listeners\" property\n+- fix npm audit issues\n+\n+## 4.9.3\n+\n+- fix npm audit issues\n+\n+## 4.9.2\n+\n+- Fix: \"simple\" scaffold not working with nested directory. Promise chaining wasn't waiting for mkdirp\n+- Fix #57: destroyNemo not properly called in Suite.afterAll in mocha.js\n+\n+## 4.9.1\n+\n+- Fix #32: only merge \"base\" data in data/parallel mode if we aren't running \"base\" profile\n+- Fix #52: root data inclusion and override for plain JS config use case\n+- Fix #53: plugin configuration for plain JS config use case\n+\n+## 4.9.0\n+\n+- adding a plain JS/JSON config option (see additional docs in README)\n+\n+## 4.8.0\n+\n+- enhance \"zero tests\" check in mocha runner\n+  - remove \"parallel by file\" conditional so it runs for every instance\n+  - conditionally use \"grep\" if provided by user\n+- add \"mkdirp\" to output listener, to create `summary.json` even if no tests run\n+\n+## 4.7.0\n+\n+### Feature\n+\n+- Add emitter for custom events from test context into master instance as `nemo.runner.emit`\n+\n+### Fixes\n+\n+- added post `npm test` verification of report directories/files type/count\n+- pull CLI-context-based config out into config directory\n+  - enables future run contexts to have separate base config\n+- pull `snap` plugin config to config file, to cleanly utilize `confit` and enable overriding if ever required\n+- fix ES6 eslint issues (var to let/const, etc)\n+- replaced circular-json npm package with it's successor: flatted.\n+\n+## 4.6.0\n",
+					"match": false,
+					"packageHash": "5fb2f5579f9f5caeacf57a3871ac84691273f3b1fbf5bf4e94393fbb0eb0af55",
+					"size": 3176,
+					"sourceHash": "3cac59be61e1bbf05a00422a626502a2d2d5015b13f0a0ea43440b47c041efd7",
+					"status": "content"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,5 +1,7 @@\n # nemo\n \n+[![Greenkeeper badge](https://badges.greenkeeper.io/krakenjs/nemo.svg)](https://greenkeeper.io/)\n+\n Node.js solution for running mocha-based selenium-webdriver tests.\n \n ## Getting started\n@@ -13,22 +15,27 @@\n Use the scaffold feature\n \n ```bash\n-$ ./node_modules/.bin/nemo -X test/functional\n+$ npx nemo -X test/functional\n \n   DONE!\n \n   Next steps:\n-  1. Add a script to package.json. E.g. \"nemo\": \"nemo -B test/functional -P pay,search,form\"\n-  2. Make sure you have latest chrome/chromedriver installed (https://sites.google.com/a/chromium.org/chromedriver/getting-started)\n+  1. Make sure you have latest chrome/chromedriver installed (https://sites.google.com/a/chromium.org/chromedriver/getting-started)\n      - The binary should be in your PATH\n-  3. Run nemo! \"npm run nemo\"\n-  4. Explore the files under test/functional\n-  5. Learn more: http://nemo.js.org\n+  2. Run nemo! \"npx nemo\"\n+  3. Look at nemo.config.js and test/functional/nemo.test.js\n+  4. Learn more: http://nemo.js.org\n \n $\n \n ```\n \n+For a more complex, fully-featured suite:\n+\n+```bash\n+$ ./node_modules/.bin/nemo -Z test/functional\n+```\n+\n ## CLI arguments\n \n ```sh\n@@ -40,20 +47,39 @@\n \n     -V, --version                output the version number\n     -B, --base-directory <path>  parent directory for config/ and spec/ (or other test file) directories. relative to cwd\n+    -C, --config-file <path>       config file. can be JS or JSON\n     -P, --profile [profile]      which profile(s) to run, out of the configuration\n     -G, --grep <pattern>         only run tests matching <pattern>\n     -F, --file                   run parallel by file\n     -D, --data                   run parallel by data\n     -S, --server                 run the nemo web server\n     -L, --logging                info level logging (errors log by default)\n-    -X, --scaffold <path>        inject an example nemo suite under <path>\n+    -X, --scaffold <path>          inject an example nemo suite under <path>\n+    -Z, --scaffold-complex <path>  inject a full-featured (complex) example nemo suite under <path>\n     -U, --allow-unknown-args     allow command line arguments not specified by Nemo\n+    -E, --exit                   force shutdown of the event loop after test run: nemo will call process.exit\n     --debug-brk                  enable node's debugger breaking on the first line\n     --inspect                    activate devtools in chrome\n     --no-timeouts                remove timeouts in debug/inspect use case\n     -h, --help                   output usage information\n ```\n \n+## Configuration\n+\n+You may either use the [confit](https://www.npmjs.com/package/confit) and [shortstop](https://www.npmjs.com/package/shortstop) powered, environment-aware configuration engine, or a plain JavaScript/JSON file.\n+\n+Use the \"complex scaffold\" feature (`-Z`) to create a suite with this option.\n+\n+### Plain JS/JSON\n+\n+If using a plain JS/JSON file, you can add it as `nemo.config.json` or `nemo.config.js` in the directory you run nemo\n+from. Then you can run nemo simply as `./node_modules/.bin/nemo`. Nemo will find your configuration file automatically.\n+\n+You can also specify a differently named or placed file using the `-C` option as `./node_modules/.bin/nemo -C\n+path/to/config/config.js`.\n+\n+Use the \"basic scaffold\" feature (`-X`) to create a suite with this option.\n+\n ## Profile options\n \n ### `output`\n@@ -119,8 +145,19 @@\n \n ### `output.listeners <optional>`\n \n-Pass an array of objects to listen for nemo events. Object is of the form:\n+The `output:listeners` property can resolve to a function, an Object, or an Array (or Array of\n+Arrays) of functions/objects.\n+\n+The function form:\n+```js\n+module.exports = function (emitter) {\n+  emitter.on('test', (context, event) => {\n+    console.log(`another testlistener ${event.test.title} status: ${event.test.state}`);\n+  });\n+};\n",
+					"match": false,
+					"packageHash": "7a7faa98a5a775b27a24995395f37f8db45d1ead0c154ab2594ad57e3bdd2349",
+					"size": 9789,
+					"sourceHash": "41c541edfb461c1ae17859c04c9dc409685b5164b51de3268f634b97b4d56ed6",
+					"status": "content"
+				},
+				"bin/_nemo": {
+					"diff": "--- published/bin/_nemo\n+++ rebuilt/bin/_nemo\n@@ -6,15 +6,16 @@\n  * Module dependencies.\n  */\n \n-var program = require('commander');\n-var path = require('path');\n-var fs = require('fs');\n-var cwd = process.cwd();\n-var debug;\n-var log;\n-var server;\n-var scaffold;\n-var engine;\n+const program = require('commander');\n+const path = require('path');\n+const fs = require('fs');\n+const cwd = process.cwd();\n+let debug;\n+let log;\n+let server;\n+let scaffold;\n+let NemoFactory;\n+let BaseNemoConfig;\n \n function list(val) {\n   return val.split(',');\n@@ -24,12 +25,13 @@\n   return path.resolve(cwd, rel);\n }\n \n-var allowUnknownArgs = (process.argv.indexOf('-U') > -1) || (process.argv.indexOf('--allow-unknown-args') > -1);\n+let allowUnknownArgs = (process.argv.indexOf('-U') > -1) || (process.argv.indexOf('--allow-unknown-args') > -1);\n \n program\n   .version(JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf8')).version)\n   .usage('[options]')\n   .option('-B, --base-directory <path>', 'parent directory for config/ and spec/ (or other test file) directories. relative to cwd', cwdPath)\n+  .option('-C, --config-file <path>', 'config file. can be JS or JSON')\n   .option('-P, --profile [profile]', 'which profile(s) to run, out of the configuration', list)\n   .option('-G, --grep <pattern>', 'only run tests matching <pattern>', list)\n   .option('-F, --file ', 'run parallel by file')\n@@ -37,7 +39,9 @@\n   .option('-S, --server ', 'run the nemo web server')\n   .option('-L, --logging ', 'info level logging (errors log by default)')\n   .option('-X, --scaffold <path>', 'inject an example nemo suite under <path>')\n+  .option('-Z, --scaffold-complex <path>', 'inject a full-featured (complex) example nemo suite under <path>')\n   .option('-U, --allow-unknown-args', 'allow command line arguments not specified by Nemo')\n+  .option('-E, --exit', 'force shutdown of the event loop after test run: nemo will call process.exit')\n   .option('--debug-brk', 'enable node\\'s debugger breaking on the first line')\n   .option('--inspect', 'activate devtools in chrome')\n   .option('--no-timeouts', 'remove timeouts in debug/inspect use case')\n@@ -47,34 +51,62 @@\n program._name = 'nemo';\n if (program.logging) {\n   process.env.DEBUG = (process.env.DEBUG) ? `${process.env.DEBUG},` : '';\n-  process.env.DEBUG += 'nemo*';\n+  process.env.DEBUG = process.env.DEBUG + 'nemo*';\n }\n \n // load these after the DEBUG var is set\n server = require('../lib/server');\n scaffold = require('../lib/scaffold');\n-engine = require('../lib/engine');\n+NemoFactory = require('../lib/nemo');\n debug = require('debug');\n-log = debug('nemo:log');\n+log = debug('nemo:cli:log');\n \n-if(allowUnknownArgs) {\n+if (allowUnknownArgs) {\n   log('allowing unknown command line arguments');\n }\n \n // are we launching the server?\n if (program.server) {\n-  log('CLI launching server');\n+  log('launching server');\n   return server(program);\n }\n if (program.scaffold) {\n   log('launching scaffold');\n-  return scaffold(program);\n+  return scaffold.simple(program);\n }\n-log('CLI launching runner');\n-engine.configure(program)\n-  .then(function (configuration) {\n-    return engine.start(configuration);\n+if (program.scaffoldComplex) {\n+  log('launching scaffold-complex');\n+  return scaffold.complex(program);\n+}\n+log('launching runner');\n+NemoFactory.configure({baseDirectory: path.resolve(__dirname, '../config/cli')})\n+  .then(function (_) {\n+    BaseNemoConfig = _.config;\n+    BaseNemoConfig.set('baseConfigPath', path.resolve(__dirname, '../config/cli'));\n+    // are we using baseDirectory and confit?\n",
+					"match": false,
+					"packageHash": "0758437e2e3f65e9dea08151ffc1229e7ca686fb976760acfc70574e02e33300",
+					"size": 2423,
+					"sourceHash": "24e7cf7b90884f2df050d53ee29143d7e30594f7c556d4d158e6b44015162817",
+					"status": "content"
+				},
+				"bin/nemo": {
+					"diff": "--- published/bin/nemo\n+++ rebuilt/bin/nemo\n@@ -2,13 +2,13 @@\n \n 'use strict';\n \n-var spawn = require('child_process').spawn;\n-var path = require('path');\n-var args = [path.join(__dirname, '_nemo')];\n-var proc;\n+const spawn = require('child_process').spawn;\n+const path = require('path');\n+const args = [path.join(__dirname, '_nemo')];\n+let proc;\n \n process.argv.slice(2).forEach(function (arg) {\n-  var flag = arg.split('=')[0];\n+  const flag = arg.split('=')[0];\n \n   switch (flag) {\n   case 'debug':\n@@ -36,6 +36,8 @@\n   }\n });\n \n+// console.log(process.env);\n+\n proc = spawn(process.execPath, args, {stdio: 'inherit'});\n proc.on('exit', function (code, signal) {\n   process.on('exit', function () {\n",
+					"match": false,
+					"packageHash": "79e9dd0b11d46591c1ddbca67179b4ea714471c5ec8dba38f9ee72bee7661d0d",
+					"size": 1213,
+					"sourceHash": "8a60fbf7d03de0df2636af0eb1cbf21f42ecdd66af9074dae381fa37b33cc687",
+					"status": "content"
+				},
+				"lib/console.js": {
+					"diff": "--- published/lib/console.js\n+++ rebuilt/lib/console.js\n@@ -1,20 +1,27 @@\n-var table = require('cli-table');\n+var Table = require('cli-table');\n var util = require('./util');\n-module.exports = function (context, _instances) {\n-  let output = util.formatSummary(_instances);\n-  let tabl = new table({\n-    head: ['tags', 'pass', 'fail', 'total']\n+\n+function getTableRows(output) {\n+  return output.instances.map(function (instance) {\n+    const tags = Object.keys(instance.tags)\n+      .filter(key => key !== 'uid')\n+      .reduce(function (acc, key) {\n+        return acc + `${key}: ${instance.tags[key]}\\n`;\n+      }, '');\n+\n+    return [tags, instance.summary.pass, instance.summary.fail, instance.summary.total];\n   });\n-  output.instances.forEach(function (instance) {\n-    let tags = '';\n-    Object.keys(instance.tags).forEach(function (key) {\n-      if (key === 'uid') {\n-        return;\n-      }\n-      tags += `${key}: ${instance.tags[key]}\\n`;\n-    });\n-    tabl.push([tags, instance.summary.pass, instance.summary.fail, instance.summary.total]);\n-  });\n-  tabl.push(['TOTALS', output.totals.pass, output.totals.fail, output.totals.total]);\n-  console.log(tabl.toString());\n+}\n+\n+module.exports = function (context, instances) {\n+  const output = util.formatSummary(instances);\n+  const table = new Table({head: ['tags', 'pass', 'fail', 'total']});\n+  table.push(...getTableRows(output));\n+  table.push(['TOTALS', output.totals.pass, output.totals.fail, output.totals.total]);\n+  console.log(table.toString());\n+  let zeroExitCode = context.config.get('profiles:base:zeroExitCode') || false;\n+  process.exitCode = zeroExitCode ? 0 : Math.min(output.totals.fail, 255);\n+  if (context.program.exit) {\n+    process.exit();\n+  }\n };\n",
+					"match": false,
+					"packageHash": "73ee16e61203ed2a29f9705a1caad590618753bb1adeaba09b2d5ff69cf12e07",
+					"size": 688,
+					"sourceHash": "d3c30b5a3a6275e93a69974a2667ca311694c3693c03ba9f88a948236295c463",
+					"status": "content"
+				},
+				"lib/engine.js": {
+					"match": false,
+					"packageHash": "59080324f69a64bd4e5b5b965d2b3dffa51fbe07a25130af88513d44cc876619",
+					"size": 1650,
+					"status": "missing-in-source"
+				},
+				"lib/flow.js": {
+					"diff": "--- published/lib/flow.js\n+++ rebuilt/lib/flow.js\n@@ -1,30 +1,37 @@\n 'use strict';\n \n-var merge = require('lodash.merge');\n-var debug = require('debug');\n-var log = debug('nemo:flow:log');\n-var filenamify = require('filenamify');\n-var reporter = require('../lib/reporter');\n-var Glob = require('glob');\n-var path = require('path');\n-var moment = require('moment');\n-\n-let profile = function profile(cb) {\n-  var base = this.config.get('profiles:base');\n-  var profiles = this.program.profile;\n+const merge = require('lodash.merge');\n+const omit = require('lodash.omit');\n+const debug = require('debug');\n+const log = debug('nemo:flow:log');\n+const filenamify = require('filenamify');\n+const reporter = require('../lib/reporter');\n+const Glob = require('glob');\n+const path = require('path');\n+const moment = require('moment');\n+const {getCommonPathStart} = require('common-path-start');\n+\n+const profile = function profile(cb) {\n+  let base = this.config.get('profiles:base');\n+  base.plugins = this.config.get('plugins') || {};\n+  let profiles = this.program.profile;\n   profiles = profiles || 'base';\n   profiles = (profiles instanceof Array) ? profiles : [profiles];\n   this.instances = [];\n   profiles.forEach(function (profil) {\n-    var conf;\n-    var instance;\n-    var profileObj = this.config.get(`profiles:${profil}`);\n+    let conf;\n+    let instance;\n+    let profileObj = this.config.get(`profiles:${profil}`);\n     log('profile %s', profil);\n     if (!profileObj) {\n       console.error('profile, profile %s is undefined', profil);\n       return;\n     }\n-    conf = merge({}, base, profileObj || {});\n+\n+    // don't merge data objects here\n+    conf = merge({}, omit(base, 'data'), profileObj || {});\n+    // set baseConfigPath for use by the runner when nemo is instantiated again\n+    conf.baseConfigPath = this.config.get('baseConfigPath');\n     instance = {\n       tags: {profile: profil},\n       conf: conf\n@@ -34,32 +41,32 @@\n   cb(null, this);\n };\n \n-let reportDir = function reportDir(cb) {\n+const reportDir = function reportDir(cb) {\n   let reportOutput = this.config.get('output:reports');\n   if (!reportOutput) {\n-    log(`reportDir: output:reports not defined`);\n+    log('reportDir: output:reports not defined');\n     return cb(null, this);\n   }\n-  let tsDirName = moment().format(\"MM-DD-YYYY/HH-mm-ss\");\n+  let tsDirName = moment().format('MM-DD-YYYY/HH-mm-ss');\n   let fullReportPath = `${reportOutput}/${tsDirName}`;\n   this.config.set('output:reports', fullReportPath);\n   log(`reportDir: ${fullReportPath}`);\n   this.instances.forEach(function (instance) {\n     instance.conf.reports = fullReportPath;\n     instance.conf.reportsBase = reportOutput;\n-    log(`reportDir: instance.conf.reports ${instance.conf.reports}`)\n+    log(`reportDir: instance.conf.reports ${instance.conf.reports}`);\n   });\n   cb(null, this);\n };\n \n-let grep = function grep(cb) {\n-  var instances = [];\n-  var greps = this.program.grep || '';\n+const grep = function grep(cb) {\n+  let instances = [];\n+  let greps = this.program.grep || '';\n   greps = (greps instanceof Array) ? greps : [greps];\n   log('grep, greps: %s', greps);\n   this.instances.forEach(function (instance) {\n     greps.forEach(function (gerp) {\n-      var _instance = merge({}, instance);\n+      let _instance = merge({}, instance);\n       if (gerp !== '') {\n         _instance.conf.mocha.grep = gerp;\n         _instance.tags.grep = gerp;\n@@ -72,12 +79,12 @@\n   cb(null, this);\n };\n",
+					"match": false,
+					"packageHash": "6bb745cac717c5bf1703574cd8141c5f64c2f93f33259cff419b0b3fb9c9f3fe",
+					"size": 5484,
+					"sourceHash": "d25fe965b99e2c0551ff0751e04b741b66e212fa5c34345ceaccdcbfeeb863d0",
+					"status": "content"
+				},
+				"lib/instance.js": {
+					"diff": "--- published/lib/instance.js\n+++ rebuilt/lib/instance.js\n@@ -1,20 +1,23 @@\n 'use strict';\n-module.exports = function instance(input, instanceComplete, instanceProgress) {\n+module.exports = function instance(instanceConfig, instanceComplete, instanceProgress) {\n   const path = require('path');\n-  const Runner = require(path.resolve(input.__dirname, 'runner/mocha'));\n+  const Runner = require(path.resolve(instanceConfig.__dirname, 'runner/mocha'));\n   const EventEmitter = require('events');\n-  let startMS;\n-  class Emitter extends EventEmitter {}\n+  let startMS = Date.now();\n+\n+  class Emitter extends EventEmitter {\n+  }\n+\n   const emitter = new Emitter();\n   let runnerConfig = {\n-    input,\n+    instanceConfig,\n     emitter\n   };\n   Runner(runnerConfig)\n     .then((testResults) => {\n       instanceProgress({\n         event: 'instance:end', payload: {\n-          tags: input.profile.tags,\n+          tags: instanceConfig.profile.tags,\n           duration: Date.now() - startMS,\n           testResults\n         }\n@@ -28,11 +31,22 @@\n   instanceProgress({\n     event: 'instance:start',\n     payload: {\n-      tags: input.profile.tags\n+      tags: instanceConfig.profile.tags\n     }\n   });\n   emitter.on('test', (test) => {\n-    instanceProgress({event: 'test', payload: {tags: input.profile.tags, test}});\n+    instanceProgress({event: 'test', payload: {tags: instanceConfig.profile.tags, test}});\n+  });\n+  emitter.on('test:before', (test) => {\n+    instanceProgress({event: 'test:before', payload: {tags: instanceConfig.profile.tags, test}});\n+  });\n+  emitter.on('suite:before', () => {\n+    instanceProgress({event: 'suite:before', payload: {tags: instanceConfig.profile.tags}});\n+  });\n+  emitter.on('suite', () => {\n+    instanceProgress({event: 'suite', payload: {tags: instanceConfig.profile.tags}});\n+  });\n+  emitter.on('custom', (eventObject) => {\n+    instanceProgress({event: 'custom', payload: {tags: instanceConfig.profile.tags, eventObject}});\n   });\n-\n };\n",
+					"match": false,
+					"packageHash": "2bec602b61c8cb3f314e4a6dee30faf5d229a24ad7fa49a972237e071f664ceb",
+					"size": 970,
+					"sourceHash": "f1385352b7e82a5fe74d73627e24c01f13a3af25ab1defeef76356cbad20beae",
+					"status": "content"
+				},
+				"lib/master.js": {
+					"diff": "--- published/lib/master.js\n+++ rebuilt/lib/master.js\n@@ -1,61 +1,67 @@\n 'use strict';\n \n-var spawn = require('threads').spawn;\n-var instance = require('../lib/instance');\n-var debug = require('debug');\n-var parallelLimit = require('async/parallelLimit');\n-var uuid = require('uuid/v4');\n-var log = debug('nemo:master:log');\n-const CJ = require('circular-json');\n-\n-module.exports = function master() {\n-  var instanceResults = [];\n-  var complete = 0;\n-  var iconfig;\n-  var tasks;\n-  var maxConcurrent;\n+const spawn = require('threads').spawn;\n+const instance = require('../lib/instance');\n+const debug = require('debug');\n+const parallelLimit = require('async/parallelLimit');\n+const uuid = require('uuid').v4;\n+const log = debug('nemo:master:log');\n+const cJSON = require('flatted');\n+\n+module.exports = function master(Nemo) {\n+  let instanceResults = [];\n+  let complete = 0;\n+  let iconfig;\n+  let tasks;\n+  let maxConcurrent;\n   const progress = function (progressObject) {\n+    // check for custom event\n+    if (progressObject.event === 'custom') {\n+      // do custom stuff\n+      let customEvent = progressObject.payload.eventObject.eventName;\n+      let customEventPayload = cJSON.parse(progressObject.payload.eventObject.event);\n+      Nemo.emitter.emit(customEvent, Nemo, {tags: progressObject.payload.tags, payload: customEventPayload});\n+      return;\n+    }\n     try {\n       if (progressObject.payload.test) {\n-        progressObject.payload.test = CJ.parse(progressObject.payload.test);\n+        progressObject.payload.test = cJSON.parse(progressObject.payload.test);\n       }\n-      this.emitter.emit(progressObject.event, this, progressObject.payload);\n+      Nemo.emitter.emit(progressObject.event, Nemo, progressObject.payload);\n     } catch (err) {\n       console.error(err);\n     }\n     log(`call progress with event: ${progressObject.event}`);\n-  }.bind(this);\n-  this.emitter.on('instance:end', (context, result) => {\n+  };\n+  Nemo.emitter.on('instance:end', (context, result) => {\n     result.testResults = result.testResults.map(safeResult => {\n-      return CJ.parse(safeResult);\n+      return cJSON.parse(safeResult);\n     });\n     instanceResults.push(result);\n     if (context.instances.length === 1) {\n       context.emitter.emit('master:end', context, instanceResults);\n     }\n   });\n-  if (this.instances.length === 1 && !this.program.fromServer) {\n-\n-    iconfig = this.instances[0];\n+  if (Nemo.instances.length === 1 && !Nemo.program.fromServer) {\n+    iconfig = Nemo.instances[0];\n \n     log('single kickoff with instance %O', iconfig.tags);\n     process.env = Object.assign({}, process.env, iconfig.conf.env || {});\n     iconfig.tags.uid = uuid();\n-    return instance({basedir: this.program.baseDirectory, profile: iconfig, __dirname: __dirname}, err => {\n+    return instance({basedir: Nemo.program.baseDirectory, profile: iconfig, __dirname: __dirname}, err => {\n       if (err) {\n         console.error(err);\n       }\n     }, progress);\n   }\n   // parallel use case\n-  tasks = this.instances.map(function (iconf) {\n-\n+  tasks = Nemo.instances.map(function (iconf) {\n     return function (done) {\n-      var thread = spawn(instance, {env: Object.assign({}, process.env, iconf.conf.env || {})});\n+      let thread = spawn(instance, {env: Object.assign({}, process.env, iconf.conf.env || {})});\n       iconf.tags.uid = uuid();\n       log('multi kickoff with instance %O', iconf.tags);\n       thread\n-        .send({basedir: this.program.baseDirectory, profile: iconf, __dirname: __dirname})\n+        .send({basedir: Nemo.program.baseDirectory, profile: iconf, __dirname: __dirname})\n         // The handlers come here: (none of them is mandatory)\n         .on('message', function (summary) {\n           log('Thread complete', summary);\n@@ -68,18 +74,18 @@\n         })\n         .on('exit', function () {\n",
+					"match": false,
+					"packageHash": "2e7426acb13bbb06032840ca7ed4aa1c50893d30bc0b2c3155576ba029ae3fd8",
+					"size": 2892,
+					"sourceHash": "e4fcd51acd318e0b4573a285cb36e348b3f6a65bb25cacc37da4c3068b7625e5",
+					"status": "content"
+				},
+				"lib/reporter.js": {
+					"diff": "--- published/lib/reporter.js\n+++ rebuilt/lib/reporter.js\n@@ -2,11 +2,14 @@\n var log = debug('nemo:reporter:log');\n var filenamify = require('filenamify');\n var fs = require('fs');\n+var mkdirp = require('mkdirp');\n var util = require('./util');\n \n function masterEnd(context) {\n   context.emitter.once('master:end', (_context, _instances) => {\n     let output = util.formatSummary(_instances);\n+    // make report directory in case mocha reporter did not (happens when no tests run)\n+    mkdirp.sync(`${_context.config.get('output:reports')}`);\n     try {\n       fs.writeFileSync(`${_context.config.get('output:reports')}/summary.json`, JSON.stringify(output, null, '\\t'));\n     } catch (err) {\n@@ -22,11 +25,11 @@\n     return;\n   }\n   let assetsDir = `${instance.conf.reportsBase}/mochawesomeAssets`;\n-  log(`mochawesome: start: %O`, instance.conf.mocha);\n+  log('mochawesome: start: %O', instance.conf.mocha);\n   let instanceLabel = '';\n   for (let tag in instance.tags) {\n     if (instance.tags.hasOwnProperty(tag)) {\n-      instanceLabel += `:${tag}:${instance.tags[tag]}:`;\n+      instanceLabel = instanceLabel + `:${tag}:${instance.tags[tag]}:`;\n     }\n   }\n   instance.conf.reports = `${instance.conf.reports}/${filenamify(instanceLabel)}`;\n@@ -45,11 +48,11 @@\n     log('xunit: output.reports was not defined. Fallback to manual xunit config');\n     return;\n   }\n-  log(`xunit: start`);\n+  log('xunit: start');\n   let instanceLabel = '';\n   for (let tag in instance.tags) {\n     if (instance.tags.hasOwnProperty(tag)) {\n-      instanceLabel += `:${tag}:${instance.tags[tag]}:`;\n+      instanceLabel = instanceLabel + `:${tag}:${instance.tags[tag]}:`;\n     }\n   }\n   instance.conf.reports = filenamify.path(`${instance.conf.reports}/${instanceLabel}`);\n@@ -58,5 +61,5 @@\n   };\n   instance.tags.reportFile = `${instance.conf.reports}/nemo-report.xml`.split(instance.conf.reportsBase)[1];\n   instance.conf.mocha.reporterOptions = Object.assign({}, instance.conf.mocha.reporterOptions, reporterOptions);\n-  log(`xunit: config: %O`, instance.conf.mocha);\n+  log('xunit: config: %O', instance.conf.mocha);\n };\n",
+					"match": false,
+					"packageHash": "8228b0756c38f732ba353ac7cc4680b43ea95143ccb46a6ce77e1405238df3bd",
+					"size": 2393,
+					"sourceHash": "b82ea14627c1b35a3c2c232dbda1e5ab0301f5dc89f696db875e38de340bd12d",
+					"status": "content"
+				},
+				"lib/runner/mocha.js": {
+					"diff": "--- published/lib/runner/mocha.js\n+++ rebuilt/lib/runner/mocha.js\n@@ -1,86 +1,131 @@\n 'use strict';\n \n const NemoCore = require('nemo-core');\n-const CircularJSON = require('circular-json');\n+const cJSON = require('flatted');\n const Mocha = require('mocha');\n const debug = require('debug');\n const log = debug('nemo:mocha:log');\n-const path = require('path');\n \n function MochaRunner(runnerConfig) {\n   let testResults = [];\n   let mochaCompleteResolvers = null;\n   let runner;\n   let modulesToRequire = [];\n-  let input = runnerConfig.input;\n-  let mocha = new Mocha(input.profile.conf.mocha);\n-  let requireFromConfig = input.profile.conf.mocha.require;\n+  let instanceConfig = runnerConfig.instanceConfig;\n+  let mocha = new Mocha(instanceConfig.profile.conf.mocha);\n+  let requireFromConfig = instanceConfig.profile.conf.mocha.require;\n   let mochaCompletePromise = new Promise(function (resolve, reject) {\n     mochaCompleteResolvers = {resolve, reject};\n   });\n \n   function createNemo() {\n-\n-    let driverConf = Object.assign({}, input.profile.conf.driver || {});\n-    let dataConf = Object.assign({}, input.profile.conf.data || {});\n-\n-    return NemoCore.Configure(input.basedir, {\n-      plugins: {\n-        snap: {\n-          module: path.resolve(input.__dirname, 'screenshot'),\n-          arguments: [\n-            input.profile.conf.reports\n-          ]\n+    let driverConf;\n+    if (typeof instanceConfig.profile.conf.driver === 'string') {\n+      driverConf = `require:${instanceConfig.profile.conf.driver}`;\n+    } else {\n+      driverConf = Object.assign({}, instanceConfig.profile.conf.driver || {});\n+    }\n+    let dataConf = Object.assign({}, instanceConfig.profile.conf.data || {});\n+    let pluginConf = Object.assign({}, instanceConfig.profile.conf.plugins || {});\n+    let NemoBaseConfig;\n+    return NemoCore.Configure(instanceConfig.profile.conf.baseConfigPath)\n+      .then(function (nemoBaseConfig) {\n+        NemoBaseConfig = nemoBaseConfig;\n+        if (instanceConfig.basedir) {\n+          // confit use case\n+          return NemoCore.Configure(instanceConfig.basedir, {\n+            driver: driverConf,\n+            data: dataConf\n+          });\n         }\n-      },\n-      driver: driverConf,\n-      data: dataConf\n-    }).then((nemoCoreConfig) => {\n-      return NemoCore(nemoCoreConfig);\n-    });\n+        // plain JS config use case\n+        return NemoCore.Configure({\n+          plugins: pluginConf,\n+          driver: driverConf,\n+          data: dataConf\n+        });\n+      })\n+      .then((nemoCoreConfig) => {\n+        NemoBaseConfig.merge(nemoCoreConfig);\n+        return NemoCore(NemoBaseConfig);\n+      });\n   }\n \n   function destroyNemo() {\n+    log('destroyNemo: called');\n     if (this.nemo) {\n-      return this.nemo.driver.quit()\n-        .then(function () {\n-          log('destroyNemo: Quit driver');\n-          return Promise.resolve();\n-        });\n+      if (this.nemo.driver) {\n+        log('Quitting nemo driver instance');\n+        return this.nemo.driver.quit()\n+          .then(function () {\n+            log('destroyNemo: Quit driver');\n+            return Promise.resolve();\n+          });\n+      }\n+      log('Nemo instance does not have a driver to quit');\n     }\n   }\n+\n   function bindNemo(nemoCoreObject) {\n     nemoCoreObject.mocha = this;\n",
+					"match": false,
+					"packageHash": "b0d2c48bc350a5b6db5d8d4a15a2b2f7503c6acdba708f1b17fbf65041c0f46d",
+					"size": 4541,
+					"sourceHash": "216285625fe292b9a4557c571fa59b6b04dc1d789a50c2a06b0ca74440b37b18",
+					"status": "content"
+				},
+				"lib/scaffold.js": {
+					"diff": "--- published/lib/scaffold.js\n+++ rebuilt/lib/scaffold.js\n@@ -1,31 +1,59 @@\n const Mkdirp = require('mkdirp');\n-const Fs = require('fs-extra')\n+const Fs = require('fs-extra');\n const Path = require('path');\n+const promisify = require('util').promisify;\n+const copyAsync = promisify(Fs.copy);\n+const copyFileAsync = promisify(Fs.copyFile);\n+const writeFileAsync = promisify(Fs.writeFile);\n \n-module.exports = function scaffold(program) {\n+module.exports.complex = function complex(program) {\n   // we need to copy the contents of ../scaffold to <cwd>/<scaffold>\n-  const src = Path.resolve(__dirname, '../scaffold');\n-  const dest = Path.resolve(process.cwd(), program.scaffold);\n-  // let times = 1;\n-  Mkdirp(dest, err => {\n-    if (err) {\n-      return console.error(err);\n-    }\n-    Fs.copy(src, dest, err2 => {\n-      if (err2) {\n-        return console.error(err2);\n-      }\n+  const src = Path.resolve(__dirname, '../scaffold/complex');\n+  const dest = Path.resolve(process.cwd(), program.scaffoldComplex);\n+  Mkdirp(dest)\n+    .then(() => copyAsync(src, dest))\n+    .then(() => {\n       console.log(`\n   DONE!\n   \n   Next steps:\n-  1. Add a script to package.json. E.g. \"nemo\": \"nemo -B ${program.scaffold} -P pay,search,form -L\"\n+  1. Add a script to package.json. E.g. \"nemo\": \"nemo -B ${program.scaffoldComplex} -P pay,search,form -L\"\n   2. Make sure you have latest chrome/chromedriver installed (https://sites.google.com/a/chromium.org/chromedriver/getting-started)\n      - The binary should be in your PATH\n   3. Run nemo! \"npm run nemo\"\n-  4. Explore the files under ${program.scaffold}\n+  4. Explore the files under ${program.scaffoldComplex}\n   5. Learn more: http://nemo.js.org\n       `);\n     })\n-  })\n+    .catch(err => {\n+      console.error(err);\n+    });\n+};\n+\n+module.exports.simple = function simple(program) {\n+  // we need to copy the contents of ../scaffold to <cwd>/<scaffold>\n+  const testSrc = Path.resolve(__dirname, '../scaffold/simple/nemo.test.js');\n+  const confSrc = require(Path.resolve(__dirname, '../scaffold/simple/nemo.config.js'))(program.scaffold);\n+  const confDest = Path.resolve(process.cwd(), 'nemo.config.js');\n+  const testDir = Path.resolve(process.cwd(), program.scaffold);\n+  const testDest = Path.resolve(process.cwd(), program.scaffold, 'nemo.test.js');\n+\n+  Mkdirp(testDir)\n+    .then(() => copyFileAsync(testSrc, testDest))\n+    .then(() => writeFileAsync(confDest, confSrc))\n+    .then(() => {\n+      console.log(`\n+  DONE!\n+  \n+  Next steps:\n+  1. Make sure you have latest chrome/chromedriver installed (https://sites.google.com/a/chromium.org/chromedriver/getting-started)\n+     - The binary should be in your PATH\n+  2. Run nemo! \"./node_modules/.bin/nemo\"\n+  3. Look at nemo.config.js and ${program.scaffold}/nemo.test.js\n+  4. Learn more: http://nemo.js.org\n+      `);\n+    })\n+    .catch(err => {\n+      console.error(err);\n+    });\n };\n",
+					"match": false,
+					"packageHash": "6fc17903a5a95223ac9d2650441f7679acc03b5a3c473e46a0e54215f3f4b0e0",
+					"size": 978,
+					"sourceHash": "ea0d96c7f367dcc391ad549f6554a5f1ce196ac91fbdbd08277bb75ebd1c07c9",
+					"status": "content"
+				},
+				"lib/screenshot.js": {
+					"diff": "--- published/lib/screenshot.js\n+++ rebuilt/lib/screenshot.js\n@@ -1,46 +1,41 @@\n-var addContext = require('mochawesome/addContext');\n-var path = require('path');\n-var mkdirp = require('mkdirp');\n-var fs = require('fs');\n-var debug = require('debug');\n-var log = debug('nemo:screenshot:log');\n-var filenamify = require('filenamify');\n+const addContext = require('mochawesome/addContext');\n+const path = require('path');\n+const mkdirp = require('mkdirp');\n+const fs = require('fs');\n+const debug = require('debug');\n+const log = debug('nemo:screenshot:log');\n+const filenamify = require('filenamify');\n \n \n-module.exports.setup = (defaultPath, nemo, cb) => {\n-  log('setup is called with defaultPath %s', defaultPath);\n-  nemo.snap = function () {\n-    var overridePath = arguments[0];\n-    var screenshotName;\n-    if (!overridePath && !defaultPath) {\n-      console.error('Trying to capture a screenshot with no path');\n+module.exports.setup = (nemo, cb) => {\n+  nemo.snap = function (filename) {\n+    let reportPath = nemo.runner.reportPath;\n+    if (!nemo.runner || !nemo.runner.reportPath) {\n+      console.error('Trying to initialize screenshot plugin with no path');\n       return Promise.resolve();\n     }\n-    if (!overridePath) {\n-      log(`snap for test ${nemo.mocha.test.title}`);\n-      nemo.mocha.test.__screenshot = (nemo.mocha.test.__screenshot) ? (nemo.mocha.test.__screenshot + 1) : 1;\n-\n-      screenshotName = `${filenamify(nemo.mocha.test.title)}.${nemo.mocha.test.__screenshot}.png`;\n-      overridePath = `${defaultPath}/${screenshotName}`;\n-    }\n+    log(`snap for test ${nemo.mocha.test.title}`);\n+    nemo.mocha.test.__screenshot = (nemo.mocha.test.__screenshot) ? (nemo.mocha.test.__screenshot + 1) : 1;\n+    let screenshotName = (filename) ? `${filename}.png` : `${filenamify(nemo.mocha.test.title)}.${nemo.mocha.test.__screenshot}.png`;\n+    reportPath = `${reportPath}/${screenshotName}`;\n     return nemo.driver.takeScreenshot()\n       .then(function (img) {\n         let pFunk;\n         let p = new Promise((resolve, reject) => {\n           pFunk = {resolve, reject};\n         });\n-        log(`afterEach: got the screenshot, ${overridePath}`);\n-        mkdirp.sync(path.dirname(overridePath));\n+        log(`afterEach: got the screenshot, ${reportPath}`);\n+        mkdirp.sync(path.dirname(reportPath));\n \n         // save screen image\n-        fs.writeFile(overridePath, img, {\n-          'encoding': 'base64'\n+        fs.writeFile(reportPath, img, {\n+          encoding: 'base64'\n         }, function (err) {\n           if (err) {\n             pFunk.reject(err);\n           } else {\n             if (!screenshotName) {\n-              screenshotName = overridePath.substr(overridePath.lastIndexOf('/') + 1);\n+              screenshotName = reportPath.substr(reportPath.lastIndexOf('/') + 1);\n             }\n             // addContext only applicable for mochawesome reports\n             addContext(nemo.mocha, screenshotName);\n",
+					"match": false,
+					"packageHash": "9fd55ba360345bf8d25882476e0288c93deb605343db77a75b8432bb7815aa30",
+					"size": 1902,
+					"sourceHash": "1c28336810df8c390290bf8da0091cb62b42eb77ae71f7be395f66eb54ae098a",
+					"status": "content"
+				},
+				"lib/server.js": {
+					"diff": "--- published/lib/server.js\n+++ rebuilt/lib/server.js\n@@ -1,5 +1,5 @@\n-const express = require('express')\n-const engine = require('./engine');\n+const express = require('express');\n+const engine = require('./nemo');\n var graphqlHTTP = require('express-graphql');\n var {buildSchema} = require('graphql');\n var debug = require('debug');\n@@ -49,7 +49,6 @@\n };\n \n module.exports = (program) => {\n-\n   const app = express();\n \n   engine.configure(program)\n@@ -59,12 +58,9 @@\n         rootValue: rootResolver(configuration),\n         graphiql: true\n       }));\n-      app.listen(3000, () => console.log('Nemo Server listening on port 3000!'))\n-\n+      app.listen(3000, () => console.log('Nemo Server listening on port 3000!'));\n     })\n     .catch(err => {\n       console.error(err);\n     });\n-\n-\n };\n",
+					"match": false,
+					"packageHash": "3a024042bcc99ebde4b6487a590b445f1e01ae31da81bd75aa6b634e1837ebc4",
+					"size": 1576,
+					"sourceHash": "06caa2a6b20830af55bdd6b69927567369e84c6c8f67b4fef9becbb4fe61630d",
+					"status": "content"
+				},
+				"lib/storage.js": {
+					"diff": "--- published/lib/storage.js\n+++ rebuilt/lib/storage.js\n@@ -2,16 +2,16 @@\n var debug = require('debug');\n var log = debug('nemo:storage:log');\n \n-let Storage = function (configuration) {\n-  this.configuration = configuration;\n-  if (!configuration.config.get('output:storage')) {\n+let Storage = function (Nemo) {\n+  this.configuration = Nemo;\n+  if (!Nemo.config.get('output:storage')) {\n     log('no storage requested');\n     return;\n   }\n-  this.masterID = configuration.masterID;\n+  this.masterID = Nemo.masterID;\n   this.influx = new Influx.InfluxDB({\n-    host: configuration.config.get('output:storage:server'),\n-    database: configuration.config.get('output:storage:database'),\n+    host: Nemo.config.get('output:storage:server'),\n+    database: Nemo.config.get('output:storage:database'),\n     schema: [\n       {\n         measurement: 'test',\n@@ -53,7 +53,7 @@\n \n   // attach listeners\n   this.listeners.forEach(listener => {\n-    configuration.emitter.on(listener.type, listener.listener);\n+    Nemo.emitter.on(listener.type, listener.listener);\n   });\n };\n \n@@ -63,19 +63,18 @@\n     return;\n   }\n   log(`store test ${result.test.fullTitleString}, status \"${result.type}\" with tags ${result.tags}`);\n-  let title, fullTitle, duration, threadID, profile, dkey, file, grep, masterID, error, stack, status;\n-  masterID = this.masterID;\n-  title = result.test.title || '_blank_';\n-  fullTitle = result.test.fullTitleString || '_blank_';\n-  duration = result.test.duration || -1;\n-  threadID = result.tags.uid;\n-  profile = result.tags.profile || '_blank_';\n-  dkey = result.tags.key || '_blank_';\n-  file = result.tags.file || '_blank_';\n-  grep = result.tags.grep || '_blank_';\n-  error = result.test.errSafe && result.test.errSafe.name;\n-  stack = result.test.errSafe && result.test.errSafe.stack;\n-  status = result.test.state;\n+  let masterID = this.masterID;\n+  let title = result.test.title || '_blank_';\n+  let fullTitle = result.test.fullTitleString || '_blank_';\n+  let duration = result.test.duration || -1;\n+  let threadID = result.tags.uid;\n+  let profile = result.tags.profile || '_blank_';\n+  let dkey = result.tags.key || '_blank_';\n+  let file = result.tags.file || '_blank_';\n+  let grep = result.tags.grep || '_blank_';\n+  let error = result.test.errSafe && result.test.errSafe.name;\n+  let stack = result.test.errSafe && result.test.errSafe.stack;\n+  let status = result.test.state;\n \n   this.influx.writePoints([\n     {\n@@ -100,13 +99,12 @@\n     return;\n   }\n   log(`store lifecycle event ${event}`);\n-  let duration, masterID, threadID, profile, dkey, grep;\n-  duration = result.duration || -1;\n-  masterID = this.masterID;\n-  threadID = result.tags.uid;\n-  profile = result.tags.profile || '_blank_';\n-  dkey = result.tags.key || '_blank_';\n-  grep = result.tags.grep || '_blank_';\n+  let duration = result.duration || -1;\n+  let masterID = this.masterID;\n+  let threadID = result.tags.uid;\n+  let profile = result.tags.profile || '_blank_';\n+  let dkey = result.tags.key || '_blank_';\n+  let grep = result.tags.grep || '_blank_';\n \n   this.influx.writePoints([\n     {\n",
+					"match": false,
+					"packageHash": "f806b48306048586d9bf814a492a8486870d565717f0002f7b4a0743e8145c4d",
+					"size": 3855,
+					"sourceHash": "0c97e9c1a8a5bca81a930c48a1e0a651b17b9c14e9c0cd6feb30c14f0cf1ee6b",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,12 +1,14 @@\n {\n   \"name\": \"nemo\",\n-  \"version\": \"4.4.0-alpha.1\",\n+  \"version\": \"4.13.1\",\n   \"description\": \"Wrapper to run mocha suites with injected selenium-webdriver instance\",\n-  \"main\": \"index.js\",\n   \"scripts\": {\n-    \"test\": \"npm run lint && npm run nemo && npm run nemo:parallel && npm run nemo:lifecycle:suite && npm run nemo:lifecycle:test\",\n-    \"nemo\": \"SELENIUM_PROMISE_MANAGER=0 ./bin/nemo -B test -L\",\n+    \"test\": \"npm run lint && node test/test-helper clean && npm run nemo && npm run nemo:parallel && npm run nemo:lifecycle:suite && npm run nemo:lifecycle:test && npm run nemo:jsconfig && npm run nemo:env:override && node test/test-helper verify\",\n+    \"nemo\": \"SELENIUM_PROMISE_MANAGER=0 ./bin/nemo -B test\",\n+    \"nemo:jsconfig\": \"SELENIUM_PROMISE_MANAGER=0 ./bin/nemo -C test/jsconfig/nemo.config.js\",\n     \"nemo:debug\": \"SELENIUM_PROMISE_MANAGER=0 ./bin/nemo -B test --inspect-brk --inspect\",\n+    \"nemo:exit\": \"SELENIUM_PROMISE_MANAGER=0 ./bin/nemo -B test -P exit -E\",\n+    \"nemo:fail\": \"SELENIUM_PROMISE_MANAGER=0 ./bin/nemo -B test -P fail -G @once@,@twice@\",\n     \"nemo:parallel\": \"./bin/nemo -B test -G @suite1,@suite2,@suite3,@suite4 -F\",\n     \"nemo:parallel:data\": \"./bin/nemo -B test -P search,pay -D\",\n     \"nemo:search\": \"SELENIUM_PROMISE_MANAGER=0 ./bin/nemo -B test -P search -D\",\n@@ -15,10 +17,13 @@\n     \"nemo:lifecycle:suite\": \"SELENIUM_PROMISE_MANAGER=0 ./bin/nemo -B test -P driverPerSuite\",\n     \"nemo:lifecycle:test\": \"SELENIUM_PROMISE_MANAGER=0 ./bin/nemo -B test -P driverPerTest\",\n     \"nemo:xunit\": \"./bin/nemo -B test -G @suite1 -P xunit\",\n+    \"nemo:customDriver\": \"./bin/nemo -B test -G @suite1 -P customDriver\",\n+    \"nemo:env:override\": \"NODE_ENV=override ./bin/nemo -B test -P override\",\n     \"nemo:server\": \"./bin/nemo -B test -S\",\n     \"nemo:dynamic\": \"./bin/nemo -B test -U --url-from-cli 'https://www.wikipedia.org' -P dynamic\",\n     \"nemo:scaffold\": \"./bin/nemo -B scaffold -P pay,search,form\",\n-    \"lint\": \"eslint ./bin/* ./lib/*\"\n+    \"lint\": \"eslint ./bin/* ./lib/*\",\n+    \"reset\": \"rm -rf node_modules && npm install\"\n   },\n   \"repository\": {\n     \"type\": \"git\",\n@@ -39,7 +44,9 @@\n     \"grawk <mattedelman@gmail.com>\",\n     \"Kurt Weiberth <kurt.weiberth@gmail.com>\",\n     \"Ethan Godt <ethan@ethangodt.com>\",\n-    \"Alex Feldman <alexfeldman@gmail.com> (https://github.com/Noyabronok)\"\n+    \"Alex Feldman <alexfeldman@gmail.com> (https://github.com/Noyabronok)\",\n+    \"Sairam Nutheti <sai.nutheti@gmail.com>\",\n+    \"Bijoy Vijayachandran <bijoyv@gmail.com>\"\n   ],\n   \"license\": \"Apache-2.0\",\n   \"bugs\": {\n@@ -47,30 +54,36 @@\n   },\n   \"homepage\": \"https://github.com/krakenjs/nemo#readme\",\n   \"dependencies\": {\n-    \"async\": \"^2.5.0\",\n-    \"circular-json\": \"^0.5.1\",\n-    \"cli-table\": \"^0.3.1\",\n-    \"commander\": \"^2.14.1\",\n-    \"debug\": \"^2.6.3\",\n-    \"express\": \"^4.16.2\",\n-    \"express-graphql\": \"^0.6.12\",\n-    \"filenamify\": \"^2.0.0\",\n-    \"fs-extra\": \"^5.0.0\",\n-    \"glob\": \"^7.1.1\",\n-    \"graphql\": \"^0.11.7\",\n-    \"influx\": \"^5.0.7\",\n+    \"async\": \"^3.2.1\",\n+    \"axis.js\": \"^1.2.1\",\n+    \"cli-table\": \"^0.3.6\",\n+    \"commander\": \"^4.0.0\",\n+    \"common-path-start\": \"0.0.4\",\n+    \"debug\": \"^4.3.2\",\n+    \"express\": \"^4.16.4\",\n+    \"express-graphql\": \"^0.9.0\",\n+    \"filenamify\": \"^4.3.0\",\n+    \"flatted\": \"^2.0.1\",\n+    \"fs-extra\": \"^8.1.0\",\n+    \"glob\": \"^7.2.0\",\n+    \"graphql\": \"^14.7.0\",\n+    \"influx\": \"^5.9.2\",\n     \"lodash.merge\": \"^4.6.1\",\n+    \"lodash.omit\": \"^4.5.0\",\n     \"minimist\": \"^1.2.0\",\n-    \"mocha\": \"^4\",\n-    \"mochawesome\": \"^3.0.2\",\n-    \"moment\": \"^2.21.0\",\n-    \"nemo-core\": \"^1.0.0\",\n-    \"nemo-view\": \"^3.1.0\",\n-    \"threads\": \"^0.7.2\",\n-    \"uuid\": \"^3.2.1\"\n+    \"mkdirp\": \"^1.0.0\",\n+    \"mocha\": \"^9.1.3\",\n+    \"mochawesome\": \"^5.0.0\",\n+    \"moment\": \"^2.29.1\",\n+    \"nemo-core\": \"^1.1.3\",\n+    \"nemo-view\": \"^3.1.1\",\n+    \"threads\": \"^0.12.1\",\n+    \"uuid\": \"^8.3.2\",\n+    \"yargs\": \"^15.4.1\"\n   },\n   \"devDependencies\": {\n-    \"eslint\": \"^3.19.0\",\n+    \"chromedriver\": \"^94.0.0\",\n",
+					"match": false,
+					"packageHash": "7ba72338f731efe275b415f80eea4281e633411a164048f0701a4942a4bdbfd3",
+					"size": 2676,
+					"sourceHash": "fbe69ffa2fd5335bcc690f14e9b74f2170740050009d9236d5370c6e587229a0",
+					"status": "content"
+				},
+				"scaffold/config/config.json": {
+					"match": false,
+					"packageHash": "43e38fe18f6ec45214cfbb5c2c101b94b88cc5537dc2951ed1fef415aeb8e78e",
+					"size": 4032,
+					"status": "missing-in-source"
+				},
+				"scaffold/config/useme.js": {
+					"match": false,
+					"packageHash": "f26f818e43342f606f70f3cd5e4bdeeab6e6ef7b6af94e1281c4ea44c9845551",
+					"size": 1115,
+					"status": "missing-in-source"
+				},
+				"scaffold/form.js": {
+					"match": false,
+					"packageHash": "5ce1c5993a3ab0a8163c1a8b39964c082902f019b1734b75a1c8841db6320a78",
+					"size": 519,
+					"status": "missing-in-source"
+				},
+				"scaffold/locator/form.json": {
+					"match": false,
+					"packageHash": "436c2c45331015c0a4b4853e4e4b638a7f18440d608f1a45008a7cef46ac3895",
+					"size": 136,
+					"status": "missing-in-source"
+				},
+				"scaffold/pay.js": {
+					"match": false,
+					"packageHash": "b7b634f31f626945679e9c15ec772dcf91ac6154cac0d9950228f89bd0336c4b",
+					"size": 332,
+					"status": "missing-in-source"
+				},
+				"scaffold/search.js": {
+					"match": false,
+					"packageHash": "ddf1ceefa6d51ac38f1753043025f229b305c4ff5adcb8c07bdf54889af99029",
+					"size": 467,
+					"status": "missing-in-source"
+				},
+				"scaffold/trivial.js": {
+					"match": false,
+					"packageHash": "f9046b6594dffc3294298323f7065ae550c761c7aa17e516e2be21b0aad4ac9e",
+					"size": 187,
+					"status": "missing-in-source"
+				},
+				"test/config/config.json": {
+					"diff": "--- published/test/config/config.json\n+++ rebuilt/test/config/config.json\n@@ -1,7 +1,4 @@\n {\n-    \"driver\": {\n-        \"browser\": \"phantomjs\"\n-    },\n     \"plugins\": {\n         \"view\": {\n             \"module\": \"nemo-view\",\n@@ -10,61 +7,68 @@\n             ]\n         }\n     },\n+    \"driver\": {\n+        \"builders\": {\n+            \"withCapabilities\": [\n+                {\n+                    \"browserName\": \"chrome\",\n+                    \"chromeOptions\": {\n+                        \"args\": [\n+                            \"headless\",\n+                            \"window-size=1200,800\",\n+                            \"disable-dev-shm-usage\"\n+                        ]\n+                    }\n+\n+                }\n+            ]\n+        }\n+    },\n     \"data\": {\n-        \"baseUrl\": \"https://www.google.com\"\n+        \"baseUrl\": \"https://www.google.com\",\n+        \"foo\": \"bar\"\n     },\n     \"output\": {\n-        \"listeners\": \"require:./config/listeners\",\n+        \"listeners\": [\"require:./config/listeners\", \"require:./config/more-listeners\"],\n         \"reports\": \"path:report\"\n-//        ,\"storage\": {\n-//            \"server\": \"localhost\",\n-//            \"database\": \"nemo\",\n-//            \"user\": \"admin\",\n-//            \"password\": \"admin\"\n-//        }\n     },\n     \"profiles\": {\n         \"base\": {\n             \"tests\": \"path:./nested*.js\",\n-            \"driver\": {\n-                \"builders\": {\n-                    \"withCapabilities\": [\n-                        {\n-                            \"browserName\": \"chrome\",\n-                            \"chromeOptions\": {\n-                                \"args\": [\n-                                    \"headless\",\n-                                    \"window-size=1200,800\"\n-                                ]\n-                            }\n-                        }\n-                    ]\n-                }\n-            },\n             \"mocha\": {\n                 \"timeout\": 180000,\n                 \"reporter\": \"mochawesome\"\n             }\n         },\n+        \"customDriver\": {\n+            \"tests\": \"path:./nested.js\",\n+            \"driver\": \"./config/driver.chrome.mobile\"\n+        },\n         \"xunit\": {\n             \"mocha\": {\n                 \"reporter\": \"xunit\"\n             }\n         },\n         \"driverPerSuite\": {\n-            \"tests\": \"path:./lifecycle.js\",\n+            \"tests\": \"path:./lifecycle-suite.js\",\n             \"driverPerTest\": false,\n             \"mocha\": {\n                 \"grep\": \"@entireSuite@\"\n             }\n         },\n         \"driverPerTest\": {\n-            \"tests\": \"path:./lifecycle.js\",\n+            \"tests\": \"path:./lifecycle-per-test.js\",\n             \"driverPerTest\": true,\n             \"mocha\": {\n                 \"grep\": \"@eachTest@\"\n             }\n         },\n+        \"exit\": {\n+            \"tests\": \"path:./exit.js\"\n+        },\n+        \"fail\": {\n+            \"tests\": \"path:./fail.js\"\n",
+					"match": false,
+					"packageHash": "dc69d0f4da3c8fd6b23684dc8d8ddf152ee3dcea946255705e9eff0d58aa8465",
+					"size": 4142,
+					"sourceHash": "276694260c9186fe9a7e6df8166866f6ea7af72d2c7c03c9d86b7effa7787ccb",
+					"status": "content"
+				},
+				"test/config/listeners.js": {
+					"diff": "--- published/test/config/listeners.js\n+++ rebuilt/test/config/listeners.js\n@@ -3,4 +3,29 @@\n   listener: (context, event) => {\n     console.log(`user event listener: test ${event.test.title} status: ${event.test.state}`);\n   }\n+},{\n+  type: 'custom:unittest',\n+  listener: (context, event) => {\n+    console.log('custom:unittest event fired', event);\n+  }\n+},{\n+ type: 'suite',\n+ listener: (context, event) => {\n+   console.log('suite event fired', event.tags.uid);\n+ }\n+},{\n+  type: 'suite:before',\n+    listener: (context, event) => {\n+    console.log('before suite event fired', event.tags.uid);\n+  }\n+},{\n+  type: 'test:before',\n+    listener: (context, event) => {\n+    console.log('before test fired', event.test.title);\n+  }\n+},{\n+  type: 'root:before',\n+  listener: (context, event) => {\n+    console.log('before root event fired', event.tags.uid);\n+  }\n }];\n",
+					"match": false,
+					"packageHash": "d670e4134856f36e1c954d2d9ccefff2396ceb50ff68d08a97e32f8164822384",
+					"size": 172,
+					"sourceHash": "717d49bbd23e16b1ffe8ca7b0c41eb8f764c8d9c0dc1bfb9822e909caff22f5d",
+					"status": "content"
+				},
+				"test/lifecycle.js": {
+					"match": false,
+					"packageHash": "a5bed406cee006346324d85a5db23fed9e30d832a8ab95c8318ca3f567b18b06",
+					"size": 1492,
+					"status": "missing-in-source"
+				},
+				"test/nested.js": {
+					"diff": "--- published/test/nested.js\n+++ rebuilt/test/nested.js\n@@ -1,55 +1,58 @@\n \n describe('@suite1@suite2@suite3@suite4@', function () {\n-  before(function () {\n+  before(async function () {\n     if (this.nemo) {\n-      return Promise.resolve();\n+      await Promise.resolve();\n+      return;\n     }\n-    return Promise.reject(new Error('no nemo'));\n+    await Promise.reject(new Error('no nemo'));\n   });\n-  after(function () {\n+  after(async function () {\n     if (this.nemo) {\n-      return Promise.resolve();\n+      await Promise.resolve();\n+      return;\n     }\n-    return Promise.reject(new Error('no nemo'));\n+    await Promise.reject(new Error('no nemo'));\n   });\n-  beforeEach(function () {\n+  beforeEach(async function () {\n     if (this.nemo) {\n-      return Promise.resolve();\n+      await Promise.resolve();\n+      return;\n     }\n-    return Promise.reject(new Error('no nemo'));\n+    await Promise.reject(new Error('no nemo'));\n   });\n-  afterEach(function () {\n+  afterEach(async function () {\n     if (this.nemo) {\n-      return Promise.resolve();\n+      await Promise.resolve();\n+      return;\n     }\n-    return Promise.reject(new Error('no nemo'));\n+    await Promise.reject(new Error('no nemo'));\n   });\n-  it('may fail a few times1', function () {\n+  it('may fail a few times1', async function () {\n     let nemo = this.nemo;\n     //verify nemo.mocha property\n     if (!nemo.mocha === this) {\n-      return Promise.reject(new Error('didnt find mocha context at nemo.mocha'));\n+      await Promise.reject(new Error('didnt find mocha context at nemo.mocha'));\n+      return;\n     }\n-    return nemo.driver.get(nemo.data.baseUrl)\n-      .then(function () {\n-        return nemo.snap();\n-      })\n-      .then(function () {\n-        return nemo.snap();\n-      })\n+    await nemo.driver.get(nemo.data.baseUrl);\n+    await nemo.snap();\n+    await nemo.snap();\n   });\n   describe('@inner@', function () {\n-    before(function () {\n+    before(async function () {\n       if (this.nemo) {\n-        return Promise.resolve();\n+        await Promise.resolve();\n+        return;\n       }\n-      return Promise.reject(new Error('no nemo'));\n+      await Promise.reject(new Error('no nemo'));\n     });\n-    after(function () {\n+    after(async function () {\n       if (this.nemo) {\n-        return Promise.resolve();\n+        await Promise.resolve();\n+        return;\n       }\n-      return Promise.reject(new Error('no nemo'));\n+      await Promise.reject(new Error('no nemo'));\n     });\n     beforeEach(function () {\n       if (this.nemo) {\n@@ -63,16 +66,26 @@\n       }\n       return Promise.reject(new Error('no nemo'));\n     });\n-    it('may fail a few times2', function () {\n+    it('may fail a few times2', async function () {\n       let nemo = this.nemo;\n       //verify nemo.mocha property\n       if (!nemo.mocha === this) {\n         return Promise.reject(new Error('didnt find mocha context at nemo.mocha'));\n       }\n-      return nemo.driver.get(nemo.data.baseUrl)\n",
+					"match": false,
+					"packageHash": "32298f1328c7cfbe06c51469173003e02da5036a2d12b79ee59442ea67148067",
+					"size": 2033,
+					"sourceHash": "b4355191248e3ce34292e07d48a1b7cb4542e0efacac15c854d0211816bc8fe0",
+					"status": "content"
+				},
+				"test/pay.js": {
+					"diff": "--- published/test/pay.js\n+++ rebuilt/test/pay.js\n@@ -5,6 +5,9 @@\n     let {baseUrl, signupButton, signupForm} = nemo.data;\n     await nemo.driver.get(baseUrl);\n     await nemo.view._find(signupButton).click();\n+    await nemo.snap();\n+    await nemo.snap('naming this one');\n+    await nemo.runner.emit('custom:unittest', {foo: 'bar'});\n     await nemo.view._waitVisible(signupForm);\n   });\n });\n",
+					"match": false,
+					"packageHash": "52269b4335686863ebff16a8dd76bee8a0f22b88ae8e4fa6bb651cc26b107313",
+					"size": 333,
+					"sourceHash": "ed155767b985b13120075839dd2f079fd6d7687bd5108cb7f4c9b55eba2ac1bc",
+					"status": "content"
+				},
+				".editorconfig": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/node.js.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"config/cli/config/config.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"config/cli/config/listeners.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/nemo.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scaffold/complex/config/config.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scaffold/complex/config/useme.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scaffold/complex/form.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scaffold/complex/locator/form.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scaffold/complex/pay.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scaffold/complex/search.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scaffold/complex/trivial.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scaffold/simple/nemo.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scaffold/simple/nemo.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/config/driver.chrome.mobile.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/config/more-listeners.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/config/override.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/exit.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/fail.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/jsconfig/nemo.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/lifecycle-per-test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/lifecycle-suite.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/locator/google.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/override.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/test-helper.js": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 21,
+				"matchingFiles": 11,
+				"missingInPackage": 25,
+				"missingInSource": 9,
+				"score": 0.16666666666666666,
+				"totalFiles": 66
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "@types/color-name",
+				"version": "1.1.1"
+			},
+			{
+				"name": "@ungap/promise-all-settled",
+				"version": "1.1.2"
+			},
+			{
+				"name": "accepts",
+				"version": "1.3.7"
+			},
+			{
+				"name": "ansi-colors",
+				"version": "4.1.1"
+			},
+			{
+				"name": "ansi-regex",
+				"version": "5.0.1"
+			},
+			{
+				"name": "ansi-styles",
+				"version": "3.2.1"
+			},
+			{
+				"name": "anymatch",
+				"version": "3.1.2"
+			},
+			{
+				"name": "array-flatten",
+				"version": "1.1.1"
+			},
+			{
+				"name": "async",
+				"version": "3.2.1"
+			},
+			{
+				"name": "axis.js",
+				"version": "1.2.1"
+			},
+			{
+				"name": "babel-runtime",
+				"version": "4.7.3"
+			},
+			{
+				"name": "balanced-match",
+				"version": "1.0.0"
+			},
+			{
+				"name": "binary-extensions",
+				"version": "2.2.0"
+			},
+			{
+				"name": "body-parser",
+				"version": "1.19.0"
+			},
+			{
+				"name": "debug",
+				"version": "2.6.9"
+			},
+			{
+				"name": "ms",
+				"version": "2.0.0"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "1.1.11"
+			},
+			{
+				"name": "braces",
+				"version": "3.0.2"
+			},
+			{
+				"name": "browser-stdout",
+				"version": "1.3.1"
+			},
+			{
+				"name": "bytes",
+				"version": "3.1.0"
+			},
+			{
+				"name": "caller",
+				"version": "1.0.1"
+			},
+			{
+				"name": "camelcase",
+				"version": "5.3.1"
+			},
+			{
+				"name": "chalk",
+				"version": "2.4.2"
+			},
+			{
+				"name": "supports-color",
+				"version": "5.5.0"
+			},
+			{
+				"name": "chokidar",
+				"version": "3.5.2"
+			},
+			{
+				"name": "cli-table",
+				"version": "0.3.6"
+			},
+			{
+				"name": "cliui",
+				"version": "5.0.0"
+			},
+			{
+				"name": "ansi-regex",
+				"version": "4.1.0"
+			},
+			{
+				"name": "string-width",
+				"version": "3.1.0"
+			},
+			{
+				"name": "strip-ansi",
+				"version": "5.2.0"
+			},
+			{
+				"name": "color-convert",
+				"version": "1.9.3"
+			},
+			{
+				"name": "color-name",
+				"version": "1.1.3"
+			},
+			{
+				"name": "colors",
+				"version": "1.0.3"
+			},
+			{
+				"name": "commander",
+				"version": "4.1.1"
+			},
+			{
+				"name": "common-path-start",
+				"version": "0.0.4"
+			},
+			{
+				"name": "concat-map",
+				"version": "0.0.1"
+			},
+			{
+				"name": "confit",
+				"version": "2.3.0"
+			},
+			{
+				"name": "async",
+				"version": "0.9.2"
+			},
+			{
+				"name": "content-disposition",
+				"version": "0.5.3"
+			},
+			{
+				"name": "content-type",
+				"version": "1.0.4"
+			},
+			{
+				"name": "cookie",
+				"version": "0.4.0"
+			},
+			{
+				"name": "cookie-signature",
+				"version": "1.0.6"
+			},
+			{
+				"name": "core-util-is",
+				"version": "1.0.2"
+			},
+			{
+				"name": "dateformat",
+				"version": "3.0.3"
+			},
+			{
+				"name": "debug",
+				"version": "4.3.2"
+			},
+			{
+				"name": "debuglog",
+				"version": "1.0.1"
+			},
+			{
+				"name": "decamelize",
+				"version": "1.2.0"
+			},
+			{
+				"name": "deep-equal",
+				"version": "0.1.2"
+			},
+			{
+				"name": "defined",
+				"version": "0.0.0"
+			},
+			{
+				"name": "depd",
+				"version": "1.1.2"
+			},
+			{
+				"name": "destroy",
+				"version": "1.0.4"
+			},
+			{
+				"name": "diff",
+				"version": "5.0.0"
+			},
+			{
+				"name": "ee-first",
+				"version": "1.1.1"
+			},
+			{
+				"name": "emoji-regex",
+				"version": "7.0.3"
+			},
+			{
+				"name": "encodeurl",
+				"version": "1.0.2"
+			},
+			{
+				"name": "escalade",
+				"version": "3.1.1"
+			},
+			{
+				"name": "escape-html",
+				"version": "1.0.3"
+			},
+			{
+				"name": "escape-string-regexp",
+				"version": "1.0.5"
+			},
+			{
+				"name": "etag",
+				"version": "1.8.1"
+			},
+			{
+				"name": "eventemitter3",
+				"version": "2.0.3"
+			},
+			{
+				"name": "express",
+				"version": "4.17.1"
+			},
+			{
+				"name": "express-graphql",
+				"version": "0.9.0"
+			},
+			{
+				"name": "http-errors",
+				"version": "1.7.3"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.4"
+			},
+			{
+				"name": "raw-body",
+				"version": "2.4.1"
+			},
+			{
+				"name": "filename-reserved-regex",
+				"version": "2.0.0"
+			},
+			{
+				"name": "filenamify",
+				"version": "4.3.0"
+			},
+			{
+				"name": "fill-range",
+				"version": "7.0.1"
+			},
+			{
+				"name": "finalhandler",
+				"version": "1.1.2"
+			},
+			{
+				"name": "find-up",
+				"version": "3.0.0"
+			},
+			{
+				"name": "flat",
+				"version": "5.0.2"
+			},
+			{
+				"name": "flatted",
+				"version": "2.0.2"
+			},
+			{
+				"name": "forwarded",
+				"version": "0.1.2"
+			},
+			{
+				"name": "fresh",
+				"version": "0.5.2"
+			},
+			{
+				"name": "fs-extra",
+				"version": "8.1.0"
+			},
+			{
+				"name": "fs.realpath",
+				"version": "1.0.0"
+			},
+			{
+				"name": "fsevents",
+				"version": "2.3.2"
+			},
+			{
+				"name": "fsu",
+				"version": "1.1.1"
+			},
+			{
+				"name": "get-caller-file",
+				"version": "2.0.5"
+			},
+			{
+				"name": "glob",
+				"version": "7.2.0"
+			},
+			{
+				"name": "glob-parent",
+				"version": "5.1.2"
+			},
+			{
+				"name": "graceful-fs",
+				"version": "4.2.4"
+			},
+			{
+				"name": "graphql",
+				"version": "14.7.0"
+			},
+			{
+				"name": "growl",
+				"version": "1.10.5"
+			},
+			{
+				"name": "has-flag",
+				"version": "3.0.0"
+			},
+			{
+				"name": "he",
+				"version": "1.2.0"
+			},
+			{
+				"name": "http-errors",
+				"version": "1.7.2"
+			},
+			{
+				"name": "iconv-lite",
+				"version": "0.4.24"
+			},
+			{
+				"name": "immediate",
+				"version": "3.0.6"
+			},
+			{
+				"name": "inflight",
+				"version": "1.0.6"
+			},
+			{
+				"name": "influx",
+				"version": "5.9.2"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.3"
+			},
+			{
+				"name": "ipaddr.js",
+				"version": "1.9.1"
+			},
+			{
+				"name": "is-binary-path",
+				"version": "2.1.0"
+			},
+			{
+				"name": "is-extglob",
+				"version": "2.1.1"
+			},
+			{
+				"name": "is-fullwidth-code-point",
+				"version": "2.0.0"
+			},
+			{
+				"name": "is-glob",
+				"version": "4.0.1"
+			},
+			{
+				"name": "is-number",
+				"version": "7.0.0"
+			},
+			{
+				"name": "is-plain-obj",
+				"version": "2.1.0"
+			},
+			{
+				"name": "is-unicode-supported",
+				"version": "0.1.0"
+			},
+			{
+				"name": "isarray",
+				"version": "1.0.0"
+			},
+			{
+				"name": "isexe",
+				"version": "2.0.0"
+			},
+			{
+				"name": "iterall",
+				"version": "1.3.0"
+			},
+			{
+				"name": "js-tokens",
+				"version": "4.0.0"
+			},
+			{
+				"name": "json-stringify-safe",
+				"version": "5.0.1"
+			},
+			{
+				"name": "jsonfile",
+				"version": "4.0.0"
+			},
+			{
+				"name": "jsonify",
+				"version": "0.0.0"
+			},
+			{
+				"name": "jszip",
+				"version": "3.7.1"
+			},
+			{
+				"name": "lie",
+				"version": "3.3.0"
+			},
+			{
+				"name": "locate-path",
+				"version": "3.0.0"
+			},
+			{
+				"name": "lodash",
+				"version": "4.17.21"
+			},
+			{
+				"name": "lodash.isempty",
+				"version": "4.4.0"
+			},
+			{
+				"name": "lodash.isfunction",
+				"version": "3.0.9"
+			},
+			{
+				"name": "lodash.isobject",
+				"version": "3.0.2"
+			},
+			{
+				"name": "lodash.isstring",
+				"version": "4.0.1"
+			},
+			{
+				"name": "lodash.merge",
+				"version": "4.6.2"
+			},
+			{
+				"name": "lodash.omit",
+				"version": "4.5.0"
+			},
+			{
+				"name": "log-symbols",
+				"version": "4.1.0"
+			},
+			{
+				"name": "ansi-styles",
+				"version": "4.3.0"
+			},
+			{
+				"name": "chalk",
+				"version": "4.1.2"
+			},
+			{
+				"name": "color-convert",
+				"version": "2.0.1"
+			},
+			{
+				"name": "color-name",
+				"version": "1.1.4"
+			},
+			{
+				"name": "has-flag",
+				"version": "4.0.0"
+			},
+			{
+				"name": "supports-color",
+				"version": "7.2.0"
+			},
+			{
+				"name": "loose-envify",
+				"version": "1.4.0"
+			},
+			{
+				"name": "media-typer",
+				"version": "0.3.0"
+			},
+			{
+				"name": "merge-descriptors",
+				"version": "1.0.1"
+			},
+			{
+				"name": "methods",
+				"version": "1.1.2"
+			},
+			{
+				"name": "mime",
+				"version": "1.6.0"
+			},
+			{
+				"name": "mime-db",
+				"version": "1.44.0"
+			},
+			{
+				"name": "mime-types",
+				"version": "2.1.27"
+			},
+			{
+				"name": "minimatch",
+				"version": "3.0.4"
+			},
+			{
+				"name": "minimist",
+				"version": "1.2.5"
+			},
+			{
+				"name": "mkdirp",
+				"version": "1.0.4"
+			},
+			{
+				"name": "mocha",
+				"version": "9.1.3"
+			},
+			{
+				"name": "argparse",
+				"version": "2.0.1"
+			},
+			{
+				"name": "cliui",
+				"version": "7.0.4"
+			},
+			{
+				"name": "escape-string-regexp",
+				"version": "4.0.0"
+			},
+			{
+				"name": "find-up",
+				"version": "5.0.0"
+			},
+			{
+				"name": "glob",
+				"version": "7.1.7"
+			},
+			{
+				"name": "js-yaml",
+				"version": "4.1.0"
+			},
+			{
+				"name": "locate-path",
+				"version": "6.0.0"
+			},
+			{
+				"name": "ms",
+				"version": "2.1.3"
+			},
+			{
+				"name": "p-limit",
+				"version": "3.1.0"
+			},
+			{
+				"name": "p-locate",
+				"version": "5.0.0"
+			},
+			{
+				"name": "path-exists",
+				"version": "4.0.0"
+			},
+			{
+				"name": "which",
+				"version": "2.0.2"
+			},
+			{
+				"name": "wrap-ansi",
+				"version": "7.0.0"
+			},
+			{
+				"name": "y18n",
+				"version": "5.0.8"
+			},
+			{
+				"name": "yargs",
+				"version": "16.2.0"
+			},
+			{
+				"name": "yargs-parser",
+				"version": "20.2.4"
+			},
+			{
+				"name": "mochawesome",
+				"version": "5.0.0"
+			},
+			{
+				"name": "mochawesome-report-generator",
+				"version": "4.1.0"
+			},
+			{
+				"name": "fs-extra",
+				"version": "7.0.1"
+			},
+			{
+				"name": "yargs",
+				"version": "13.3.2"
+			},
+			{
+				"name": "ansi-regex",
+				"version": "5.0.0"
+			},
+			{
+				"name": "ansi-styles",
+				"version": "4.2.1"
+			},
+			{
+				"name": "chalk",
+				"version": "3.0.0"
+			},
+			{
+				"name": "diff",
+				"version": "4.0.2"
+			},
+			{
+				"name": "strip-ansi",
+				"version": "6.0.0"
+			},
+			{
+				"name": "supports-color",
+				"version": "7.1.0"
+			},
+			{
+				"name": "uuid",
+				"version": "7.0.3"
+			},
+			{
+				"name": "moment",
+				"version": "2.29.1"
+			},
+			{
+				"name": "ms",
+				"version": "2.1.2"
+			},
+			{
+				"name": "nanoid",
+				"version": "3.1.25"
+			},
+			{
+				"name": "native-promise-only",
+				"version": "0.8.1"
+			},
+			{
+				"name": "negotiator",
+				"version": "0.6.2"
+			},
+			{
+				"name": "nemo-core",
+				"version": "1.1.3"
+			},
+			{
+				"name": "async",
+				"version": "2.6.3"
+			},
+			{
+				"name": "debug",
+				"version": "3.2.6"
+			},
+			{
+				"name": "y18n",
+				"version": "4.0.3"
+			},
+			{
+				"name": "nemo-view",
+				"version": "3.1.1"
+			},
+			{
+				"name": "normalize-path",
+				"version": "3.0.0"
+			},
+			{
+				"name": "object-assign",
+				"version": "4.1.1"
+			},
+			{
+				"name": "on-finished",
+				"version": "2.3.0"
+			},
+			{
+				"name": "once",
+				"version": "1.4.0"
+			},
+			{
+				"name": "opener",
+				"version": "1.5.1"
+			},
+			{
+				"name": "os-tmpdir",
+				"version": "1.0.2"
+			},
+			{
+				"name": "p-limit",
+				"version": "2.3.0"
+			},
+			{
+				"name": "p-locate",
+				"version": "3.0.0"
+			},
+			{
+				"name": "p-try",
+				"version": "2.2.0"
+			},
+			{
+				"name": "pako",
+				"version": "1.0.11"
+			},
+			{
+				"name": "parseurl",
+				"version": "1.3.3"
+			},
+			{
+				"name": "path-exists",
+				"version": "3.0.0"
+			},
+			{
+				"name": "path-is-absolute",
+				"version": "1.0.1"
+			},
+			{
+				"name": "path-to-regexp",
+				"version": "0.1.7"
+			},
+			{
+				"name": "picomatch",
+				"version": "2.3.0"
+			},
+			{
+				"name": "process-nextick-args",
+				"version": "2.0.1"
+			},
+			{
+				"name": "prop-types",
+				"version": "15.7.2"
+			},
+			{
+				"name": "proxy-addr",
+				"version": "2.0.6"
+			},
+			{
+				"name": "qs",
+				"version": "6.7.0"
+			},
+			{
+				"name": "randombytes",
+				"version": "2.1.0"
+			},
+			{
+				"name": "range-parser",
+				"version": "1.2.1"
+			},
+			{
+				"name": "raw-body",
+				"version": "2.4.0"
+			},
+			{
+				"name": "react",
+				"version": "16.13.1"
+			},
+			{
+				"name": "react-dom",
+				"version": "16.13.1"
+			},
+			{
+				"name": "react-is",
+				"version": "16.13.1"
+			},
+			{
+				"name": "readable-stream",
+				"version": "2.3.7"
+			},
+			{
+				"name": "readdirp",
+				"version": "3.6.0"
+			},
+			{
+				"name": "require-directory",
+				"version": "2.1.1"
+			},
+			{
+				"name": "require-main-filename",
+				"version": "2.0.0"
+			},
+			{
+				"name": "resumer",
+				"version": "0.0.0"
+			},
+			{
+				"name": "rimraf",
+				"version": "2.7.1"
+			},
+			{
+				"name": "safe-buffer",
+				"version": "5.1.2"
+			},
+			{
+				"name": "safer-buffer",
+				"version": "2.1.2"
+			},
+			{
+				"name": "sax",
+				"version": "1.2.4"
+			},
+			{
+				"name": "scheduler",
+				"version": "0.19.1"
+			},
+			{
+				"name": "selenium-drivex",
+				"version": "2.0.1"
+			},
+			{
+				"name": "selenium-webdriver",
+				"version": "3.6.0"
+			},
+			{
+				"name": "send",
+				"version": "0.17.1"
+			},
+			{
+				"name": "ms",
+				"version": "2.1.1"
+			},
+			{
+				"name": "serialize-javascript",
+				"version": "6.0.0"
+			},
+			{
+				"name": "serve-static",
+				"version": "1.14.1"
+			},
+			{
+				"name": "set-blocking",
+				"version": "2.0.0"
+			},
+			{
+				"name": "set-immediate-shim",
+				"version": "1.0.1"
+			},
+			{
+				"name": "setprototypeof",
+				"version": "1.1.1"
+			},
+			{
+				"name": "shortstop",
+				"version": "1.0.3"
+			},
+			{
+				"name": "shortstop-handlers",
+				"version": "1.0.1"
+			},
+			{
+				"name": "async",
+				"version": "0.2.10"
+			},
+			{
+				"name": "shush",
+				"version": "1.0.0"
+			},
+			{
+				"name": "caller",
+				"version": "0.0.1"
+			},
+			{
+				"name": "strip-json-comments",
+				"version": "0.1.3"
+			},
+			{
+				"name": "statuses",
+				"version": "1.5.0"
+			},
+			{
+				"name": "string_decoder",
+				"version": "1.1.1"
+			},
+			{
+				"name": "string-width",
+				"version": "4.2.3"
+			},
+			{
+				"name": "emoji-regex",
+				"version": "8.0.0"
+			},
+			{
+				"name": "is-fullwidth-code-point",
+				"version": "3.0.0"
+			},
+			{
+				"name": "strip-ansi",
+				"version": "6.0.1"
+			},
+			{
+				"name": "strip-json-comments",
+				"version": "3.1.1"
+			},
+			{
+				"name": "strip-outer",
+				"version": "1.0.1"
+			},
+			{
+				"name": "supports-color",
+				"version": "8.1.1"
+			},
+			{
+				"name": "tape",
+				"version": "2.3.3"
+			},
+			{
+				"name": "tcomb",
+				"version": "3.2.29"
+			},
+			{
+				"name": "tcomb-validation",
+				"version": "3.4.1"
+			},
+			{
+				"name": "threads",
+				"version": "0.12.1"
+			},
+			{
+				"name": "through",
+				"version": "2.3.8"
+			},
+			{
+				"name": "tmp",
+				"version": "0.0.30"
+			},
+			{
+				"name": "to-regex-range",
+				"version": "5.0.1"
+			},
+			{
+				"name": "toidentifier",
+				"version": "1.0.0"
+			},
+			{
+				"name": "trim-repeated",
+				"version": "1.0.0"
+			},
+			{
+				"name": "type-is",
+				"version": "1.6.18"
+			},
+			{
+				"name": "universalify",
+				"version": "0.1.2"
+			},
+			{
+				"name": "unpipe",
+				"version": "1.0.0"
+			},
+			{
+				"name": "util-deprecate",
+				"version": "1.0.2"
+			},
+			{
+				"name": "utils-merge",
+				"version": "1.0.1"
+			},
+			{
+				"name": "uuid",
+				"version": "8.3.2"
+			},
+			{
+				"name": "validator",
+				"version": "10.11.0"
+			},
+			{
+				"name": "vary",
+				"version": "1.1.2"
+			},
+			{
+				"name": "which-module",
+				"version": "2.0.0"
+			},
+			{
+				"name": "workerpool",
+				"version": "6.1.5"
+			},
+			{
+				"name": "wrap-ansi",
+				"version": "5.1.0"
+			},
+			{
+				"name": "wrappy",
+				"version": "1.0.2"
+			},
+			{
+				"name": "xml2js",
+				"version": "0.4.23"
+			},
+			{
+				"name": "xmlbuilder",
+				"version": "11.0.1"
+			},
+			{
+				"name": "yargs",
+				"version": "15.4.1"
+			},
+			{
+				"name": "yargs-parser",
+				"version": "13.1.2"
+			},
+			{
+				"name": "yargs-unparser",
+				"version": "2.0.0"
+			},
+			{
+				"name": "camelcase",
+				"version": "6.2.0"
+			},
+			{
+				"name": "decamelize",
+				"version": "4.0.0"
+			},
+			{
+				"name": "cliui",
+				"version": "6.0.0"
+			},
+			{
+				"name": "find-up",
+				"version": "4.1.0"
+			},
+			{
+				"name": "locate-path",
+				"version": "5.0.0"
+			},
+			{
+				"name": "p-locate",
+				"version": "4.1.0"
+			},
+			{
+				"name": "string-width",
+				"version": "4.2.0"
+			},
+			{
+				"name": "wrap-ansi",
+				"version": "6.2.0"
+			},
+			{
+				"name": "yargs-parser",
+				"version": "18.1.3"
+			},
+			{
+				"name": "yocto-queue",
+				"version": "0.1.0"
+			}
+		]
+	}
+]
