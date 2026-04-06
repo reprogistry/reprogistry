@@ -262,7 +262,7 @@ for (const result of results) {
 		return semverCompare(a.reproduceVersion, b.reproduceVersion);
 	});
 
-	await writeFile(dataPath, `${JSON.stringify(deduped, null, '\t')}\n`); // eslint-disable-line no-await-in-loop
+	await writeFile(dataPath, `${JSON.stringify(deduped)}\n`); // eslint-disable-line no-await-in-loop
 }
 
 console.log(`\nSummary: ${successCount} versions compared successfully, ${errors.length} failed`);
