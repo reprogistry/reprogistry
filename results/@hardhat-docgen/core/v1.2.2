@@ -1,0 +1,744 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-04-15T10:03:24.205Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:6.14.12",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "@hardhat-docgen/core@1.2.2",
+			"name": "@hardhat-docgen/core",
+			"version": "1.2.2",
+			"location": "https://registry.npmjs.org/@hardhat-docgen/core/-/core-1.2.2.tgz",
+			"integrity": "sha512-inPxlwxknPurfoU4vaZuzSb4KPHvCM6gxQ9HrLCsG233cJKXvgWNhj9unC7WSdVHZ8F7yOw8CPbezbybGJ6DPQ==",
+			"publishedAt": "2021-08-12T17:11:00.014Z",
+			"publishedWith": {
+				"node": "14.16.1",
+				"npm": "6.14.12"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/ItsNickBarry/hardhat-docgen.git",
+			"spec": "github:ItsNickBarry/hardhat-docgen#HEAD"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,11 +1,71 @@\n-# `@hardhat-docgen/core`\n+# Hardhat Docgen\n \n-> TODO: description\n+Generate a static documentation site from NatSpec comments automatically on compilation with Hardhat.\n+\n+## Installation\n+\n+```bash\n+npm install --save-dev hardhat-docgen\n+# or\n+yarn add --dev hardhat-docgen\n+```\n \n ## Usage\n \n+Load plugin in Hardhat config:\n+\n+```javascript\n+require('hardhat-docgen');\n+```\n+\n+Add configuration under the `docgen` key:\n+\n+| option         | description                                                                                                | default                                                        |\n+| -------------- | ---------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |\n+| `path`         | path to HTML export directory (relative to Hardhat root)                                                   | `'./docgen'`                                                   |\n+| `clear`        | whether to delete old files in `path` on documentation generation                                          | `false`                                                        |\n+| `runOnCompile` | whether to automatically generate documentation during compilation                                         | `false`                                                        |\n+| `only`         | `Array` of `String` matchers used to select included contracts, defaults to all contracts if `length` is 0 | `['^contracts/']` (dependent on Hardhat `paths` configuration) |\n+| `except`       | `Array` of `String` matchers used to exclude contracts                                                     | `[]`                                                           |\n+\n+```javascript\n+docgen: {\n+  path: './docs',\n+  clear: true,\n+  runOnCompile: true,\n+}\n+```\n+\n+The included Hardhat task may be run manually:\n+\n+```bash\n+npx hardhat docgen\n+# or\n+yarn run hardhat docgen\n ```\n-const core = require('@hardhat-docgen/core');\n \n-// TODO: DEMONSTRATE API\n+By default, the hardhat `compile` task is run before generating documentation. This behavior can be disabled with the `--no-compile` flag:\n+\n+```bash\n+npx hardhat docgen --no-compile\n+# or\n+yarn run hardhat docgen --no-compile\n+```\n+\n+The `path` directory will be created if it does not exist.\n+\n+The `clear` option is set to `false` by default because it represents a destructive action, but should be set to `true` in most cases.\n+\n+## Development\n+\n+Install dependencies via Yarn:\n+\n+```bash\n+yarn install\n+```\n+\n+Setup Husky to format code on commit:\n+\n+```bash\n+yarn prepare\n ```\n",
+					"match": false,
+					"packageHash": "b789961bd234993adf4a9b6eba97e11d911fdb9059365835f713a42a8f2fd618",
+					"size": 137,
+					"sourceHash": "d28bc48cc6c0d6cb4eb5429df82a7a7cccb9330081578142c87f35b102533a0f",
+					"status": "content"
+				},
+				"index.d.ts": {
+					"diff": "--- published/index.d.ts\n+++ rebuilt/index.d.ts\n@@ -3,23 +3,21 @@\n declare module 'hardhat/types/config' {\n   interface HardhatUserConfig {\n     docgen?: {\n-      path?: string,\n-      clear?: boolean,\n-      runOnCompile?: boolean,\n-      only?: string[],\n-      except?: string[],\n-      theme: string,\n-    }\n+      path?: string;\n+      clear?: boolean;\n+      runOnCompile?: boolean;\n+      only?: string[];\n+      except?: string[];\n+    };\n   }\n \n   interface HardhatConfig {\n     docgen: {\n-      path: string,\n-      clear: boolean,\n-      runOnCompile: boolean,\n-      only: string[],\n-      except: string[],\n-      theme:string,\n-    }\n+      path: string;\n+      clear: boolean;\n+      runOnCompile: boolean;\n+      only: string[];\n+      except: string[];\n+    };\n   }\n }\n",
+					"match": false,
+					"packageHash": "1bf6a9b7c6f1514c81d319a19677ff6cee63f22d6f7e49f73e81bb0dc2964cdc",
+					"size": 464,
+					"sourceHash": "6db39d665dd9d23b2522427738d9eff724d88d4426832c5e089d5c83e6cb7636",
+					"status": "content"
+				},
+				"index.js": {
+					"diff": "--- published/index.js\n+++ rebuilt/index.js\n@@ -1,12 +1,8 @@\n-/* global hre, task */\n-const fs = require('fs');\n const path = require('path');\n const { extendConfig } = require('hardhat/config');\n-const { HardhatPluginError } = require('hardhat/plugins');\n \n-const {\n-  TASK_COMPILE,\n-} = require('hardhat/builtin-tasks/task-names');\n+require('./tasks/compile.js');\n+require('./tasks/docgen.js');\n \n extendConfig(function (config, userConfig) {\n   const { root, sources } = config.paths;\n@@ -19,63 +15,18 @@\n       only: [`^${path.relative(root, sources)}/`],\n       except: [],\n     },\n-    userConfig.docgen\n+    userConfig.docgen,\n   );\n-});\n-\n-const NAME = 'docgen';\n-const DESC = 'Generate NatSpec documentation automatically on compilation';\n-\n-task(NAME, DESC)\n-  .addOptionalParam('theme', 'The theme used to render the output')\n-  .setAction(async ({ theme }) => {\n-    const config = hre.config.docgen;\n-\n-    const outputDirectory = path.resolve(hre.config.paths.root, config.path);\n-\n-    if (!outputDirectory.startsWith(hre.config.paths.root)) {\n-      throw new HardhatPluginError('resolved path must be inside of project directory');\n-    }\n \n-    if (outputDirectory === hre.config.paths.root) {\n-      throw new HardhatPluginError('resolved path must not be root directory');\n-    }\n+  for (const compiler of config.solidity.compilers) {\n+    const outputSelection = compiler.settings.outputSelection['*']['*'];\n \n-    if (config.clear && fs.existsSync(outputDirectory)) {\n-      fs.rmdirSync(outputDirectory, { recursive: true });\n+    if (!outputSelection.includes('devdoc')) {\n+      outputSelection.push('devdoc');\n     }\n \n-    const output = {};\n-    const contractNames = await hre.artifacts.getAllFullyQualifiedNames();\n-    for (const contractName of contractNames) {\n-      if (config.only.length && !config.only.some(m => contractName.match(m))) continue;\n-      if (config.except.length && config.except.some(m => contractName.match(m))) continue;\n-      output[contractName] = await hre.artifacts.getBuildInfo(contractName);\n-    }\n-    // Default renderer\n-    let render = async (outputDirectory, data) => {\n-      if (!fs.existsSync(outputDirectory)) {\n-        fs.mkdirSync(outputDirectory, { recursive: true });\n-      }\n-      fs.writeFileSync(path.join(outputDirectory, 'output.json'), JSON.stringify(data, null, 4));\n-    };\n-    if (theme || config.theme) {\n-      render = require('@hardhat-docgen/' + (theme || config.theme));\n-    }\n-    const error = await render(outputDirectory, output);\n-    if (error) {\n-      throw new HardhatPluginError(error);\n+    if (!outputSelection.includes('userdoc')) {\n+      outputSelection.push('userdoc');\n     }\n-  });\n-task(TASK_COMPILE, async function (args, hre, runSuper) {\n-  for (let compiler of hre.config.solidity.compilers) {\n-    compiler.settings.outputSelection['*']['*'].push('devdoc');\n-    compiler.settings.outputSelection['*']['*'].push('userdoc');\n-  }\n-\n-  await runSuper();\n-\n-  if (hre.config.docgen.runOnCompile) {\n-    await hre.run(NAME);\n   }\n });\n",
+					"match": false,
+					"packageHash": "efb5db7c7e0863ede13e638ee4609d3ee51b00f3352203c90a078c8065ee47c9",
+					"size": 2615,
+					"sourceHash": "7c4d2059ff12ad15132299d18a468dcf156279dee6deb4ca023320eeee7c555b",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,7 +1,6 @@\n {\n-  \"name\": \"@hardhat-docgen/core\",\n-  \"version\": \"1.2.2\",\n-  \"license\": \"MIT\",\n+  \"name\": \"hardhat-docgen\",\n+  \"version\": \"1.3.0\",\n   \"description\": \"Generate NatSpec documentation automatically on compilation\",\n   \"keywords\": [\n     \"hardhat\",\n@@ -18,18 +17,38 @@\n     \"wow\"\n   ],\n   \"repository\": \"https://github.com/ItsNickBarry/hardhat-docgen\",\n+  \"license\": \"MIT\",\n   \"author\": \"Nick Barry\",\n   \"main\": \"index.js\",\n   \"types\": \"index.d.ts\",\n-  \"peerDependencies\": {\n-    \"hardhat\": \"^2.0.0\"\n+  \"scripts\": {\n+    \"prepare\": \"husky\",\n+    \"prettier\": \"prettier --write .\"\n+  },\n+  \"dependencies\": {\n+    \"css-loader\": \"^6.5.1\",\n+    \"html-webpack-plugin\": \"^5.5.0\",\n+    \"vue\": \"^2.6.14\",\n+    \"vue-loader\": \"^15.9.8\",\n+    \"vue-router\": \"^3.5.3\",\n+    \"vue-template-compiler\": \"^2.6.14\",\n+    \"webpack\": \"^5.65.0\"\n   },\n   \"devDependencies\": {\n-    \"eslint\": \"^7.17.0\",\n-    \"eslint-plugin-vue\": \"^7.4.1\",\n+    \"@trivago/prettier-plugin-sort-imports\": \"^4.3.0\",\n+    \"@vue/compiler-sfc\": \"^3.4.30\",\n+    \"hardhat\": \"^2.7.1\",\n+    \"husky\": \"^9.0.11\",\n+    \"lint-staged\": \"^15.2.7\",\n+    \"prettier\": \"^3.3.2\",\n+    \"prettier-plugin-packagejson\": \"^2.5.11\",\n+    \"prettier-plugin-solidity\": \"^1.3.1\",\n+    \"webpack-cli\": \"^4.9.1\"\n+  },\n+  \"peerDependencies\": {\n     \"hardhat\": \"^2.0.0\"\n   },\n   \"engines\": {\n-    \"node\": \">=12.10.0\"\n+    \"node\": \">=14.14.0\"\n   }\n }\n",
+					"match": false,
+					"packageHash": "1da5c42d62725df8d53d295ae3e3eae3656ab0f0c9fe8fb7665eab4f5306d5dd",
+					"size": 718,
+					"sourceHash": "e0f1f38d2ed418c5c3649ae0ea996a6f348453d770f05a4893de15eef2ac7114",
+					"status": "content"
+				},
+				".husky/pre-commit": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".lintstagedrc.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".prettierrc.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/App.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/components/Branch.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/components/Contract.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/components/FooterBar.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/components/HeaderBar.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/components/Index.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/components/Member.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/components/MemberSection.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/components/MemberSet.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/index.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/main.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tasks/compile.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tasks/docgen.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"webpack.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 4,
+				"matchingFiles": 1,
+				"missingInPackage": 17,
+				"missingInSource": 0,
+				"score": 0.045454545454545456,
+				"totalFiles": 22
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "@types/eslint",
+				"version": "8.2.1"
+			},
+			{
+				"name": "@types/eslint-scope",
+				"version": "3.7.1"
+			},
+			{
+				"name": "@types/estree",
+				"version": "0.0.50"
+			},
+			{
+				"name": "@types/html-minifier-terser",
+				"version": "6.1.0"
+			},
+			{
+				"name": "@types/json-schema",
+				"version": "7.0.9"
+			},
+			{
+				"name": "@types/node",
+				"version": "14.14.20"
+			},
+			{
+				"name": "@vue/component-compiler-utils",
+				"version": "3.2.0"
+			},
+			{
+				"name": "lru-cache",
+				"version": "4.1.5"
+			},
+			{
+				"name": "postcss",
+				"version": "7.0.35"
+			},
+			{
+				"name": "prettier",
+				"version": "1.19.1"
+			},
+			{
+				"name": "source-map",
+				"version": "0.6.1"
+			},
+			{
+				"name": "supports-color",
+				"version": "6.1.0"
+			},
+			{
+				"name": "yallist",
+				"version": "2.1.2"
+			},
+			{
+				"name": "@webassemblyjs/ast",
+				"version": "1.11.1"
+			},
+			{
+				"name": "@webassemblyjs/floating-point-hex-parser",
+				"version": "1.11.1"
+			},
+			{
+				"name": "@webassemblyjs/helper-api-error",
+				"version": "1.11.1"
+			},
+			{
+				"name": "@webassemblyjs/helper-buffer",
+				"version": "1.11.1"
+			},
+			{
+				"name": "@webassemblyjs/helper-numbers",
+				"version": "1.11.1"
+			},
+			{
+				"name": "@webassemblyjs/helper-wasm-bytecode",
+				"version": "1.11.1"
+			},
+			{
+				"name": "@webassemblyjs/helper-wasm-section",
+				"version": "1.11.1"
+			},
+			{
+				"name": "@webassemblyjs/ieee754",
+				"version": "1.11.1"
+			},
+			{
+				"name": "@webassemblyjs/leb128",
+				"version": "1.11.1"
+			},
+			{
+				"name": "@webassemblyjs/utf8",
+				"version": "1.11.1"
+			},
+			{
+				"name": "@webassemblyjs/wasm-edit",
+				"version": "1.11.1"
+			},
+			{
+				"name": "@webassemblyjs/wasm-gen",
+				"version": "1.11.1"
+			},
+			{
+				"name": "@webassemblyjs/wasm-opt",
+				"version": "1.11.1"
+			},
+			{
+				"name": "@webassemblyjs/wasm-parser",
+				"version": "1.11.1"
+			},
+			{
+				"name": "@webassemblyjs/wast-printer",
+				"version": "1.11.1"
+			},
+			{
+				"name": "@xtuc/ieee754",
+				"version": "1.2.0"
+			},
+			{
+				"name": "@xtuc/long",
+				"version": "4.2.2"
+			},
+			{
+				"name": "acorn",
+				"version": "8.6.0"
+			},
+			{
+				"name": "acorn-import-assertions",
+				"version": "1.8.0"
+			},
+			{
+				"name": "ajv",
+				"version": "6.12.6"
+			},
+			{
+				"name": "ajv-keywords",
+				"version": "3.5.2"
+			},
+			{
+				"name": "ansi-styles",
+				"version": "3.2.1"
+			},
+			{
+				"name": "big.js",
+				"version": "5.2.2"
+			},
+			{
+				"name": "bluebird",
+				"version": "3.7.2"
+			},
+			{
+				"name": "boolbase",
+				"version": "1.0.0"
+			},
+			{
+				"name": "browserslist",
+				"version": "4.19.1"
+			},
+			{
+				"name": "buffer-from",
+				"version": "1.1.1"
+			},
+			{
+				"name": "camel-case",
+				"version": "4.1.2"
+			},
+			{
+				"name": "tslib",
+				"version": "2.3.1"
+			},
+			{
+				"name": "caniuse-lite",
+				"version": "1.0.30001286"
+			},
+			{
+				"name": "chalk",
+				"version": "2.4.2"
+			},
+			{
+				"name": "chrome-trace-event",
+				"version": "1.0.2"
+			},
+			{
+				"name": "clean-css",
+				"version": "5.2.2"
+			},
+			{
+				"name": "color-convert",
+				"version": "1.9.3"
+			},
+			{
+				"name": "color-name",
+				"version": "1.1.3"
+			},
+			{
+				"name": "commander",
+				"version": "8.3.0"
+			},
+			{
+				"name": "consolidate",
+				"version": "0.15.1"
+			},
+			{
+				"name": "css-loader",
+				"version": "6.5.1"
+			},
+			{
+				"name": "css-select",
+				"version": "4.2.0"
+			},
+			{
+				"name": "css-what",
+				"version": "5.1.0"
+			},
+			{
+				"name": "cssesc",
+				"version": "3.0.0"
+			},
+			{
+				"name": "de-indent",
+				"version": "1.0.2"
+			},
+			{
+				"name": "dom-converter",
+				"version": "0.2.0"
+			},
+			{
+				"name": "dom-serializer",
+				"version": "1.3.2"
+			},
+			{
+				"name": "entities",
+				"version": "2.1.0"
+			},
+			{
+				"name": "domelementtype",
+				"version": "2.2.0"
+			},
+			{
+				"name": "domhandler",
+				"version": "4.3.0"
+			},
+			{
+				"name": "domutils",
+				"version": "2.8.0"
+			},
+			{
+				"name": "dot-case",
+				"version": "3.0.4"
+			},
+			{
+				"name": "electron-to-chromium",
+				"version": "1.4.18"
+			},
+			{
+				"name": "emojis-list",
+				"version": "3.0.0"
+			},
+			{
+				"name": "enhanced-resolve",
+				"version": "5.8.3"
+			},
+			{
+				"name": "es-module-lexer",
+				"version": "0.9.3"
+			},
+			{
+				"name": "escalade",
+				"version": "3.1.1"
+			},
+			{
+				"name": "escape-string-regexp",
+				"version": "1.0.5"
+			},
+			{
+				"name": "eslint-scope",
+				"version": "5.1.1"
+			},
+			{
+				"name": "esrecurse",
+				"version": "4.3.0"
+			},
+			{
+				"name": "estraverse",
+				"version": "5.2.0"
+			},
+			{
+				"name": "estraverse",
+				"version": "4.3.0"
+			},
+			{
+				"name": "events",
+				"version": "3.3.0"
+			},
+			{
+				"name": "fast-deep-equal",
+				"version": "3.1.3"
+			},
+			{
+				"name": "fast-json-stable-stringify",
+				"version": "2.1.0"
+			},
+			{
+				"name": "glob-to-regexp",
+				"version": "0.4.1"
+			},
+			{
+				"name": "graceful-fs",
+				"version": "4.2.4"
+			},
+			{
+				"name": "has-flag",
+				"version": "3.0.0"
+			},
+			{
+				"name": "hash-sum",
+				"version": "1.0.2"
+			},
+			{
+				"name": "he",
+				"version": "1.2.0"
+			},
+			{
+				"name": "html-minifier-terser",
+				"version": "6.1.0"
+			},
+			{
+				"name": "html-webpack-plugin",
+				"version": "5.5.0"
+			},
+			{
+				"name": "htmlparser2",
+				"version": "6.1.0"
+			},
+			{
+				"name": "icss-utils",
+				"version": "5.1.0"
+			},
+			{
+				"name": "indexes-of",
+				"version": "1.0.1"
+			},
+			{
+				"name": "jest-worker",
+				"version": "27.4.5"
+			},
+			{
+				"name": "has-flag",
+				"version": "4.0.0"
+			},
+			{
+				"name": "supports-color",
+				"version": "8.1.1"
+			},
+			{
+				"name": "json-parse-better-errors",
+				"version": "1.0.2"
+			},
+			{
+				"name": "json-schema-traverse",
+				"version": "0.4.1"
+			},
+			{
+				"name": "json5",
+				"version": "1.0.1"
+			},
+			{
+				"name": "loader-runner",
+				"version": "4.2.0"
+			},
+			{
+				"name": "loader-utils",
+				"version": "1.4.0"
+			},
+			{
+				"name": "lodash",
+				"version": "4.17.21"
+			},
+			{
+				"name": "lower-case",
+				"version": "2.0.2"
+			},
+			{
+				"name": "merge-source-map",
+				"version": "1.1.0"
+			},
+			{
+				"name": "merge-stream",
+				"version": "2.0.0"
+			},
+			{
+				"name": "mime-db",
+				"version": "1.51.0"
+			},
+			{
+				"name": "mime-types",
+				"version": "2.1.34"
+			},
+			{
+				"name": "minimist",
+				"version": "1.2.5"
+			},
+			{
+				"name": "nanoid",
+				"version": "3.3.7"
+			},
+			{
+				"name": "neo-async",
+				"version": "2.6.2"
+			},
+			{
+				"name": "no-case",
+				"version": "3.0.4"
+			},
+			{
+				"name": "node-releases",
+				"version": "2.0.1"
+			},
+			{
+				"name": "nth-check",
+				"version": "2.0.1"
+			},
+			{
+				"name": "param-case",
+				"version": "3.0.4"
+			},
+			{
+				"name": "pascal-case",
+				"version": "3.1.2"
+			},
+			{
+				"name": "picocolors",
+				"version": "1.0.0"
+			},
+			{
+				"name": "postcss",
+				"version": "8.4.38"
+			},
+			{
+				"name": "postcss-modules-extract-imports",
+				"version": "3.0.0"
+			},
+			{
+				"name": "postcss-modules-local-by-default",
+				"version": "4.0.0"
+			},
+			{
+				"name": "postcss-modules-scope",
+				"version": "3.0.0"
+			},
+			{
+				"name": "postcss-modules-values",
+				"version": "4.0.0"
+			},
+			{
+				"name": "postcss-selector-parser",
+				"version": "6.0.4"
+			},
+			{
+				"name": "postcss-value-parser",
+				"version": "4.2.0"
+			},
+			{
+				"name": "pretty-error",
+				"version": "4.0.0"
+			},
+			{
+				"name": "pseudomap",
+				"version": "1.0.2"
+			},
+			{
+				"name": "punycode",
+				"version": "2.1.1"
+			},
+			{
+				"name": "randombytes",
+				"version": "2.1.0"
+			},
+			{
+				"name": "relateurl",
+				"version": "0.2.7"
+			},
+			{
+				"name": "renderkid",
+				"version": "3.0.0"
+			},
+			{
+				"name": "ansi-regex",
+				"version": "5.0.1"
+			},
+			{
+				"name": "strip-ansi",
+				"version": "6.0.1"
+			},
+			{
+				"name": "safe-buffer",
+				"version": "5.2.1"
+			},
+			{
+				"name": "schema-utils",
+				"version": "3.1.1"
+			},
+			{
+				"name": "semver",
+				"version": "7.7.1"
+			},
+			{
+				"name": "serialize-javascript",
+				"version": "6.0.0"
+			},
+			{
+				"name": "source-map-js",
+				"version": "1.2.0"
+			},
+			{
+				"name": "source-map-support",
+				"version": "0.5.21"
+			},
+			{
+				"name": "supports-color",
+				"version": "5.5.0"
+			},
+			{
+				"name": "tapable",
+				"version": "2.2.1"
+			},
+			{
+				"name": "terser",
+				"version": "5.10.0"
+			},
+			{
+				"name": "terser-webpack-plugin",
+				"version": "5.2.5"
+			},
+			{
+				"name": "commander",
+				"version": "2.20.3"
+			},
+			{
+				"name": "source-map",
+				"version": "0.7.3"
+			},
+			{
+				"name": "tslib",
+				"version": "1.14.1"
+			},
+			{
+				"name": "uniq",
+				"version": "1.0.1"
+			},
+			{
+				"name": "uri-js",
+				"version": "4.4.0"
+			},
+			{
+				"name": "util-deprecate",
+				"version": "1.0.2"
+			},
+			{
+				"name": "utila",
+				"version": "0.4.0"
+			},
+			{
+				"name": "vue",
+				"version": "2.6.14"
+			},
+			{
+				"name": "vue-hot-reload-api",
+				"version": "2.3.4"
+			},
+			{
+				"name": "vue-loader",
+				"version": "15.9.8"
+			},
+			{
+				"name": "vue-router",
+				"version": "3.5.3"
+			},
+			{
+				"name": "vue-style-loader",
+				"version": "4.1.2"
+			},
+			{
+				"name": "vue-template-compiler",
+				"version": "2.6.14"
+			},
+			{
+				"name": "vue-template-es2015-compiler",
+				"version": "1.9.1"
+			},
+			{
+				"name": "watchpack",
+				"version": "2.3.1"
+			},
+			{
+				"name": "webpack",
+				"version": "5.65.0"
+			},
+			{
+				"name": "webpack-sources",
+				"version": "3.2.2"
+			}
+		]
+	}
+]
