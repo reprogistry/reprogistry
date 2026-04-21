@@ -1,0 +1,159 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-04-20T22:47:17.441Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:2.15.11",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "connect@1.5.2",
+			"name": "connect",
+			"version": "1.5.2",
+			"location": "https://registry.npmjs.org/connect/-/connect-1.5.2.tgz",
+			"integrity": "sha512-VbOGrcW6W2CEGSRE/79lpGuR+6r38VE8KYkfTqnSipjhDiOdypLGgh1StWjgitoQFhsCEruIhacQ5h1aaN3AOQ==",
+			"publishedAt": "2011-07-06T16:00:11.234Z",
+			"publishedWith": {
+				"node": "v0.4.8",
+				"npm": "1.0.14"
+			},
+			"dependencies": {
+				"qs": ">= 0.0.6",
+				"mime": ">= 0.0.1"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git://github.com/senchalabs/connect.git",
+			"spec": "github:senchalabs/connect#1.5.2"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".npmignore": {
+					"match": false,
+					"packageHash": "478cc2a5cf67e15e0a857690f85675b4ffc50470e8ee8e434313817d48253b28",
+					"size": 95,
+					"status": "missing-in-source"
+				},
+				"lib/http.js": {
+					"diff": "--- published/lib/http.js\n+++ rebuilt/lib/http.js\n@@ -97,6 +97,13 @@\n     route = '/';\n   }\n \n+  // multiples\n+  if (arguments.length > 2) {\n+    return Array.prototype.slice.call(arguments, 1).forEach(function(fn){\n+      this.use(route, fn);\n+    }, this);\n+  }\n+\n   // wrap sub-apps\n   if ('function' == typeof handle.handle) {\n     var server = handle;\n",
+					"match": false,
+					"packageHash": "47c24cb43304064385de6b154459608f15552798a991c118a6b9a55ccfe61258",
+					"size": 5123,
+					"sourceHash": "190c4eba278742ee585f975d9ed2e35f8ed2e223b149d830e53cdb594c35d7c1",
+					"status": "content"
+				},
+				"lib/middleware/logger.js": {
+					"diff": "--- published/lib/middleware/logger.js\n+++ rebuilt/lib/middleware/logger.js\n@@ -50,30 +50,6 @@\n  *    - `tiny`  ':method :url :status :res[content-length] - :response-time ms'\n  *    - `dev` concise output colored by response status for development use\n  *\n- * Examples:\n- *\n- *      connect.logger() // default\n- *      connect.logger('short')\n- *      connect.logger('tiny')\n- *      connect.logger('dev')\n- *      connect.logger(':method :url - :referrer')\n- *      connect.logger(':req[content-type] -> :res[content-type]')\n- *      connect.logger(function(req, res){ return 'some format string' })\n- *\n- * Defining Tokens:\n- *\n- *   To define a token, simply invoke `connect.logger.token()` with the\n- *   name and a callback function. The value returned is then available\n- *   as \":type\" in this case.\n- *\n- *      connect.logger.token('type', function(req, res){ return req.headers['content-type']; })\n- *\n- * Defining Formats:\n- *\n- *   All default formats are defined this way, however it's public API as well:\n- *\n- *       connect.logger.format('name', 'string or function')\n- *\n  * @param {String|Function|Object} format or options\n  * @return {Function}\n  * @api public\n",
+					"match": false,
+					"packageHash": "0b94be5568efc42ff38924382d363bd991a443080d637ad0ba4e3632d8f68dcd",
+					"size": 6426,
+					"sourceHash": "074394eb706985c4d9756663656858ea9a71126786d69cb5684513bdce82def0",
+					"status": "content"
+				},
+				"test.js": {
+					"match": false,
+					"packageHash": "d08abba776d69e13c5ecbedf831066106c9b4c3eae3300c33aa1ecaa896f8a7b",
+					"size": 449,
+					"status": "missing-in-source"
+				},
+				"Readme.md": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 112,
+				"missingInPackage": 1,
+				"missingInSource": 2,
+				"score": 0.9572649572649573,
+				"totalFiles": 117
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "call-bind-apply-helpers",
+				"version": "1.0.2"
+			},
+			{
+				"name": "call-bound",
+				"version": "1.0.4"
+			},
+			{
+				"name": "dunder-proto",
+				"version": "1.0.1"
+			},
+			{
+				"name": "es-define-property",
+				"version": "1.0.1"
+			},
+			{
+				"name": "es-errors",
+				"version": "1.3.0"
+			},
+			{
+				"name": "es-object-atoms",
+				"version": "1.1.1"
+			},
+			{
+				"name": "function-bind",
+				"version": "1.1.2"
+			},
+			{
+				"name": "get-intrinsic",
+				"version": "1.3.0"
+			},
+			{
+				"name": "get-proto",
+				"version": "1.0.1"
+			},
+			{
+				"name": "gopd",
+				"version": "1.2.0"
+			},
+			{
+				"name": "has-symbols",
+				"version": "1.1.0"
+			},
+			{
+				"name": "hasown",
+				"version": "2.0.3"
+			},
+			{
+				"name": "math-intrinsics",
+				"version": "1.1.0"
+			},
+			{
+				"name": "mime",
+				"version": "4.1.0"
+			},
+			{
+				"name": "object-inspect",
+				"version": "1.13.4"
+			},
+			{
+				"name": "qs",
+				"version": "6.15.1"
+			},
+			{
+				"name": "side-channel",
+				"version": "1.1.0"
+			},
+			{
+				"name": "side-channel-list",
+				"version": "1.0.1"
+			},
+			{
+				"name": "side-channel-map",
+				"version": "1.0.1"
+			},
+			{
+				"name": "side-channel-weakmap",
+				"version": "1.0.2"
+			}
+		]
+	}
+]

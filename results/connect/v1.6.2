@@ -1,0 +1,159 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-04-20T22:48:00.957Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:2.15.11",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "connect@1.6.2",
+			"name": "connect",
+			"version": "1.6.2",
+			"location": "https://registry.npmjs.org/connect/-/connect-1.6.2.tgz",
+			"integrity": "sha512-hX/ILyrJXYRYUvYt8dbedqwWGkIZBljufd2F+zX5+MRJs4w3rYGheEdgAmC7q7Qq8K5uT6zoZDIBmgqo8psYlg==",
+			"publishedAt": "2011-08-15T23:07:21.103Z",
+			"publishedWith": {
+				"node": "v0.4.10",
+				"npm": "1.0.24"
+			},
+			"dependencies": {
+				"qs": ">= 0.3.0",
+				"mime": ">= 0.0.1"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git://github.com/senchalabs/connect.git",
+			"spec": "github:senchalabs/connect#1.6.2"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".npmignore": {
+					"match": false,
+					"packageHash": "478cc2a5cf67e15e0a857690f85675b4ffc50470e8ee8e434313817d48253b28",
+					"size": 95,
+					"status": "missing-in-source"
+				},
+				"lib/middleware/logger.js": {
+					"diff": "--- published/lib/middleware/logger.js\n+++ rebuilt/lib/middleware/logger.js\n@@ -26,7 +26,6 @@\n  *   - `format`  Format string, see below for tokens\n  *   - `stream`  Output stream, defaults to _stdout_\n  *   - `buffer`  Buffer duration, defaults to 1000ms when _true_\n- *   - `immediate`  Write log line on request instead of response (for response times)\n  *\n  * Tokens:\n  *\n@@ -89,9 +88,6 @@\n     options = {};\n   }\n \n-  // output on request instead of response\n-  var immediate = options.immediate;\n-\n   // format name\n   var fmt = exports[options.format] || options.format || exports.default;\n \n@@ -134,23 +130,15 @@\n     // flag as logging\n     req._logging = true;\n \n-    // immediate\n-    if (immediate) {\n+    // proxy end to output loggging\n+    var end = res.end;\n+    res.end = function(chunk, encoding){\n+      res.end = end;\n+      res.end(chunk, encoding);\n       var line = fmt(exports, req, res);\n       if (null == line) return;\n       stream.write(line + '\\n', 'ascii');\n-    } else {\n-      // proxy end to output loggging\n-      var end = res.end;\n-      res.end = function(chunk, encoding){\n-        res.end = end;\n-        res.end(chunk, encoding);\n-        var line = fmt(exports, req, res);\n-        if (null == line) return;\n-        stream.write(line + '\\n', 'ascii');\n-      };\n-    }\n-\n+    };\n \n     next();\n   };\n",
+					"match": false,
+					"packageHash": "c6249381f60fea7d498743b18c4c039d785a6d94aa0061c0a59d9ab7b02979da",
+					"size": 6902,
+					"sourceHash": "8fb8493e413c5eb0269760b5dc2ab9c9ef0be1b5970ab6bb3ff92cce27adb62e",
+					"status": "content"
+				},
+				"lib/middleware/static.js": {
+					"diff": "--- published/lib/middleware/static.js\n+++ rebuilt/lib/middleware/static.js\n@@ -182,9 +182,9 @@\n     // stream the entire file\n     } else {\n       res.setHeader('Content-Length', stat.size);\n-      if (!res.getHeader('Cache-Control')) res.setHeader('Cache-Control', 'public, max-age=' + (maxAge / 1000));\n-      if (!res.getHeader('Last-Modified')) res.setHeader('Last-Modified', stat.mtime.toUTCString());\n-      if (!res.getHeader('ETag')) res.setHeader('ETag', utils.etag(stat));\n+      res.setHeader('Cache-Control', 'public, max-age=' + (maxAge / 1000));\n+      res.setHeader('Last-Modified', stat.mtime.toUTCString());\n+      res.setHeader('ETag', utils.etag(stat));\n \n       // conditional GET support\n       if (utils.conditionalGET(req)) {\n",
+					"match": false,
+					"packageHash": "9d155f06401ec8184ee3bb4170b716a86a2a94e6582a1d08a64e1c35b4883bde",
+					"size": 5406,
+					"sourceHash": "82728c15cdbc5fb292cfc45f8e535fc6f9c70e23a63646c7d901ce6492b2b953",
+					"status": "content"
+				},
+				"test.js": {
+					"match": false,
+					"packageHash": "9420e8765ae075972f5e08b30c32dfaec95f12dc5a35bdf91c7bbe23440153d3",
+					"size": 1529,
+					"status": "missing-in-source"
+				},
+				"Readme.md": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 113,
+				"missingInPackage": 1,
+				"missingInSource": 2,
+				"score": 0.9576271186440678,
+				"totalFiles": 118
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "call-bind-apply-helpers",
+				"version": "1.0.2"
+			},
+			{
+				"name": "call-bound",
+				"version": "1.0.4"
+			},
+			{
+				"name": "dunder-proto",
+				"version": "1.0.1"
+			},
+			{
+				"name": "es-define-property",
+				"version": "1.0.1"
+			},
+			{
+				"name": "es-errors",
+				"version": "1.3.0"
+			},
+			{
+				"name": "es-object-atoms",
+				"version": "1.1.1"
+			},
+			{
+				"name": "function-bind",
+				"version": "1.1.2"
+			},
+			{
+				"name": "get-intrinsic",
+				"version": "1.3.0"
+			},
+			{
+				"name": "get-proto",
+				"version": "1.0.1"
+			},
+			{
+				"name": "gopd",
+				"version": "1.2.0"
+			},
+			{
+				"name": "has-symbols",
+				"version": "1.1.0"
+			},
+			{
+				"name": "hasown",
+				"version": "2.0.3"
+			},
+			{
+				"name": "math-intrinsics",
+				"version": "1.1.0"
+			},
+			{
+				"name": "mime",
+				"version": "4.1.0"
+			},
+			{
+				"name": "object-inspect",
+				"version": "1.13.4"
+			},
+			{
+				"name": "qs",
+				"version": "6.15.1"
+			},
+			{
+				"name": "side-channel",
+				"version": "1.1.0"
+			},
+			{
+				"name": "side-channel-list",
+				"version": "1.0.1"
+			},
+			{
+				"name": "side-channel-map",
+				"version": "1.0.1"
+			},
+			{
+				"name": "side-channel-weakmap",
+				"version": "1.0.2"
+			}
+		]
+	}
+]

@@ -1,0 +1,151 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-04-20T22:48:53.774Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:2.15.11",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "connect@1.6.1",
+			"name": "connect",
+			"version": "1.6.1",
+			"location": "https://registry.npmjs.org/connect/-/connect-1.6.1.tgz",
+			"integrity": "sha512-K5bAY2q4SelOyn/58c1iB0jP818US68KEg52BQpIU8dM1oSjPqXhpu9A+xaSjswGr+DA2kw/d0HjCzPl9zCxuQ==",
+			"publishedAt": "2011-08-03T21:31:39.962Z",
+			"publishedWith": {
+				"node": "v0.4.10",
+				"npm": "1.0.14"
+			},
+			"dependencies": {
+				"qs": ">= 0.3.0",
+				"mime": ">= 0.0.1"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git://github.com/senchalabs/connect.git",
+			"spec": "github:senchalabs/connect#1.6.1"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".npmignore": {
+					"match": false,
+					"packageHash": "478cc2a5cf67e15e0a857690f85675b4ffc50470e8ee8e434313817d48253b28",
+					"size": 95,
+					"status": "missing-in-source"
+				},
+				"lib/middleware/static.js": {
+					"diff": "--- published/lib/middleware/static.js\n+++ rebuilt/lib/middleware/static.js\n@@ -127,29 +127,28 @@\n   if (root && 0 != path.indexOf(root)) return fn\n     ? fn(new Error('Forbidden'))\n     : utils.forbidden(res);\n-\n+    \n   // index.html support\n   if ('/' == path[path.length - 1]) path += 'index.html';\n \n   // \"hidden\" file\n   if (!hidden && '.' == basename(path)[0]) return next();\n \n-  fs.stat(path, function(err, stat){\n-    // mime type\n-    type = mime.lookup(path);\n+  // mime type\n+  type = mime.lookup(path);\n \n+  fs.stat(path, function(err, stat){\n     // ignore ENOENT\n     if (err) {\n       if (fn) return fn(err);\n       return 'ENOENT' == err.code\n         ? next()\n         : next(err);\n-    // redirect directory in case index.html is present\n+    // ignore directories\n     } else if (stat.isDirectory()) {\n-      res.statusCode = 301;\n-      res.setHeader('Location', url.pathname + '/');\n-      res.end('Redirecting to ' + url.pathname + '/');\n-      return;\n+      return fn\n+        ? fn(new Error('Cannot Transfer Directory'))\n+        : next();\n     }\n \n     var opts = {};\n",
+					"match": false,
+					"packageHash": "04d1a802e151b9d82adbdaaaa52f2ee07cdd4c1b64a43cf50634073358d2a661",
+					"size": 5228,
+					"sourceHash": "c50317e256389b1c7337f487e7ec39eb0a6ff144813a1d196ed4f25a7d7a24c0",
+					"status": "content"
+				},
+				"test.js": {
+					"match": false,
+					"packageHash": "27b95b89e8d20dfb6558a1ccd0d0745add0ecbe2b85c07767ae60a4786c2bc44",
+					"size": 837,
+					"status": "missing-in-source"
+				},
+				"Readme.md": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 1,
+				"matchingFiles": 114,
+				"missingInPackage": 1,
+				"missingInSource": 2,
+				"score": 0.9661016949152542,
+				"totalFiles": 118
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "call-bind-apply-helpers",
+				"version": "1.0.2"
+			},
+			{
+				"name": "call-bound",
+				"version": "1.0.4"
+			},
+			{
+				"name": "dunder-proto",
+				"version": "1.0.1"
+			},
+			{
+				"name": "es-define-property",
+				"version": "1.0.1"
+			},
+			{
+				"name": "es-errors",
+				"version": "1.3.0"
+			},
+			{
+				"name": "es-object-atoms",
+				"version": "1.1.1"
+			},
+			{
+				"name": "function-bind",
+				"version": "1.1.2"
+			},
+			{
+				"name": "get-intrinsic",
+				"version": "1.3.0"
+			},
+			{
+				"name": "get-proto",
+				"version": "1.0.1"
+			},
+			{
+				"name": "gopd",
+				"version": "1.2.0"
+			},
+			{
+				"name": "has-symbols",
+				"version": "1.1.0"
+			},
+			{
+				"name": "hasown",
+				"version": "2.0.3"
+			},
+			{
+				"name": "math-intrinsics",
+				"version": "1.1.0"
+			},
+			{
+				"name": "mime",
+				"version": "4.1.0"
+			},
+			{
+				"name": "object-inspect",
+				"version": "1.13.4"
+			},
+			{
+				"name": "qs",
+				"version": "6.15.1"
+			},
+			{
+				"name": "side-channel",
+				"version": "1.1.0"
+			},
+			{
+				"name": "side-channel-list",
+				"version": "1.0.1"
+			},
+			{
+				"name": "side-channel-map",
+				"version": "1.0.1"
+			},
+			{
+				"name": "side-channel-weakmap",
+				"version": "1.0.2"
+			}
+		]
+	}
+]

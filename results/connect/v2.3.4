@@ -1,0 +1,118 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-04-20T23:01:14.897Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:11.12.1",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "connect@2.3.4",
+			"name": "connect",
+			"version": "2.3.4",
+			"location": "https://registry.npmjs.org/connect/-/connect-2.3.4.tgz",
+			"integrity": "sha512-qp4py4pd5P8034TYEMZ9Bq9Eew6hP8siRcMCahFr/4pU5/2V0EJ+RUA71PkbsgakwySogEbylms33yGbdB4q/A==",
+			"publishedAt": "2012-06-25T20:54:48.691Z",
+			"publishedWith": {
+				"node": null,
+				"npm": null
+			},
+			"dependencies": {
+				"qs": "0.4.2",
+				"mime": "1.2.4",
+				"formidable": "1.0.11",
+				"crc": "0.2.0",
+				"cookie": "0.0.4",
+				"fresh": "0.0.1",
+				"bytes": "0.0.1",
+				"range-parser": "0.0.4",
+				"debug": "*"
+			}
+		},
+		"source": {
+			"integrity": "sha512-e62r//7ryRU9jP3vjbY8J/L8Nguu8n3IWV5d9nN3Ge9wWH2APSxb82XzosFjSYxNmw6HHDmbkFqiJE7NUAQi7g==",
+			"location": "git://github.com/senchalabs/connect.git",
+			"spec": "github:senchalabs/connect#2.3.4"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".npmignore": {
+					"match": false,
+					"packageHash": "a92a0a87310f4874b28ce4424efa870d89e8cdec0ec67a07d2d4884ca26ce979",
+					"size": 109,
+					"status": "missing-in-source"
+				},
+				"lib/middleware/staticCache.js": {
+					"diff": "--- published/lib/middleware/staticCache.js\n+++ rebuilt/lib/middleware/staticCache.js\n@@ -59,7 +59,6 @@\n   return function staticCache(req, res, next){\n     var key = cacheKey(req)\n       , ranges = req.headers.range\n-      , hasCookies = req.headers.cookie\n       , hit = cache.get(key);\n \n     // cache static\n@@ -71,12 +70,6 @@\n         , contentLength = headers['content-length']\n         , hit;\n \n-      // dont cache set-cookie responses\n-      if (headers['set-cookie']) return hasCookies = true;\n-\n-      // dont cache when cookies are present\n-      if (hasCookies) return;\n-\n       // ignore larger files\n       if (!contentLength || contentLength > maxlen) return;\n \n@@ -124,7 +117,7 @@\n     if (req.method == 'GET' || req.method == 'HEAD') {\n       if (ranges) {\n         next();\n-      } else if (!hasCookies && hit && !mustRevalidate(req, hit)) {\n+      } else if (hit && !mustRevalidate(req, hit)) {\n         res.setHeader('X-Cache', 'HIT');\n         respondFromCache(req, res, hit);\n       } else {\n",
+					"match": false,
+					"packageHash": "134a6a4b51a561d642b24c21fa3f0399eb7693841e9c48ad7f97041b5c559af6",
+					"size": 5703,
+					"sourceHash": "67e8d78afccb4b6c264b1175d7c097c69cb7b83be95c3b6b0802d778d59a6fc2",
+					"status": "content"
+				},
+				"test.js": {
+					"match": false,
+					"packageHash": "fbd0ff9fdf81c5b11e215cccae57a3800f5e30a36024a29d47b14d68ab2fe1f1",
+					"size": 587,
+					"status": "missing-in-source"
+				},
+				"Readme.md": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 1,
+				"matchingFiles": 116,
+				"missingInPackage": 1,
+				"missingInSource": 2,
+				"score": 0.9666666666666667,
+				"totalFiles": 120
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "bytes",
+				"version": "0.0.1"
+			},
+			{
+				"name": "cookie",
+				"version": "0.0.4"
+			},
+			{
+				"name": "crc",
+				"version": "0.2.0"
+			},
+			{
+				"name": "debug",
+				"version": "4.4.3"
+			},
+			{
+				"name": "formidable",
+				"version": "1.0.11"
+			},
+			{
+				"name": "fresh",
+				"version": "0.0.1"
+			},
+			{
+				"name": "mime",
+				"version": "1.2.4"
+			},
+			{
+				"name": "ms",
+				"version": "2.1.3"
+			},
+			{
+				"name": "qs",
+				"version": "0.4.2"
+			},
+			{
+				"name": "range-parser",
+				"version": "0.0.4"
+			}
+		]
+	}
+]
