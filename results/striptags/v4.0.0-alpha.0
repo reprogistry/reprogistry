@@ -1,0 +1,75 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-04-30T10:05:44.746Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:11.13.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "striptags@4.0.0-alpha.0",
+			"name": "striptags",
+			"version": "4.0.0-alpha.0",
+			"location": "https://registry.npmjs.org/striptags/-/striptags-4.0.0-alpha.0.tgz",
+			"integrity": "sha512-rbewxpe+S5ZTph40TZmfxFHJ3soxwU9PRG7lbl1jbe3Pa1IjkzFh6TLe+zqUL40aPxjseTdTiBtS5YUGaNLN+Q==",
+			"publishedAt": "2020-11-29T16:55:23.697Z",
+			"publishedWith": {
+				"node": null,
+				"npm": null
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": "sha512-Xoi5705IZeWKPeilCvR5aRgEJvUKlrXiV9UKa5I2bW6DRf6VYh4wkkZuFeLaGdl/goxJhsQZVx6KEILy0pxT0g==",
+			"location": "https://github.com/ericnorris/striptags.git",
+			"spec": "github:ericnorris/striptags#v4.0.0-alpha.0"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,7 +1,9 @@\n-# striptags (WIP)\n+# striptags\n \n An implementation of PHP's [strip_tags](https://www.php.net/manual/en/function.strip-tags.php) in Typescript.\n \n+**Note:** this is a total rewrite from [v3](https://github.com/ericnorris/striptags/tree/v3.x.x), and as such, is currently in an alpha state. Feel free to use this during the alpha period and provide feedback before it is released as v4.\n+\n ## Highlights\n \n - No dependencies\n@@ -10,23 +12,22 @@\n ## Installing\n \n ```\n-npm install striptags\n+npm install striptags@alpha\n ```\n \n ## Basic Usage\n \n ```typescript\n-// commonjs format\n striptags(text: string, options?: Partial<StateMachineOptions>): string;\n ```\n \n ### Examples\n \n ```javascript\n-// commonjs format\n+// commonjs\n const striptags = require(\"striptags\").striptags;\n \n-// alternatively:\n+// alternatively, as an es6 import\n // import { striptags } from \"striptags\";\n \n var html = `\n@@ -34,8 +35,8 @@\n `.trim();\n \n console.log(striptags(html));\n-console.log(striptags(html, {allowedTags: new Set([\"strong\"])}));\n-console.log(striptags(html, {tagReplacementText: \"🍩\"}));\n+console.log(striptags(html, { allowedTags: new Set([\"strong\"]) }));\n+console.log(striptags(html, { tagReplacementText: \"🍩\" }));\n ```\n \n Outputs:\n@@ -58,16 +59,15 @@\n The `StateMachine` class is similar to the `striptags` function, but persists state across calls to `consume()` so that you may safely pass in a stream of text. For example:\n \n ```javascript\n+// commonjs\n const StateMachine = require(\"striptags\").StateMachine;\n \n-// alternatively:\n+// alternatively, as an es6 import\n // import { StateMachine } from \"striptags\";\n \n const instance = new StateMachine();\n \n-console.log(\n-  instance.consume(\"some text with <a\") + instance.consume(\"tag>and more text\")\n-);\n+console.log(instance.consume(\"some text with <a\") + instance.consume(\"tag>and more text\"));\n ```\n \n Outputs:\n@@ -76,8 +76,8 @@\n some text with and more text\n ```\n \n-## Options\n+## `Partial<StateMachineOptions>`\n \n-* `allowedTags: Set<string>` a set containing a list of tag names to allow (e.g. `new Set([\"tagname\"])`), default: `new Set([])`.\n-* `tagReplacementText: string` a string to use as replacement text when a tag is found and not allowed, default: `\"\"`.\n-* `encodePlaintextTagDelimiters: boolean` true if `<` and `>` characters immediately followed by whitespace should be HTML encoded, default: `true`. This is safe to set to `false` if the output is expected to be used only as plaintext.\n+* `allowedTags?: Set<string>` a set containing a list of tag names to allow (e.g. `new Set([\"tagname\"])`), default: `new Set([])`.\n+* `tagReplacementText?: string` a string to use as replacement text when a tag is found and not allowed, default: `\"\"`.\n+* `encodePlaintextTagDelimiters?: boolean` true if `<` and `>` characters immediately followed by whitespace should be HTML encoded, default: `true`. This is safe to set to `false` if the output is expected to be used only as plaintext.\n",
+					"match": false,
+					"packageHash": "acfd8699145b4f6bbc8207696266ac2d5a15135ae9b1bb6114f9d6b28c684f85",
+					"size": 2089,
+					"sourceHash": "c62926bf96cf347ddfeb5a20560dfac9cecaeb97fa7ab47c37d53d2f2ff98f70",
+					"status": "content"
+				},
+				"dist/cjs/striptags.js": {
+					"match": false,
+					"packageHash": "abcce568600701b79e8290d48900547000719e89b6b7a6ad247f4a5cc2789f76",
+					"size": 5242,
+					"status": "missing-in-source"
+				},
+				"dist/es6/states.d.ts": {
+					"match": false,
+					"packageHash": "1a7082d296b04c3eba7804a68d87c2a506bdd79709708d6e8c4254c424a9b19f",
+					"size": 2414,
+					"status": "missing-in-source"
+				},
+				"dist/es6/striptags.d.ts": {
+					"match": false,
+					"packageHash": "e5a0f851193fcf0c672976b31ebdbf4f2dafa60e959d8d410604e1e552c0d0a1",
+					"size": 403,
+					"status": "missing-in-source"
+				},
+				"dist/es6/striptags.js": {
+					"match": false,
+					"packageHash": "6368cd1ed556371f1c19f4f64f2ab5642105e1bb382b637dc5e99c804028a483",
+					"size": 5094,
+					"status": "missing-in-source"
+				}
+			},
+			"summary": {
+				"differentFiles": 1,
+				"matchingFiles": 2,
+				"missingInPackage": 0,
+				"missingInSource": 4,
+				"score": 0.2857142857142857,
+				"totalFiles": 7
+			}
+		},
+		"prodDependencies": []
+	}
+]
