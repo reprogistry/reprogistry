@@ -1,0 +1,81 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-05-28T21:26:00.720Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:11.16.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "nested-property@0.0.2",
+			"name": "nested-property",
+			"version": "0.0.2",
+			"location": "https://registry.npmjs.org/nested-property/-/nested-property-0.0.2.tgz",
+			"integrity": "sha512-3s7yfiqec5Rpe3Uala0wcpvEwc+rL5P9/FhReZWo5gzj04FF6sj0E8/qe7wbfzq96AvOYM1x6y25LwW4MqfEeA==",
+			"publishedAt": "2014-04-08T00:42:57.039Z",
+			"publishedWith": {
+				"node": null,
+				"npm": "1.3.24"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": "sha512-2uoz/VBloe5DJTNYXaTOaNxuUD/7/8VWXW5Z5IDG7lEoiYz3oehJrvcbyoyVt7SqHyRJPrjQu0pA3SSIHjVUgQ==",
+			"location": "git@github.com:cosmosio/nested-property.git",
+			"spec": "github:cosmosio/nested-property#HEAD"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"LICENSE": {
+					"diff": "--- published/LICENSE\n+++ rebuilt/LICENSE\n@@ -3,7 +3,7 @@\n *\n * The MIT License (MIT)\n *\n-* Copyright (c) 2014 Olivier Scherrer <pode.fr@gmail.com>\n+* Copyright (c) 2014-2020 Olivier Scherrer <pode.fr@gmail.com>\n  *\n  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated\n  * documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation\n",
+					"match": false,
+					"packageHash": "c2547182ffa8446a32f6533355ca7e719e2816b34e33da99a388449d5ec34d26",
+					"size": 1228,
+					"sourceHash": "98a3d2b2148d605c6342afb95ef469020e906a912917bfd2073f4141535c33f4",
+					"status": "content"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,17 +1,48 @@\n-Nested property\n-=============\n+![npm](https://img.shields.io/npm/dw/nested-property) \n+![Actively Maintained](https://img.shields.io/badge/Maintenance%20Level-Actively%20Maintained-green.svg)\n \n-Read or write an array or object's nested property via a string like 'my.nested.property'\n+[Changelog](./CHANGELOG.md)\n \n-Installation\n-============\n+# Nested property\n+\n+Traverse a deeply nested JS data structure to get, set values, or test if values are part of the data structure.\n+Nested property offers a simple syntax to define a path to access a value with.\n+\n+For instance:\n+\n+```js\n+const data = { \n+  a: {\n+    b: [\n+      10,\n+      20\n+    ]\n+  }\n+ };\n+\n+nestedProperty.get(data, \"a.b.1\"); // returns 20, or sdata.a.b[1]\n+```\n+\n+The syntax also supports array wildcards to access all items within an array:\n+\n+```js\n+const array = [\n+  { ssn: \"123-456-7890\", name: \"alice\" },\n+  { ssn: \"234-567-8901\", name: \"bob\" },\n+  { ssn: \"456-789-0123\", name: \"charlie\" }\n+]\n+\n+nestedProperty.set(array, \"+.ssn\", \"<redacted>\"); // sets all `ssn` values to <redacted>\n+```\n+\n+\n+## Install\n \n ```bash\n npm install nested-property\n ```\n \n-How to use\n-==========\n+## Use\n \n Require nested-property:\n \n@@ -19,7 +50,9 @@\n var nestedProperty = require(\"nested-property\");\n ```\n \n-You can get a nested property from an object:\n+### nestedProperty.get(data, \"path\")\n+\n+__You can get a nested property from an object:__\n \n ```js\n var object = {\n@@ -55,7 +88,21 @@\n nestedProperty.get(array, \"1.a.b.c\"); // returns undefined\n ```\n \n-You can set a nested property on an object:\n+You may also use wildcards to access multiple values:\n+\n+```js\n+var array = [\n+  { a: 0, b: 1, c: 2 },\n+  { a: 10, b: 11, c: 12 },\n+  { a: 20, b: 21, c: 22 }\n+]\n+\n+nestedProperty.get(array, \"+.b\"); // returns [1, 11, 21]\n+```\n+\n+### nestedProperty.set(data, \"path\", value)\n+\n+__You can set a nested property on an object:__\n \n ```js\n var object = {\n@@ -88,23 +135,117 @@\n nestedProperty.set(array, \"0.b.c\", 1337); // array[0].b.c == 1337\n ```\n \n-Caveat!\n+\n+You may also use wildcards to set multiple values:\n \n",
+					"match": false,
+					"packageHash": "77e4e2a17040a53afcd33fcc54c1ac7015fddb0bbeaedf2eec74539fb5eccc51",
+					"size": 1941,
+					"sourceHash": "2b005669f5a966ddb9987f24538a727d8c0de66487c3c40b80da3d1fc436c132",
+					"status": "content"
+				},
+				"index.js": {
+					"match": false,
+					"packageHash": "88e6a68151b593e977ad65b7b220c0ecf27c7c31cd03b97180ef16f3c47385bb",
+					"size": 2127,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,19 +1,22 @@\n {\n   \"name\": \"nested-property\",\n-  \"description\": \"Read or write an array or object's nested property via a string like 'my.nested.property'\",\n-  \"version\": \"0.0.2\",\n+  \"description\": \"Read, write or test a data structure's nested property via a string like 'my.nested.property'. It works through arrays and objects.'\",\n+  \"version\": \"4.0.0\",\n   \"homepage\": \"https://github.com/cosmosio/nested-property\",\n-  \"licenses\": [\n-    {\n-      \"type\": \"MIT\",\n-      \"url\": \"https://raw.github.com/cosmosio/nested-property/master/LICENSE\"\n-    }\n-  ],\n+  \"license\": \"MIT\",\n   \"files\": [\n     \"LICENSE\",\n-    \"index.js\"\n+    \"CHANGELOG\",\n+    \"dist/nested-property.js\",\n+    \"index.d.ts\"\n   ],\n   \"author\": \"Olivier Scherrer <pode.fr@gmail.com>\",\n+  \"contributors\": [\n+    {\n+      \"name\": \"Igor Barbosa\",\n+      \"url\": \"https://github.com/igor-barbosa\"\n+    }\n+  ],\n   \"keywords\": [\n     \"nested\",\n     \"property\",\n@@ -32,11 +35,21 @@\n     \"url\": \"https://github.com/cosmosio/nested-property/issues\"\n   },\n   \"scripts\": {\n-    \"test\": \"mocha\"\n+    \"test\": \"mocha test/\",\n+    \"debug-test\": \"mocha debug test/\",\n+    \"test-build\": \"ENTRYPOINT=../dist/nested-property.js mocha test/\",\n+    \"lint\": \"eslint index.js test/\",\n+    \"fix-lint\": \"eslint index.js test/ --fix\",\n+    \"build\": \"babel index.js -o dist/nested-property.js\"\n   },\n-  \"main\": \"index.js\",\n+  \"main\": \"./dist/nested-property.js\",\n   \"devDependencies\": {\n+    \"@babel/cli\": \"^7.10.3\",\n+    \"@babel/core\": \"^7.10.3\",\n+    \"@babel/preset-env\": \"^7.11.5\",\n     \"chai\": \"~1.9.1\",\n-    \"mocha\": \"~1.18.2\"\n+    \"eslint\": \"^6.8.0\",\n+    \"mocha\": \"^8.1.1\",\n+    \"sinon\": \"~1.12.2\"\n   }\n }\n",
+					"match": false,
+					"packageHash": "97791f0484e8c9bc541baa9709e3bb8693a7b002538fd57e8cf7d57ca7eaed81",
+					"size": 896,
+					"sourceHash": "d81b9d4761b4dcea477244d437cc81a7cc0bcd872a8246ba4e9d104298f3e8cf",
+					"status": "content"
+				},
+				"dist/nested-property.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"index.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 3,
+				"matchingFiles": 0,
+				"missingInPackage": 2,
+				"missingInSource": 1,
+				"score": 0,
+				"totalFiles": 6
+			}
+		},
+		"prodDependencies": []
+	}
+]
