@@ -1,0 +1,2162 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-05-28T04:12:55.833Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:11.16.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "@ledgerhq/hw-transport-mocker@4.6.0-beta.5109e524",
+			"name": "@ledgerhq/hw-transport-mocker",
+			"version": "4.6.0-beta.5109e524",
+			"location": "https://registry.npmjs.org/@ledgerhq/hw-transport-mocker/-/hw-transport-mocker-4.6.0-beta.5109e524.tgz",
+			"integrity": "sha512-R/EU/dP7z6+i0ZdbYaijy9a2v7iYDfXo+JQV0lwT/LtxyOPzJD2eIQjYiv3Boi+uukWwHTHseNB5cX5b0fkDSA==",
+			"publishedAt": "2018-03-08T15:07:18.827Z",
+			"publishedWith": {
+				"node": null,
+				"npm": null
+			},
+			"dependencies": {
+				"@ledgerhq/hw-transport": "^4.6.0-beta.5109e524"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "https://github.com/LedgerHQ/ledgerjs",
+			"spec": "github:LedgerHQ/ledgerjs#HEAD"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".flowconfig": {
+					"match": false,
+					"packageHash": "656344ddbebc48a49b2885c701e79f2790d0e98e5c47ae66023159b122c6a6bd",
+					"size": 69,
+					"status": "missing-in-source"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,9 +1,363 @@\n-<img src=\"https://user-images.githubusercontent.com/211411/34776833-6f1ef4da-f618-11e7-8b13-f0697901d6a8.png\" height=\"100\" />\n+# ⛔️ DEPRECATED\n \n-## @ledgerhq/hw-transport-mocker\n+This repository is now deprecated. We moved to a new mono repository architecture containing all of Ledger Live JavaScript Ecosystem that you can find [here](https://github.com/ledgerhq/ledger-live). \n+You can follow the [migration guide](https://github.com/LedgerHQ/ledger-live/wiki/Migrate-from-previous-repositories#migration) to help you make the transition.\n \n-Library for Ledger Hardware Wallets.\n+**[We are hiring, join us! 👨‍💻👩‍💻](https://jobs.lever.co/ledger/?department=Engineering)**\n+\n+\n+<img src=\"https://user-images.githubusercontent.com/3273751/151214602-f5153588-1911-4456-ae65-604d56821b36.png\" height=\"80\" /> <img src=\"https://user-images.githubusercontent.com/211411/52533081-e679d380-2d2e-11e9-9c5e-571e4ad0107b.png\" height=\"80\" />\n+\n+[![Ledger Devs Slack](https://img.shields.io/badge/Slack-LedgerDevs-yellow.svg?style=flat)](https://ledger-dev.slack.com/)\n+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)\n+\n+Welcome to Ledger's JavaScript libraries.\n+\n+**See also:**\n+\n+- [Changelog](https://github.com/LedgerHQ/ledgerjs/releases)\n+- [**LedgerJS examples**](https://github.com/LedgerHQ/ledgerjs-examples)\n+- [Ledger Live Desktop](https://github.com/ledgerhq/ledger-live-desktop)\n+- [Ledger Live Mobile](https://github.com/ledgerhq/ledger-live-mobile)\n+- [live-common](https://github.com/ledgerhq/ledger-live-common)\n+- Deprecated libraries are archived in https://github.com/LedgerHQ/ledgerjs-legacy\n+\n+## `@ledgerhq/hw-transport-*`\n+\n+**To communicate with a Ledger device, you first need to identify which transport(s) to use.**\n+\n+> The _hw-transport_ libraries implement communication protocol for our [hardware wallet devices](https://www.ledger.com/) (Ledger Nano / Ledger Nano S / Ledger Nano X / Ledger Blue) in many platforms: **Web, Node, Electron, React Native,...** and using many different communication channels: **U2F, HID, WebUSB, Bluetooth,...**\n+\n+| Channels | U2F/WebAuthn | HID | WebUSB | Bluetooth |\n+|----------|--------------|-----|--------|-----------|\n+| Blue     | DEPRECATED<sup>1</sup> | YES | NO     | NO        |\n+| Nano S   | DEPRECATED<sup>1</sup> | YES | YES    | NO        |\n+| Nano X   | DEPRECATED<sup>1</sup> | YES | YES    | YES       |\n+\n+1. U2F is deprecated. See https://github.com/LedgerHQ/ledgerjs/blob/master/docs/migrate_webusb.md\n+\n+Summary of implementations available per platform\n+\n+\n+|    Platforms     |  U2F/WebAuthn    |                HID                |       WebUSB        |           Bluetooth           |\n+|------------------|------------------|-----------------------------------|---------------------|-------------------------------|\n+| Web              | `@ledgerhq/hw-transport-u2f` | `@ledgerhq/hw-transport-webhid` | `@ledgerhq/hw-transport-webusb` | `@ledgerhq/hw-transport-web-ble`          |\n+| Electron/Node.js | NO               | `@ledgerhq/hw-transport-node-hid`<sup>1</sup> | NO                  | `@ledgerhq/hw-transport-node-ble`         |\n+| iOS              | NO               | NO                                | NO                  | `@ledgerhq/react-native-hw-transport-ble` |\n+| Android          | `@ledgerhq/hw-transport-u2f`<sup>2</sup> | `@ledgerhq/react-native-hid`                  | `@ledgerhq/hw-transport-webusb`<sup>2</sup>    | `@ledgerhq/react-native-hw-transport-ble` |\n+\n+1. 3 implementations available\n+2. via Android Chrome\n+\n+**Beware the current web support:**\n+\n+\n+| Channels | U2F               | WebHID.         | WebUSB             | WebBluetooth |\n+|----------|-------------------|-----------------|--------------------|--------------|\n+| Windows  | DEPRECATED<sup>1</sup> | YES             | OK BUT<sup>2</sup> | YES          |\n+| Mac      | DEPRECATED<sup>1</sup> | YES             | YES                | YES          |\n+| Linux    | DEPRECATED<sup>1</sup> | YES             | YES                | YES          |\n+| Chrome   | DEPRECATED<sup>1</sup> | YES<sup>3</sup> | YES                | YES          |\n+| Safari   | DEPRECATED<sup>1</sup> | NO              | NO                 | NO           |\n+| Firefox  | DEPRECATED<sup>1</sup> | NO              | NO                 | NO           |\n+| IE.      | DEPRECATED<sup>1</sup> | NO              | NO                 | NO           |\n+\n+\n+1. U2F is deprecated. See https://github.com/LedgerHQ/ledgerjs/blob/master/docs/migrate_webusb.md\n+2. instabilities has been reported\n+3. WebHID supported under _Chrome experimental flags_\n+\n+\n+**Please find respective documentation for each transport:**\n+\n+- [![npm](https://img.shields.io/npm/v/@ledgerhq/hw-transport-u2f.svg)](https://www.npmjs.com/package/@ledgerhq/hw-transport-u2f) [@ledgerhq/hw-transport-u2f](https://github.com/LedgerHQ/ledgerjs-legacy/tree/master/packages/hw-transport-u2f) **[Web]** **(U2F)** (legacy but reliable) – FIDO U2F api. [check browser support](https://caniuse.com/u2f).\n+- [![npm](https://img.shields.io/npm/v/@ledgerhq/hw-transport-webauthn.svg)](https://www.npmjs.com/package/@ledgerhq/hw-transport-webauthn) [@ledgerhq/hw-transport-webauthn](https://github.com/LedgerHQ/ledgerjs-legacy/tree/master/packages/hw-transport-webauthn) **[Web]** **(WebAuthn)** (experimental) – WebAuthn api. [check browser support](https://caniuse.com/webauthn).\n+- [![npm](https://img.shields.io/npm/v/@ledgerhq/hw-transport-webusb.svg)](https://www.npmjs.com/package/@ledgerhq/hw-transport-webusb) [@ledgerhq/hw-transport-webusb](./packages/hw-transport-webusb) **[Web]** **(WebUSB)** – WebUSB [check browser support](https://caniuse.com/webusb).\n+- [![npm](https://img.shields.io/npm/v/@ledgerhq/hw-transport-webhid.svg)](https://www.npmjs.com/package/@ledgerhq/hw-transport-webhid) [@ledgerhq/hw-transport-webhid](./packages/hw-transport-webhid) **[Web]** **(WebHID)** – WebHID [check browser support](https://caniuse.com/webhid).\n+- [![npm](https://img.shields.io/npm/v/@ledgerhq/hw-transport-web-ble.svg)](https://www.npmjs.com/package/@ledgerhq/hw-transport-web-ble) [@ledgerhq/hw-transport-web-ble](./packages/hw-transport-web-ble) **[Web]** **(Bluetooth)** – [check browser support](https://caniuse.com/web-bluetooth).\n+- [![npm](https://img.shields.io/npm/v/@ledgerhq/hw-transport-node-hid.svg)](https://www.npmjs.com/package/@ledgerhq/hw-transport-node-hid) [@ledgerhq/hw-transport-node-hid](./packages/hw-transport-node-hid) **[Node]**/Electron **(HID)** – historical implementation – uses `node-hid` and `usb`.\n+- [![npm](https://img.shields.io/npm/v/@ledgerhq/hw-transport-node-hid-noevents.svg)](https://www.npmjs.com/package/@ledgerhq/hw-transport-node-hid-noevents) [@ledgerhq/hw-transport-node-hid-noevents](./packages/hw-transport-node-hid-noevents) **[Node]**/Electron **(HID)** – uses **only** `node-hid`. Does not provide USB events.\n+- [![npm](https://img.shields.io/npm/v/@ledgerhq/hw-transport-node-hid-singleton.svg)](https://www.npmjs.com/package/@ledgerhq/hw-transport-node-hid-singleton) [@ledgerhq/hw-transport-node-hid-singleton](./packages/hw-transport-node-hid-singleton) **[Node]**/Electron **(HID)** – uses `node-hid` and `usb-detection`. Focus on supporting one device at a time (potentially will have more robust events and less blocking cases)\n+- [![npm](https://img.shields.io/npm/v/@ledgerhq/hw-transport-node-ble.svg)](https://www.npmjs.com/package/@ledgerhq/hw-transport-node-ble) [@ledgerhq/hw-transport-node-ble](./packages/hw-transport-node-ble) **[Node]**/Electron **(BLE)** (experimental) – uses `@abandonware/noble`.\n+- [![npm](https://img.shields.io/npm/v/@ledgerhq/react-native-hw-transport-ble.svg)](https://www.npmjs.com/package/@ledgerhq/react-native-hw-transport-ble) [@ledgerhq/react-native-hw-transport-ble](./packages/react-native-hw-transport-ble) **[React Native]** **(Bluetooth)** – uses `react-native-ble-plx`\n+- [![npm](https://img.shields.io/npm/v/@ledgerhq/react-native-hid.svg)](https://www.npmjs.com/package/@ledgerhq/react-native-hid) [@ledgerhq/react-native-hid](./packages/react-native-hid) **[React Native]** **(HID)** _Android_ – Ledger's native implementation\n+- [![npm](https://img.shields.io/npm/v/@ledgerhq/hw-transport-http.svg)](https://www.npmjs.com/package/@ledgerhq/hw-transport-http) [@ledgerhq/hw-transport-http](./packages/hw-transport-http) **[DEV only]** universal HTTP channel. **NOT for PROD**.\n+\n+### An unified _Transport_ interface\n+\n+All these transports implement a generic interface exposed by\n+[@ledgerhq/hw-transport](./packages/hw-transport).\n+There are specifics for each transport which are explained in each package.\n+\n+A Transport is essentially:\n+\n+- `Transport.listen: (observer)=>Subscription`\n",
+					"match": false,
+					"packageHash": "2d66bf18781d6c833c0bd4490e1dc91342a59ebd0eb05d48d2188d8fd694ce4e",
+					"size": 347,
+					"sourceHash": "a005d06a7cfe8d197d0102f3ba806a946f6b908bdd18f26d8600c9021746681c",
+					"status": "content"
+				},
+				"flow-typed/npm/@ledgerhq/hw-transport_vx.x.x.js": {
+					"match": false,
+					"packageHash": "e1237e590900d98e5553a33f89f62ce4e7a5a0cd5280b363c08de66bb3f1d975",
+					"size": 929,
+					"status": "missing-in-source"
+				},
+				"flow-typed/npm/flow-bin_v0.x.x.js": {
+					"match": false,
+					"packageHash": "81b9b42a77429fafc11864a311137d8623005807f47ee1b78dd95582eaaba657",
+					"size": 188,
+					"status": "missing-in-source"
+				},
+				"flow-typed/npm/flow-typed_vx.x.x.js": {
+					"match": false,
+					"packageHash": "577ebd6f9e5a90838927f9a5f2b14d71b698958e3930bc103fda631261721235",
+					"size": 5763,
+					"status": "missing-in-source"
+				},
+				"lib/RecordStore.js": {
+					"match": false,
+					"packageHash": "92d7bce136f53fe29d9dcef5bdbdbf44c88441eca2287631e08e1bfd8a960ad6",
+					"size": 1869,
+					"status": "missing-in-source"
+				},
+				"lib/RecordStore.js.flow": {
+					"match": false,
+					"packageHash": "1a2ceb48258cfb773215ad070ac93a5935ff2dc40b9079a2a61180d54066fa5d",
+					"size": 1073,
+					"status": "missing-in-source"
+				},
+				"lib/RecordStore.js.map": {
+					"match": false,
+					"packageHash": "f939b9f1de711ae95e841bd7b1111fb21db5541fc75a4c4a8a73e52a0d560727",
+					"size": 2251,
+					"status": "missing-in-source"
+				},
+				"lib/createTransportRecorder.js": {
+					"match": false,
+					"packageHash": "118c29363c988acaf709e179f8a1c864728bfd292802aef60b2c6af265c65bd3",
+					"size": 2538,
+					"status": "missing-in-source"
+				},
+				"lib/createTransportRecorder.js.flow": {
+					"match": false,
+					"packageHash": "f95453a24f11aec9c5825821d85808796108bf69347731aa284e5ecf0f758025",
+					"size": 942,
+					"status": "missing-in-source"
+				},
+				"lib/createTransportRecorder.js.map": {
+					"match": false,
+					"packageHash": "89390fb23b20bd72425a790839b20341c5db8de97055a7f6bea10c93c382533d",
+					"size": 2075,
+					"status": "missing-in-source"
+				},
+				"lib/createTransportReplayer.js": {
+					"match": false,
+					"packageHash": "e86aa73682ed1f168ff070e55d0ebb311860aea15152bb617ba0b8e899c63234",
+					"size": 3042,
+					"status": "missing-in-source"
+				},
+				"lib/createTransportReplayer.js.flow": {
+					"match": false,
+					"packageHash": "c83b416aa1992cdfc5775514d28f2079f09877b273f0a8aca7661aa06fde6ae3",
+					"size": 1228,
+					"status": "missing-in-source"
+				},
+				"lib/createTransportReplayer.js.map": {
+					"match": false,
+					"packageHash": "118e20e26647ca19fc0cee2d688b5160792d7964e267321db2582f0610ce19a8",
+					"size": 2913,
+					"status": "missing-in-source"
+				},
+				"lib/index.js": {
+					"match": false,
+					"packageHash": "c5b85343ef81ad740ea04064f2fddaed87a63e2d4ba8f82786c619a2d2eba60d",
+					"size": 906,
+					"status": "missing-in-source"
+				},
+				"lib/index.js.flow": {
+					"match": false,
+					"packageHash": "f19de80f1e64d0300c82b4ebc6a74fd2de8546f6e81a6413e44402918f8e8c99",
+					"size": 245,
+					"status": "missing-in-source"
+				},
+				"lib/index.js.map": {
+					"match": false,
+					"packageHash": "cd30327227c8c7b4c040d18d4c982b1b0fe93f0451e87e92866a1ed0664dec2d",
+					"size": 487,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,38 +1,44 @@\n {\n-  \"name\": \"@ledgerhq/hw-transport-mocker\",\n-  \"version\": \"4.6.0-beta.5109e524\",\n-  \"description\": \"Ledger Hardware Wallet mocker utilities used for tests\",\n-  \"keywords\": [\n-    \"Ledger\",\n-    \"LedgerWallet\",\n-    \"NanoS\",\n-    \"Blue\",\n-    \"Hardware Wallet\"\n+  \"private\": true,\n+  \"name\": \"ledger-libs\",\n+  \"version\": \"0.0.0\",\n+  \"workspaces\": [\n+    \"packages/*\"\n   ],\n-  \"repository\": {\n-    \"type\": \"git\",\n-    \"url\": \"https://github.com/LedgerHQ/ledgerjs\"\n-  },\n-  \"bugs\": {\n-    \"url\": \"https://github.com/LedgerHQ/ledgerjs/issues\"\n-  },\n-  \"homepage\": \"https://github.com/LedgerHQ/ledgerjs\",\n-  \"publishConfig\": {\n-    \"access\": \"public\"\n-  },\n-  \"main\": \"lib/index.js\",\n-  \"license\": \"Apache-2.0\",\n-  \"dependencies\": {\n-    \"@ledgerhq/hw-transport\": \"^4.6.0-beta.5109e524\"\n+  \"scripts\": {\n+    \"preinstall\": \"node -e \\\"if (process.env.npm_execpath.indexOf('yarn') === -1) { console.log('\\u001b[31mPlease use yarn\\u001b[0m'); process.exit(1); }\\\"\",\n+    \"postinstall\": \"(cd ./flow-support && yarn)\",\n+    \"prettier\": \"prettier --write 'packages/*/src/**/*.?s'\",\n+    \"test\": \"jest\",\n+    \"test-no-git-diff\": \"git diff --exit-code || exit 1\",\n+    \"doc\": \"lerna run doc\",\n+    \"lint\": \"eslint packages/**/src --no-error-on-unmatched-pattern --ext .ts,.tsx -c .eslintrc.json\",\n+    \"build\": \"lerna run build\",\n+    \"watch\": \"lerna run --parallel watch\",\n+    \"clean\": \"rm -rf node_modules packages/*/node_modules/ packages/*/lib\",\n+    \"rebuild\": \"lerna run clean && lerna run build\",\n+    \"publish\": \"yarn && lerna run clean && lerna run build && lerna publish --registry=https://registry.npmjs.org/\"\n   },\n   \"devDependencies\": {\n-    \"flow-bin\": \"^0.66.0\",\n-    \"flow-typed\": \"^2.3.0\"\n+    \"@types/jest\": \"^27.4.0\",\n+    \"@typescript-eslint/eslint-plugin\": \"^4.33.0\",\n+    \"@typescript-eslint/parser\": \"^4.33.0\",\n+    \"browserify\": \"^17.0.0\",\n+    \"create-hash\": \"^1.1.3\",\n+    \"documentation\": \"^13.2.5\",\n+    \"eslint\": \"7\",\n+    \"eslint-config-prettier\": \"^8.5.0\",\n+    \"eslint-plugin-prettier\": \"^3.4.0\",\n+    \"eslint-plugin-react\": \"^7.29.4\",\n+    \"jest\": \"^27.5.1\",\n+    \"lerna\": \"3.22.1\",\n+    \"prettier\": \"^2.2.1\",\n+    \"ts-jest\": \"^27.1.3\",\n+    \"ts-node\": \"^10.6.0\",\n+    \"typescript\": \"^4.6.2\",\n+    \"uglify-js\": \"^3.15.3\"\n   },\n-  \"scripts\": {\n-    \"flow\": \"flow\",\n-    \"clean\": \"rm -rf lib/\",\n-    \"build\": \"cd ../.. && export PATH=$(yarn bin):$PATH && cd - && babel --source-maps -d lib src && flow-copy-source -v src lib\",\n-    \"watch\": \"cd ../.. && export PATH=$(yarn bin):$PATH && cd - && babel --watch --source-maps -d lib src & flow-copy-source -w -v src lib\"\n+  \"dependencies\": {\n+    \"js-levenshtein\": \"^1.1.6\"\n   }\n }\n",
+					"match": false,
+					"packageHash": "065e223dc11ff370e859eb30a040823a27cd19799ceadda7e883127b9bdd57d2",
+					"size": 1080,
+					"sourceHash": "ea5162e6c78c94dc94955d30b36f6f111dc0c0f4cbd03c501b00184248bd982e",
+					"status": "content"
+				},
+				"src/RecordStore.js": {
+					"match": false,
+					"packageHash": "1a2ceb48258cfb773215ad070ac93a5935ff2dc40b9079a2a61180d54066fa5d",
+					"size": 1073,
+					"status": "missing-in-source"
+				},
+				"src/createTransportRecorder.js": {
+					"match": false,
+					"packageHash": "f95453a24f11aec9c5825821d85808796108bf69347731aa284e5ecf0f758025",
+					"size": 942,
+					"status": "missing-in-source"
+				},
+				"src/createTransportReplayer.js": {
+					"match": false,
+					"packageHash": "c83b416aa1992cdfc5775514d28f2079f09877b273f0a8aca7661aa06fde6ae3",
+					"size": 1228,
+					"status": "missing-in-source"
+				},
+				"src/index.js": {
+					"match": false,
+					"packageHash": "f19de80f1e64d0300c82b4ebc6a74fd2de8546f6e81a6413e44402918f8e8c99",
+					"size": 245,
+					"status": "missing-in-source"
+				},
+				".eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".eslintrc.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/config.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".nvmrc": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".prettierignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"CODEOWNERS": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"CONTRIBUTING.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/ethereum_ledger_integration.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/migrate_webusb.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"flow-support/index.mjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"flow-support/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"flow-support/yarn.lock": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"jest.config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lerna.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cryptoassets/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cryptoassets/data/asa.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cryptoassets/data/bep20.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cryptoassets/data/erc20-signatures.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cryptoassets/data/erc20.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cryptoassets/data/esdt.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cryptoassets/data/exchange/coins.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cryptoassets/data/exchange/erc20.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cryptoassets/data/polygon-erc20.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cryptoassets/data/spl.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cryptoassets/data/trc10.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cryptoassets/data/trc20.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cryptoassets/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cryptoassets/src/__snapshots__/currencies.test.ts.snap": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cryptoassets/src/abandonseed.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cryptoassets/src/currencies.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cryptoassets/src/currencies.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cryptoassets/src/exchange.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cryptoassets/src/fiats.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cryptoassets/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cryptoassets/src/tokens.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cryptoassets/src/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cryptoassets/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/devices/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/devices/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/devices/src/ble/receiveAPDU.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/devices/src/ble/sendAPDU.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/devices/src/hid-framing.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/devices/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/devices/src/scrambling.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/devices/tests/identifyTargetId.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/devices/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/errors/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/errors/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/errors/src/helpers.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/errors/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/errors/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-algorand/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-algorand/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-algorand/src/Algorand.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-algorand/src/utils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-algorand/tests/Algorand.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-algorand/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/src/Btc.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/src/BtcNew.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/src/BtcOld.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/src/bip32.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/src/buffertools.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/src/compressPublicKey.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/src/constants.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/src/createTransaction.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/src/debug.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/src/finalizeInput.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/src/getAppAndVersion.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/src/getTrustedInput.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/src/getTrustedInputBIP143.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/src/getWalletPublicKey.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/src/hashPublicKey.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/src/newops/accounttype.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/src/newops/appClient.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/src/newops/clientCommands.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/src/newops/merkelizedPsbt.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/src/newops/merkle.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/src/newops/merkleMap.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/src/newops/policy.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/src/newops/psbtExtractor.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/src/newops/psbtFinalizer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/src/newops/psbtv2.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/src/serializeTransaction.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/src/shouldUseTrustedInputForSegwit.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/src/signMessage.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/src/signP2SHTransaction.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/src/signTransaction.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/src/splitTransaction.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/src/startUntrustedHashTransactionInput.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/src/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/src/varint.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/tests/Btc.integration.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/tests/Btc.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/tests/buffertools.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/tests/newops/BtcNew.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/tests/newops/common.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/tests/newops/integrationtools.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/tests/newops/merkle.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/tests/newops/testtx.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/tests/speculosclient.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/tests/trustedInputs.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-btc/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-cosmos/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-cosmos/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-cosmos/src/Cosmos.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-cosmos/tests/Cosmos.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-cosmos/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-eth/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-eth/erc20.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-eth/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-eth/src/Eth.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-eth/src/errors.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-eth/src/services/ledger/contracts.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-eth/src/services/ledger/erc20.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-eth/src/services/ledger/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-eth/src/services/ledger/loadConfig.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-eth/src/services/ledger/nfts.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-eth/src/services/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-eth/src/utils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-eth/tests/Eth.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-eth/tests/paraswap.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-eth/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-helium/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-helium/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-helium/src/Helium.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-helium/src/serialization.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-helium/tests/Helium.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-helium/tests/speculos-smoke.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-helium/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-polkadot/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-polkadot/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-polkadot/src/Polkadot.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-polkadot/tests/Polkadot.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-polkadot/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-solana/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-solana/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-solana/src/Solana.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-solana/tests/Solana.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-solana/tests/speculos-smoke.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-solana/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-str/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-str/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-str/src/Str.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-str/src/utils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-str/tests/Str.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-str/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-tezos/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-tezos/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-tezos/src/Tezos.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-tezos/tests/Tezos.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-tezos/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-trx/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-trx/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-trx/src/Trx.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-trx/src/utils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-trx/tests/Trx.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-trx/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-xrp/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-xrp/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-xrp/src/Xrp.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-xrp/tests/Xrp.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-app-xrp/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport/src/Transport.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-http/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-http/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-http/src/HttpTransport.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-http/src/WebSocketTransport.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-http/src/withStaticURLs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-http/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-mocker/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-mocker/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-mocker/src/RecordStore.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-mocker/src/createTransportRecorder.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-mocker/src/createTransportReplayer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-mocker/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-mocker/src/openTransportReplayer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-mocker/tests/RecordStore.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-mocker/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-node-ble/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-node-ble/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-node-ble/src/TransportNodeBle.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-node-ble/src/platform.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-node-ble/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-node-hid/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-node-hid/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-node-hid/src/TransportNodeHid.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-node-hid/src/listenDevices.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-node-hid/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-node-hid-noevents/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-node-hid-noevents/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-node-hid-noevents/src/TransportNodeHid.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-node-hid-noevents/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-node-hid-singleton/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-node-hid-singleton/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-node-hid-singleton/src/TransportNodeHid.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-node-hid-singleton/src/listenDevices.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-node-hid-singleton/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-node-speculos/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-node-speculos/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-node-speculos/src/SpeculosTransport.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-node-speculos/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-node-speculos-http/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-node-speculos-http/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-node-speculos-http/src/SpeculosHttpTransport.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-node-speculos-http/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-web-ble/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-web-ble/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-web-ble/src/TransportWebBLE.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-web-ble/src/monitorCharacteristic.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-web-ble/src/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-web-ble/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-webhid/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-webhid/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-webhid/src/TransportWebHID.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-webhid/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-webusb/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-webusb/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-webusb/src/TransportWebUSB.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-webusb/src/webusb.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/hw-transport-webusb/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/logs/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/logs/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/logs/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/logs/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-native-hid/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-native-hid/android/build.gradle": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-native-hid/android/gradlew": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-native-hid/android/src/main/AndroidManifest.xml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-native-hid/android/src/main/java/com/ledgerwallet/hid/HIDDevice.java": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-native-hid/android/src/main/java/com/ledgerwallet/hid/LedgerHelper.java": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-native-hid/android/src/main/java/com/ledgerwallet/hid/ReactHIDModule.java": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-native-hid/android/src/main/java/com/ledgerwallet/hid/ReactHIDPackage.java": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-native-hid/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-native-hid/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-native-hid/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-native-hw-transport-ble/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-native-hw-transport-ble/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-native-hw-transport-ble/src/BleTransport.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-native-hw-transport-ble/src/awaitsBleOn.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-native-hw-transport-ble/src/monitorCharacteristic.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-native-hw-transport-ble/src/remapErrors.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-native-hw-transport-ble/src/timer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-native-hw-transport-ble/src/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-native-hw-transport-ble/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/types-cryptoassets/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/types-cryptoassets/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/types-cryptoassets/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/types-cryptoassets/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/types-devices/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/types-devices/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/types-devices/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/types-devices/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/types-live/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/types-live/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/types-live/src/account.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/types-live/src/bridge.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/types-live/src/derivation.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/types-live/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/types-live/src/nft.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/types-live/src/operation.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/types-live/src/pagination.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/types-live/src/portfolio.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/types-live/src/swap.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/types-live/src/transaction.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/types-live/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"script/build.sh": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"script/clean.sh": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"script/crypto-assets-importer/importers/bep20full.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"script/crypto-assets-importer/importers/currenciesExchange.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"script/crypto-assets-importer/importers/erc20-signatures.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"script/crypto-assets-importer/importers/erc20exchange.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"script/crypto-assets-importer/importers/erc20full.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"script/crypto-assets-importer/importers/ethereum-plugins.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"script/crypto-assets-importer/importers/polygontokensfull.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"script/crypto-assets-importer/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"script/crypto-assets-importer/tron/sync-trc10-tokens.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"script/crypto-assets-importer/tron/trc10-tokens.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"script/crypto-assets-importer/utils.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"script/doc.sh": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"script/watch.sh": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 0,
+				"missingInPackage": 288,
+				"missingInSource": 20,
+				"score": 0,
+				"totalFiles": 310
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "@abandonware/bluetooth-hci-socket",
+				"version": "0.5.3-8"
+			},
+			{
+				"name": "@abandonware/noble",
+				"version": "1.9.2-15"
+			},
+			{
+				"name": "@ethersproject/abi",
+				"version": "5.5.0"
+			},
+			{
+				"name": "@ethersproject/abstract-provider",
+				"version": "5.5.1"
+			},
+			{
+				"name": "@ethersproject/abstract-signer",
+				"version": "5.5.0"
+			},
+			{
+				"name": "@ethersproject/address",
+				"version": "5.5.0"
+			},
+			{
+				"name": "@ethersproject/base64",
+				"version": "5.5.0"
+			},
+			{
+				"name": "@ethersproject/bignumber",
+				"version": "5.5.0"
+			},
+			{
+				"name": "@ethersproject/bytes",
+				"version": "5.5.0"
+			},
+			{
+				"name": "@ethersproject/constants",
+				"version": "5.5.0"
+			},
+			{
+				"name": "@ethersproject/hash",
+				"version": "5.5.0"
+			},
+			{
+				"name": "@ethersproject/keccak256",
+				"version": "5.5.0"
+			},
+			{
+				"name": "@ethersproject/logger",
+				"version": "5.5.0"
+			},
+			{
+				"name": "@ethersproject/networks",
+				"version": "5.5.1"
+			},
+			{
+				"name": "@ethersproject/properties",
+				"version": "5.5.0"
+			},
+			{
+				"name": "@ethersproject/rlp",
+				"version": "5.5.0"
+			},
+			{
+				"name": "@ethersproject/signing-key",
+				"version": "5.5.0"
+			},
+			{
+				"name": "@ethersproject/strings",
+				"version": "5.5.0"
+			},
+			{
+				"name": "@ethersproject/transactions",
+				"version": "5.5.0"
+			},
+			{
+				"name": "@ethersproject/web",
+				"version": "5.5.1"
+			},
+			{
+				"name": "@helium/address",
+				"version": "4.0.0"
+			},
+			{
+				"name": "@helium/crypto",
+				"version": "3.60.0"
+			},
+			{
+				"name": "@helium/proto",
+				"version": "1.5.0"
+			},
+			{
+				"name": "@helium/transactions",
+				"version": "3.62.0"
+			},
+			{
+				"name": "@mapbox/node-pre-gyp",
+				"version": "1.0.6"
+			},
+			{
+				"name": "ansi-regex",
+				"version": "3.0.0"
+			},
+			{
+				"name": "are-we-there-yet",
+				"version": "2.0.0"
+			},
+			{
+				"name": "chownr",
+				"version": "2.0.0"
+			},
+			{
+				"name": "fs-minipass",
+				"version": "2.1.0"
+			},
+			{
+				"name": "gauge",
+				"version": "3.0.1"
+			},
+			{
+				"name": "minipass",
+				"version": "3.1.5"
+			},
+			{
+				"name": "minizlib",
+				"version": "2.1.2"
+			},
+			{
+				"name": "mkdirp",
+				"version": "1.0.4"
+			},
+			{
+				"name": "nopt",
+				"version": "5.0.0"
+			},
+			{
+				"name": "npmlog",
+				"version": "5.0.1"
+			},
+			{
+				"name": "readable-stream",
+				"version": "3.6.0"
+			},
+			{
+				"name": "strip-ansi",
+				"version": "4.0.0"
+			},
+			{
+				"name": "tar",
+				"version": "6.1.11"
+			},
+			{
+				"name": "yallist",
+				"version": "4.0.0"
+			},
+			{
+				"name": "@protobufjs/aspromise",
+				"version": "1.1.2"
+			},
+			{
+				"name": "@protobufjs/base64",
+				"version": "1.1.2"
+			},
+			{
+				"name": "@protobufjs/codegen",
+				"version": "2.0.4"
+			},
+			{
+				"name": "@protobufjs/eventemitter",
+				"version": "1.1.0"
+			},
+			{
+				"name": "@protobufjs/fetch",
+				"version": "1.1.0"
+			},
+			{
+				"name": "@protobufjs/float",
+				"version": "1.0.2"
+			},
+			{
+				"name": "@protobufjs/inquire",
+				"version": "1.1.0"
+			},
+			{
+				"name": "@protobufjs/path",
+				"version": "1.1.2"
+			},
+			{
+				"name": "@protobufjs/pool",
+				"version": "1.1.0"
+			},
+			{
+				"name": "@protobufjs/utf8",
+				"version": "1.1.0"
+			},
+			{
+				"name": "@types/libsodium-wrappers",
+				"version": "0.7.9"
+			},
+			{
+				"name": "@types/long",
+				"version": "4.0.1"
+			},
+			{
+				"name": "@types/node",
+				"version": "16.11.7"
+			},
+			{
+				"name": "abbrev",
+				"version": "1.1.1"
+			},
+			{
+				"name": "agent-base",
+				"version": "6.0.2"
+			},
+			{
+				"name": "aproba",
+				"version": "2.0.0"
+			},
+			{
+				"name": "are-we-there-yet",
+				"version": "1.1.5"
+			},
+			{
+				"name": "axios",
+				"version": "0.26.1"
+			},
+			{
+				"name": "b4a",
+				"version": "1.3.1"
+			},
+			{
+				"name": "balanced-match",
+				"version": "1.0.2"
+			},
+			{
+				"name": "base-x",
+				"version": "3.0.8"
+			},
+			{
+				"name": "base32.js",
+				"version": "0.1.0"
+			},
+			{
+				"name": "bech32",
+				"version": "1.1.4"
+			},
+			{
+				"name": "bignumber.js",
+				"version": "9.0.2"
+			},
+			{
+				"name": "bindings",
+				"version": "1.5.0"
+			},
+			{
+				"name": "bip174",
+				"version": "2.0.1"
+			},
+			{
+				"name": "bip32",
+				"version": "2.0.6"
+			},
+			{
+				"name": "bip32-path",
+				"version": "0.4.2"
+			},
+			{
+				"name": "@types/node",
+				"version": "10.12.18"
+			},
+			{
+				"name": "bip66",
+				"version": "1.1.5"
+			},
+			{
+				"name": "bitcoin-ops",
+				"version": "1.4.1"
+			},
+			{
+				"name": "bitcoinjs-lib",
+				"version": "5.2.0"
+			},
+			{
+				"name": "bl",
+				"version": "3.0.1"
+			},
+			{
+				"name": "blake2b",
+				"version": "2.1.4"
+			},
+			{
+				"name": "blake2b-wasm",
+				"version": "2.4.0"
+			},
+			{
+				"name": "bn.js",
+				"version": "4.12.0"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "1.1.11"
+			},
+			{
+				"name": "brorand",
+				"version": "1.1.0"
+			},
+			{
+				"name": "bs58",
+				"version": "4.0.1"
+			},
+			{
+				"name": "bs58check",
+				"version": "2.1.2"
+			},
+			{
+				"name": "chownr",
+				"version": "1.1.4"
+			},
+			{
+				"name": "cipher-base",
+				"version": "1.0.4"
+			},
+			{
+				"name": "code-point-at",
+				"version": "1.1.0"
+			},
+			{
+				"name": "color-support",
+				"version": "1.1.3"
+			},
+			{
+				"name": "concat-map",
+				"version": "0.0.1"
+			},
+			{
+				"name": "console-control-strings",
+				"version": "1.1.0"
+			},
+			{
+				"name": "core-util-is",
+				"version": "1.0.2"
+			},
+			{
+				"name": "create-hash",
+				"version": "1.2.0"
+			},
+			{
+				"name": "create-hmac",
+				"version": "1.1.7"
+			},
+			{
+				"name": "debug",
+				"version": "4.3.2"
+			},
+			{
+				"name": "decompress-response",
+				"version": "4.2.1"
+			},
+			{
+				"name": "deep-extend",
+				"version": "0.6.0"
+			},
+			{
+				"name": "delegates",
+				"version": "1.0.0"
+			},
+			{
+				"name": "detect-libc",
+				"version": "1.0.3"
+			},
+			{
+				"name": "elliptic",
+				"version": "6.5.4"
+			},
+			{
+				"name": "end-of-stream",
+				"version": "1.4.4"
+			},
+			{
+				"name": "eventemitter2",
+				"version": "5.0.1"
+			},
+			{
+				"name": "events",
+				"version": "3.3.0"
+			},
+			{
+				"name": "expand-template",
+				"version": "2.0.3"
+			},
+			{
+				"name": "file-uri-to-path",
+				"version": "1.0.0"
+			},
+			{
+				"name": "follow-redirects",
+				"version": "1.14.9"
+			},
+			{
+				"name": "fs-constants",
+				"version": "1.0.0"
+			},
+			{
+				"name": "fs.realpath",
+				"version": "1.0.0"
+			},
+			{
+				"name": "gauge",
+				"version": "2.7.4"
+			},
+			{
+				"name": "ansi-regex",
+				"version": "2.1.1"
+			},
+			{
+				"name": "aproba",
+				"version": "1.2.0"
+			},
+			{
+				"name": "is-fullwidth-code-point",
+				"version": "1.0.0"
+			},
+			{
+				"name": "string-width",
+				"version": "1.0.2"
+			},
+			{
+				"name": "strip-ansi",
+				"version": "3.0.1"
+			},
+			{
+				"name": "github-from-package",
+				"version": "0.0.0"
+			},
+			{
+				"name": "glob",
+				"version": "7.2.0"
+			},
+			{
+				"name": "has-unicode",
+				"version": "2.0.1"
+			},
+			{
+				"name": "hash-base",
+				"version": "3.0.4"
+			},
+			{
+				"name": "hash.js",
+				"version": "1.1.7"
+			},
+			{
+				"name": "hi-base32",
+				"version": "0.5.1"
+			},
+			{
+				"name": "hmac-drbg",
+				"version": "1.0.1"
+			},
+			{
+				"name": "https-proxy-agent",
+				"version": "5.0.0"
+			},
+			{
+				"name": "inflight",
+				"version": "1.0.6"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.4"
+			},
+			{
+				"name": "ini",
+				"version": "1.3.8"
+			},
+			{
+				"name": "invariant",
+				"version": "2.2.4"
+			},
+			{
+				"name": "is-fullwidth-code-point",
+				"version": "2.0.0"
+			},
+			{
+				"name": "isarray",
+				"version": "1.0.0"
+			},
+			{
+				"name": "js-levenshtein",
+				"version": "1.1.6"
+			},
+			{
+				"name": "js-sha256",
+				"version": "0.9.0"
+			},
+			{
+				"name": "js-sha3",
+				"version": "0.8.0"
+			},
+			{
+				"name": "js-sha512",
+				"version": "0.8.0"
+			},
+			{
+				"name": "js-tokens",
+				"version": "4.0.0"
+			},
+			{
+				"name": "libsodium",
+				"version": "0.7.9"
+			},
+			{
+				"name": "libsodium-wrappers",
+				"version": "0.7.9"
+			},
+			{
+				"name": "lodash",
+				"version": "4.17.21"
+			},
+			{
+				"name": "long",
+				"version": "4.0.0"
+			},
+			{
+				"name": "loose-envify",
+				"version": "1.4.0"
+			},
+			{
+				"name": "make-dir",
+				"version": "3.1.0"
+			},
+			{
+				"name": "semver",
+				"version": "6.3.0"
+			},
+			{
+				"name": "md5.js",
+				"version": "1.3.5"
+			},
+			{
+				"name": "merkle-lib",
+				"version": "2.0.10"
+			},
+			{
+				"name": "mimic-response",
+				"version": "2.1.0"
+			},
+			{
+				"name": "minimalistic-assert",
+				"version": "1.0.1"
+			},
+			{
+				"name": "minimalistic-crypto-utils",
+				"version": "1.0.1"
+			},
+			{
+				"name": "minimatch",
+				"version": "3.1.2"
+			},
+			{
+				"name": "minimist",
+				"version": "1.2.6"
+			},
+			{
+				"name": "mkdirp",
+				"version": "0.5.5"
+			},
+			{
+				"name": "mkdirp-classic",
+				"version": "0.5.3"
+			},
+			{
+				"name": "ms",
+				"version": "2.1.2"
+			},
+			{
+				"name": "nan",
+				"version": "2.15.0"
+			},
+			{
+				"name": "nanoassert",
+				"version": "2.0.0"
+			},
+			{
+				"name": "napi-build-utils",
+				"version": "1.0.1"
+			},
+			{
+				"name": "node-abi",
+				"version": "2.30.1"
+			},
+			{
+				"name": "semver",
+				"version": "5.7.1"
+			},
+			{
+				"name": "node-addon-api",
+				"version": "3.2.1"
+			},
+			{
+				"name": "node-fetch",
+				"version": "2.6.7"
+			},
+			{
+				"name": "tr46",
+				"version": "0.0.3"
+			},
+			{
+				"name": "webidl-conversions",
+				"version": "3.0.1"
+			},
+			{
+				"name": "whatwg-url",
+				"version": "5.0.0"
+			},
+			{
+				"name": "node-gyp-build",
+				"version": "4.3.0"
+			},
+			{
+				"name": "node-hid",
+				"version": "2.1.1"
+			},
+			{
+				"name": "npmlog",
+				"version": "4.1.2"
+			},
+			{
+				"name": "number-is-nan",
+				"version": "1.0.1"
+			},
+			{
+				"name": "object-assign",
+				"version": "4.1.1"
+			},
+			{
+				"name": "once",
+				"version": "1.4.0"
+			},
+			{
+				"name": "path",
+				"version": "0.12.7"
+			},
+			{
+				"name": "path-is-absolute",
+				"version": "1.0.1"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.3"
+			},
+			{
+				"name": "util",
+				"version": "0.10.4"
+			},
+			{
+				"name": "prebuild-install",
+				"version": "6.1.4"
+			},
+			{
+				"name": "process",
+				"version": "0.11.10"
+			},
+			{
+				"name": "process-nextick-args",
+				"version": "2.0.1"
+			},
+			{
+				"name": "protobufjs",
+				"version": "6.11.2"
+			},
+			{
+				"name": "pump",
+				"version": "3.0.0"
+			},
+			{
+				"name": "pushdata-bitcoin",
+				"version": "1.0.1"
+			},
+			{
+				"name": "randombytes",
+				"version": "2.1.0"
+			},
+			{
+				"name": "rc",
+				"version": "1.2.8"
+			},
+			{
+				"name": "react-native-ble-plx",
+				"version": "2.0.3"
+			},
+			{
+				"name": "readable-stream",
+				"version": "2.3.7"
+			},
+			{
+				"name": "safe-buffer",
+				"version": "5.1.2"
+			},
+			{
+				"name": "string_decoder",
+				"version": "1.1.1"
+			},
+			{
+				"name": "rimraf",
+				"version": "3.0.2"
+			},
+			{
+				"name": "ripemd160",
+				"version": "2.0.2"
+			},
+			{
+				"name": "rxjs",
+				"version": "6.6.7"
+			},
+			{
+				"name": "safe-buffer",
+				"version": "5.2.1"
+			},
+			{
+				"name": "semver",
+				"version": "7.3.5"
+			},
+			{
+				"name": "lru-cache",
+				"version": "6.0.0"
+			},
+			{
+				"name": "set-blocking",
+				"version": "2.0.0"
+			},
+			{
+				"name": "sha.js",
+				"version": "2.4.11"
+			},
+			{
+				"name": "signal-exit",
+				"version": "3.0.3"
+			},
+			{
+				"name": "simple-concat",
+				"version": "1.0.1"
+			},
+			{
+				"name": "simple-get",
+				"version": "3.1.1"
+			},
+			{
+				"name": "string_decoder",
+				"version": "1.3.0"
+			},
+			{
+				"name": "string-width",
+				"version": "2.1.1"
+			},
+			{
+				"name": "strip-json-comments",
+				"version": "2.0.1"
+			},
+			{
+				"name": "tar-fs",
+				"version": "2.0.0"
+			},
+			{
+				"name": "tar-stream",
+				"version": "2.1.0"
+			},
+			{
+				"name": "tiny-secp256k1",
+				"version": "1.1.6"
+			},
+			{
+				"name": "tslib",
+				"version": "1.14.1"
+			},
+			{
+				"name": "tunnel-agent",
+				"version": "0.6.0"
+			},
+			{
+				"name": "typeforce",
+				"version": "1.18.0"
+			},
+			{
+				"name": "usb",
+				"version": "1.9.0"
+			},
+			{
+				"name": "usb-detection",
+				"version": "4.13.0"
+			},
+			{
+				"name": "node-addon-api",
+				"version": "4.2.0"
+			},
+			{
+				"name": "util-deprecate",
+				"version": "1.0.2"
+			},
+			{
+				"name": "uuid",
+				"version": "3.4.0"
+			},
+			{
+				"name": "varuint-bitcoin",
+				"version": "1.1.2"
+			},
+			{
+				"name": "wide-align",
+				"version": "1.1.5"
+			},
+			{
+				"name": "wif",
+				"version": "2.0.6"
+			},
+			{
+				"name": "wrappy",
+				"version": "1.0.2"
+			},
+			{
+				"name": "tweetnacl",
+				"version": "1.0.3"
+			},
+			{
+				"name": "ws",
+				"version": "8.5.0"
+			}
+		]
+	}
+]
