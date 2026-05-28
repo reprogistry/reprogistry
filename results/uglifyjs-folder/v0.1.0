@@ -1,0 +1,540 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-05-28T04:23:17.084Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:11.16.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "uglifyjs-folder@0.1.0",
+			"name": "uglifyjs-folder",
+			"version": "0.1.0",
+			"location": "https://registry.npmjs.org/uglifyjs-folder/-/uglifyjs-folder-0.1.0.tgz",
+			"integrity": "sha512-coqAON0esJfvx/WQOdhbGmiomfgKNnh3h0t8AJRe8GgUS+3wnXXTEwqc6s30rFDqCCVM/qP0Bc9cBHePcuLG/w==",
+			"publishedAt": "2014-01-05T22:26:10.401Z",
+			"publishedWith": {
+				"node": null,
+				"npm": "1.3.21"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": "sha512-IhRHYAuvl79MY9MNX3i/1ZG9Y4A90wYaoMO1c14uclLDuvOfZ/V6f2/91dnXHYrvcw7Z4I8R4t+qDjNm3pJ32Q==",
+			"location": "git://github.com/ionutvmi/uglifyjs-folder.git",
+			"spec": "github:ionutvmi/uglifyjs-folder#HEAD"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".jshintrc": {
+					"match": false,
+					"packageHash": "ff9c45b47af5825b9ace32f343ded6f9c730e4caac4b4f864b2e6b885190fca7",
+					"size": 227,
+					"status": "missing-in-source"
+				},
+				".npmignore": {
+					"match": false,
+					"packageHash": "fd03f16fc5ad8be70d6e0491fa2e029bc4a31f5b0de6d4adf8e7dd709d23840f",
+					"size": 6,
+					"status": "missing-in-source"
+				},
+				"Gruntfile.js": {
+					"match": false,
+					"packageHash": "d645e2e88e977f86cc77e1a2083338530a68d1092777f5ca4b8a429cf5acbf7d",
+					"size": 1068,
+					"status": "missing-in-source"
+				},
+				"LICENSE-MIT": {
+					"match": false,
+					"packageHash": "1e67667dfe00421ac4520171ac18bf9f69b68f284d5a2954e2c903714ac9e5a2",
+					"size": 1083,
+					"status": "missing-in-source"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,32 +1,113 @@\n-# uglifyjs-folder\r\n-\r\n-Command to run uglifyjs on a folder and minify the result in a single file or a new folder.\r\n-\r\n-## Getting Started\r\n-Install the module with: `npm install uglifyjs-folder -g`\r\n-\r\n-\r\n-## Documentation\r\n-    usage: uglifyjs-folder path[,...] [options]\r\n-\r\n-    options:\r\n-      -c --no-comments   Will remove the filename comments, so result will be in one line\r\n-      -o --output        Specify a file/folder to write the minified code\r\n-      -e --each          Will minify each file in <output>/*.min.js\r\n-      -h --help          Print this list and exit.\r\n-\r\n-## Examples\r\n-    $ uglifyjs-folder test-folder\r\n-    $ uglifyjs-folder test-folder --no-comments\r\n-    $ uglifyjs-folder test-folder -o all.min.js\r\n-    $ uglifyjs-folder test-folder -e -o newFolder\r\n-\r\n-## Contributing\r\n-Pull requests are appreciated.\r\n-\r\n-## Release History\r\n-Jan/05/2014 - Initial release\r\n-\r\n-## License\r\n-Copyright (c) 2014 Mihai Ionut Vilcu\r\n-Licensed under the MIT license.\r\n+# uglifyjs-folder\n+\n+![tests](https://github.com/mihai-vlc/uglifyjs-folder/actions/workflows/test.yml/badge.svg)\n+\n+Command to run uglifyjs on a folder and minify the result in a single file or a new folder.\n+Uses the [terser](https://www.npmjs.com/package/terser) package to perform the minification.\n+\n+## Getting Started\n+\n+Install the module with: `npm install uglifyjs-folder -g`\n+\n+## Documentation\n+\n+    Usage\n+      uglifyjs-folder path [options]\n+\n+    options:\n+      -c --comments      Add a comment with the file name.\n+      -o --output        Specify a file/folder to write the minified code\n+      -e --each          Minify each file independently\n+      -x --extension     Minified file extension (default: .min.js)\n+      -p --pattern       Specifies a comma separated glob patterns for the file selections. Default: **/*.js\n+         --pseparator    Specifies the separator for the pattern input. Default: ,\n+         --version       Prints the current version from package.json\n+         --config-file   Specifies a json configuration file for the terser module\n+         --log-level     Specifies the log level used when processing the files. Default: info\n+      -h --help          Print this list and exit.\n+\n+## Examples\n+\n+    $ uglifyjs-folder test-folder\n+    $ uglifyjs-folder test-folder --comments\n+    $ uglifyjs-folder test-folder -o all.min.js\n+    $ uglifyjs-folder test-folder --output all.min.js --pattern \"**/*.js,!**/*min.js\" # ignore minified files\n+    $ uglifyjs-folder test-folder -eo newFolder\n+    $ uglifyjs-folder test-folder -eo newFolder --log-level error\n+    $ uglifyjs-folder test-folder-es6 -o newFolder\n+    $ uglifyjs-folder test-folder -e -x .js -o test-folder # careful: overwrite all files in test-folder\n+    $ uglifyjs-folder test-folder --config-file \"./uglify.json\"\n+    where uglify.json contains\n+    {\n+      \"keep_fnames\": true\n+    }\n+\n+## Contributing\n+\n+Pull requests are appreciated.\n+\n+## Release History\n+\n+- 25/Jun/2023\n+\n+  - Upgraded terser to 5.18.1\n+\n+- 29/Dec/2022\n+\n+  - Upgraded terser to 5.16.1\n+\n+- 31/Oct/2022\n+\n+  - Fixed the line ending during npm publish. Fixes #34\n+\n+- 21/Aug/2022\n+\n+  - Upgraded terser to 5.14.2\n",
+					"match": false,
+					"packageHash": "f27b17304273b8c42bb825bbb8a906e1fbdf0f606129a6bb1a2c7195440ddb1d",
+					"size": 957,
+					"sourceHash": "70a6c5f0bbd68b65797b9645d2e6b8626cd758d6df26544fa4c61ad5a78a4b51",
+					"status": "content"
+				},
+				"lib/uglifyjs-folder.js": {
+					"match": false,
+					"packageHash": "87b2082b307f24841d1180d65d742e49409d703a4301051f7e29450f08ec2af0",
+					"size": 3461,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,43 +1,61 @@\n {\n   \"name\": \"uglifyjs-folder\",\n-  \"description\": \"Run uglifyjs on a folder and minify the result in a single file\",\n-  \"version\": \"0.1.0\",\n-  \"homepage\": \"https://github.com/ionutvmi/uglifyjs-folder\",\n+  \"description\": \"Run terser on a folder and minify the result in a single file\",\n+  \"version\": \"3.3.0\",\n+  \"homepage\": \"https://github.com/mihai-vlc/uglifyjs-folder\",\n   \"author\": {\n     \"name\": \"Mihai Ionut Vilcu\",\n     \"email\": \"ionutvmi@gmail.com\"\n   },\n   \"repository\": {\n     \"type\": \"git\",\n-    \"url\": \"git://github.com/ionutvmi/uglifyjs-folder.git\"\n+    \"url\": \"git://github.com/mihai-vlc/uglifyjs-folder.git\"\n   },\n   \"bugs\": {\n-    \"url\": \"https://github.com/ionutvmi/uglifyjs-folder/issues\"\n+    \"url\": \"https://github.com/mihai-vlc/uglifyjs-folder/issues\"\n   },\n-  \"licenses\": [\n-    {\n-      \"type\": \"MIT\",\n-      \"url\": \"https://github.com/ionutvmi/uglifyjs-folder/blob/master/LICENSE-MIT\"\n-    }\n-  ],\n-  \"main\": \"lib/uglifyjs-folder\",\n+  \"license\": \"MIT\",\n   \"engines\": {\n-    \"node\": \">= 0.8.0\"\n+    \"node\": \">=14\"\n+  },\n+  \"keywords\": [\n+    \"uglify\",\n+    \"folder\",\n+    \"directory\",\n+    \"cli\"\n+  ],\n+  \"preferGlobal\": true,\n+  \"bin\": {\n+    \"uglifyjs-folder\": \"cli.js\"\n   },\n   \"scripts\": {\n-    \"test\": \"grunt nodeunit\"\n+    \"test\": \"ava --no-worker-threads\",\n+    \"test:watch\": \"ava --no-worker-threads --watch\",\n+    \"coverage\": \"nyc --reporter=lcov ava --no-worker-threads\"\n+  },\n+  \"ava\": {\n+    \"files\": [\n+      \"test/index.js\",\n+      \"test/snapshots.js\"\n+    ],\n+    \"ignoredByWatcher\": [\n+      \"tmp/**\"\n+    ],\n+    \"snapshotDir\": \"test/snapshots-data\"\n+  },\n+  \"dependencies\": {\n+    \"extend\": \"3.0.2\",\n+    \"globby\": \"11.1.0\",\n+    \"graceful-fs\": \"4.2.11\",\n+    \"meow\": \"9.0.0\",\n+    \"mkdirp\": \"1.0.4\",\n+    \"terser\": \"5.18.1\"\n   },\n   \"devDependencies\": {\n-    \"grunt-contrib-jshint\": \"~0.6.4\",\n-    \"grunt-contrib-nodeunit\": \"~0.2.0\",\n-    \"grunt-contrib-watch\": \"~0.5.3\",\n-    \"grunt\": \"~0.4.2\",\n-    \"uglify-js\": \"~2.4.8\",\n-    \"mkdirp\": \"~0.3.5\"\n-  },\n-  \"keywords\": [],\n-  \"preferGlobal\": \"true\",\n-  \"bin\": {\n-    \"uglifyjs-folder\": \"lib/uglifyjs-folder.js\"\n+    \"ava\": \"5.1.0\",\n+    \"del\": \"6.1.1\",\n+    \"nyc\": \"15.1.0\",\n+    \"proxyquire\": \"2.1.3\",\n+    \"sinon\": \"15.0.1\"\n   }\n }\n",
+					"match": false,
+					"packageHash": "c115142ff0cd7f0e894e942e339b153650304316f33072674451a37f1c5861a2",
+					"size": 1053,
+					"sourceHash": "dcf68bb97094e4287c68a4002e7e588990d48537110711d47822ffb1bcd902d4",
+					"status": "content"
+				},
+				"test/uglifyjs-folder_test.js": {
+					"match": false,
+					"packageHash": "b4c533ade8d112d0191a976907c93be29a107f1616ad68fce7238794f8d02016",
+					"size": 741,
+					"status": "missing-in-source"
+				},
+				".editorconfig": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".prettierrc": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"cli.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 0,
+				"missingInPackage": 4,
+				"missingInSource": 6,
+				"score": 0,
+				"totalFiles": 12
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "@babel/code-frame",
+				"version": "7.22.5"
+			},
+			{
+				"name": "@babel/helper-validator-identifier",
+				"version": "7.22.5"
+			},
+			{
+				"name": "@babel/highlight",
+				"version": "7.22.5"
+			},
+			{
+				"name": "ansi-styles",
+				"version": "3.2.1"
+			},
+			{
+				"name": "chalk",
+				"version": "2.4.2"
+			},
+			{
+				"name": "escape-string-regexp",
+				"version": "1.0.5"
+			},
+			{
+				"name": "has-flag",
+				"version": "3.0.0"
+			},
+			{
+				"name": "supports-color",
+				"version": "5.5.0"
+			},
+			{
+				"name": "@jridgewell/gen-mapping",
+				"version": "0.3.3"
+			},
+			{
+				"name": "@jridgewell/resolve-uri",
+				"version": "3.1.0"
+			},
+			{
+				"name": "@jridgewell/set-array",
+				"version": "1.1.2"
+			},
+			{
+				"name": "@jridgewell/source-map",
+				"version": "0.3.3"
+			},
+			{
+				"name": "@jridgewell/sourcemap-codec",
+				"version": "1.4.15"
+			},
+			{
+				"name": "@jridgewell/trace-mapping",
+				"version": "0.3.18"
+			},
+			{
+				"name": "@jridgewell/sourcemap-codec",
+				"version": "1.4.14"
+			},
+			{
+				"name": "@nodelib/fs.scandir",
+				"version": "2.1.5"
+			},
+			{
+				"name": "@nodelib/fs.stat",
+				"version": "2.0.5"
+			},
+			{
+				"name": "@nodelib/fs.walk",
+				"version": "1.2.8"
+			},
+			{
+				"name": "@types/minimist",
+				"version": "1.2.2"
+			},
+			{
+				"name": "@types/normalize-package-data",
+				"version": "2.4.1"
+			},
+			{
+				"name": "acorn",
+				"version": "8.9.0"
+			},
+			{
+				"name": "array-union",
+				"version": "2.1.0"
+			},
+			{
+				"name": "braces",
+				"version": "3.0.2"
+			},
+			{
+				"name": "buffer-from",
+				"version": "1.1.2"
+			},
+			{
+				"name": "camelcase",
+				"version": "5.3.1"
+			},
+			{
+				"name": "camelcase-keys",
+				"version": "6.2.2"
+			},
+			{
+				"name": "color-convert",
+				"version": "1.9.3"
+			},
+			{
+				"name": "color-name",
+				"version": "1.1.3"
+			},
+			{
+				"name": "commander",
+				"version": "2.20.3"
+			},
+			{
+				"name": "decamelize",
+				"version": "1.2.0"
+			},
+			{
+				"name": "decamelize-keys",
+				"version": "1.1.1"
+			},
+			{
+				"name": "map-obj",
+				"version": "1.0.1"
+			},
+			{
+				"name": "dir-glob",
+				"version": "3.0.1"
+			},
+			{
+				"name": "error-ex",
+				"version": "1.3.2"
+			},
+			{
+				"name": "extend",
+				"version": "3.0.2"
+			},
+			{
+				"name": "fast-glob",
+				"version": "3.2.12"
+			},
+			{
+				"name": "fastq",
+				"version": "1.15.0"
+			},
+			{
+				"name": "fill-range",
+				"version": "7.0.1"
+			},
+			{
+				"name": "find-up",
+				"version": "4.1.0"
+			},
+			{
+				"name": "function-bind",
+				"version": "1.1.1"
+			},
+			{
+				"name": "glob-parent",
+				"version": "5.1.2"
+			},
+			{
+				"name": "globby",
+				"version": "11.1.0"
+			},
+			{
+				"name": "graceful-fs",
+				"version": "4.2.11"
+			},
+			{
+				"name": "hard-rejection",
+				"version": "2.1.0"
+			},
+			{
+				"name": "has",
+				"version": "1.0.3"
+			},
+			{
+				"name": "hosted-git-info",
+				"version": "4.1.0"
+			},
+			{
+				"name": "ignore",
+				"version": "5.2.4"
+			},
+			{
+				"name": "is-arrayish",
+				"version": "0.2.1"
+			},
+			{
+				"name": "is-core-module",
+				"version": "2.12.1"
+			},
+			{
+				"name": "is-extglob",
+				"version": "2.1.1"
+			},
+			{
+				"name": "is-glob",
+				"version": "4.0.3"
+			},
+			{
+				"name": "is-number",
+				"version": "7.0.0"
+			},
+			{
+				"name": "is-plain-obj",
+				"version": "1.1.0"
+			},
+			{
+				"name": "js-tokens",
+				"version": "4.0.0"
+			},
+			{
+				"name": "json-parse-even-better-errors",
+				"version": "2.3.1"
+			},
+			{
+				"name": "kind-of",
+				"version": "6.0.3"
+			},
+			{
+				"name": "lines-and-columns",
+				"version": "1.2.4"
+			},
+			{
+				"name": "locate-path",
+				"version": "5.0.0"
+			},
+			{
+				"name": "lru-cache",
+				"version": "6.0.0"
+			},
+			{
+				"name": "map-obj",
+				"version": "4.3.0"
+			},
+			{
+				"name": "meow",
+				"version": "9.0.0"
+			},
+			{
+				"name": "merge2",
+				"version": "1.4.1"
+			},
+			{
+				"name": "micromatch",
+				"version": "4.0.5"
+			},
+			{
+				"name": "min-indent",
+				"version": "1.0.1"
+			},
+			{
+				"name": "minimist-options",
+				"version": "4.1.0"
+			},
+			{
+				"name": "arrify",
+				"version": "1.0.1"
+			},
+			{
+				"name": "mkdirp",
+				"version": "1.0.4"
+			},
+			{
+				"name": "normalize-package-data",
+				"version": "3.0.3"
+			},
+			{
+				"name": "p-limit",
+				"version": "2.3.0"
+			},
+			{
+				"name": "p-locate",
+				"version": "4.1.0"
+			},
+			{
+				"name": "p-try",
+				"version": "2.2.0"
+			},
+			{
+				"name": "parse-json",
+				"version": "5.2.0"
+			},
+			{
+				"name": "path-exists",
+				"version": "4.0.0"
+			},
+			{
+				"name": "path-parse",
+				"version": "1.0.7"
+			},
+			{
+				"name": "path-type",
+				"version": "4.0.0"
+			},
+			{
+				"name": "picomatch",
+				"version": "2.3.1"
+			},
+			{
+				"name": "queue-microtask",
+				"version": "1.2.3"
+			},
+			{
+				"name": "quick-lru",
+				"version": "4.0.1"
+			},
+			{
+				"name": "read-pkg",
+				"version": "5.2.0"
+			},
+			{
+				"name": "read-pkg-up",
+				"version": "7.0.1"
+			},
+			{
+				"name": "type-fest",
+				"version": "0.8.1"
+			},
+			{
+				"name": "hosted-git-info",
+				"version": "2.8.9"
+			},
+			{
+				"name": "normalize-package-data",
+				"version": "2.5.0"
+			},
+			{
+				"name": "semver",
+				"version": "5.7.1"
+			},
+			{
+				"name": "type-fest",
+				"version": "0.6.0"
+			},
+			{
+				"name": "redent",
+				"version": "3.0.0"
+			},
+			{
+				"name": "indent-string",
+				"version": "4.0.0"
+			},
+			{
+				"name": "resolve",
+				"version": "1.22.2"
+			},
+			{
+				"name": "reusify",
+				"version": "1.0.4"
+			},
+			{
+				"name": "run-parallel",
+				"version": "1.2.0"
+			},
+			{
+				"name": "semver",
+				"version": "7.5.3"
+			},
+			{
+				"name": "slash",
+				"version": "3.0.0"
+			},
+			{
+				"name": "source-map",
+				"version": "0.6.1"
+			},
+			{
+				"name": "source-map-support",
+				"version": "0.5.21"
+			},
+			{
+				"name": "spdx-correct",
+				"version": "3.2.0"
+			},
+			{
+				"name": "spdx-exceptions",
+				"version": "2.3.0"
+			},
+			{
+				"name": "spdx-expression-parse",
+				"version": "3.0.1"
+			},
+			{
+				"name": "spdx-license-ids",
+				"version": "3.0.13"
+			},
+			{
+				"name": "strip-indent",
+				"version": "3.0.0"
+			},
+			{
+				"name": "supports-preserve-symlinks-flag",
+				"version": "1.0.0"
+			},
+			{
+				"name": "terser",
+				"version": "5.18.1"
+			},
+			{
+				"name": "to-regex-range",
+				"version": "5.0.1"
+			},
+			{
+				"name": "trim-newlines",
+				"version": "3.0.1"
+			},
+			{
+				"name": "type-fest",
+				"version": "0.18.1"
+			},
+			{
+				"name": "validate-npm-package-license",
+				"version": "3.0.4"
+			},
+			{
+				"name": "yallist",
+				"version": "4.0.0"
+			},
+			{
+				"name": "yargs-parser",
+				"version": "20.2.9"
+			}
+		]
+	}
+]
