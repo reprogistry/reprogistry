@@ -1,0 +1,135 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-05-28T21:12:23.416Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:3.8.6",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "metal-soy@1.0.2",
+			"name": "metal-soy",
+			"version": "1.0.2",
+			"location": "https://registry.npmjs.org/metal-soy/-/metal-soy-1.0.2.tgz",
+			"integrity": "sha512-Jt0DzA8hgDtc5+L0i8txEasVbYkJnwEKZOQEQlM+1Rq1QohbqWTiU/SBTW101vHFcp/NdgcXAHzqCKMcewt4PQ==",
+			"publishedAt": "2016-07-14T15:19:44.265Z",
+			"publishedWith": {
+				"node": "5.12.0",
+				"npm": "3.8.6"
+			},
+			"dependencies": {
+				"metal": "^1.0.0",
+				"metal-dom": "^1.0.0",
+				"html2incdom": "^0.1.1",
+				"metal-component": "^1.0.2",
+				"metal-soy-bundle": "^1.1.0",
+				"metal-incremental-dom": "^1.0.2"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "https://github.com/metal/metal/tree/master/packages/metal-soy",
+			"spec": "github:metal/metal#v1.0.2::path:packages/metal-soy"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,3 +1,5 @@\n # metal-soy\n \n A soy templates renderer to be used with Metal.js's Component class.\n+\n+See [https://metaljs.com/docs/guides/soy-components.html](https://metaljs.com/docs/guides/soy-components.html) for documentation.\n",
+					"match": false,
+					"packageHash": "f0aa515af421a76631d70b4a68a8bb3812fc154ea64ea783836df9d7b6b05c5f",
+					"size": 82,
+					"sourceHash": "aa078a048d43d41495ec86fa341c554be2f3f624536e5d7b9a304359bc5ba153",
+					"status": "content"
+				},
+				"lib/Soy.js": {
+					"match": false,
+					"packageHash": "ebb3c7b5f95a28dfbd045cad91076b640faf5e96aab8f384e395d55b6ca08573",
+					"size": 9087,
+					"status": "missing-in-source"
+				},
+				"lib/SoyAop.js": {
+					"match": false,
+					"packageHash": "5f4f92dea36fbe620f77ce1ade3e8d2a1a91ce18899bb8b08bdc200d651b56fc",
+					"size": 2635,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,9 +1,9 @@\n {\n   \"name\": \"metal-soy\",\n-  \"version\": \"1.0.2\",\n+  \"version\": \"2.16.9\",\n   \"description\": \"A soy templates renderer to be used with Metal.js's Component class\",\n   \"license\": \"BSD\",\n-  \"repository\": \"https://github.com/metal/metal/tree/master/packages/metal-soy\",\n+  \"repository\": \"https://github.com/metal/metal.js/tree/master/packages/metal-soy\",\n   \"engines\": {\n     \"node\": \">=0.12.0\",\n     \"npm\": \">=3.0.0\"\n@@ -15,22 +15,22 @@\n     \"src\"\n   ],\n   \"scripts\": {\n-    \"compile\": \"babel --presets metal -d lib/ src/\",\n+    \"compile\": \"babel --no-babelrc --presets env -d lib/ src/ -s\",\n     \"prepublish\": \"npm run compile\"\n   },\n   \"keywords\": [\n     \"metal\"\n   ],\n   \"dependencies\": {\n-    \"html2incdom\": \"^0.1.1\",\n-    \"metal\": \"^1.0.0\",\n-    \"metal-component\": \"^1.0.2\",\n-    \"metal-dom\": \"^1.0.0\",\n-    \"metal-incremental-dom\": \"^1.0.2\",\n-    \"metal-soy-bundle\": \"^1.1.0\"\n+    \"metal\": \"^2.16.8\",\n+    \"metal-component\": \"^2.16.8\",\n+    \"metal-dom\": \"^2.16.8\",\n+    \"metal-incremental-dom\": \"^2.16.9\",\n+    \"metal-soy-bundle\": \"^2.16.9\",\n+    \"metal-state\": \"^2.16.8\"\n   },\n   \"devDependencies\": {\n     \"babel-cli\": \"^6.4.5\",\n-    \"babel-preset-metal\": \"^4.0.0\"\n+    \"babel-preset-env\": \"^1.6.0\"\n   }\n }\n",
+					"match": false,
+					"packageHash": "20b1e0b952838b445f1784f1d58bafede66efdfacfdd5295e429cb0505713821",
+					"size": 837,
+					"sourceHash": "de92ab3db29e23ddffc2ac5fd8712b21cc2491a7c3f10196c54516c88afc8a34",
+					"status": "content"
+				},
+				"src/Soy.js": {
+					"diff": "--- published/src/Soy.js\n+++ rebuilt/src/Soy.js\n@@ -1,43 +1,41 @@\n 'use strict';\n \n import 'metal-soy-bundle';\n-import { core, object } from 'metal';\n-import { ComponentRegistry } from 'metal-component';\n-import HTML2IncDom from 'html2incdom';\n-import IncrementalDomRenderer from 'metal-incremental-dom';\n+import {ComponentRegistry} from 'metal-component';\n+import {isFunction, isObject, isString, object} from 'metal';\n+import {validators, Config} from 'metal-state';\n+import IncrementalDomRenderer, {HTML2IncDom} from 'metal-incremental-dom';\n import SoyAop from './SoyAop';\n \n // The injected data that will be passed to soy templates.\n-var ijData = {};\n+let ijData = {};\n \n-class Soy extends IncrementalDomRenderer {\n-\t/**\n-\t * @inheritDoc\n-\t */\n-\tconstructor(comp) {\n-\t\tsuper(comp);\n-\t\tthis.addMissingStateKeys_();\n-\t}\n+/**\n+ * Soy Renderer\n+ */\n+class Soy extends IncrementalDomRenderer.constructor {\n \t/**\n \t * Adds the template params to the component's state, if they don't exist yet.\n-\t * @protected\n+\t * @param {!Component} component\n+\t * @return {Object}\n \t */\n-\taddMissingStateKeys_() {\n-\t\tvar elementTemplate = this.component_.constructor.TEMPLATE;\n-\t\tif (!core.isFunction(elementTemplate)) {\n+\tgetExtraDataConfig(component) {\n+\t\tlet elementTemplate = component.constructor.TEMPLATE;\n+\t\tif (!isFunction(elementTemplate)) {\n \t\t\treturn;\n \t\t}\n \n \t\telementTemplate = SoyAop.getOriginalFn(elementTemplate);\n \t\tthis.soyParamTypes_ = elementTemplate.types || {};\n \n-\t\tvar keys = elementTemplate.params || [];\n-\t\tvar component = this.component_;\n-\t\tfor (var i = 0; i < keys.length; i++) {\n-\t\t\tif (!component.getStateKeyConfig(keys[i]) && !component[keys[i]]) {\n-\t\t\t\tcomponent.addToState(keys[i], {}, component.getInitialConfig()[keys[i]]);\n+\t\tconst keys = elementTemplate.params || [];\n+\t\tconst configs = {};\n+\t\tfor (let i = 0; i < keys.length; i++) {\n+\t\t\tif (!component[keys[i]]) {\n+\t\t\t\tconfigs[keys[i]] = {};\n \t\t\t}\n \t\t}\n+\t\treturn configs;\n \t}\n \n \t/**\n@@ -45,32 +43,34 @@\n \t * template call's data. The copying needs to be done because, if the component\n \t * itself is passed directly, some problems occur when soy tries to merge it\n \t * with other data, due to property getters and setters. This is safer.\n+\t * Also calls the component's \"prepareStateForRender\" to let it change the\n+\t * data passed to the template.\n+\t * @param {!Component} component\n \t * @param {!Array<string>} params The params used by this template.\n \t * @return {!Object}\n \t * @protected\n \t */\n-\tbuildTemplateData_(params) {\n-\t\tvar component = this.component_;\n-\t\tvar data = object.mixin({}, component.config);\n+\tbuildTemplateData_(component, params) {\n+\t\tconst data = object.mixin({}, this.getConfig(component));\n \t\tcomponent.getStateKeys().forEach(key => {\n-\t\t\t// Get all state values except \"element\", since it helps performance\n-\t\t\t// and the element shouldn't be referenced inside a soy template anyway.\n-\t\t\tif (key === 'element') {\n-\t\t\t\treturn;\n-\t\t\t}\n-\n-\t\t\tvar value = component[key];\n-\t\t\tif (this.isHtmlParam_(key)) {\n-\t\t\t\tvalue = Soy.toIncDom(value);\n+\t\t\tlet value = component[key];\n+\t\t\tif (this.isHtmlParam_(component, key)) {\n+\t\t\t\tvalue = soyRenderer_.toIncDom(value);\n \t\t\t}\n \t\t\tdata[key] = value;\n \t\t});\n-\t\tfor (var i = 0; i < params.length; i++) {\n-\t\t\tif (!data[params[i]] && core.isFunction(component[params[i]])) {\n",
+					"match": false,
+					"packageHash": "4fc56090b36f6d3f3eb22bae326b558bfdebd24d219befc564ad5727058e892b",
+					"size": 6800,
+					"sourceHash": "0d37b580c7a3a50cf5f76841fb6308710721ca664f8c525e587bf353e987151c",
+					"status": "content"
+				},
+				"src/SoyAop.js": {
+					"diff": "--- published/src/SoyAop.js\n+++ rebuilt/src/SoyAop.js\n@@ -1,6 +1,6 @@\n 'use strict';\n \n-var SoyAop = {\n+const SoyAop = {\n \t/**\n \t * The functions that should be called instead of a template call. The last\n \t * function in the array is the one that is intercepting at the moment. If the\n@@ -25,18 +25,19 @@\n \t * is set, or otherwise just calling the original function instead.\n \t * @param {!function()} originalFn The original template function that was\n \t *     intercepted.\n-\t * @param {Object} opt_data Template data object.\n-\t * @param {*} opt_ignored\n-\t * @param {Object} opt_ijData Template injected data object.\n+\t * @param {Object=} data Template data object.\n+\t * @param {*=} ignored\n+\t * @param {Object=} ijData Template injected data object.\n \t * @return {*} The return value of the function that is called to handle this\n \t *     interception.\n \t */\n-\thandleTemplateCall_: function(originalFn, opt_data, opt_ignored, opt_ijData) {\n-\t\tvar interceptFn = SoyAop.interceptFns_[SoyAop.interceptFns_.length - 1];\n+\thandleTemplateCall_: function(originalFn, data, ignored, ijData) {\n+\t\tconst interceptFn =\n+\t\t\tSoyAop.interceptFns_[SoyAop.interceptFns_.length - 1]; // eslint-disable-line\n \t\tif (interceptFn) {\n-\t\t\treturn interceptFn.call(null, originalFn, opt_data, opt_ignored, opt_ijData);\n+\t\t\treturn interceptFn.call(null, originalFn, data, ignored, ijData);\n \t\t} else {\n-\t\t\treturn originalFn.call(null, opt_data, opt_ignored, opt_ijData);\n+\t\t\treturn originalFn.call(null, data, ignored, ijData);\n \t\t}\n \t},\n \n@@ -47,7 +48,7 @@\n \t * @param {string} name The name of the template function to intercept.\n \t */\n \tregisterForInterception: function(templates, name) {\n-\t\tvar originalFn = templates[name];\n+\t\tconst originalFn = templates[name];\n \t\tif (!originalFn.originalFn) {\n \t\t\ttemplates[name] = SoyAop.handleTemplateCall_.bind(null, originalFn);\n \t\t\ttemplates[name].originalFn = originalFn;\n@@ -75,7 +76,7 @@\n \t */\n \tstopInterception: function() {\n \t\tSoyAop.interceptFns_.pop();\n-\t}\n+\t},\n };\n \n export default SoyAop;\n",
+					"match": false,
+					"packageHash": "a4049acb06e44365f7d3917a78aeaaf72a08c226f0ff37b7a8a1cb82cc2873aa",
+					"size": 2455,
+					"sourceHash": "83173f59f3d5877c7c448569b2cfc16b9b81843c8b92e339b60f657b8779abe0",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 4,
+				"matchingFiles": 1,
+				"missingInPackage": 0,
+				"missingInSource": 2,
+				"score": 0.14285714285714285,
+				"totalFiles": 7
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "incremental-dom",
+				"version": "0.5.1"
+			},
+			{
+				"name": "incremental-dom-string",
+				"version": "0.0.5"
+			},
+			{
+				"name": "metal",
+				"version": "2.16.8"
+			},
+			{
+				"name": "metal-component",
+				"version": "2.16.8"
+			},
+			{
+				"name": "metal-dom",
+				"version": "2.16.8"
+			},
+			{
+				"name": "metal-events",
+				"version": "2.16.8"
+			},
+			{
+				"name": "metal-incremental-dom",
+				"version": "2.16.9"
+			},
+			{
+				"name": "metal-soy-bundle",
+				"version": "2.16.9"
+			},
+			{
+				"name": "metal-state",
+				"version": "2.16.8"
+			},
+			{
+				"name": "xss-filters",
+				"version": "1.2.7"
+			}
+		]
+	}
+]
