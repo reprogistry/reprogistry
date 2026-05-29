@@ -1,0 +1,353 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-05-29T04:09:19.847Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:6.13.4",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "winston-cloudwatch@4.0.0",
+			"name": "winston-cloudwatch",
+			"version": "4.0.0",
+			"location": "https://registry.npmjs.org/winston-cloudwatch/-/winston-cloudwatch-4.0.0.tgz",
+			"integrity": "sha512-/hyfHV/lIQp16akgj5+7fLYiwwVw2gLiMQ2AoW7yXNFdRcSp/XphPHPWzHlSTWgW8HRs9pCLuHYkSaiSpOXVtg==",
+			"publishedAt": "2022-03-19T17:13:32.239Z",
+			"publishedWith": {
+				"node": "10.19.0",
+				"npm": "6.14.4"
+			},
+			"dependencies": {
+				"async": "^3.1.0",
+				"chalk": "^4.0.0",
+				"fast-safe-stringify": "^2.0.7",
+				"lodash.assign": "^4.2.0",
+				"lodash.find": "^4.6.0",
+				"lodash.isempty": "^4.4.0",
+				"lodash.iserror": "^3.1.1",
+				"proxy-agent": "^5.0.0"
+			}
+		},
+		"source": {
+			"integrity": "sha512-llcMzqQzoEa9io97I0IxV/rjTScEfcg0joyBig4bKLDobipIEmonZs8v2ve7FhPP6/4KsDbafeT7lY9jgcmCqA==",
+			"location": "git+https://github.com/lazywithclass/winston-cloudwatch.git",
+			"spec": "github:lazywithclass/winston-cloudwatch#520d85b94cf5f4dd479507a353ba46d0196c20f5"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"lib/cloudwatch-integration.js": {
+					"diff": "--- published/lib/cloudwatch-integration.js\n+++ rebuilt/lib/cloudwatch-integration.js\n@@ -81,7 +81,7 @@\n           // InvalidSequenceToken means we need to do a describe to get another token\n           // also do the same if ResourceNotFound as that will result in the last token\n           // for the group being set to null\n-          if (err.code === 'InvalidSequenceTokenException' || err.code === 'ResourceNotFoundException') {\n+          if (err.name === 'InvalidSequenceTokenException' || err.name === 'ResourceNotFoundException') {\n             debug(err.name + ', retrying', true);\n             lib.submitWithAnotherToken(aws, groupName, streamName, payload, retentionInDays, options, cb)\n           } else {\n@@ -162,7 +162,7 @@\n   var params = { logGroupName: name };\n   aws.describeLogStreams(params, function(err, data) {\n     // TODO we should cb(err, false) if there's an error?\n-    if (err && err.code == 'ResourceNotFoundException') {\n+    if (err && err.name == 'ResourceNotFoundException') {\n       debug('create group');\n       return aws.createLogGroup(params, lib.ignoreInProgress(function(err) {\n         if(!err) lib.putRetentionPolicy(aws, name, retentionInDays);\n@@ -219,8 +219,8 @@\n \n lib.ignoreInProgress = function ignoreInProgress(cb) {\n   return function(err, data) {\n-    if (err && (err.code == 'OperationAbortedException' ||\n-                err.code == 'ResourceAlreadyExistsException')) {\n+    if (err && (err.name == 'OperationAbortedException' ||\n+                err.name == 'ResourceAlreadyExistsException')) {\n       debug('ignore operation in progress', err.message);\n       cb(null, data);\n     } else {\n",
+					"match": false,
+					"packageHash": "881e93d2c58e35cb93bb55f231a4b5f2851bc5724a86e0ba5d438daccb1d3735",
+					"size": 8044,
+					"sourceHash": "2f4f54aad52e2642fa71215dd5139737b019e1b74270ed3eab99571a13da4b86",
+					"status": "content"
+				},
+				"test/index.js": {
+					"diff": "--- published/test/index.js\n+++ rebuilt/test/index.js\n@@ -36,8 +36,6 @@\n     mockery.registerAllowable('lodash.isempty');\n     mockery.registerAllowable('lodash.iserror');\n     mockery.registerAllowable('./lib/utils');\n-    mockery.registerAllowable('@aws-sdk/client-cloudwatch-logs');\n-    mockery.registerAllowable('aws-crt');\n \n     mockery.registerMock('winston', stubbedWinston);\n     mockery.registerMock('aws-sdk', stubbedAWS);\n",
+					"match": false,
+					"packageHash": "44dfb479dd07043d0c14bdf4e21b6121e88262c7fa0587cc9e8da6492951ff13",
+					"size": 8472,
+					"sourceHash": "924e14525b51198cbc2ab13a20d7b99832c6616f684062108067eb34a0ee7e9b",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 24,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.9230769230769231,
+				"totalFiles": 26
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "@tootallnate/once",
+				"version": "1.1.2"
+			},
+			{
+				"name": "acorn",
+				"version": "8.7.0"
+			},
+			{
+				"name": "acorn-walk",
+				"version": "8.2.0"
+			},
+			{
+				"name": "agent-base",
+				"version": "6.0.2"
+			},
+			{
+				"name": "ansi-styles",
+				"version": "4.3.0"
+			},
+			{
+				"name": "ast-types",
+				"version": "0.13.4"
+			},
+			{
+				"name": "async",
+				"version": "3.2.3"
+			},
+			{
+				"name": "bytes",
+				"version": "3.1.2"
+			},
+			{
+				"name": "chalk",
+				"version": "4.1.2"
+			},
+			{
+				"name": "color-convert",
+				"version": "2.0.1"
+			},
+			{
+				"name": "color-name",
+				"version": "1.1.4"
+			},
+			{
+				"name": "core-util-is",
+				"version": "1.0.3"
+			},
+			{
+				"name": "data-uri-to-buffer",
+				"version": "3.0.1"
+			},
+			{
+				"name": "debug",
+				"version": "4.3.4"
+			},
+			{
+				"name": "deep-is",
+				"version": "0.1.4"
+			},
+			{
+				"name": "degenerator",
+				"version": "3.0.2"
+			},
+			{
+				"name": "depd",
+				"version": "2.0.0"
+			},
+			{
+				"name": "escodegen",
+				"version": "1.14.3"
+			},
+			{
+				"name": "esprima",
+				"version": "4.0.1"
+			},
+			{
+				"name": "estraverse",
+				"version": "4.3.0"
+			},
+			{
+				"name": "esutils",
+				"version": "2.0.3"
+			},
+			{
+				"name": "fast-levenshtein",
+				"version": "2.0.6"
+			},
+			{
+				"name": "fast-safe-stringify",
+				"version": "2.1.1"
+			},
+			{
+				"name": "file-uri-to-path",
+				"version": "2.0.0"
+			},
+			{
+				"name": "fs-extra",
+				"version": "8.1.0"
+			},
+			{
+				"name": "ftp",
+				"version": "0.3.10"
+			},
+			{
+				"name": "get-uri",
+				"version": "3.0.2"
+			},
+			{
+				"name": "graceful-fs",
+				"version": "4.2.9"
+			},
+			{
+				"name": "has-flag",
+				"version": "4.0.0"
+			},
+			{
+				"name": "http-errors",
+				"version": "2.0.0"
+			},
+			{
+				"name": "http-proxy-agent",
+				"version": "4.0.1"
+			},
+			{
+				"name": "https-proxy-agent",
+				"version": "5.0.0"
+			},
+			{
+				"name": "iconv-lite",
+				"version": "0.4.24"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.4"
+			},
+			{
+				"name": "ip",
+				"version": "1.1.5"
+			},
+			{
+				"name": "isarray",
+				"version": "0.0.1"
+			},
+			{
+				"name": "jsonfile",
+				"version": "4.0.0"
+			},
+			{
+				"name": "levn",
+				"version": "0.3.0"
+			},
+			{
+				"name": "lodash.assign",
+				"version": "4.2.0"
+			},
+			{
+				"name": "lodash.find",
+				"version": "4.6.0"
+			},
+			{
+				"name": "lodash.isempty",
+				"version": "4.4.0"
+			},
+			{
+				"name": "lodash.iserror",
+				"version": "3.1.1"
+			},
+			{
+				"name": "lru-cache",
+				"version": "5.1.1"
+			},
+			{
+				"name": "ms",
+				"version": "2.1.2"
+			},
+			{
+				"name": "netmask",
+				"version": "2.0.2"
+			},
+			{
+				"name": "optionator",
+				"version": "0.8.3"
+			},
+			{
+				"name": "pac-proxy-agent",
+				"version": "5.0.0"
+			},
+			{
+				"name": "pac-resolver",
+				"version": "5.0.0"
+			},
+			{
+				"name": "prelude-ls",
+				"version": "1.1.2"
+			},
+			{
+				"name": "proxy-agent",
+				"version": "5.0.0"
+			},
+			{
+				"name": "proxy-from-env",
+				"version": "1.1.0"
+			},
+			{
+				"name": "raw-body",
+				"version": "2.5.1"
+			},
+			{
+				"name": "readable-stream",
+				"version": "1.1.14"
+			},
+			{
+				"name": "safer-buffer",
+				"version": "2.1.2"
+			},
+			{
+				"name": "setprototypeof",
+				"version": "1.2.0"
+			},
+			{
+				"name": "smart-buffer",
+				"version": "4.2.0"
+			},
+			{
+				"name": "socks",
+				"version": "2.6.2"
+			},
+			{
+				"name": "socks-proxy-agent",
+				"version": "5.0.1"
+			},
+			{
+				"name": "source-map",
+				"version": "0.6.1"
+			},
+			{
+				"name": "statuses",
+				"version": "2.0.1"
+			},
+			{
+				"name": "string_decoder",
+				"version": "0.10.31"
+			},
+			{
+				"name": "supports-color",
+				"version": "7.2.0"
+			},
+			{
+				"name": "toidentifier",
+				"version": "1.0.1"
+			},
+			{
+				"name": "tslib",
+				"version": "2.3.1"
+			},
+			{
+				"name": "type-check",
+				"version": "0.3.2"
+			},
+			{
+				"name": "universalify",
+				"version": "0.1.2"
+			},
+			{
+				"name": "unpipe",
+				"version": "1.0.0"
+			},
+			{
+				"name": "vm2",
+				"version": "3.9.9"
+			},
+			{
+				"name": "word-wrap",
+				"version": "1.2.3"
+			},
+			{
+				"name": "xregexp",
+				"version": "2.0.0"
+			},
+			{
+				"name": "yallist",
+				"version": "3.1.1"
+			}
+		]
+	}
+]
