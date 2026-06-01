@@ -1,0 +1,414 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-05-31T16:27:52.356Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:11.16.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "can@1.1.0",
+			"name": "can",
+			"version": "1.1.0",
+			"location": "https://registry.npmjs.org/can/-/can-1.1.0.tgz",
+			"integrity": "sha512-tgXbbkApijT/MMKtjcBZRc74fvSTBT0au/Sj8VNmmd7rR4FPtO6DrsrY/qzLjlHwK+IjCdtHpgiUo1RdnogV2Q==",
+			"publishedAt": "2012-12-31T22:05:22.820Z",
+			"publishedWith": {
+				"node": null,
+				"npm": "1.1.69"
+			},
+			"dependencies": {
+				"xml2js": ">=0.2.0"
+			}
+		},
+		"source": {
+			"integrity": "sha512-uR3GOrG8o0NUXxiTw+r47DCoUbIg2IJ0mLnwRxdTGaXvcvMh5At273dc5OBYe7wIibr+5K0Ziw68C7icdlTs0w==",
+			"location": "git://github.com/sebi2k1/node-can.git",
+			"spec": "github:sebi2k1/node-can#HEAD"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,15 +1,18 @@\n+![Build Status](https://github.com/sebi2k1/node-can/actions/workflows/cicd.yml/badge.svg?branch=master)\n+\n node-can\n ========\n \n This is a NodeJS SocketCAN extension. SocketCAN is a socket-based implementation of the CANbus protocol for Linux system.\n \n-This extensions makes it possible to send and receive CAN messages (extended, remote transission) using simple Javascript functions.\n+This extensions makes it possible to send and receive CAN messages (extended, remote transission) using simple Javascript/Typescript functions.\n \n-Usage\n------\n+Usage (JavaScript)\n+-----------------\n \n+Basic CAN example:\n ```javascript\n-var can = require('can');\n+var can = require(\"socketcan\");\n \n var channel = can.createRawChannel(\"vcan0\", true);\n \n@@ -22,16 +25,108 @@\n channel.start();\n ```\n \n+Working with message and signals:\n+```javascript\n+var can = require(\"socketcan\");\n+\n+// Parse database\n+var network = can.parseNetworkDescription(\"samples/can_definition_sample.kcd\");\n+var channel = can.createRawChannel(\"vcan0\");\n+var db_motor = new can.DatabaseService(channel, network.buses[\"Motor\"]);\n+var db_instr = new can.DatabaseService(channel, network.buses[\"Instrumentation\"]);\n+\n+channel.start();\n+\n+// Register a listener to get any value changes\n+db_motor.messages[\"CruiseControlStatus\"].signals[\"SpeedKm\"].onChange(function(s) {\n+   console.log(\"SpeedKm \" + s.value);\n+});\n+\n+// Register a listener to get any value updates\n+db_motor.messages[\"Emission\"].signals[\"Enginespeed\"].onUpdate(function(s) {\n+   console.log(\"Enginespeed \" + s.value);\n+});\n+\n+// Update tank temperature\n+db_instr.messages[\"TankController\"].signals[\"TankTemperature\"].update(80);\n+\n+// Trigger sending this message\n+db_instr.send(\"TankController\");\n+\n+channel.stop()\n+```\n+\n+Usage (TypeScript)\n+------------------\n+\n+Basic CAN example:\n+```typescript\n+import {Message} from \"*can.node\";\n+import * as can from \"socketcan\";\n+\n+const channel = can.createRawChannel(\"vcan0\", true);\n+\n+// Log any message\n+channel.addListener(\"onMessage\", function (msg: Message) { console.log(msg); });\n+\n+// Reply any message\n+channel.addListener(\"onMessage\", channel.send, channel);\n+\n+channel.start();\n+```\n+\n+Working with message and signals:\n+\n+```typescript\n+import * as can from \"socketcan\"\n+\n+// Parse database\n+const network = can.parseNetworkDescription(\"samples/can_definition_sample.kcd\");\n+const channel = can.createRawChannel(\"vcan0\");\n+const db_motor = new can.DatabaseService(channel, network.buses[\"Motor\"]);\n+const db_instr = new can.DatabaseService(channel, network.buses[\"Instrumentation\"]);\n+\n+channel.start();\n+\n+// Register a listener to get any value changes\n+db_motor.messages[\"CruiseControlStatus\"].signals[\"SpeedKm\"].onChange(function (s: can.Signal) {\n+\tconsole.log(\"SpeedKm \" + s.value);\n+});\n+\n+// Register a listener to get any value updates\n+db_motor.messages[\"Emission\"].signals[\"Enginespeed\"].onUpdate(function (s: can.Signal) {\n+\tconsole.log(\"Enginespeed \" + s.value);\n",
+					"match": false,
+					"packageHash": "f5119b9c623493e4b5d2f5b13213dda070e87d138fa053d53c3b190dba569f4e",
+					"size": 820,
+					"sourceHash": "2c07ea65f4689814aa8f7facad5040e82a5daef9e14d26fb8fa23acde8d5b2cf",
+					"status": "content"
+				},
+				"can.js": {
+					"match": false,
+					"packageHash": "b6f5b5a8a625755015345cc6f798838cc69439732a6a231b123d0a53946b2633",
+					"size": 4558,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,19 +1,80 @@\n {\n-  \"name\": \"can\",\n+  \"name\": \"socketcan\",\n   \"author\": {\n     \"name\": \"Sebastian Haas\",\n     \"email\": \"sebastian@sebastianhaas.info\"\n   },\n   \"description\": \"A SocketCAN abstraction layer for NodeJS.\",\n-  \"version\": \"1.1.0\",\n+  \"version\": \"4.2.1\",\n+  \"license\": \"MIT\",\n+  \"keywords\": [\n+    \"can\",\n+    \"canbus\",\n+    \"socketcan\",\n+    \"linux\",\n+    \"native\",\n+    \"addon\",\n+    \"iobroker\",\n+    \"automotive\"\n+  ],\n+  \"homepage\": \"https://github.com/sebi2k1/node-can#readme\",\n+  \"bugs\": {\n+    \"url\": \"https://github.com/sebi2k1/node-can/issues\"\n+  },\n   \"repository\": {\n     \"type\": \"git\",\n     \"url\": \"git://github.com/sebi2k1/node-can.git\"\n   },\n-  \"scripts\" : {\n-    \"preinstall\" : \"node-waf configure && node-waf build\",\n-    \"preuninstall\" : \"rm -rf build/*\"\n+  \"scripts\": {\n+    \"configure\": \"node-gyp configure\",\n+    \"build\": \"node-gyp build\",\n+    \"build:ts\": \"tsc\",\n+    \"build:all\": \"npm run build && npm run build:ts\",\n+    \"lint\": \"eslint --fix '*/**/*.{js,ts}'\",\n+    \"install\": \"node-gyp rebuild\",\n+    \"prepare\": \"npm run build:ts\",\n+    \"test\": \"mocha\",\n+    \"coverage\": \"nyc npm test\"\n+  },\n+  \"devDependencies\": {\n+    \"@eslint/js\": \"^10.0.0\",\n+    \"@types/node\": \"^25.9.1\",\n+    \"@types/xml2js\": \"^0.4.14\",\n+    \"@typescript-eslint/eslint-plugin\": \"^8.0.0\",\n+    \"@typescript-eslint/parser\": \"^8.0.0\",\n+    \"eslint\": \"^10.0.0\",\n+    \"eslint-config-prettier\": \"^10.0.0\",\n+    \"eslint-plugin-prettier\": \"^5.0.0\",\n+    \"globals\": \"^17.0.0\",\n+    \"mocha\": \"^11.0.0\",\n+    \"nyc\": \"^18.0.0\",\n+    \"prettier\": \"^3.0.0\",\n+    \"typescript\": \"^6.0.0\"\n+  },\n+  \"dependencies\": {\n+    \"node-addon-api\": \"^8.8.0\",\n+    \"node-gyp\": \">=12.0.0\",\n+    \"xml2js\": \">=0.6.2\"\n+  },\n+  \"main\": \"dist/socketcan.js\",\n+  \"types\": \"dist/socketcan.d.ts\",\n+  \"files\": [\n+    \"binding.gyp\",\n+    \"dist\",\n+    \"samples\",\n+    \"src\",\n+    \"native\",\n+    \"docs\"\n+  ],\n+  \"engines\": {\n+    \"node\": \">=22.0.0\"\n   },\n-  \"dependencies\": { \"xml2js\": \">=0.2.0\" },\n-  \"main\": \"can.js\"\n+  \"os\": [\n+    \"linux\"\n+  ],\n+  \"overrides\": {\n+    \"diff\": \"^9.0.0\",\n+    \"serialize-javascript\": \"^7.0.5\",\n+    \"uuid\": \"^14.0.0\"\n+  }\n }\n",
+					"match": false,
+					"packageHash": "812b2f073411dddeff693aa5cb26fefef20c8a144209ba17b4edb1a3114acd45",
+					"size": 471,
+					"sourceHash": "b3e5a481dfe2057d4c3c3c58f52adb45c9d09b71afe095540c3d90db30eb00a1",
+					"status": "content"
+				},
+				"parse_kcd.js": {
+					"match": false,
+					"packageHash": "11202e02cd713ede5c0a71db8e4e43e977041e24366b6c18cebf38e4898a7036",
+					"size": 4640,
+					"status": "missing-in-source"
+				},
+				"samples/package.json": {
+					"diff": "--- published/samples/package.json\n+++ rebuilt/samples/package.json\n@@ -3,6 +3,6 @@\n \t\"version\": \"0.0.1\",\n \t\"private\": true,\n \t\"dependencies\": {\n-\t\t\"can\": \"*\"\n+\t\t\"socketcan\": \"*\"\n \t}\n }\n",
+					"match": false,
+					"packageHash": "38e19000e531e03b44f6bd0f4706bcedf5f8753699d24e5b0cdfba20e88d737a",
+					"size": 109,
+					"sourceHash": "e063d3e058a780106883fbb9feb5cba3c27153b85ba6c901d1c5ac3364374fb7",
+					"status": "content"
+				},
+				"samples/simulate_node.js": {
+					"diff": "--- published/samples/simulate_node.js\n+++ rebuilt/samples/simulate_node.js\n@@ -1,4 +1,4 @@\n-var can = require('can');\n+var can = require('socketcan');\n var fs = require('fs');\n \n // Parse database\n@@ -11,8 +11,8 @@\n var i = 0;\n for (b in node.buses) {\n \tvar c = can.createRawChannel(\"vcan\" + i++);\n-\tvar d = new can.DatabaseService(c, network.buses[b].messages);\n-\t\n+\tvar d = new can.DatabaseService(c, network.buses[b]);\n+\n \tc.start();\n \n \tconsole.log(\"Starting simulation \" + b);\n@@ -20,7 +20,7 @@\n \t// Generate all CAN message this node is the producer\n \tfor (m in node.buses[b].produces) {\n \t\tvar msg = node.buses[b].produces[m];\n-\t\t\n+\n \t\tif (msg.interval)\n \t\t\tsetInterval(function(name) { d.send(name); }, msg.interval, msg.name);\n \t}\n",
+					"match": false,
+					"packageHash": "da8a0e63ce75c02c249b236ecd7257bd6d66e42f7654a8afbeae77d83343adfb",
+					"size": 653,
+					"sourceHash": "8b8ec2b2a6e3b58a821da28e0847ab2f0f4c15c73a0d7b4f1eb70ddbb618ea12",
+					"status": "content"
+				},
+				"src/raw.cc": {
+					"match": false,
+					"packageHash": "0c646094dbc13387eab7df66645454a87543038a9ec30120aaca8e499ea93d5b",
+					"size": 11931,
+					"status": "missing-in-source"
+				},
+				"src/raw.h": {
+					"match": false,
+					"packageHash": "cdedffa3c4115ff25c619ad2dea5ed70a13c02c45978fcebc366dbd096dbfd9b",
+					"size": 3212,
+					"status": "missing-in-source"
+				},
+				"src/signals.cc": {
+					"match": false,
+					"packageHash": "dbf4592eba89fa6ef2c5b91329313f839314e1e3042971a27d5f4d1fb0ea0dc1",
+					"size": 6733,
+					"status": "missing-in-source"
+				},
+				"tests/test-raw_basic.js": {
+					"match": false,
+					"packageHash": "84471ff68603398039a9e31b6e8450d579f0908ab4e1c76615cc754ebd7dedb0",
+					"size": 847,
+					"status": "missing-in-source"
+				},
+				"tests/test-signal_conversion.js": {
+					"match": false,
+					"packageHash": "357dc2708bfa8a495cc4beb557c88f1532f8e30c1ba510e2661ddbac6ba2969f",
+					"size": 2708,
+					"status": "missing-in-source"
+				},
+				"wscript": {
+					"match": false,
+					"packageHash": "61e8c1c48d4920fefdcaa19e228382533a3ce5505ab8f33d4e1408ae2ad92e01",
+					"size": 401,
+					"status": "missing-in-source"
+				},
+				"LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"binding.gyp": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/parse_kcd.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/parse_kcd.d.ts.map": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/parse_kcd.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/socketcan.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/socketcan.d.ts.map": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/socketcan.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/fonts/OpenSans-Bold-webfont.eot": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/fonts/OpenSans-Bold-webfont.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/fonts/OpenSans-Bold-webfont.woff": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/fonts/OpenSans-BoldItalic-webfont.eot": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/fonts/OpenSans-BoldItalic-webfont.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/fonts/OpenSans-BoldItalic-webfont.woff": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/fonts/OpenSans-Italic-webfont.eot": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/fonts/OpenSans-Italic-webfont.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/fonts/OpenSans-Italic-webfont.woff": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/fonts/OpenSans-Light-webfont.eot": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/fonts/OpenSans-Light-webfont.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/fonts/OpenSans-Light-webfont.woff": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/fonts/OpenSans-LightItalic-webfont.eot": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/fonts/OpenSans-LightItalic-webfont.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/fonts/OpenSans-LightItalic-webfont.woff": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/fonts/OpenSans-Regular-webfont.eot": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/fonts/OpenSans-Regular-webfont.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/fonts/OpenSans-Regular-webfont.woff": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/global.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/index.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/module-Signals-DatabaseService.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/module-Signals-Message.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/module-Signals-Signal.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/module-Signals.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/scripts/linenumber.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/scripts/prettify/Apache-License-2.0.txt": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/scripts/prettify/lang-css.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/scripts/prettify/prettify.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/socketcan.js.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/styles/jsdoc-default.css": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/styles/prettify-jsdoc.css": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/styles/prettify-tomorrow.css": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"native/can.cc": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"native/signals.cc": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"samples/dump.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"samples/perf.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/can.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/can_signals.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/parse_kcd.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/socketcan.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 4,
+				"matchingFiles": 1,
+				"missingInPackage": 48,
+				"missingInSource": 8,
+				"score": 0.01639344262295082,
+				"totalFiles": 61
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "@isaacs/fs-minipass",
+				"version": "4.0.1"
+			},
+			{
+				"name": "abbrev",
+				"version": "4.0.0"
+			},
+			{
+				"name": "chownr",
+				"version": "3.0.0"
+			},
+			{
+				"name": "env-paths",
+				"version": "2.2.1"
+			},
+			{
+				"name": "exponential-backoff",
+				"version": "3.1.3"
+			},
+			{
+				"name": "fdir",
+				"version": "6.5.0"
+			},
+			{
+				"name": "graceful-fs",
+				"version": "4.2.11"
+			},
+			{
+				"name": "minipass",
+				"version": "7.1.3"
+			},
+			{
+				"name": "minizlib",
+				"version": "3.1.0"
+			},
+			{
+				"name": "node-addon-api",
+				"version": "8.8.0"
+			},
+			{
+				"name": "node-gyp",
+				"version": "12.3.0"
+			},
+			{
+				"name": "isexe",
+				"version": "4.0.0"
+			},
+			{
+				"name": "which",
+				"version": "6.0.1"
+			},
+			{
+				"name": "nopt",
+				"version": "9.0.0"
+			},
+			{
+				"name": "picomatch",
+				"version": "4.0.4"
+			},
+			{
+				"name": "proc-log",
+				"version": "6.1.0"
+			},
+			{
+				"name": "sax",
+				"version": "1.6.0"
+			},
+			{
+				"name": "semver",
+				"version": "7.8.1"
+			},
+			{
+				"name": "tar",
+				"version": "7.5.15"
+			},
+			{
+				"name": "yallist",
+				"version": "5.0.0"
+			},
+			{
+				"name": "tinyglobby",
+				"version": "0.2.16"
+			},
+			{
+				"name": "undici",
+				"version": "6.26.0"
+			},
+			{
+				"name": "xml2js",
+				"version": "0.6.2"
+			},
+			{
+				"name": "xmlbuilder",
+				"version": "11.0.1"
+			}
+		]
+	}
+]

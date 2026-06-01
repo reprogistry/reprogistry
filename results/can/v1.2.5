@@ -1,0 +1,80 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-05-31T16:38:44.177Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:1.4.3",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "can@1.2.5",
+			"name": "can",
+			"version": "1.2.5",
+			"location": "https://registry.npmjs.org/can/-/can-1.2.5.tgz",
+			"integrity": "sha512-hq+VTVyzCUuT4Ks2HT2SXYwSaCn3ywH0rHcujDpPlwaVo8aS7KlzA3RNHcJpSzvElhoSJefXgFHuCGKc4GP+zQ==",
+			"publishedAt": "2015-02-07T00:18:19.018Z",
+			"publishedWith": {
+				"node": "0.10.26",
+				"npm": "2.1.12"
+			},
+			"dependencies": {
+				"xml2js": ">=0.2.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git://github.com/sebi2k1/node-can.git",
+			"spec": "github:sebi2k1/node-can#711dc757f136fa670e881bdddc81c9711a028136"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,9 +1,62 @@\n-CanJS\n+node-can\n ========\n \n-This npm package will be for the [CanJS client-side MV* framework](http://canjs.com). It was formerly\n-the [node-can project](https://github.com/sebi2k1/node-can) which has been moved \n-to [socketcan](https://www.npmjs.com/package/socketcan).  A HUGE thanks to Sebastian Haas for \n-letting us use the `can` name!\n+This is a NodeJS SocketCAN extension. SocketCAN is a socket-based implementation of the CANbus protocol for Linux system.\n \n+This extensions makes it possible to send and receive CAN messages (extended, remote transission) using simple Javascript functions.\n \n+Usage\n+-----\n+\n+Basic CAN example:\n+```javascript\n+var can = require('can');\n+\n+var channel = can.createRawChannel(\"vcan0\", true);\n+\n+// Log any message\n+channel.addListener(\"onMessage\", function(msg) { console.log(msg); } );\n+\n+// Reply any message\n+channel.addListener(\"onMessage\", channel.send, channel);\n+\n+channel.start();\n+```\n+\n+Working with message and signals:\n+```javascript\n+var can = require('can');\n+var fs = require('fs');\n+\n+// Parse database\n+var network = can.parseNetworkDescription(\"samples/can_definition_sample.kcd\");\n+var channel = can.createRawChannel(\"vcan0\");\n+var db      = new can.DatabaseService(channel, network.buses[\"Motor\"].messages);\n+\n+channel.start();\n+\n+// Register a listener to get any value changes\n+db.messages[\"CruiseControlStatus\"].signals[\"SpeedKm\"].onChange(function(s) {\n+   console.log(\"SpeedKm \" + s.value);\n+}\n+\n+// Update tank temperature\n+db.messages[\"TankController\"].signals[\"TankTemperature\"].update(80);\n+\n+// Trigger sending this message\n+db.send(\"TankController\");\n+```\n+\n+Install\n+-------\n+\n+There are two options for installing node-can:\n+\n+1. Clone / download node-can from [GitHub](https://github.com/sebi2k1/node-can),\n+   then:\n+\n+    node-gyp configure && node-gyp build\n+\n+2. Install via npm:\n+\n+    npm install socketcan\n",
+					"match": false,
+					"packageHash": "3e69e3360ed5343c62349e02be718aa086b784198845f658fd9f484d6f291c25",
+					"size": 328,
+					"sourceHash": "911474e1a85f33a8d5fa0439aa768531570723d06e540de33b2d6fd71177f110",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -5,49 +5,15 @@\n     \"email\": \"sebastian@sebastianhaas.info\"\n   },\n   \"description\": \"A SocketCAN abstraction layer for NodeJS.\",\n-  \"version\": \"1.2.5\",\n+  \"version\": \"1.2.4\",\n   \"repository\": {\n     \"type\": \"git\",\n     \"url\": \"git://github.com/sebi2k1/node-can.git\"\n   },\n-  \"scripts\": {\n-    \"preinstall\": \"node-gyp configure && node-gyp build\",\n-    \"preuninstall\": \"rm -rf build/*\",\n-    \"postinstall\": \"node warning.js\"\n+  \"scripts\" : {\n+    \"preinstall\" : \"node-gyp configure && node-gyp build\",\n+    \"preuninstall\" : \"rm -rf build/*\"\n   },\n-  \"dependencies\": {\n-    \"xml2js\": \">=0.2.0\"\n-  },\n-  \"main\": \"can.js\",\n-  \"gitHead\": \"711dc757f136fa670e881bdddc81c9711a028136\",\n-  \"bugs\": {\n-    \"url\": \"https://github.com/sebi2k1/node-can/issues\"\n-  },\n-  \"homepage\": \"https://github.com/sebi2k1/node-can\",\n-  \"maintainers\": [\n-    {\n-      \"name\": \"sebi2k1\",\n-      \"email\": \"sebastian@sebastianhaas.info\"\n-    },\n-    {\n-      \"name\": \"justinbmeyer\",\n-      \"email\": \"justin@bitovi.com\"\n-    }\n-  ],\n-  \"directories\": {},\n-  \"_id\": \"can@1.2.5-pre.0\",\n-  \"_shasum\": \"bd564413090a4d384953c49b1d07a2e17ad80570\",\n-  \"_from\": \"can@1.2.5-pre.0\",\n-  \"_npmVersion\": \"2.1.12\",\n-  \"_nodeVersion\": \"0.10.26\",\n-  \"_npmUser\": {\n-    \"name\": \"justinbmeyer\",\n-    \"email\": \"justin@bitovi.com\"\n-  },\n-  \"dist\": {\n-    \"shasum\": \"bd564413090a4d384953c49b1d07a2e17ad80570\",\n-    \"tarball\": \"http://registry.npmjs.org/can/-/can-1.2.5-pre.0.tgz\"\n-  },\n-  \"_resolved\": \"https://registry.npmjs.org/can/-/can-1.2.5-pre.0.tgz\",\n-  \"readme\": \"ERROR: No README data found!\"\n+  \"dependencies\": { \"xml2js\": \">=0.2.0\" },\n+  \"main\": \"can.js\"\n }\n",
+					"match": false,
+					"packageHash": "95d9c3379e77983daedfa43929028569155c705aa4023a011f097787f693075c",
+					"size": 1413,
+					"sourceHash": "88e278800be75d93cb2cf2caadce17a8dd3800a98ac916b8505f40d871baac38",
+					"status": "content"
+				},
+				"warning.js": {
+					"match": false,
+					"packageHash": "c21a5cf4a8196d631b71ffc7b7c6f2159082d5f7e2459e8e35b403736b7822f6",
+					"size": 503,
+					"status": "missing-in-source"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 45,
+				"missingInPackage": 0,
+				"missingInSource": 1,
+				"score": 0.9375,
+				"totalFiles": 48
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "sax",
+				"version": "1.6.0"
+			},
+			{
+				"name": "xml2js",
+				"version": "0.6.2"
+			},
+			{
+				"name": "xmlbuilder",
+				"version": "11.0.1"
+			}
+		]
+	}
+]
