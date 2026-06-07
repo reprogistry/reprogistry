@@ -1,0 +1,257 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-06-06T11:03:38.951Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:11.16.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "hexo-renderer-stylus@0.0.2",
+			"name": "hexo-renderer-stylus",
+			"version": "0.0.2",
+			"location": "https://registry.npmjs.org/hexo-renderer-stylus/-/hexo-renderer-stylus-0.0.2.tgz",
+			"integrity": "sha512-8BX1vmBvx2VKCu+ytJTD9TNBvRUi78Z3WH9tr7UOWczy0kzd7phzXImLbgpv1BX3nHQKUQ9z4Ftw9UxA3tQ5MA==",
+			"publishedAt": "2014-05-09T16:40:50.920Z",
+			"publishedWith": {
+				"node": null,
+				"npm": "1.4.3"
+			},
+			"dependencies": {
+				"nib": "^1.0.2",
+				"stylus": "^0.44.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "https://github.com/hexojs/hexo-renderer-stylus.git",
+			"spec": "github:hexojs/hexo-renderer-stylus#HEAD"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".npmignore": {
+					"match": false,
+					"packageHash": "ccb7fe350f2123431181d2a028256a30f0e699cfd2eadf82cf6db31df31669ba",
+					"size": 15,
+					"status": "missing-in-source"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,9 +1,17 @@\n-# [Stylus] renderer\n+# hexo-renderer-stylus\n \n-Add support for [Stylus] with [nib]\n+[![Build Status](https://github.com/hexojs/hexo-renderer-stylus/workflows/Tester/badge.svg)](https://github.com/hexojs/hexo-renderer-stylus/actions/workflows/tester.yml)\n+[![NPM version](https://badge.fury.io/js/hexo-renderer-stylus.svg)](https://www.npmjs.com/package/hexo-renderer-stylus)\n+[![Coverage Status](https://img.shields.io/coveralls/hexojs/hexo-renderer-stylus.svg)](https://coveralls.io/r/hexojs/hexo-renderer-stylus?branch=master)\n+\n+Add support for [Stylus] with [nib] and other plugins.\n \n ## Install\n \n+Prerequisites:\n+- Hexo 3: >= 0.2\n+- Hexo 2: 0.1.x\n+\n ``` bash\n $ npm install hexo-renderer-stylus --save\n ```\n@@ -15,9 +23,76 @@\n ``` yaml\n stylus:\n   compress: false\n+  sourcemaps:\n+    comment: true\n+    inline: true\n+    sourceRoot: ''\n+    basePath: .\n+  plugins: 'nib'\n+```\n+\n+- **compress** - Compress generated CSS (default: `false`)\n+- **sourcemaps**\n+  - **comment** - Adds a comment with the `sourceMappingURL` to the generated CSS (default: `true`)\n+  - **inline** - Inlines the sourcemap with full source text in base64 format (default: `false`)\n+  - **sourceRoot** - `sourceRoot` property of the generated sourcemap\n+  - **basePath** - Base path from which sourcemap and all sources are relative (default: `.`)\n+- **plugins** - Stylus plugin(s) (default: `nib`)\n+\n+## Setting Stylus variables\n+\n+It is possible to set variables that can be used in Stylus.\n+The purpose of setting variable is to avoid direct modification of the Stylus code,\n+and thus to make themes more generic\n+\n+For example, instead of hardcoding:\n+```stylus\n+div\n+ color #FFCC44\n+```\n+\n+You can refer to a variable:\n+```stylus\n+div\n+ color convert(hexo-config(\"moody_red\"))\n+```\n+\n+And in your **theme's** configuration, you can define this variable:\n+```yml\n+moody_red: \"#8B0001\"\n+```\n+\n+(The \"convert\" function above is here to convert the string into an actual stylus color)\n+\n+You can also use the theme_config variable in the main `_config.yml`:\n+```yml\n+theme_config:\n+  moody_red: \"#8B0001\"\n+```\n+\n+[Stylus]: https://stylus-lang.com/\n+[nib]: https://stylus.github.io/nib/\n+\n+## Extensibility\n+\n+This plugin provide a filter `stylus:renderer` to allows you extend it. When there's something you cannot do in Stylus, define it in JavaScript!\n+\n+For example, to define some global variable:\n+\n+```js\n+hexo.extend.filter.register('stylus:renderer', function(style) {\n+  style\n+    // we may define a global variable by passing a `Node`\n+    .define('has-canvas', require('stylus').nodes.false);\n+    // stylus also casts JavaScript values to their Stylus equivalents when possible\n+    .define('families', ['Helvetica Neue', 'Helvetica', 'sans-serif'])\n+    // also allows you to provide a JavaScript-defined function to Stylus\n+    .define('get-list', function(){\n+      return ['foo', 'bar', 'baz'];\n+    });\n+})\n ```\n \n-- **compress** - Compress generated CSS\n+Save the file in \"scripts/\" folder and run Hexo as usual.\n \n-[Stylus]: http://learnboost.github.io/stylus/\n",
+					"match": false,
+					"packageHash": "bd875f066c69a806a6128e7f2b8c30a2d81a4fbe4d80fc2183f325783f90adf5",
+					"size": 354,
+					"sourceHash": "edaaa99d116d3357426d0f2d523f42cc1f8808793b8bac21d65d8baea181448c",
+					"status": "content"
+				},
+				"index.js": {
+					"diff": "--- published/index.js\n+++ rebuilt/index.js\n@@ -1,36 +1,7 @@\n-var stylus = require('stylus'),\n-  nib = require('nib');\n+/* global hexo */\n+'use strict';\n \n-var getProperty = function(obj, key){\n-  key = key.replace(/\\[(\\w+)\\]/g, '.$1').replace(/^\\./, '');\n-\n-  var split = key.split('.'),\n-    result = obj[split[0]];\n-\n-  for (var i = 1, len = split.length; i < len; i++){\n-    result = result[split[i]];\n-  }\n-\n-  return result;\n-};\n-\n-var defineConfig = function(style){\n-  style.define('hexo-config', function(data){\n-    return getProperty(hexo._themeConfig, data.val);\n-  });\n-};\n-\n-var renderer = function(data, options, callback){\n-  var config = hexo.config.stylus || {};\n-\n-  stylus(data.text)\n-    .use(nib())\n-    .use(defineConfig)\n-    .set('filename', data.path)\n-    .set('compress', config.compress)\n-    .set('include css', true)\n-    .render(callback);\n-};\n+const renderer = require('./lib/renderer');\n \n hexo.extend.renderer.register('styl', 'css', renderer);\n-hexo.extend.renderer.register('stylus', 'css', renderer);\n\\ No newline at end of file\n+hexo.extend.renderer.register('stylus', 'css', renderer);\n",
+					"match": false,
+					"packageHash": "9edf05b7485be7354dde1181e617e89743b39ffc4c9fcc801f36487375a53522",
+					"size": 862,
+					"sourceHash": "c36228e30a448ee4983f72d223706fbf686ed4404a20a05968e44d93a5cdcdc2",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,15 +1,21 @@\n {\n   \"name\": \"hexo-renderer-stylus\",\n-  \"version\": \"0.0.2\",\n+  \"version\": \"3.0.1\",\n   \"description\": \"Stylus renderer plugin for Hexo\",\n   \"main\": \"index\",\n-  \"repository\": {\n-    \"type\": \"git\",\n-    \"url\": \"https://github.com/hexojs/hexo-renderer-stylus.git\"\n+  \"scripts\": {\n+    \"eslint\": \"eslint .\",\n+    \"test\": \"mocha test/index.js\",\n+    \"test-cov\": \"c8 --reporter=lcovonly --reporter=text npm run test\"\n   },\n-  \"bugs\": {\n-    \"url\": \"https://github.com/hexojs/hexo-renderer-stylus/issues\"\n+  \"directories\": {\n+    \"lib\": \"./lib\"\n   },\n+  \"files\": [\n+    \"lib\",\n+    \"index.js\"\n+  ],\n+  \"repository\": \"hexojs/hexo-renderer-stylus\",\n   \"keywords\": [\n     \"hexo\",\n     \"stylus\",\n@@ -19,13 +25,21 @@\n     \"styl\",\n     \"renderer\"\n   ],\n-  \"author\": \"Tommy Chen <tommy351@gmail.com> (http://zespia.tw)\",\n-  \"license\": {\n-    \"type\": \"MIT\",\n-    \"url\": \"https://raw.github.com/tommy351/hexo/master/LICENSE\"\n-  },\n+  \"author\": \"Tommy Chen <tommy351@gmail.com> (https://zespia.tw)\",\n+  \"license\": \"MIT\",\n   \"dependencies\": {\n-    \"stylus\": \"^0.44.0\",\n-    \"nib\": \"^1.0.2\"\n+    \"nib\": \"^1.2.0\",\n+    \"stylus\": \"^0.64.0\"\n+  },\n+  \"devDependencies\": {\n+    \"c8\": \"^8.0.0\",\n+    \"chai\": \"^4.3.7\",\n+    \"eslint\": \"^8.40.0\",\n+    \"eslint-config-hexo\": \"^5.0.0\",\n+    \"hexo\": \"^7.0.0\",\n+    \"mocha\": \"^10.2.0\"\n+  },\n+  \"engines\": {\n+    \"node\": \">=14\"\n   }\n }\n",
+					"match": false,
+					"packageHash": "9bcc23c0c5d1f07a2418979299da6012502af6a1cbac37ab1efd6f1f93d48bdc",
+					"size": 676,
+					"sourceHash": "61cd639115f22284f392f42ef92e0f4e7d1465ab9c1388a50239a58ccb2a9ac6",
+					"status": "content"
+				},
+				"lib/renderer.js": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 3,
+				"matchingFiles": 1,
+				"missingInPackage": 1,
+				"missingInSource": 1,
+				"score": 0.16666666666666666,
+				"totalFiles": 6
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "@adobe/css-tools",
+				"version": "4.3.3"
+			},
+			{
+				"name": "@isaacs/cliui",
+				"version": "8.0.2"
+			},
+			{
+				"name": "ansi-regex",
+				"version": "6.2.2"
+			},
+			{
+				"name": "ansi-styles",
+				"version": "6.2.3"
+			},
+			{
+				"name": "emoji-regex",
+				"version": "9.2.2"
+			},
+			{
+				"name": "string-width",
+				"version": "5.1.2"
+			},
+			{
+				"name": "strip-ansi",
+				"version": "7.2.0"
+			},
+			{
+				"name": "wrap-ansi",
+				"version": "8.1.0"
+			},
+			{
+				"name": "@pkgjs/parseargs",
+				"version": "0.11.0"
+			},
+			{
+				"name": "ansi-regex",
+				"version": "5.0.1"
+			},
+			{
+				"name": "ansi-styles",
+				"version": "4.3.0"
+			},
+			{
+				"name": "balanced-match",
+				"version": "1.0.2"
+			},
+			{
+				"name": "color-convert",
+				"version": "2.0.1"
+			},
+			{
+				"name": "color-name",
+				"version": "1.1.4"
+			},
+			{
+				"name": "cross-spawn",
+				"version": "7.0.6"
+			},
+			{
+				"name": "debug",
+				"version": "4.4.3"
+			},
+			{
+				"name": "eastasianwidth",
+				"version": "0.2.0"
+			},
+			{
+				"name": "emoji-regex",
+				"version": "8.0.0"
+			},
+			{
+				"name": "is-fullwidth-code-point",
+				"version": "3.0.0"
+			},
+			{
+				"name": "isexe",
+				"version": "2.0.0"
+			},
+			{
+				"name": "jackspeak",
+				"version": "3.4.3"
+			},
+			{
+				"name": "lru-cache",
+				"version": "10.4.3"
+			},
+			{
+				"name": "minipass",
+				"version": "7.1.3"
+			},
+			{
+				"name": "ms",
+				"version": "2.1.3"
+			},
+			{
+				"name": "nib",
+				"version": "1.2.0"
+			},
+			{
+				"name": "package-json-from-dist",
+				"version": "1.0.1"
+			},
+			{
+				"name": "path-key",
+				"version": "3.1.1"
+			},
+			{
+				"name": "path-scurry",
+				"version": "1.11.1"
+			},
+			{
+				"name": "sax",
+				"version": "1.4.4"
+			},
+			{
+				"name": "shebang-command",
+				"version": "2.0.0"
+			},
+			{
+				"name": "shebang-regex",
+				"version": "3.0.0"
+			},
+			{
+				"name": "source-map",
+				"version": "0.7.6"
+			},
+			{
+				"name": "string-width",
+				"version": "4.2.3"
+			},
+			{
+				"name": "string-width-cjs",
+				"version": "4.2.3"
+			},
+			{
+				"name": "strip-ansi",
+				"version": "6.0.1"
+			},
+			{
+				"name": "strip-ansi-cjs",
+				"version": "6.0.1"
+			},
+			{
+				"name": "stylus",
+				"version": "0.64.0"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "2.1.1"
+			},
+			{
+				"name": "foreground-child",
+				"version": "3.3.1"
+			},
+			{
+				"name": "glob",
+				"version": "10.5.0"
+			},
+			{
+				"name": "minimatch",
+				"version": "9.0.9"
+			},
+			{
+				"name": "signal-exit",
+				"version": "4.1.0"
+			},
+			{
+				"name": "which",
+				"version": "2.0.2"
+			},
+			{
+				"name": "wrap-ansi-cjs",
+				"version": "7.0.0"
+			}
+		]
+	}
+]
