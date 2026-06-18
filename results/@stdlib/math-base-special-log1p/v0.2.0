@@ -1,0 +1,106 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-06-18T01:24:20.726Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:8.19.4",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "@stdlib/math-base-special-log1p@0.2.0",
+			"name": "@stdlib/math-base-special-log1p",
+			"version": "0.2.0",
+			"location": "https://registry.npmjs.org/@stdlib/math-base-special-log1p/-/math-base-special-log1p-0.2.0.tgz",
+			"integrity": "sha512-gmvXAOALXC+QU660F52+cQPcbM3pPRj/b7skFon5jdl3zQ8aBWWGpQMgQHhJImeeHoM2oP/+bpZqkoGF8IOHXw==",
+			"publishedAt": "2024-02-14T06:00:42.823Z",
+			"publishedWith": {
+				"node": "16.20.2",
+				"npm": "8.19.4"
+			},
+			"dependencies": {
+				"@stdlib/math-base-napi-unary": "^0.2.0",
+				"@stdlib/constants-float64-ninf": "^0.2.0",
+				"@stdlib/constants-float64-pinf": "^0.2.0",
+				"@stdlib/utils-library-manifest": "^0.2.0",
+				"@stdlib/math-base-assert-is-nan": "^0.2.0",
+				"@stdlib/constants-float64-exponent-bias": "^0.2.0",
+				"@stdlib/number-float64-base-get-high-word": "^0.2.0",
+				"@stdlib/number-float64-base-set-high-word": "^0.2.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git://github.com/stdlib-js/math-base-special-log1p.git",
+			"spec": "github:stdlib-js/math-base-special-log1p#7137673f0798ef13d7c9fd7becf78e557b1d583b"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"NOTICE": {
+					"diff": "--- published/NOTICE\n+++ rebuilt/NOTICE\n@@ -1 +1 @@\n-Copyright (c) 2016-2024 The Stdlib Authors.\n+Copyright (c) 2016-2026 The Stdlib Authors.\n",
+					"match": false,
+					"packageHash": "ff1f7f092ae9540736fe045a9ce1ef0e2280a826349381a0cb0d5c379aae5d1a",
+					"size": 44,
+					"sourceHash": "45b4aab70d14b1cfa179cafdc83e4437288ca11984d058b0f53c2ab1e10770f4",
+					"status": "content"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -43,6 +43,16 @@\n npm install @stdlib/math-base-special-log1p\n ```\n \n+Alternatively,\n+\n+-   To load the package in a website via a `script` tag without installation and bundlers, use the [ES Module][es-module] available on the [`esm`][esm-url] branch (see [README][esm-readme]).\n+-   If you are using Deno, visit the [`deno`][deno-url] branch (see [README][deno-readme] for usage intructions).\n+-   For use in Observable, or in browser/node environments, use the [Universal Module Definition (UMD)][umd] build available on the [`umd`][umd-url] branch (see [README][umd-readme]).\n+\n+The [branches.md][branches-url] file summarizes the available branches and displays a diagram illustrating their relationships.\n+\n+To view installation and usage instructions specific to each branch build, be sure to explicitly navigate to the respective README files on each branch, as linked to above.\n+\n </section>\n \n <section class=\"usage\">\n@@ -95,17 +105,16 @@\n <!-- eslint no-undef: \"error\" -->\n \n ```javascript\n-var randu = require( '@stdlib/random-base-randu' );\n-var round = require( '@stdlib/math-base-special-round' );\n+var discreteUniform = require( '@stdlib/random-array-discrete-uniform' );\n+var logEachMap = require( '@stdlib/console-log-each-map' );\n var log1p = require( '@stdlib/math-base-special-log1p' );\n \n-var x;\n-var i;\n+var opts = {\n+    'dtype': 'float64'\n+};\n+var x = discreteUniform( 100, 0, 100, opts );\n \n-for ( i = 0; i < 100; i++ ) {\n-    x = round( randu() * 100.0 );\n-    console.log( log1p( x ) );\n-}\n+logEachMap( 'log1p( %0.4f ) = %0.4f', x, log1p );\n ```\n \n </section>\n@@ -185,7 +194,7 @@\n     double x;\n     double v;\n     int i;\n-    \n+\n     for ( i = 0; i < 100; i++ ) {\n         x = ( (double)rand() / (double)RAND_MAX ) * 100.0;\n         v = stdlib_base_log1p( x );\n@@ -211,7 +220,7 @@\n ## See Also\n \n -   <span class=\"package-name\">[`@stdlib/math-base/special/ln`][@stdlib/math/base/special/ln]</span><span class=\"delimiter\">: </span><span class=\"description\">evaluate the natural logarithm of a double-precision floating-point number.</span>\n--   <span class=\"package-name\">[`@stdlib/math-base/special/log`][@stdlib/math/base/special/log]</span><span class=\"delimiter\">: </span><span class=\"description\">base `b` logarithm.</span>\n+-   <span class=\"package-name\">[`@stdlib/math-base/special/log`][@stdlib/math/base/special/log]</span><span class=\"delimiter\">: </span><span class=\"description\">compute the base `b` logarithm of a double-precision floating-point number.</span>\n \n </section>\n \n@@ -238,7 +247,7 @@\n \n ## Copyright\n \n-Copyright &copy; 2016-2024. The Stdlib [Authors][stdlib-authors].\n+Copyright &copy; 2016-2026. The Stdlib [Authors][stdlib-authors].\n \n </section>\n \n@@ -251,8 +260,8 @@\n [npm-image]: http://img.shields.io/npm/v/@stdlib/math-base-special-log1p.svg\n [npm-url]: https://npmjs.org/package/@stdlib/math-base-special-log1p\n \n-[test-image]: https://github.com/stdlib-js/math-base-special-log1p/actions/workflows/test.yml/badge.svg?branch=v0.2.0\n-[test-url]: https://github.com/stdlib-js/math-base-special-log1p/actions/workflows/test.yml?query=branch:v0.2.0\n+[test-image]: https://github.com/stdlib-js/math-base-special-log1p/actions/workflows/test.yml/badge.svg?branch=main\n+[test-url]: https://github.com/stdlib-js/math-base-special-log1p/actions/workflows/test.yml?query=branch:main\n \n [coverage-image]: https://img.shields.io/codecov/c/github/stdlib-js/math-base-special-log1p/main.svg\n [coverage-url]: https://codecov.io/github/stdlib-js/math-base-special-log1p?branch=main\n@@ -264,8 +273,8 @@\n \n -->\n \n-[chat-image]: https://img.shields.io/gitter/room/stdlib-js/stdlib.svg\n-[chat-url]: https://app.gitter.im/#/room/#stdlib-js_stdlib:gitter.im\n+[chat-image]: https://img.shields.io/badge/zulip-join_chat-brightgreen.svg\n+[chat-url]: https://stdlib.zulipchat.com\n \n [stdlib]: https://github.com/stdlib-js/stdlib\n \n@@ -284,9 +293,9 @@\n \n <!-- <related-links> -->\n \n-[@stdlib/math/base/special/ln]: https://www.npmjs.com/package/@stdlib/math-base-special-ln\n+[@stdlib/math/base/special/ln]: https://github.com/stdlib-js/math-base-special-ln\n \n",
+					"match": false,
+					"packageHash": "3bc70d9cf3803f7d20d84cc332ef21acdf5a10ab19cc335f6c8f7807e66c61f4",
+					"size": 8165,
+					"sourceHash": "9247eb7def52ff63eec529547a9e192eb71fc444338917ce20ec2d963197ac7e",
+					"status": "content"
+				},
+				"include.gypi": {
+					"match": false,
+					"packageHash": "8289ddb91aae3a51656fdebc6b683babe38cf08a3f734138e733f5e8133106f5",
+					"size": 2193,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,6 +1,6 @@\n {\n   \"name\": \"@stdlib/math-base-special-log1p\",\n-  \"version\": \"0.2.0\",\n+  \"version\": \"0.2.4\",\n   \"description\": \"Evaluate the natural logarithm of 1+x.\",\n   \"license\": \"Apache-2.0\",\n   \"author\": {\n@@ -14,6 +14,7 @@\n     }\n   ],\n   \"main\": \"./lib\",\n+  \"gypfile\": false,\n   \"directories\": {\n     \"benchmark\": \"./benchmark\",\n     \"doc\": \"./docs\",\n@@ -40,37 +41,37 @@\n     \"url\": \"https://github.com/stdlib-js/stdlib/issues\"\n   },\n   \"dependencies\": {\n-    \"@stdlib/constants-float64-exponent-bias\": \"^0.2.0\",\n-    \"@stdlib/constants-float64-ninf\": \"^0.2.0\",\n-    \"@stdlib/constants-float64-pinf\": \"^0.2.0\",\n-    \"@stdlib/math-base-assert-is-nan\": \"^0.2.0\",\n-    \"@stdlib/math-base-napi-unary\": \"^0.2.0\",\n-    \"@stdlib/number-float64-base-get-high-word\": \"^0.2.0\",\n-    \"@stdlib/number-float64-base-set-high-word\": \"^0.2.0\",\n-    \"@stdlib/utils-library-manifest\": \"^0.2.0\"\n+    \"@stdlib/constants-float64-exponent-bias\": \"^0.2.3\",\n+    \"@stdlib/constants-float64-ninf\": \"^0.2.3\",\n+    \"@stdlib/constants-float64-pinf\": \"^0.2.3\",\n+    \"@stdlib/math-base-assert-is-nan\": \"^0.2.3\",\n+    \"@stdlib/math-base-napi-unary\": \"^0.2.7\",\n+    \"@stdlib/number-float64-base-get-high-word\": \"^0.2.3\",\n+    \"@stdlib/number-float64-base-set-high-word\": \"^0.2.3\",\n+    \"@stdlib/utils-library-manifest\": \"^0.2.4\"\n   },\n   \"devDependencies\": {\n-    \"@stdlib/array-base-incrspace\": \"^0.1.0\",\n-    \"@stdlib/constants-float64-eps\": \"^0.1.1\",\n-    \"@stdlib/fs-read-file\": \"^0.1.1\",\n-    \"@stdlib/fs-write-file\": \"^0.1.1\",\n-    \"@stdlib/math-base-assert-is-negative-zero\": \"^0.1.1\",\n-    \"@stdlib/math-base-special-abs\": \"^0.1.1\",\n-    \"@stdlib/math-base-special-ln\": \"^0.1.1\",\n-    \"@stdlib/math-base-special-round\": \"^0.1.1\",\n-    \"@stdlib/math-base-tools-evalpoly-compile\": \"^0.1.0\",\n-    \"@stdlib/math-base-tools-evalpoly-compile-c\": \"^0.1.0\",\n-    \"@stdlib/random-base-randu\": \"^0.1.0\",\n-    \"@stdlib/string-format\": \"^0.2.0\",\n-    \"@stdlib/string-substring-after\": \"^0.1.0\",\n-    \"@stdlib/string-substring-before\": \"^0.2.0\",\n-    \"@stdlib/time-current-year\": \"^0.1.1\",\n-    \"@stdlib/utils-try-require\": \"^0.2.0\",\n+    \"@stdlib/array-base-incrspace\": \"^0.2.3\",\n+    \"@stdlib/console-log-each-map\": \"^0.1.1\",\n+    \"@stdlib/constants-float64-eps\": \"^0.2.3\",\n+    \"@stdlib/fs-read-file\": \"^0.2.3\",\n+    \"@stdlib/fs-write-file\": \"^0.2.3\",\n+    \"@stdlib/math-base-assert-is-negative-zero\": \"^0.2.3\",\n+    \"@stdlib/math-base-special-abs\": \"^0.2.3\",\n+    \"@stdlib/math-base-special-ln\": \"^0.2.5\",\n+    \"@stdlib/math-base-tools-evalpoly-compile\": \"^0.3.1\",\n+    \"@stdlib/math-base-tools-evalpoly-compile-c\": \"^0.2.2\",\n+    \"@stdlib/random-array-discrete-uniform\": \"^0.2.2\",\n+    \"@stdlib/random-array-uniform\": \"^0.2.2\",\n+    \"@stdlib/string-format\": \"^0.2.3\",\n+    \"@stdlib/string-substring-after\": \"^0.2.3\",\n+    \"@stdlib/string-substring-before\": \"^0.2.3\",\n+    \"@stdlib/time-current-year\": \"^0.2.3\",\n+    \"@stdlib/utils-try-require\": \"^0.2.3\",\n     \"tape\": \"git+https://github.com/kgryte/tape.git#fix/globby\",\n     \"istanbul\": \"^0.4.1\",\n     \"tap-min\": \"git+https://github.com/Planeshifter/tap-min.git\",\n-    \"@stdlib/bench-harness\": \"^0.1.2\",\n-    \"@stdlib/bench\": \"^0.3.1\"\n+    \"@stdlib/bench-harness\": \"^0.2.3\"\n   },\n   \"engines\": {\n     \"node\": \">=0.10.0\",\n",
+					"match": false,
+					"packageHash": "9202bc230d93ee03abf1df15ea39322498fe85ee52e8c44bb9ba57b022dc9a3b",
+					"size": 3017,
+					"sourceHash": "dbef8f655e6819a259d641b585afbce7a6a2f70c9dcf8e62ac525f920764758f",
+					"status": "content"
+				},
+				"src/addon.c": {
+					"diff": "--- published/src/addon.c\n+++ rebuilt/src/addon.c\n@@ -19,5 +19,4 @@\n #include \"stdlib/math/base/special/log1p.h\"\n #include \"stdlib/math/base/napi/unary.h\"\n \n-// cppcheck-suppress shadowFunction\n STDLIB_MATH_BASE_NAPI_MODULE_D_D( stdlib_base_log1p )\n",
+					"match": false,
+					"packageHash": "4838ecbb626f5c45bbb54875ff5e07b4c2636736e6f14fb93e1268512ebead2c",
+					"size": 794,
+					"sourceHash": "cc8c1636607ef7e221d8e035cc50a8568a9f7d9d933edd71f6936608f745965e",
+					"status": "content"
+				},
+				"src/main.c": {
+					"diff": "--- published/src/main.c\n+++ rebuilt/src/main.c\n@@ -227,7 +227,7 @@\n *     See HP-15C Advanced Functions Handbook, p.193.\n *\n * @param x    input value\n-* @return\t  output value\n+* @return     output value\n *\n * @example\n * double out = stdlib_base_log1p( 4.0 );\n@@ -311,7 +311,7 @@\n \t\t}\n \t\t// Apply a bit mask (0 00000000000 11111111111111111111) to remove the exponent:\n \t\thu &= 0x000fffff; // max value => 0x000fffff => 1048575\n-\t\t\n+\n \t\t// The approximation to sqrt(2) used in thresholds is not critical.  However, the ones used above must give less strict bounds than the one here so that the k==0 case is never reached from here, since here we have committed to using the correction term but don't use it if k==0.\n \n \t\t// Check if u significand is less than sqrt(2) significand => 0x6a09e => 01101010000010011110\n",
+					"match": false,
+					"packageHash": "78cb09907ff2656ed6d4c63178d7d3097d40ba5b19f060d389026d04be56df1f",
+					"size": 10469,
+					"sourceHash": "dc1471d673211b78d4b92eae6c288572074a41fa7f8dc8b0112414fd799e25d2",
+					"status": "content"
+				},
+				"docs/repl.txt": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/types/test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 5,
+				"matchingFiles": 12,
+				"missingInPackage": 2,
+				"missingInSource": 1,
+				"score": 0.6,
+				"totalFiles": 20
+			}
+		},
+		"prodDependencies": []
+	}
+]
