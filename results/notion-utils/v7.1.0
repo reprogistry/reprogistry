@@ -1,0 +1,1495 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-06-19T10:37:04.993Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:10.9.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "notion-utils@7.1.0",
+			"name": "notion-utils",
+			"version": "7.1.0",
+			"location": "https://registry.npmjs.org/notion-utils/-/notion-utils-7.1.0.tgz",
+			"integrity": "sha512-hV3C8l3VGb6rdEj2W+toBbEvAoS+wuGiMySwxe4rMvERUktPnOCvM7cE0/b15dMSMlHXCwf2CYQXzpQiRbj8SA==",
+			"publishedAt": "2024-11-08T00:28:35.150Z",
+			"publishedWith": {
+				"node": "22.10.0",
+				"npm": "10.9.0"
+			},
+			"dependencies": {
+				"mem": "^10.0.0",
+				"p-queue": "^8.0.1",
+				"notion-types": "workspace:*",
+				"is-url-superb": "^6.1.0",
+				"normalize-url": "^8.0.1"
+			}
+		},
+		"source": {
+			"integrity": "sha512-McczOZymy9l6KABeLwTALgDeWorKAprCp+mnVezBb8JkPsiNVONO9U+bV8os5cnUVJLotoCn6hNsTXAKiBwDSA==",
+			"location": "git+https://github.com/NotionX/react-notion-x.git",
+			"spec": "github:NotionX/react-notion-x#214bc903e882aba058807920bea7f577efef1608"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"build/index.d.ts": {
+					"match": false,
+					"packageHash": "f0004b754c3574538b4db6dd57ee3df87a87a65824cfec856db0d0568ab89184",
+					"size": 6704,
+					"status": "missing-in-source"
+				},
+				"build/index.js": {
+					"match": false,
+					"packageHash": "deb558af748ec4baf5204f8b80f4d39207ac70fb2bbd6ae84cbc885fdbef2b4a",
+					"size": 25325,
+					"status": "missing-in-source"
+				},
+				"build/index.js.map": {
+					"match": false,
+					"packageHash": "cf3757f9e1e45b707fc51e52dbe13bd9d2caa141724ef54ccd7a02448ef97cfe",
+					"size": 49058,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,42 +1,42 @@\n {\n-  \"name\": \"notion-utils\",\n-  \"version\": \"7.1.0\",\n-  \"type\": \"module\",\n-  \"description\": \"Useful utilities for working with Notion data. Isomorphic.\",\n+  \"name\": \"notion\",\n+  \"private\": true,\n+  \"description\": \"Fast and accurate React renderer for Notion. TS batteries included.\",\n   \"repository\": \"NotionX/react-notion-x\",\n   \"author\": \"Travis Fischer <travis@transitivebullsh.it>\",\n   \"license\": \"MIT\",\n-  \"main\": \"./build/index.js\",\n-  \"module\": \"./build/index.js\",\n-  \"types\": \"./build/index.d.ts\",\n-  \"exports\": {\n-    \".\": {\n-      \"types\": \"./build/index.d.ts\",\n-      \"default\": \"./build/index.js\"\n-    }\n-  },\n-  \"sideEffects\": false,\n-  \"files\": [\n-    \"build\"\n-  ],\n+  \"version\": \"7.0.0\",\n+  \"packageManager\": \"pnpm@9.12.2\",\n   \"engines\": {\n     \"node\": \">=18\"\n   },\n   \"scripts\": {\n-    \"build\": \"tsup\",\n-    \"dev\": \"tsup --watch\",\n-    \"watch\": \"tsup --watch --silent --onSuccess 'echo build successful'\",\n-    \"clean\": \"del build\",\n-    \"test\": \"run-s test:*\",\n-    \"test:lint\": \"eslint .\",\n-    \"test:typecheck\": \"tsc --noEmit\",\n-    \"test:unit\": \"vitest run\"\n+    \"build\": \"turbo build --filter='./packages/*'\",\n+    \"dev\": \"turbo dev --concurrency 50 --continue\",\n+    \"clean\": \"turbo clean\",\n+    \"test\": \"turbo test\",\n+    \"test:format\": \"prettier --check \\\"**/*.{js,ts,tsx}\\\"\",\n+    \"test:lint\": \"turbo test:lint\",\n+    \"test:typecheck\": \"turbo test:typecheck\",\n+    \"test:unit\": \"turbo test:unit\",\n+    \"pretest\": \"run-s build\",\n+    \"preinstall\": \"npx only-allow pnpm\"\n   },\n-  \"dependencies\": {\n-    \"is-url-superb\": \"^6.1.0\",\n-    \"mem\": \"^10.0.0\",\n-    \"normalize-url\": \"^8.0.1\",\n-    \"notion-types\": \"workspace:*\",\n-    \"p-queue\": \"^8.0.1\"\n+  \"devDependencies\": {\n+    \"@changesets/cli\": \"^2.27.9\",\n+    \"@fisch0920/eslint-config\": \"^1.4.0\",\n+    \"@total-typescript/ts-reset\": \"^0.6.1\",\n+    \"@types/node\": \"^22.8.4\",\n+    \"del-cli\": \"^6.0.0\",\n+    \"eslint\": \"^8.57.1\",\n+    \"npm-run-all2\": \"^7.0.1\",\n+    \"prettier\": \"^3.3.3\",\n+    \"react\": \"^18.3.1\",\n+    \"react-dom\": \"^18.3.1\",\n+    \"tsup\": \"^8.3.5\",\n+    \"tsx\": \"^4.19.2\",\n+    \"turbo\": \"^2.2.3\",\n+    \"typescript\": \"^5.6.3\",\n+    \"vitest\": \"^2.1.4\"\n   }\n }\n",
+					"match": false,
+					"packageHash": "12d12fd710409d8854f3f815c5404b877bf98db16acec7d9e22d71ba34686f5b",
+					"size": 1030,
+					"sourceHash": "4807e65f100113ac2b9113a495ba4fccb25e287580154668a8c646380bf972b6",
+					"status": "content"
+				},
+				"readme.md": {
+					"diff": "--- published/readme.md\n+++ rebuilt/readme.md\n@@ -2,43 +2,331 @@\n   <img alt=\"React Notion X\" src=\"https://raw.githubusercontent.com/NotionX/react-notion-x/master/media/notion-ts.png\" width=\"689\">\n </p>\n \n-# notion-utils\n+# React Notion X\n \n-> Useful utilities for working with Notion data. Isomorphic.\n+> Fast and accurate React renderer for Notion. TS batteries included. ⚡️\n \n-[![NPM](https://img.shields.io/npm/v/notion-utils.svg)](https://www.npmjs.com/package/notion-utils) [![Build Status](https://github.com/NotionX/react-notion-x/actions/workflows/test.yml/badge.svg)](https://github.com/NotionX/react-notion-x/actions/workflows/test.yml) [![Prettier Code Formatting](https://img.shields.io/badge/code_style-prettier-brightgreen.svg)](https://prettier.io)\n+[![NPM](https://img.shields.io/npm/v/react-notion-x.svg)](https://www.npmjs.com/package/react-notion-x) [![Build Status](https://github.com/NotionX/react-notion-x/actions/workflows/test.yml/badge.svg)](https://github.com/NotionX/react-notion-x/actions/workflows/test.yml) [![Prettier Code Formatting](https://img.shields.io/badge/code_style-prettier-brightgreen.svg)](https://prettier.io) [![NPM](https://badgen.net/bundlephobia/minzip/react-notion-x)](https://bundlephobia.com/package/react-notion-x)\n \n-## Install\n+## Contents\n \n-```bash\n-npm install notion-utils\n+- [React Notion X](#react-notion-x)\n+  - [Contents](#contents)\n+  - [Advice](#advice)\n+  - [Features](#features)\n+  - [Usage](#usage)\n+  - [Styles](#styles)\n+  - [Optional Components](#optional-components)\n+  - [Private Pages](#private-pages)\n+  - [Next.js Examples](#nextjs-examples)\n+  - [Packages](#packages)\n+  - [Supported Blocks](#supported-blocks)\n+  - [Performance](#performance)\n+  - [Related](#related)\n+  - [Contributing](#contributing)\n+  - [License](#license)\n+  - [Sponsor](#sponsor)\n+\n+## Advice\n+\n+If you just want to publish a website using Notion, then we highly recommend using [Super.so](https://s.super.so/x) — a hosted solution with great perf that takes care of all the details for you.\n+\n+If you want more control over your website via React, then we recommend checking out the accompanying [Next.js starter kit](https://github.com/transitive-bullshit/nextjs-notion-starter-kit), which is free and uses `react-notion-x` under the hood.\n+\n+And if you want even more control, then you're in the right place! 👇👇\n+\n+## Features\n+\n+- 🚀 **Simple** - TypeScript + React\n+- ⚡ **Fast** - 10-100x faster than Notion\n+  - 95-100% Lighthouse scores\n+  - Heavier components can be loaded lazily via `next/dynamic`\n+- 💯 **Tests** - Comes with a comprehensive [test suite](https://www.notion.so/Notion-Test-Suite-067dd719a912471ea9a3ac10710e7fdf) covering most of Notion's functionality\n+- 🔥 **Solid** - Used in production by [Potion](https://www.potion.so) and thousands of websites\n+- 💪 **Smooth** - Supports `next/image` along with LQIP preview images ([demo](https://react-notion-x-demo.transitivebullsh.it/3492bd6dbaf44fe7a5cac62c5d402f06))\n+- Framework agnostic - Use with next.js, create-react-app, gatsby, etc\n+\n+## Usage\n+\n+First you'll want to fetch the content for a Notion page:\n+\n+```ts\n+import { NotionAPI } from 'notion-client'\n+\n+const notion = new NotionAPI()\n+\n+const recordMap = await notion.getPage('067dd719a912471ea9a3ac10710e7fdf')\n ```\n \n-This package is compatible with both Node.js and client-side web usage.\n+Once you have the data for a Notion page, you can render it via React:\n \n-## Usage\n+```tsx\n+import * as React from 'react'\n+import { NotionRenderer } from 'react-notion-x'\n+\n+export default ({ recordMap }) => (\n+  <NotionRenderer recordMap={recordMap} fullPage={true} darkMode={false} />\n+)\n+```\n+\n+Note: for heavier blocks, you'll have to opt into using them via `NotionRenderer.components`. These are not included in the default `NotionRenderer` export because they're too heavyweight for many use cases.\n+\n+## Styles\n+\n+You'll need to import some CSS styles as well. If you're using Next.js, we recommend you place these imports at the top of `pages/_app.js`:\n \n ```ts\n-import { parsePageId } from 'notion-utils'\n+// core styles shared by all of react-notion-x (required)\n+import 'react-notion-x/src/styles.css'\n+\n+// used for code syntax highlighting (optional)\n+import 'prismjs/themes/prism-tomorrow.css'\n+\n+// used for rendering equations (optional)\n+import 'katex/dist/katex.min.css'\n+```\n+\n+## Optional Components\n",
+					"match": false,
+					"packageHash": "d0a763a77242588f082e34336cfe214ab65aa34941015bed2b652be72e7cca8c",
+					"size": 1497,
+					"sourceHash": "b6183c7cebc83a5dbd2fb7fec284dfccf106d4ea8a631b3b647cd79c74559a57",
+					"status": "content"
+				},
+				".changeset/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".changeset/config.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".editorconfig": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".eslintrc.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/funding.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/issue_template.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/pull_request_template.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/test.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".prettierignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".prettierrc": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".vscode/launch.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"contributing.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/cra/CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/cra/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/cra/public/favicon.ico": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/cra/public/index.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/cra/public/logo192.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/cra/public/logo512.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/cra/public/manifest.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/cra/public/robots.txt": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/cra/readme.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/cra/src/App.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/cra/src/config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/cra/src/index.css": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/cra/src/index.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/cra/src/react-app-env.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/cra/src/record-map.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/cra/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/full/CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/full/components/Loading.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/full/components/LoadingIcon.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/full/components/NotionPage.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/full/components/styles.module.css": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/full/lib/config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/full/lib/notion.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/full/lib/preview-images.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/full/next-env.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/full/next.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/full/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/full/pages/[pageId].tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/full/pages/_app.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/full/pages/_document.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/full/pages/index.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/full/public/favicon.ico": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/full/public/robots.txt": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/full/public/social.jpg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/full/readme.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/full/styles/globals.css": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/full/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/full/turbo.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/minimal/CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/minimal/components/NotionPage.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/minimal/lib/config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/minimal/lib/notion.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/minimal/next-env.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/minimal/next.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/minimal/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/minimal/pages/[pageId].tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/minimal/pages/_app.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/minimal/pages/_document.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/minimal/pages/index.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/minimal/public/favicon.ico": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/minimal/public/robots.txt": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/minimal/readme.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/minimal/styles/globals.css": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/minimal/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/minimal/turbo.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"license": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"media/notion-ts.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"media/react-notion-x-perf.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"media/super-so-banner.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-client/CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-client/fixtures/blocks/audio.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-client/fixtures/blocks/drive.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-client/fixtures/blocks/equation.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-client/fixtures/blocks/file.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-client/fixtures/blocks/pdf.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-client/fixtures/board-results.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-client/fixtures/board.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-client/fixtures/collection-row-page.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-client/fixtures/collection-view-page.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-client/fixtures/gallery.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-client/fixtures/list.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-client/fixtures/page.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-client/fixtures/search.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-client/fixtures/signed-urls.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-client/fixtures/table.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-client/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-client/readme.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-client/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-client/src/notion-api.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-client/src/notion-api.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-client/src/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-client/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-client/tsup.config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-compat/CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-compat/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-compat/readme.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-compat/src/convert-block.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-compat/src/convert-color.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-compat/src/convert-page.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-compat/src/convert-rich-text.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-compat/src/convert-time.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-compat/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-compat/src/notion-compat-api.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-compat/src/notion-compat-api.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-compat/src/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-compat/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-compat/tsup.config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-types/CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-types/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-types/readme.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-types/src/api.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-types/src/block.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-types/src/collection-view.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-types/src/collection.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-types/src/core.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-types/src/formula.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-types/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-types/src/maps.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-types/src/user.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-types/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-types/tsup.config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/1a425309-21c0-4ca1-8548-c5915137b566.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/Atlanta Hawks.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/Boston Celtics.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/Brooklyn Nets.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/Charlotte Hornets.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/Chicago Bulls.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/Cleveland Cavaliers.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/Dallas Mavericks.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/Denver Nuggest.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/Detroit Pistons.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/Duke University.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/Golden State Warriors.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/Houston Rockets.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/Indiana Pacers.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/List.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/Los Angeles Clippers.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/Los Angeles Lakers.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/Memphis Grizzlies.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/Miami Heat.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/Milwaukee Bucks.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/Minnesota Timberwolves.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/New Orleans Pelicans.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/New York Knicks.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/Oklahoma City Thunder.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/Orlando Magic.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/Philadelphia 76ers.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/Phoenix Suns.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/Portland Trail Blazers.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/Raw Table.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/Sacramento Kings.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/San Antonio Spurs.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/Toronto Raptors.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/UCLA.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/University of Kentucky.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/University of North Carolina.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/University of Texas.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/Utah Jazz.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/Washington Wizards.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/data/1a425309-21c0-4ca1-8548-c5915137b566-048d8535-b957-488a-89f0-ade8d3c4c026.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/data/1a425309-21c0-4ca1-8548-c5915137b566-1a1863bd-f819-41dc-a228-831ca7a75d2a.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/data/1a425309-21c0-4ca1-8548-c5915137b566-1d79cc15-d040-43eb-9d65-7e35bafbcf74.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/data/1a425309-21c0-4ca1-8548-c5915137b566-367ecf41-f124-4652-bb7d-464b3789aefd.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/data/1a425309-21c0-4ca1-8548-c5915137b566-3815e8d7-e5f2-4399-a761-9ceaed565257.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/data/1a425309-21c0-4ca1-8548-c5915137b566-385ed123-6a39-46e5-984c-9704bcfd6494.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/data/1a425309-21c0-4ca1-8548-c5915137b566-43d091fb-a648-40cc-ae10-9d9784c34524.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/data/1a425309-21c0-4ca1-8548-c5915137b566-448a76b8-847d-4a40-a494-9a6da9c41a58.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/data/1a425309-21c0-4ca1-8548-c5915137b566-52718a79-d339-4d26-873f-734004af8823.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/data/1a425309-21c0-4ca1-8548-c5915137b566-5662c1f4-a011-4629-9616-3a2d53f6c9af.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/data/1a425309-21c0-4ca1-8548-c5915137b566-5742eaed-3c36-495a-bde5-7d33cba0ddb5.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/data/1a425309-21c0-4ca1-8548-c5915137b566-59a7246f-e923-4faf-9246-75851294365b.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/data/1a425309-21c0-4ca1-8548-c5915137b566-5ae81e49-33ad-47bf-9c14-14adb9145b4d.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/data/1a425309-21c0-4ca1-8548-c5915137b566-5c20b593-23d4-4884-9102-3ef3b1049273.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/data/1a425309-21c0-4ca1-8548-c5915137b566-63717bf3-3af6-4112-989d-acbe665ccf91.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/data/1a425309-21c0-4ca1-8548-c5915137b566-693b4304-0bbd-4f9a-85f1-7c9cb1768110.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/data/1a425309-21c0-4ca1-8548-c5915137b566-7687ad1f-ccbe-4abb-8e95-a3685543aefe.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/data/1a425309-21c0-4ca1-8548-c5915137b566-85e4d626-09cc-45f6-9a28-07d5d490ca1d.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/data/1a425309-21c0-4ca1-8548-c5915137b566-93fe8a38-e32b-4c6a-87f2-03f1a438de75.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/data/1a425309-21c0-4ca1-8548-c5915137b566-99cd3dfb-97fb-493d-bfaa-518bd872dda4.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/data/1a425309-21c0-4ca1-8548-c5915137b566-9a43758f-21c5-4fc2-a4b5-0fc82971b79f.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/data/1a425309-21c0-4ca1-8548-c5915137b566-9fdf39a1-64c3-464c-a4c9-f3e4d9a9aa2c.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/data/1a425309-21c0-4ca1-8548-c5915137b566-ab6c9a56-5322-4bd1-a384-7797a81478c5.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/data/1a425309-21c0-4ca1-8548-c5915137b566-b6c6b669-659e-4487-8d48-8a538b8a0d82.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/data/1a425309-21c0-4ca1-8548-c5915137b566-bd226193-3647-4ed1-bbe3-a5baa69954c7.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/data/1a425309-21c0-4ca1-8548-c5915137b566-bdc489ac-13dd-46bd-97f9-86866d76bc43.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/data/1a425309-21c0-4ca1-8548-c5915137b566-c14e33fe-19d2-4266-a935-0ef6528a77ff.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/data/1a425309-21c0-4ca1-8548-c5915137b566-c34ab79e-df2d-4a6d-af71-8aef61a65aa7.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/data/1a425309-21c0-4ca1-8548-c5915137b566-c69e1799-88cb-4135-a10d-1ec4617f0aa6.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/data/1a425309-21c0-4ca1-8548-c5915137b566-cfe27a86-00d0-4322-b2db-2bc3e69269e2.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/data/1a425309-21c0-4ca1-8548-c5915137b566-d4102177-3cb3-4d36-8f39-92d84147f825.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/data/1a425309-21c0-4ca1-8548-c5915137b566-d8f02741-e03a-4e40-91d7-0b821ee4014d.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/data/1a425309-21c0-4ca1-8548-c5915137b566-dac0d378-1774-47fc-a3a3-103ae120a3c1.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/data/1a425309-21c0-4ca1-8548-c5915137b566-e1c31992-ad30-4ab5-a497-c69fc579e2ec.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/data/1a425309-21c0-4ca1-8548-c5915137b566-e3d28d4f-e72e-430a-92f8-263cd01ea452.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/data/1a425309-21c0-4ca1-8548-c5915137b566-e8feed24-4bf6-41b5-84a7-6134f9160cc1.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/data/e777a528-9404-4e96-9f26-0014be705592-c01c2f48-5442-47d8-adb3-01c4f8bb8e58.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/data/e777a528-9404-4e96-9f26-0014be705592-c0d2d91c-e2a5-4ea5-a9b7-2b2d8ae2d591.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/fixtures/nba/e777a528-9404-4e96-9f26-0014be705592.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/readme.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/src/__snapshots__/normalize-url.test.ts.snap": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/src/__snapshots__/parse-page-id.test.ts.snap": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/src/estimate-page-read-time.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/src/format-date.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/src/format-notion-date-time.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/src/get-all-pages-in-space.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/src/get-block-collection-id.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/src/get-block-icon.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/src/get-block-parent-page.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/src/get-block-title.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/src/get-canonical-page-id.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/src/get-date-value.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/src/get-page-breadcrumbs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/src/get-page-content-block-ids.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/src/get-page-image-urls.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/src/get-page-property.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/src/get-page-table-of-contents.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/src/get-page-title.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/src/get-text-content.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/src/id-to-uuid.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/src/is-url.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/src/map-image-url.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/src/map-page-url.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/src/merge-record-maps.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/src/normalize-title.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/src/normalize-url.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/src/normalize-url.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/src/parse-page-id.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/src/parse-page-id.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/src/reset.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/src/uuid-to-id.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/notion-utils/tsup.config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/readme.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/block.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/components/asset-wrapper.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/components/asset.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/components/audio.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/components/checkbox.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/components/eoi.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/components/file.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/components/google-drive.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/components/graceful-image.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/components/header.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/components/lazy-image.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/components/lite-youtube-embed.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/components/mention-preview-card.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/components/page-aside.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/components/page-icon.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/components/page-title.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/components/search-dialog.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/components/sync-pointer-block.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/components/text.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/context.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/check.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/check.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/chevron-down-icon.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/clear-icon.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/collection-view-board.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/collection-view-board.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/collection-view-calendar.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/collection-view-calendar.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/collection-view-gallery.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/collection-view-gallery.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/collection-view-icon.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/collection-view-list.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/collection-view-list.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/collection-view-table.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/collection-view-table.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/copy.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/copy.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/default-page-icon.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/empty-icon.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/file-icon.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/link-icon.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/loading-icon.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/property-icon.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/search-icon.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/type-auto-increment-id.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/type-auto-increment-id.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/type-checkbox.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/type-checkbox.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/type-date.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/type-date.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/type-email.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/type-email.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/type-file.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/type-file.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/type-formula.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/type-formula.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/type-github.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/type-multi-select.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/type-multi-select.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/type-number.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/type-number.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/type-person-2.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/type-person-2.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/type-person.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/type-person.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/type-phone-number.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/type-phone-number.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/type-relation.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/type-relation.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/type-select.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/type-select.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/type-status.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/type-status.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/type-text.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/type-text.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/type-timestamp.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/type-timestamp.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/type-title.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/type-title.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/type-url.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/icons/type-url.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/next.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/renderer.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/styles.css": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/third-party/code.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/third-party/collection-card.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/third-party/collection-column-title.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/third-party/collection-group.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/third-party/collection-row.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/third-party/collection-utils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/third-party/collection-view-board.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/third-party/collection-view-gallery.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/third-party/collection-view-list.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/third-party/collection-view-table.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/third-party/collection-view.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/third-party/collection.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/third-party/collections.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/third-party/equation.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/third-party/eval-formula.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/third-party/modal.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/third-party/pdf.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/third-party/property.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/third-party/react-use.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/third-party/readme.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/src/utils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react-notion-x/tsup.config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"pnpm-workspace.yaml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"turbo.json": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 0,
+				"missingInPackage": 353,
+				"missingInSource": 3,
+				"score": 0,
+				"totalFiles": 358
+			}
+		},
+		"prodDependencies": []
+	}
+]
