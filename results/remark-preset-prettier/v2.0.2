@@ -1,0 +1,69 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-07-07T14:08:37.725Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:10.9.2",
+		"reproduced": false,
+		"attested": true,
+		"package": {
+			"spec": "remark-preset-prettier@2.0.2",
+			"name": "remark-preset-prettier",
+			"version": "2.0.2",
+			"location": "https://registry.npmjs.org/remark-preset-prettier/-/remark-preset-prettier-2.0.2.tgz",
+			"integrity": "sha512-kTJRYWjcLBqVZZT49uEyWoZXb2DCIADITTizv7zj9SK/Msofl1syVqO7zcLlH6MCkXk3W0dyeKLcmiIyoLegkQ==",
+			"publishedAt": "2025-04-03T14:52:35.309Z",
+			"publishedWith": {
+				"node": "22.14.0",
+				"npm": "10.9.2"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/un-ts/remark-preset-prettier.git",
+			"spec": "github:un-ts/remark-preset-prettier#44de249c1174280ae55850ce341f84054f5514c3"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"lib/index.d.ts": {
+					"match": false,
+					"packageHash": "f8bcd5bb7ca857b9e6c32323a0adb9c00b8e37ff017676422cb970a5ad9c673c",
+					"size": 220,
+					"status": "missing-in-source"
+				},
+				"lib/index.js": {
+					"match": false,
+					"packageHash": "9c6f982bf032abe8838529bdd0b7eadc239f7e57968bf965300ec764f6bbad8a",
+					"size": 1748,
+					"status": "missing-in-source"
+				},
+				"lib/index.js.map": {
+					"match": false,
+					"packageHash": "113f3e137103093930f62f896e0bd7e0edd94eb5f54c39a58895252648bf2dbc",
+					"size": 938,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -6,6 +6,7 @@\n   \"repository\": \"https://@github.com/un-ts/remark-preset-prettier.git\",\n   \"author\": \"JounQin <admin@1stg.me> (https://www.1stG.me)\",\n   \"license\": \"MIT\",\n+  \"packageManager\": \"yarn@4.8.1\",\n   \"engines\": {\n     \"node\": \">=14.8\"\n   },\n@@ -19,7 +20,53 @@\n     \"lib\",\n     \"!**/*.tsbuildinfo\"\n   ],\n+  \"scripts\": {\n+    \"build\": \"tsc -p tsconfig.lib.json\",\n+    \"format\": \"prettier --write .\",\n+    \"lint\": \"yarn build && run-p 'lint:*'\",\n+    \"lint:es\": \"eslint . --cache\",\n+    \"lint:ts\": \"tsc --noEmit\",\n+    \"prepare\": \"simple-git-hooks && yarn-berry-deduplicate || exit 0\",\n+    \"release\": \"yarn build && clean-pkg-json && changeset publish\",\n+    \"typecov\": \"type-coverage\"\n+  },\n   \"peerDependencies\": {\n     \"prettier\": \">=1.0.0\"\n+  },\n+  \"devDependencies\": {\n+    \"@1stg/common-config\": \"^11.1.2\",\n+    \"@changesets/changelog-github\": \"^0.5.1\",\n+    \"@changesets/cli\": \"^2.28.1\",\n+    \"@commitlint/cli\": \"^19.8.0\",\n+    \"@types/node\": \"^22.14.0\",\n+    \"clean-pkg-json\": \"^1.2.1\",\n+    \"eslint\": \"^9.23.0\",\n+    \"lint-staged\": \"^15.5.0\",\n+    \"npm-run-all2\": \"^7.0.2\",\n+    \"prettier\": \"^3.5.3\",\n+    \"simple-git-hooks\": \"^2.12.1\",\n+    \"size-limit\": \"^11.2.0\",\n+    \"size-limit-preset-node-lib\": \"^0.3.0\",\n+    \"type-coverage\": \"^2.29.7\",\n+    \"typescript\": \"^5.8.2\",\n+    \"yarn-berry-deduplicate\": \"^6.1.1\"\n+  },\n+  \"resolutions\": {\n+    \"es5-ext\": \"npm:@unes/es5-ext@latest\",\n+    \"prettier\": \"^3.5.3\",\n+    \"remark-preset-prettier\": \"link:.\"\n+  },\n+  \"typeCoverage\": {\n+    \"atLeast\": 100,\n+    \"cache\": true,\n+    \"detail\": true,\n+    \"ignoreAsAssertion\": true,\n+    \"ignoreCatch\": true,\n+    \"ignoreFiles\": [\n+      \"lib\"\n+    ],\n+    \"showRelativePath\": true,\n+    \"strict\": true,\n+    \"update\": true\n   }\n-}\n\\ No newline at end of file\n+}\n",
+					"match": false,
+					"packageHash": "108626612d8a8cb08fa2e6f4820e5cc5abd47ee962594ce2015d6de8a0d7bcc8",
+					"size": 616,
+					"sourceHash": "71de1e69c63f7b04078e70bb7b76f0f44b2db43fd91c420a63a508e95112b715",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 1,
+				"matchingFiles": 2,
+				"missingInPackage": 0,
+				"missingInSource": 3,
+				"score": 0.3333333333333333,
+				"totalFiles": 6
+			}
+		},
+		"prodDependencies": []
+	}
+]
