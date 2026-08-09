@@ -1,0 +1,3085 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-08-08T21:10:42.940Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:6.9.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "@nrwl/express@8.4.8",
+			"name": "@nrwl/express",
+			"version": "8.4.8",
+			"location": "https://registry.npmjs.org/@nrwl/express/-/express-8.4.8.tgz",
+			"integrity": "sha512-lZMe+TUcaHU2P5y8aA4XVMgdKGsUgDTilhYtdt1fVVM5JdcOdkngGzTA56qGGk/lvajZkjKfTPLOw79gLwdudw==",
+			"publishedAt": "2019-08-10T18:55:48.778Z",
+			"publishedWith": {
+				"node": "10.16.0",
+				"npm": "6.9.0"
+			},
+			"dependencies": {
+				"@nrwl/jest": "8.4.8",
+				"@nrwl/node": "8.4.8",
+				"@angular-devkit/schematics": "8.1.1"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/nrwl/nx.git",
+			"spec": "github:nrwl/nx#8.4.8"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"builders.json": {
+					"match": false,
+					"packageHash": "7945f71ce2fc17c50148e132b42c3b13958bb40c1d55c7838fb21f4db99e62a7",
+					"size": 88,
+					"status": "missing-in-source"
+				},
+				"collection.json": {
+					"match": false,
+					"packageHash": "4fc4f3500ff40b3f36321eb3e4789de24689ed86b60a8a7cf2d051244c5e07b4",
+					"size": 537,
+					"status": "missing-in-source"
+				},
+				"index.d.ts": {
+					"match": false,
+					"packageHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+					"size": 0,
+					"status": "missing-in-source"
+				},
+				"index.js": {
+					"match": false,
+					"packageHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+					"size": 0,
+					"status": "missing-in-source"
+				},
+				"migrations.json": {
+					"match": false,
+					"packageHash": "d004502f174b26832a2236ed9cab857222d78b3773195e764646edc4285130b9",
+					"size": 23,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,39 +1,167 @@\n {\n-  \"name\": \"@nrwl/express\",\n+  \"name\": \"@nrwl/nx-source\",\n   \"version\": \"8.4.8\",\n-  \"description\": \"Express Plugin for Nx\",\n-  \"repository\": {\n-    \"type\": \"git\",\n-    \"url\": \"git+https://github.com/nrwl/nx.git\"\n-  },\n-  \"keywords\": [\n-    \"Monorepo\",\n-    \"Node\",\n-    \"Express\",\n-    \"Jest\",\n-    \"Cypress\",\n-    \"CLI\"\n-  ],\n+  \"description\": \"Extensible Dev Tools for Monorepos\",\n+  \"homepage\": \"https://nx.dev\",\n   \"main\": \"index.js\",\n-  \"types\": \"index.d.ts\",\n-  \"author\": \"Victor Savkin\",\n-  \"license\": \"MIT\",\n-  \"bugs\": {\n-    \"url\": \"https://github.com/nrwl/nx/issues\"\n+  \"private\": true,\n+  \"scripts\": {\n+    \"build\": \"./scripts/package.sh --local\",\n+    \"commit\": \"git-cz\",\n+    \"checkcommit\": \"node ./scripts/commit-lint.js\",\n+    \"e2e\": \"./scripts/e2e.sh\",\n+    \"e2e-rerun\": \"./scripts/e2e-rerun.sh\",\n+    \"format\": \"./scripts/format.sh\",\n+    \"linknpm\": \"./scripts/link.sh\",\n+    \"nx-release\": \"./scripts/nx-release.js\",\n+    \"copy\": \"./scripts/copy.sh\",\n+    \"test\": \"yarn linknpm fast && ./scripts/test.sh\",\n+    \"test:all\": \"yarn linknpm fast && ./scripts/test_angular_runtime.sh && ./scripts/test.sh\",\n+    \"checkformat\": \"./scripts/check_format.sh\",\n+    \"checkimports\": \"node ./scripts/check-imports.js\",\n+    \"documentation\": \"./scripts/documentation/documentation.sh && yarn format && ./scripts/documentation/check-documentation.sh\"\n   },\n-  \"homepage\": \"https://nx.dev\",\n-  \"schematics\": \"./collection.json\",\n-  \"builders\": \"./builders.json\",\n-  \"ng-update\": {\n-    \"requirements\": {},\n-    \"migrations\": \"./migrations.json\"\n+  \"devDependencies\": {\n+    \"@angular-devkit/architect\": \"0.801.1\",\n+    \"@angular-devkit/build-angular\": \"0.801.1\",\n+    \"@angular-devkit/build-ng-packagr\": \"0.801.1\",\n+    \"@angular-devkit/build-webpack\": \"0.801.1\",\n+    \"@angular-devkit/core\": \"8.1.1\",\n+    \"@angular-devkit/schematics\": \"8.1.1\",\n+    \"@angular-eslint/builder\": \"0.0.1-alpha.16\",\n+    \"@angular/cli\": \"8.1.1\",\n+    \"@angular/common\": \"^8.0.0\",\n+    \"@angular/compiler\": \"^8.0.0\",\n+    \"@angular/compiler-cli\": \"^8.0.0\",\n+    \"@angular/core\": \"^8.0.0\",\n+    \"@angular/platform-browser\": \"^8.0.0\",\n+    \"@angular/platform-browser-dynamic\": \"^8.0.0\",\n+    \"@angular/router\": \"^8.0.0\",\n+    \"@angular/upgrade\": \"^8.0.0\",\n+    \"@babel/core\": \"7.5.5\",\n+    \"@babel/plugin-proposal-decorators\": \"7.4.4\",\n+    \"@babel/preset-env\": \"7.5.5\",\n+    \"@babel/preset-react\": \"7.0.0\",\n+    \"@babel/preset-typescript\": \"7.3.3\",\n+    \"@cypress/webpack-preprocessor\": \"^4.1.0\",\n+    \"@nestjs/common\": \"^6.2.4\",\n+    \"@nestjs/core\": \"^6.2.4\",\n+    \"@nestjs/platform-express\": \"^6.2.4\",\n+    \"@nestjs/schematics\": \"^6.3.0\",\n+    \"@nestjs/testing\": \"^6.2.4\",\n+    \"@ngrx/effects\": \"8.1.0\",\n+    \"@ngrx/entity\": \"8.1.0\",\n+    \"@ngrx/router-store\": \"8.1.0\",\n+    \"@ngrx/schematics\": \"8.1.0\",\n+    \"@ngrx/store\": \"8.1.0\",\n+    \"@ngrx/store-devtools\": \"8.1.0\",\n+    \"@schematics/angular\": \"8.1.1\",\n+    \"@testing-library/react\": \"8.0.5\",\n+    \"@types/express\": \"4.16.0\",\n+    \"@types/jasmine\": \"~2.8.6\",\n+    \"@types/jasminewd2\": \"~2.0.3\",\n+    \"@types/jest\": \"24.0.9\",\n+    \"@types/node\": \"~8.9.4\",\n+    \"@types/prettier\": \"^1.10.0\",\n+    \"@types/react\": \"^16.8.4\",\n+    \"@types/react-dom\": \"^16.8.2\",\n+    \"@types/webpack\": \"^4.4.24\",\n+    \"@types/yargs\": \"^11.0.0\",\n+    \"@typescript-eslint/eslint-plugin\": \"2.0.0-alpha.4\",\n+    \"@typescript-eslint/parser\": \"2.0.0-alpha.4\",\n+    \"angular\": \"1.6.6\",\n",
+					"match": false,
+					"packageHash": "1733d5962a583bfa51538ebc116420f783c7501416b92b319f3ed7c7fd9e7a2c",
+					"size": 812,
+					"sourceHash": "adecdeeb3789d311ead3f1b2adbff098d034eb876a9615bdbd53f18a3dca4dc0",
+					"status": "content"
+				},
+				"src/schematics/application/application.d.ts": {
+					"match": false,
+					"packageHash": "da7ae55379a5912f6d0c3bfaae1fb7a5d9bf1f959b3d7098c6d19e26f8b7d4de",
+					"size": 134,
+					"status": "missing-in-source"
+				},
+				"src/schematics/application/application.js": {
+					"match": false,
+					"packageHash": "5e74cb7909cb6ff7efbd22be3939092c14b2e9e8d22d5e896361f585289f23a2",
+					"size": 2431,
+					"status": "missing-in-source"
+				},
+				"src/schematics/application/application.spec.d.ts": {
+					"match": false,
+					"packageHash": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+					"size": 11,
+					"status": "missing-in-source"
+				},
+				"src/schematics/application/application.spec.js": {
+					"match": false,
+					"packageHash": "a7b5b3a6df63846e8a599d1101055517466b284aeafc74acc4fea01d0810aea1",
+					"size": 4180,
+					"status": "missing-in-source"
+				},
+				"src/schematics/application/schema.json": {
+					"match": false,
+					"packageHash": "07052918c957442b81e606c15ec286a5f7901d535665c4dda3b1c89a27a71c3f",
+					"size": 1524,
+					"status": "missing-in-source"
+				},
+				"src/schematics/ng-add/ng-add.d.ts": {
+					"match": false,
+					"packageHash": "da7ae55379a5912f6d0c3bfaae1fb7a5d9bf1f959b3d7098c6d19e26f8b7d4de",
+					"size": 134,
+					"status": "missing-in-source"
+				},
+				"src/schematics/ng-add/ng-add.js": {
+					"match": false,
+					"packageHash": "a9cd898a65ee7b87a62f6555e82737bcea9333f5114cad95278c2692e5ed987e",
+					"size": 1492,
+					"status": "missing-in-source"
+				},
+				"src/schematics/ng-add/ng-add.spec.d.ts": {
+					"match": false,
+					"packageHash": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+					"size": 11,
+					"status": "missing-in-source"
+				},
+				"src/schematics/ng-add/ng-add.spec.js": {
+					"match": false,
+					"packageHash": "5488ac1811f82c6162d0a7d464da142149e83089d23faafc3e8205c6989345b6",
+					"size": 7067,
+					"status": "missing-in-source"
+				},
+				"src/schematics/ng-add/schema.json": {
+					"match": false,
+					"packageHash": "daa3901e512ad96bfba50e6e594089a2e1959f0878bdc07b37978cbfdb9b6e22",
+					"size": 296,
+					"status": "missing-in-source"
+				},
+				"src/utils/testing.d.ts": {
+					"match": false,
+					"packageHash": "2b1edd5e4f1c3bf528967f249ee78c83b0ac9aa3766535471b7d7928091eb1c0",
+					"size": 341,
+					"status": "missing-in-source"
+				},
+				"src/utils/testing.js": {
+					"match": false,
+					"packageHash": "4f57c734371a056b1aae6409821404904f9e8cff6d529dca6a7ccebdc53ce45b",
+					"size": 583,
+					"status": "missing-in-source"
+				},
+				"src/utils/versions.d.ts": {
+					"match": false,
+					"packageHash": "6282f3eaa406c3fc803b6f72b4b237a07698f3e1409ce5f80285d5604a43f052",
+					"size": 141,
+					"status": "missing-in-source"
+				},
+				"src/utils/versions.js": {
+					"match": false,
+					"packageHash": "9d557e122cf6ff065bb9f666b24683649239bb19ebe370b9522e183c5b501a29",
+					"size": 183,
+					"status": "missing-in-source"
+				},
+				".github/ISSUE_TEMPLATE/feature.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/ISSUE_TEMPLATE.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/PULL_REQUEST_TEMPLATE.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/SAVED_REPLIES.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".prettierignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".prettierrc": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".travis.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"CONTRIBUTING.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/angular/fundamentals/build-full-stack-applications.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/angular/fundamentals/full-stack-app.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/angular/fundamentals/full-stack-deps.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/angular/fundamentals/lint-error.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/angular/fundamentals/monorepo-diagram-affected.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/angular/fundamentals/monorepo-diagram.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/angular/fundamentals/monorepos-automation.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/angular/fundamentals/use-modern-tools.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/angular/getting-started/create-workspace.gif": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/angular/getting-started/dep-graph.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/angular/getting-started/getting-started.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/angular/getting-started/lint-error.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/angular/getting-started/nx-and-cli.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/angular/getting-started/resources.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/angular/getting-started/what-is-nx.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/angular/guides/misc-data-persistence.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/angular/guides/misc-lazy-loading.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/angular/guides/misc-ngrx.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/angular/guides/misc-upgrade.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/angular/guides/nx7-to-nx8.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/angular/guides/react-affected.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/angular/guides/react-affected2.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/angular/guides/react-and-angular.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/angular/guides/react-dep-graph.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/angular/guides/react-serve.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/angular/guides/react.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/angular/guides/update.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/angular/tutorial/01-create-application.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/angular/tutorial/02-add-e2e-test.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/angular/tutorial/03-display-todos.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/angular/tutorial/04-connect-to-api.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/angular/tutorial/05-add-node-app.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/angular/tutorial/06-proxy.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/angular/tutorial/07-share-code.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/angular/tutorial/08-create-libs.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/angular/tutorial/09-dep-graph.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/angular/tutorial/10-test-affected-projects.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/angular/tutorial/11-build-affected-projects.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/angular/tutorial/12-summary.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api/angular.jpg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api/cypress.jpg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api/express.jpg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api/home.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api/jest.jpg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api/nest.jpg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api/node.jpg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api/react.jpg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api/web.jpg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-angular/schematics/application.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-angular/schematics/downgrade-module.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-angular/schematics/karma-project.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-angular/schematics/karma.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-angular/schematics/library.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-angular/schematics/ng-add.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-angular/schematics/ngrx.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-angular/schematics/upgrade-module.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-cypress/builders/cypress.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-cypress/schematics/cypress-project.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-cypress/schematics/ng-add.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-express/schematics/application.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-express/schematics/ng-add.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-jest/builders/jest.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-jest/schematics/jest-project.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-jest/schematics/ng-add.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-linter/builders/lint.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-nest/schematics/application.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-nest/schematics/ng-add.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-node/builders/build.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-node/builders/execute.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-node/schematics/application.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-node/schematics/ng-add.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-react/schematics/application.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-react/schematics/component.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-react/schematics/library.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-react/schematics/ng-add.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-web/builders/build.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-web/builders/dev-server.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-web/schematics/application.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-web/schematics/ng-add.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-workspace/builders/run-commands.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-workspace/npmscripts/affected-apps.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-workspace/npmscripts/affected-build.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-workspace/npmscripts/affected-dep-graph.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-workspace/npmscripts/affected-e2e.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-workspace/npmscripts/affected-libs.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-workspace/npmscripts/affected-lint.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-workspace/npmscripts/affected-test.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-workspace/npmscripts/affected.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-workspace/npmscripts/dep-graph.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-workspace/npmscripts/format-check.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-workspace/npmscripts/format-write.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-workspace/npmscripts/workspace-lint-files.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-workspace/npmscripts/workspace-schematic-name.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-workspace/schematics/library.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-workspace/schematics/ng-add.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-workspace/schematics/ng-new.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-workspace/schematics/preset.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-workspace/schematics/tao-new.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-workspace/schematics/workspace-schematic.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/api-workspace/schematics/workspace.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/builders.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/map.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/react/fundamentals/affected.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/react/fundamentals/build-full-stack-applications.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/react/fundamentals/full-stack-app.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/react/fundamentals/full-stack-deps.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/react/fundamentals/lint-error.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/react/fundamentals/monorepo-diagram-affected.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/react/fundamentals/monorepo-diagram.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/react/fundamentals/monorepos-automation.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/react/fundamentals/use-modern-tools.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/react/getting-started/getting-started.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/react/getting-started/resources.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/react/getting-started/what-is-nx.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/react/guides/cli.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/react/guides/update.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/react/tutorial/01-create-application.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/react/tutorial/02-add-e2e-test.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/react/tutorial/03-display-todos.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/react/tutorial/04-connect-to-api.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/react/tutorial/05-add-node-app.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/react/tutorial/06-proxy.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/react/tutorial/07-share-code.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/react/tutorial/08-create-libs.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/react/tutorial/09-dep-graph.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/react/tutorial/10-test-affected-projects.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/react/tutorial/11-build-affected-projects.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/react/tutorial/12-summary.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/schematics.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/shared/about.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/shared/affected.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/shared/cypress-logo.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/shared/dependency-graph.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/shared/jest-logo.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/shared/modernize-cypress.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/shared/modernize-jest.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/shared/modernize-prettier.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/shared/monorepo-affected.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/shared/monorepo-dependency-diagrams.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/shared/monorepo-nx-enterprise.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/shared/monorepo-tags.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/shared/nest-logo.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/shared/prettier-logo.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/shared/tools-workspace-schematics.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/web/fundamentals/build-full-stack-applications.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/web/fundamentals/full-stack-app.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/web/fundamentals/full-stack-deps.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/web/fundamentals/lint-error.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/web/fundamentals/monorepo-diagram-affected.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/web/fundamentals/monorepo-diagram.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/web/fundamentals/monorepos-automation.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/web/fundamentals/use-modern-tools.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/web/getting-started/getting-started.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/web/getting-started/resources.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/web/getting-started/what-is-nx.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/web/guides/cli.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/web/guides/update.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/web/tutorial/01-create-application.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/web/tutorial/02-add-e2e-test.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/web/tutorial/03-display-todos.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/web/tutorial/04-connect-to-api.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/web/tutorial/05-add-node-app.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/web/tutorial/06-proxy.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/web/tutorial/07-share-code.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/web/tutorial/08-create-libs.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/web/tutorial/09-dep-graph.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/web/tutorial/10-test-affected-projects.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/web/tutorial/11-build-affected-projects.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/web/tutorial/12-summary.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/affected.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/command-line.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/cypress.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/delegate-to-cli.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/downgrade-module.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/help.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/jest.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/karma.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/new.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/ng-add.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/ngrx.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/react.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/upgrade-module.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/utils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/web.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"karma.conf.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nx-logo.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nx-video-img.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/collection.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/migrations.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/ng-package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/spec/data-persistence.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/spec/testing-utils.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/migrations/update-8-3-0/upgrade-ngrx-8-0.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/runtime/nx/data-persistence.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/runtime/nx/nx.module.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/application/application.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/application/application.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/application/files/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/application/schema.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/application/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/downgrade-module/downgrade-module.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/downgrade-module/downgrade-module.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/downgrade-module/schema.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/downgrade-module/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/karma/files/karma/karma.conf.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/karma/karma.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/karma/karma.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/karma/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/karma-project/files/karma.conf.js__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/karma-project/files/src/test.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/karma-project/files/tsconfig.spec.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/karma-project/karma-project.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/karma-project/karma-project.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/karma-project/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/library/files/lib/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/library/files/lib/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/library/library.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/library/library.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/library/schema.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/library/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/ng-add/ng-add.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/ng-add/ng-add.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/ng-add/schema.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/ng-add/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/ngrx/creator-files/__directory__/__fileName__.actions.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/ngrx/creator-files/__directory__/__fileName__.effects.spec.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/ngrx/creator-files/__directory__/__fileName__.effects.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/ngrx/creator-files/__directory__/__fileName__.facade.spec.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/ngrx/creator-files/__directory__/__fileName__.facade.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/ngrx/creator-files/__directory__/__fileName__.models.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/ngrx/creator-files/__directory__/__fileName__.reducer.spec.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/ngrx/creator-files/__directory__/__fileName__.reducer.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/ngrx/creator-files/__directory__/__fileName__.selectors.spec.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/ngrx/creator-files/__directory__/__fileName__.selectors.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/ngrx/files/__directory__/__fileName__.actions.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/ngrx/files/__directory__/__fileName__.effects.spec.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/ngrx/files/__directory__/__fileName__.effects.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/ngrx/files/__directory__/__fileName__.facade.spec.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/ngrx/files/__directory__/__fileName__.facade.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/ngrx/files/__directory__/__fileName__.reducer.spec.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/ngrx/files/__directory__/__fileName__.reducer.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/ngrx/files/__directory__/__fileName__.selectors.spec.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/ngrx/files/__directory__/__fileName__.selectors.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/ngrx/ngrx.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/ngrx/ngrx.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/ngrx/rules/add-exports-barrel.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/ngrx/rules/add-imports-to-module.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/ngrx/rules/add-ngrx-to-package-json.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/ngrx/rules/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/ngrx/rules/request-context.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/ngrx/schema.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/ngrx/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/upgrade-module/files/__name__-setup.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/upgrade-module/files/hybrid.spec.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/upgrade-module/schema.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/upgrade-module/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/upgrade-module/upgrade-module.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/schematics/upgrade-module/upgrade-module.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/utils/ast-utils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/utils/test-runners.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/utils/testing.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/utils/upgrade.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/src/utils/versions.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/testing/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/testing/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/angular/testing/src/testing-utils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cli/bin/nx.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cli/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/create-nx-workspace/bin/create-nx-workspace.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/create-nx-workspace/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cypress/builders.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cypress/collection.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cypress/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cypress/migrations.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cypress/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cypress/plugins/preprocessor.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cypress/src/builders/cypress/cypress.impl.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cypress/src/builders/cypress/cypress.impl.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cypress/src/builders/cypress/legacy.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cypress/src/builders/cypress/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cypress/src/migrations/update-8-1-0/update-8-1-0.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cypress/src/migrations/update-8-1-0/update-8-1-0.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cypress/src/migrations/update-8-2-0/update-8-2-0.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cypress/src/migrations/update-8-2-0/update-8-2-0.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cypress/src/plugins/preprocessor.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cypress/src/plugins/preprocessor.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cypress/src/schematics/cypress-project/cypress-project.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cypress/src/schematics/cypress-project/cypress-project.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cypress/src/schematics/cypress-project/files/cypress.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cypress/src/schematics/cypress-project/files/src/fixtures/example.json__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cypress/src/schematics/cypress-project/files/src/integration/app.spec.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cypress/src/schematics/cypress-project/files/src/plugins/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cypress/src/schematics/cypress-project/files/src/support/app.po.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cypress/src/schematics/cypress-project/files/src/support/commands.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cypress/src/schematics/cypress-project/files/src/support/index.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cypress/src/schematics/cypress-project/files/tsconfig.e2e.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cypress/src/schematics/cypress-project/files/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cypress/src/schematics/cypress-project/schema.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cypress/src/schematics/cypress-project/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cypress/src/schematics/ng-add/ng-add.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cypress/src/schematics/ng-add/ng-add.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cypress/src/schematics/ng-add/schema.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cypress/src/schematics/ng-add/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cypress/src/utils/testing.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cypress/src/utils/versions.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/express/builders.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/express/collection.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/express/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/express/migrations.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/express/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/express/src/schematics/application/application.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/express/src/schematics/application/application.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/express/src/schematics/application/schema.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/express/src/schematics/application/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/express/src/schematics/ng-add/ng-add.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/express/src/schematics/ng-add/ng-add.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/express/src/schematics/ng-add/schema.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/express/src/schematics/ng-add/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/express/src/utils/testing.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/express/src/utils/versions.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/jest/builders.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/jest/collection.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/jest/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/jest/migrations.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/jest/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/jest/plugins/resolver.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/jest/src/builders/jest/jest.impl.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/jest/src/builders/jest/jest.impl.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/jest/src/builders/jest/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/jest/src/migrations/update-8-3-0/test-files/jest.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/jest/src/migrations/update-8-3-0/update-8-3-0.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/jest/src/migrations/update-8-3-0/update-8-3-0.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/jest/src/schematics/jest-project/files/jest.config.js__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/jest/src/schematics/jest-project/files/src/test-setup.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/jest/src/schematics/jest-project/files/tsconfig.spec.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/jest/src/schematics/jest-project/jest-project.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/jest/src/schematics/jest-project/jest-project.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/jest/src/schematics/jest-project/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/jest/src/schematics/ng-add/files/jest.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/jest/src/schematics/ng-add/ng-add.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/jest/src/schematics/ng-add/ng-add.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/jest/src/schematics/ng-add/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/jest/src/utils/testing.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/jest/src/utils/versions.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/linter/builders.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/linter/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/linter/src/builders/lint/lint.impl.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/linter/src/builders/lint/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/nest/builders.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/nest/collection.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/nest/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/nest/migrations.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/nest/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/nest/src/schematics/application/application.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/nest/src/schematics/application/application.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/nest/src/schematics/application/files/app/app.controller.spec.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/nest/src/schematics/application/files/app/app.controller.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/nest/src/schematics/application/files/app/app.module.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/nest/src/schematics/application/files/app/app.service.spec.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/nest/src/schematics/application/files/app/app.service.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/nest/src/schematics/application/schema.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/nest/src/schematics/application/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/nest/src/schematics/ng-add/ng-add.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/nest/src/schematics/ng-add/ng-add.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/nest/src/schematics/ng-add/schema.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/nest/src/schematics/ng-add/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/nest/src/utils/testing.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/nest/src/utils/versions.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node/builders.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node/collection.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node/migrations.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node/src/builders/build/build.impl.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node/src/builders/build/build.impl.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node/src/builders/build/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node/src/builders/execute/execute.impl.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node/src/builders/execute/execute.impl.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node/src/builders/execute/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node/src/schematics/application/application.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node/src/schematics/application/application.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node/src/schematics/application/files/app/src/app/.gitkeep": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node/src/schematics/application/files/app/src/assets/.gitkeep": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node/src/schematics/application/files/app/src/environments/environment.prod.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node/src/schematics/application/files/app/src/environments/environment.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node/src/schematics/application/files/app/src/main.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node/src/schematics/application/files/app/tsconfig.app.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node/src/schematics/application/files/app/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node/src/schematics/application/schema.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node/src/schematics/application/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node/src/schematics/ng-add/ng-add.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node/src/schematics/ng-add/ng-add.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node/src/schematics/ng-add/schema.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node/src/schematics/ng-add/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node/src/utils/config.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node/src/utils/config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node/src/utils/node.config.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node/src/utils/node.config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node/src/utils/normalize.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node/src/utils/normalize.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node/src/utils/testing.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node/src/utils/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node/src/utils/versions.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/collection.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/migrations.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/plugins/babel.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/migrations/update-8-3-0/update-8-3-0.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/migrations/update-8-3-0/update-8-3-0.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/plugins/babel.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/schematics/application/application.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/schematics/application/application.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/schematics/application/files/app/browserslist": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/schematics/application/files/app/src/app/__fileName__.__style__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/schematics/application/files/app/src/app/__fileName__.spec.tsx__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/schematics/application/files/app/src/app/__fileName__.tsx__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/schematics/application/files/app/src/assets/.gitkeep": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/schematics/application/files/app/src/environments/environment.prod.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/schematics/application/files/app/src/environments/environment.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/schematics/application/files/app/src/favicon.ico": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/schematics/application/files/app/src/index.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/schematics/application/files/app/src/main.tsx__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/schematics/application/files/app/src/polyfills.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/schematics/application/files/app/src/styles.__style__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/schematics/application/files/app/tsconfig.app.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/schematics/application/files/app/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/schematics/application/schema.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/schematics/application/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/schematics/component/component.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/schematics/component/component.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/schematics/component/files/__name__/__fileName__.__style__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/schematics/component/files/__name__/__fileName__.spec.tsx__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/schematics/component/files/__name__/__fileName__.tsx__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/schematics/component/schema.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/schematics/component/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/schematics/library/files/lib/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/schematics/library/files/lib/src/index.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/schematics/library/files/lib/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/schematics/library/files/lib/tsconfig.lib.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/schematics/library/library.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/schematics/library/library.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/schematics/library/schema.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/schematics/library/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/schematics/ng-add/ng-add.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/schematics/ng-add/ng-add.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/schematics/ng-add/schema.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/schematics/ng-add/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/utils/ast-utils.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/utils/ast-utils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/utils/dependencies.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/utils/styled.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/utils/testing.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/react/src/utils/versions.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/legacy-migrations/20171129-change-schema.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/legacy-migrations/20171202-change-schema.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/legacy-migrations/20171205-remove-npmscope-from-tslintjson.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/legacy-migrations/20171211-create-tsconfigapp-per-app.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/legacy-migrations/20171213-update-tsconfig-spec-to-exclude-e2e.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/legacy-migrations/20171219-add-affected-commands.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/legacy-migrations/20180103-update-command-line-scripts.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/legacy-migrations/20180116-update-command-line-scripts-to-use-nx-command.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/legacy-migrations/20180120-update-prettier.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/legacy-migrations/20180121-update-angular.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/legacy-migrations/20180121-update-testjs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/legacy-migrations/20180122-add-angular-devkit-core.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/legacy-migrations/20180130-add-migration-check-and-skip.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/legacy-migrations/20180130-add-postinstall.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/legacy-migrations/20180130-angular-devkit-schematics.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/legacy-migrations/20180225-switch-to-cli17.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/legacy-migrations/20180227-cleanup-scripts.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/legacy-migrations/20180309-create-or-update-prettierrc-file.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/legacy-migrations/20180313-add-tags.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/legacy-migrations/20180321-add-karma-app-check.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/legacy-migrations/20180328-add-nx-lint.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/legacy-migrations/20180404-adding-dep-graph.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/legacy-migrations/20180405-add-tools-directory.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/legacy-migrations/20180405-add-workspace-schematic-command.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/legacy-migrations/20180412-nx-update-scripts.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/legacy-migrations/20180424-add-tsconfig-tools.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/legacy-migrations/20180507-create-nx-json.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/legacy-migrations/20180515-switch-to-nx6.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/migrations.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/update-6-0-0/helpers.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/update-6-0-0/update-6-0-0.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/update-6-0-5/update-6-0-5.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/update-6-1-0/update-6-1-0.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/update-6-2-0/files/karma.conf.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/update-6-2-0/update-6-2-0.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/update-6-2-0/update-6-2-0.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/update-6-3-2/update-6-3-2.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/update-6-3-2/update-6-3-2.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/update-6-4-0/update-6-4-0.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/update-6-4-0/update-6-4-0.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/update-7-0-0/update-7-0-0.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/update-7-0-0/update-7-0-0.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/update-7-0-2/test-files/karma.conf.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/update-7-0-2/update-7-0-2.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/update-7-0-2/update-7-0-2.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/update-7-1-0/update-7-1-0.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/update-7-1-0/update-7-1-0.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/update-7-2-0/update-7-2-0.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/update-7-2-0/update-7-2-0.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/update-7-5-0/update-7-5-0.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/update-7-5-0/update-7-5-0.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/update-7-6-0/update-7-6-0.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/update-7-6-0/update-7-6-0.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/update-7-7-0/update-7-7-0.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/update-7-7-0/update-7-7-0.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/update-7-8-1/update-7-8-1.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/update-7-8-1/update-7-8-1.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/update-8-0-0/update-8-0-0.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/migrations/update-8-0-0/update-8-0-0.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/src/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/src/collection.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/src/migrator/migrator.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/src/schematics/ng-add/ng-add.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/src/schematics/ng-add/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/schematics/testing.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/tao/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/tao/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/tao/src/commands/generate.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/tao/src/commands/help.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/tao/src/commands/run.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/tao/src/compat/angular-cli-compat.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/tao/src/shared/logger.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/tao/src/shared/params.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/tao/src/shared/params.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/tao/src/shared/print-help.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/builders.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/collection.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/migrations.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/src/builders/build/build.impl.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/src/builders/build/build.impl.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/src/builders/build/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/src/builders/dev-server/dev-server.impl.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/src/builders/dev-server/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/src/schematics/application/application.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/src/schematics/application/application.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/src/schematics/application/files/app/browserslist": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/src/schematics/application/files/app/src/app/app.element.__style__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/src/schematics/application/files/app/src/app/app.element.spec.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/src/schematics/application/files/app/src/app/app.element.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/src/schematics/application/files/app/src/assets/.gitkeep": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/src/schematics/application/files/app/src/environments/environment.prod.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/src/schematics/application/files/app/src/environments/environment.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/src/schematics/application/files/app/src/favicon.ico": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/src/schematics/application/files/app/src/index.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/src/schematics/application/files/app/src/main.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/src/schematics/application/files/app/src/polyfills.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/src/schematics/application/files/app/src/styles.__style__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/src/schematics/application/files/app/tsconfig.app.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/src/schematics/application/files/app/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/src/schematics/application/schema.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/src/schematics/application/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/src/schematics/ng-add/ng-add.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/src/schematics/ng-add/ng-add.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/src/schematics/ng-add/schema.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/src/schematics/ng-add/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/src/utils/config.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/src/utils/config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/src/utils/devserver.config.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/src/utils/devserver.config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/src/utils/normalize.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/src/utils/normalize.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/src/utils/serve-path.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/src/utils/source-root.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/src/utils/testing.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/src/utils/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/src/utils/versions.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/src/utils/web.config.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/web/src/utils/web.config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/builders.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/collection.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/migrations.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/builders/run-commands/run-commands.impl.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/builders/run-commands/run-commands.impl.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/builders/run-commands/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/command-line/affected-apps.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/command-line/affected-apps.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/command-line/affected.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/command-line/dep-graph.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/command-line/dep-graph.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/command-line/deps-calculator.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/command-line/deps-calculator.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/command-line/format.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/command-line/lint.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/command-line/nx-commands.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/command-line/nx-migrate.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/command-line/output.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/command-line/shared.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/command-line/shared.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/command-line/touched.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/command-line/touched.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/command-line/workspace-integrity-checks.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/command-line/workspace-integrity-checks.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/command-line/workspace-results.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/command-line/workspace-results.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/command-line/workspace-schematic.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/migrations/update-8-2-0/update-8-2-0.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/migrations/update-8-2-0/update-8-2-0.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/migrations/update-8-3-0/rename-lint.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/migrations/update-8-3-0/update-8-3-0.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/migrations/update-8-3-0/update-cypress-to-34.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/migrations/update-8-3-0/update-ng-cli-8-1.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/migrations/update-8-4-0/add-nx-script.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/library/files/lib/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/library/files/lib/src/index.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/library/files/lib/src/lib/__fileName__.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/library/files/lib/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/library/files/lib/tsconfig.lib.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/library/library.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/library/library.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/library/schema.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/library/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/ng-add/files/.prettierignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/ng-add/files/karma.conf.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/ng-add/files/tools/schematics/.gitkeep": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/ng-add/files/tools/tsconfig.tools.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/ng-add/ng-add.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/ng-add/ng-add.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/ng-add/schema.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/ng-add/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/ng-new/ng-new.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/ng-new/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/preset/preset.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/preset/preset.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/preset/schema.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/preset/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/shared-new/shared-new.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/tao-new/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/tao-new/tao-new.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/workspace/files/.vscode/extensions.json__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/workspace/files/README.md__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/workspace/files/__dot__editorconfig": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/workspace/files/__dot__gitignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/workspace/files/__dot__prettierignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/workspace/files/__dot__prettierrc": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/workspace/files/__workspaceFile__.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/workspace/files/apps/.gitkeep": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/workspace/files/libs/.gitkeep": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/workspace/files/nx.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/workspace/files/package.json__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/workspace/files/tools/schematics/.gitkeep": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/workspace/files/tools/tsconfig.tools.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/workspace/files/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/workspace/schema.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/workspace/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/workspace/workspace.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/workspace/workspace.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/workspace-schematic/files/__name__/index.ts__tmpl__": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/workspace-schematic/files/__name__/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/workspace-schematic/schema.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/workspace-schematic/schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/workspace-schematic/workspace-schematic.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/schematics/workspace-schematic/workspace-schematic.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/tslint/nxEnforceModuleBoundariesRule.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/tslint/nxEnforceModuleBoundariesRule.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/utils/app-root.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/utils/ast-utils.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/utils/ast-utils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/utils/cli-config-utils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/utils/common.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/utils/common.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/utils/fileutils.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/utils/fileutils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/utils/lint.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/utils/name-utils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/utils/rules/deleteFile.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/utils/rules/format-files.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/utils/rules/format-files.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/utils/rules/ng-add.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/utils/rules/update-karma-conf.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/utils/rules/update-karma-conf.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/utils/strings.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/utils/strip-source-code.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/utils/strip-source-code.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/utils/testing-utils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/utils/testing.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/utils/typescript.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/utils/update-task.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/utils/versions.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/src/utils/workspace.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/workspace/testing.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/build.sh": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/build_for_test.sh": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/check-imports.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/check_format.sh": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/commit-lint.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/copy.sh": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/documentation/check-documentation.sh": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/documentation/documentation.sh": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/documentation/generate-api-home.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/documentation/generate-builders-data.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/documentation/generate-npmscripts-data.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/documentation/generate-package-dependencies.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/documentation/generate-schematics-data.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/documentation/get-package-configurations.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/documentation/json-parser.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/documentation/utils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/e2e-rerun.sh": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/e2e.sh": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/format.sh": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/link.sh": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/nx-release.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/package.sh": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/publish.sh": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/test.sh": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/test_angular_runtime.sh": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 1,
+				"matchingFiles": 2,
+				"missingInPackage": 729,
+				"missingInSource": 19,
+				"score": 0.002663115845539281,
+				"totalFiles": 751
+			}
+		},
+		"prodDependencies": []
+	}
+]
