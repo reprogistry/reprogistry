@@ -1,0 +1,5473 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-08-28T17:58:37.101Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:8.11.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "@metaplex-foundation/mpl-candy-machine@5.1.0",
+			"name": "@metaplex-foundation/mpl-candy-machine",
+			"version": "5.1.0",
+			"location": "https://registry.npmjs.org/@metaplex-foundation/mpl-candy-machine/-/mpl-candy-machine-5.1.0.tgz",
+			"integrity": "sha512-pjHpUpWVOCDxK3l6dXxfmJKNQmbjBqnm5ElOl1mJAygnzO8NIPQvrP89y6xSNyo8qZsJyt4ZMYUyD0TdbtKZXQ==",
+			"publishedAt": "2023-02-02T20:32:46.081Z",
+			"publishedWith": {
+				"node": "16.15.1",
+				"npm": "9.4.1"
+			},
+			"dependencies": {
+				"@solana/web3.js": "^1.66.2",
+				"@solana/spl-token": "^0.3.6",
+				"@metaplex-foundation/beet": "^0.7.1",
+				"@metaplex-foundation/cusper": "^0.0.2",
+				"@metaplex-foundation/beet-solana": "^0.4.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/metaplex-foundation/metaplex-program-library.git",
+			"spec": "github:metaplex-foundation/metaplex-program-library#bc24ee32b270d247c5ef4d8bad16a7462fd73581"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"LICENSE": {
+					"diff": "--- published/LICENSE\n+++ rebuilt/LICENSE\n@@ -1,202 +1,241 @@\n-                                 Apache License\n-                           Version 2.0, January 2004\n-                        http://www.apache.org/licenses/\n-\n-   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n-\n-   1. Definitions.\n-\n-      \"License\" shall mean the terms and conditions for use, reproduction,\n-      and distribution as defined by Sections 1 through 9 of this document.\n-\n-      \"Licensor\" shall mean the copyright owner or entity authorized by\n-      the copyright owner that is granting the License.\n-\n-      \"Legal Entity\" shall mean the union of the acting entity and all\n-      other entities that control, are controlled by, or are under common\n-      control with that entity. For the purposes of this definition,\n-      \"control\" means (i) the power, direct or indirect, to cause the\n-      direction or management of such entity, whether by contract or\n-      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n-      outstanding shares, or (iii) beneficial ownership of such entity.\n-\n-      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n-      exercising permissions granted by this License.\n-\n-      \"Source\" form shall mean the preferred form for making modifications,\n-      including but not limited to software source code, documentation\n-      source, and configuration files.\n-\n-      \"Object\" form shall mean any form resulting from mechanical\n-      transformation or translation of a Source form, including but\n-      not limited to compiled object code, generated documentation,\n-      and conversions to other media types.\n-\n-      \"Work\" shall mean the work of authorship, whether in Source or\n-      Object form, made available under the License, as indicated by a\n-      copyright notice that is included in or attached to the work\n-      (an example is provided in the Appendix below).\n-\n-      \"Derivative Works\" shall mean any work, whether in Source or Object\n-      form, that is based on (or derived from) the Work and for which the\n-      editorial revisions, annotations, elaborations, or other modifications\n-      represent, as a whole, an original work of authorship. For the purposes\n-      of this License, Derivative Works shall not include works that remain\n-      separable from, or merely link (or bind by name) to the interfaces of,\n-      the Work and Derivative Works thereof.\n-\n-      \"Contribution\" shall mean any work of authorship, including\n-      the original version of the Work and any modifications or additions\n-      to that Work or Derivative Works thereof, that is intentionally\n-      submitted to Licensor for inclusion in the Work by the copyright owner\n-      or by an individual or Legal Entity authorized to submit on behalf of\n-      the copyright owner. For the purposes of this definition, \"submitted\"\n-      means any form of electronic, verbal, or written communication sent\n-      to the Licensor or its representatives, including but not limited to\n-      communication on electronic mailing lists, source code control systems,\n-      and issue tracking systems that are managed by, or on behalf of, the\n-      Licensor for the purpose of discussing and improving the Work, but\n-      excluding communication that is conspicuously marked or otherwise\n-      designated in writing by the copyright owner as \"Not a Contribution.\"\n-\n-      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n-      on behalf of whom a Contribution has been received by Licensor and\n-      subsequently incorporated within the Work.\n-\n-   2. Grant of Copyright License. Subject to the terms and conditions of\n-      this License, each Contributor hereby grants to You a perpetual,\n-      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n-      copyright license to reproduce, prepare Derivative Works of,\n-      publicly display, publicly perform, sublicense, and distribute the\n-      Work and such Derivative Works in Source or Object form.\n-\n-   3. Grant of Patent License. Subject to the terms and conditions of\n-      this License, each Contributor hereby grants to You a perpetual,\n-      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n-      (except as stated in this section) patent license to make, have made,\n-      use, offer to sell, sell, import, and otherwise transfer the Work,\n-      where such license applies only to those patent claims licensable\n-      by such Contributor that are necessarily infringed by their\n-      Contribution(s) alone or by combination of their Contribution(s)\n-      with the Work to which such Contribution(s) was submitted. If You\n-      institute patent litigation against any entity (including a\n-      cross-claim or counterclaim in a lawsuit) alleging that the Work\n-      or a Contribution incorporated within the Work constitutes direct\n-      or contributory patent infringement, then any patent licenses\n-      granted to You under this License for that Work shall terminate\n-      as of the date such litigation is filed.\n-\n-   4. Redistribution. You may reproduce and distribute copies of the\n-      Work or Derivative Works thereof in any medium, with or without\n-      modifications, and in Source or Object form, provided that You\n-      meet the following conditions:\n-\n-      (a) You must give any other recipients of the Work or\n-          Derivative Works a copy of this License; and\n-\n-      (b) You must cause any modified files to carry prominent notices\n",
+					"match": false,
+					"packageHash": "7fc678e1e0950ba447c7c13658158378755366a91c1ebd5390307d0427a16e6f",
+					"size": 11391,
+					"sourceHash": "18f025513b3ad665d57ab359e11ab593f240ecd46b59eb5092ef03418f1bf0f7",
+					"status": "content"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,19 +1,233 @@\n-# mpl-candy-machine\n-#\n+# Metaplex Program Library\n \n-This package contains the Candy Machine contract SDK code. This MPL package targets the current generation of candy machine on the v2.0.0 release line.\n+Metaplex smart contracts and SDK.\n \n-## Developing\n+[![Program Tests](https://github.com/metaplex-foundation/metaplex-program-library/actions/workflows/program.yml/badge.svg)](https://github.com/metaplex-foundation/metaplex-program-library/actions/workflows/program.yml)\n+[![Integration Tests](https://github.com/metaplex-foundation/metaplex-program-library/actions/workflows/integration.yml/badge.svg)](https://github.com/metaplex-foundation/metaplex-program-library/actions/workflows/integration.yml)\n+[![SDK Tests](https://github.com/metaplex-foundation/metaplex-program-library/actions/workflows/sdk.yml/badge.svg)](https://github.com/metaplex-foundation/metaplex-program-library/actions/workflows/sdk.yml)\n \n-In order to update the generated lib when the rust contract was updated please run:\n+## Metaplex Contracts\n \n+| Name                                       | Rust Crate                                                                | npm Package                                                            |\n+|:-------------------------------------------|:--------------------------------------------------------------------------|------------------------------------------------------------------------|\n+| [Auction House](./auction-house)           | [![Crate][mpl-auction-house-img-long]][mpl-auction-house-crate]           | [![NPM][mpl-auction-house-nimg-long]][mpl-auction-house-npm]           |\n+| [Auctioneer](./auctioneer)                 | [![Crate][mpl-auctioneer-img-long]][mpl-auctioneer-crate]                 | [![NPM][mpl-auctioneer-nimg-long]][mpl-auctioneer-npm]                 |\n+| [Bubblegum](./bubblegum)                   | [![Crate][mpl-bubblegum-img-long]][mpl-bubblegum-crate]                   | [![NPM][mpl-bubblegum-nimg-long]][mpl-bubblegum-npm]                   |\n+| [Candy Machine Core](./candy-machine-core) | [![Crate][mpl-candy-machine-core-img-long]][mpl-candy-machine-core-crate] | [![NPM][mpl-candy-machine-core-nimg-long]][mpl-candy-machine-core-npm] |\n+| [Candy Machine](./candy-machine)           | [![Crate][mpl-candy-machine-img-long]][mpl-candy-machine-crate]           | [![NPM][mpl-candy-machine-nimg-long]][mpl-candy-machine-npm]           |\n+| [Fixed Price Sale](./fixed-price-sale)     | [![Crate][mpl-fixed-price-sale-img-long]][mpl-fixed-price-sale-crate]     | [![NPM][mpl-fixed-price-sale-nimg-long]][mpl-fixed-price-sale-npm]     |\n+| [Gumdrop](./gumdrop)                       | [![Crate][mpl-gumdrop-img-long]][mpl-gumdrop-crate]                       | [![NPM][mpl-gumdrop-nimg-long]][mpl-gumdrop-npm]                       |\n+| [Hydra](./hydra)                           | [![Crate][mpl-hydra-img-long]][mpl-hydra-crate]                           | [![NPM][mpl-hydra-nimg-long]][mpl-hydra-npm]                           |\n+| [NFT Packs](./nft-packs)                   | [![Crate][mpl-nft-packs-img-long]][mpl-nft-packs-crate]                   | [![NPM][mpl-nft-packs-nimg-long]][mpl-nft-packs-npm]                   |\n+| [Token Entangler](./token-entangler)       | [![Crate][mpl-token-entangler-img-long]][mpl-token-entangler-crate]       | [![NPM][mpl-token-entangler-nimg-long]][mpl-token-entangler-npm]       |\n+| [Token Metadata](./token-metadata)         | [![Crate][mpl-token-metadata-img-long]][mpl-token-metadata-crate]         | [![NPM][mpl-token-metadata-nimg-long]][mpl-token-metadata-npm]         |\n+\n+## Development\n+\n+### Setting up Rust Tests\n+\n+Run the `build.sh` script with the name of the program to build the shared object and put it in a directory\n+called `test-programs` in the root of the project.\n+\n+E.g.:\n+\n+```bash\n+./build.sh auction-house\n ```\n-yarn gen:api\n-```\n \n-NOTE: at this point this only generates the IDL json file but later will generate TypeScript\n-definitions and SDK code as well, derived from that IDL.\n+Running with `all` builds all programs.\n+\n+### Versioning and Publishing Packages\n+\n+Smart contract SDK packages are versioned independently since a contract isn't necessarily coupled\n+to other contracts.\n+\n+We use the following `(pre|post)(version|publish)` npm scripts to manage related checks, tagging,\n+committing and pushing the version bump.\n+\n+- `preversion`: ensures that the package builds and its tests pass\n+- `postversion`: adds and commits the version bump and adds a tag indicating package name and new\n+  version, i.e. `@metaplex-foundation/mp-core@v0.0.1`\n+- `prepublishOnly`: ensures that the package builds and its tests pass again (just to be _really_ sure)\n+- `postpublish`: pushes the committed change and new tag to GitHub\n+\n+In order to version and then publish a package just run the following commands from the folder of\n+the package you want to update:\n+\n+- `npm version <patch|minor|major>`\n+- `npm publish`\n+\n+As you note if version + publish succeeds the scripts end up pushing those updates to the master\n+branch. Therefore, please ensure to be on and up to date `master` branch before running them. Please\n+**don't ever publish from another branch** but only from the main one with only PR approved changes\n+merged.\n+\n+### Rust Crates\n+\n+| Package            | Link                                                   | Version                                                              |\n+|:-------------------|:-------------------------------------------------------|:---------------------------------------------------------------------|\n+| Auction House      | [mpl-auction-house][mpl-auction-house-crate]           | [![Crate][mpl-auction-house-img]][mpl-auction-house-crate]           |\n+| Auctioneer         | [mpl-auctioneer][mpl-auctioneer-crate]                 | [![Crate][mpl-auctioneer-img]][mpl-auctioneer-crate]                 |\n+| Bubblegum          | [mpl-bubblegum][mpl-bubblegum-crate]                   | [![Crate][mpl-bubblegum-img]][mpl-bubblegum-crate]                   |\n+| Candy Machine Core | [mpl-candy-machine-core][mpl-candy-machine-core-crate] | [![Crate][mpl-candy-machine-core-img]][mpl-candy-machine-core-crate] |\n+| Testing Utils      | [mpl-testing-utils][mpl-testing-utils-crate]           | [![Crate][mpl-testing-utils-img]][mpl-testing-utils-crate]           |\n+| Utils              | [mpl-utils][mpl-utils-crate]                           | [![Crate][mpl-utils-img]][mpl-utils-crate]                           |\n+| Fixed Price Sale   | [mpl-fixed-price-sale][mpl-fixed-price-sale-crate]     | [![Crate][mpl-fixed-price-sale-img]][mpl-fixed-price-sale-crate]     |\n+| Gumdrop            | [mpl-gumdrop][mpl-gumdrop-crate]                       | [![Crate][mpl-gumdrop-img]][mpl-gumdrop-crate]                       |\n+| Hydra              | [mpl-hydra][mpl-hydra-crate]                           | [![Crate][mpl-hydra-img]][mpl-hydra-crate]                           |\n+| NFT Packs          | [mpl-nft-packs][mpl-nft-packs-crate]                   | [![Crate][mpl-nft-packs-img]][mpl-nft-packs-crate]                   |\n+| Token Entangler    | [mpl-token-entangler][mpl-token-entangler-crate]       | [![Crate][mpl-token-entangler-img]][mpl-token-entangler-crate]       |\n+| Token Metadata     | [mpl-token-metadata][mpl-token-metadata-crate]         | [![Crate][mpl-token-metadata-img]][mpl-token-metadata-crate]         |\n+\n+### npm Packages\n+\n+| Package            | Link                                                 | Version                                                           |\n+|:-------------------|:-----------------------------------------------------|:------------------------------------------------------------------|\n+| Auction House      | [mpl-auction-house][mpl-auction-house-npm]           | [![NPM][mpl-auction-house-nimg]][mpl-auction-house-npm]           |\n+| Auctioneer         | [mpl-auctioneer][mpl-auctioneer-npm]                 | [![NPM][mpl-auctioneer-nimg]][mpl-auctioneer-npm]                 |\n+| Bubblegum          | [mpl-bubblegum][mpl-bubblegum-npm]                   | [![NPM][mpl-bubblegum-nimg]][mpl-bubblegum-npm]                   |\n",
+					"match": false,
+					"packageHash": "2e7a25631eb8dab5bb7c9ccd197dd05238dd5899471e343c2ab9891069659619",
+					"size": 473,
+					"sourceHash": "7180c48770b8df6271fd60290fafb7b78f2f1370f27550dd8845742b6ba7f265",
+					"status": "content"
+				},
+				"dist/src/errors.d.ts": {
+					"match": false,
+					"packageHash": "c2b8774236197c72f523fcc874b319306233a6801c3a7a7dd74df8457e1ff214",
+					"size": 82,
+					"status": "missing-in-source"
+				},
+				"dist/src/errors.js": {
+					"match": false,
+					"packageHash": "5e62a30de081c1962105165e01ecd111795d137a2d13b669d13f0c7202bea055",
+					"size": 307,
+					"status": "missing-in-source"
+				},
+				"dist/src/errors.js.map": {
+					"match": false,
+					"packageHash": "8c249c4801462e6d2d62b600b53f10c275efde1828477ef9b11723f7783c1958",
+					"size": 187,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/accounts/CandyMachine.d.ts": {
+					"match": false,
+					"packageHash": "55308284a3d69bd250ff7dbc02a2ad3831e2ee03d066decefca7ead8dd64881a",
+					"size": 1977,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/accounts/CandyMachine.js": {
+					"match": false,
+					"packageHash": "efea9472fdebe4c1dd1c08950f450b5e3e37456e5b769e6fd28c41a43c55edb1",
+					"size": 4443,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/accounts/CandyMachine.js.map": {
+					"match": false,
+					"packageHash": "d287bd42fccee50e753f92327d140d57c91e101c81196ff7b9b6e9d8580f506d",
+					"size": 2790,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/accounts/CollectionPDA.d.ts": {
+					"match": false,
+					"packageHash": "7efecbcd5cdcbe4f782a2610a1537884d72b5d587688ad2f00a1089a941e1ec0",
+					"size": 1574,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/accounts/CollectionPDA.js": {
+					"match": false,
+					"packageHash": "326b06a8dc66f391ebb6a04dd8b9b756cc9c224413b3a684fe1ac36cf190d2f2",
+					"size": 3555,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/accounts/CollectionPDA.js.map": {
+					"match": false,
+					"packageHash": "aa9848c595315b6378de387035c8332637f4e9145d394094f2f5fec8dba9bac7",
+					"size": 2091,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/accounts/FreezePDA.d.ts": {
+					"match": false,
+					"packageHash": "b6fa40fd62b5887fdf32ea25a1a92111b565c14f33376e2103284d26eed3511d",
+					"size": 2028,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/accounts/FreezePDA.js": {
+					"match": false,
+					"packageHash": "7e5849e36c751b72fc2262d0cf1b1d73e054d24eb381de57c3395e3667bd08e2",
+					"size": 5113,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/accounts/FreezePDA.js.map": {
+					"match": false,
+					"packageHash": "ccf91788dd5df5b8766278b686d25398732c605dee2a232f8fab31d615fa7ea1",
+					"size": 3365,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/accounts/index.d.ts": {
+					"match": false,
+					"packageHash": "cd5f4a57110152b39757f5eb0fffb45110ba87578204619e05fad8260e874e25",
+					"size": 388,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/accounts/index.js": {
+					"match": false,
+					"packageHash": "cf2ba9442020b622a5509e1a5f94eeda50d05472840474ba88908ff19db6e5aa",
+					"size": 1273,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/accounts/index.js.map": {
+					"match": false,
+					"packageHash": "d1dce9ee99c8e2b219191202d34dbf01c3b010352ac0b76c37e98416072b6b69",
+					"size": 319,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/errors/index.d.ts": {
+					"match": false,
+					"packageHash": "c0925dbc8945e7265ea71f89a728a25abac70c5c746849bcf21c4f3fb72e4f8d",
+					"size": 7591,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/errors/index.js": {
+					"match": false,
+					"packageHash": "86b38eb14bdf142cbd54314c2e4343998fe0ba07caeb2966bb80372410bbf74f",
+					"size": 34575,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/errors/index.js.map": {
+					"match": false,
+					"packageHash": "02de7540cb7cf3ac635b8877909c053e846446a7b4682c456af2235ad65858c7",
+					"size": 22249,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/index.d.ts": {
+					"match": false,
+					"packageHash": "db6e8aa5bb56a79beb334aa0f221d285014fa327a85e8734bc9d5863bcc3db3a",
+					"size": 286,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/index.js": {
+					"match": false,
+					"packageHash": "c03693f8c3f1dba544d4d0fb689216bcd4ca5df3e9ceec79b7e9709bda6690b0",
+					"size": 1218,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/index.js.map": {
+					"match": false,
+					"packageHash": "6580c9a53ddd28cab88288a11fe4ad85fa953dcfec6e059cfebc45a7f74cbbcb",
+					"size": 283,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/addConfigLines.d.ts": {
+					"match": false,
+					"packageHash": "478eb7cd32a043b6645e61699accbaa6735ebfe745803783706a5b23e6292f02",
+					"size": 824,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/addConfigLines.js": {
+					"match": false,
+					"packageHash": "f98db2673a1e016f6f54fb79df5160696d63103e6c828f0546d49a15ae054b4d",
+					"size": 2727,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/addConfigLines.js.map": {
+					"match": false,
+					"packageHash": "d8161817016c76297174b6b4fdff8560034ddb96417aabf114d4725540982242",
+					"size": 1266,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/index.d.ts": {
+					"match": false,
+					"packageHash": "edd9a28ce83cc04f08fa5e6a2a771f4221f36542535d190998747529efd6f9bd",
+					"size": 440,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/index.js": {
+					"match": false,
+					"packageHash": "44b30e0e6c21b9865207829f6380e4326852921abb61418a850e6ca6d21df9f5",
+					"size": 1464,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/index.js.map": {
+					"match": false,
+					"packageHash": "5d2bf4acbde2780144ea8403fd94f25ef963a0605fa161453af46f90e5d55aa7",
+					"size": 317,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/initializeCandyMachine.d.ts": {
+					"match": false,
+					"packageHash": "40b7bde2a412cbdf0460482581fc75f9dae16cbeca8a9469fabdffeafdef29c7",
+					"size": 996,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/initializeCandyMachine.js": {
+					"match": false,
+					"packageHash": "2753f660b765f492735c178988b9534e1ac59880d1cfd6bd2afc7d8c180d3b4a",
+					"size": 3436,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/initializeCandyMachine.js.map": {
+					"match": false,
+					"packageHash": "9cd67cf828ec2db447606d8176058d929485e26a26f09ae9ca9d8a302632c437",
+					"size": 1614,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/mintNft.d.ts": {
+					"match": false,
+					"packageHash": "a185205f35cbf876d947b4c63ef5646d63d454d068c8bec598585f6481145ef8",
+					"size": 1166,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/mintNft.js": {
+					"match": false,
+					"packageHash": "3967095ccd89c67804115f77989783cc71238b6dbe32893731ffffdf41b6dad7",
+					"size": 4535,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/mintNft.js.map": {
+					"match": false,
+					"packageHash": "7f76c82a411bbc20780ec82bdd4b33f91759112ec3dc7863e742221f7212579b",
+					"size": 2450,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/removeCollection.d.ts": {
+					"match": false,
+					"packageHash": "205b945a550b42f379fb8f53e65aa1bcee67e9d44821e1b8bb7ee787777e2021",
+					"size": 789,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/removeCollection.js": {
+					"match": false,
+					"packageHash": "d2e5fb8f627229fb9a3b772cdad646d5ab34e74dd904979a65d2f5e259afd4df",
+					"size": 3202,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/removeCollection.js.map": {
+					"match": false,
+					"packageHash": "c4d0d17840d54bc884dd5a9c7f022a28c482d7616dea65dd708de124c7dff3fc",
+					"size": 1548,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/removeFreeze.d.ts": {
+					"match": false,
+					"packageHash": "25beabbe52c8210f98cc159b90f2c3cc904df5d9b88b9bd09b59317f5caefd60",
+					"size": 620,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/removeFreeze.js": {
+					"match": false,
+					"packageHash": "78a1ad7459e20aa1587da20117d652fd6c725a6b1f2c55da57d617d8bb6e2183",
+					"size": 2643,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/removeFreeze.js.map": {
+					"match": false,
+					"packageHash": "2eb1e7d9f1d01a519ed468d7c11f12943309ba0562b2fdd2348b233a76cd092a",
+					"size": 1204,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/setCollection.d.ts": {
+					"match": false,
+					"packageHash": "4b0faa8c27950f4ee9e52f8d4fffbe6eb1a5bfca4b10341f0925951a79c3a241",
+					"size": 893,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/setCollection.js": {
+					"match": false,
+					"packageHash": "4a3215680e8ef4fd8f802ffbc3f8ed8af213b9b8357622959a6acebcd774d184",
+					"size": 3792,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/setCollection.js.map": {
+					"match": false,
+					"packageHash": "f5e791c401f5814ca2409b070835c880e65e6c2e2fe78c214265e3f6968ca91c",
+					"size": 1938,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/setCollectionDuringMint.d.ts": {
+					"match": false,
+					"packageHash": "8891f4b24096441c4d34a1feeed173469340eef9ccc0f0f49ff99ba3e9a59854",
+					"size": 980,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/setCollectionDuringMint.js": {
+					"match": false,
+					"packageHash": "78e96c763d0f4c22ee93184aa518bb63fa4324f9248ff678ee7df8a2c3a2a996",
+					"size": 3802,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/setCollectionDuringMint.js.map": {
+					"match": false,
+					"packageHash": "6538bae8dd27e6bf7ef6413ea3f359c17c0f993ff0b8d19ebbde3aff330ae69b",
+					"size": 1898,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/setFreeze.d.ts": {
+					"match": false,
+					"packageHash": "88e1287df727945ea190fa7e9f25e1d044af64713c3a81a849e19bb2c6e4004d",
+					"size": 773,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/setFreeze.js": {
+					"match": false,
+					"packageHash": "0c0004ce2e8fb8c4099fb9acc1ec42d2bb1fb0452fd291bb7a63acf056c1927d",
+					"size": 2876,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/setFreeze.js.map": {
+					"match": false,
+					"packageHash": "f69ecac979990f2a98ff439a4dcf234b339384c3ff77cd732892931e932c9801",
+					"size": 1383,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/thawNft.d.ts": {
+					"match": false,
+					"packageHash": "559b80c87f7c2b1f0d977292ff3e5ccf5c4256690306ed77d5a6e81ab54c0b41",
+					"size": 820,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/thawNft.js": {
+					"match": false,
+					"packageHash": "acac22fba46ed67f5ce3ae616cd1ebab160437f0e3ba5c8ba97aad0f96714307",
+					"size": 3647,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/thawNft.js.map": {
+					"match": false,
+					"packageHash": "6a03d369d63705e6c650413fedc94d47584088ea7f900fe43321366d01031e86",
+					"size": 1852,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/unlockFunds.d.ts": {
+					"match": false,
+					"packageHash": "fcddba3d1826f12cac319353374527684ae99f4483842f2ee38cdad0a95aa47f",
+					"size": 679,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/unlockFunds.js": {
+					"match": false,
+					"packageHash": "7cbffc903efa6bc6c16c69a1be863ce2a4082b1e76531a2a5211b4a04ce53d3b",
+					"size": 2956,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/unlockFunds.js.map": {
+					"match": false,
+					"packageHash": "d3ad7e73a4c976da6f7008016928885e0d26c71c1ee7bbb3da9d56b64e920a70",
+					"size": 1405,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/updateAuthority.d.ts": {
+					"match": false,
+					"packageHash": "ebf7ce8a3ce8f2906b6c8b14ed17cf5f538f6eeee9b57e2a9227049a465d14cb",
+					"size": 808,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/updateAuthority.js": {
+					"match": false,
+					"packageHash": "aa55f904d82cb85c248a47b0de4c9c712c444c23c1481060a2dc48f7e192c5bf",
+					"size": 2850,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/updateAuthority.js.map": {
+					"match": false,
+					"packageHash": "687193f6efccb3143c2140a622308b2707d93828f1bac9bbb61687c3f8c110ff",
+					"size": 1318,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/updateCandyMachine.d.ts": {
+					"match": false,
+					"packageHash": "a157350863a197d20ae4a42c8296824972e552f270ec293b83c85ff9ba23d4d6",
+					"size": 874,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/updateCandyMachine.js": {
+					"match": false,
+					"packageHash": "a4a22e40a06763ee6111aba809da991ffccd976613b17788b463146e749e02fd",
+					"size": 2876,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/updateCandyMachine.js.map": {
+					"match": false,
+					"packageHash": "6d9cc3ed3205bc15abfdbe08532f45775efcbc1cb936d8ca2fd830372ad0d221",
+					"size": 1291,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/withdrawFunds.d.ts": {
+					"match": false,
+					"packageHash": "ba8700582f8b1cfba6cbb0777660b2a0e35f441aea419adbefe9d8b657677fd5",
+					"size": 594,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/withdrawFunds.js": {
+					"match": false,
+					"packageHash": "5e9e4c334763361a6cd2c9eb482daefd95b66f95f1300aaea57ea1b2e2eb7568",
+					"size": 2537,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/instructions/withdrawFunds.js.map": {
+					"match": false,
+					"packageHash": "9479f005a0d55cb699c6ecf3ebfdcd041bb8e3d0010be3664e6e731395c35cff",
+					"size": 1123,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/types/CandyMachineData.d.ts": {
+					"match": false,
+					"packageHash": "d722d5d651e7874129b3e84bb0bcd964fa36e7a611c59172c445bdf8772dc99a",
+					"size": 914,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/types/CandyMachineData.js": {
+					"match": false,
+					"packageHash": "8d8184cd95d83ad731fa4e4b7e7db47ea8a52806c33d48090c992caf57b61b4b",
+					"size": 2275,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/types/CandyMachineData.js.map": {
+					"match": false,
+					"packageHash": "4cfe994342d71d0e35bf1e49d9c66b615fafea7b625642775ba004e6d76617c4",
+					"size": 1023,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/types/ConfigLine.d.ts": {
+					"match": false,
+					"packageHash": "98500df2af5a7936b2434cbdfc9d8d7fe3ea25000aba9fceddf8b563e01a4ccb",
+					"size": 193,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/types/ConfigLine.js": {
+					"match": false,
+					"packageHash": "9fa153968fe3e766f1d7c5109d997368b5792dad03b608c5a0f4f3bc0d3d02e8",
+					"size": 1377,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/types/ConfigLine.js.map": {
+					"match": false,
+					"packageHash": "b1b93e2fd77c2682dcfb3aec2f4a07fc4f4a66072c675583257e23a9830e24c2",
+					"size": 330,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/types/Creator.d.ts": {
+					"match": false,
+					"packageHash": "3000064c39d22e0ed81bb288f89177f23834e44de5dfceeddde1c3cd48c0fe22",
+					"size": 254,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/types/Creator.js": {
+					"match": false,
+					"packageHash": "e1b06a86ffacedec66111ccd90e45eae38f12b38df1b44e1bd727b3713053512",
+					"size": 1467,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/types/Creator.js.map": {
+					"match": false,
+					"packageHash": "9dc3678dc7d943f2488428576c8909637d2d7b28496138d656df39ca291beb55",
+					"size": 376,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/types/EndSettingType.d.ts": {
+					"match": false,
+					"packageHash": "90d74f021e82d36981c4c2b991d7bf1dc6b5e64a6ef999d3148638324407930c",
+					"size": 212,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/types/EndSettingType.js": {
+					"match": false,
+					"packageHash": "26fa5e4133cd238c21b0e6429bf67892e616cf9616b198ff4ae4d2008b73beca",
+					"size": 1585,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/types/EndSettingType.js.map": {
+					"match": false,
+					"packageHash": "21f2a784869683b8638d970ffdc8819115c88e759a5700b2eadae15466e01d3f",
+					"size": 352,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/types/EndSettings.d.ts": {
+					"match": false,
+					"packageHash": "e538f86f4dee1d79d7ed4adf9cfc90d7573a5285995187b6a4289cec29625081",
+					"size": 266,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/types/EndSettings.js": {
+					"match": false,
+					"packageHash": "aa93a891f5ef42c37ecd15bbe190609bf24f58e36c794f8616b28ca7871ace65",
+					"size": 1454,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/types/EndSettings.js.map": {
+					"match": false,
+					"packageHash": "4f3b3c1c37af18141c9f781ca0b8520854909ece30e93162c8ee7b9f6dd33dfe",
+					"size": 337,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/types/GatekeeperConfig.d.ts": {
+					"match": false,
+					"packageHash": "de72aea700d41b24e135c0befff3d0f4f63266f8b50e6d9e611ea51116f53260",
+					"size": 275,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/types/GatekeeperConfig.js": {
+					"match": false,
+					"packageHash": "746daf55cca469e70d8940e5dfd43139bb6f4254780f92a418085b501d62e449",
+					"size": 1492,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/types/GatekeeperConfig.js.map": {
+					"match": false,
+					"packageHash": "c4e25a9676c120b2dc4105bce16442e4d34612ea779ae64f5483b8f136b2b3df",
+					"size": 360,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/types/HiddenSettings.d.ts": {
+					"match": false,
+					"packageHash": "b5baa145938de2135d0dfd4a6fc1ef8ffd11d5a81d02d53f859c8f8442644ca9",
+					"size": 225,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/types/HiddenSettings.js": {
+					"match": false,
+					"packageHash": "79c654faa208ff353c14ade12a4c828c95f5a0f129a1156282caf686aa7a247d",
+					"size": 1448,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/types/HiddenSettings.js.map": {
+					"match": false,
+					"packageHash": "4750ec15a22e02050798d2b0246a9a3a537d483e1dfd37c3cda2235e1e85c552",
+					"size": 421,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/types/WhitelistMintMode.d.ts": {
+					"match": false,
+					"packageHash": "d0a670a7f359336fb1407ca27c97b0981dce358e788c61ac8cb3e2367944f621",
+					"size": 236,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/types/WhitelistMintMode.js": {
+					"match": false,
+					"packageHash": "cbbf1fafeef6d8b500179e07c276e9642964f32e39208f97737d52f9719d5cf1",
+					"size": 1651,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/types/WhitelistMintMode.js.map": {
+					"match": false,
+					"packageHash": "674ef0429e2590d7049b4d3b5d75a295898026d4eab1bae5ee230a7021847d55",
+					"size": 369,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/types/WhitelistMintSettings.d.ts": {
+					"match": false,
+					"packageHash": "e8dedd7de257f1f50fc059642894503608e88c1fd37cc0e4934473f38d74ea23",
+					"size": 412,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/types/WhitelistMintSettings.js": {
+					"match": false,
+					"packageHash": "c38091df3e773eaefef1111545de07a92cd796ca430964ee49284fe92177b0a3",
+					"size": 1666,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/types/WhitelistMintSettings.js.map": {
+					"match": false,
+					"packageHash": "d1825de55a51e308c7196e499d43cb8213da820c567d1971c88054e78dc4458d",
+					"size": 482,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/types/index.d.ts": {
+					"match": false,
+					"packageHash": "da34789b9ad75ae3a78dd655fc470a42dbad1760d6c0fb8c56cf9619aa4bb131",
+					"size": 306,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/types/index.js": {
+					"match": false,
+					"packageHash": "4434a344cda66e93fff3b9dd6b408182bbd4fd6b88363ced26b1524b48c18f8e",
+					"size": 1258,
+					"status": "missing-in-source"
+				},
+				"dist/src/generated/types/index.js.map": {
+					"match": false,
+					"packageHash": "82104fee9ce74fe3f93ab7ffbdadbd4b2e42ff23468d43d2e39fb1b20b19e0e6",
+					"size": 258,
+					"status": "missing-in-source"
+				},
+				"dist/src/mpl-candy-machine.d.ts": {
+					"match": false,
+					"packageHash": "56fe0a685a9b532da16f0f00b2d3a3c318c1a2755f860358ada75c8ee0f1a382",
+					"size": 55,
+					"status": "missing-in-source"
+				},
+				"dist/src/mpl-candy-machine.js": {
+					"match": false,
+					"packageHash": "c5e8f472d76998eb9b74e209a242a3f21f393bfacdd304419a48442334584588",
+					"size": 893,
+					"status": "missing-in-source"
+				},
+				"dist/src/mpl-candy-machine.js.map": {
+					"match": false,
+					"packageHash": "5dd9236575a4ff8930b168ea7ecad63042355bf8cd56bda407ed7b1e77bfa496",
+					"size": 169,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,59 +1,19 @@\n {\n-  \"name\": \"@metaplex-foundation/mpl-candy-machine\",\n-  \"version\": \"5.1.0\",\n-  \"programVersion\": \"4.6.0\",\n-  \"description\": \"MPL Candy Machine JavaScript API. This MPL package is for the current generation of candy machine which is 2.0.0\",\n-  \"main\": \"dist/src/mpl-candy-machine.js\",\n-  \"types\": \"dist/src/mpl-candy-machine.d.ts\",\n-  \"scripts\": {\n-    \"check:publish-ready\": \"yarn build && yarn test\",\n-    \"preversion\": \"yarn check:publish-ready\",\n-    \"postversion\": \"git add package.json && git commit -m \\\"chore: update $npm_package_name to v$npm_package_version\\\" && git tag $npm_package_name@$npm_package_version\",\n-    \"prepublishOnly\": \"yarn check:publish-ready\",\n-    \"postpublish\": \"git push origin && git push origin --tags\",\n-    \"build:docs\": \"typedoc\",\n-    \"build\": \"rimraf dist && tsc -p tsconfig.json\",\n-    \"test\": \"echo mpl-candy-machine tests coming up ...\",\n-    \"api:gen\": \"DEBUG='(solita|rustbin):(info|error)' solita\",\n-    \"lint\": \"eslint \\\"{src,test}/**/*.ts\\\" --format stylish\",\n-    \"fix:lint\": \"yarn lint --fix\",\n-    \"prettier\": \"prettier \\\"{src,test}/**/*.ts\\\" --check\",\n-    \"fix:prettier\": \"prettier --write src/\",\n-    \"fix\": \"yarn fix:lint && yarn fix:prettier\"\n-  },\n-  \"files\": [\n-    \"/dist\"\n-  ],\n-  \"publishConfig\": {\n-    \"access\": \"public\",\n-    \"registry\": \"https://registry.npmjs.org\"\n-  },\n-  \"keywords\": [\n-    \"nft\",\n-    \"metaplex\",\n-    \"solana\",\n-    \"blockchain\"\n-  ],\n-  \"homepage\": \"https://metaplex.com\",\n-  \"repository\": \"https://github.com/metaplex-foundation/metaplex-program-library.git\",\n-  \"author\": \"Metaplex Maintainers <contact@metaplex.com>\",\n-  \"license\": \"Apache-2.0\",\n-  \"dependencies\": {\n-    \"@metaplex-foundation/beet\": \"^0.7.1\",\n-    \"@metaplex-foundation/beet-solana\": \"^0.4.0\",\n-    \"@metaplex-foundation/cusper\": \"^0.0.2\",\n-    \"@solana/spl-token\": \"^0.3.6\",\n-    \"@solana/web3.js\": \"^1.66.2\"\n-  },\n-  \"devDependencies\": {\n-    \"eslint-config-prettier\": \"^8.5.0\",\n-    \"eslint-plugin-prettier\": \"^4.0.0\",\n-    \"@metaplex-foundation/solita\": \"^0.19.0\",\n-    \"@typescript-eslint/eslint-plugin\": \"^5.43.0\",\n-    \"@typescript-eslint/parser\": \"^5.43.0\",\n-    \"eslint\": \"^8.27.0\",\n-    \"prettier\": \"^2.7.1\",\n-    \"rimraf\": \"^3.0.2\",\n-    \"typescript\": \"^4.9.3\"\n-  }\n-}\n+    \"name\": \"@metaplex-foundation/metaplex-program-library\",\n+    \"version\": \"0.1.0\",\n+    \"description\": \"Web interface to Smart Contracts by the Metaplex team.\",\n+    \"repository\": \"git@github.com:metaplex-foundation/metaplex-program-library.git\",\n+    \"author\": \"Metaplex Maintainers <contact@metaplex.com>\",\n+    \"license\": \"MIT\",\n+    \"private\": true,\n+    \"devDependencies\": {\n+        \"@metaplex-foundation/amman\": \"^0.12.0\",\n+        \"@project-serum/anchor\": \"^0.19.0\",\n+        \"@typescript-eslint/eslint-plugin\": \"^5.4.0\",\n+        \"@typescript-eslint/parser\": \"^5.4.0\",\n+        \"eslint\": \"^8.3.0\",\n+        \"eslint-config-prettier\": \"^8.3.0\",\n+        \"eslint-plugin-prettier\": \"^4.0.0\",\n+        \"prettier\": \"^2.7.1\"\n+    }\n+}\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "b4cd8a04fa02c89cae10e57d7cc1dcc245178c4973e73c7e1bed5b20172645eb",
+					"size": 2181,
+					"sourceHash": "7c175d493a0736f3a969ac58fc0ee323784ff86e61faaaaafa8ad0bb7d605ea4",
+					"status": "content"
+				},
+				".base-ammanrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".clippy.toml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".editorconfig": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/CODEOWNERS": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/ISSUE_TEMPLATE/bug_report.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/ISSUE_TEMPLATE/feature_request.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/PULL_REQUEST_TEMPLATE/pr_template.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/SECURITY.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/actions/anchor-build/action.yaml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/actions/build-and-publish/action.yaml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/actions/build-program/action.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/actions/get-pr-for-commit/action.yaml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/actions/install-anchor/action.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/actions/install-common-build-deps/action.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/actions/install-linux-build-deps/action.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/actions/install-rust/action.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/actions/install-shank/action.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/actions/install-solana/action.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/actions/list-changed-files/action.yaml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/actions/list-changed-files/script.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/actions/make-version-changes/action.yaml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/actions/make-version-changes/script.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/actions/parse-version-command/action.yaml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/actions/parse-version-command/script.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/actions/program/action.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/actions/program/auctioneer/action.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/actions/program/token-auth-rules-and-rooster/action.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/actions/program/token-metadata-and-metaplex/action.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/actions/publish-version-changes/action.yaml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/actions/publish-version-changes/script.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/actions/setup-aws-env/action.yaml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/actions/upload-to-s3/action.yaml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/actions/verify-rust/action.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/actions/yarn-install-and-build/action.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/actions/yarn-install-and-verify/action.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/configs/issue-label-automations.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/apply-version-update.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/integration-reusable.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/integration.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/label-automations.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/manually-sync-package-versions.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/program-reusable.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/program.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/publish-on-pr-merge.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/sdk-reusable.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/sdk.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/verify-lib-on-pr-open.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".prettierrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"Anchor.toml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/cli/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/cli/.nvmrc": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/cli/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/cli/src/auction-house-cli.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/cli/src/commands/mint-nft.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/cli/src/commands/mint.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/cli/src/commands/owners.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/cli/src/commands/remove-collection.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/cli/src/commands/set-collection.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/cli/src/commands/sign.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/cli/src/commands/signAll.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/cli/src/commands/updateFromCache.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/cli/src/commands/upload.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/cli/src/commands/verifyTokenMetadata/__fixtures__/invalidSchema/invalid-address.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/cli/src/commands/verifyTokenMetadata/__fixtures__/invalidSchema/invalid-shares.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/cli/src/commands/verifyTokenMetadata/__fixtures__/mismatchedAssets/0.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/cli/src/commands/verifyTokenMetadata/__tests__/__snapshots__/verifyTokenMetadata.ts.snap": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/cli/src/commands/verifyTokenMetadata/__tests__/verifyTokenMetadata.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/cli/src/commands/verifyTokenMetadata/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/cli/src/commands/verifyTokenMetadata/token-metadata.schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/cli/src/commands/withdraw.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/cli/src/helpers/accounts.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/cli/src/helpers/cache.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/cli/src/helpers/constants.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/cli/src/helpers/instructions.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/cli/src/helpers/schema.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/cli/src/helpers/storage-type.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/cli/src/helpers/transactions.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/cli/src/helpers/upload/arweave-bundle.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/cli/src/helpers/upload/arweave.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/cli/src/helpers/upload/aws.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/cli/src/helpers/upload/file-uri.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/cli/src/helpers/upload/ipfs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/cli/src/helpers/upload/nft-storage.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/cli/src/helpers/upload/pinata.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/cli/src/helpers/various.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/cli/src/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/cli/src/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/cli/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/cli/yarn.lock": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/.eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/.prettierignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/.prettierrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/.solitarc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/idl/auction_house.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/errors.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/accounts/AuctionHouse.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/accounts/Auctioneer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/accounts/BidReceipt.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/accounts/ListingReceipt.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/accounts/PurchaseReceipt.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/accounts/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/errors/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/instructions/auctioneerBuy.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/instructions/auctioneerCancel.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/instructions/auctioneerDeposit.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/instructions/auctioneerExecutePartialSale.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/instructions/auctioneerExecuteSale.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/instructions/auctioneerPublicBuy.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/instructions/auctioneerSell.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/instructions/auctioneerWithdraw.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/instructions/buy.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/instructions/cancel.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/instructions/cancelBidReceipt.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/instructions/cancelListingReceipt.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/instructions/closeEscrowAccount.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/instructions/createAuctionHouse.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/instructions/delegateAuctioneer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/instructions/deposit.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/instructions/executePartialSale.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/instructions/executeSale.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/instructions/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/instructions/printBidReceipt.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/instructions/printListingReceipt.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/instructions/printPurchaseReceipt.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/instructions/publicBuy.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/instructions/sell.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/instructions/updateAuctionHouse.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/instructions/updateAuctioneer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/instructions/withdraw.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/instructions/withdrawFromFee.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/instructions/withdrawFromTreasury.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/types/AuthorityScope.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/types/BidType.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/types/CancelType.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/types/ListingType.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/types/PurchaseType.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/generated/types/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/src/mpl-auction-house.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/test/account.auction-house.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/tsconfig.build.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/typedoc.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/js/yarn.lock": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/program/Cargo.lock": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/program/Cargo.toml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/program/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/program/Xargo.toml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/program/src/auctioneer/delegate.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/program/src/auctioneer/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/program/src/auctioneer/update.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/program/src/bid/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/program/src/cancel/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/program/src/constants.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/program/src/deposit/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/program/src/errors.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/program/src/execute_sale/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/program/src/lib.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/program/src/pda.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/program/src/receipt/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/program/src/sell/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/program/src/state.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/program/src/utils.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/program/src/withdraw/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/program/tests/buy.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/program/tests/cancel.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/program/tests/common/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/program/tests/create_auction_house.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/program/tests/delegate.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/program/tests/deposit.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/program/tests/execute_sale.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/program/tests/sell.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/program/tests/update_auction_house.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/program/tests/utils/helpers.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/program/tests/utils/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/program/tests/utils/setup_functions.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/program/tests/withdraw.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/program/tests/withdraw_from_fee.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auction-house/program/tests/withdraw_from_treasury.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/js/.eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/js/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/js/.prettierignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/js/.prettierrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/js/.solitarc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/js/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/js/idl/auctioneer.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/js/idl/auctioneer.txt": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/js/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/js/scripts/api-gen-ts.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/js/src/errors.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/js/src/generated/accounts/AuctioneerAuthority.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/js/src/generated/accounts/ListingConfig.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/js/src/generated/accounts/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/js/src/generated/errors/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/js/src/generated/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/js/src/generated/instructions/authorize.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/js/src/generated/instructions/buy.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/js/src/generated/instructions/cancel.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/js/src/generated/instructions/deposit.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/js/src/generated/instructions/executeSale.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/js/src/generated/instructions/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/js/src/generated/instructions/sell.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/js/src/generated/instructions/withdraw.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/js/src/generated/types/Bid.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/js/src/generated/types/ListingConfigVersion.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/js/src/generated/types/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/js/src/mpl-auctioneer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/js/tsconfig.build.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/js/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/js/yarn.lock": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/program/Cargo.lock": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/program/Cargo.toml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/program/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/program/Xargo.toml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/program/src/authorize/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/program/src/bid/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/program/src/cancel/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/program/src/constants.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/program/src/deposit/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/program/src/errors.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/program/src/execute_sale/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/program/src/lib.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/program/src/pda.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/program/src/sell/config.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/program/src/sell/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/program/src/utils.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/program/src/withdraw/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/program/tests/buy.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/program/tests/cancel.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/program/tests/close_escrow_account.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/program/tests/common/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/program/tests/deposit.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/program/tests/execute_sale.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/program/tests/sell.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/program/tests/utils/helpers.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/program/tests/utils/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/program/tests/utils/setup_functions.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auctioneer/program/tests/withdraw.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/.prettierignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/.prettierrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/.solitarc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/idl/bubblegum.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/jest.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/src/errors.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/src/generated/accounts/TreeConfig.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/src/generated/accounts/Voucher.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/src/generated/accounts/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/src/generated/errors/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/src/generated/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/src/generated/instructions/burn.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/src/generated/instructions/cancelRedeem.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/src/generated/instructions/compress.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/src/generated/instructions/createTree.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/src/generated/instructions/decompressV1.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/src/generated/instructions/delegate.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/src/generated/instructions/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/src/generated/instructions/mintToCollectionV1.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/src/generated/instructions/mintV1.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/src/generated/instructions/redeem.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/src/generated/instructions/setAndVerifyCollection.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/src/generated/instructions/setTreeDelegate.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/src/generated/instructions/transfer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/src/generated/instructions/unverifyCollection.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/src/generated/instructions/unverifyCreator.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/src/generated/instructions/verifyCollection.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/src/generated/instructions/verifyCreator.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/src/generated/types/BubblegumEventType.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/src/generated/types/Collection.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/src/generated/types/Creator.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/src/generated/types/InstructionName.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/src/generated/types/LeafSchema.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/src/generated/types/MetadataArgs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/src/generated/types/TokenProgramVersion.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/src/generated/types/TokenStandard.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/src/generated/types/UseMethod.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/src/generated/types/Uses.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/src/generated/types/Version.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/src/generated/types/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/src/mpl-bubblegum.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/tests/main.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/tsconfig.build.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/typedoc.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/js/yarn.lock": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/program/Cargo.lock": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/program/Cargo.toml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/program/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/program/Xargo.toml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/program/build-token-metadata.sh": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/program/build.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/program/download-compression-programs.sh": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/program/rustfmt.toml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/program/src/error.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/program/src/lib.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/program/src/state/leaf_schema.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/program/src/state/metaplex_adapter.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/program/src/state/metaplex_anchor.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/program/src/state/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/program/src/utils.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/program/tests/simple.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/program/tests/utils/context.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/program/tests/utils/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/program/tests/utils/tree.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bubblegum/program/tests/utils/tx_builder.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"build.sh": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/.ammanrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/.eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/.prettierignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/.prettierrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/.solitarc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/idl/candy_machine.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/src/errors.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/src/generated/accounts/CandyMachine.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/src/generated/accounts/CollectionPDA.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/src/generated/accounts/FreezePDA.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/src/generated/accounts/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/src/generated/errors/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/src/generated/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/src/generated/instructions/addConfigLines.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/src/generated/instructions/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/src/generated/instructions/initializeCandyMachine.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/src/generated/instructions/mintNft.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/src/generated/instructions/removeCollection.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/src/generated/instructions/removeFreeze.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/src/generated/instructions/setCollection.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/src/generated/instructions/setCollectionDuringMint.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/src/generated/instructions/setFreeze.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/src/generated/instructions/thawNft.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/src/generated/instructions/unlockFunds.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/src/generated/instructions/updateAuthority.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/src/generated/instructions/updateCandyMachine.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/src/generated/instructions/withdrawFunds.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/src/generated/types/CandyMachineData.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/src/generated/types/ConfigLine.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/src/generated/types/Creator.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/src/generated/types/EndSettingType.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/src/generated/types/EndSettings.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/src/generated/types/GatekeeperConfig.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/src/generated/types/HiddenSettings.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/src/generated/types/WhitelistMintMode.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/src/generated/types/WhitelistMintSettings.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/src/generated/types/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/src/mpl-candy-machine.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/tsconfig.build.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/typedoc.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/js/yarn.lock": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/program/Cargo.lock": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/program/Cargo.toml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/program/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/program/Xargo.toml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/program/src/constants.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/program/src/errors.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/program/src/lib.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/program/src/processor/add_config_lines.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/program/src/processor/collection/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/program/src/processor/collection/remove_collection.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/program/src/processor/collection/set_collection.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/program/src/processor/collection/set_collection_during_mint.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/program/src/processor/freeze/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/program/src/processor/freeze/remove_freeze.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/program/src/processor/freeze/set_freeze.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/program/src/processor/freeze/thaw_nft.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/program/src/processor/freeze/unlock_funds.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/program/src/processor/initialize.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/program/src/processor/mint.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/program/src/processor/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/program/src/processor/update.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/program/src/processor/withdraw.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/program/src/state.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/program/src/utils.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/program/tests/collection.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/program/tests/core/helpers.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/program/tests/core/master_edition_manager.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/program/tests/core/metadata_manager.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/program/tests/core/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/program/tests/freeze.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/program/tests/initialize.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/program/tests/mint.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/program/tests/update.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/program/tests/utils/candy_manager.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/program/tests/utils/configs.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/program/tests/utils/helper_transactions.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/program/tests/utils/helpers.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine/program/tests/utils/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/.ammanrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/.prettierrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/.solitarc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/idl/candy_machine_core.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/run-test.sh": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/src/errors.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/src/generated/accounts/CandyMachine.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/src/generated/accounts/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/src/generated/errors/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/src/generated/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/src/generated/instructions/addConfigLines.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/src/generated/instructions/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/src/generated/instructions/initialize.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/src/generated/instructions/mint.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/src/generated/instructions/setAuthority.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/src/generated/instructions/setCollection.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/src/generated/instructions/setMintAuthority.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/src/generated/instructions/update.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/src/generated/instructions/withdraw.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/src/generated/types/CandyMachineData.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/src/generated/types/ConfigLine.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/src/generated/types/ConfigLineSettings.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/src/generated/types/Creator.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/src/generated/types/HiddenSettings.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/src/generated/types/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/test/add-config-lines.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/test/initialize.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/test/mint.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/test/set-collection.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/test/setup/amman.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/test/setup/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/test/setup/log.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/test/setup/txs-init.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/test/update.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/test/utils/asserts.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/test/utils/constants.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/test/utils/errors.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/test/utils/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/test/utils/minter.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/test/withdraw.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/tsconfig.build.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/typedoc.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/js/yarn.lock": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/program/Cargo.lock": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/program/Cargo.toml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/program/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/program/Xargo.toml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/program/src/constants.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/program/src/errors.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/program/src/instructions/add_config_lines.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/program/src/instructions/initialize.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/program/src/instructions/mint.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/program/src/instructions/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/program/src/instructions/set_authority.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/program/src/instructions/set_collection.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/program/src/instructions/set_mint_authority.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/program/src/instructions/update.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/program/src/instructions/withdraw.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/program/src/lib.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/program/src/state/candy_machine.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/program/src/state/candy_machine_data.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/program/src/state/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"candy-machine-core/program/src/utils.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"core/rust/testing-utils/Cargo.lock": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"core/rust/testing-utils/Cargo.toml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"core/rust/testing-utils/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"core/rust/testing-utils/src/lib.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"core/rust/testing-utils/src/solana.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"core/rust/testing-utils/src/utils/assert.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"core/rust/testing-utils/src/utils/edition_marker.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"core/rust/testing-utils/src/utils/external_price.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"core/rust/testing-utils/src/utils/master_edition_v2.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"core/rust/testing-utils/src/utils/metadata.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"core/rust/testing-utils/src/utils/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"core/rust/testing-utils/src/utils/vault.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"core/rust/utils/Cargo.lock": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"core/rust/utils/Cargo.toml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"core/rust/utils/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"core/rust/utils/src/account.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"core/rust/utils/src/assertions.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"core/rust/utils/src/lib.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"core/rust/utils/src/misc.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"core/rust/utils/src/token/assertions.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"core/rust/utils/src/token/cpi.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"core/rust/utils/src/token/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"core/rust/utils/src/token/utils.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/cli/Cargo.toml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/cli/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/cli/src/cli_args.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/cli/src/error.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/cli/src/main.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/cli/src/processor/buy.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/cli/src/processor/change_market.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/cli/src/processor/claim_resource.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/cli/src/processor/close_market.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/cli/src/processor/create_market.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/cli/src/processor/create_store.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/cli/src/processor/get_account_state.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/cli/src/processor/get_account_state_legacy.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/cli/src/processor/init_selling_resource.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/cli/src/processor/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/cli/src/processor/resume_market.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/cli/src/processor/save_primary_metadata_creators.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/cli/src/processor/suspend_market.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/cli/src/processor/withdraw.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/cli/src/utils.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/.ammanrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/.eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/.prettierignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/.prettierrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/.solitarc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/idl/fixed_price_sale.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/src/consts.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/src/errors.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/src/generated/accounts/Market.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/src/generated/accounts/PayoutTicket.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/src/generated/accounts/PrimaryMetadataCreators.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/src/generated/accounts/SellingResource.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/src/generated/accounts/Store.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/src/generated/accounts/TradeHistory.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/src/generated/accounts/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/src/generated/errors/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/src/generated/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/src/generated/instructions/buy.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/src/generated/instructions/changeMarket.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/src/generated/instructions/claimResource.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/src/generated/instructions/closeMarket.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/src/generated/instructions/createMarket.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/src/generated/instructions/createStore.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/src/generated/instructions/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/src/generated/instructions/initSellingResource.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/src/generated/instructions/resumeMarket.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/src/generated/instructions/savePrimaryMetadataCreators.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/src/generated/instructions/suspendMarket.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/src/generated/instructions/withdraw.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/src/generated/types/Creator.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/src/generated/types/GatingConfig.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/src/generated/types/MarketState.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/src/generated/types/SellingResourceState.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/src/generated/types/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/src/utils/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/test/actions/createMarket.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/test/actions/createMintAccount.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/test/actions/createPrerequisites.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/test/actions/createStore.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/test/actions/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/test/actions/initSellingResource.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/test/actions/mintNft.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/test/actions/mintTokenToAccount.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/test/actions/verifyCollection.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/test/buy.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/test/claimResource.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/test/closeMarket.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/test/collection.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/test/createMarket.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/test/createStore.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/test/initSellingResource.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/test/transactions/buy.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/test/transactions/claimResource.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/test/transactions/closeMarket.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/test/transactions/createSavePrimaryMetadataCreators.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/test/transactions/createTokenAccount.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/test/transactions/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/test/transactions/withdraw.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/test/utils/createAndSignTransaction.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/test/utils/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/test/utils/sleep.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/test/validate.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/test/withdraw.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/tsconfig.build.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/typedoc.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/js/yarn.lock": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/program/Cargo.lock": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/program/Cargo.toml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/program/Xargo.toml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/program/src/error.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/program/src/lib.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/program/src/processor/buy.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/program/src/processor/change_market.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/program/src/processor/claim_resource.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/program/src/processor/close_market.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/program/src/processor/create_market.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/program/src/processor/create_store.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/program/src/processor/init_selling_resource.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/program/src/processor/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/program/src/processor/resume_market.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/program/src/processor/save_primary_metadata_creators.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/program/src/processor/suspend_market.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/program/src/processor/withdraw.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/program/src/state.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/program/src/utils.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/program/tests/buy.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/program/tests/change_market.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/program/tests/claim_resource.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/program/tests/close_market.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/program/tests/create_market.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/program/tests/create_store.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/program/tests/init_selling_resource.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/program/tests/resume_market.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/program/tests/save_primary_metadata_creators.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/program/tests/suspend_market.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/program/tests/utils/helpers.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/program/tests/utils/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/program/tests/utils/setup_functions.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"fixed-price-sale/program/tests/withdraw.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gumdrop/js/.eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gumdrop/js/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gumdrop/js/.prettierignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gumdrop/js/.prettierrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gumdrop/js/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gumdrop/js/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gumdrop/js/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gumdrop/js/scripts/api-gen-ts.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gumdrop/js/src/errors.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gumdrop/js/src/generated/accounts/CandyMachine.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gumdrop/js/src/generated/accounts/ClaimCount.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gumdrop/js/src/generated/accounts/ClaimStatus.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gumdrop/js/src/generated/accounts/MerkleDistributor.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gumdrop/js/src/generated/accounts/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gumdrop/js/src/generated/errors/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gumdrop/js/src/generated/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gumdrop/js/src/generated/instructions/claim.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gumdrop/js/src/generated/instructions/claimCandy.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gumdrop/js/src/generated/instructions/claimEdition.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gumdrop/js/src/generated/instructions/closeDistributor.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gumdrop/js/src/generated/instructions/closeDistributorTokenAccount.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gumdrop/js/src/generated/instructions/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gumdrop/js/src/generated/instructions/newDistributor.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gumdrop/js/src/generated/types/CandyMachineData.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gumdrop/js/src/generated/types/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gumdrop/js/src/mpl-gumdrop.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gumdrop/js/test/gumdrop.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gumdrop/js/tsconfig.build.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gumdrop/js/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gumdrop/js/typedoc.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gumdrop/js/yarn.lock": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gumdrop/program/Cargo.lock": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gumdrop/program/Cargo.toml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gumdrop/program/Xargo.toml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gumdrop/program/src/lib.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gumdrop/program/src/merkle_proof.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/cli/cli_api.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/cli/main.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/cli/src/cli_api.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/cli/src/main.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/.ammanrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/.eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/.prettierignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/.prettierrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/.solitarc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/idl/hydra.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/src/generated/accounts/Fanout.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/src/generated/accounts/FanoutMembershipMintVoucher.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/src/generated/accounts/FanoutMembershipVoucher.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/src/generated/accounts/FanoutMint.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/src/generated/accounts/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/src/generated/errors/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/src/generated/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/src/generated/instructions/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/src/generated/instructions/processAddMemberNft.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/src/generated/instructions/processAddMemberWallet.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/src/generated/instructions/processDistributeNft.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/src/generated/instructions/processDistributeToken.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/src/generated/instructions/processDistributeWallet.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/src/generated/instructions/processInit.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/src/generated/instructions/processInitForMint.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/src/generated/instructions/processRemoveMember.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/src/generated/instructions/processSetForTokenMemberStake.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/src/generated/instructions/processSetTokenMemberStake.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/src/generated/instructions/processSignMetadata.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/src/generated/instructions/processTransferShares.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/src/generated/instructions/processUnstake.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/src/generated/types/AddMemberArgs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/src/generated/types/InitializeFanoutArgs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/src/generated/types/MembershipModel.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/src/generated/types/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/src/systemErrors.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/src/utils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/test/nft.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/test/setup/amman.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/test/setup/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/test/setup/log.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/test/sign.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/test/token.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/test/utils/errors.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/test/utils/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/test/utils/scenarios.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/test/utils/token.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/test/wallet.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/tsconfig.build.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/typedoc.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/js/yarn.lock": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/program/Cargo.lock": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/program/Cargo.toml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/program/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/program/Xargo.toml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/program/src/error.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/program/src/lib.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/program/src/processors/add_member/arg.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/program/src/processors/add_member/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/program/src/processors/add_member/nft.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/program/src/processors/add_member/wallet.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/program/src/processors/distribute/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/program/src/processors/distribute/nft_member.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/program/src/processors/distribute/token_member.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/program/src/processors/distribute/wallet_member.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/program/src/processors/init/init_for_mint.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/program/src/processors/init/init_parent.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/program/src/processors/init/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/program/src/processors/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/program/src/processors/remove_member/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/program/src/processors/remove_member/process_remove_member.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/program/src/processors/signing/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/program/src/processors/signing/sign_metadata.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/program/src/processors/stake/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/program/src/processors/stake/set.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/program/src/processors/stake/set_for.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/program/src/processors/stake/unstake.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/program/src/processors/transfer_shares/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/program/src/processors/transfer_shares/process_transfer_shares.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/program/src/state.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/program/src/utils/logic/calculation.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/program/src/utils/logic/distribution.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/program/src/utils/logic/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/program/src/utils/logic/transfer.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/program/src/utils/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"hydra/program/src/utils/validation/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/.eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/.prettierignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/.prettierrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/.solitarc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/idl/mpl_nft_packs.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/src/errors.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/src/generated/accounts/PackCard.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/src/generated/accounts/PackConfig.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/src/generated/accounts/PackSet.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/src/generated/accounts/PackVoucher.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/src/generated/accounts/ProvingProcess.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/src/generated/accounts/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/src/generated/errors/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/src/generated/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/src/generated/instructions/Activate.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/src/generated/instructions/AddCardToPack.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/src/generated/instructions/AddVoucherToPack.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/src/generated/instructions/ClaimPack.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/src/generated/instructions/CleanUp.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/src/generated/instructions/ClosePack.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/src/generated/instructions/Deactivate.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/src/generated/instructions/DeletePack.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/src/generated/instructions/DeletePackCard.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/src/generated/instructions/DeletePackConfig.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/src/generated/instructions/DeletePackVoucher.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/src/generated/instructions/EditPack.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/src/generated/instructions/InitPack.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/src/generated/instructions/RequestCardForRedeem.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/src/generated/instructions/TransferPackAuthority.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/src/generated/instructions/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/src/generated/types/AccountType.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/src/generated/types/AddCardToPackArgs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/src/generated/types/ClaimPackArgs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/src/generated/types/CleanUpActions.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/src/generated/types/EditPackSetArgs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/src/generated/types/InitPackSetArgs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/src/generated/types/PackDistributionType.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/src/generated/types/PackSetState.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/src/generated/types/RequestCardToRedeemArgs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/src/generated/types/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/src/mpl-nft-packs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/tsconfig.build.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/typedoc.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/js/yarn.lock": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/Cargo.lock": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/Cargo.toml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/Xargo.toml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/src/entrypoint.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/src/error.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/src/instruction.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/src/lib.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/src/math.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/src/processor/activate.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/src/processor/add_card_to_pack.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/src/processor/add_voucher_to_pack.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/src/processor/change_authority.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/src/processor/claim_pack.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/src/processor/clean_up.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/src/processor/close_pack.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/src/processor/deactivate.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/src/processor/delete_pack.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/src/processor/delete_pack_card.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/src/processor/delete_pack_config.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/src/processor/delete_pack_voucher.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/src/processor/edit_pack.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/src/processor/init_pack.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/src/processor/request_card_to_redeem.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/src/processor.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/src/state/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/src/state/pack_card.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/src/state/pack_config.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/src/state/pack_set.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/src/state/pack_voucher.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/src/state/proving_process.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/src/utils.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/tests/activate.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/tests/add_card_to_pack.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/tests/add_voucher_to_pack.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/tests/claim_card.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/tests/clean_up.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/tests/close_pack.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/tests/deactivate.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/tests/delete_pack.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/tests/delete_pack_card.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/tests/delete_pack_voucher.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/tests/edit_pack.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/tests/init_pack_set.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/tests/lib.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/tests/request_card_to_redeem.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/tests/transfer_pack_authority.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/tests/utils/assert.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/tests/utils/edition.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/tests/utils/edition_marker.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/tests/utils/external_price.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/tests/utils/master_edition_v2.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/tests/utils/metadata.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/tests/utils/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/tests/utils/pack_card.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/tests/utils/pack_set.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/tests/utils/pack_voucher.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/tests/utils/user.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"nft-packs/program/tests/utils/vault.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"release.toml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"rustfmt.toml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-entangler/js/.eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-entangler/js/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-entangler/js/.prettierignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-entangler/js/.prettierrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-entangler/js/.solitarc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-entangler/js/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-entangler/js/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-entangler/js/idl/token_entangler.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-entangler/js/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-entangler/js/src/generated/accounts/EntangledPair.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-entangler/js/src/generated/accounts/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-entangler/js/src/generated/errors/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-entangler/js/src/generated/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-entangler/js/src/generated/instructions/createEntangledPair.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-entangler/js/src/generated/instructions/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-entangler/js/src/generated/instructions/swap.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-entangler/js/src/generated/instructions/updateEntangledPair.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-entangler/js/src/mpl-token-entangler.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-entangler/js/test/token-entangler.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-entangler/js/tsconfig.build.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-entangler/js/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-entangler/js/typedoc.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-entangler/js/yarn.lock": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-entangler/program/Cargo.lock": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-entangler/program/Cargo.toml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-entangler/program/Xargo.toml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-entangler/program/src/lib.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-entangler/program/src/utils.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-entangler/program/tests/entangler_lifecycle_test.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/Cargo.lock": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/Cargo.toml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/cli/Cargo.toml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/cli/src/main.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/.ammanrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/.eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/.prettierignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/.prettierrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/.solitarc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/build-and-run-test.sh": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/idl/mpl_token_metadata.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/run-test.sh": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/custom/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/custom/metadata-deserializer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/custom/token-record-deserializer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/errors.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/accounts/CollectionAuthorityRecord.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/accounts/Edition.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/accounts/EditionMarker.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/accounts/MasterEditionV1.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/accounts/MasterEditionV2.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/accounts/Metadata.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/accounts/MetadataDelegateRecord.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/accounts/ReservationListV1.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/accounts/ReservationListV2.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/accounts/TokenOwnedEscrow.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/accounts/TokenRecord.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/accounts/UseAuthorityRecord.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/accounts/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/errors/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/ApproveCollectionAuthority.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/ApproveUseAuthority.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/BubblegumSetCollectionSize.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/Burn.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/BurnEditionNft.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/BurnNft.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/CloseEscrowAccount.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/ConvertMasterEditionV1ToV2.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/Create.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/CreateEscrowAccount.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/CreateMasterEdition.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/CreateMasterEditionV3.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/CreateMetadataAccount.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/CreateMetadataAccountV2.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/CreateMetadataAccountV3.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/Delegate.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/DeprecatedCreateMasterEdition.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/DeprecatedCreateReservationList.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/DeprecatedMintNewEditionFromMasterEditionViaPrintingToken.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/DeprecatedMintPrintingTokens.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/DeprecatedMintPrintingTokensViaToken.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/DeprecatedSetReservationList.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/FreezeDelegatedAccount.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/Lock.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/Migrate.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/Mint.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/MintNewEditionFromMasterEditionViaToken.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/MintNewEditionFromMasterEditionViaVaultProxy.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/PuffMetadata.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/RemoveCreatorVerification.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/Revoke.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/RevokeCollectionAuthority.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/RevokeUseAuthority.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/SetAndVerifyCollection.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/SetAndVerifySizedCollectionItem.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/SetCollectionSize.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/SetTokenStandard.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/SignMetadata.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/ThawDelegatedAccount.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/Transfer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/TransferOutOfEscrow.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/Unlock.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/UnverifyCollection.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/UnverifySizedCollectionItem.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/Update.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/UpdateMetadataAccount.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/UpdateMetadataAccountV2.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/UpdatePrimarySaleHappenedViaToken.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/Use.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/Utilize.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/Verify.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/VerifyCollection.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/VerifySizedCollectionItem.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/instructions/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/ApproveUseAuthorityArgs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/AssetData.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/AuthorityType.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/AuthorizationData.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/BurnArgs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/Collection.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/CollectionDetails.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/CollectionDetailsToggle.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/CollectionToggle.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/CreateArgs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/CreateMasterEditionArgs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/CreateMetadataAccountArgs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/CreateMetadataAccountArgsV2.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/CreateMetadataAccountArgsV3.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/Creator.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/Data.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/DataV2.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/DelegateArgs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/EscrowAuthority.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/Key.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/LeafInfo.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/LockArgs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/MetadataDelegateRole.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/MigrateArgs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/MigrationType.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/MintArgs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/MintNewEditionFromMasterEditionViaTokenArgs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/MintPrintingTokensViaTokenArgs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/Payload.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/PayloadKey.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/PayloadType.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/PrintSupply.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/ProgrammableConfig.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/Reservation.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/ReservationV1.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/RevokeArgs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/RuleSetToggle.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/SeedsVec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/SetCollectionSizeArgs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/SetReservationListArgs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/TokenDelegateRole.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/TokenStandard.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/TokenState.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/TransferArgs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/TransferOutOfEscrowArgs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/UnlockArgs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/UpdateArgs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/UpdateMetadataAccountArgs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/UpdateMetadataAccountArgsV2.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/UseArgs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/UseMethod.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/Uses.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/UsesToggle.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/UtilizeArgs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/VerifyArgs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/generated/types/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/src/mpl-token-metadata.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/test/create.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/test/delegate.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/test/deserializer.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/test/fixtures/faulty_13gxS4r6SiJn8fwizKZT2W8x8DL6vjN1nAhPWsfNXegb.buf": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/test/lock.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/test/mint.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/test/revoke.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/test/setup/amman.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/test/setup/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/test/setup/log.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/test/setup/lut.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/test/setup/txs-init.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/test/transfer.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/test/unlock.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/test/update.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/test/utils/digital-asset-manager.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/test/utils/errors.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/test/utils/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/test/utils/programmable.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/test/utils/update-test-data.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/tsconfig.build.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/typedoc.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/js/yarn.lock": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/macro/Cargo.toml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/macro/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/macro/src/lib.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/Cargo.toml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/ProgrammableNFTGuide.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/Xargo.toml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/rustfmt.toml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/assertions/collection.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/assertions/edition.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/assertions/metadata.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/assertions/misc.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/assertions/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/assertions/programmable.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/assertions/uses.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/entrypoint.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/error.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/instruction/bubblegum.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/instruction/burn.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/instruction/collection.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/instruction/delegate.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/instruction/deprecated.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/instruction/edition.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/instruction/escrow.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/instruction/freeze.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/instruction/metadata.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/instruction/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/instruction/scratchpad.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/instruction/state.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/instruction/uses.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/lib.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/pda.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/bubblegum/bubblegum_set_collection_size.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/bubblegum/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/burn/burn.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/burn/burn_edition_nft.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/burn/burn_nft.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/burn/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/collection/approve_collection_authority.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/collection/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/collection/revoke_collection_authority.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/collection/set_and_verify_collection.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/collection/set_and_verify_sized_collection_item.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/collection/set_collection_size.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/collection/unverify_collection.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/collection/unverify_sized_collection_item.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/collection/verify.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/collection/verify_collection.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/collection/verify_sized_collection_item.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/delegate/delegate.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/delegate/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/delegate/revoke.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/deprecated/create_medatata_accounts_v2.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/deprecated/deprecated_create_metadata_accounts.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/deprecated/deprecated_update_metadata_accounts.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/deprecated/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/edition/convert_master_edition_v1_to_v2.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/edition/create_master_edition_v3.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/edition/mint_new_edition_from_master_edition_via_token.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/edition/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/escrow/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/escrow/close_escrow_account.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/escrow/create_escrow_account.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/escrow/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/escrow/pda.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/escrow/transfer_out.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/freeze/freeze_delegated_account.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/freeze/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/freeze/thaw_delegated_account.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/metadata/create.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/metadata/create_medatata_accounts_v3.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/metadata/migrate.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/metadata/mint.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/metadata/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/metadata/puff_metadata.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/metadata/remove_creator_verification.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/metadata/set_token_standard.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/metadata/sign_metadata.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/metadata/transfer.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/metadata/update.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/metadata/update_metadata_account_v2.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/metadata/update_primary_sale_happened_via_token.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/state/lock.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/state/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/state/unlock.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/uses/approve_use_authority.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/uses/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/uses/revoke_use_authority.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/processor/uses/utilize.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/state/asset_data.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/state/collection.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/state/creator.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/state/data.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/state/delegate.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/state/edition.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/state/edition_marker.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/state/escrow.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/state/master_edition.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/state/metadata.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/state/migrate.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/state/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/state/programmable.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/state/reservation.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/state/token_auth_payload.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/state/uses.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/utils/collection.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/utils/compression.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/utils/master_edition.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/utils/metadata.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/utils/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/src/utils/programmable_asset.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/approve_use_authority.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/bump_seed_migration.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/burn_edition_nft.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/burn_nft.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/collection_migrations.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/collection_sizes.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/create.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/create_master_edition.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/create_metadata_account.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/delegate.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/escrow.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/freeze_authority.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/freeze_delegated_account.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/lock.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/migrate.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/mint.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/mint_new_edition_from_master_edition_via_token.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/process_legacy_instruction.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/revoke.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/revoke_use_authority.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/seralization.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/set_collection_size.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/set_token_standard.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/sign_metadata.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/transfer.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/unlock.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/update.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/update_metadata_account.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/update_metadata_account_v2.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/update_primary_sale_happened_via_token.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/uses.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/utils/assert.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/utils/collection.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/utils/digital_asset.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/utils/edition_marker.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/utils/master_edition_v2.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/utils/metadata.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/utils/mod.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/utils/programmable.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/utils/rooster_manager.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/verify_collection.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"token-metadata/program/tests/verify_sized_collection_item.rs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tsconfig.build.json": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 3,
+				"matchingFiles": 0,
+				"missingInPackage": 1206,
+				"missingInSource": 96,
+				"score": 0,
+				"totalFiles": 1305
+			}
+		},
+		"prodDependencies": []
+	}
+]
