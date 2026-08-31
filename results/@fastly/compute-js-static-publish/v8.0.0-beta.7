@@ -1,0 +1,527 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-08-30T09:09:51.277Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:11.6.1",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "@fastly/compute-js-static-publish@8.0.0-beta.7",
+			"name": "@fastly/compute-js-static-publish",
+			"version": "8.0.0-beta.7",
+			"location": "https://registry.npmjs.org/@fastly/compute-js-static-publish/-/compute-js-static-publish-8.0.0-beta.7.tgz",
+			"integrity": "sha512-i+q6Wy19HPfYzGnOJ+SZ97PIHVUoqMEvs8pSggeUtCzhRGQaiBOuWiXVLA2UsqCfTV/YKzBQy9R2QD955fHhRg==",
+			"publishedAt": "2025-11-11T02:38:47.049Z",
+			"publishedWith": {
+				"node": "24.11.0",
+				"npm": "11.6.1"
+			},
+			"dependencies": {
+				"toml": "^3.0.0",
+				"@fastly/cli": "^11.2.0",
+				"glob-to-regexp": "^0.4.1",
+				"command-line-args": "^5.2.1",
+				"@aws-sdk/client-s3": "3.888.0",
+				"@aws-sdk/credential-providers": "3.888.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/fastly/compute-js-static-publish.git",
+			"spec": "github:fastly/compute-js-static-publish#087dfdb696da2cd7a073b05170bf300147fe74dc"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,70 +1,1062 @@\n-# @fastly/compute-js-static-publish\n+# Static Publisher for JavaScript on Fastly Compute\n \n-Fastly Compute + KV Store for static websites and web apps.\n+> [!NOTE]\n+> v8 adds Beta support for S3-compatible storage, such as Fastly [Object Storage](https://www.fastly.com/products/storage). For more details, see the [S3-compatible storage](https://github.com/fastly/compute-js-static-publish/blob/main/README.md#s3-compatible-storage) section.  \n \n-This CLI tool helps you:\n-\n-- ✅ Deploy static sites to Fastly Compute with zero backend\n-- 📦 Store files in Fastly KV Store efficiently\n-  - 🎁 New in v8: Support for S3-compatible storage such as Fastly Object Storage (Beta) \n-- 🗂 Publish to named collections (`live`, `preview-42`, etc.)\n-- 🔄 Switch between collections at runtime\n-- 🧹 Clean up old or expired assets\n+> [!NOTE]\n+> These docs are for v7 or newer, a major rewrite that adds powerful new features such as named collections.\n+> If you're looking for v6, please check out the [v6 branch](https://github.com/fastly/compute-js-static-publish/tree/v6).\n+\n+> [!WARNING]\n+> v7 and newer no longer support module assets. If you require this feature, consider using [v6](https://github.com/fastly/compute-js-static-publish/tree/v6).\n+\n+## 📖 Table of Contents\n+\n+- [✨ Key Features](#-key-features)\n+- [🏁 Quick Start](#-quick-start)\n+  - [📦 Fastly KV Store](#-using-the-fastly-kv-store) \n+  - [🎁 S3 Compatible Storage](#-using-s3-compatible-storage-beta) (Beta)\n+- [⚙️ Configuring `static-publish.rc.js`](#️-configuring-static-publishrcjs)\n+- [🧾 Config for Publishing and Server: `publish-content.config.js`](#-config-for-publishing-and-server-publish-contentconfigjs)\n+- [📦 Collections (Publish, Preview, Promote)](#-collections-publish-preview-promote)\n+- [🧹 Cleaning Up](#-cleaning-up)\n+- [🔄 Content Compression](#-content-compression)\n+- [🧩 Using PublisherServer in Custom Apps](#-using-publisherserver-in-custom-apps)\n+- [📥 Using Published Assets in Your Code](#-using-published-assets-in-your-code)\n+- [📚 CLI Reference](#-cli-reference)\n+- [📕 Appendix](#-appendix)\n+- [📚 Next Steps](#-next-steps)\n+\n+Serve static websites and web apps at the edge &mdash; no backends and no CDN invalidation delays.\n+\n+`@fastly/compute-js-static-publish` helps you deploy and serve static files using [Fastly Compute](https://developer.fastly.com/learning/compute/) for fast, cacheable, and content-addressed delivery. The library can be configured to store your data in either of the following:\n+* Fastly [Key Value Store](https://www.fastly.com/products/kv-store)\n+* S3-compatible storage, such as Fastly [Object Storage](https://www.fastly.com/products/storage) (Beta) \n+\n+## ✨ Key Features\n+\n+- 📦 Easy to scaffold and deploy\n+- 🚀 Content stored using hashed keys, in Fastly KV Store or S3-compatible storage (Beta) including Fastly Object Storage\n+- 🔁 Publish new content without needing to deploy new Wasm binaries\n+- 🗂 Organize releases into named collections which can be previewed (e.g. `live`, `staging`, `preview-123`)\n+- 🧼 Cleanup tools to remove expired or orphaned files\n+- ⚙️ Configurable per-collection server configurations (e.g. fallback files)\n+- 🔒 Supports Brotli/gzip compression, conditional GET, and long cache TTLs\n \n ---\n \n-## Quick Start\n+## 🏁 Quick Start\n+\n+### 📦 Using the Fastly KV Store\n+\n+#### 1. Scaffold a Compute App\n \n Create a directory for your project, place your static files in `./public`, then type:\n \n ```sh\n-npx @fastly/compute-js-static-publish@latest --root-dir=./public --kv-store-name=site-content\n+npx @fastly/compute-js-static-publish@latest \\\n+  --root-dir=./public \\\n+  --kv-store-name=site-content\n+```\n+\n+You get a Compute app in `./compute-js` with:\n+\n+- `fastly.toml` (service config)\n+- `src/index.js` (entry point)\n+- `static-publish.rc.js` (app config)\n+- `publish-content.config.js` (publish-time / runtime behavior)\n+\n+Once the application is scaffolded, install dependencies:\n+\n+```sh\n+cd compute-js\n+npm install\n+```\n+\n+#### 2. Preview Locally\n+\n+Type the following &mdash; no Fastly account or service required yet!\n+\n+```sh\n+npm run dev:publish\n+npm run dev:start\n+```\n+\n+Fastly's [local development environment](https://www.fastly.com/documentation/guides/compute/testing/#running-a-local-testing-server) serves your static website at `http://127.0.0.1:7676`, powered by a simulated KV Store.\n",
+					"match": false,
+					"packageHash": "fce48d98b3f1066845dfa7116ca68391732bb1d00ae8c348c3a87e5336c89d0a",
+					"size": 2345,
+					"sourceHash": "b28472bab1caf7a748e09791d218ccb92c459dfc593b7a40f714c75aaa164bc2",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 1,
+				"matchingFiles": 208,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.9952153110047847,
+				"totalFiles": 209
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "@aws-crypto/crc32",
+				"version": "5.2.0"
+			},
+			{
+				"name": "@aws-crypto/crc32c",
+				"version": "5.2.0"
+			},
+			{
+				"name": "@aws-crypto/sha1-browser",
+				"version": "5.2.0"
+			},
+			{
+				"name": "@smithy/is-array-buffer",
+				"version": "2.2.0"
+			},
+			{
+				"name": "@smithy/util-buffer-from",
+				"version": "2.2.0"
+			},
+			{
+				"name": "@smithy/util-utf8",
+				"version": "2.3.0"
+			},
+			{
+				"name": "@aws-crypto/sha256-browser",
+				"version": "5.2.0"
+			},
+			{
+				"name": "@aws-crypto/sha256-js",
+				"version": "5.2.0"
+			},
+			{
+				"name": "@aws-crypto/supports-web-crypto",
+				"version": "5.2.0"
+			},
+			{
+				"name": "@aws-crypto/util",
+				"version": "5.2.0"
+			},
+			{
+				"name": "@aws-sdk/client-cognito-identity",
+				"version": "3.888.0"
+			},
+			{
+				"name": "@aws-sdk/client-s3",
+				"version": "3.888.0"
+			},
+			{
+				"name": "@aws-sdk/client-sso",
+				"version": "3.888.0"
+			},
+			{
+				"name": "@aws-sdk/core",
+				"version": "3.888.0"
+			},
+			{
+				"name": "@aws-sdk/credential-provider-cognito-identity",
+				"version": "3.888.0"
+			},
+			{
+				"name": "@aws-sdk/credential-provider-env",
+				"version": "3.888.0"
+			},
+			{
+				"name": "@aws-sdk/credential-provider-http",
+				"version": "3.888.0"
+			},
+			{
+				"name": "@aws-sdk/credential-provider-ini",
+				"version": "3.888.0"
+			},
+			{
+				"name": "@aws-sdk/credential-provider-node",
+				"version": "3.888.0"
+			},
+			{
+				"name": "@aws-sdk/credential-provider-process",
+				"version": "3.888.0"
+			},
+			{
+				"name": "@aws-sdk/credential-provider-sso",
+				"version": "3.888.0"
+			},
+			{
+				"name": "@aws-sdk/credential-provider-web-identity",
+				"version": "3.888.0"
+			},
+			{
+				"name": "@aws-sdk/credential-providers",
+				"version": "3.888.0"
+			},
+			{
+				"name": "@aws-sdk/middleware-bucket-endpoint",
+				"version": "3.887.0"
+			},
+			{
+				"name": "@aws-sdk/middleware-expect-continue",
+				"version": "3.887.0"
+			},
+			{
+				"name": "@aws-sdk/middleware-flexible-checksums",
+				"version": "3.888.0"
+			},
+			{
+				"name": "@aws-sdk/middleware-host-header",
+				"version": "3.887.0"
+			},
+			{
+				"name": "@aws-sdk/middleware-location-constraint",
+				"version": "3.887.0"
+			},
+			{
+				"name": "@aws-sdk/middleware-logger",
+				"version": "3.887.0"
+			},
+			{
+				"name": "@aws-sdk/middleware-recursion-detection",
+				"version": "3.887.0"
+			},
+			{
+				"name": "@aws-sdk/middleware-sdk-s3",
+				"version": "3.888.0"
+			},
+			{
+				"name": "@aws-sdk/middleware-ssec",
+				"version": "3.887.0"
+			},
+			{
+				"name": "@aws-sdk/middleware-user-agent",
+				"version": "3.888.0"
+			},
+			{
+				"name": "@aws-sdk/nested-clients",
+				"version": "3.888.0"
+			},
+			{
+				"name": "@aws-sdk/region-config-resolver",
+				"version": "3.887.0"
+			},
+			{
+				"name": "@aws-sdk/signature-v4-multi-region",
+				"version": "3.888.0"
+			},
+			{
+				"name": "@aws-sdk/token-providers",
+				"version": "3.888.0"
+			},
+			{
+				"name": "@aws-sdk/types",
+				"version": "3.887.0"
+			},
+			{
+				"name": "@aws-sdk/util-arn-parser",
+				"version": "3.873.0"
+			},
+			{
+				"name": "@aws-sdk/util-endpoints",
+				"version": "3.887.0"
+			},
+			{
+				"name": "@aws-sdk/util-locate-window",
+				"version": "3.873.0"
+			},
+			{
+				"name": "@aws-sdk/util-user-agent-browser",
+				"version": "3.887.0"
+			},
+			{
+				"name": "@aws-sdk/util-user-agent-node",
+				"version": "3.888.0"
+			},
+			{
+				"name": "@aws-sdk/xml-builder",
+				"version": "3.887.0"
+			},
+			{
+				"name": "@aws/lambda-invoke-store",
+				"version": "0.0.1"
+			},
+			{
+				"name": "@fastly/cli",
+				"version": "11.2.0"
+			},
+			{
+				"name": "@fastly/cli-darwin-arm64",
+				"version": "11.2.0"
+			},
+			{
+				"name": "@fastly/cli-darwin-x64",
+				"version": "11.2.0"
+			},
+			{
+				"name": "@fastly/cli-linux-arm64",
+				"version": "11.2.0"
+			},
+			{
+				"name": "@fastly/cli-linux-x32",
+				"version": "11.2.0"
+			},
+			{
+				"name": "@fastly/cli-linux-x64",
+				"version": "11.2.0"
+			},
+			{
+				"name": "@fastly/cli-win32-arm64",
+				"version": "11.2.0"
+			},
+			{
+				"name": "@fastly/cli-win32-x32",
+				"version": "11.2.0"
+			},
+			{
+				"name": "@fastly/cli-win32-x64",
+				"version": "11.2.0"
+			},
+			{
+				"name": "@smithy/abort-controller",
+				"version": "4.1.1"
+			},
+			{
+				"name": "@smithy/chunked-blob-reader",
+				"version": "5.1.0"
+			},
+			{
+				"name": "@smithy/chunked-blob-reader-native",
+				"version": "4.1.0"
+			},
+			{
+				"name": "@smithy/config-resolver",
+				"version": "4.2.2"
+			},
+			{
+				"name": "@smithy/core",
+				"version": "3.11.0"
+			},
+			{
+				"name": "@smithy/credential-provider-imds",
+				"version": "4.1.2"
+			},
+			{
+				"name": "@smithy/eventstream-codec",
+				"version": "4.1.1"
+			},
+			{
+				"name": "@smithy/eventstream-serde-browser",
+				"version": "4.1.1"
+			},
+			{
+				"name": "@smithy/eventstream-serde-config-resolver",
+				"version": "4.2.1"
+			},
+			{
+				"name": "@smithy/eventstream-serde-node",
+				"version": "4.1.1"
+			},
+			{
+				"name": "@smithy/eventstream-serde-universal",
+				"version": "4.1.1"
+			},
+			{
+				"name": "@smithy/fetch-http-handler",
+				"version": "5.2.1"
+			},
+			{
+				"name": "@smithy/hash-blob-browser",
+				"version": "4.1.1"
+			},
+			{
+				"name": "@smithy/hash-node",
+				"version": "4.1.1"
+			},
+			{
+				"name": "@smithy/hash-stream-node",
+				"version": "4.1.1"
+			},
+			{
+				"name": "@smithy/invalid-dependency",
+				"version": "4.1.1"
+			},
+			{
+				"name": "@smithy/is-array-buffer",
+				"version": "4.1.0"
+			},
+			{
+				"name": "@smithy/md5-js",
+				"version": "4.1.1"
+			},
+			{
+				"name": "@smithy/middleware-content-length",
+				"version": "4.1.1"
+			},
+			{
+				"name": "@smithy/middleware-endpoint",
+				"version": "4.2.2"
+			},
+			{
+				"name": "@smithy/middleware-retry",
+				"version": "4.2.2"
+			},
+			{
+				"name": "@smithy/middleware-serde",
+				"version": "4.1.1"
+			},
+			{
+				"name": "@smithy/middleware-stack",
+				"version": "4.1.1"
+			},
+			{
+				"name": "@smithy/node-config-provider",
+				"version": "4.2.2"
+			},
+			{
+				"name": "@smithy/node-http-handler",
+				"version": "4.2.1"
+			},
+			{
+				"name": "@smithy/property-provider",
+				"version": "4.1.1"
+			},
+			{
+				"name": "@smithy/protocol-http",
+				"version": "5.2.1"
+			},
+			{
+				"name": "@smithy/querystring-builder",
+				"version": "4.1.1"
+			},
+			{
+				"name": "@smithy/querystring-parser",
+				"version": "4.1.1"
+			},
+			{
+				"name": "@smithy/service-error-classification",
+				"version": "4.1.1"
+			},
+			{
+				"name": "@smithy/shared-ini-file-loader",
+				"version": "4.2.0"
+			},
+			{
+				"name": "@smithy/signature-v4",
+				"version": "5.2.1"
+			},
+			{
+				"name": "@smithy/smithy-client",
+				"version": "4.6.2"
+			},
+			{
+				"name": "@smithy/types",
+				"version": "4.5.0"
+			},
+			{
+				"name": "@smithy/url-parser",
+				"version": "4.1.1"
+			},
+			{
+				"name": "@smithy/util-base64",
+				"version": "4.1.0"
+			},
+			{
+				"name": "@smithy/util-body-length-browser",
+				"version": "4.1.0"
+			},
+			{
+				"name": "@smithy/util-body-length-node",
+				"version": "4.1.0"
+			},
+			{
+				"name": "@smithy/util-buffer-from",
+				"version": "4.1.0"
+			},
+			{
+				"name": "@smithy/util-config-provider",
+				"version": "4.1.0"
+			},
+			{
+				"name": "@smithy/util-defaults-mode-browser",
+				"version": "4.1.2"
+			},
+			{
+				"name": "@smithy/util-defaults-mode-node",
+				"version": "4.1.2"
+			},
+			{
+				"name": "@smithy/util-endpoints",
+				"version": "3.1.2"
+			},
+			{
+				"name": "@smithy/util-hex-encoding",
+				"version": "4.1.0"
+			},
+			{
+				"name": "@smithy/util-middleware",
+				"version": "4.1.1"
+			},
+			{
+				"name": "@smithy/util-retry",
+				"version": "4.1.1"
+			},
+			{
+				"name": "@smithy/util-stream",
+				"version": "4.3.1"
+			},
+			{
+				"name": "@smithy/util-uri-escape",
+				"version": "4.1.0"
+			},
+			{
+				"name": "@smithy/util-utf8",
+				"version": "4.1.0"
+			},
+			{
+				"name": "@smithy/util-waiter",
+				"version": "4.1.1"
+			},
+			{
+				"name": "@types/uuid",
+				"version": "9.0.8"
+			},
+			{
+				"name": "array-back",
+				"version": "3.1.0"
+			},
+			{
+				"name": "bowser",
+				"version": "2.12.1"
+			},
+			{
+				"name": "command-line-args",
+				"version": "5.2.1"
+			},
+			{
+				"name": "fast-xml-parser",
+				"version": "5.2.5"
+			},
+			{
+				"name": "find-replace",
+				"version": "3.0.0"
+			},
+			{
+				"name": "glob-to-regexp",
+				"version": "0.4.1"
+			},
+			{
+				"name": "lodash.camelcase",
+				"version": "4.3.0"
+			},
+			{
+				"name": "strnum",
+				"version": "2.1.1"
+			},
+			{
+				"name": "toml",
+				"version": "3.0.0"
+			},
+			{
+				"name": "tslib",
+				"version": "2.8.1"
+			},
+			{
+				"name": "typical",
+				"version": "4.0.0"
+			},
+			{
+				"name": "uuid",
+				"version": "9.0.1"
+			}
+		]
+	}
+]

@@ -1,0 +1,121 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-08-30T09:14:02.029Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:11.6.2",
+		"reproduced": false,
+		"attested": true,
+		"package": {
+			"spec": "@fastly/compute-js-static-publish@7.0.6",
+			"name": "@fastly/compute-js-static-publish",
+			"version": "7.0.6",
+			"location": "https://registry.npmjs.org/@fastly/compute-js-static-publish/-/compute-js-static-publish-7.0.6.tgz",
+			"integrity": "sha512-SpwANIGiK20iEC9kCl92OQg/3ATN3D7Wp4xKC5E+9VauBaygh3mWSpPikWVgerqy4TmN48butfsHEbJNZTfTHw==",
+			"publishedAt": "2026-02-13T08:25:09.929Z",
+			"publishedWith": {
+				"node": "24.13.0",
+				"npm": "11.6.2"
+			},
+			"dependencies": {
+				"toml": "^3.0.0",
+				"@fastly/cli": "^11.2.0",
+				"glob-to-regexp": "^0.4.1",
+				"command-line-args": "^5.2.1"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/fastly/compute-js-static-publish.git",
+			"spec": "github:fastly/compute-js-static-publish#81eb5aa848eb420c54b325c5739d30a0c3e14619"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,64 +1,854 @@\n-# @fastly/compute-js-static-publish\n+# Static Publisher for JavaScript on Fastly Compute\n \n-Fastly Compute + KV Store for static websites and web apps.\n+> NOTE: `@fastly/compute-js-static-publish` is provided as a Fastly Labs product. Visit the [Fastly Labs](https://www.fastlylabs.com/) site for terms of use.\n \n-This CLI tool helps you:\n-\n-- ✅ Deploy static sites to Fastly Compute with zero backend\n-- 📦 Store files in Fastly KV Store efficiently\n-- 🗂 Publish to named collections (`live`, `preview-42`, etc.)\n-- 🔄 Switch between collections at runtime\n-- 🧹 Clean up old or expired assets\n+> [!NOTE]\n+> These docs are for v7, a major rewrite that adds powerful new features such as named collections.\n+> If you're looking for v6, please check out the [v6 branch](https://github.com/fastly/compute-js-static-publish/tree/v6).\n+\n+> [!WARNING]\n+> Version 7 no longer supports module assets. If you require this feature, consider using [v6](https://github.com/fastly/compute-js-static-publish/tree/v6).\n+\n+## 📖 Table of Contents\n+\n+- [✨ Key Features](#-key-features)\n+- [🏁 Quick Start](#-quick-start)\n+- [⚙️ Configuring `static-publish.rc.js`](#️-configuring-static-publishrcjs)\n+- [🧾 Config for Publishing and Server: `publish-content.config.js`](#-config-for-publishing-and-server-publish-contentconfigjs)\n+- [📦 Collections (Publish, Preview, Promote)](#-collections-publish-preview-promote)\n+- [🧹 Cleaning Up](#-cleaning-up)\n+- [🔄 Content Compression](#-content-compression)\n+- [🧩 Using PublisherServer in Custom Apps](#-using-publisherserver-in-custom-apps)\n+- [📥 Using Published Assets in Your Code](#-using-published-assets-in-your-code)\n+- [📚 CLI Reference](#-cli-reference)\n+- [📕 Appendix](#-appendix)\n+- [📚 Next Steps](#-next-steps)\n+\n+Serve static websites and web apps at the edge &mdash; no backends and no CDN invalidation delays.\n+\n+`@fastly/compute-js-static-publish` helps you deploy static files to [Fastly Compute](https://developer.fastly.com/learning/compute/) using Fastly's KV Store for fast, cacheable, and content-addressed delivery.\n+\n+## ✨ Key Features\n+\n+- 📦 Easy to scaffold and deploy\n+- 🚀 Content stored in Fastly KV Store using hashed keys\n+- 🔁 Publish new content without deploying new Wasm binaries\n+- 🗂 Organize releases into named collections which can be previewed (e.g. `live`, `staging`, `preview-123`)\n+- 🧼 Cleanup tools to remove expired or orphaned files\n+- ⚙️ Configurable per-collection server configurations (e.g. fallback files)\n+- 🔒 Supports Brotli/gzip compression, conditional GET, and long cache TTLs\n \n ---\n \n-## Quick Start\n+## 🏁 Quick Start\n+\n+### 1. Scaffold a Compute App\n \n Create a directory for your project, place your static files in `./public`, then type:\n \n ```sh\n-npx @fastly/compute-js-static-publish@latest --root-dir=./public --kv-store-name=site-content\n+npx @fastly/compute-js-static-publish@latest \\\n+  --root-dir=./public \\\n+  --kv-store-name=site-content\n ```\n \n-### 🔧 Local Preview\n+You get a Compute app in `./compute-js` with:\n+\n+- `fastly.toml` (service config)\n+- `src/index.js` (entry point)\n+- `static-publish.rc.js` (app config)\n+- `publish-content.config.js` (publish-time / runtime behavior)\n+\n+### 2. Preview Locally\n+\n+Type the following &mdash; no Fastly account or service required yet!\n \n ```sh\n cd compute-js\n npm install\n+npm run dev:publish\n+npm run dev:start\n+```\n+\n+Fastly's [local development environment](https://www.fastly.com/documentation/guides/compute/testing/#running-a-local-testing-server) serves your static website at `http://127.0.0.1:7676`, powered by a simulated KV Store.\n+\n+### 3. Deploy Your App\n+\n+Ready to go live? All you need is a [free Fastly account](https://www.fastly.com/signup/?tier=free)!\n+\n+```sh\n+npm run fastly:deploy\n+```\n+\n+The command publishes your Compute app and creates the KV Store. (No content uploaded yet!)\n+\n+### 4. Publish Content\n",
+					"match": false,
+					"packageHash": "b1e6bd8ba198096d100634dd9b8f77cb44f26e82d6e5f3ecb30677c5e9b4e97e",
+					"size": 1868,
+					"sourceHash": "a23a07866266556a801b51e550e528d249431f6a5990699efd8686b6aea3a548",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 1,
+				"matchingFiles": 139,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.9928571428571429,
+				"totalFiles": 140
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "@fastly/cli",
+				"version": "11.2.0"
+			},
+			{
+				"name": "@fastly/cli-darwin-arm64",
+				"version": "11.2.0"
+			},
+			{
+				"name": "@fastly/cli-darwin-x64",
+				"version": "11.2.0"
+			},
+			{
+				"name": "@fastly/cli-linux-arm64",
+				"version": "11.2.0"
+			},
+			{
+				"name": "@fastly/cli-linux-x32",
+				"version": "11.2.0"
+			},
+			{
+				"name": "@fastly/cli-linux-x64",
+				"version": "11.2.0"
+			},
+			{
+				"name": "@fastly/cli-win32-arm64",
+				"version": "11.2.0"
+			},
+			{
+				"name": "@fastly/cli-win32-x32",
+				"version": "11.2.0"
+			},
+			{
+				"name": "@fastly/cli-win32-x64",
+				"version": "11.2.0"
+			},
+			{
+				"name": "array-back",
+				"version": "3.1.0"
+			},
+			{
+				"name": "command-line-args",
+				"version": "5.2.1"
+			},
+			{
+				"name": "find-replace",
+				"version": "3.0.0"
+			},
+			{
+				"name": "glob-to-regexp",
+				"version": "0.4.1"
+			},
+			{
+				"name": "lodash.camelcase",
+				"version": "4.3.0"
+			},
+			{
+				"name": "toml",
+				"version": "3.0.0"
+			},
+			{
+				"name": "typical",
+				"version": "4.0.0"
+			}
+		]
+	}
+]
