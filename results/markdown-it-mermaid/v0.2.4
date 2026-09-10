@@ -1,0 +1,120 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-09-09T00:50:42.426Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:5.5.1",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "markdown-it-mermaid@0.2.4",
+			"name": "markdown-it-mermaid",
+			"version": "0.2.4",
+			"location": "https://registry.npmjs.org/markdown-it-mermaid/-/markdown-it-mermaid-0.2.4.tgz",
+			"integrity": "sha512-8cIDlPaYoec4oE44fwG6CuZafWVE2aLsKhlrUfduBSgZvhhKgynC/WX+VAMmACi2q+xsNd6vau164acG4Kas0Q==",
+			"publishedAt": "2017-12-26T14:00:10.934Z",
+			"publishedWith": {
+				"node": "9.3.0",
+				"npm": "5.6.0"
+			},
+			"dependencies": {
+				"mermaid": "^7.1.1"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+ssh://git@github.com/tylingsoft/markdown-it-mermaid.git",
+			"spec": "github:tylingsoft/markdown-it-mermaid#f25fb153258acb42383f213c589855dac6be7247"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"dist/index.js": {
+					"match": false,
+					"packageHash": "8aeb11df9098c54bb3db467fc9446c121996696653b7ab43ebbb940ca51f47d1",
+					"size": 1476,
+					"status": "missing-in-source"
+				},
+				"dist/index.js.map": {
+					"match": false,
+					"packageHash": "f75e78456ffd2f88721346c76b36364cb8b88b5678a3809aec7c10d863d54a4a",
+					"size": 11015,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,6 +1,6 @@\n {\n   \"name\": \"markdown-it-mermaid\",\n-  \"version\": \"0.2.4\",\n+  \"version\": \"0.2.3\",\n   \"description\": \"Mermaid plugin for markdown-it.\",\n   \"main\": \"dist/index.js\",\n   \"scripts\": {\n",
+					"match": false,
+					"packageHash": "0874d2d86ec8a9dea990067e9cfe64754d585e2ee65b7b6d4534ca06f493ff36",
+					"size": 822,
+					"sourceHash": "82f87b5792550f75bb070377b297c3a3edf5b5f77a977946f39c45209d33bc69",
+					"status": "content"
+				},
+				"src/index.js": {
+					"diff": "--- published/src/index.js\n+++ rebuilt/src/index.js\n@@ -1,11 +1,17 @@\n import mermaid from 'mermaid'\n \n const mermaidChart = (code) => {\n-  try {\n-    mermaid.parse(code)\n+  if (typeof window === 'undefined') {\n     return `<div class=\"mermaid\">${code}</div>`\n-  } catch ({ str, hash }) {\n-    return `<pre>${str}</pre>`\n+  }\n+  let mermaidError = null\n+  mermaid.parseError = (error, hash) => {\n+    mermaidError = error\n+  }\n+  if (mermaid.parse(code) || mermaidError === null) {\n+    return `<div class=\"mermaid\">${code}</div>`\n+  } else {\n+    return `<pre>${mermaidError}</pre>`\n   }\n }\n \n",
+					"match": false,
+					"packageHash": "af34f93bbec9e2c24b6bb40cb380e6e41b01a707045dddc33286f50de1493183",
+					"size": 1445,
+					"sourceHash": "09432ac124c119df81354884c9c4ecf521910d10b1be83e234a50e51dcf3029f",
+					"status": "content"
+				},
+				"test/index.js": {
+					"diff": "--- published/test/index.js\n+++ rebuilt/test/index.js\n@@ -24,14 +24,6 @@\n     C -->|Two| E[iPhone]\n     C -->|Three| F[Car]\n \\`\\`\\``))\n-console.log(mdi.render(`\\`\\`\\`\n-graph TD\n-    A[Christmas] -->|Get money| B(Go shopping)\n-    B ----> C{Let me think}\n-    C -->|One| D[Laptop]\n-    C -->|Two| E[iPhone]\n-    C -->|Three| F[Car]\n-\\`\\`\\``))\n \n assert(mdi.render(`\\`\\`\\`mermaid\n graph TD\n@@ -49,11 +41,3 @@\n     C -->|Two| E[iPhone]\n     C -->|Three| F[Car]\n \\`\\`\\``).indexOf('class=\"mermaid\"') > -1)\n-assert(mdi.render(`\\`\\`\\`\n-graph TD\n-    A[Christmas] -->|Get money| B(Go shopping)\n-    B ----> C{Let me think}\n-    C -->|One| D[Laptop]\n-    C -->|Two| E[iPhone]\n-    C -->|Three| F[Car]\n-\\`\\`\\``).indexOf('<pre>Parse error') > -1)\n",
+					"match": false,
+					"packageHash": "73b85ffd5e6c9be2d615bb90bd8f3bebaf06cc9bf1af958fe258d743f7189d13",
+					"size": 1613,
+					"sourceHash": "765f1c333ec5b9bc02e995d2405e73edb0626d20d0cc6f080da23573919f2272",
+					"status": "content"
+				},
+				"yarn.lock": {
+					"match": false,
+					"packageHash": "aa5d802d015b18e1ff6eeb9c7c601d9a7c528c50ffd5db86bc2bd223764614f3",
+					"size": 122584,
+					"status": "missing-in-source"
+				}
+			},
+			"summary": {
+				"differentFiles": 3,
+				"matchingFiles": 5,
+				"missingInPackage": 0,
+				"missingInSource": 3,
+				"score": 0.45454545454545453,
+				"totalFiles": 11
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "d3",
+				"version": "3.5.17"
+			},
+			{
+				"name": "dagre-d3-renderer",
+				"version": "0.4.26"
+			},
+			{
+				"name": "dagre-layout",
+				"version": "0.8.0"
+			},
+			{
+				"name": "graphlib",
+				"version": "2.1.1"
+			},
+			{
+				"name": "he",
+				"version": "1.1.1"
+			},
+			{
+				"name": "lodash",
+				"version": "4.17.4"
+			},
+			{
+				"name": "mermaid",
+				"version": "7.1.1"
+			},
+			{
+				"name": "moment",
+				"version": "2.20.1"
+			}
+		]
+	}
+]

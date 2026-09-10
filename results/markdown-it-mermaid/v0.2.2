@@ -1,0 +1,79 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-09-09T00:56:02.857Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:5.5.1",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "markdown-it-mermaid@0.2.2",
+			"name": "markdown-it-mermaid",
+			"version": "0.2.2",
+			"location": "https://registry.npmjs.org/markdown-it-mermaid/-/markdown-it-mermaid-0.2.2.tgz",
+			"integrity": "sha512-C6DuGNjebWG8hyXbjY4k9UVGQK+uv5yqiJkgPBPqtVmuqbFRa2yEXk4zyQIuCKn9Y7+RWNJThWuez6PzD703sw==",
+			"publishedAt": "2017-12-25T09:11:31.939Z",
+			"publishedWith": {
+				"node": "9.3.0",
+				"npm": "5.6.0"
+			},
+			"dependencies": {
+				"mermaid": "^7.1.1"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+ssh://git@github.com/tylingsoft/markdown-it-mermaid.git",
+			"spec": "github:tylingsoft/markdown-it-mermaid#49844d91073a616a407ec1d06e8fceea02f9e56f"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"dist/index.js": {
+					"match": false,
+					"packageHash": "a584806440a0a86150b9448b1891c011882608ffa938e3e724d6c55c7786c4ea",
+					"size": 1549,
+					"status": "missing-in-source"
+				},
+				"dist/index.js.map": {
+					"match": false,
+					"packageHash": "4a06df44007a59c2fdb1ae0e58585751a1b4486353bf7c9b859619c8c296607f",
+					"size": 11417,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,6 +1,6 @@\n {\n   \"name\": \"markdown-it-mermaid\",\n-  \"version\": \"0.2.2\",\n+  \"version\": \"0.2.1\",\n   \"description\": \"Mermaid plugin for markdown-it.\",\n   \"main\": \"dist/index.js\",\n   \"scripts\": {\n@@ -22,8 +22,5 @@\n     \"webpack\": \"^3.10.0\",\n     \"webpack-node-externals\": \"^1.6.0\",\n     \"yarn-upgrade-all\": \"^0.1.3\"\n-  },\n-  \"dependencies\": {\n-    \"mermaid\": \"^7.1.1\"\n   }\n }\n",
+					"match": false,
+					"packageHash": "85bfe36322c2263f48095dd2782e0772acc0deee7ed8e7207e545aab4d239441",
+					"size": 822,
+					"sourceHash": "2b2015e33f35d8bf13535353c3aa8ed4659f7a9013b61f5eb39976957f6bf697",
+					"status": "content"
+				},
+				"src/index.js": {
+					"diff": "--- published/src/index.js\n+++ rebuilt/src/index.js\n@@ -1,14 +1,12 @@\n-import mermaid from 'mermaid'\n-\n const mermaidChart = (code) => {\n-  if (typeof window === 'undefined') {\n+  if (typeof window === 'undefined' || !window.mermaid) {\n     return `<div class=\"mermaid\">${code}</div>`\n   }\n   let mermaidError = null\n-  mermaid.parseError = (error, hash) => {\n+  window.mermaid.parseError = (error, hash) => {\n     mermaidError = error\n   }\n-  if (mermaid.parse(code) || mermaidError === null) {\n+  if (window.mermaid.parse(code) || mermaidError === null) {\n     return `<div class=\"mermaid\">${code}</div>`\n   } else {\n     return `<pre>${mermaidError}</pre>`\n@@ -16,26 +14,17 @@\n }\n \n const MermaidPlugin = (md) => {\n-  mermaid.loadPreferences = (preferenceStore) => {\n-    let mermaidTheme = preferenceStore.get('mermaid-theme')\n-    if (mermaidTheme === undefined) {\n-      mermaidTheme = 'default'\n-    }\n-    let ganttAxisFormat = preferenceStore.get('gantt-axis-format')\n-    if (ganttAxisFormat === undefined) {\n-      ganttAxisFormat = '%Y-%m-%d'\n-    }\n-    mermaid.initialize({\n-      theme: mermaidTheme,\n-      gantt: { axisFormatter: [\n-        [ganttAxisFormat, (d) => {\n-          return d.getDay() === 1\n-        }]\n-      ]}\n-    })\n-    return {\n-      'mermaid-theme': mermaidTheme,\n-      'gantt-axis-format': ganttAxisFormat\n+  md.mermaid = {\n+    gantt: {\n+      axisFormat: (format) => {\n+        window.mermaid.ganttConfig = {\n+          axisFormatter: [\n+            [format, (d) => {\n+              return d.getDay() === 1\n+            }]\n+          ]\n+        }\n+      }\n     }\n   }\n \n",
+					"match": false,
+					"packageHash": "1456e93cfd91c1449bb3a889c35b44b10359310bdd0a2698301c1524cf93e138",
+					"size": 1624,
+					"sourceHash": "72a2077530c11a8bd1b05f402dd709ce46734c40bda3aa37e7584bc6bf75f62b",
+					"status": "content"
+				},
+				"yarn.lock": {
+					"match": false,
+					"packageHash": "b445f8527ba64abe14d763e796041d370165d0f8a30d6aea74848518faee76fb",
+					"size": 122584,
+					"status": "missing-in-source"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 6,
+				"missingInPackage": 0,
+				"missingInSource": 3,
+				"score": 0.5454545454545454,
+				"totalFiles": 11
+			}
+		},
+		"prodDependencies": []
+	}
+]
