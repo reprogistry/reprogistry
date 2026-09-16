@@ -1,0 +1,257 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-09-16T03:08:01.596Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:2.15.11",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "png@2.1.1",
+			"name": "png",
+			"version": "2.1.1",
+			"location": "https://registry.npmjs.org/png/-/png-2.1.1.tgz",
+			"integrity": "sha512-WFzE+emW475rdvpEiEiI434as4ywns1eFJNCZLnSFSbVxxV8ychIHJgBsA8ajJNpEb0um4Mpz8H0NZdswoyjNA==",
+			"publishedAt": "2012-02-01T21:56:22.024Z",
+			"publishedWith": {
+				"node": "v0.4.8",
+				"npm": "1.0.106"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git://github.com/pkrumins/node-png.git",
+			"spec": "github:pkrumins/node-png#HEAD"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".gitignore": {
+					"match": false,
+					"packageHash": "3336e1a5d8f8ec42fc0e02a979ae79a1f25dd5c5620f208c2b4626c45dc7b7fa",
+					"size": 22,
+					"status": "missing-in-source"
+				},
+				".npmignore": {
+					"match": false,
+					"packageHash": "34adb7e721d2cdd142decc399079373dc6338c5cd680833e4ce3674efd61ab39",
+					"size": 55,
+					"status": "missing-in-source"
+				},
+				"discovery/png.c": {
+					"match": false,
+					"packageHash": "7d8c8f1286361c1a9176c890bd6c17a43e32e1abdc9d3232266d19a95dbf0a37",
+					"size": 2954,
+					"status": "missing-in-source"
+				},
+				"discovery/png.cc": {
+					"match": false,
+					"packageHash": "1e0070e069d79005b6bfc1ac6ff96afe4a8e17482f6084e3b22ff2fe9b7f3760",
+					"size": 2389,
+					"status": "missing-in-source"
+				},
+				"experiments/fbconvert.cpp": {
+					"match": false,
+					"packageHash": "b589477950e590e04dd36aa54ab18b473e02194fc2acdf3f937d3c7597e275fb",
+					"size": 2654,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,6 +1,6 @@\n {\n    \"name\": \"png\",\n-   \"version\": \"2.1.1\",\n+   \"version\": \"3.0.3\",\n    \"main\":\"./build/Release/png\",\n    \"description\": \"A C++ module for node-js that converts an RGB and RGBA buffers to PNG images (in memory).\",\n    \"keywords\": [\n@@ -30,9 +30,6 @@\n    },\n    \"engines\": {\n        \"node\": \">=0.6.0\"\n-   },\n-   \"scripts\": {\n-       \"install\": \"node-waf configure build\"\n    }\n }\n \n",
+					"match": false,
+					"packageHash": "b3019f3d10a21542b56df7b083b7d7dc9aab2f73339b207dcb13c8ef1ac9622f",
+					"size": 816,
+					"sourceHash": "be7acb17f63e1845c0d3067f462d7f408f8aa2cf07e5563cfc3f247e1cf4f76f",
+					"status": "content"
+				},
+				"package.json~": {
+					"match": false,
+					"packageHash": "388bcd68be07498839db23803db9177395e4887d0081c6064fc9dbb6263fd96c",
+					"size": 889,
+					"status": "missing-in-source"
+				},
+				"readme.txt": {
+					"match": false,
+					"packageHash": "4adbdce3b9b35f1a3a9514f7efc5f0f6353ed40fb31bc41302606aa887c11633",
+					"size": 6073,
+					"status": "missing-in-source"
+				},
+				"src/common.h": {
+					"diff": "--- published/src/common.h\n+++ rebuilt/src/common.h\n@@ -22,7 +22,7 @@\n \n bool str_eq(const char *s1, const char *s2);\n \n-typedef enum { BUF_RGB, BUF_BGR, BUF_RGBA, BUF_BGRA } buffer_type;\n+typedef enum { BUF_RGB, BUF_BGR, BUF_RGBA, BUF_BGRA, BUF_GRAY } buffer_type;\n \n struct encode_request {\n     v8::Persistent<v8::Function> callback;\n",
+					"match": false,
+					"packageHash": "d220fe978c6eeb97a7c52b483f21f844cc530e70d7a752490a8ec5410e35a84b",
+					"size": 745,
+					"sourceHash": "a8b45ad3a6a1c561eaaeb1657b7c70dd406487905d1160c0116008deab0f088d",
+					"status": "content"
+				},
+				"src/dynamic_png_stack.cpp": {
+					"diff": "--- published/src/dynamic_png_stack.cpp\n+++ rebuilt/src/dynamic_png_stack.cpp\n@@ -107,7 +107,7 @@\n     buffer_type pbt = (buf_type == BUF_BGR || buf_type == BUF_BGRA) ? BUF_BGRA : BUF_RGBA;\n \n     try {\n-        PngEncoder encoder(data, width, height, pbt);\n+        PngEncoder encoder(data, width, height, pbt, 8);\n         encoder.encode();\n         free(data);\n         int png_len = encoder.get_png_len();\n@@ -226,7 +226,7 @@\n }\n \n void\n-DynamicPngStack::EIO_PngEncode(eio_req *req)\n+DynamicPngStack::UV_PngEncode(uv_work_t *req)\n {\n     encode_request *enc_req = (encode_request *)req->data;\n     DynamicPngStack *png = (DynamicPngStack *)enc_req->png_obj;\n@@ -242,7 +242,7 @@\n \n     unsigned char *data = (unsigned char*)malloc(sizeof(*data) * png->width * png->height * 4);\n     if (!data) {\n-        enc_req->error = strdup(\"malloc failed in DynamicPngStack::EIO_PngEncode.\");\n+        enc_req->error = strdup(\"malloc failed in DynamicPngStack::UV_PngEncode.\");\n         return;\n     }\n     memset(data, 0xFF, png->width*png->height*4);\n@@ -253,13 +253,13 @@\n         BUF_BGRA : BUF_RGBA;\n \n     try {\n-        PngEncoder encoder(data, png->width, png->height, pbt);\n+        PngEncoder encoder(data, png->width, png->height, pbt, 8);\n         encoder.encode();\n         free(data);\n         enc_req->png_len = encoder.get_png_len();\n         enc_req->png = (char *)malloc(sizeof(*enc_req->png)*enc_req->png_len);\n         if (!enc_req->png) {\n-            enc_req->error = strdup(\"malloc in DynamicPngStack::EIO_PngEncode failed.\");\n+            enc_req->error = strdup(\"malloc in DynamicPngStack::UV_PngEncode failed.\");\n             return;\n         }\n         else {\n@@ -271,13 +271,14 @@\n     }\n }\n \n-int \n-DynamicPngStack::EIO_PngEncodeAfter(eio_req *req)\n+void \n+DynamicPngStack::UV_PngEncodeAfter(uv_work_t *req)\n {\n     HandleScope scope;\n \n-    ev_unref(EV_DEFAULT_UC);\n     encode_request *enc_req = (encode_request *)req->data;\n+    delete req;\n+\n     DynamicPngStack *png = (DynamicPngStack *)enc_req->png_obj;\n \n     Handle<Value> argv[3];\n@@ -308,8 +309,6 @@\n \n     png->Unref();\n     free(enc_req);\n-\n-    return 0;\n }\n \n Handle<Value>\n@@ -336,9 +335,11 @@\n     enc_req->png_len = 0;\n     enc_req->error = NULL;\n \n-    eio_custom(EIO_PngEncode, EIO_PRI_DEFAULT, EIO_PngEncodeAfter, enc_req);\n \n-    ev_ref(EV_DEFAULT_UC);\n+    uv_work_t* req = new uv_work_t;\n+    req->data = enc_req;\n+    uv_queue_work(uv_default_loop(), req, UV_PngEncode, (uv_after_work_cb)UV_PngEncodeAfter);\n+\n     png->Ref();\n \n     return Undefined();\n",
+					"match": false,
+					"packageHash": "febccb1a7586acb0ac9c3a94ecdda7e43005966c2a0d8490a2409250aa7cc219",
+					"size": 10189,
+					"sourceHash": "e439e58f8fd3025ddfa673cc394f16871735b1af36602bb7b4661c3768416d8d",
+					"status": "content"
+				},
+				"src/dynamic_png_stack.h": {
+					"diff": "--- published/src/dynamic_png_stack.h\n+++ rebuilt/src/dynamic_png_stack.h\n@@ -38,8 +38,8 @@\n \n     std::pair<Point, Point> optimal_dimension();\n \n-    static void EIO_PngEncode(eio_req *req);\n-    static int EIO_PngEncodeAfter(eio_req *req);\n+    static void UV_PngEncode(uv_work_t *req);\n+    static void UV_PngEncodeAfter(uv_work_t *req);\n     void construct_png_data(unsigned char *data, Point &top);\n \n public:\n",
+					"match": false,
+					"packageHash": "cc192a1af13d121971fb6682ddf572e13387fc087ceeff081344d2e13fda2a84",
+					"size": 1743,
+					"sourceHash": "91de0c1d9e6555b22841dc5cef9577e734b971fee03dbed72ad51ebc9534a99d",
+					"status": "content"
+				},
+				"src/fixed_png_stack.cpp": {
+					"diff": "--- published/src/fixed_png_stack.cpp\n+++ rebuilt/src/fixed_png_stack.cpp\n@@ -56,7 +56,7 @@\n     buffer_type pbt = (buf_type == BUF_BGR || buf_type == BUF_BGRA) ? BUF_BGRA : BUF_RGBA;\n \n     try {\n-        PngEncoder encoder(data, width, height, pbt);\n+        PngEncoder encoder(data, width, height, pbt, 8);\n         encoder.encode();\n         int png_len = encoder.get_png_len();\n         Buffer *retbuf = Buffer::New(png_len);\n@@ -173,18 +173,18 @@\n }\n \n void\n-FixedPngStack::EIO_PngEncode(eio_req *req)\n+FixedPngStack::UV_PngEncode(uv_work_t *req)\n {\n     encode_request *enc_req = (encode_request *)req->data;\n     FixedPngStack *png = (FixedPngStack *)enc_req->png_obj;\n \n     try {\n-        PngEncoder encoder(png->data, png->width, png->height, png->buf_type);\n+        PngEncoder encoder(png->data, png->width, png->height, png->buf_type, 8);\n         encoder.encode();\n         enc_req->png_len =encoder.get_png_len();\n         enc_req->png = (char *)malloc(sizeof(*enc_req->png)*enc_req->png_len);\n         if (!enc_req->png) {\n-            enc_req->error = strdup(\"malloc in FixedPngStack::EIO_PngEncode failed.\");\n+            enc_req->error = strdup(\"malloc in FixedPngStack::UV_PngEncode failed.\");\n             return;\n         }\n         else {\n@@ -196,13 +196,13 @@\n     }\n }\n \n-int \n-FixedPngStack::EIO_PngEncodeAfter(eio_req *req)\n+void \n+FixedPngStack::UV_PngEncodeAfter(uv_work_t *req)\n {\n     HandleScope scope;\n \n-    ev_unref(EV_DEFAULT_UC);\n     encode_request *enc_req = (encode_request *)req->data;\n+    delete req;\n \n     Handle<Value> argv[2];\n \n@@ -230,8 +230,6 @@\n \n     ((FixedPngStack *)enc_req->png_obj)->Unref();\n     free(enc_req);\n- \n-    return 0;\n }\n \n Handle<Value>\n@@ -258,9 +256,10 @@\n     enc_req->png_len = 0;\n     enc_req->error = NULL;\n \n-    eio_custom(EIO_PngEncode, EIO_PRI_DEFAULT, EIO_PngEncodeAfter, enc_req);\n+    uv_work_t* req = new uv_work_t;\n+    req->data = enc_req;\n+    uv_queue_work(uv_default_loop(), req, UV_PngEncode, (uv_after_work_cb)UV_PngEncodeAfter);\n \n-    ev_ref(EV_DEFAULT_UC);\n     png->Ref();\n \n     return Undefined();\n",
+					"match": false,
+					"packageHash": "bdf39e5811b6a4f4020d04bcc25eafd1ac6fd49b1469fb8c0438e09744def2d0",
+					"size": 7929,
+					"sourceHash": "4a39832e3e05ffb631c76a2dd22ce3cb3914bae8b04bc8ff8874c72452889fd0",
+					"status": "content"
+				},
+				"src/fixed_png_stack.h": {
+					"diff": "--- published/src/fixed_png_stack.h\n+++ rebuilt/src/fixed_png_stack.h\n@@ -11,8 +11,8 @@\n     unsigned char *data;\n     buffer_type buf_type;\n \n-    static void EIO_PngEncode(eio_req *req);\n-    static int EIO_PngEncodeAfter(eio_req *req);\n+    static void UV_PngEncode(uv_work_t *req);\n+    static void UV_PngEncodeAfter(uv_work_t *req);\n \n public:\n     static void Initialize(v8::Handle<v8::Object> target);\n",
+					"match": false,
+					"packageHash": "3ee73b46aaab7c3c1d5b91297edd40cded8f3a65005610de3a9c4d377aebf98c",
+					"size": 898,
+					"sourceHash": "3d5b07c1f9a126795fdcfdb01b74a298faac59e2aa7cdcc7fab977fd758cd9a4",
+					"status": "content"
+				},
+				"src/png.cpp": {
+					"diff": "--- published/src/png.cpp\n+++ rebuilt/src/png.cpp\n@@ -20,8 +20,8 @@\n     target->Set(String::NewSymbol(\"Png\"), t->GetFunction());\n }\n \n-Png::Png(int wwidth, int hheight, buffer_type bbuf_type) :\n-    width(wwidth), height(hheight), buf_type(bbuf_type) {}\n+Png::Png(int wwidth, int hheight, buffer_type bbuf_type, int bbits) :\n+    width(wwidth), height(hheight), buf_type(bbuf_type), bits(bbits) {}\n \n Handle<Value>\n Png::PngEncodeSync()\n@@ -33,7 +33,7 @@\n     char *buf_data = BufferData(buf_val->ToObject());\n \n     try {\n-        PngEncoder encoder((unsigned char*)buf_data, width, height, buf_type);\n+        PngEncoder encoder((unsigned char*)buf_data, width, height, buf_type, bits);\n         encoder.encode();\n         int png_len = encoder.get_png_len();\n         Buffer *retbuf = Buffer::New(png_len);\n@@ -60,15 +60,16 @@\n         return VException(\"Third argument must be integer height.\");\n \n     buffer_type buf_type = BUF_RGB;\n-    if (args.Length() == 4) {\n+    if (args.Length() >= 4) {\n         if (!args[3]->IsString())\n-            return VException(\"Fourth argument must be 'rgb', 'bgr', 'rgba' or 'bgra'.\");\n+            return VException(\"Fourth argument must be 'gray', 'rgb', 'bgr', 'rgba' or 'bgra'.\");\n \n         String::AsciiValue bts(args[3]->ToString());\n         if (!(str_eq(*bts, \"rgb\") || str_eq(*bts, \"bgr\") ||\n-            str_eq(*bts, \"rgba\") || str_eq(*bts, \"bgra\")))\n+            str_eq(*bts, \"rgba\") || str_eq(*bts, \"bgra\") ||\n+            str_eq(*bts, \"gray\")))\n         {\n-            return VException(\"Fourth argument must be 'rgb', 'bgr', 'rgba' or 'bgra'.\");\n+            return VException(\"Fourth argument must be 'gray', 'rgb', 'bgr', 'rgba' or 'bgra'.\");\n         }\n         \n         if (str_eq(*bts, \"rgb\"))\n@@ -79,20 +80,38 @@\n             buf_type = BUF_RGBA;\n         else if (str_eq(*bts, \"bgra\"))\n             buf_type = BUF_BGRA;\n+        else if (str_eq(*bts, \"gray\"))\n+            buf_type = BUF_GRAY;\n         else\n-            return VException(\"Fourth argument wasn't 'rgb', 'bgr', 'rgba' or 'bgra'.\");\n+            return VException(\"Fourth argument wasn't 'gray', 'rgb', 'bgr', 'rgba' or 'bgra'.\");\n     }\n \n+    int bits = 8;\n+\n+    if (args.Length() >= 5) {\n+        if(buf_type != BUF_GRAY)\n+            return VException(\"Pixel bit width option only valid for \\\"gray\\\" buffer type\");\n+        if(!args[4]->IsInt32())\n+            return VException(\"Fifth argument must be 8 or 16\");\n+\n+        if(args[4]->Int32Value() == 8)\n+            bits = 8;\n+        else if (args[4]->Int32Value() == 16)\n+            bits = 16;\n+        else\n+            return VException(\"Fifth arguments wasn't 8 or 16\");\n+    }\n \n     int w = args[1]->Int32Value();\n     int h = args[2]->Int32Value();\n \n+\n     if (w < 0)\n         return VException(\"Width smaller than 0.\");\n     if (h < 0)\n         return VException(\"Height smaller than 0.\");\n \n-    Png *png = new Png(w, h, buf_type);\n+    Png *png = new Png(w, h, buf_type, bits);\n     png->Wrap(args.This());\n \n     // Save buffer.\n@@ -110,18 +129,18 @@\n }\n \n void\n-Png::EIO_PngEncode(eio_req *req)\n+Png::UV_PngEncode(uv_work_t* req)\n {\n     encode_request *enc_req = (encode_request *)req->data;\n     Png *png = (Png *)enc_req->png_obj;\n \n     try {\n-        PngEncoder encoder((unsigned char *)enc_req->buf_data, png->width, png->height, png->buf_type);\n+        PngEncoder encoder((unsigned char *)enc_req->buf_data, png->width, png->height, png->buf_type, png->bits);\n         encoder.encode();\n         enc_req->png_len = encoder.get_png_len();\n         enc_req->png = (char *)malloc(sizeof(*enc_req->png)*enc_req->png_len);\n",
+					"match": false,
+					"packageHash": "ce6ca20ac88a683951d6887363409da28726adaf6b9e899bc43b71a41fec796b",
+					"size": 5891,
+					"sourceHash": "95a1837ce8b7e2ccbbe4d778e5032b2a0151e06366aa282da85048247701a7e0",
+					"status": "content"
+				},
+				"src/png.h": {
+					"diff": "--- published/src/png.h\n+++ rebuilt/src/png.h\n@@ -10,12 +10,13 @@\n     int width;\n     int height;\n     buffer_type buf_type;\n+    int bits;\n \n-    static void EIO_PngEncode(eio_req *req);\n-    static int EIO_PngEncodeAfter(eio_req *req);\n+    static void UV_PngEncode(uv_work_t *req);\n+    static void UV_PngEncodeAfter(uv_work_t *req);\n public:\n     static void Initialize(v8::Handle<v8::Object> target);\n-    Png(int wwidth, int hheight, buffer_type bbuf_type);\n+    Png(int wwidth, int hheight, buffer_type bbuf_type, int bbits);\n     v8::Handle<v8::Value> PngEncodeSync();\n \n     static v8::Handle<v8::Value> New(const v8::Arguments &args);\n",
+					"match": false,
+					"packageHash": "9fbc010a6a10894cdc82c8c2b67d9a9d86caa75c9af4c265fa2ad27d2bba48bf",
+					"size": 690,
+					"sourceHash": "56bee8dd4f0b3d3a860c8b1b5bc3bdbca24270a18bd4f04cf1f57ceb1c8ae76b",
+					"status": "content"
+				},
+				"src/png_encoder.cpp": {
+					"diff": "--- published/src/png_encoder.cpp\n+++ rebuilt/src/png_encoder.cpp\n@@ -26,9 +26,17 @@\n     p->png_len += length;\n }\n \n-PngEncoder::PngEncoder(unsigned char *ddata, int wwidth, int hheight, buffer_type bbuf_type) :\n-    data(ddata), width(wwidth), height(hheight), buf_type(bbuf_type),\n-    png(NULL), png_len(0), mem_len(0) {}\n+PngEncoder::PngEncoder(unsigned char *ddata, int wwidth, int hheight,\n+                       buffer_type bbuf_type, int bbits) {\n+    data = ddata;\n+    width = wwidth;\n+    height = hheight;\n+    buf_type = bbuf_type;\n+    bits = bbits;\n+    png = NULL;\n+    png_len = 0;\n+    mem_len = 0;\n+}\n \n PngEncoder::~PngEncoder() {\n     free(png);\n@@ -42,17 +50,24 @@\n         throw \"png_create_write_struct failed.\";\n \n     png_infop info_ptr = png_create_info_struct(png_ptr);\n-    if (!png_ptr)\n+    if (!info_ptr)\n         throw \"png_create_info_struct failed.\";\n \n     int color_type;\n-    if (buf_type == BUF_RGB || buf_type == BUF_BGR)\n+    switch (buf_type) {\n+    case BUF_RGB:\n+    case BUF_BGR:\n         color_type = PNG_COLOR_TYPE_RGB;\n-    else\n+        break;\n+    case BUF_GRAY:\n+        color_type = PNG_COLOR_TYPE_GRAY;\n+        break;\n+    default:\n         color_type = PNG_COLOR_TYPE_RGB_ALPHA;\n+    }\n \n     png_set_IHDR(png_ptr, info_ptr, width, height,\n-        8, color_type, PNG_INTERLACE_NONE,\n+        bits, color_type, PNG_INTERLACE_NONE,\n         PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);\n \n     png_bytep *row_pointers = NULL;\n@@ -69,11 +84,17 @@\n         if (!row_pointers)\n             throw \"malloc failed in node-png (PngEncoder::encode).\";\n \n-        if (buf_type == BUF_RGB || buf_type == BUF_BGR) {\n+        switch (buf_type) {\n+        case BUF_RGB:\n+        case BUF_BGR:\n             for (int i=0; i<height; i++)\n                 row_pointers[i] = data+3*i*width;\n-        }\n-        else {\n+            break;\n+        case BUF_GRAY:\n+            for (int i=0; i<height; i++)\n+                row_pointers[i] = data+(bits/8)*i*width;\n+            break;\n+        default:\n             for (int i=0; i<height; i++)\n                 row_pointers[i] = data+4*i*width;\n         }\n",
+					"match": false,
+					"packageHash": "11ee8305133ef1ba6230f16e6af2c1f86b8d078ca32f63711e1d652b07fc2156",
+					"size": 2917,
+					"sourceHash": "ab3494c4eb44562c7aef69d3079628e6c4aebc2cc3db9cde916758452e5e0142",
+					"status": "content"
+				},
+				"src/png_encoder.h": {
+					"diff": "--- published/src/png_encoder.h\n+++ rebuilt/src/png_encoder.h\n@@ -6,14 +6,14 @@\n #include \"common.h\"\n \n class PngEncoder {\n-    int width, height;\n+    int width, height, bits;\n     unsigned char *data;\n     char *png;\n-    int png_len, mem_len;\n-    buffer_type buf_type; \n+    unsigned int png_len, mem_len;\n+    buffer_type buf_type;\n \n public:\n-    PngEncoder(unsigned char *ddata, int width, int hheight, buffer_type bbuf_type);\n+    PngEncoder(unsigned char *ddata, int width, int hheight, buffer_type bbuf_type, int bbits);\n     ~PngEncoder();\n \n     static void png_chunk_producer(png_structp png_ptr, png_bytep data, png_size_t length);\n",
+					"match": false,
+					"packageHash": "b5a8b4c3c91683f76c5ab2c8d8d5525c5e90ae256073b020ad35691709602196",
+					"size": 518,
+					"sourceHash": "25a57a7815748b6880131f04ed3e2df2d43505b29c532adc77e75a3692afab1a",
+					"status": "content"
+				},
+				"binding.gyp": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/png-example4.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gyp/include/libpng12/png.h": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gyp/include/libpng12/pngconf.h": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gyp/include/png.h": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gyp/include/pngconf.h": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gyp/include/zconf.h": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gyp/include/zlib.h": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gyp/lib/libpng-bcc.lib": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gyp/lib/libpng.dll.a": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gyp/lib/libpng.la": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gyp/lib/libpng.lib": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gyp/lib/libpng12.def": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gyp/lib/libpng12.dll.a": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gyp/lib/libpng12.la": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gyp/lib/libz.a": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gyp/lib/libz.dll.a": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gyp/lib/pkgconfig/libpng.pc": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gyp/lib/pkgconfig/libpng12.pc": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gyp/lib/zlib-bcc.lib": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gyp/lib/zlib.def": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gyp/lib/zlib.lib": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"readme.md": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 10,
+				"matchingFiles": 34,
+				"missingInPackage": 23,
+				"missingInSource": 7,
+				"score": 0.4594594594594595,
+				"totalFiles": 74
+			}
+		},
+		"prodDependencies": []
+	}
+]
