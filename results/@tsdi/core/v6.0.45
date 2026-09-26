@@ -1,0 +1,861 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-09-25T22:48:16.065Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:6.14.17",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "@tsdi/core@6.0.45",
+			"name": "@tsdi/core",
+			"version": "6.0.45",
+			"location": "https://registry.npmjs.org/@tsdi/core/-/core-6.0.45.tgz",
+			"integrity": "sha512-p2gD4CTkua8z9jYBZ7cLSKVhmO4PFxnSoRow+6/7KQePSiNFOQ4v3Zhos7O7e3tN5b9xvsCf6foz1hgmrQRETw==",
+			"publishedAt": "2023-02-16T03:03:13.491Z",
+			"publishedWith": {
+				"node": "14.21.1",
+				"npm": "6.14.17"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/zhouhoujun/tsioc.git",
+			"spec": "github:zhouhoujun/tsioc#HEAD"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,14 +1,9 @@\n-# packaged @tsdi/core\n+# packaged @tsdi/ioc\n \n This repo is for distribution on `npm`. The source for this module is in the\n [main repo](https://github.com/zhouhoujun/tsioc).\n \n-`@tsdi/core` is Ioc container, Injector, via typescript decorator. extends `@tsdi/ioc`\n-with features:\n-* can load script and inject.\n-* get service form injector tree.\n-* get services form injector tree.\n-\n+`@tsdi/ioc` is Ioc container, Injector, via typescript decorator.\n \n version 5+ of [`@ts-ioc/core`](https://www.npmjs.com/package/@ts-ioc/core) [`tsioc`](https://www.npmjs.com/package/tsioc)\n \n@@ -47,15 +42,11 @@\n ```\n \n ```ts\n-import { AopModule } from '@tsdi/aop';\n-// in server\n-import { ContainerBuilder } from '@tsdi/platform-server'\n-// in browser\n-import { ContainerBuilder } from '@tsdi/platform-browser'\n \n-let builder = new ContainerBuilder();\n+import { AopModule } from '@tsdi/aop';\n+import { IocContainer } from '@tsdi/ioc';\n \n-let container = build.create();\n+let container = new IocContainer();\n \n // use aop.\n container.use(AopModule);\n@@ -150,7 +141,7 @@\n \n *  `@DIModule` DIModule decorator, use to define class as DI Module.\n *  `@Bootstrap` Bootstrap decorator, use to define class as bootstrp module.\n-*  `@Boot` Boot decorator, use to define class as startup service for application.\n+*  `@Annotation` Annotation decorator, use to define class build metadata config.\n *  `@Message`  Message decorator, for class. use to define the class as message handle register in global message queue.\n \n [mvc boot simple](https://github.com/zhouhoujun/type-mvc/tree/master/packages/simples)\n@@ -623,7 +614,6 @@\n see AOP extends (https://github.com/zhouhoujun/tsioc/blob/master/packages/aop/src/AopModule.ts)\n You can extend yourself decorator via:\n \n-\n ## Documentation\n Documentation is available on the\n * [@tsdi/ioc document](https://github.com/zhouhoujun/tsioc/tree/master/packages/ioc).\n@@ -631,30 +621,12 @@\n * [@tsdi/core document](https://github.com/zhouhoujun/tsioc/tree/master/packages/core).\n * [@tsdi/boot document](https://github.com/zhouhoujun/tsioc/tree/master/packages/boot).\n * [@tsdi/components document](https://github.com/zhouhoujun/tsioc/tree/master/packages/components).\n-* [@tsdi/compiler document](https://github.com/zhouhoujun/tsioc/tree/master/packages/compiler).\n * [@tsdi/activities document](https://github.com/zhouhoujun/tsioc/tree/master/packages/activities).\n-* [@tsdi/pack document](https://github.com/zhouhoujun/tsioc/tree/master/packages/pack).\n * [@tsdi/typeorm-adapter document](https://github.com/zhouhoujun/tsioc/tree/master/packages/typeorm-adapter).\n * [@tsdi/unit document](https://github.com/zhouhoujun/tsioc/tree/master/packages/unit).\n * [@tsdi/unit-console document](https://github.com/zhouhoujun/tsioc/tree/master/packages/unit-console).\n * [@tsdi/cli document](https://github.com/zhouhoujun/tsioc/tree/master/packages/cli).\n \n-\n-\n-### packages\n-[@tsdi/cli](https://www.npmjs.com/package/@tsdi/cli)\n-[@tsdi/ioc](https://www.npmjs.com/package/@tsdi/ioc)\n-[@tsdi/aop](https://www.npmjs.com/package/@tsdi/aop)\n-[@tsdi/core](https://www.npmjs.com/package/@tsdi/core)\n-[@tsdi/boot](https://www.npmjs.com/package/@tsdi/boot)\n-[@tsdi/components](https://www.npmjs.com/package/@tsdi/components)\n-[@tsdi/compiler](https://www.npmjs.com/package/@tsdi/compiler)\n-[@tsdi/activities](https://www.npmjs.com/package/@tsdi/activities)\n-[@tsdi/pack](https://www.npmjs.com/package/@tsdi/pack)\n-[@tsdi/typeorm-adapter](https://www.npmjs.com/package/@tsdi/typeorm-adapter)\n-[@tsdi/unit](https://www.npmjs.com/package/@tsdi/unit)\n-[@tsdi/unit-console](https://www.npmjs.com/package/@tsdi/unit-console)\n-\n ## License\n \n MIT © [Houjun](https://github.com/zhouhoujun/)\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "f7b5ffedf56e1db7a60ab0bc9ebaa38691c2449cd03252ce5a911b9b90579854",
+					"size": 15430,
+					"sourceHash": "df9dda9b7ca3c5ecdd8e40104fb895389f65f5fd0599ea987212b7f89cb8456c",
+					"status": "content"
+				},
+				"bundle/core.umd.js": {
+					"match": false,
+					"packageHash": "203a0379ee9159f0804dd9e4dfe31951ea3236ca7f45c59942ec2ab499480244",
+					"size": 48083,
+					"status": "missing-in-source"
+				},
+				"bundle/core.umd.js.map": {
+					"match": false,
+					"packageHash": "f3979cb54710e1c82fb9e19670fdd9328205b23dac79eb06ebb73c7cde5c4060",
+					"size": 59553,
+					"status": "missing-in-source"
+				},
+				"bundle/core.umd.min.js": {
+					"match": false,
+					"packageHash": "d4f1d05f8fcf6a9ab3af78330f25ef179fc30e15281a815157d0e3f85dc9d857",
+					"size": 20664,
+					"status": "missing-in-source"
+				},
+				"bundle/core.umd.min.js.map": {
+					"match": false,
+					"packageHash": "ae2c9ff1fb2087a4014dafe9a568d5f53307c31b5a32c73dd68f6e20d35bc436",
+					"size": 77430,
+					"status": "missing-in-source"
+				},
+				"es2015/Container.js": {
+					"match": false,
+					"packageHash": "1d519a40d71e57e48116ebaae7428119d707d1b4fca120366bc16778c1ba920d",
+					"size": 3170,
+					"status": "missing-in-source"
+				},
+				"es2015/ContainerBuilder.js": {
+					"match": false,
+					"packageHash": "3ef187ca4b3b13e3fbae92dfbfb1e861f82a4e05528ecd29a630445a49200a38",
+					"size": 1388,
+					"status": "missing-in-source"
+				},
+				"es2015/CoreInjector.js": {
+					"match": false,
+					"packageHash": "9f466d5e23d164ccc28a86bb659d2d11c29d2119a2e9032fdddee7c30637e4a5",
+					"size": 2716,
+					"status": "missing-in-source"
+				},
+				"es2015/IContainer.js": {
+					"match": false,
+					"packageHash": "18ee36f00214e7ce11707807100e0449390cc86189613171e8c71b52c6bc3b7a",
+					"size": 62,
+					"status": "missing-in-source"
+				},
+				"es2015/IContainerBuilder.js": {
+					"match": false,
+					"packageHash": "6687721b8ca7042a04006f47ebdb680d9809fa8af9d1d95f156e9cf9104d797b",
+					"size": 69,
+					"status": "missing-in-source"
+				},
+				"es2015/ICoreInjector.js": {
+					"match": false,
+					"packageHash": "6b564b8d2358b391be06c4f1c68f211322bcbca4d9df20c11c413dbe8e0e179f",
+					"size": 65,
+					"status": "missing-in-source"
+				},
+				"es2015/index.js": {
+					"match": false,
+					"packageHash": "cf5a2a0fb08dae201c46da850649aeb1bef1dd21b9bbc2860fc9090f82a11db8",
+					"size": 684,
+					"status": "missing-in-source"
+				},
+				"es2015/injects/actions.js": {
+					"match": false,
+					"packageHash": "ad03c7d5ca957640cc0913d51cacd470b856cd588b7f7822862086662fb4eb36",
+					"size": 3696,
+					"status": "missing-in-source"
+				},
+				"es2015/injects/context.js": {
+					"match": false,
+					"packageHash": "d8c46bf6d817b8b3b571499e61a2bd799f27a65c611007f306c82acd45b51d20",
+					"size": 70,
+					"status": "missing-in-source"
+				},
+				"es2015/injects/lifescope.js": {
+					"match": false,
+					"packageHash": "f81b499e8631948f6f81963a869a9ffc971fb965fdecc53873afc017408f8946",
+					"size": 1234,
+					"status": "missing-in-source"
+				},
+				"es2015/regs.js": {
+					"match": false,
+					"packageHash": "1c98e788b3a5ba5fbcb2bb245de480e1ac4915a08f4772598be01975bac8f3ad",
+					"size": 1008,
+					"status": "missing-in-source"
+				},
+				"es2015/resolves/actions.js": {
+					"match": false,
+					"packageHash": "dd3e3aa0e68656c0792c5e5b846f97475894363ba7ad477798f98101e21352e0",
+					"size": 6325,
+					"status": "missing-in-source"
+				},
+				"es2015/resolves/context.js": {
+					"match": false,
+					"packageHash": "90ff7978863b768a2a6703217ef58b2f38c628f1d41db4522fb5c54778d4f8c7",
+					"size": 71,
+					"status": "missing-in-source"
+				},
+				"es2015/services/IServiceResolver.js": {
+					"match": false,
+					"packageHash": "6ce607d3c43adecc71778e78d9a39c54df53d2e28640365b4ae0607a407409ee",
+					"size": 80,
+					"status": "missing-in-source"
+				},
+				"es2015/services/IServicesResolver.js": {
+					"match": false,
+					"packageHash": "2cf3932802f3efacef6793dd39930f1c80ffd8b8e58c8bfda2b09f70c42f45ac",
+					"size": 81,
+					"status": "missing-in-source"
+				},
+				"es2015/services/loader.js": {
+					"match": false,
+					"packageHash": "4b8dc121b2636fe01c20fdb5369fba2641ca87c5cf4a2c5ae056d91fc10c2268",
+					"size": 4019,
+					"status": "missing-in-source"
+				},
+				"es2015/services/providers.js": {
+					"match": false,
+					"packageHash": "4c781e127e0a760c23d57e8660289dccbe76da8bf6091686c2f772a5adb7947d",
+					"size": 3946,
+					"status": "missing-in-source"
+				},
+				"es2015/sourcemaps/Container.js.map": {
+					"match": false,
+					"packageHash": "f2586820e1fdbd406874dd83b3ea3f79524765d1379fef1a11e4b123755ffc27",
+					"size": 5797,
+					"status": "missing-in-source"
+				},
+				"es2015/sourcemaps/ContainerBuilder.js.map": {
+					"match": false,
+					"packageHash": "6229300ac8b37bbf694097567f1048c03b31bb6103911849db4124a76621de66",
+					"size": 2739,
+					"status": "missing-in-source"
+				},
+				"es2015/sourcemaps/CoreInjector.js.map": {
+					"match": false,
+					"packageHash": "a0e0d58540bada24d29ce2180667837b778210750e5fe2ad8576699796c2d7f8",
+					"size": 4973,
+					"status": "missing-in-source"
+				},
+				"es2015/sourcemaps/IContainer.js.map": {
+					"match": false,
+					"packageHash": "d3a032a712c0bb091cdad2daf63ddb8f482b0a9efa8be0e297227f64ca95bcab",
+					"size": 440,
+					"status": "missing-in-source"
+				},
+				"es2015/sourcemaps/IContainerBuilder.js.map": {
+					"match": false,
+					"packageHash": "e043a0fe84f83a1488f77d4c197c0d7fb704236e12ab785330492427d667a6f8",
+					"size": 1036,
+					"status": "missing-in-source"
+				},
+				"es2015/sourcemaps/ICoreInjector.js.map": {
+					"match": false,
+					"packageHash": "fde7d5b746841e32aa93f4996ec2f9d223407d9508cbfa4bbd0b8495ed536e80",
+					"size": 2248,
+					"status": "missing-in-source"
+				},
+				"es2015/sourcemaps/index.js.map": {
+					"match": false,
+					"packageHash": "183850808b32363475bd29fb10c6d21bc3d51f00af0055adb53527002179dbbb",
+					"size": 1193,
+					"status": "missing-in-source"
+				},
+				"es2015/sourcemaps/injects/actions.js.map": {
+					"match": false,
+					"packageHash": "25b3fcb714f035c823f3e64b90aa81fa9befd8b88ed3ad3107bc4c4c87160fcf",
+					"size": 8698,
+					"status": "missing-in-source"
+				},
+				"es2015/sourcemaps/injects/context.js.map": {
+					"match": false,
+					"packageHash": "7dc48ae422894478eba7870e18e6e56f686b7e976e9bf46ad48350a5c6ebb7bf",
+					"size": 997,
+					"status": "missing-in-source"
+				},
+				"es2015/sourcemaps/injects/lifescope.js.map": {
+					"match": false,
+					"packageHash": "01ad21ce793d0269f2f5c4adc1fbfd77efff8a6ef1c99a5e4b1750f3c8badf78",
+					"size": 2638,
+					"status": "missing-in-source"
+				},
+				"es2015/sourcemaps/regs.js.map": {
+					"match": false,
+					"packageHash": "46696bc14daa18073dcb732ea403daca1ac31d25143876ef52ddfa32ffeeca02",
+					"size": 2049,
+					"status": "missing-in-source"
+				},
+				"es2015/sourcemaps/resolves/actions.js.map": {
+					"match": false,
+					"packageHash": "fefa4bc82435e32b5b3d450e0dfda36c7080fff62727126113cffb89c49746c0",
+					"size": 14142,
+					"status": "missing-in-source"
+				},
+				"es2015/sourcemaps/resolves/context.js.map": {
+					"match": false,
+					"packageHash": "b27aee1bdf3e67b670a120da1142da3cccb859bd6ab3a45ef6c8feb9398ec716",
+					"size": 2074,
+					"status": "missing-in-source"
+				},
+				"es2015/sourcemaps/services/IServiceResolver.js.map": {
+					"match": false,
+					"packageHash": "8eba09986ad7c31699c29a5a0c831716450591b6205f1e48b894f913a2d6ab76",
+					"size": 798,
+					"status": "missing-in-source"
+				},
+				"es2015/sourcemaps/services/IServicesResolver.js.map": {
+					"match": false,
+					"packageHash": "51e50bf4e5aab013d938b1dbe1ebc2bedd76ac90edeaa3499e29ad8d68f58e7b",
+					"size": 1138,
+					"status": "missing-in-source"
+				},
+				"es2015/sourcemaps/services/loader.js.map": {
+					"match": false,
+					"packageHash": "45e9c1ec2bffb439c953f41bb76e475cf68c841d699c646e298938eb98d5514b",
+					"size": 8684,
+					"status": "missing-in-source"
+				},
+				"es2015/sourcemaps/services/providers.js.map": {
+					"match": false,
+					"packageHash": "8f4dcabc009308d0b28edfa4d95a97383bb5361512b6cd02a8e887d56681c3ec",
+					"size": 8498,
+					"status": "missing-in-source"
+				},
+				"es2015/sourcemaps/tk.js.map": {
+					"match": false,
+					"packageHash": "b251486f723cc846ee3b11f4f7f85d87b5ae38c3c6d0e388ea40dd18e4c07f1c",
+					"size": 946,
+					"status": "missing-in-source"
+				},
+				"es2015/sourcemaps/types.js.map": {
+					"match": false,
+					"packageHash": "e67d2f765ed0f66cd3849491cce7ce4abc772a678b0a1f6186f48da50307fa4a",
+					"size": 948,
+					"status": "missing-in-source"
+				},
+				"es2015/tk.js": {
+					"match": false,
+					"packageHash": "393fb3f287c29cf0b540dd856c3aca1631a6496b9ed5b6510db6edfe91e40e68",
+					"size": 472,
+					"status": "missing-in-source"
+				},
+				"es2015/types.js": {
+					"match": false,
+					"packageHash": "460136ca03f09605b62ecf24565ebb71ea6a86b1c6c55d72c3c257782d1bf9f7",
+					"size": 57,
+					"status": "missing-in-source"
+				},
+				"fesm2015/core.js": {
+					"match": false,
+					"packageHash": "454997cbbf46d2805ba06ad9a3eda632bc6636571a3c70eee9bf96fead452242",
+					"size": 26204,
+					"status": "missing-in-source"
+				},
+				"fesm2015/core.js.map": {
+					"match": false,
+					"packageHash": "47e3041a1478daa6042183b305d034451a03a5fe86386756d473aea16ce52dcf",
+					"size": 55214,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,34 +1,97 @@\n {\n-  \"name\": \"@tsdi/core\",\n-  \"version\": \"6.0.45\",\n-  \"description\": \"@tsdi/core is Ioc container, via typescript decorator\",\n+  \"name\": \"tsioc-srcs\",\n+  \"version\": \"6.0.48\",\n+  \"description\": \"AOP,  Ioc container, Boot framework, unit testing framework , activities workflow framework.\",\n   \"scripts\": {\n-    \"build\": \"ts-node -r tsconfig-paths/register taskfile.ts\"\n+    \"postinstall\": \"npm prune\",\n+    \"reinstall\": \"npm cache clean && npm install\",\n+    \"build\": \"ts-node -r tsconfig-paths/register builder.ts\"\n   },\n-  \"keywords\": [\"core\", \"ioc\", \"IoC\", \"Injector\", \"container\", \"dependency\", \"injection\", \"AOP\", \"aop\", \"tsdi\", \"@tsdi\", \"tsioc\", \"type\"],\n-  \"author\": \"houjun\",\n+  \"keywords\": [\n+    \"IoC\",\n+    \"AOP\",\n+    \"dependency\",\n+    \"injection\",\n+    \"framework\",\n+    \"unit\",\n+    \"test\",\n+    \"container\",\n+    \"decorator\",\n+    \"autofac\",\n+    \"Inject\",\n+    \"type\",\n+    \"typescript\"\n+  ],\n+  \"author\": \"houjun <freebirds8281@hotmail.com>\",\n   \"license\": \"MIT\",\n   \"bugs\": {\n     \"url\": \"https://github.com/zhouhoujun/tsioc/issues\"\n   },\n   \"repository\": {\n     \"type\": \"git\",\n-    \"url\": \"https://github.com/zhouhoujun/tsioc.git\"\n+    \"url\": \"git+https://github.com/zhouhoujun/tsioc.git\"\n   },\n-  \"homepage\": \"https://github.com/zhouhoujun/tsioc#readme\",\n-  \"dependencies\": {},\n-  \"peerDependencies\": {\n-    \"tslib\": \"^2.3.0\",\n-    \"@tsdi/ioc\": \"~6.0.45\"\n+  \"devDependencies\": {\n+    \"@types/execa\": \"^2.0.0\",\n+    \"@types/mocha\": \"^7.0.2\",\n+    \"@types/shelljs\": \"^0.8.0\",\n+    \"@types/vinyl-fs\": \"^2.4.8\",\n+    \"assert\": \"^2.0.0\",\n+    \"bluebird\": \"^3.7.2\",\n+    \"chalk\": \"^4.0.0\",\n+    \"chokidar\": \"^3.4.0\",\n+    \"commander\": \"^4.1.1\",\n+    \"core-js\": \"^3.6.4\",\n+    \"del\": \"^5.1.0\",\n+    \"execa\": \"^4.0.2\",\n+    \"expect\": \"^25.3.0\",\n+    \"findup\": \"^0.1.5\",\n+    \"globby\": \"^11.1.0\",\n+    \"gulp-filter\": \"^6.0.0\",\n+    \"gulp-json-editor\": \"^2.5.2\",\n+    \"gulp-rename\": \"^1.4.0\",\n+    \"gulp-replace\": \"^0.5.4\",\n+    \"gulp-rollup\": \"^2.16.2\",\n+    \"gulp-sourcemaps\": \"~2.6.4\",\n+    \"gulp-typescript\": \"~5.0.1\",\n+    \"gulp-uglify-es\": \"~2.0.0\",\n+    \"interpret\": \"^2.0.0\",\n+    \"json-in-place\": \"^1.0.1\",\n+    \"liftoff\": \"^2.5.0\",\n+    \"lodash\": \"^4.13.1\",\n+    \"log4js\": \"^6.7.1\",\n+    \"minimatch\": \"^3.0.4\",\n+    \"minimist\": \"^1.2.5\",\n+    \"on-change\": \"^1.6.2\",\n+    \"path\": \"^0.12.7\",\n+    \"pg\": \"^8.0.2\",\n+    \"pretty-hrtime\": \"^1.0.3\",\n+    \"readable-stream\": \"~2.0.1\",\n+    \"reflect-metadata\": \"^0.1.13\",\n+    \"rollup\": \"^1.31.1\",\n+    \"rollup-plugin-commonjs\": \"^10.1.0\",\n+    \"rollup-plugin-hypothetical\": \"^2.1.0\",\n+    \"rollup-plugin-inject\": \"^3.0.1\",\n+    \"rollup-plugin-node-builtins\": \"^2.1.2\",\n+    \"rollup-plugin-node-globals\": \"^1.4.0\",\n+    \"rollup-plugin-node-resolve\": \"^5.2.0\",\n+    \"rollup-plugin-sourcemaps\": \"^0.4.2\",\n+    \"rollup-plugin-uglify\": \"^6.0.3\",\n+    \"rollup-pluginutils\": \"^2.8.2\",\n+    \"rxjs\": \"^6.3.3\",\n+    \"shelljs\": \"^0.8.3\",\n+    \"source-map\": \"~0.7.3\",\n+    \"through2\": \"^3.0.0\",\n+    \"time-stamp\": \"^2.2.0\",\n",
+					"match": false,
+					"packageHash": "87949bfcdc96092c750e996e0680f100e2764abf442d36f504e5828e1a1b2354",
+					"size": 973,
+					"sourceHash": "ae77416a637440a3e45ac2ce9ddbaf9b6a3f99628f40fae710fe1e1892ff6fec",
+					"status": "content"
+				},
+				"src/Container.d.ts": {
+					"match": false,
+					"packageHash": "55671bfe9b2e2fbadf0c03650b298d7f672bb937d06549332eda4b8a0303715a",
+					"size": 2449,
+					"status": "missing-in-source"
+				},
+				"src/Container.js": {
+					"match": false,
+					"packageHash": "6ef04b9d8142aab2d7e10e82017b54fe734354a0a9f4d6422c7e13aba9eb3c72",
+					"size": 4896,
+					"status": "missing-in-source"
+				},
+				"src/ContainerBuilder.d.ts": {
+					"match": false,
+					"packageHash": "4e9c7ba3777423c92682936425a26b9a6a3482ff9a1cdf193c66dd0f22a573f8",
+					"size": 818,
+					"status": "missing-in-source"
+				},
+				"src/ContainerBuilder.js": {
+					"match": false,
+					"packageHash": "4efae8975e24a90fe2127eee25902b1438c297a2176520bb4734a01a16d5cc77",
+					"size": 2446,
+					"status": "missing-in-source"
+				},
+				"src/CoreInjector.d.ts": {
+					"match": false,
+					"packageHash": "4ab54d8121ab5efcb5daae446aee49fae47f93121bc3574acd4d060b24e77d3b",
+					"size": 2158,
+					"status": "missing-in-source"
+				},
+				"src/CoreInjector.js": {
+					"match": false,
+					"packageHash": "17262dcddad568c1fac2aeab68ef644d63d3a39c68986c9afb4653e68f642760",
+					"size": 4342,
+					"status": "missing-in-source"
+				},
+				"src/IContainer.d.ts": {
+					"match": false,
+					"packageHash": "609def40c1280504768b96d7d6cf76508678024a1eda335621f7e083a6e0db32",
+					"size": 306,
+					"status": "missing-in-source"
+				},
+				"src/IContainer.js": {
+					"match": false,
+					"packageHash": "a3ae84a0cc6b4488af2df1f78ffe5c0e687c203fc31aa2dffe386d9fbf6d11c5",
+					"size": 128,
+					"status": "missing-in-source"
+				},
+				"src/IContainerBuilder.d.ts": {
+					"match": false,
+					"packageHash": "2800ab82fcd00a043232ccc19b86343cff34b9d6b7a4f1fc0dc2a37f5f9a14d8",
+					"size": 863,
+					"status": "missing-in-source"
+				},
+				"src/IContainerBuilder.js": {
+					"match": false,
+					"packageHash": "578e27da7c2230609651fed7408191b34ec18deaf674643e57408446e2968b54",
+					"size": 135,
+					"status": "missing-in-source"
+				},
+				"src/ICoreInjector.d.ts": {
+					"match": false,
+					"packageHash": "8ab44c2a3fa979189a72727665f4dc4dfc978799a5bc23c72dc73802b5e728eb",
+					"size": 2024,
+					"status": "missing-in-source"
+				},
+				"src/ICoreInjector.js": {
+					"match": false,
+					"packageHash": "6fc3f8521edcc309ba92cf4689461d917ce56c701eed2d8eed12d6a309d87e43",
+					"size": 131,
+					"status": "missing-in-source"
+				},
+				"src/index.d.ts": {
+					"match": false,
+					"packageHash": "2671313ac3ecd13be783862098a6e7b2d57e20b3d87f915b117be01b74ef3174",
+					"size": 587,
+					"status": "missing-in-source"
+				},
+				"src/index.js": {
+					"match": false,
+					"packageHash": "4cdc9dd46137821e41c526c7a70c88cbb4ef4f536898b00d68c1a5593b647110",
+					"size": 1320,
+					"status": "missing-in-source"
+				},
+				"src/injects/actions.d.ts": {
+					"match": false,
+					"packageHash": "9c0293c648e60d19840bf63a4941d89cd0b63bdc865e1d6894f6c83aecb9f52e",
+					"size": 1899,
+					"status": "missing-in-source"
+				},
+				"src/injects/actions.js": {
+					"match": false,
+					"packageHash": "6215fc2621326610319934089558299c36283920100a030f365bb89ccf3854b5",
+					"size": 6690,
+					"status": "missing-in-source"
+				},
+				"src/injects/context.d.ts": {
+					"match": false,
+					"packageHash": "35f0609cbf9b9fb725392daf344182c519e8b024769ac46696ceddd5d8abfa66",
+					"size": 808,
+					"status": "missing-in-source"
+				},
+				"src/injects/context.js": {
+					"match": false,
+					"packageHash": "19af941f2b0a527da22a8e55ae61c2b33d448d23e600ce265a17622f9ac99a26",
+					"size": 136,
+					"status": "missing-in-source"
+				},
+				"src/injects/lifescope.d.ts": {
+					"match": false,
+					"packageHash": "4041ceb279fe2fef1f821a36a986828c0b20010a0202b682ed69921f77f2f856",
+					"size": 350,
+					"status": "missing-in-source"
+				},
+				"src/injects/lifescope.js": {
+					"match": false,
+					"packageHash": "753d761502c5921d2aa8f5ae9115b34c6e992a10df127868de02367bb10b0575",
+					"size": 1907,
+					"status": "missing-in-source"
+				},
+				"src/regs.d.ts": {
+					"match": false,
+					"packageHash": "fe80cabeab50e49f5db7c6d72d27d540050410c2fc9434de620e59abcc3dd26a",
+					"size": 111,
+					"status": "missing-in-source"
+				},
+				"src/regs.js": {
+					"match": false,
+					"packageHash": "f5571c1ee26fe3c00d75a272fbcc8db49d535bfda8e159a7862abf4ca729d22d",
+					"size": 1220,
+					"status": "missing-in-source"
+				},
+				"src/resolves/actions.d.ts": {
+					"match": false,
+					"packageHash": "68287ee3f7f6fd798ae083a4dbd98f1a43ba43ee470f640aba712cdf184bb081",
+					"size": 1130,
+					"status": "missing-in-source"
+				},
+				"src/resolves/actions.js": {
+					"match": false,
+					"packageHash": "6073ecec57662ee6a0f454f3f1e90fda11baab7b2a20e61ccbae9bd1e1ffb4a1",
+					"size": 8789,
+					"status": "missing-in-source"
+				},
+				"src/resolves/context.d.ts": {
+					"match": false,
+					"packageHash": "4c0aab0b740c4a75c3c4050a5a80f64320274b1f223a1dfe3bc489fb86b802cb",
+					"size": 1827,
+					"status": "missing-in-source"
+				},
+				"src/resolves/context.js": {
+					"match": false,
+					"packageHash": "6a2068d75e29201e5b2d8a8365c139d5e0bdcb1ee1d284753f533e552faa15bf",
+					"size": 137,
+					"status": "missing-in-source"
+				},
+				"src/services/IServiceResolver.d.ts": {
+					"match": false,
+					"packageHash": "fb6e022f47d83f771622b23f4d1930f1930cdd1d2b8fc61567e0355f8d9d8259",
+					"size": 626,
+					"status": "missing-in-source"
+				},
+				"src/services/IServiceResolver.js": {
+					"match": false,
+					"packageHash": "057926dae50f5e03532aba5cd6929c66c5928ca5d3c1074753057ebf43c3a1d7",
+					"size": 146,
+					"status": "missing-in-source"
+				},
+				"src/services/IServicesResolver.d.ts": {
+					"match": false,
+					"packageHash": "a33cec8fdc452d7f40b47353b31313fb422647bdf12e1140bd8d0c615326384e",
+					"size": 954,
+					"status": "missing-in-source"
+				},
+				"src/services/IServicesResolver.js": {
+					"match": false,
+					"packageHash": "48b409a308bed8551005b3dc288097db3f17ea33f86f4638896daaf9927ab266",
+					"size": 147,
+					"status": "missing-in-source"
+				},
+				"src/services/loader.d.ts": {
+					"match": false,
+					"packageHash": "938ef2780b338dfbd82c25a6f8ff97db9e9d8e580ce821fe08e25628c95e6fba",
+					"size": 2255,
+					"status": "missing-in-source"
+				},
+				"src/services/loader.js": {
+					"match": false,
+					"packageHash": "2a43771e9277d0e686bad106a1d434704934d22c82eb043ee91cb1b1ec3f69d9",
+					"size": 7641,
+					"status": "missing-in-source"
+				},
+				"src/services/providers.d.ts": {
+					"match": false,
+					"packageHash": "fcca01a511ca6e1ae63dd3a6313c2d14811b18fd71079d8c82f1c98c8dee1526",
+					"size": 1618,
+					"status": "missing-in-source"
+				},
+				"src/services/providers.js": {
+					"match": false,
+					"packageHash": "360df5a3f22eac2f5a50a31ed1ee77e21e129d40e71083a503a4a85f7e919277",
+					"size": 4957,
+					"status": "missing-in-source"
+				},
+				"src/sourcemaps/Container.js.map": {
+					"match": false,
+					"packageHash": "17528d2025c352c70665cc5b84f7d901dd371d1ffe797be43ffd94eeae981b23",
+					"size": 5904,
+					"status": "missing-in-source"
+				},
+				"src/sourcemaps/ContainerBuilder.js.map": {
+					"match": false,
+					"packageHash": "56ab26cc0641442927cbbe2012f63684d79674d3b50dc5a937d0f9adfb6998d2",
+					"size": 2812,
+					"status": "missing-in-source"
+				},
+				"src/sourcemaps/CoreInjector.js.map": {
+					"match": false,
+					"packageHash": "1515582742d9c812fb69201d30778e87c703856cbc24c1eac820f17fcf480814",
+					"size": 5117,
+					"status": "missing-in-source"
+				},
+				"src/sourcemaps/IContainer.js.map": {
+					"match": false,
+					"packageHash": "d3a032a712c0bb091cdad2daf63ddb8f482b0a9efa8be0e297227f64ca95bcab",
+					"size": 440,
+					"status": "missing-in-source"
+				},
+				"src/sourcemaps/IContainerBuilder.js.map": {
+					"match": false,
+					"packageHash": "e043a0fe84f83a1488f77d4c197c0d7fb704236e12ab785330492427d667a6f8",
+					"size": 1036,
+					"status": "missing-in-source"
+				},
+				"src/sourcemaps/ICoreInjector.js.map": {
+					"match": false,
+					"packageHash": "fde7d5b746841e32aa93f4996ec2f9d223407d9508cbfa4bbd0b8495ed536e80",
+					"size": 2248,
+					"status": "missing-in-source"
+				},
+				"src/sourcemaps/index.js.map": {
+					"match": false,
+					"packageHash": "5358f8e6cb75d500e9094c75a51a55c96e483a2a022df0f04dcde5b25124ab6c",
+					"size": 1034,
+					"status": "missing-in-source"
+				},
+				"src/sourcemaps/injects/actions.js.map": {
+					"match": false,
+					"packageHash": "2cdd9ac246deba4eed95518b76acad4f8053a7220eac5f2ceb0eb38aa6a26eb2",
+					"size": 9194,
+					"status": "missing-in-source"
+				},
+				"src/sourcemaps/injects/context.js.map": {
+					"match": false,
+					"packageHash": "7dc48ae422894478eba7870e18e6e56f686b7e976e9bf46ad48350a5c6ebb7bf",
+					"size": 997,
+					"status": "missing-in-source"
+				},
+				"src/sourcemaps/injects/lifescope.js.map": {
+					"match": false,
+					"packageHash": "ee96ff50565f93785514031cbaf51678c4f098652ee051649dbd6dcfe8cfc997",
+					"size": 2654,
+					"status": "missing-in-source"
+				},
+				"src/sourcemaps/regs.js.map": {
+					"match": false,
+					"packageHash": "0187cd8ee7daccec0082b6503f5b799c7e84dbb9f421d1bc2adef4d35d3b3b29",
+					"size": 1855,
+					"status": "missing-in-source"
+				},
+				"src/sourcemaps/resolves/actions.js.map": {
+					"match": false,
+					"packageHash": "4b7746ab52743da766f531a18222c199249021f3d55a710c5dc01b1d438ac041",
+					"size": 14428,
+					"status": "missing-in-source"
+				},
+				"src/sourcemaps/resolves/context.js.map": {
+					"match": false,
+					"packageHash": "b27aee1bdf3e67b670a120da1142da3cccb859bd6ab3a45ef6c8feb9398ec716",
+					"size": 2074,
+					"status": "missing-in-source"
+				},
+				"src/sourcemaps/services/IServiceResolver.js.map": {
+					"match": false,
+					"packageHash": "8eba09986ad7c31699c29a5a0c831716450591b6205f1e48b894f913a2d6ab76",
+					"size": 798,
+					"status": "missing-in-source"
+				},
+				"src/sourcemaps/services/IServicesResolver.js.map": {
+					"match": false,
+					"packageHash": "51e50bf4e5aab013d938b1dbe1ebc2bedd76ac90edeaa3499e29ad8d68f58e7b",
+					"size": 1138,
+					"status": "missing-in-source"
+				},
+				"src/sourcemaps/services/loader.js.map": {
+					"match": false,
+					"packageHash": "6ea020840b34202e98a5ddfb76cac824a097c8a4791258c3474bc2753edbe6aa",
+					"size": 9014,
+					"status": "missing-in-source"
+				},
+				"src/sourcemaps/services/providers.js.map": {
+					"match": false,
+					"packageHash": "228254e9074deadb880e2f6b74bb0404ca07e86d32e8be8fd9c8e11321602277",
+					"size": 8626,
+					"status": "missing-in-source"
+				},
+				"src/sourcemaps/tk.js.map": {
+					"match": false,
+					"packageHash": "4ff13fe276d5edc3163f9f08cb28e0b83233ba374b05912a79bb3df45fe7198c",
+					"size": 909,
+					"status": "missing-in-source"
+				},
+				"src/sourcemaps/types.js.map": {
+					"match": false,
+					"packageHash": "e67d2f765ed0f66cd3849491cce7ce4abc772a678b0a1f6186f48da50307fa4a",
+					"size": 948,
+					"status": "missing-in-source"
+				},
+				"src/tk.d.ts": {
+					"match": false,
+					"packageHash": "36069bb0fd274074171008984ab83b6c08eb63556d163f3a6ab80bb3f32070f6",
+					"size": 536,
+					"status": "missing-in-source"
+				},
+				"src/tk.js": {
+					"match": false,
+					"packageHash": "38a1a161bc106767fd97bfa21e6f098c6a846e61353c69599b8a31077aa1bd57",
+					"size": 623,
+					"status": "missing-in-source"
+				},
+				"src/types.d.ts": {
+					"match": false,
+					"packageHash": "fa7f5986226376b460aefcd70a36c018fae219f722d30c869848d8b7d37aa349",
+					"size": 808,
+					"status": "missing-in-source"
+				},
+				"src/types.js": {
+					"match": false,
+					"packageHash": "4a11d1d2d49d4b0f734b95da439882dea9bf8f44d9d24d04ecd4db1e5530b3d0",
+					"size": 123,
+					"status": "missing-in-source"
+				},
+				"LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"builder.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"deploy": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"deploy.cmd": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/activities/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/activities/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/annotations/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/annotations/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/aop/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/aop/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/boot/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/boot/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cli/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/cli/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/compiler/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/compiler/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/components/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/components/design/act.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/components/design/act.yuml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/components/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/ioc/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/ioc/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/logs/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/logs/unit.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pack/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pack/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/platform-browser/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/platform-browser-activities/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/platform-browser-activities/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/platform-browser-boot/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/platform-server/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/platform-server-activities/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/platform-server-activities/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/platform-server-boot/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/platform-server-logs/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/platform-server-logs/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/typeorm-adapter/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/typeorm-adapter/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/unit/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/unit/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/unit-console/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/unit-console/assets/ConsoleReport.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/unit-console/assets/ConsoleReport1.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/unit-console/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/unit-karma/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/unit-karma/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"taskfile.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 0,
+				"missingInPackage": 49,
+				"missingInSource": 101,
+				"score": 0,
+				"totalFiles": 152
+			}
+		},
+		"prodDependencies": []
+	}
+]
