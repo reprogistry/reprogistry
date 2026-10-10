@@ -1,0 +1,537 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-10-09T10:46:17.287Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:10.5.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "vue3-sketch-ruler@2.2.5",
+			"name": "vue3-sketch-ruler",
+			"version": "2.2.5",
+			"location": "https://registry.npmjs.org/vue3-sketch-ruler/-/vue3-sketch-ruler-2.2.5.tgz",
+			"integrity": "sha512-DmruV9FhbGPU6KjDb4jraa3+IFFD9hf1CbgbsgRHvxnLCGE1t3sqmi2j76T35BssuLbVxZw8ltlxFfJi7hnhOw==",
+			"publishedAt": "2024-10-06T07:37:31.229Z",
+			"publishedWith": {
+				"node": "20.12.0",
+				"npm": "10.5.0"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/kakajun/vue3-sketch-ruler.git",
+			"spec": "github:kakajun/vue3-sketch-ruler#9fb03e68baa784101fca0a1651f2112c2afdba9f"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"LICENSE": {
+					"match": false,
+					"packageHash": "4f79ff3e18486fe66ef1df4637c0646a2c42901ba259426fb3ee858b1baccf2c",
+					"size": 1073,
+					"status": "missing-in-source"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,279 +1,279 @@\n-# vue3-sketch-ruler\r\n-\r\n-> In using vue3, the zoom operation used for page presentation\r\n-\r\n-[![](https://camo.githubusercontent.com/28479a7a834310a667f36760a27283f7389e864a/68747470733a2f2f696d672e736869656c64732e696f2f6e706d2f6c2f76322d646174657069636b65722e737667)](https://camo.githubusercontent.com/28479a7a834310a667f36760a27283f7389e864a/68747470733a2f2f696d672e736869656c64732e696f2f6e706d2f6c2f76322d646174657069636b65722e737667) [![build status](https://github.com/kakajun/vue3-sketch-ruler/actions/workflows/gh-pages.yml/badge.svg?branch=master)](https://github.com/kakajun/vue3-sketch-ruler/actions/workflows/gh-pages.yml)\r\n-\r\n-[![Cloud Studio Template](https://cs-res.codehub.cn/common/assets/icon-badge.svg)](https://cloudstudio.net/a/21005994397405184?channel=share&sharetype=Markdown)\r\n-\r\n-<div align=center>\r\n-<img src=\"https://github.com/kakajun/vue3-sketch-ruler/blob/master/packages/docs/src/assets/logo.png\" width=\"392\" height=\"300\">\r\n-</div>\r\n-\r\n-## 🚀 Features\r\n-\r\n-- 💪 Vue 3 Composition API\r\n-- 🔥 Written in TypeScript\r\n-- 💡 以鼠标为中心缩放页面, 可以使用pazoom的特性\r\n-- 📦 减化配置\r\n-- 💎 提供还原, 放大, 缩小的功能\r\n-- 📦 平台与业务代码通过插槽的方式进行分离, 也就是你只需要专注你的业务代码, 其他交给平台\r\n-\r\n-## issues\r\n-\r\n-1. 1X版本的问题, 已经不会再修改, 除非自己提pr我来合或者升级更强大的2X版本\r\n-2. 2X正常修改, 欢迎提pr\r\n-\r\n-## ✨ 升级特性(同1X比较)\r\n-\r\n-1. 在原来1X版本中满足基本的缩放和标注辅助线的功能, 但是缩放时, 是固定以画面左上角位缩放点, 这样子在实际操作中会很不方便，所以这里对缩放功能进行了改进，以鼠标为中心缩放页面，这样在操作中会更方便。缩放采用改造过的pazoom插件,加了些方法使得更适配我的插件, 详情见[pazoom](https://github.com/kakajun/simple-panzoom.git)\r\n-2. 对辅助线做了调整, 减少了细刻度的绘制, 因为已经有刻度显示, 删除后画面更加简洁\r\n-3. 辅助线位置显示跟随鼠标移动\r\n-4. 删除辅助线是以拖拽线条到编辑框外即可\r\n-5. 新增还原, 放大, 缩小的API，自动居中对齐\r\n-6. 修改引用方式, 减少繁琐的配置\r\n-7. 对标墨刀, 修改新增和删除参考线\r\n-8. 初始化自动居中对齐\r\n-9. 新增辅助线对刻度有吸附效果\r\n-10. 新增阴影刻度显示效果\r\n-\r\n-升级过程简单写了一篇掘金文章, 同行或感兴趣的可以留言交流\r\n-\r\n-[掘金:1X 大屏页面缩放插件---升级改造](https://juejin.cn/post/7025195450080690212)\r\n-\r\n-[掘金:2X `vue3-sketch-ruler`插件的蜕变与升级](https://juejin.cn/post/7390134326871228428)\r\n-\r\n-## 🔑 说明\r\n-\r\n-1. 插件应用范围: 适合作为低代码平台操作页面缩放工具,比如做图工具如, 大屏可视化, 做图工具图怪兽等,类似ps的缩放效果.\r\n-2. 由1X 版本升级2X可以参考[GoView 2X 应用源码地址](https://gitee.com/majun2232/go-view) 的提交修改记录进行\r\n-3. 此master最新2X版本只在vue3中使用, 如果需要学习vue-demi关于vue2/vue3通用组件的,或者希望用到原来风格的, 请切换到1x分支, 使用1X版本。\r\n-4. 注意2X版本作为加强版，重构了内核与1X版本使用方法有较大的变革，不兼容，请谨慎升级！继续使用1X版本的同学，请切换到1x分支阅读使用文档[1x](https://github.com/kakajun/vue3-sketch-ruler/tree/1x)\r\n-\r\n-## 🦄 demo\r\n-\r\n-案例浏览: [https://kakajun.github.io/vue3-sketch-ruler](https://kakajun.github.io/vue3-sketch-ruler) ![image](https://github.com/kakajun/vue3-sketch-ruler/blob/master/packages/docs/src/assets/1.png)\r\n-\r\n-[CodePen 示例](https://codepen.io/kakajun/pen/eYwagJb)\r\n-\r\n-## 安装\r\n-\r\n-> 支持全局导入和模块导入\r\n-\r\n-```js\r\n-npm install --save vue3-sketch-ruler\r\n-\r\n-yarn add vue3-sketch-ruler  -S\r\n-```\r\n-\r\n-## 引入方式\r\n-\r\n-将打包后的dist包拷贝，用import导入，支持下面两种引用方式\r\n-\r\n-```\r\n-import SketchRule from 'vue3-sketch-ruler'\r\n-import 'vue3-sketch-ruler/lib/style.css'\r\n-// ts需要时引入类型\r\n-import type { SketchRulerProps } from 'vue3-sketch-ruler'\r\n-```\r\n-\r\n-CDN 引入, 详情参见 [CDN demo](https://github.com/kakajun/vue3-sketch-ruler/blob/master/packages/docs/src/html/mydemo.html)\r\n-\r\n-```js\r\n-<script src=\"https://unpkg.com/vue3-sketch-ruler/lib/index.umd.js\"></script>\r\n- <link type=\"text/css\" rel=\"stylesheet\" href=\"https://unpkg.com/vue3-sketch-ruler/lib/style.css\" />\r\n-\r\n-const SketchRule = window.SketchRuler\r\n-const App = {\r\n-  components: { 'sketch-rule': SketchRule },\r\n-  setup() {}\r\n-}\r\n-...\r\n-```\r\n-\r\n-## 支持的功能\r\n-\r\n-- [x] 标尺渲染\r\n-- [x] 缩放内容，重绘标尺\r\n",
+					"match": false,
+					"packageHash": "bab35505b322e78622dc26c6eb6c1ed7a34d25387c9a9cd02b2bbc36dc26e5df",
+					"size": 12363,
+					"sourceHash": "31a2a3daff00a7da69d2716c4b72ad86fb149acd7fc8c90e7b608565889a1950",
+					"status": "content"
+				},
+				"lib/index.d.ts": {
+					"match": false,
+					"packageHash": "e6e5e64a22f8cb0d7a7381a6dabadcc2b267bb67b00dc0ea60796a5a863864fb",
+					"size": 5603,
+					"status": "missing-in-source"
+				},
+				"lib/index.js": {
+					"match": false,
+					"packageHash": "d4f6fb73f9cdc9ac4ef69836b9e9fbfe85e22eea914c8d838440a04b3a3e3675",
+					"size": 35561,
+					"status": "missing-in-source"
+				},
+				"lib/index.umd.cjs": {
+					"match": false,
+					"packageHash": "6405ba573eb88248847d78492aa1c42889cbf1a9a253b8b86c01b73acbd6f4dd",
+					"size": 26857,
+					"status": "missing-in-source"
+				},
+				"lib/style.css": {
+					"match": false,
+					"packageHash": "9758b5aa3e10e71ad424107c1beba439ad53d810bd3d66ee0d802d77b52eae8f",
+					"size": 1903,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,46 +1,95 @@\n-{\r\n-  \"name\": \"vue3-sketch-ruler\",\r\n-  \"version\": \"2.2.5\",\r\n-  \"author\": \"kakajun <253495832@qq.com>\",\r\n-  \"license\": \"MIT\",\r\n-  \"type\": \"module\",\r\n-  \"private\": false,\r\n-  \"files\": [\r\n-    \"lib\",\r\n-    \"src\"\r\n-  ],\r\n-  \"repository\": {\r\n-    \"type\": \"git\",\r\n-    \"url\": \"https://github.com/kakajun/vue3-sketch-ruler\"\r\n-  },\r\n-  \"repository2\": {\r\n-    \"type\": \"gitee\",\r\n-    \"url\": \"https://gitee.com/majun2232/vue3-sketch-Ruler\"\r\n-  },\r\n-  \"sideEffects\": false,\r\n-  \"main_\": \"lib/index.js\",\r\n-  \"main\": \"src/index.ts\",\r\n-  \"style\": \"lib/style.css\",\r\n-  \"types\": \"lib/index.d.ts\",\r\n-  \"scripts\": {\r\n-    \"build\": \"vite build\",\r\n-    \"changelog\": \"conventional-changelog -p angular -i CHANGELOG.md -s -r 0\",\r\n-    \"release\": \"release-it\"\r\n-  },\r\n-  \"keywords\": [\r\n-    \"vue\",\r\n-    \"vue3\",\r\n-    \"ruler\",\r\n-    \"sketch\",\r\n-    \"sketch-ruler\",\r\n-    \"vue-sketch-ruler\",\r\n-    \"room\",\r\n-    \"panzoom\"\r\n-  ],\r\n-  \"bugs\": {\r\n-    \"url\": \"https://github.com/kakajun/vue3-sketch-ruler/issues\"\r\n-  },\r\n-  \"publishConfig\": {\r\n-    \"registry\": \"https://registry.npmjs.org/\"\r\n-  }\r\n-}\r\n+{\n+  \"name\": \"root\",\n+  \"version\": \"2.2.2\",\n+  \"author\": \"kakajun <253495832@qq.com>\",\n+  \"workspaces\": [\n+    \"packages/*\"\n+  ],\n+  \"license\": \"MIT\",\n+  \"private\": true,\n+  \"scripts\": {\n+    \"dev\": \"pnpm build && pnpm --filter ./packages/docs dev\",\n+    \"d\": \"pnpm --filter ./packages/docs dev\",\n+    \"build\": \"pnpm --filter ./packages/sketch-ruler build\",\n+    \"build:demo\": \"pnpm build && pnpm --filter ./packages/docs build\",\n+    \"precommit\": \"lint-staged\",\n+    \"clean\": \"npx rimraf node_modules\",\n+    \"clean:cache\": \"npx rimraf node_modules/.cache\",\n+    \"format\": \"prettier --write  \\\"packages/**/src/**/*.{js,ts,json,tsx,less,vue,html,md}\\\"\",\n+    \"lint\": \"esprint check --workers=4 --fix\",\n+    \"ci-pretty-check\": \"prettier --check .\",\n+    \"lint:format\": \"prettier --write --loglevel warn \\\"packages/**/*.{js,ts,json,tsx,css,less,scss,vue,html,md}\\\"\",\n+    \"changelog\": \"pnpm --filter ./packages/sketch-ruler changelog\",\n+    \"release\": \"pnpm --filter ./packages/sketch-ruler release\"\n+  },\n+  \"lint-staged\": {\n+    \"*.{ts,tsx,js,vue,less}\": \"prettier --write\",\n+    \"*.{ts,tsx,js,vue}\": \"eslint --fix\",\n+    \"*.{vue,css,less}\": \"stylelint --fix\"\n+  },\n+  \"keywords\": [\n+    \"vue\",\n+    \"vue3\",\n+    \"ruler\",\n+    \"sketch\",\n+    \"sketch-ruler\",\n+    \"vue-sketch-ruler\",\n+    \"room\",\n+    \"panzoom\"\n+  ],\n+  \"devDependencies\": {\n+    \"simple-panzoom\": \"^1.0.8\",\n+    \"root-common\": \"*\",\n+    \"vue3-sketch-ruler\": \"*\",\n+    \"@babel/preset-env\": \"^7.25.4\",\n+    \"@babel/preset-typescript\": \"^7.24.7\",\n+    \"@release-it/conventional-changelog\": \"^8.0.2\",\n+    \"@types/node\": \"^22.7.4\",\n+    \"@typescript-eslint/eslint-plugin\": \"^8.7.0\",\n+    \"@typescript-eslint/parser\": \"^8.7.0\",\n+    \"@vitejs/plugin-vue\": \"^5.1.4\",\n+    \"@vue/babel-plugin-jsx\": \"^1.2.5\",\n",
+					"match": false,
+					"packageHash": "0325d9b2cd91043ad95a115eaeb031c2a9d5c005d6b0c239757bca8394c91dbc",
+					"size": 1029,
+					"sourceHash": "8ee36c33d2ba4c1b525c309caf13a12fb09ce3579247bdc0b7c93ffcb4f3b40d",
+					"status": "content"
+				},
+				"src/canvas-ruler/index.vue": {
+					"match": false,
+					"packageHash": "0d554ac536d502065aa10414e4cbc858e329d3fa3c90e8132302c49d89baad74",
+					"size": 3428,
+					"status": "missing-in-source"
+				},
+				"src/canvas-ruler/utils.ts": {
+					"match": false,
+					"packageHash": "914e6a52ce348ad5b8a56f6b7ecac4740d8b8c8f880af3a998692c314d7eb34a",
+					"size": 6547,
+					"status": "missing-in-source"
+				},
+				"src/index-types.ts": {
+					"match": false,
+					"packageHash": "16320f72c0b84462ea1e8fe961b43f297f8de349399d0b9724e77ed8b57dcef8",
+					"size": 1390,
+					"status": "missing-in-source"
+				},
+				"src/index.ts": {
+					"match": false,
+					"packageHash": "1674a24c6354569325862b4b89d33c0838ca898bd631c429ada9a7ae6b5dc16d",
+					"size": 188,
+					"status": "missing-in-source"
+				},
+				"src/sketch-ruler/cornerImg64.ts": {
+					"match": false,
+					"packageHash": "94941f8a683ade8daf44072a41d3b15e036e245907e64b2a8003cd5dadd36e17",
+					"size": 1935,
+					"status": "missing-in-source"
+				},
+				"src/sketch-ruler/index.vue": {
+					"match": false,
+					"packageHash": "332f3545ef4f1616e5b9a626c8d488ab8b6d9b477e74fc8bcf36a93b645c4fff",
+					"size": 9156,
+					"status": "missing-in-source"
+				},
+				"src/sketch-ruler/mixins.scss": {
+					"match": false,
+					"packageHash": "6d7880cd38947bfb74371a55c772148dc7d23a577b08fa5c5c5c5f3c0343926d",
+					"size": 776,
+					"status": "missing-in-source"
+				},
+				"src/sketch-ruler/ruler-line.vue": {
+					"match": false,
+					"packageHash": "f2b476b41afa7690c04fab43a1617b8adc8bab1939b0ba6cf9618be3a9bc956a",
+					"size": 2282,
+					"status": "missing-in-source"
+				},
+				"src/sketch-ruler/ruler-wrapper.vue": {
+					"match": false,
+					"packageHash": "a94e7334bf68027b12872541b29cf4fb666d6653fe71d9cbe5d886eb0c582a8c",
+					"size": 3881,
+					"status": "missing-in-source"
+				},
+				"src/sketch-ruler/useLine.ts": {
+					"match": false,
+					"packageHash": "b52155046f138868edf324fad11063d39058d96854bdcc378d385931234b13ca",
+					"size": 4243,
+					"status": "missing-in-source"
+				},
+				".esprintrc": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/gh-pages.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".vscode/extensions.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".vscode/launch.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".vscode/preview.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".vscode/settings.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"eslint.config.mjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/common/i18n/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/common/i18n/src/i18n.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/common/i18n/src/locales/en.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/common/i18n/src/locales/zh.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/common/i18n/src/store.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/common/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/common/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/index.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/public/favicon.ico": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/public/logo.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/App.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/assets/1.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/assets/bg.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/assets/css/base.scss": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/assets/css/index.scss": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/assets/css/vars.scss": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/assets/dp.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/assets/group.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/assets/images/dark-github.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/assets/images/dark-theme.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/assets/images/icons/bottom.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/assets/images/icons/center.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/assets/images/icons/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/assets/images/icons/left.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/assets/images/icons/middle.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/assets/images/icons/right.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/assets/images/icons/top.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/assets/images/light-github.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/assets/images/light-theme.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/assets/logo.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/assets/qq.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/components/layout/Aside.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/components/layout/Header.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/examples/SelectoDemo.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/examples/basic.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/examples/closeEyeIcon.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/examples/comprehensive.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/examples/comprehensive2.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/examples/customizeButtons.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/examples/edit/GroupSelectable.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/examples/edit/Selecto.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/examples/edit/content.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/examples/edit/moveble.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/examples/edit/movebleSelecto.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/examples/edit/rect.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/examples/edit/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/examples/eye.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/examples/moveble.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/html/mydemo.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/html/mydemoCdn.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/html/任意比例+缩放.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/html/任意比例.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/html/屏幕相比1.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/html/屏幕相比2.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/html/屏幕相比3.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/html/屏幕相比4.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/html/屏幕相比问题.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/html/屏幕相比问题0.5.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/main.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/plugins/element.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/router/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/store/app.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/store/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/views/Home.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/vite-env.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/vite.config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/sketch-ruler/CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/sketch-ruler/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/sketch-ruler/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/sketch-ruler/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/sketch-ruler/src/canvas-ruler/index.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/sketch-ruler/src/canvas-ruler/utils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/sketch-ruler/src/index-types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/sketch-ruler/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/sketch-ruler/src/sketch-ruler/cornerImg64.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/sketch-ruler/src/sketch-ruler/index.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/sketch-ruler/src/sketch-ruler/mixins.scss": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/sketch-ruler/src/sketch-ruler/ruler-line.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/sketch-ruler/src/sketch-ruler/ruler-wrapper.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/sketch-ruler/src/sketch-ruler/useLine.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/sketch-ruler/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/sketch-ruler/vite.config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"pnpm-workspace.yaml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"prettier.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tsconfig.common.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tsconfig.eslint.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 0,
+				"missingInPackage": 97,
+				"missingInSource": 15,
+				"score": 0,
+				"totalFiles": 114
+			}
+		},
+		"prodDependencies": []
+	}
+]

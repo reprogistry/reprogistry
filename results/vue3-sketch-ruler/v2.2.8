@@ -1,0 +1,539 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-10-09T10:49:09.346Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:10.5.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "vue3-sketch-ruler@2.2.8",
+			"name": "vue3-sketch-ruler",
+			"version": "2.2.8",
+			"location": "https://registry.npmjs.org/vue3-sketch-ruler/-/vue3-sketch-ruler-2.2.8.tgz",
+			"integrity": "sha512-d7isa6gSsDWq2TfWOSJkQ11XY3RbcL4o5EnDwj8vGGJNzKX9yAzkj4+1k6fZjPetEQyv2A1p5Qc+UdH67LVCng==",
+			"publishedAt": "2025-02-25T12:19:16.124Z",
+			"publishedWith": {
+				"node": "20.12.0",
+				"npm": "10.5.0"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/kakajun/vue3-sketch-ruler.git",
+			"spec": "github:kakajun/vue3-sketch-ruler#a144c09abe5c9c2a984c87717ce9bcbf14d39bf1"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"LICENSE": {
+					"match": false,
+					"packageHash": "4f79ff3e18486fe66ef1df4637c0646a2c42901ba259426fb3ee858b1baccf2c",
+					"size": 1073,
+					"status": "missing-in-source"
+				},
+				"lib/index.d.ts": {
+					"match": false,
+					"packageHash": "e6e5e64a22f8cb0d7a7381a6dabadcc2b267bb67b00dc0ea60796a5a863864fb",
+					"size": 5603,
+					"status": "missing-in-source"
+				},
+				"lib/index.js": {
+					"match": false,
+					"packageHash": "c0075162b1ff3c0426a1ae1d3a3ca36f87b8519237612b79acdcb47486334422",
+					"size": 36056,
+					"status": "missing-in-source"
+				},
+				"lib/index.umd.cjs": {
+					"match": false,
+					"packageHash": "78aeea0987c69d97fc6c3d1f4851729d4557ae75635da30c560977098f68bee3",
+					"size": 27262,
+					"status": "missing-in-source"
+				},
+				"lib/style.css": {
+					"match": false,
+					"packageHash": "b14464464aed119e566d109317a3d3c5d00c195d61bee4a18f320d1df38f5016",
+					"size": 1903,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,31 +1,31 @@\n {\n-  \"name\": \"vue3-sketch-ruler\",\n-  \"version\": \"2.2.8\",\n+  \"name\": \"root\",\n+  \"version\": \"2.2.7\",\n   \"author\": \"kakajun <253495832@qq.com>\",\n-  \"license\": \"MIT\",\n-  \"type\": \"module\",\n-  \"private\": false,\n-  \"files\": [\n-    \"lib\",\n-    \"src\"\n+  \"workspaces\": [\n+    \"packages/*\"\n   ],\n-  \"repository\": {\n-    \"type\": \"git\",\n-    \"url\": \"https://github.com/kakajun/vue3-sketch-ruler\"\n-  },\n-  \"repository2\": {\n-    \"type\": \"gitee\",\n-    \"url\": \"https://gitee.com/majun2232/vue3-sketch-Ruler\"\n-  },\n-  \"sideEffects\": false,\n-  \"main\": \"lib/index.js\",\n-  \"main1\": \"src/index.ts\",\n-  \"style\": \"lib/style.css\",\n-  \"types\": \"lib/index.d.ts\",\n+  \"license\": \"MIT\",\n+  \"private\": true,\n   \"scripts\": {\n-    \"build\": \"vite build\",\n-    \"changelog\": \"conventional-changelog -p angular -i CHANGELOG.md -s -r 0\",\n-    \"release\": \"release-it\"\n+    \"dev\": \"pnpm build && pnpm --filter ./packages/docs dev\",\n+    \"d\": \"pnpm --filter ./packages/docs dev\",\n+    \"build\": \"pnpm --filter ./packages/sketch-ruler build\",\n+    \"build:demo\": \"pnpm build && pnpm --filter ./packages/docs build\",\n+    \"precommit\": \"lint-staged\",\n+    \"clean\": \"npx rimraf node_modules\",\n+    \"clean:cache\": \"npx rimraf node_modules/.cache\",\n+    \"format\": \"prettier --write  \\\"packages/**/src/**/*.{js,ts,json,tsx,less,vue,html,md}\\\"\",\n+    \"lint\": \"esprint check --workers=4 --fix\",\n+    \"ci-pretty-check\": \"prettier --check .\",\n+    \"lint:format\": \"prettier --write --loglevel warn \\\"packages/**/*.{js,ts,json,tsx,css,less,scss,vue,html,md}\\\"\",\n+    \"changelog\": \"pnpm --filter ./packages/sketch-ruler changelog\",\n+    \"release\": \"pnpm build && node ./scripts/release.js\"\n+  },\n+  \"lint-staged\": {\n+    \"*.{ts,tsx,js,vue,less}\": \"prettier --write\",\n+    \"*.{ts,tsx,js,vue}\": \"eslint --fix\",\n+    \"*.{vue,css,less}\": \"stylelint --fix\"\n   },\n   \"keywords\": [\n     \"vue\",\n@@ -37,10 +37,61 @@\n     \"room\",\n     \"panzoom\"\n   ],\n-  \"bugs\": {\n-    \"url\": \"https://github.com/kakajun/vue3-sketch-ruler/issues\"\n+  \"devDependencies\": {\n+    \"simple-panzoom\": \"^1.0.8\",\n+    \"root-common\": \"*\",\n+    \"vue3-sketch-ruler\": \"*\",\n+    \"@babel/preset-env\": \"^7.25.4\",\n+    \"@babel/preset-typescript\": \"^7.24.7\",\n+    \"@types/node\": \"^22.7.4\",\n+    \"@typescript-eslint/eslint-plugin\": \"^8.7.0\",\n+    \"@typescript-eslint/parser\": \"^8.7.0\",\n+    \"@vitejs/plugin-vue\": \"^5.1.4\",\n+    \"@vue/babel-plugin-jsx\": \"^1.2.5\",\n+    \"@element-plus/icons-vue\": \"^2.3.1\",\n+    \"@eslint/eslintrc\": \"^3.1.0\",\n+    \"@eslint/js\": \"^9.11.1\",\n+    \"esprint\": \"^3.6.0\",\n+    \"compare-func\": \"^2.0.0\",\n+    \"conventional-changelog\": \"^6.0.0\",\n+    \"conventional-changelog-cli\": \"^5.0.0\",\n+    \"eslint-plugin-vue\": \"^9.28.0\",\n+    \"eslint\": \"^9.11.0\",\n+    \"gh-pages\": \"^6.1.1\",\n+    \"husky\": \"^9.1.6\",\n+    \"jsdom\": \"^25.0.1\",\n+    \"lint-staged\": \"^15.2.10\",\n+    \"lodash\": \"^4.17.21\",\n+    \"postcss-html\": \"^1.7.0\",\n+    \"prettier\": \"^3.3.3\",\n+    \"pretty-quick\": \"^4.0.0\",\n+    \"vue-eslint-parser\": \"^9.4.3\",\n+    \"rollup-plugin-banner\": \"^0.2.1\",\n+    \"sass\": \"^1.79.3\",\n+    \"selecto\": \"^1.26.3\",\n+    \"eslint-config-prettier\": \"^9.1.0\",\n+    \"eslint-plugin-prettier\": \"^5.2.1\",\n+    \"eslint-plugin-prettier-vue\": \"^5.0.0\",\n+    \"globals\": \"^15.9.0\",\n",
+					"match": false,
+					"packageHash": "bbf78f43937e14f13a20ab1574148c63f5378d86e7cde3bddf66cc474ba688d3",
+					"size": 983,
+					"sourceHash": "cd14d84690b7ec39d80e8a22f1a0aa33ee1d663af526021c46e10a21c44d318c",
+					"status": "content"
+				},
+				"src/canvas-ruler/index.vue": {
+					"match": false,
+					"packageHash": "0d554ac536d502065aa10414e4cbc858e329d3fa3c90e8132302c49d89baad74",
+					"size": 3428,
+					"status": "missing-in-source"
+				},
+				"src/canvas-ruler/utils.ts": {
+					"match": false,
+					"packageHash": "fb3ea3b68ae3e23500dcb2d669550ac8d6e255edf0c795717f7b8786cc474b6d",
+					"size": 6610,
+					"status": "missing-in-source"
+				},
+				"src/index-types.ts": {
+					"match": false,
+					"packageHash": "16320f72c0b84462ea1e8fe961b43f297f8de349399d0b9724e77ed8b57dcef8",
+					"size": 1390,
+					"status": "missing-in-source"
+				},
+				"src/index.ts": {
+					"match": false,
+					"packageHash": "1674a24c6354569325862b4b89d33c0838ca898bd631c429ada9a7ae6b5dc16d",
+					"size": 188,
+					"status": "missing-in-source"
+				},
+				"src/sketch-ruler/cornerImg64.ts": {
+					"match": false,
+					"packageHash": "94941f8a683ade8daf44072a41d3b15e036e245907e64b2a8003cd5dadd36e17",
+					"size": 1935,
+					"status": "missing-in-source"
+				},
+				"src/sketch-ruler/index.vue": {
+					"match": false,
+					"packageHash": "b5ef00c1339178d12052a8e248b07cea77e88e15cccf13e6caf53b1045c919be",
+					"size": 10005,
+					"status": "missing-in-source"
+				},
+				"src/sketch-ruler/ruler-line.vue": {
+					"match": false,
+					"packageHash": "f2b476b41afa7690c04fab43a1617b8adc8bab1939b0ba6cf9618be3a9bc956a",
+					"size": 2282,
+					"status": "missing-in-source"
+				},
+				"src/sketch-ruler/ruler-wrapper.vue": {
+					"match": false,
+					"packageHash": "5deb8d2b92c40c85900e680f7a083b00a31736ed254230f066e7d68d5eb6e48e",
+					"size": 4638,
+					"status": "missing-in-source"
+				},
+				"src/sketch-ruler/useLine.ts": {
+					"match": false,
+					"packageHash": "f18f13eab47fc8446db006dec5cd6478a60e8bf36427ee1b13d95db5425d809b",
+					"size": 4234,
+					"status": "missing-in-source"
+				},
+				".esprintrc": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/gh-pages.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".vscode/extensions.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".vscode/launch.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".vscode/preview.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".vscode/settings.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"eslint.config.mjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/common/i18n/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/common/i18n/src/i18n.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/common/i18n/src/locales/en.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/common/i18n/src/locales/zh.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/common/i18n/src/store.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/common/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/common/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/index.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/public/favicon.ico": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/public/logo.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/App.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/assets/1.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/assets/bg.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/assets/css/base.scss": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/assets/css/index.scss": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/assets/css/vars.scss": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/assets/dp.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/assets/group.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/assets/images/dark-github.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/assets/images/dark-theme.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/assets/images/icons/bottom.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/assets/images/icons/center.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/assets/images/icons/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/assets/images/icons/left.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/assets/images/icons/middle.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/assets/images/icons/right.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/assets/images/icons/top.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/assets/images/light-github.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/assets/images/light-theme.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/assets/logo.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/assets/qq.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/components/layout/Aside.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/components/layout/Header.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/examples/SelectoDemo.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/examples/basic.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/examples/basic2.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/examples/closeEyeIcon.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/examples/comprehensive.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/examples/comprehensive2.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/examples/customizeButtons.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/examples/edit/GroupSelectable.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/examples/edit/Selecto.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/examples/edit/content.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/examples/edit/moveble.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/examples/edit/movebleSelecto.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/examples/edit/rect.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/examples/edit/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/examples/esDragle.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/examples/eye.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/examples/input.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/examples/moveble.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/html/mydemo.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/html/mydemoCdn.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/html/任意比例+缩放.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/html/任意比例.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/html/屏幕相比1.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/html/屏幕相比2.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/html/屏幕相比3.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/html/屏幕相比4.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/html/屏幕相比问题.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/html/屏幕相比问题0.5.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/main.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/plugins/element.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/router/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/store/app.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/store/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/src/views/Home.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/vite-env.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/docs/vite.config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/sketch-ruler/CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/sketch-ruler/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/sketch-ruler/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/sketch-ruler/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/sketch-ruler/src/canvas-ruler/index.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/sketch-ruler/src/canvas-ruler/utils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/sketch-ruler/src/index-types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/sketch-ruler/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/sketch-ruler/src/sketch-ruler/cornerImg64.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/sketch-ruler/src/sketch-ruler/index.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/sketch-ruler/src/sketch-ruler/mixins.scss": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/sketch-ruler/src/sketch-ruler/ruler-line.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/sketch-ruler/src/sketch-ruler/ruler-wrapper.vue": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/sketch-ruler/src/sketch-ruler/useLine.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/sketch-ruler/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/sketch-ruler/vite.config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"pnpm-workspace.yaml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"prettier.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/release.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tsconfig.common.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tsconfig.eslint.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 1,
+				"matchingFiles": 1,
+				"missingInPackage": 101,
+				"missingInSource": 14,
+				"score": 0.008547008547008548,
+				"totalFiles": 117
+			}
+		},
+		"prodDependencies": []
+	}
+]
