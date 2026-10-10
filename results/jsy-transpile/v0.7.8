@@ -1,0 +1,327 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-10-10T00:46:21.098Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:6.13.7",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "jsy-transpile@0.7.8",
+			"name": "jsy-transpile",
+			"version": "0.7.8",
+			"location": "https://registry.npmjs.org/jsy-transpile/-/jsy-transpile-0.7.8.tgz",
+			"integrity": "sha512-OWPV1hmkcFaRv70v1pZbk1+lELAcV2+3qMbUAWmM7HVtN7YbVeV+6NqILCPtlmEkbyzD+AlEPtm2skJqmoKsEg==",
+			"publishedAt": "2020-03-28T20:28:03.961Z",
+			"publishedWith": {
+				"node": "13.11.0",
+				"npm": "6.13.7"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/jsy-lang/jsy-transpile.git",
+			"spec": "github:jsy-lang/jsy-transpile#f50075d695f032fe21f8630c4a9f8521aea85f21"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"cjs/all.cjs": {
+					"match": false,
+					"packageHash": "060733562ee27c0389818b273b8b1b67b46421f657a2e199e14021f9bdb264ee",
+					"size": 61881,
+					"status": "missing-in-source"
+				},
+				"cjs/all.cjs.map": {
+					"match": false,
+					"packageHash": "1ce53a92fde5e33397cd2cbfe70784cbc37b069064a5651faf9263ff35028933",
+					"size": 80516,
+					"status": "missing-in-source"
+				},
+				"cjs/all.js": {
+					"match": false,
+					"packageHash": "85af738af5efcd9828886d05e4175c22147f6055f24e41fc605ce2424cfecd1d",
+					"size": 61880,
+					"status": "missing-in-source"
+				},
+				"cjs/all.js.map": {
+					"match": false,
+					"packageHash": "b4233991fed4e9c499992ccf4a0592f4123e6f1c78e6b4dba7d879e40a623547",
+					"size": 80515,
+					"status": "missing-in-source"
+				},
+				"cjs/index.cjs": {
+					"match": false,
+					"packageHash": "7aa105bfc692cc2d38063b30cbe24f0554c20387713ea6c5942bc5130b0d670e",
+					"size": 59492,
+					"status": "missing-in-source"
+				},
+				"cjs/index.cjs.map": {
+					"match": false,
+					"packageHash": "e3a739ad56ce13c82894e0f1331bb7393fe67846934bce8ee8ccd16c95edc653",
+					"size": 79358,
+					"status": "missing-in-source"
+				},
+				"cjs/index.js": {
+					"match": false,
+					"packageHash": "9f7ba71c1e3e5629d93d12eddd798294576ae3bfa7e0f9d28b96d7748bf24c64",
+					"size": 59491,
+					"status": "missing-in-source"
+				},
+				"cjs/index.js.map": {
+					"match": false,
+					"packageHash": "825c7a2078eef85044e6eda489b7a4b81658f2e6ff875dd18e1a7947f3b83213",
+					"size": 79357,
+					"status": "missing-in-source"
+				},
+				"cjs/scanner/index.cjs": {
+					"match": false,
+					"packageHash": "e8e8cabffef7a55d27469d4980639f5ed46cfd26076647144ce1b3c72f113404",
+					"size": 22789,
+					"status": "missing-in-source"
+				},
+				"cjs/scanner/index.cjs.map": {
+					"match": false,
+					"packageHash": "04bc390cb945e54f0da4031c8e0a56549efc5066b29bb6d34fe0fda74559830c",
+					"size": 31194,
+					"status": "missing-in-source"
+				},
+				"cjs/scanner/index.js": {
+					"match": false,
+					"packageHash": "fe85e201cc4f606768307f683cd0e414b475a6d30e47895327dc9d98931b397a",
+					"size": 22788,
+					"status": "missing-in-source"
+				},
+				"cjs/scanner/index.js.map": {
+					"match": false,
+					"packageHash": "3cf82e6d4b969c215826c1b4d219495a22ed87e4f2a66fd7181ed5f8d1d97cf2",
+					"size": 31193,
+					"status": "missing-in-source"
+				},
+				"code/.DS_Store": {
+					"match": false,
+					"packageHash": "d65165279105ca6773180500688df4bdc69a2c7b771752f0a46ef120b7fd8ec3",
+					"size": 6148,
+					"status": "missing-in-source"
+				},
+				"code/._.DS_Store": {
+					"match": false,
+					"packageHash": "f81c4f284d788ce9f4bdd1a03833cbe57fd1f9cae7c6c5218bffe321e107e711",
+					"size": 4096,
+					"status": "missing-in-source"
+				},
+				"code/jsy-script-elem.jsy": {
+					"diff": "--- published/code/jsy-script-elem.jsy\n+++ rebuilt/code/jsy-script-elem.jsy\n@@ -9,11 +9,13 @@\n     this.parentElement.replaceChild @ elem, this\n     return elem\n \n-  async connectedCallback() ::\n+  connectedCallback() ::\n     const jsy_src = this.textContent\n     this.textContent = ''\n-    this.style = 'display: none'\n+    this._render_src(jsy_src)\n \n+  async _render_src(jsy_src) ::\n+    //this.style = 'display: none'\n     const url_src = this.getAttribute('src')\n     if url_src ::\n       const resp = await fetch @ url_src,\n@@ -22,10 +24,12 @@\n       return this.as_jsy_script @ \n         await resp.text()\n \n-    return this.as_jsy_script(jsy_src)\n+    return this.as_jsy_script @ jsy_src\n \n   as_jsy_script(jsy_src) ::\n+    //console.log @ 'as_jsy_script', @{} jsy_src\n     const js_src = jsy_transpile(jsy_src)\n+    //console.log @: js_src, v: !! js_src\n     if js_src ::\n-      this.replace_script(js_src)\n+      this.replace_script @ js_src\n \n",
+					"match": false,
+					"packageHash": "2208f52ac462f25e32bbfd4a34d50e4c311617ce8efb26b78fa271546030bbbd",
+					"size": 858,
+					"sourceHash": "f9b4ed0c2057703474db7c2b13467b62c9cffdb67f775057ee4779366a1e25dc",
+					"status": "content"
+				},
+				"code/jsy_lambda_operators.jsy": {
+					"diff": "--- published/code/jsy_lambda_operators.jsy\n+++ rebuilt/code/jsy_lambda_operators.jsy\n@@ -59,8 +59,8 @@\n \n \n export const at_lambda_iife_offside = @[]\n-  @{} jsy_op: '::!', pre: '{(()=>{', post: '})()}', is_kw_close: true\n-  @{} jsy_op: '::!>', pre: '{(async ()=>{', post: '})()}', is_kw_close: true\n+  @{} jsy_op: '::!', pre: ';(()=>{', post: '})();'\n+  @{} jsy_op: '::!>', pre: ';(async ()=>{', post: '})();'\n \n   @{} jsy_op0: '@!\\\\::', jsy_op: /@!\\\\(.*?)::(>?\\*?)/,\n       pre: '((()=>', post: ')())',\n",
+					"match": false,
+					"packageHash": "7d5ae0602859a218c335c3165596280d523dfc738f6bb8be5ac2695606e0a11c",
+					"size": 2907,
+					"sourceHash": "534ed4eaf59f48d3c17ebf84ee50661dedac694b6c8d1292dc4469b18b3083de",
+					"status": "content"
+				},
+				"code/jsy_operators.jsy": {
+					"diff": "--- published/code/jsy_operators.jsy\n+++ rebuilt/code/jsy_operators.jsy\n@@ -37,7 +37,7 @@\n   @{} ... deprecated_suffix_offside_fold, jsy_op: '@@', pre: '(', post: ')', implicitCommas: true, isFoldable: true, foldTop: true\n   @{} ... deprecated_suffix_offside_fold, jsy_op: '@;', pre: ' ', post: null, foldTop: true\n   @{} ... deprecated_suffix_offside_fold, jsy_op: '@,', pre: ', ', post: null, foldTop: true\n-  @{} ... deprecated_suffix_offside_fold, jsy_op: '@.', pre: '.', post: null, foldTop: true\n+  @{} ... deprecated_suffix_offside_fold, jsy_op: '@;', pre: ' ', post: null, foldTop: true\n \n \n const deprecated_functional_composition_experiment = @{}\n",
+					"match": false,
+					"packageHash": "ea5d67fcd3c814729a4eff7164e7af50a845661617d702e0b1f752475ebe112a",
+					"size": 4718,
+					"sourceHash": "a1cac664e1872c8d814239e2aa452497a501a05aaeb56f05e8310b114006a5b1",
+					"status": "content"
+				},
+				"esm/all.js": {
+					"match": false,
+					"packageHash": "7aee53004a865bb73a5e79891590bff931c21d37031e44b40e66b0167d856a7c",
+					"size": 60897,
+					"status": "missing-in-source"
+				},
+				"esm/all.js.map": {
+					"match": false,
+					"packageHash": "ab835c5f62c55e321654d4fc9fd09d27aef9d74ab01b82dbd8f853a12a56798f",
+					"size": 80479,
+					"status": "missing-in-source"
+				},
+				"esm/all.mjs": {
+					"match": false,
+					"packageHash": "6589530aaa973aef1a0e27801aebc7e199a3235b75b903251e92f4d9ce9f6fbd",
+					"size": 60898,
+					"status": "missing-in-source"
+				},
+				"esm/all.mjs.map": {
+					"match": false,
+					"packageHash": "2e346b6e698674860fbaed830ddf2d7794a976cbad32c43890565bc73e63a9c5",
+					"size": 80480,
+					"status": "missing-in-source"
+				},
+				"esm/index.js": {
+					"match": false,
+					"packageHash": "3f474e83470c3ec36b49637195f58e6efb7bfb8719183dfbd90052ab59a3280c",
+					"size": 59474,
+					"status": "missing-in-source"
+				},
+				"esm/index.js.map": {
+					"match": false,
+					"packageHash": "3db81474cb187e981f573f6a5142164e6752335ec740991268e3473a3b6686cc",
+					"size": 79355,
+					"status": "missing-in-source"
+				},
+				"esm/index.mjs": {
+					"match": false,
+					"packageHash": "331b0e80a3b808a84889494b4bb598661623b83115629f0b1b5b754aa57f0dff",
+					"size": 59475,
+					"status": "missing-in-source"
+				},
+				"esm/index.mjs.map": {
+					"match": false,
+					"packageHash": "b0ed804389d80740685485a64bd3f0af0787c429131a2d835092b4622f826125",
+					"size": 79356,
+					"status": "missing-in-source"
+				},
+				"esm/jsy-script.js": {
+					"match": false,
+					"packageHash": "de16f3887864dbfd410aef96a4e22097ce679b4cce16f50a286f1195220af51a",
+					"size": 32381,
+					"status": "missing-in-source"
+				},
+				"esm/jsy-script.js.map": {
+					"match": false,
+					"packageHash": "5c0cbdfa8058e652f8cfeded2188925e7f72b4f8d512c3d82913f8ca0dd46ca4",
+					"size": 82296,
+					"status": "missing-in-source"
+				},
+				"esm/jsy-script.min.js": {
+					"match": false,
+					"packageHash": "216438fc2f6f4c26ee326ece61c47976a699d129468f09b259e61b1b5152d269",
+					"size": 32385,
+					"status": "missing-in-source"
+				},
+				"esm/jsy-script.min.js.map": {
+					"match": false,
+					"packageHash": "9a7606d25f62cec0646243abf0abe2b62923250eec8b5262a245c65fd624afe5",
+					"size": 82300,
+					"status": "missing-in-source"
+				},
+				"esm/jsy-script.min.mjs": {
+					"match": false,
+					"packageHash": "6d23406c55b8f53f730724193648bd6228ddb5a7370c862b82a02c4913a23eb6",
+					"size": 32386,
+					"status": "missing-in-source"
+				},
+				"esm/jsy-script.min.mjs.map": {
+					"match": false,
+					"packageHash": "329871d9cc57ac5b9ef352e6bc08177b3cbd63ff9c7b77043cdd08e55bb791dc",
+					"size": 82301,
+					"status": "missing-in-source"
+				},
+				"esm/jsy-script.mjs": {
+					"match": false,
+					"packageHash": "d364065c5f32b40c0bff144311ded14a97360cff090044fb0f91747fb6f81e9b",
+					"size": 32382,
+					"status": "missing-in-source"
+				},
+				"esm/jsy-script.mjs.map": {
+					"match": false,
+					"packageHash": "95f6fe0c02a377e17617ff9a1ac81f478db318f892a887813d0dcc255a61bb81",
+					"size": 82297,
+					"status": "missing-in-source"
+				},
+				"esm/scanner/index.js": {
+					"match": false,
+					"packageHash": "94eaaab6f9947967360766cb15d5bc7e79fbe69e8cd3e22ea5f7364b66069e3e",
+					"size": 22131,
+					"status": "missing-in-source"
+				},
+				"esm/scanner/index.js.map": {
+					"match": false,
+					"packageHash": "d6721c1213f8abb0d88db49e885ec091365025d1f92c910b391acaac7e468ed3",
+					"size": 31169,
+					"status": "missing-in-source"
+				},
+				"esm/scanner/index.mjs": {
+					"match": false,
+					"packageHash": "08a4cc0ddbbab3a9ede695b97a6a3d5c908490f0ceda74083a51e912a0898ff7",
+					"size": 22132,
+					"status": "missing-in-source"
+				},
+				"esm/scanner/index.mjs.map": {
+					"match": false,
+					"packageHash": "93036badce1d94c05c5f410dcb006e699e8efee75c2b5536e6e0c1de0f6b52be",
+					"size": 31170,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,6 +1,6 @@\n {\n   \"name\": \"jsy-transpile\",\n-  \"version\": \"0.7.8\",\n+  \"version\": \"0.7.7\",\n   \"description\": \"Offside (indention) JSY syntax transpiler to standard JavaScript — without Babel\",\n   \"author\": \"Shane Holloway <shane.holloway@ieee.org>\",\n   \"license\": \"BSD-2-Clause\",\n",
+					"match": false,
+					"packageHash": "4e4c297924dfdee68291ae943bdc6718c30b26eab329e886b8b64da188b1390f",
+					"size": 1658,
+					"sourceHash": "e25798b18487b02bfd3c510dfd56ee345e54e78d73a26a873da405bf1d5d1086",
+					"status": "content"
+				},
+				"test/__unittest.iife.js": {
+					"match": false,
+					"packageHash": "e80f39e33e4cea6ebb423d08f1e4adc6356e5c1812ffe5af363c53b5bbeed051",
+					"size": 1550137,
+					"status": "missing-in-source"
+				},
+				"test/package.json": {
+					"match": false,
+					"packageHash": "b3f0188f3e02fdf450949d6e2a438fc25c7d39018595e97d6a518cab5cad89f4",
+					"size": 693,
+					"status": "missing-in-source"
+				},
+				"umd/all.js": {
+					"match": false,
+					"packageHash": "0e11e08b1cfbf28045bf6eb6dfe781f3a6360ecb40c914cfd0c8d6ef3def2d42",
+					"size": 33326,
+					"status": "missing-in-source"
+				},
+				"umd/all.js.map": {
+					"match": false,
+					"packageHash": "6d68587e88c04823b3a12e4af971181d74f2dd5e5cdb0a809ec221283a922808",
+					"size": 82066,
+					"status": "missing-in-source"
+				},
+				"umd/jsy-transpile.js": {
+					"match": false,
+					"packageHash": "13b3a45d9cbd02532bf0009bd0d390b330c8d3f14d4137f27db8b2a8fed6bfb2",
+					"size": 31989,
+					"status": "missing-in-source"
+				},
+				"umd/jsy-transpile.js.map": {
+					"match": false,
+					"packageHash": "cc5dcb2046f7a9156f9258617f62d4f8fb154a502c06a839e9b58322f8a84eb3",
+					"size": 80818,
+					"status": "missing-in-source"
+				},
+				"umd/scanner/index.js": {
+					"match": false,
+					"packageHash": "90c7e1b1e32571922705e60f8a81a681b666bc740c27488d725175d0bc3701c8",
+					"size": 12287,
+					"status": "missing-in-source"
+				},
+				"umd/scanner/index.js.map": {
+					"match": false,
+					"packageHash": "6f57ec3f1a850d873447f1ab0e3ce0f7341003222c127a911d53cf064825da70",
+					"size": 32141,
+					"status": "missing-in-source"
+				}
+			},
+			"summary": {
+				"differentFiles": 4,
+				"matchingFiles": 25,
+				"missingInPackage": 0,
+				"missingInSource": 42,
+				"score": 0.352112676056338,
+				"totalFiles": 71
+			}
+		},
+		"prodDependencies": []
+	}
+]

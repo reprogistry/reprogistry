@@ -1,0 +1,721 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-10-10T00:53:16.079Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:8.13.2",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "jsy-transpile@0.9.9",
+			"name": "jsy-transpile",
+			"version": "0.9.9",
+			"location": "https://registry.npmjs.org/jsy-transpile/-/jsy-transpile-0.9.9.tgz",
+			"integrity": "sha512-WlzqY1gBpg7X9gDmjSY1Tbhom/Mnr1VnGOpa0zjFXq0/2SXnfA1P0uvkxGZMbj3UBTPSSwHAxXE/XMb/I9oZhg==",
+			"publishedAt": "2022-07-31T15:31:17.074Z",
+			"publishedWith": {
+				"node": "18.6.0",
+				"npm": "8.13.2"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/jsy-lang/jsy-transpile.git",
+			"spec": "github:jsy-lang/jsy-transpile#HEAD"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"LICENSE": {
+					"diff": "--- published/LICENSE\n+++ rebuilt/LICENSE\n@@ -1,6 +1,6 @@\n BSD 2-Clause License\n \n-Copyright (c) 2018-2020, Shane Holloway\n+Copyright (c) 2018-2023, Shane Holloway\n All rights reserved.\n \n Redistribution and use in source and binary forms, with or without\n",
+					"match": false,
+					"packageHash": "ecc435711b892d2eeb9f085adc881283d74e5f2a57d2d74ab78e5e55b73a96b4",
+					"size": 1324,
+					"sourceHash": "8a4af823f12b16b780b05d672d22a6e032559c62141f901ba431724ee2643136",
+					"status": "content"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,36 +1,104 @@\n-# jsy-transpile\n-[![Build Status](https://travis-ci.org/jsy-lang/jsy-transpile.svg?branch=master)](https://travis-ci.org/jsy-lang/jsy-transpile)\n+# [`@jsy-lang/jsy`](https://www.npmjs.com/package/@jsy-lang/jsy)\n+![JSY Logo](./jsy_logo.svg)\n \n-JSY is an indented (offside) JavaScript dialect. We believe indentation is better at describing code blocks.\n+JSY is a syntax dialect for ECMAScript using offside indentation\n+similar to [Python][] or [CoffeeScript][]\n+from ES5 to modern JavaScript (ES2025).\n \n-This is an offside (indention) JSY syntax transpiler to standard JavaScript with zero dependencies — e.g. No Babel, no Acorn!\n \n-Please see [JSY language docs](https://github.com/jsy-lang/jsy-lang-docs) for details on the JSY dialect.\n+This library is the JSY tranpiler and scanner written in JSY itself.\n+Zero runtime dependencies. No Babel. No Acorn.\n+6300 unit tests and counting.\n \n-## Use from the command line\n+## Docs\n \n-Ensure you are using Node 10.x or later.\n+- [JSY website](https://jsy-lang.github.io/)\n+- [JSY syntax dialect](https://github.com/jsy-lang/jsy-lang-docs) for details on the JSY dialect.\n \n-Install globally with `npm install -g jsy-transpile`\n \n-Transpile a JSY file with `npx jsy-transpile test.jsy > test.js`\n+## Getting Started\n \n-Run a JSY file with `npx jsy-node test.jsy` – see [jsy-node](https://github.com/jsy-lang/jsy-node)\n+### Use directly with node\n \n-## Use from Bundlers\n+```sh\n+node --import @jsy-lang/nodejs example.jsy\n+```\n+\n+### Use with [Rollup][] or [Vite][] (primary method)\n \n-- via `npm init jsy` – see [npm-create-jsy](https://github.com/jsy-lang/npm-create-jsy)\n-- via Rollup with [rollup-plugin-jsy-lite](https://github.com/jsy-lang/rollup-plugin-jsy-lite)\n-- via Babel with [babel-plugin-jsy-lite](https://github.com/jsy-lang/babel-plugin-jsy-lite)\n+```javascript\n+// rollup.config.js\n+import rpi_jsy from '@jsy-lang/jsy/rollup' // or from 'rollup-plugin-jsy'\n+\n+export default {\n+    input: 'code/example.jsy',\n+    plugins: [rpi_jsy()],\n+    output: { file: 'esm/example.js', format: 'es', sourcemap: true } }\n+```\n \n+Consider starting from a JSY template, such as `npm init jsy basic`.\n+See [`npm-create-jsy`](https://github.com/jsy-lang/npm-create-jsy).\n \n-## Use directly from HTML\n+### Use from HTML\n \n ```html\n ...\n-<script type='module' src='https://cdn.jsdelivr.net/npm/jsy-transpile/esm/jsy-script.min.js'></script>\n+<script type='module' src='https://cdn.jsdelivr.net/npm/@jsy-lang/jsy@latest/jsy-script.js'></script>\n ...\n-<jsy-script src='./example.jsy'></jsy-script>\n+<jsy-script>\n+  if true ::\n+    console.log @\n+      \"Fun with JSY\"\n+</jsy-script>\n ...\n ```\n \n+### Examine JSY transpiled code\n+\n+```sh\n+npx @jsy-lang/jsy example.jsy\n+```\n+\n+### Background and History\n+\n+Inspired by an indented dialect of LISP called [Wisp][],\n+JSY primarily operates as a scanner-pass syntax transformation to change\n+indented (offside) code into the corresponding open/close matching token\n+JavaScript code. Thus the internal scanning parser only has to be aware of\n+`/* comments */` and `\"string literals\"` rules to successfully transform code.\n+Thus, as a dialect, **JSY automatically keeps pace with modern JavaScript editions!**\n+\n+Our opinion is that indentation is a strong expression of the author's\n+intention, and should be observed by the language dialect.\n+As a dialect, JSY leading operators opt into the offside indentation,\n+and standard JavaScript continues to work without modification.\n+As a code author, indentation frees you from painstakingly matching open/close\n+sections `{} () []` so you can focus on the logic.\n+As a code reader, your screen is uncluttered by lines of closing punctuation --\n+allowing you to focus on the logic.\n+\n+\n",
+					"match": false,
+					"packageHash": "8cdec129eb7dc1526660df71ae75257939268d0be71a4399e8b10b1b4f960272",
+					"size": 1287,
+					"sourceHash": "c97f09b51bdcc730780e561be14632be23e948e096335d810f9c41f48ce8bbf5",
+					"status": "content"
+				},
+				"cjs/all.cjs": {
+					"match": false,
+					"packageHash": "0664e963cfdbd80a034d15131db62c4b48a3e1342143cdb12b707cc81abce0b5",
+					"size": 62650,
+					"status": "missing-in-source"
+				},
+				"cjs/all.cjs.map": {
+					"match": false,
+					"packageHash": "cc433246f71fefa0d03a007575b6e427751ccff1ec0e17cbba7c4bb58a507636",
+					"size": 135332,
+					"status": "missing-in-source"
+				},
+				"cjs/all.js": {
+					"match": false,
+					"packageHash": "f9480359d7a32c63582501a6b564adc84b495b46219d45f3849709879798a33e",
+					"size": 62649,
+					"status": "missing-in-source"
+				},
+				"cjs/all.js.map": {
+					"match": false,
+					"packageHash": "38f89346cd6463c7d6543c5755d280f555f76feea0f598f62712faefc013ceaa",
+					"size": 135331,
+					"status": "missing-in-source"
+				},
+				"cjs/cli_transpile.cjs": {
+					"match": false,
+					"packageHash": "22aef65e09c866a135e3713bf8e2ae8d0e60d322a779844c57262a60d223d72b",
+					"size": 66351,
+					"status": "missing-in-source"
+				},
+				"cjs/cli_transpile.cjs.map": {
+					"match": false,
+					"packageHash": "f1c5a2ca0894830a1c72f82b2883577a6054c3e7f68ccb70c895851fc6b9aa03",
+					"size": 147197,
+					"status": "missing-in-source"
+				},
+				"cjs/index.cjs": {
+					"match": false,
+					"packageHash": "2d3720a6fcbfbc9be5e3091c8438a5f4239c37dfeadc3b81c7018150d5be8b68",
+					"size": 61165,
+					"status": "missing-in-source"
+				},
+				"cjs/index.cjs.map": {
+					"match": false,
+					"packageHash": "5912b77fa36d949cb448ad2195482d76bffcb30c92dcf2fd0605a4b0bf34e7d1",
+					"size": 135476,
+					"status": "missing-in-source"
+				},
+				"cjs/index.js": {
+					"match": false,
+					"packageHash": "6f74f02f6997ff525bf6cdef937ccc2bac1458a5af380f8115a9320f234c59f7",
+					"size": 61164,
+					"status": "missing-in-source"
+				},
+				"cjs/index.js.map": {
+					"match": false,
+					"packageHash": "f6385fe063ea2968b9a78dc9722d1537d1dff86e9a42ba4cd24269fe04c142c2",
+					"size": 135475,
+					"status": "missing-in-source"
+				},
+				"cjs/scanner/index.cjs": {
+					"match": false,
+					"packageHash": "5abf9eebe81c24c29d738b004d9f8fe9d5e5ed748029f55726453d59b0a2ac07",
+					"size": 24306,
+					"status": "missing-in-source"
+				},
+				"cjs/scanner/index.cjs.map": {
+					"match": false,
+					"packageHash": "c44b5513f74b22cd7c1eb527ad93cf06ec2e90df1f39e45b804858d4733b9db9",
+					"size": 53091,
+					"status": "missing-in-source"
+				},
+				"cjs/scanner/index.js": {
+					"match": false,
+					"packageHash": "fae61fefa5ce3834bd60c15e48a15ebfd46d1e981699291bb95c7a809087c01c",
+					"size": 24305,
+					"status": "missing-in-source"
+				},
+				"cjs/scanner/index.js.map": {
+					"match": false,
+					"packageHash": "d7a8c5b8fcb2e7e19f7f39ec071517ae1d1c291527702f1ee89e1d1a8e2d2c6b",
+					"size": 53090,
+					"status": "missing-in-source"
+				},
+				"cjs/with_srcmap.cjs": {
+					"match": false,
+					"packageHash": "57e22a6a8ed8a34a03394e9ecdc14d7696cd06a912ea5aacf4fd43642b16d1cf",
+					"size": 65358,
+					"status": "missing-in-source"
+				},
+				"cjs/with_srcmap.cjs.map": {
+					"match": false,
+					"packageHash": "3ebfb8d83b538abf95c5536a237511ad1baec261af98745e5086dfb00de217ea",
+					"size": 145408,
+					"status": "missing-in-source"
+				},
+				"cjs/with_srcmap.js": {
+					"match": false,
+					"packageHash": "1845ec400c8d2141bfd7479927e8e2452c9a520b4309e012334d67c02b764ac6",
+					"size": 65357,
+					"status": "missing-in-source"
+				},
+				"cjs/with_srcmap.js.map": {
+					"match": false,
+					"packageHash": "3551e0085fe9e9cddc89c551664f022397280242bf448740335ade34039822e5",
+					"size": 145407,
+					"status": "missing-in-source"
+				},
+				"code/_ast_debug.jsy": {
+					"match": false,
+					"packageHash": "23b1e4704bd7d8e20ce639ced76072c416439145379ca1ab3f974c9f16925aad",
+					"size": 578,
+					"status": "missing-in-source"
+				},
+				"code/all.jsy": {
+					"match": false,
+					"packageHash": "d9df406ce671ee5b537e751b53bd3c3ac071470ee3311795bc144403e24d7707",
+					"size": 298,
+					"status": "missing-in-source"
+				},
+				"code/cli_transpile.jsy": {
+					"match": false,
+					"packageHash": "10ea5b96b98b8b4306d5975345f3cd7defcc090d0d17f69a75b539a5df0f7cfd",
+					"size": 1528,
+					"status": "missing-in-source"
+				},
+				"code/index.jsy": {
+					"match": false,
+					"packageHash": "f15b8fcbac39e00993282fa19eca38ad17dac3bbfabc397ae73b2c00f6ee1996",
+					"size": 128,
+					"status": "missing-in-source"
+				},
+				"code/jsy-script-elem.jsy": {
+					"match": false,
+					"packageHash": "8f0ede4ee9429df1a9b414decda7ffc5755ca597145aa2ef293d0e1569fbf842",
+					"size": 912,
+					"status": "missing-in-source"
+				},
+				"code/jsy-script.jsy": {
+					"match": false,
+					"packageHash": "9254a26e676732f7d6d0b8290c570cbe09803e1c0a6dd0bf73d70813a7bb6aae",
+					"size": 185,
+					"status": "missing-in-source"
+				},
+				"code/jsy_func_operators.jsy": {
+					"match": false,
+					"packageHash": "292956b43ff299c7d6a8f9238ff5ead0ce24e8bce8a356f7aba1ba369a9dcc3d",
+					"size": 907,
+					"status": "missing-in-source"
+				},
+				"code/jsy_lambda_operators.jsy": {
+					"match": false,
+					"packageHash": "14f656bd2b0683e406f1b267ce19b1f2204c89c4b4fc9a981e156246db9f1c04",
+					"size": 3201,
+					"status": "missing-in-source"
+				},
+				"code/jsy_operators.jsy": {
+					"match": false,
+					"packageHash": "3c53822dc0354eef3432f54edc9d5e09076272adfce056224ea3ab68b9939985",
+					"size": 2979,
+					"status": "missing-in-source"
+				},
+				"code/jsy_prefix_operators.jsy": {
+					"match": false,
+					"packageHash": "440926d44369045ec525fc2d444cb19da772ef25d44d2fe3c3368856137a72b5",
+					"size": 1307,
+					"status": "missing-in-source"
+				},
+				"code/jsy_regexp.jsy": {
+					"match": false,
+					"packageHash": "5239e2df395dc3957206a82c009e4423bd2744593bca9d446d5580b02781c8fa",
+					"size": 1046,
+					"status": "missing-in-source"
+				},
+				"code/jsy_regexp_utils.jsy": {
+					"match": false,
+					"packageHash": "ff47d3987ed8cebae5e36adb8bbb519fc067a070072c6f44e49aa1775235d5e7",
+					"size": 664,
+					"status": "missing-in-source"
+				},
+				"code/node-loader.jsy": {
+					"match": false,
+					"packageHash": "4b8e12b965b75d386e1cda22b6ae4d00c6a83b497166f99e464cf3875075177d",
+					"size": 708,
+					"status": "missing-in-source"
+				},
+				"code/optional_comma.jsy": {
+					"match": false,
+					"packageHash": "d27817419e729d89dd7512969901dfafdeb60488916adcb7c3512b3993a1fd2d",
+					"size": 1870,
+					"status": "missing-in-source"
+				},
+				"code/preprocess_jsy.jsy": {
+					"match": false,
+					"packageHash": "cc1c98ee50ada625b031113f958e3bf6e08e483e745fddc9d4eb577090d3d813",
+					"size": 4193,
+					"status": "missing-in-source"
+				},
+				"code/rollup.jsy": {
+					"match": false,
+					"packageHash": "8d8c55bf489b642af3c1144767a80db5b1a91f2509e219de514f9c5e0e3f13d1",
+					"size": 1282,
+					"status": "missing-in-source"
+				},
+				"code/scan_jsy.jsy": {
+					"match": false,
+					"packageHash": "3175224d020a4bf259a28fc2132515d105f8e8b73614d69e6314190806abf6d2",
+					"size": 4464,
+					"status": "missing-in-source"
+				},
+				"code/scanner/basic_contexts.jsy": {
+					"diff": "--- published/code/scanner/basic_contexts.jsy\n+++ rebuilt/code/scanner/basic_contexts.jsy\n@@ -1,6 +1,5 @@\n import { DispatchScanner, DispatchFirstlineScanner } from './context_scanner.jsy'\n \n-export default bind_context_scanner\n export function bind_context_scanner(context_scanners) ::\n   if ! Object.isFrozen(context_scanners) || ! Array.isArray(context_scanners) ::\n     throw new TypeError @ `Expected a frozen array of context scanners`\n@@ -60,9 +59,9 @@\n \n   function build_composite_scanner() ::\n     const ds_body = new DispatchScanner().startCompile()\n-    ds_body.description = 'Dispatch scanner (0)'\n+    ds_body.description = 'JSY Dispatch scanner (0)'\n     const ds_first = new DispatchFirstlineScanner().startCompile()\n-    ds_first.description = 'Firstline Dispatch scanner (0)'\n+    ds_first.description = 'Firstline JSY Dispatch scanner (0)'\n \n     for const scanner of context_scanners ::\n       if ! scanner :: continue\n",
+					"match": false,
+					"packageHash": "7d85bc52d44612fcbac1f5897fc1e2099967207bbae7e5bf2ba8fbe470adf19a",
+					"size": 2220,
+					"sourceHash": "58c4f7ffdc153ba7ac6677b477485008b6b5defd6acba2ad2a9c37ae6f1af793",
+					"status": "content"
+				},
+				"code/scanner/basic_offside.jsy": {
+					"diff": "--- published/code/scanner/basic_offside.jsy\n+++ rebuilt/code/scanner/basic_offside.jsy\n@@ -4,7 +4,6 @@\n \n import createLoc from './_location.jsy'\n \n-export default basic_offside_scanner\n export function basic_offside_scanner(source, feedback) ::\n   if null == feedback ::\n     feedback = @{}\n@@ -84,20 +83,24 @@\n \n \n function add_indent_info(all_lines) ::\n-  let len_dedent=0\n-  const len_stack = [0]\n+  let len_dedent = 0 // how far to dedent to next outer level\n+  let len_stack = [0]\n+  // work backwards from the file end\n   for let i = all_lines.length-1 ; i>=0 ; i-- ::\n-    const ln = all_lines[i]\n+    let ln = all_lines[i]\n     if ln.is_blank :: continue\n \n     ln.len_dedent = len_dedent\n-    const len_indent = ln.len_indent\n+\n+    // how many indent prefix chars per line\n+    let len_indent = ln.len_indent\n \n     let len_inner\n     while len_stack[0] > len_indent ::\n       len_inner = len_stack.shift()\n \n     if len_stack[0] < len_indent ::\n+      // len_indent is the new stack tip\n       len_stack.unshift @ len_indent\n \n     if len_inner ::\n",
+					"match": false,
+					"packageHash": "2aecf10fd2067a73e68ebe3cda2338f3f1bbe455e889dca3c78a9e5cdfdb8b31",
+					"size": 2705,
+					"sourceHash": "e9ce5899ba2d1e12d7b7a81bfbc1cabc6b13079acc80960c6e40fe71130f930f",
+					"status": "content"
+				},
+				"code/scanner/basic_offside_contexts.jsy": {
+					"diff": "--- published/code/scanner/basic_offside_contexts.jsy\n+++ rebuilt/code/scanner/basic_offside_contexts.jsy\n@@ -1,7 +1,6 @@\n-import basic_offside_scanner from './basic_offside.jsy'\n-import bind_context_scanner from './basic_contexts.jsy'\n+import { basic_offside_scanner } from './basic_offside.jsy'\n+import { bind_context_scanner } from './basic_contexts.jsy'\n \n-export default scan_offside_contexts\n export function scan_offside_contexts(source, feedback, disp_name, context_scanners) ::\n   // see scan_javascript and scan_clike for good context_scanners\n   const context_scanner = bind_context_scanner(disp_name, context_scanners)\n",
+					"match": false,
+					"packageHash": "7b6fa3e99628382419f556363e4d72dde1855cc37019c7ed54612ca0d5aaf1e1",
+					"size": 448,
+					"sourceHash": "a08c46f12ffff4789fdb72fd0aa4a79f6b3618508cc6c1c4e4849a084001f0f0",
+					"status": "content"
+				},
+				"code/scanner/context_scanner.jsy": {
+					"diff": "--- published/code/scanner/context_scanner.jsy\n+++ rebuilt/code/scanner/context_scanner.jsy\n@@ -177,11 +177,11 @@\n     const start = ctx.loc_tip\n     const end = ctx.loc_tip = start.move(content || 0)\n     const ast = @{} type: ast_type || this.op, loc: {start, end}, content\n-    this._ast_extend(ctx, ast)\n+    this.ast_extend(ctx, ast)\n     ctx.parts.push @ ast\n     return ast\n \n-  _ast_extend(ctx, ast) ::\n+  ast_extend(ctx, ast) ::\n \n   newline(ctx, is_blank) ::\n   scan_fragment(ctx, content) ::\n@@ -301,7 +301,7 @@\n       throw ctx.ln.loc.end.syntaxError @\n         `Newline in ${this.description} (${ctx.ln.loc.end})`\n \n-  _ast_extend(ctx, ast) ::\n+  ast_extend(ctx, ast) ::\n     const ln = this.ln_first || ctx.ln\n     if undefined !== ln.len_inner ::\n       ast.block_indent = ln.len_inner\n@@ -316,7 +316,9 @@\n     const [content, open, close] = match\n \n     const t_content = this.nestTrim(content, close, false)\n-    if t_content :: this.emit_ast @ ctx, t_content\n+    if null != t_content ::\n+      this.ast_scan_match @ {open, close},\n+        this.emit_ast @ ctx, t_content,\n     return this.post_scan(ctx, close)\n \n   scan_continue(ctx, idx0) ::\n@@ -330,17 +332,14 @@\n     const [content, close] = match\n \n     const t_content = this.nestTrim(content, close, true)\n-    if t_content :: this.emit_ast @ ctx, t_content\n+    if null != t_content ::\n+      this.ast_scan_match @ {close},\n+        this.emit_ast @ ctx, t_content,\n     return this.post_scan(ctx, close)\n \n-  nestTrim(content, close, isContinue) ::\n-    const nestingTrim = this.nestingTrim\n-    if undefined !== nestingTrim ::\n-      let trim = nestingTrim[close]\n-      if true === trim :: trim = close\n-      if trim :: return content.slice(0, - trim.length)\n+  ast_scan_match(match, ast) ::\n \n-    return content\n+  nestTrim(content, close, isContinue) :: return content\n \n   post_scan(ctx, close) ::\n     if ! close ::\n@@ -424,6 +423,18 @@\n   newline(ctx, is_blank) ::\n   get multiline() :: return true\n \n+  ast_extend(ctx, ast) ::\n+    //let ln = this.ln_first || ctx.ln\n+    let col = ast.loc.start.column\n+    let mlctx = this.mlctx ??= {col}\n+\n+    if col < mlctx.col ::\n+      mlctx.col = col\n+\n+    ast.mlctx = mlctx\n+    return ast\n+\n+\n // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n \n export class TaggedRegExpScanner extends RegExpScanner ::\n",
+					"match": false,
+					"packageHash": "a95216dbd47398208a7e866cd815cfa22b1d00c3b903ba068b75cd34e2dbe4bd",
+					"size": 14024,
+					"sourceHash": "cbde7bdbe3b3866c7484ab3d12f34d86d8b05178d73ab401ba5176f3728b3cd4",
+					"status": "content"
+				},
+				"code/scanner/dbg_context_scanner.jsy": {
+					"diff": "--- published/code/scanner/dbg_context_scanner.jsy\n+++ rebuilt/code/scanner/dbg_context_scanner.jsy\n@@ -41,4 +41,3 @@\n   scan(ctx, idx0) :: return RXDBG.dbg_scan(this, ctx, idx0)\n   scan_continue(ctx, idx0) :: return RXDBG.dbg_scan_continue(this, ctx, idx0)\n \n-export default RXDBG\n",
+					"match": false,
+					"packageHash": "3fdff1cd115a5c4a055e47299c6a137e19ff96df834286c6e7c5cf3c5a8c2151",
+					"size": 1609,
+					"sourceHash": "e0494e9946cf9b066fd575f154c5972752f4865ed81286439ff0a80625d0167f",
+					"status": "content"
+				},
+				"code/scanner/index.jsy": {
+					"match": false,
+					"packageHash": "5b02dc7031993155a4ccec6a5777ec11a104f1c48dfc218a9cfc6c60fd2deac5",
+					"size": 225,
+					"status": "missing-in-source"
+				},
+				"code/scanner/inject_dedent.jsy": {
+					"diff": "--- published/code/scanner/inject_dedent.jsy\n+++ rebuilt/code/scanner/inject_dedent.jsy\n@@ -1,5 +1,4 @@\n \n-export default inject_dedent\n export function inject_dedent(offside_lines, trailing_types) ::\n   if 'function' !== typeof trailing_types ::\n     const s_trailing_types = new Set @\n",
+					"match": false,
+					"packageHash": "f233037b1beee2c95ed1fae265fb866465ff60662928512fde0071fd63d4ed56",
+					"size": 733,
+					"sourceHash": "bfbf2b54e4fb733739585908e2f9c419b15146e8282461799a03186c11e98071",
+					"status": "content"
+				},
+				"code/scanner/scan_clike.jsy": {
+					"diff": "--- published/code/scanner/scan_clike.jsy\n+++ rebuilt/code/scanner/scan_clike.jsy\n@@ -1,5 +1,5 @@\n import { SourceCodeScanner, NestedCodeScanner, RegExpScanner, MultiLineScanner } from './context_scanner.jsy'\n-import scan_offside_contexts from './basic_offside_contexts.jsy'\n+import { scan_offside_contexts } from './basic_offside_contexts.jsy'\n \n export const scanner_source =\n   new SourceCodeScanner @:\n@@ -72,7 +72,6 @@\n   scanner_preprocessor\n \n \n-export default scan_clike\n export function scan_clike(source, feedback) ::\n   return scan_offside_contexts(source, feedback, clike_context_scanners)\n \n",
+					"match": false,
+					"packageHash": "bada6e198ed877ab526dd3244562f0110e2f1843b15ae404a611fc991ae32346",
+					"size": 2367,
+					"sourceHash": "51ab73a27adbb2a81198dc6f6b8a305c1a5de5a2acac55fbe5e05c2971342f85",
+					"status": "content"
+				},
+				"code/scanner/scan_javascript.jsy": {
+					"diff": "--- published/code/scanner/scan_javascript.jsy\n+++ rebuilt/code/scanner/scan_javascript.jsy\n@@ -1,4 +1,4 @@\n-import scan_offside_contexts from './basic_offside_contexts.jsy'\n+import { scan_offside_contexts } from './basic_offside_contexts.jsy'\n import { RegExpScanner, MultiLineScanner } from './context_scanner.jsy'\n import { scanner_source, clike_context_scanners, scanner_nestedSrc } from './scan_clike.jsy'\n \n@@ -47,11 +47,17 @@\n       example: '`template string`'\n       op: 'str_template'\n       kind: '`'\n-      rx_open: /(`)/\n+      rx_open: /(`)\\\\?/\n       rx_close: /(?:\\\\.|\\$(?!{)|[^\\$`\\\\])*(`|\\${|$)/\n       nesting: @{}\n         '${': templateArgNesting\n \n+      ast_scan_match(scan, ast) ::\n+        if '`' == scan.open ::\n+          ast.tmpl_opened = true\n+        if '`' == scan.close ::\n+          ast.tmpl_closed = true\n+\n function templateArgNesting(ctx, hostScanner) ::\n   const src = scanner_nestedSrc.withOuter @:\n     scanner: hostScanner.continueScanner(ctx)\n@@ -69,7 +75,6 @@\n   scanner_strTemplate\n   ... clike_context_scanners\n \n-export default scan_javascript\n export function scan_javascript(source, feedback) ::\n   return scan_offside_contexts(source, feedback, js_context_scanners)\n \n",
+					"match": false,
+					"packageHash": "63826e7936be8952be44f5f2c41a14767460d3d32ad106835eac79fb55ea924d",
+					"size": 2569,
+					"sourceHash": "e7d8b3d64899e6ab82807f0eb59c3879edf92838f26110a8715f447fe0bf767d",
+					"status": "content"
+				},
+				"code/scanner/scan_jsx_javascript.jsy": {
+					"diff": "--- published/code/scanner/scan_jsx_javascript.jsy\n+++ rebuilt/code/scanner/scan_jsx_javascript.jsy\n@@ -1,4 +1,4 @@\n-import scan_offside_contexts from './basic_offside_contexts.jsy'\n+import { scan_offside_contexts } from './basic_offside_contexts.jsy'\n import { js_context_scanners } from './scan_javascript.jsy'\n import { scanner_nestedSrc } from './scan_clike.jsy'\n import { SourceCodeScanner, RegExpScanner } from './context_scanner.jsy'\n@@ -19,7 +19,7 @@\n       rx_open: /\\s*({)/,\n       rx_close: /()/,\n \n-      nestTrim(content, close) :: return ''\n+      nestTrim(content, close, isContinue) ::\n       post_scan(ctx) :: jsxArgNesting @ ctx, null\n \n export const scanner_jsxAttrNameValue =\n@@ -99,8 +99,9 @@\n         '\"': scanner_jsxAttrDouble\n \n       nestTrim(content, close, isContinue) ::\n-        return this.nesting[close] ? content\n-          : content.slice(0, - close.length)\n+        if ! this.nesting[close] ::\n+          content = content.slice(0, - close.length)\n+        return content || null\n \n       nestMatch(close, ctx, hostScanner) ::\n         let inner = this.nesting[close]\n@@ -209,7 +210,6 @@\n   scanner_jsx\n   ... js_context_scanners\n \n-export default scan_javascript_with_jsx\n export function scan_javascript_with_jsx(source, feedback) ::\n   return scan_offside_contexts(source, feedback, jsx_context_scanners)\n \n",
+					"match": false,
+					"packageHash": "90efdd613c3f67b15811eb1a4fee16ba56d3b8267260a552579ed8218fe9d77e",
+					"size": 6085,
+					"sourceHash": "03c424706b550877d089dc35f44c3b80505b8e7e14455e762c53406d1ce8418b",
+					"status": "content"
+				},
+				"code/transpile_jsy.jsy": {
+					"match": false,
+					"packageHash": "dcc6753285d2c98e4475a60400fc1531d27ff6c9e3835aa6bdede4cfc9d5dd2e",
+					"size": 10416,
+					"status": "missing-in-source"
+				},
+				"code/with_srcmap.jsy": {
+					"match": false,
+					"packageHash": "a597c22cb0bc791b9fd4961e0970f9c5a2a74aa76569c20da664113b5b95e926",
+					"size": 625,
+					"status": "missing-in-source"
+				},
+				"esm/all.js": {
+					"match": false,
+					"packageHash": "d25c7973b4a9a261a6200a1c8eb23ea499472cacabd7d19c0bf8e89e00461cfb",
+					"size": 61708,
+					"status": "missing-in-source"
+				},
+				"esm/all.js.map": {
+					"match": false,
+					"packageHash": "fbf870fc3382c06eae82d3cd88aa2db91656441ecd2ca2305f7bd328e5e342b8",
+					"size": 135296,
+					"status": "missing-in-source"
+				},
+				"esm/all.mjs": {
+					"match": false,
+					"packageHash": "e9d18054815dbafc9f5a845f435ac786e5716f32f05e1131e469a1e1b2a0105b",
+					"size": 61709,
+					"status": "missing-in-source"
+				},
+				"esm/all.mjs.map": {
+					"match": false,
+					"packageHash": "d1b6023486a315ac0e9b361f6d1cb4c80f3a00746096bdd8cef1547afb14f982",
+					"size": 135297,
+					"status": "missing-in-source"
+				},
+				"esm/index.js": {
+					"match": false,
+					"packageHash": "9aa1bc2675d99bf10eb57cfa6f848890c39225daff07afa67d0b30913a72b555",
+					"size": 61154,
+					"status": "missing-in-source"
+				},
+				"esm/index.js.map": {
+					"match": false,
+					"packageHash": "35679a237c9607472fcec4679f391efc69fe8b5caa63f8939fcc2afaffaf890c",
+					"size": 135473,
+					"status": "missing-in-source"
+				},
+				"esm/index.mjs": {
+					"match": false,
+					"packageHash": "770b05b08f0e3b03374464742f56cd8919a821d9f3914fb16d32c146bbc11674",
+					"size": 61155,
+					"status": "missing-in-source"
+				},
+				"esm/index.mjs.map": {
+					"match": false,
+					"packageHash": "a4e0d3594975470c5f24147124aab5c3117c80bb18f9ac275512154d74bc7f68",
+					"size": 135474,
+					"status": "missing-in-source"
+				},
+				"esm/jsy-script.min.mjs": {
+					"match": false,
+					"packageHash": "5a806285ffeabdbb5f5396086519e84e74ffbbbe1a1e70ef66613a7cbad9e44d",
+					"size": 34167,
+					"status": "missing-in-source"
+				},
+				"esm/jsy-script.min.mjs.map": {
+					"match": false,
+					"packageHash": "657fcad900af29bc8b07869816ee95860941a47473dd896a86794fdc2502957d",
+					"size": 118134,
+					"status": "missing-in-source"
+				},
+				"esm/jsy-script.mjs": {
+					"match": false,
+					"packageHash": "a6aefc5d7647be2ef3adc5afbe76a21de3973a79057fb34af2b0dd19b2de9ff7",
+					"size": 66226,
+					"status": "missing-in-source"
+				},
+				"esm/jsy-script.mjs.map": {
+					"match": false,
+					"packageHash": "ee340e35e76631aff3bb2088c1425299bd9d3759f24190833dd927013d94e63d",
+					"size": 147630,
+					"status": "missing-in-source"
+				},
+				"esm/node-loader.mjs": {
+					"match": false,
+					"packageHash": "fb6e1494d706badb05d0841a2774db64578cee896e13218d7a12aee31191fd93",
+					"size": 65948,
+					"status": "missing-in-source"
+				},
+				"esm/node-loader.mjs.map": {
+					"match": false,
+					"packageHash": "dc78870e1c254f77359c23932e5e0fee1fd4eaf7f5735af9e17d9835bac4f898",
+					"size": 146733,
+					"status": "missing-in-source"
+				},
+				"esm/rollup.mjs": {
+					"match": false,
+					"packageHash": "c16913ee1fc34e41dd1ff2e36f27ae05ea8f6279f66026b763bc061a0838915a",
+					"size": 122935,
+					"status": "missing-in-source"
+				},
+				"esm/rollup.mjs.map": {
+					"match": false,
+					"packageHash": "a2a72132a657ea55e9384d739c3af3f994ebe0435093f1f216285a48ad2200f6",
+					"size": 283008,
+					"status": "missing-in-source"
+				},
+				"esm/scanner/index.js": {
+					"match": false,
+					"packageHash": "2394fe60fa8f50f4a9a4590a81e5f6d526b87c4390ed70c060e2336d184ac112",
+					"size": 23648,
+					"status": "missing-in-source"
+				},
+				"esm/scanner/index.js.map": {
+					"match": false,
+					"packageHash": "76ee846ea64e7204e68d4ea9f803e9eeab4228e787a78e537cfdf5cd7b4c89e8",
+					"size": 53066,
+					"status": "missing-in-source"
+				},
+				"esm/scanner/index.mjs": {
+					"match": false,
+					"packageHash": "65e86f9c3a7b0420183a2812ef9a5b62a4ae6d47e2baaf7bcb5041e517fa000e",
+					"size": 23649,
+					"status": "missing-in-source"
+				},
+				"esm/scanner/index.mjs.map": {
+					"match": false,
+					"packageHash": "91f7d79cb20cb0754da204a3c69d3bd5806e1d7bc0af04feb81654df10c9e9a8",
+					"size": 53067,
+					"status": "missing-in-source"
+				},
+				"esm/with_srcmap.js": {
+					"match": false,
+					"packageHash": "046355d99d3e909eb0a862d81c79cbc2c4ba97d44d64b646cc8c23d9bfca29a7",
+					"size": 65347,
+					"status": "missing-in-source"
+				},
+				"esm/with_srcmap.js.map": {
+					"match": false,
+					"packageHash": "e904c051632b161cb8e8787804bb652c34f8e0fbb1c7a27f8cb5e9db2824b7be",
+					"size": 145405,
+					"status": "missing-in-source"
+				},
+				"esm/with_srcmap.mjs": {
+					"match": false,
+					"packageHash": "a0f5ad13c462f6d054948a4a7b483d76ca51175cf61bad186da45ae207e8d545",
+					"size": 65348,
+					"status": "missing-in-source"
+				},
+				"esm/with_srcmap.mjs.map": {
+					"match": false,
+					"packageHash": "cc8c0c4dbd89833db927b9156d78f47ba7e720d385bead3e0b022f74fe4dd951",
+					"size": 145406,
+					"status": "missing-in-source"
+				},
+				"iife/jsy-script.js": {
+					"match": false,
+					"packageHash": "49b0340742c7cece2fbf4fa21113b62bac298ac243551d15fe2d860eec177e05",
+					"size": 69778,
+					"status": "missing-in-source"
+				},
+				"iife/jsy-script.js.map": {
+					"match": false,
+					"packageHash": "137f22a3d182916ee216ba8988917237088ac4734d2a53677a4b3e963909d5e5",
+					"size": 147639,
+					"status": "missing-in-source"
+				},
+				"iife/jsy-script.min.js": {
+					"match": false,
+					"packageHash": "5b8b1e8643a010691e2a088d1e45f4bcb1d5135c1a98c9650b90e8a445947ae2",
+					"size": 34194,
+					"status": "missing-in-source"
+				},
+				"iife/jsy-script.min.js.map": {
+					"match": false,
+					"packageHash": "8de7d7cb93698ef9264e20a9a749a7de832ad38a217db139097b51078fabb55d",
+					"size": 118134,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,72 +1,78 @@\n {\n-  \"name\": \"jsy-transpile\",\n-  \"version\": \"0.9.9\",\n-  \"description\": \"Offside (indention) JSY syntax transpiler to standard JavaScript — without Babel\",\n+  \"name\": \"@jsy-lang/jsy\",\n+  \"version\": \"0.10.9\",\n+  \"description\": \"JSY offside syntax for ECMAScript/JS\",\n   \"author\": \"Shane Holloway <shane.holloway@ieee.org>\",\n   \"license\": \"BSD-2-Clause\",\n   \"keywords\": [\n-    \"syntax\",\n-    \"offside\",\n+    \"jsy\",\n     \"python\",\n+    \"wisp\",\n+    \"coffeescript\",\n+    \"offside\",\n     \"indention\",\n-    \"indent\"\n+    \"indent\",\n+    \"syntax\",\n+    \"transpile\",\n+    \"transpiler\"\n   ],\n   \"repository\": {\n     \"type\": \"git\",\n-    \"url\": \"git+https://github.com/jsy-lang/jsy-transpile.git\"\n+    \"url\": \"git+https://github.com/jsy-lang/jsy.git\"\n   },\n   \"bugs\": {\n-    \"url\": \"https://github.com/jsy-lang/jsy-transpile/issues\"\n+    \"url\": \"https://github.com/jsy-lang/jsy/issues\"\n   },\n-  \"homepage\": \"https://github.com/jsy-lang/jsy-transpile#readme\",\n+  \"homepage\": \"https://github.com/jsy-lang/jsy#readme\",\n   \"bin\": {\n-    \"jsy-transpile\": \"transpile.cjs\"\n+    \"jsy\": \"transpile.mjs\",\n+    \"jsy-transpile\": \"transpile.mjs\",\n+    \"jsy-scan\": \"scan.mjs\"\n   },\n   \"files\": [\n-    \"cjs\",\n     \"esm\",\n-    \"umd\",\n-    \"iife\",\n+    \"cjs\",\n     \"code\",\n-    \"transpile.cjs\",\n-    \"unittest.html\",\n-    \"test/browser_unittest.js\",\n-    \"test/__unittest.iife.js\"\n+    \"jsy-script.js\",\n+    \"transpile.mjs\",\n+    \"scan.mjs\",\n+    \"unittest.html\"\n   ],\n   \"type\": \"module\",\n-  \"main\": \"cjs/index.cjs\",\n-  \"module\": \"esm/index.mjs\",\n-  \"browser\": \"umd/jsy-transpile.js\",\n+  \"module\": \"esm/index.js\",\n+  \"browser\": \"esm/index.js\",\n   \"exports\": {\n+    \"./rollup\": \"./esm/rollup.js\",\n     \"./*\": \"./*\",\n-    \".\": {\n-      \"import\": \"./esm/index.mjs\",\n-      \"require\": \"./cjs/index.cjs\"\n-    }\n+    \".\": \"./esm/index.js\"\n   },\n-  \"dependencies\": {},\n+  \"workspaces\": [],\n   \"devDependencies\": {\n-    \"@rollup/plugin-commonjs\": \"^22.0.1\",\n-    \"@rollup/plugin-node-resolve\": \"^13.3.0\",\n-    \"@rollup/pluginutils\": \"^4.2.1\",\n-    \"jsy-transpile\": \"file:.\",\n-    \"micromatch\": \"^4.0.5\",\n-    \"rollup\": \"^2.77.2\",\n-    \"rollup-plugin-dgnotify\": \"^0.1.8\",\n-    \"rollup-plugin-terser\": \"^7.0.2\",\n-    \"source-map\": \"^0.7.4\",\n+    \"@rollup/plugin-commonjs\": \"^29.0.0\",\n+    \"@rollup/plugin-node-resolve\": \"^16.0.3\",\n+    \"@rollup/plugin-terser\": \"^0.4.3\",\n+    \"@rollup/plugin-virtual\": \"^3.0.1\",\n+    \"@rollup/pluginutils\": \"^5.3.0\",\n+    \"acorn\": \"^8.14.1\",\n+    \"chai\": \"^6.2.2\",\n+    \"mocha\": \"^11.1.0\",\n+    \"rollup\": \"^4.54.0\",\n     \"tiny-source-map\": \"^0.8.0\"\n   },\n   \"scripts\": {\n     \"clean\": \"rm -rf cjs/ umd/ esm/ iife/\",\n",
+					"match": false,
+					"packageHash": "00e0c919fda7725d351c29c853086a8f76988bc42a337d0d16eec8eece10983b",
+					"size": 1932,
+					"sourceHash": "f5f842abec660c39eba1782d449e1d5cd92b9cfcb9e31de789e9e1bbf9ce4420",
+					"status": "content"
+				},
+				"test/__unittest.iife.js": {
+					"match": false,
+					"packageHash": "9b59b4211e529495e6851d4520f4e6bf9d7d66d527cddd06701b7eb88db475c6",
+					"size": 1943973,
+					"status": "missing-in-source"
+				},
+				"test/browser_unittest.js": {
+					"match": false,
+					"packageHash": "52726895d4ecab6810d38ea2bdd3495d608c23c4e0106f250f521f30ed1c65f2",
+					"size": 889,
+					"status": "missing-in-source"
+				},
+				"transpile.cjs": {
+					"match": false,
+					"packageHash": "f6fa2e5786fb62f4462c4d419754bff981bf0fd9950d28999af4ef37e3ec931a",
+					"size": 92,
+					"status": "missing-in-source"
+				},
+				"umd/index.js": {
+					"match": false,
+					"packageHash": "da288675c221fd239a28525f0886d7965a627bd97f2192092de3fe1a9ae3d5a3",
+					"size": 64655,
+					"status": "missing-in-source"
+				},
+				"umd/index.js.map": {
+					"match": false,
+					"packageHash": "6989acc8ba3d917c1f6024897ce31f58971f29e98ac340292548b8ef44191606",
+					"size": 135484,
+					"status": "missing-in-source"
+				},
+				"umd/index.min.js": {
+					"match": false,
+					"packageHash": "e3e7b909d1143e1c0236666d60076deaad2c2dc3bfaef12bd0a8c66ccad3fdb9",
+					"size": 32258,
+					"status": "missing-in-source"
+				},
+				"umd/index.min.js.map": {
+					"match": false,
+					"packageHash": "8a710e0a9672b9e2aec367ee1423f918d75c9ee59c6fab53e59ba4aad7c8c1f2",
+					"size": 108705,
+					"status": "missing-in-source"
+				},
+				"umd/jsy-script.js": {
+					"match": false,
+					"packageHash": "d7e0e3ff3d3902a3fec6b7653a2f1242b49f244aa3fe79e6f0e54fd643435402",
+					"size": 69878,
+					"status": "missing-in-source"
+				},
+				"umd/jsy-script.js.map": {
+					"match": false,
+					"packageHash": "e83e0a12d13d39216a12c0ab76f5005e7325ecf03997a123e7c71ede975a032c",
+					"size": 147641,
+					"status": "missing-in-source"
+				},
+				"umd/jsy-script.min.js": {
+					"match": false,
+					"packageHash": "ff222b4bc9eb09ed3d3485d604110810aa7ebdbc8d3011abc9f6ad556870ba26",
+					"size": 34260,
+					"status": "missing-in-source"
+				},
+				"umd/jsy-script.min.js.map": {
+					"match": false,
+					"packageHash": "b8e4158989ab90a778b1a3ef3fc62db4f6f5022b6302ff3f2075fc8b1ae811dc",
+					"size": 118134,
+					"status": "missing-in-source"
+				},
+				"umd/with_srcmap.js": {
+					"match": false,
+					"packageHash": "effdbc80b4bf28ebc1c49701a1d9f9919120a14dfef8338a2ea6c33692548c62",
+					"size": 69144,
+					"status": "missing-in-source"
+				},
+				"umd/with_srcmap.js.map": {
+					"match": false,
+					"packageHash": "0ae456b1fd11296afead4a331d2c9df74ed41004009a1e319c20ae47ddb50e9c",
+					"size": 145416,
+					"status": "missing-in-source"
+				},
+				"umd/with_srcmap.min.js": {
+					"match": false,
+					"packageHash": "b4c4dbdac01b451f8b279a639a7d420140f0193fdac40aba7767977bcb2e5dca",
+					"size": 33836,
+					"status": "missing-in-source"
+				},
+				"umd/with_srcmap.min.js.map": {
+					"match": false,
+					"packageHash": "4685e7c0541ee7610822869199113aebc59e9f1aa7ceedb9caef17e3f8feeda2",
+					"size": 116099,
+					"status": "missing-in-source"
+				},
+				"unittest.html": {
+					"diff": "--- published/unittest.html\n+++ rebuilt/unittest.html\n@@ -3,16 +3,21 @@\n <head>\n   <meta charset=\"utf-8\">\n   <title>JSY Transpile Mocha Tests</title>\n-  <link rel='stylesheet' href='https://unpkg.com/mocha@5.2.0/mocha.css' />\n+  <link rel='stylesheet' href='https://unpkg.com/mocha/mocha.css' />\n+\n+  <script crossorigin src='https://unpkg.com/mocha/mocha.js'></script>\n </head>\n <body>\n \n <div id=\"mocha\"></div>\n \n-<script>\n-  window.unittest_root = window.location // new URL('https://unpkg.com/jsy-transpile/')\n+<script type=module>\n+  mocha.setup({ui: 'bdd'}).checkLeaks()\n+\n+  await import('./esm/test/unittest.js')\n+\n+  mocha.run()\n </script>\n-<script src='./test/browser_unittest.js'></script>\n \n </body>\n </html>\n",
+					"match": false,
+					"packageHash": "dc8db9f63e7529ac38f9ffc01e9ea6830f7b21897f3bded90daf3dceb712bc76",
+					"size": 388,
+					"sourceHash": "ff9a8f5b55ebc242945c654ae755aec27094da2633ee5ed5c6e618dddb28a44d",
+					"status": "content"
+				},
+				"code/all.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"code/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"code/jsy/jsy_func_operators.jsy": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"code/jsy/jsy_lambda_operators.jsy": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"code/jsy/jsy_operators.jsy": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"code/jsy/jsy_prefix_operators.jsy": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"code/jsy/jsy_visitor.jsy": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"code/jsy/optional_comma.jsy": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"code/jsy/preprocess.jsy": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"code/jsy/preprocess_visitor.jsy": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"code/jsy/regexp.jsy": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"code/jsy/scan.jsy": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"code/jsy/transpile.jsy": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"code/jsy/utils.jsy": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"code/jsy/version.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"code/jsy/with_srcmap.jsy": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"code/rollup.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"code/scanner/ast_debug.jsy": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"code/scanner/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"jsy-script.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scan.mjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"transpile.mjs": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 13,
+				"matchingFiles": 1,
+				"missingInPackage": 22,
+				"missingInSource": 81,
+				"score": 0.008547008547008548,
+				"totalFiles": 117
+			}
+		},
+		"prodDependencies": []
+	}
+]

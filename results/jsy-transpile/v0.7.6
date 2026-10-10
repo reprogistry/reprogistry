@@ -1,0 +1,319 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-10-10T00:47:51.539Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:6.13.7",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "jsy-transpile@0.7.6",
+			"name": "jsy-transpile",
+			"version": "0.7.6",
+			"location": "https://registry.npmjs.org/jsy-transpile/-/jsy-transpile-0.7.6.tgz",
+			"integrity": "sha512-x5RmNjsDNL4qfm59bjOdgNqww5Fo+EA+K3AiXwpnZylSicYLpi+WZ00tG+/cP2GG/yTnS6BsLjo522rzbhXgQQ==",
+			"publishedAt": "2020-03-24T22:50:13.139Z",
+			"publishedWith": {
+				"node": "13.11.0",
+				"npm": "6.13.7"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/jsy-lang/jsy-transpile.git",
+			"spec": "github:jsy-lang/jsy-transpile#fb9ec2985d3337c10bfed2a2e49725fe72adc9ef"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"cjs/all.cjs": {
+					"match": false,
+					"packageHash": "bd9ccecad9e7024455b6242588e2cdf32427d17f41a892bd9e3d24a28bf7806b",
+					"size": 61994,
+					"status": "missing-in-source"
+				},
+				"cjs/all.cjs.map": {
+					"match": false,
+					"packageHash": "359c57899d9147a656034c5e4be56249deee93c07701491b49f4286f35e26783",
+					"size": 80641,
+					"status": "missing-in-source"
+				},
+				"cjs/all.js": {
+					"match": false,
+					"packageHash": "2e90015f029810f14aa56854951e1cd72d66d5b4dd21f6c37d9e9d0aef424bcc",
+					"size": 61993,
+					"status": "missing-in-source"
+				},
+				"cjs/all.js.map": {
+					"match": false,
+					"packageHash": "7b3e29b3648799f0b152a33761f52e6489cb4706d1a4c82f2d2268f847495851",
+					"size": 80640,
+					"status": "missing-in-source"
+				},
+				"cjs/index.cjs": {
+					"match": false,
+					"packageHash": "c39cd4605f976b074f066f422a79dbd4515c38c835aa112fd4554c2ad50a2183",
+					"size": 59454,
+					"status": "missing-in-source"
+				},
+				"cjs/index.cjs.map": {
+					"match": false,
+					"packageHash": "71e3df5687a1b05cd7cb671fc67f4c6b52cde41a03ced8ff5c181ab20a27590a",
+					"size": 79310,
+					"status": "missing-in-source"
+				},
+				"cjs/index.js": {
+					"match": false,
+					"packageHash": "bc9b67ab0536f2100db1feed88c4de055d505e338642ea632b7860a6c686e1ff",
+					"size": 59453,
+					"status": "missing-in-source"
+				},
+				"cjs/index.js.map": {
+					"match": false,
+					"packageHash": "72a3bf1b5ce5ace9f8d105ac665a5badb09544357ff0926ac328fe564cb0a97a",
+					"size": 79309,
+					"status": "missing-in-source"
+				},
+				"cjs/scanner/index.cjs": {
+					"match": false,
+					"packageHash": "e8e8cabffef7a55d27469d4980639f5ed46cfd26076647144ce1b3c72f113404",
+					"size": 22789,
+					"status": "missing-in-source"
+				},
+				"cjs/scanner/index.cjs.map": {
+					"match": false,
+					"packageHash": "04bc390cb945e54f0da4031c8e0a56549efc5066b29bb6d34fe0fda74559830c",
+					"size": 31194,
+					"status": "missing-in-source"
+				},
+				"cjs/scanner/index.js": {
+					"match": false,
+					"packageHash": "fe85e201cc4f606768307f683cd0e414b475a6d30e47895327dc9d98931b397a",
+					"size": 22788,
+					"status": "missing-in-source"
+				},
+				"cjs/scanner/index.js.map": {
+					"match": false,
+					"packageHash": "3cf82e6d4b969c215826c1b4d219495a22ed87e4f2a66fd7181ed5f8d1d97cf2",
+					"size": 31193,
+					"status": "missing-in-source"
+				},
+				"code/.DS_Store": {
+					"match": false,
+					"packageHash": "d65165279105ca6773180500688df4bdc69a2c7b771752f0a46ef120b7fd8ec3",
+					"size": 6148,
+					"status": "missing-in-source"
+				},
+				"code/._.DS_Store": {
+					"match": false,
+					"packageHash": "f81c4f284d788ce9f4bdd1a03833cbe57fd1f9cae7c6c5218bffe321e107e711",
+					"size": 4096,
+					"status": "missing-in-source"
+				},
+				"code/jsy-script-elem.jsy": {
+					"diff": "--- published/code/jsy-script-elem.jsy\n+++ rebuilt/code/jsy-script-elem.jsy\n@@ -1,7 +1,13 @@\n+'use strict';\n+\n import {jsy_transpile} from './transpile_jsy.jsy'\n \n export default JSYScript\n export class JSYScript extends HTMLElement ::\n+  constructor() ::\n+    super()\n+    this.style = 'display: none'\n+\n   replace_script(js_src) ::\n     const elem = this.ownerDocument.createElement('script')\n     elem.type = this.getAttribute('type') || 'module'\n@@ -9,13 +15,7 @@\n     this.parentElement.replaceChild @ elem, this\n     return elem\n \n-  connectedCallback() ::\n-    const jsy_src = this.textContent\n-    this.textContent = ''\n-    this._render_src(jsy_src)\n-\n-  async _render_src(jsy_src) ::\n-    //this.style = 'display: none'\n+  async connectedCallback() ::\n     const url_src = this.getAttribute('src')\n     if url_src ::\n       const resp = await fetch @ url_src,\n@@ -24,12 +24,11 @@\n       return this.as_jsy_script @ \n         await resp.text()\n \n-    return this.as_jsy_script @ jsy_src\n+    return this.as_jsy_script @ \n+      this.textContent\n \n   as_jsy_script(jsy_src) ::\n-    //console.log @ 'as_jsy_script', @{} jsy_src\n     const js_src = jsy_transpile(jsy_src)\n-    //console.log @: js_src, v: !! js_src\n     if js_src ::\n       this.replace_script @ js_src\n \n",
+					"match": false,
+					"packageHash": "f9b4ed0c2057703474db7c2b13467b62c9cffdb67f775057ee4779366a1e25dc",
+					"size": 1009,
+					"sourceHash": "5dac92d46ff47ca2237ff288916c915cc60d779817dbe6978369c1d08ca5a7ba",
+					"status": "content"
+				},
+				"code/jsy-script.jsy": {
+					"diff": "--- published/code/jsy-script.jsy\n+++ rebuilt/code/jsy-script.jsy\n@@ -1,5 +1,3 @@\n-'use strict';\n-\n import {jsy_transpile} from './transpile_jsy.jsy'\n import {JSYScript} from './jsy-script-elem.jsy'\n \n",
+					"match": false,
+					"packageHash": "068c837e84b981f760c31db4b41cf837f152ae42018b0951761374ece56a61b9",
+					"size": 207,
+					"sourceHash": "8fe6482b1d34ade77ac9545e643b875509158ab3043b0f808dcb6366d0f58387",
+					"status": "content"
+				},
+				"esm/all.js": {
+					"match": false,
+					"packageHash": "984a43a31d0917ce69def6abd5a0703714a50a611a68b83a3434e118a8a22316",
+					"size": 61010,
+					"status": "missing-in-source"
+				},
+				"esm/all.js.map": {
+					"match": false,
+					"packageHash": "c05b1bebc77105d2fd841ad602432f999e9d789c89cddf84fd1670c2ccd0f684",
+					"size": 80604,
+					"status": "missing-in-source"
+				},
+				"esm/all.mjs": {
+					"match": false,
+					"packageHash": "dbd3623aa24e5c422c18356bb16d22c7a9d59fb3938bc929ccf91e5ebe7633a9",
+					"size": 61011,
+					"status": "missing-in-source"
+				},
+				"esm/all.mjs.map": {
+					"match": false,
+					"packageHash": "044a0a27c47ba53369ea52bddd0844a12f287fd1b3cd80d60eae268771e3e40c",
+					"size": 80605,
+					"status": "missing-in-source"
+				},
+				"esm/index.js": {
+					"match": false,
+					"packageHash": "e5dec71956afa7f2059c0f0b04ec37b0b38d8a64af1aeda623880eaeae7d7639",
+					"size": 59436,
+					"status": "missing-in-source"
+				},
+				"esm/index.js.map": {
+					"match": false,
+					"packageHash": "c17c7df4a8730c24461f3dc0aaea54df7b37c423e15dacee0cb13af63918c9ab",
+					"size": 79307,
+					"status": "missing-in-source"
+				},
+				"esm/index.mjs": {
+					"match": false,
+					"packageHash": "086cc73e96d57c150caad3f5a9ca8c220cbf0660d972cdb1100d9548f70fe812",
+					"size": 59437,
+					"status": "missing-in-source"
+				},
+				"esm/index.mjs.map": {
+					"match": false,
+					"packageHash": "e5d2b50708e874ca9f9348c458ac8fb2e976c1fc98d61dcff342369498855e91",
+					"size": 79308,
+					"status": "missing-in-source"
+				},
+				"esm/jsy-script.js": {
+					"match": false,
+					"packageHash": "d8a720c8685aa567e663817c54f307e8929a70550fdd60378c7fb18432a9b646",
+					"size": 32359,
+					"status": "missing-in-source"
+				},
+				"esm/jsy-script.js.map": {
+					"match": false,
+					"packageHash": "f88576e8b04d3934491030f5b236718e63ad74f00b25839eddcaccf1398bbe4c",
+					"size": 82440,
+					"status": "missing-in-source"
+				},
+				"esm/jsy-script.min.js": {
+					"match": false,
+					"packageHash": "571effb4b5cc172a22853de00c18a351e6938653746ce14942ef04abf5331472",
+					"size": 32363,
+					"status": "missing-in-source"
+				},
+				"esm/jsy-script.min.js.map": {
+					"match": false,
+					"packageHash": "697b593ba63043720d91e0dfa00ca92278b121a6ec93d92de97be57dbc24a180",
+					"size": 82444,
+					"status": "missing-in-source"
+				},
+				"esm/jsy-script.min.mjs": {
+					"match": false,
+					"packageHash": "865c3ce9b900a56aea95bba41eb06c58c9a594d673539f8ab8575c3bec520d30",
+					"size": 32364,
+					"status": "missing-in-source"
+				},
+				"esm/jsy-script.min.mjs.map": {
+					"match": false,
+					"packageHash": "dd238fc8e67fee22bcec24557675f21755e0a606ba2583532f5165118e379a38",
+					"size": 82445,
+					"status": "missing-in-source"
+				},
+				"esm/jsy-script.mjs": {
+					"match": false,
+					"packageHash": "7304f8097083ebab1ddc85bd3382fa5cff9fd05a982037b9d80cb9ff7e6095af",
+					"size": 32360,
+					"status": "missing-in-source"
+				},
+				"esm/jsy-script.mjs.map": {
+					"match": false,
+					"packageHash": "78c52d59013fc11b0abb6799684c257e8a8e9e51a0867c4e2ebc50f80683a8b2",
+					"size": 82441,
+					"status": "missing-in-source"
+				},
+				"esm/scanner/index.js": {
+					"match": false,
+					"packageHash": "94eaaab6f9947967360766cb15d5bc7e79fbe69e8cd3e22ea5f7364b66069e3e",
+					"size": 22131,
+					"status": "missing-in-source"
+				},
+				"esm/scanner/index.js.map": {
+					"match": false,
+					"packageHash": "d6721c1213f8abb0d88db49e885ec091365025d1f92c910b391acaac7e468ed3",
+					"size": 31169,
+					"status": "missing-in-source"
+				},
+				"esm/scanner/index.mjs": {
+					"match": false,
+					"packageHash": "08a4cc0ddbbab3a9ede695b97a6a3d5c908490f0ceda74083a51e912a0898ff7",
+					"size": 22132,
+					"status": "missing-in-source"
+				},
+				"esm/scanner/index.mjs.map": {
+					"match": false,
+					"packageHash": "93036badce1d94c05c5f410dcb006e699e8efee75c2b5536e6e0c1de0f6b52be",
+					"size": 31170,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,6 +1,6 @@\n {\n   \"name\": \"jsy-transpile\",\n-  \"version\": \"0.7.6\",\n+  \"version\": \"0.7.5\",\n   \"description\": \"Offside (indention) JSY syntax transpiler to standard JavaScript — without Babel\",\n   \"author\": \"Shane Holloway <shane.holloway@ieee.org>\",\n   \"license\": \"BSD-2-Clause\",\n",
+					"match": false,
+					"packageHash": "aace4dff406f614f991c4f9643b9a329ae74b6ceb111769c91c0338b0b5aabd6",
+					"size": 1657,
+					"sourceHash": "73297186dde584cfbf9f317f9573bf4b0d5ac4917f688911b336cecfaa374bc4",
+					"status": "content"
+				},
+				"test/__unittest.iife.js": {
+					"match": false,
+					"packageHash": "789a6f28c96c3e37393457423e826c9be4c77a0d6ecb8605eac899d29920e77c",
+					"size": 1550165,
+					"status": "missing-in-source"
+				},
+				"test/package.json": {
+					"match": false,
+					"packageHash": "b3f0188f3e02fdf450949d6e2a438fc25c7d39018595e97d6a518cab5cad89f4",
+					"size": 693,
+					"status": "missing-in-source"
+				},
+				"umd/all.js": {
+					"match": false,
+					"packageHash": "4db4db6cc7c3c78d74dc45aa28b12ffc1a5325734811483002c87da609474357",
+					"size": 33304,
+					"status": "missing-in-source"
+				},
+				"umd/all.js.map": {
+					"match": false,
+					"packageHash": "14068235978386635fdb59804d4a46bbb0fac247870780e8b981b8fabce9c795",
+					"size": 82211,
+					"status": "missing-in-source"
+				},
+				"umd/jsy-transpile.js": {
+					"match": false,
+					"packageHash": "8e661caf1103da5288b8641630134f7d2af15e1b57b9fe850636aa8894bec363",
+					"size": 31959,
+					"status": "missing-in-source"
+				},
+				"umd/jsy-transpile.js.map": {
+					"match": false,
+					"packageHash": "5c6b1faa0e7746c9beb2a06a4a95f52dbc4279a57fb23f57e0e00eb395f24487",
+					"size": 80778,
+					"status": "missing-in-source"
+				},
+				"umd/scanner/index.js": {
+					"match": false,
+					"packageHash": "90c7e1b1e32571922705e60f8a81a681b666bc740c27488d725175d0bc3701c8",
+					"size": 12287,
+					"status": "missing-in-source"
+				},
+				"umd/scanner/index.js.map": {
+					"match": false,
+					"packageHash": "6f57ec3f1a850d873447f1ab0e3ce0f7341003222c127a911d53cf064825da70",
+					"size": 32141,
+					"status": "missing-in-source"
+				}
+			},
+			"summary": {
+				"differentFiles": 3,
+				"matchingFiles": 26,
+				"missingInPackage": 0,
+				"missingInSource": 42,
+				"score": 0.36619718309859156,
+				"totalFiles": 71
+			}
+		},
+		"prodDependencies": []
+	}
+]
