@@ -1,0 +1,159 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-10-11T13:15:54.353Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:8.1.2",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "liqvid@2.1.3",
+			"name": "liqvid",
+			"version": "2.1.3",
+			"location": "https://registry.npmjs.org/liqvid/-/liqvid-2.1.3.tgz",
+			"integrity": "sha512-5OIoRDsuFdn67P2Y4kIKeQaEbq2cSGUO9FNJgjZ9N+uT8CVuDYFGIgllBLjg9DH3okjJ4ITFeCwlpMt/76Gjcg==",
+			"publishedAt": "2022-03-13T22:26:30.917Z",
+			"publishedWith": {
+				"node": "16.13.2",
+				"npm": "8.1.2"
+			},
+			"dependencies": {
+				"react": "^17.0.2",
+				"events": "^3.3.0",
+				"@types/node": "^17.0.21",
+				"@types/react": "^17.0.40",
+				"@liqvid/utils": "^1.3.0",
+				"@types/events": "^3.0.0",
+				"@liqvid/keymap": "1.1.2",
+				"@liqvid/playback": "1.1.3",
+				"@types/react-dom": "^17.0.13",
+				"strict-event-emitter-types": "^2.0.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/liqvidjs/player.git",
+			"spec": "github:liqvidjs/player#v2.1.3"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"dist/liqvid.css": {
+					"match": false,
+					"packageHash": "00aa00a8a5b680a67bbb4b30ff39dc5c98ea6389e00596c10a3d0e0227a2c39d",
+					"size": 14558,
+					"status": "missing-in-source"
+				},
+				"dist/liqvid.d.ts": {
+					"match": false,
+					"packageHash": "4e05191a8db3a77b89555f8c2df569d89a3e21b6a063145c5e3a291d0fd48437",
+					"size": 16849,
+					"status": "missing-in-source"
+				},
+				"dist/liqvid.js": {
+					"match": false,
+					"packageHash": "a79960a3294dcca4936a4eb5679dccf17131864991cf17a803318c8f9ea211e5",
+					"size": 122328,
+					"status": "missing-in-source"
+				},
+				"dist/liqvid.min.css": {
+					"match": false,
+					"packageHash": "a4c4b185659b9cbf755c4f29861767911780a4b095f3a1e297699aa66d7bfacb",
+					"size": 12263,
+					"status": "missing-in-source"
+				},
+				"dist/liqvid.min.js": {
+					"match": false,
+					"packageHash": "f9b4cf18cebc0780e7b82c63a2e7147e46da63eb0b2c87ede8fe659691ef33d7",
+					"size": 56292,
+					"status": "missing-in-source"
+				},
+				"dist/liqvid.mjs": {
+					"match": false,
+					"packageHash": "ec27a671f3aaeebc7c5bd10a1322e636dc96498b4f31a759689a38f7e6c16193",
+					"size": 120048,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -8,6 +8,17 @@\n   \"main\": \"./dist/liqvid.js\",\n   \"module\": \"./dist/liqvid.mjs\",\n   \"typings\": \"./dist/liqvid.d.ts\",\n+  \"scripts\": {\n+    \"build\": \"pnpm build:clean && pnpm build:css && pnpm build:js && pnpm build:postclean\",\n+    \"build:clean\": \"rm -rf dist\",\n+    \"build:js\": \"tsc && rollup -c\",\n+    \"build:css\": \"stylus -o dist/liqvid.css styl/liqvid.styl; stylus -c -o dist/liqvid.min.css styl/liqvid.styl\",\n+    \"build:postclean\": \"rm -rf dist/esm dist/types\",\n+    \"lint\": \"eslint --ext ts,tsx --fix src; eslint --ext ts,tsx --fix tests\",\n+    \"stylus\": \"stylus -o dist/liqvid.css -w styl/liqvid.styl\",\n+    \"stylus:prod\": \"stylus -c -o dist/liqvid.min.css -w styl/liqvid.styl\",\n+    \"test\": \"jest\"\n+  },\n   \"repository\": {\n     \"type\": \"git\",\n     \"url\": \"git+https://github.com/liqvidjs/player.git\"\n@@ -58,17 +69,5 @@\n     \"events\": \"^3.3.0\",\n     \"react\": \"^17.0.2\",\n     \"strict-event-emitter-types\": \"^2.0.0\"\n-  },\n-  \"scripts\": {\n-    \"build\": \"pnpm build:clean && pnpm build:css && pnpm build:js && pnpm build:postclean\",\n-    \"build:clean\": \"rm -rf dist\",\n-    \"build:js\": \"tsc && rollup -c\",\n-    \"build:css\": \"stylus -o dist/liqvid.css styl/liqvid.styl; stylus -c -o dist/liqvid.min.css styl/liqvid.styl\",\n-    \"build:postclean\": \"rm -rf dist/esm dist/types\",\n-    \"lint\": \"eslint --ext ts,tsx --fix src; eslint --ext ts,tsx --fix tests\",\n-    \"stylus\": \"stylus -o dist/liqvid.css -w styl/liqvid.styl\",\n-    \"stylus:prod\": \"stylus -c -o dist/liqvid.min.css -w styl/liqvid.styl\",\n-    \"test\": \"jest\"\n-  },\n-  \"readme\": \"# liqvid\\n\\nThis is a library for making **interactive** videos in React.\\n\\nFor example, here's an interactive coding demo inside a video:\\n\\n<a href=\\\"https://gfycat.com/frailtemptingeyra\\\"><img src=\\\"https://thumbs.gfycat.com/FrailTemptingEyra-size_restricted.gif\\\"/></a>\\n\\nHere's an interactive graph:\\n\\n<a href=\\\"https://gfycat.com/magnificentdopeybrownbear\\\"><img src=\\\"https://thumbs.gfycat.com/MagnificentDopeyBrownbear-size_restricted.gif\\\"/></a>\\n\\nTo get started, clone https://github.com/ysulyma/rp-tutorial\\n\\nFor documentation, visit https://liqvidjs.org/\\n\\nFor inspiration, see https://epiplexis.xyz/\\n\"\n-}\n\\ No newline at end of file\n+  }\n+}\n",
+					"match": false,
+					"packageHash": "83df279343defe0e31623758d6f47b88fdb83886d50ddd39b98fe87e1b8d506a",
+					"size": 3062,
+					"sourceHash": "b6ab2f3bba36bf91ed8e9253c8eee0ee24e99728972e037c522dde359b4c343b",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 1,
+				"matchingFiles": 2,
+				"missingInPackage": 0,
+				"missingInSource": 6,
+				"score": 0.2222222222222222,
+				"totalFiles": 9
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "@liqvid/keymap",
+				"version": "1.1.2"
+			},
+			{
+				"name": "@liqvid/playback",
+				"version": "1.1.3"
+			},
+			{
+				"name": "@liqvid/utils",
+				"version": "1.3.0"
+			},
+			{
+				"name": "@liqvid/utils",
+				"version": "1.10.0"
+			},
+			{
+				"name": "@lqv/playback",
+				"version": "0.0.1"
+			},
+			{
+				"name": "@types/events",
+				"version": "3.0.3"
+			},
+			{
+				"name": "@types/node",
+				"version": "17.0.45"
+			},
+			{
+				"name": "@types/prop-types",
+				"version": "15.7.15"
+			},
+			{
+				"name": "@types/react",
+				"version": "17.0.93"
+			},
+			{
+				"name": "@types/react-dom",
+				"version": "17.0.26"
+			},
+			{
+				"name": "@types/scheduler",
+				"version": "0.16.8"
+			},
+			{
+				"name": "bezier-easing",
+				"version": "2.1.0"
+			},
+			{
+				"name": "csstype",
+				"version": "3.2.3"
+			},
+			{
+				"name": "events",
+				"version": "3.3.0"
+			},
+			{
+				"name": "strict-event-emitter-types",
+				"version": "2.0.0"
+			}
+		]
+	}
+]
