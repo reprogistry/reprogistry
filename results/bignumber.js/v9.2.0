@@ -1,0 +1,83 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-10-17T07:38:17.072Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:10.9.2",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "bignumber.js@9.2.0",
+			"name": "bignumber.js",
+			"version": "9.2.0",
+			"location": "https://registry.npmjs.org/bignumber.js/-/bignumber.js-9.2.0.tgz",
+			"integrity": "sha512-JocpCSOixzy5XFJi2ub6IMmV/G9i8Lrm2lZvwBv9xPdglmZM0ufDVBbjbrfU/zuLvBfD7Bv2eYxz9i+OHTgkew==",
+			"publishedAt": "2025-04-03T18:44:55.378Z",
+			"publishedWith": {
+				"node": "23.11.0",
+				"npm": "8.16.0"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/MikeMcl/bignumber.js.git",
+			"spec": "github:MikeMcl/bignumber.js#997c74849940122885cd307e13e5eb82a8367669"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"CHANGELOG.md": {
+					"diff": "--- published/CHANGELOG.md\n+++ rebuilt/CHANGELOG.md\n@@ -1,9 +1,3 @@\n-#### 9.2.0\r\n-* 03/04/25\r\n-* #355 Support `BigInt` argument.\r\n-* #371 Provide separate type definitions for CommonJS and ES modules.\r\n-* #374 Correct `comparedTo` return type.\r\n-\r\n #### 9.1.2\r\n * 28/08/23\r\n * #354 Amend `round` to avoid bug in v8 Maglev compiler.\r\n",
+					"match": false,
+					"packageHash": "b63f45612939224d7ab83828f742b711dbaf0b64907c924daf197ed5cb71b53e",
+					"size": 8950,
+					"sourceHash": "db8836f07c7105074548a0973681fef6fe5335e6ba3747b111534b9556b3ebf4",
+					"status": "content"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,286 +1,286 @@\n-![bignumber.js](https://raw.githubusercontent.com/MikeMcl/bignumber.js/gh-pages/bignumberjs.png)\r\n-\r\n-A JavaScript library for arbitrary-precision decimal and non-decimal arithmetic.\r\n-\r\n-[![npm version](https://img.shields.io/npm/v/bignumber.js.svg)](https://www.npmjs.com/package/bignumber.js)\r\n-[![npm downloads](https://img.shields.io/npm/dw/bignumber.js)](https://www.npmjs.com/package/bignumber.js)\r\n-\r\n-<br />\r\n-\r\n-## Features\r\n-\r\n-- Integers and decimals\r\n-- Simple API but full-featured\r\n-- Faster, smaller, and perhaps easier to use than JavaScript versions of Java's BigDecimal\r\n-- 8 KB minified and gzipped\r\n-- Replicates the `toExponential`, `toFixed`, `toPrecision` and `toString` methods of JavaScript's Number type\r\n-- Includes a `toFraction` and a correctly-rounded `squareRoot` method\r\n-- Supports cryptographically-secure pseudo-random number generation\r\n-- No dependencies\r\n-- Wide platform compatibility: uses JavaScript 1.5 (ECMAScript 3) features only\r\n-- Comprehensive [documentation](http://mikemcl.github.io/bignumber.js/) and test set\r\n-\r\n-![API](https://raw.githubusercontent.com/MikeMcl/bignumber.js/gh-pages/API.png)\r\n-\r\n-If a smaller and simpler library is required see [big.js](https://github.com/MikeMcl/big.js/).\r\n-It's less than half the size but only works with decimal numbers and only has half the methods.\r\n-It also has fewer configuration options than this library, and does not allow `NaN` or `Infinity`.\r\n-\r\n-See also [decimal.js](https://github.com/MikeMcl/decimal.js/), which among other things adds support for non-integer powers, and performs all operations to a specified number of significant digits.\r\n-\r\n-## Load\r\n-\r\n-The library is the single JavaScript file *bignumber.js* or ES module *bignumber.mjs*.\r\n-\r\n-### Browser\r\n-\r\n-```html\r\n-<script src='path/to/bignumber.js'></script>\r\n-```\r\n-\r\n-> ES module\r\n-\r\n-```html\r\n-<script type=\"module\">\r\n-import BigNumber from './path/to/bignumber.mjs';\r\n-```\r\n-\r\n-> Get a minified version from a CDN:\r\n-\r\n-```html\r\n-<script src='https://cdn.jsdelivr.net/npm/bignumber.js@9.2.0/bignumber.min.js'></script>\r\n-```\r\n-\r\n-### [Node.js](http://nodejs.org)\r\n-\r\n-```bash\r\n-npm install bignumber.js\r\n-```\r\n-\r\n-```javascript\r\n-const BigNumber = require('bignumber.js');\r\n-```\r\n-\r\n-> ES module\r\n-\r\n-```javascript\r\n-import BigNumber from \"bignumber.js\";\r\n-import { BigNumber } from \"./node_modules/bignumber.js/bignumber.mjs\";\r\n-```\r\n-\r\n-### [Deno](https://deno.land/)\r\n-\r\n-```javascript\r\n-import BigNumber from 'https://raw.githubusercontent.com/mikemcl/bignumber.js/v9.2.0/bignumber.mjs';\r\n-import BigNumber from 'https://unpkg.com/bignumber.js@latest/bignumber.mjs';\r\n-```\r\n-\r\n-## Use\r\n-\r\n-The library exports a single constructor function, [`BigNumber`](http://mikemcl.github.io/bignumber.js/#bignumber), which accepts a value of type Number, String or BigNumber,\r\n-\r\n-```javascript\r\n-let x = new BigNumber(123.4567);\r\n-let y = BigNumber('123456.7e-3');\r\n-let z = new BigNumber(x);\r\n-x.isEqualTo(y) && y.isEqualTo(z) && x.isEqualTo(z);      // true\r\n-```\r\n-\r\n-To get the string value of a BigNumber use [`toString()`](http://mikemcl.github.io/bignumber.js/#toS) or [`toFixed()`](http://mikemcl.github.io/bignumber.js/#toFix). Using `toFixed()` prevents exponential notation being returned, no matter how large or small the value.\r\n-\r\n-```javascript\r\n-let x = new BigNumber('1111222233334444555566');\r\n-x.toString();                       // \"1.111222233334444555566e+21\"\r\n-x.toFixed();                        // \"1111222233334444555566\"\r\n-```\r\n-\r\n-If the limited precision of Number values is not well understood, it is recommended to create BigNumbers from String values rather than Number values to avoid a potential loss of precision.\r\n",
+					"match": false,
+					"packageHash": "047dae99a8da063e0aff12a073df70dcc11fa8cb4a00be1ff694766860bf1202",
+					"size": 10810,
+					"sourceHash": "11d0620a18bf786044a0cc723b7e0fa40326ec4e03114ae8de96df0569e9aa8e",
+					"status": "content"
+				},
+				"bignumber.js": {
+					"diff": "--- published/bignumber.js\n+++ rebuilt/bignumber.js\n@@ -2,10 +2,10 @@\n   'use strict';\r\n \r\n /*\r\n- *      bignumber.js v9.2.0\r\n+ *      bignumber.js v9.1.2\r\n  *      A JavaScript library for arbitrary-precision arithmetic.\r\n  *      https://github.com/MikeMcl/bignumber.js\r\n- *      Copyright (c) 2025 Michael Mclaughlin <M8ch88l@gmail.com>\r\n+ *      Copyright (c) 2022 Michael Mclaughlin <M8ch88l@gmail.com>\r\n  *      MIT Licensed.\r\n  *\r\n  *      BigNumber.prototype methods     |  BigNumber methods\r\n",
+					"match": false,
+					"packageHash": "8b3a5d16c28fa1e954ca7436740e231bb415b74371ae7d81ef3535898eccedad",
+					"size": 89661,
+					"sourceHash": "2bc030f5a1145576c0e803ba8ec9a2b4ed995ba2ccc0a6274a0707b04ea0ceee",
+					"status": "content"
+				},
+				"bignumber.mjs": {
+					"diff": "--- published/bignumber.mjs\n+++ rebuilt/bignumber.mjs\n@@ -1,8 +1,8 @@\n /*\r\n- *      bignumber.js v9.2.0\r\n+ *      bignumber.js v9.1.2\r\n  *      A JavaScript library for arbitrary-precision arithmetic.\r\n  *      https://github.com/MikeMcl/bignumber.js\r\n- *      Copyright (c) 2025 Michael Mclaughlin <M8ch88l@gmail.com>\r\n+ *      Copyright (c) 2022 Michael Mclaughlin <M8ch88l@gmail.com>\r\n  *      MIT Licensed.\r\n  *\r\n  *      BigNumber.prototype methods     |  BigNumber methods\r\n",
+					"match": false,
+					"packageHash": "ae9f05f3603541230e29c3a0a69aba4a4e85f6aeddf655f0d895c517cd2cebac",
+					"size": 84691,
+					"sourceHash": "01966c32bca3c4ad4bbf5e9ae598eb0c7da7c3fe1b006985fe9f3efb85be6573",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,7 +1,7 @@\n {\r\n   \"name\": \"bignumber.js\",\r\n   \"description\": \"A library for arbitrary-precision decimal and non-decimal arithmetic\",\r\n-  \"version\": \"9.2.0\",\r\n+  \"version\": \"9.1.2\",\r\n   \"keywords\": [\r\n     \"arbitrary\",\r\n     \"precision\",\r\n",
+					"match": false,
+					"packageHash": "3c20f806bb8bc60e172a92f617a488bd0821fd00330bb21dbe82f5f924e85906",
+					"size": 1291,
+					"sourceHash": "f275e7ed11ef2689a61e74d78e206256fa67871a4bbd114dcb694e44fd502a30",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 5,
+				"matchingFiles": 5,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.5,
+				"totalFiles": 10
+			}
+		},
+		"prodDependencies": []
+	}
+]
