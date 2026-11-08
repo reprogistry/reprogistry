@@ -1,0 +1,111 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-07T20:33:24.589Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:12.2.2",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "console-browserify@0.1.0",
+			"name": "console-browserify",
+			"version": "0.1.0",
+			"location": "https://registry.npmjs.org/console-browserify/-/console-browserify-0.1.0.tgz",
+			"integrity": "sha512-TkOT1YHLp7x4wNKov6JOkXeEXVsDcNqvvZZKkWB6sNZG7G+sOdCyedj0eqU6uUFgG+txl71sJyO+NFBCworZqQ==",
+			"publishedAt": "2013-01-27T05:05:37.892Z",
+			"publishedWith": {
+				"node": null,
+				"npm": "1.1.71"
+			},
+			"dependencies": {
+				"date-now": "~0.1.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git://github.com/Raynos/console-browserify.git",
+			"spec": "github:Raynos/console-browserify#HEAD"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".npmignore": {
+					"match": false,
+					"packageHash": "f5b605413dd55a74d36442990ecc5f238c0e05fbad63c9eaec34706bdc3d425d",
+					"size": 135,
+					"status": "missing-in-source"
+				},
+				".travis.yml": {
+					"diff": "--- published/.travis.yml\n+++ rebuilt/.travis.yml\n@@ -1,4 +1,11 @@\n language: node_js\n node_js:\n-  - 0.8\n-  - 0.9\n+  - \"stable\"\n+  - \"12\"\n+  - \"11\"\n+  - \"10\"\n+  - \"8\"\n+  - \"6\"\n+  - \"4\"\n+  - \"0.12\"\n+  - \"0.10\"\n",
+					"match": false,
+					"packageHash": "76e116bd00d3f5660a3f4fed592199c00b2ffe1628fc644498349bbc343e9fdb",
+					"size": 43,
+					"sourceHash": "ed5207a66f8aa5816e2144818203a8cadd52d4c54196d87c66f6f334e548c915",
+					"status": "content"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,31 +1,42 @@\n-# console-browserify\n+# console-browserify [![Build Status](https://travis-ci.org/browserify/console-browserify.png?branch=master)](https://travis-ci.org/browserify/console-browserify)\n \n-[![build status][1]][2]\n+Emulate console for all the browsers\n \n-[![browser support][3]][4]\n+## Install\n \n-Emulate console for all the browsers\n+You usually do not have to install `console-browserify` yourself! If your code runs in Node.js, `console` is built in. If your code runs in the browser, bundlers like [browserify](https://github.com/browserify/browserify) or [webpack](https://github.com/webpack/webpack) also include the `console-browserify` module when you do `require('console')`.\n+\n+But if none of those apply, with npm do:\n+\n+```\n+npm install console-browserify\n+```\n \n-## Example\n+## Usage\n \n ```js\n-var console = require(\"console-browserify\")\n+var console = require(\"console\")\n+// Or when manually using console-browserify directly:\n+// var console = require(\"console-browserify\")\n \n console.log(\"hello world!\")\n ```\n \n-## Installation\n+## API\n+\n+See the [Node.js Console docs](https://nodejs.org/api/console.html). `console-browserify` does not support creating new `Console` instances and does not support the Inspector-only methods.\n+\n+## Contributing\n \n-`npm install console-browserify`\n+PRs are very welcome! The main way to contribute to `console-browserify` is by porting features, bugfixes and tests from Node.js. Ideally, code contributions to this module are copy-pasted from Node.js and transpiled to ES5, rather than reimplemented from scratch. Matching the Node.js code as closely as possible makes maintenance simpler when new changes land in Node.js.\n+This module intends to provide exactly the same API as Node.js, so features that are not available in the core `console` module will not be accepted. Feature requests should instead be directed at [nodejs/node](https://github.com/nodejs/node) and will be added to this module once they are implemented in Node.js.\n+\n+If there is a difference in behaviour between Node.js's `console` module and this module, please open an issue!\n \n ## Contributors\n \n  - Raynos\n \n-## MIT Licenced\n-\n+## License\n \n-  [1]: https://secure.travis-ci.org/Raynos/console-browserify.png\n-  [2]: http://travis-ci.org/Raynos/console-browserify\n-  [3]: http://ci.testling.com/Raynos/console-browserify.png\n-  [4]: http://ci.testling.com/Raynos/console-browserify\n+[MIT](./LICENSE)\n",
+					"match": false,
+					"packageHash": "dde6594ab0bd55ae2ef4219f575aa949dec3d4aba3015105f7b3836ac8f65eb0",
+					"size": 542,
+					"sourceHash": "8f2116766543e4e323385206c10d220ae66dbd6aa46efe6a55b6d7c0b685b9ac",
+					"status": "content"
+				},
+				"index.js": {
+					"diff": "--- published/index.js\n+++ rebuilt/index.js\n@@ -1,8 +1,9 @@\n-var now = require(\"date-now\")\n+/*global window, global*/\n var util = require(\"util\")\n-var assert = require(\"assert\")\n+function now() { return new Date().getTime() }\n \n var slice = Array.prototype.slice\n+var concat = Array.prototype.concat\n var console\n var times = {}\n \n@@ -11,40 +12,45 @@\n } else if (typeof window !== \"undefined\" && window.console) {\n     console = window.console\n } else {\n-    console = consoleShim()\n+    console = {}\n }\n \n-if (!console.time) {\n-    console.time = time\n-}\n+var functions = [\n+    [log, \"log\"],\n+    [info, \"info\"],\n+    [warn, \"warn\"],\n+    [error, \"error\"],\n+    [time, \"time\"],\n+    [timeEnd, \"timeEnd\"],\n+    [trace, \"trace\"],\n+    [dir, \"dir\"],\n+    [assert, \"assert\"]\n+]\n+\n+for (var i = 0; i < functions.length; i++) {\n+    var tuple = functions[i]\n+    var f = tuple[0]\n+    var name = tuple[1]\n \n-if (!console.timeEnd) {\n-    console.timeEnd = timeEnd\n+    if (!console[name]) {\n+        console[name] = f\n+    }\n }\n \n-if (!console.trace) {\n-    console.trace = trace\n-}\n+module.exports = console\n \n-if (!console.dir) {\n-    console.dir = dir\n-}\n+function log() {}\n \n-if (!console.assert) {\n-    console.assert = assert\n+function info() {\n+    console.log.apply(console, arguments)\n }\n \n-module.exports = console\n+function warn() {\n+    console.log.apply(console, arguments)\n+}\n \n-function consoleShim() {\n-    return {\n-        log: function () {}\n-        , warn: function () {}\n-        , error: function () {}\n-        , info: function () {}\n-        , dir: function () {}\n-        , assert: function () {}\n-    }\n+function error() {\n+    console.warn.apply(console, arguments)\n }\n \n function time(label) {\n@@ -57,6 +63,7 @@\n         throw new Error(\"No such label: \" + label)\n     }\n \n+    delete times[label]\n     var duration = now() - time\n     console.log(label + \": \" + duration + \"ms\")\n }\n@@ -74,7 +81,6 @@\n \n function assert(expression) {\n     if (!expression) {\n-        var arr = slice.call(arguments, 1)\n-        assert.ok(false, util.format.apply(null, arr))\n+        console.error.apply(null, concat.call([\"Assertion failed:\"], slice.call(arguments, 1)))\n     }\n",
+					"match": false,
+					"packageHash": "d16edaabc43ca9cb3de1f5793a1c8637499a685705e2d39221b54c4a4e97a24b",
+					"size": 1525,
+					"sourceHash": "f1729f169fa2e1c2257af478c23da2769058f403ee965d0e2eb6125001a02eb1",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,68 +1,59 @@\n {\n   \"name\": \"console-browserify\",\n-  \"version\": \"0.1.0\",\n+  \"version\": \"1.2.0\",\n   \"description\": \"Emulate console for all the browsers\",\n   \"keywords\": [],\n   \"author\": \"Raynos <raynos2@gmail.com>\",\n-  \"repository\": \"git://github.com/Raynos/console-browserify.git\",\n+  \"repository\": \"git://github.com/browserify/console-browserify.git\",\n   \"main\": \"index\",\n-  \"homepage\": \"https://github.com/Raynos/console-browserify\",\n+  \"homepage\": \"https://github.com/browserify/console-browserify\",\n   \"contributors\": [\n     {\n       \"name\": \"Raynos\"\n     }\n   ],\n   \"bugs\": {\n-    \"url\": \"https://github.com/Raynos/console-browserify/issues\",\n+    \"url\": \"https://github.com/browserify/console-browserify/issues\",\n     \"email\": \"raynos2@gmail.com\"\n   },\n-  \"dependencies\": {\n-    \"date-now\": \"~0.1.0\"\n-  },\n   \"devDependencies\": {\n-    \"tape\": \"~0.2.2\",\n-    \"browserify\": \"https://github.com/raynos/node-browserify/tarball/master\",\n-    \"testem\": \"~0.2.55\"\n+    \"tape\": \"^2.12.3\",\n+    \"jsonify\": \"0.0.0\",\n+    \"tap-spec\": \"^0.1.8\",\n+    \"run-browser\": \"^1.3.0\",\n+    \"tap-dot\": \"^0.2.1\"\n   },\n   \"licenses\": [\n     {\n       \"type\": \"MIT\",\n-      \"url\": \"http://github.com/Raynos/console-browserify/raw/master/LICENSE\"\n+      \"url\": \"http://github.com/browserify/console-browserify/raw/master/LICENSE\"\n     }\n   ],\n   \"scripts\": {\n-    \"test\": \"node ./test\",\n+    \"test\": \"node ./test/index.js | tap-spec\",\n+    \"dot\": \"node ./test/index.js | tap-dot\",\n+    \"start\": \"node ./index.js\",\n+    \"cover\": \"istanbul cover --report none --print detail ./test/index.js\",\n+    \"view-cover\": \"istanbul report html && google-chrome ./coverage/index.html\",\n+    \"browser\": \"run-browser test/index.js\",\n+    \"phantom\": \"run-browser test/index.js -b | tap-spec\",\n     \"build\": \"browserify test/index.js -o test/static/bundle.js\",\n-    \"testem\": \"testem\",\n-    \"postinstall\": \"npm dedup\"\n+    \"testem\": \"testem\"\n   },\n   \"testling\": {\n     \"files\": \"test/index.js\",\n-    \"browsers\": {\n-      \"ie\": [\n-        \"6\",\n-        \"7\",\n-        \"8\",\n-        \"9\",\n-        \"10\"\n-      ],\n-      \"firefox\": [\n-        \"16\",\n-        \"17\",\n-        \"nightly\"\n-      ],\n-      \"chrome\": [\n-        \"22\",\n-        \"23\",\n-        \"canary\"\n-      ],\n-      \"opera\": [\n-        \"12\",\n-        \"next\"\n-      ],\n-      \"safari\": [\n-        \"5.1\"\n-      ]\n-    }\n+    \"browsers\": [\n+      \"ie/8..latest\",\n+      \"firefox/16..latest\",\n+      \"firefox/nightly\",\n+      \"chrome/22..latest\",\n+      \"chrome/canary\",\n+      \"opera/12..latest\",\n+      \"opera/next\",\n+      \"safari/5.1..latest\",\n+      \"ipad/6.0..latest\",\n+      \"iphone/6.0..latest\",\n+      \"android-browser/4.2..latest\"\n+    ]\n",
+					"match": false,
+					"packageHash": "829455adac7e3480973ce7be1c1ce25214e5a4c36e66102771fa933c768f1a4d",
+					"size": 1403,
+					"sourceHash": "12a1d48faf399d4798cb0936cd5df3ee7c2ae4144775f5fe5cfb3443a585c29a",
+					"status": "content"
+				},
+				"test/index.js": {
+					"diff": "--- published/test/index.js\n+++ rebuilt/test/index.js\n@@ -1,6 +1,10 @@\n var console = require(\"../index\")\n var test = require(\"tape\")\n \n+if (typeof window !== \"undefined\" && !window.JSON) {\n+    window.JSON = require(\"jsonify\")\n+}\n+\n test(\"console has expected methods\", function (assert) {\n     assert.ok(console.log)\n     assert.ok(console.info)\n@@ -14,15 +18,50 @@\n     assert.end()\n })\n \n-test(\"all the methods\", function (assert) {\n+test(\"invoke console.log\", function (assert) {\n     console.log(\"test-log\")\n+\n+    assert.end()\n+})\n+\n+test(\"invoke console.info\", function (assert) {\n     console.info(\"test-info\")\n+\n+    assert.end()\n+})\n+\n+test(\"invoke console.warn\", function (assert) {\n     console.warn(\"test-warn\")\n-    console.dir(\"test-dir\")\n+    \n+    assert.end()\n+})\n+\n+test(\"invoke console.time\", function (assert) {\n     console.time(\"label\")\n-    console.timeEnd(\"label\")\n+\n+    assert.end()\n+})\n+\n+test(\"invoke console.trace\", function (assert) {\n     console.trace(\"test-trace\")\n+\n+    assert.end()\n+})\n+\n+test(\"invoke console.assert\", function (assert) {\n     console.assert(true)\n \n     assert.end()\n })\n+\n+test(\"invoke console.dir\", function (assert) {\n+    console.dir(\"test-dir\")\n+\n+    assert.end()\n+})\n+\n+test(\"invoke console.timeEnd\", function (assert) {\n+    console.timeEnd(\"label\")\n+\n+    assert.end()\n+})\n",
+					"match": false,
+					"packageHash": "2f04ac004ea1692e7da62b1311a47bc9bd3dab7fd5a1da9a26d595a821bbb0b9",
+					"size": 690,
+					"sourceHash": "8e8e861622249c44558896e22f73f8067a4dac1f8483f422e379d6d61a08c4bd",
+					"status": "content"
+				},
+				"test/static/index.html": {
+					"diff": "--- published/test/static/index.html\n+++ rebuilt/test/static/index.html\n@@ -1,6 +1,7 @@\n <!doctype html>\n <html>\n <head>\n+    <meta http-equiv=\"x-ua-compatible\" content=\"IE=8\" >\n     <title>TAPE Example</title>\n     <script src=\"/testem.js\"></script>\n     <script src=\"test-adapter.js\"></script>\n",
+					"match": false,
+					"packageHash": "3e30fb7712d1c73f87e8d1aa718a0676f3161df32fb666eff9ba914bcd4748f6",
+					"size": 214,
+					"sourceHash": "e62bb487a165b9496d5c3e30b7b843260d7b065fbdf0507227655d3354d5cdc6",
+					"status": "content"
+				},
+				".github/FUNDING.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"security.md": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 6,
+				"matchingFiles": 3,
+				"missingInPackage": 3,
+				"missingInSource": 1,
+				"score": 0.23076923076923078,
+				"totalFiles": 13
+			}
+		},
+		"prodDependencies": []
+	}
+]
