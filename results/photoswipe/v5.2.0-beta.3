@@ -1,0 +1,59 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-16T16:00:59.265Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:6.14.12",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "photoswipe@5.2.0-beta.3",
+			"name": "photoswipe",
+			"version": "5.2.0-beta.3",
+			"location": "https://registry.npmjs.org/photoswipe/-/photoswipe-5.2.0-beta.3.tgz",
+			"integrity": "sha512-+Wt7NoZfRtoZyS59mCfSADzWIBREzKrYzacmMY1/PwDnGRkEq0r+JtDgKslCfdUAyMvMK3ixekuSMYW/WyaNAQ==",
+			"publishedAt": "2022-03-21T14:55:34.177Z",
+			"publishedWith": {
+				"node": "14.16.1",
+				"npm": "6.14.12"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git://github.com/dimsemenov/Photoswipe.git",
+			"spec": "github:dimsemenov/Photoswipe#792a6a6bdbf1e79f06c6887f11204f7720e65826"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"src/js/photoswipe.js": {
+					"diff": "--- published/src/js/photoswipe.js\n+++ rebuilt/src/js/photoswipe.js\n@@ -1,488 +1,488 @@\n-import {\r\n-  createElement,\r\n-  equalizePoints,\r\n-  pointsEqual,\r\n-  clamp,\r\n-} from './util/util.js';\r\n-\r\n-import DOMEvents from './util/dom-events.js';\r\n-import Slide from './slide/slide.js';\r\n-import Gestures from './gestures/gestures.js';\r\n-import MainScroll from './main-scroll.js';\r\n-\r\n-import Keyboard from './keyboard.js';\r\n-import Animations from './util/animations.js';\r\n-import ScrollWheel from './scroll-wheel.js';\r\n-import UI from './ui/ui.js';\r\n-import { getViewportSize } from './util/viewport-size.js';\r\n-import { getThumbBounds } from './slide/get-thumb-bounds.js';\r\n-import PhotoSwipeBase from './core/base.js';\r\n-import Opener from './opener.js';\r\n-import ContentLoader from './slide/loader.js';\r\n-\r\n-const defaultOptions = {\r\n-  allowPanToNext: true,\r\n-  spacing: 0.1,\r\n-  loop: true,\r\n-  pinchToClose: true,\r\n-  closeOnVerticalDrag: true,\r\n-  hideAnimationDuration: 333,\r\n-  showAnimationDuration: 333,\r\n-  zoomAnimationDuration: 333,\r\n-  escKey: true,\r\n-  arrowKeys: true,\r\n-  returnFocus: true,\r\n-  maxWidthToAnimate: 4000,\r\n-  clickToCloseNonZoomable: true,\r\n-  imageClickAction: 'zoom-or-close',\r\n-  bgClickAction: 'close',\r\n-  tapAction: 'toggle-controls',\r\n-  doubleTapAction: 'zoom',\r\n-  indexIndicatorSep: ' / ',\r\n-  preloaderDelay: 2000,\r\n-  bgOpacity: 0.8,\r\n-\r\n-  index: 0,\r\n-  errorMsg: 'The image cannot be loaded',\r\n-  preload: [1, 2],\r\n-  easing: 'cubic-bezier(.4,0,.22,1)'\r\n-};\r\n-\r\n-class PhotoSwipe extends PhotoSwipeBase {\r\n-  constructor(items, options) {\r\n-    super();\r\n-\r\n-    this.items = items;\r\n-\r\n-    this._prepareOptions(options);\r\n-\r\n-    // offset of viewport relative to document\r\n-    this.offset = {};\r\n-\r\n-    this._prevViewportSize = {};\r\n-\r\n-    // Size of scrollable PhotoSwipe viewport\r\n-    this.viewportSize = {};\r\n-\r\n-    // background (backdrop) opacity\r\n-    this.bgOpacity = 1;\r\n-\r\n-    this.events = new DOMEvents();\r\n-\r\n-    /** @type {Animations} */\r\n-    this.animations = new Animations();\r\n-\r\n-    this.mainScroll = new MainScroll(this);\r\n-    this.gestures = new Gestures(this);\r\n-    this.opener = new Opener(this);\r\n-    this.keyboard = new Keyboard(this);\r\n-    this.contentLoader = new ContentLoader(this);\r\n-  }\r\n-\r\n-  init() {\r\n-    if (this.isOpen || this.isDestroying) {\r\n-      return;\r\n-    }\r\n-\r\n-    this.isOpen = true;\r\n-    this.dispatch('init'); // legacy\r\n-    this.dispatch('beforeOpen');\r\n-\r\n-    this._createMainStructure();\r\n-\r\n-    // init modules\r\n-    // _modules.forEach(function (module) {\r\n-    //   module();\r\n-    // });\r\n-\r\n",
+					"match": false,
+					"packageHash": "2d8a7ed6ad3715bd71242baf86b6e42f850f4759fe87bced893183d008061c81",
+					"size": 12188,
+					"sourceHash": "3d54a0ae3a5f488ecfcf8e63207e414636ba611f83dbd58a3ea177986bdc00b1",
+					"status": "content"
+				},
+				"src/js/util/animations.js": {
+					"diff": "--- published/src/js/util/animations.js\n+++ rebuilt/src/js/util/animations.js\n@@ -1,94 +1,105 @@\n-import CSSAnimation from './css-animation.js';\r\n-import SpringAnimation from './spring-animation.js';\r\n-\r\n-/**\r\n- * Manages animations\r\n- */\r\n-\r\n-class Animations {\r\n-  constructor() {\r\n-    this.activeAnimations = [];\r\n-  }\r\n-\r\n-  startSpring(props) {\r\n-    this._start(props, true);\r\n-  }\r\n-\r\n-  startTransition(props) {\r\n-    this._start(props);\r\n-  }\r\n-\r\n-  _start(props, isSpring) {\r\n-    let animation;\r\n-    if (isSpring) {\r\n-      animation = new SpringAnimation(props);\r\n-    } else {\r\n-      animation = new CSSAnimation(props);\r\n-    }\r\n-\r\n-    this.activeAnimations.push(animation);\r\n-    animation.onFinish = () => this.stop(animation);\r\n-\r\n-    return animation;\r\n-  }\r\n-\r\n-  stop(animation) {\r\n-    animation.destroy();\r\n-    const index = this.activeAnimations.indexOf(animation);\r\n-    if (index > -1) {\r\n-      this.activeAnimations.splice(index, 1);\r\n-    }\r\n-  }\r\n-\r\n-  stopAll() { // _stopAllAnimations\r\n-    this.activeAnimations.forEach((animation) => {\r\n-      animation.destroy();\r\n-    });\r\n-    this.activeAnimations = [];\r\n-  }\r\n-\r\n-  /**\r\n-   * Stop all pan or zoom transitions\r\n-   */\r\n-  stopAllPan() {\r\n-    this.activeAnimations = this.activeAnimations.filter((animation) => {\r\n-      if (animation.props.isPan) {\r\n-        animation.destroy();\r\n-        return false;\r\n-      }\r\n-\r\n-      return true;\r\n-    });\r\n-  }\r\n-\r\n-  stopMainScroll() {\r\n-    this.activeAnimations = this.activeAnimations.filter((animation) => {\r\n-      if (animation.props.isMainScroll) {\r\n-        animation.destroy();\r\n-        return false;\r\n-      }\r\n-\r\n-      return true;\r\n-    });\r\n-  }\r\n-\r\n-  /**\r\n-   * Returns true if main scroll transition is running\r\n-   */\r\n-  // isMainScrollRunning() {\r\n-  //   return this.activeAnimations.some((animation) => {\r\n-  //     return animation.props.isMainScroll;\r\n-  //   });\r\n-  // }\r\n-\r\n-  /**\r\n-   * Returns true if any pan or zoom transition is running\r\n-   */\r\n-  isPanRunning() {\r\n-    return this.activeAnimations.some((animation) => {\r\n-      return animation.props.isPan;\r\n-    });\r\n-  }\r\n-}\r\n-\r\n-export default Animations;\r\n+import CSSAnimation from './css-animation.js';\n+import SpringAnimation from './spring-animation.js';\n+\n",
+					"match": false,
+					"packageHash": "9bdc13e47478df0eab10680bc99b77281264ffec9856ab0d538956dc7f9952bf",
+					"size": 1996,
+					"sourceHash": "7f348f3d496c754191ea14b1e94e9487164c7b300d07a7ebebbd9a593c1be357",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 42,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.9545454545454546,
+				"totalFiles": 44
+			}
+		},
+		"prodDependencies": []
+	}
+]
