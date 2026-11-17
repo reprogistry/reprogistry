@@ -1,0 +1,190 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-17T16:13:33.494Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:6.2.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "clean-publish@1.0.8",
+			"name": "clean-publish",
+			"version": "1.0.8",
+			"location": "https://registry.npmjs.org/clean-publish/-/clean-publish-1.0.8.tgz",
+			"integrity": "sha512-RcAY50nzITzwRkHYGhCEI5P2GBW7DcpP7tAZ3XliQq9I+W4phhDia2L+PX0reUL1BQtEJg2Tu6HdcYkbDZxH7A==",
+			"publishedAt": "2018-08-04T14:07:50.316Z",
+			"publishedWith": {
+				"node": "10.8.0",
+				"npm": "6.2.0"
+			},
+			"dependencies": {
+				"chalk": "^2.4.1",
+				"ramda": "^0.25.0",
+				"yargs": "^12.0.1",
+				"fs-extra": "^6.0.1",
+				"cross-spawn": "^6.0.5"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/shashkovdanil/clean-publish.git",
+			"spec": "github:shashkovdanil/clean-publish#HEAD"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"CHANGELOG.md": {
+					"diff": "--- published/CHANGELOG.md\n+++ rebuilt/CHANGELOG.md\n@@ -1,29 +1,211 @@\n # Change Log\n \n+## 7.1.0\n+\n+- Added `--stage` support (by @43081j).\n+\n+## 7.0.1\n+\n+- Fixed npm package size regression.\n+\n+## 7.0.0\n+\n+- Added `pnpm-workspace.yaml` to ignore files.\n+- Removed Node.js 20 support.\n+\n+## 6.0.5\n+\n+- Ignore `oxfmt` and `oxlint` configs.\n+\n+## 6.0.4\n+\n+- Ignore `.prettierignore` file.\n+\n+## 6.0.3\n+\n+- Added `pnpm` to ignore `package.json` fields.\n+\n+## 6.0.2\n+\n+- Ignore `.claude` folder.\n+\n+## 6.0.1\n+\n+- Fixed CLI calls (by @hyperz111).\n+\n+## 6.0.0\n+\n+- Removed Node.js 18 support.\n+- Reduced dependencies (by @hyperz111).\n+\n+## 5.2.2\n+\n+- Fixed false-positive ChangeLog ignoring (by @dangreen).\n+\n+## 5.2.1\n+\n+- Fixed `scripts` removal (by @dangreen).\n+\n+## 5.2\n+\n+- Allow to use path in `fields` (by @pyoner).\n+\n+## 5.1\n+\n+- Keep `prepare` script (by @azat-io).\n+\n+## 5.0\n+\n+- Removed Node.js 16 support.\n+- Added Dev Container config support.\n+\n+## 4.4\n+\n+- Added `publishConfig` to ignore fields (by Dan Onoshko).\n+\n+## 4.3\n+\n+- Added ESLint flat config to ignore files.\n+- Added Nano Stages config to ignore files (by Eduard Aksamitov).\n+\n+## 4.2\n+\n+- Added Vitest config support (by @azat-io).\n+\n+## 4.1.1\n+\n+- Added types for config (by Artiom Tretjakovas).\n+- Fixed `--clean-comments` (by Artiom Tretjakovas).\n+- Fixed `--tag` (by Artiom Tretjakovas).\n+\n+## 4.1\n+\n+- Added `.clean-publish.json` config support (by Artiom Tretjakovas).\n+\n+## 4.0.2\n+\n+- Fixed full docs URL by using homepage (by Morgan Brasseur).\n+\n+## 4.0.1\n+\n+- Fixed `/**/` comments cleaning on `cleanComments` option.\n+\n+## 4.0\n+\n+- Dropped Node.js 14 and 12 support.\n+- Added `--` support to pass any arguments to package manager (by Dan Onoshko).\n+- Added pattern support to `files` option (by Dan Onoshko).\n",
+					"match": false,
+					"packageHash": "4ac6042f832e60ca23adf672d94492b1280b12b405b252a5d9b2e58c65d517aa",
+					"size": 455,
+					"sourceHash": "532478854c2cef9e6925a0cdf19414424771093f98ffe2e825a665186927054e",
+					"status": "content"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,19 +1,16 @@\n # Clean Publish\n-[![Build Status](https://travis-ci.org/shashkovdanil/clean-publish.svg?branch=master)](https://travis-ci.org/shashkovdanil/clean-publish)\n-[![Cult Of Martians][cult-img]][cult]\n \n <img src=\"./img/logo.svg\" title=\"Clean Publish logo by Anton Panachev <pana4eow@yandex.ru>\" width=\"180\" height=\"180\" align=\"right\">\n \n-[cult-img]:                         http://cultofmartians.com/assets/badges/badge.svg\n-[cult]:                             https://cultofmartians.com/tasks/clean-publish.html\n-\n Clean Publish is a tool for removing configuration files, fields and script for development from `package.json` before publishing to `npm`.\n \n ## Table of Contents\n+\n 1. [How it works](#how-it-works)\n 2. [Usage](#usage)\n-3. [Exclude files and package.json fields](#exclude-files-and-packagejson-fields)\n-4. [Examples](#examples)\n+3. [Config](#config)\n+4. [Exclude files and package.json fields](#exclude-files-and-packagejson-fields)\n+5. [Examples](#examples)\n \n ## How it works\n \n@@ -30,6 +27,7 @@\n .prettierrc\n package.json\n ```\n+\n ```json\n {\n   \"name\": \"author\",\n@@ -43,15 +41,16 @@\n \n - After clean:\n \n-`node_modules`, `.eslintrc`, `.prettierrc`, `lint` script and `devDependecies` field was removed (empty objects will also be deleted). \n+`node_modules`, `.eslintrc`, `.prettierrc`, `lint` script and `devDependecies` field was removed (empty objects will also be deleted).\n \n ```\n src\n package.json\n ```\n+\n ```json\n {\n-  \"name\": \"author\",\n+  \"name\": \"author\"\n }\n ```\n \n@@ -71,28 +70,177 @@\n \n 2. Add `clean-publish` script to `package.json`:\n \n-```json\n+```diff\n {\n-  \"scripts\": \"clean-publish\"\n+  \"scripts\": {\n+    \"test\": \"echo \\\"Error: no test specified\\\" && exit 1\",\n++   \"publish\": \"clean-publish\"\n+  }\n }\n+\n ```\n \n 3. Usage with arguments:\n \n-- `files` - list of files that you want to delete before publishing\n+- `clean-docs` - keep only main section of `README.md`.\n+- `clean-comments` - clean inline comments from JS files.\n+- `files` - list of files that you want to delete before publishing (supports regex and glob patterns)\n - `fields` - list of fields in the `package.json` file that you want to delete before publishing\n - `without-publish` - clean project without `npm publish` (tmp directory will not be deleted automatically)\n+- `package-manager` - name of package manager to use (`npm` by default)\n+- `access` - whether the npm registry publishes this package as a public package, or restricted\n+- `before-script` - run script on the to-release dir before `npm publish`\n+- `temp-dir` - create temporary directory with given name.\n+- `stage` - publish as a staged package (i.e. `npm stage publish`)\n \n ```sh\n-$ npm run clean-publish --files file1.js file2.js --fields scripts name\n+$ npx clean-publish --files \"file1.js, file2.js\" --fields \"scripts, name\"\n+```\n+\n+Also you are able to pass additional options to package manager:\n+\n+```sh\n+$ npx clean-publish --package-manager pnpm -- --no-git-checks\n+```\n+\n+### clear-package-json\n+\n+`clear-package-json` is additional tool to work only with `package.json` file.\n+\n+```sh\n+$ npx clear-package-json package.json -o package/package.json --fields \"scripts, name\"\n",
+					"match": false,
+					"packageHash": "ce7c2d7ab58993a10c75602db9e0db50df8057d8e871640dcb7f38ae2dcd3630",
+					"size": 9525,
+					"sourceHash": "3ad6db3aa60fdbbf62527a32dce6e00de068a9dd7307220674f0950d46d959ad",
+					"status": "content"
+				},
+				"clean-publish.js": {
+					"diff": "--- published/clean-publish.js\n+++ rebuilt/clean-publish.js\n@@ -1,129 +1,150 @@\n #!/usr/bin/env node\n \n-const chalk = require('chalk')\n-const fs = require('fs')\n-const path = require('path')\n-const spawn = require('cross-spawn')\n-const fse = require('fs-extra')\n-const { omit, pick } = require('ramda')\n-const yargs = require('yargs')\n-const { regExpIndexOf, multiCp } = require('./utils')\n-\n-const IGNORE_FILES = require('./exception/ignore-files')\n-const IGNORE_FIELDS = require('./exception/ignore-fields')\n-const NPM_SCRIPTS = require('./exception/npm-scripts')\n-\n-const { argv } = yargs\n-  .usage('$0')\n-  .option('files', {\n-    type: 'array',\n-    desc: 'One or more exclude files'\n-  })\n-  .option('fields', {\n-    type: 'array',\n-    desc: 'One or more exclude package.json fields'\n-  })\n-  .option('without-publish', {\n-    type: 'boolean',\n-    desc: 'Clean package without npm publish'\n-  })\n-\n-function removeTempDirectory (tempDirectoryName) {\n-  fse.remove(tempDirectoryName, error => {\n-    if (error) {\n-      console.error(chalk.red(error))\n-      process.exit()\n-    }\n-  })\n-}\n-\n-function clearPackageJSON (tempDirectoryName, cleanPackageJSON) {\n-  fse.writeJson(\n-    path.join(tempDirectoryName, 'package.json'),\n-    cleanPackageJSON,\n-    { spaces: 2 },\n-    error => {\n-      if (error) {\n-        console.error(chalk.red(error))\n-        process.exit()\n-      }\n-      if (!argv['without-publish']) {\n-        spawn('npm', ['publish'], {\n-          stdio: 'inherit',\n-          cwd: tempDirectoryName\n-        }).on('close', () => {\n-          removeTempDirectory()\n-        })\n-      }\n-    }\n-  )\n-}\n+import { readFile } from 'node:fs/promises'\n \n-function readPackageJSON (tempDirectoryName) {\n-  fse.readJson('package.json', (error, content) => {\n-    if (error) {\n-      console.error(chalk.red(error))\n-      process.exit()\n-    }\n-    const ignoreFields = argv.fields\n-      ? IGNORE_FIELDS.concat(argv.fields)\n-      : IGNORE_FIELDS\n-    const clearedScripts = {\n-      scripts: pick(NPM_SCRIPTS, content.scripts)\n-    }\n-    const cleanPackageJSON = Object.assign(\n-      omit(ignoreFields, content),\n-      clearedScripts\n+import {\n+  cleanComments,\n+  cleanDocs,\n+  clearPackageJSON,\n+  copyFiles,\n+  createFilesFilter,\n+  createTempDirectory,\n+  publish,\n+  readPackageJSON,\n+  removeTempDirectory,\n+  runScript,\n+  writePackageJSON\n+} from './core.js'\n+import { getConfig } from './get-config.js'\n+import { parseListArg } from './utils.js'\n+\n+const HELP =\n+  'npx clean-publish\\n' +\n+  '\\n' +\n+  'Options:\\n' +\n",
+					"match": false,
+					"packageHash": "81ac0621d60e1beb7fba8452d8c9aca038a075703860c3ac1a3a913991225e11",
+					"size": 3231,
+					"sourceHash": "0d5d438e73ba0e1211fb328eb1db5f83f34043b8ac220c1f139796efa9b183ef",
+					"status": "content"
+				},
+				"exception/ignore-fields.js": {
+					"diff": "--- published/exception/ignore-fields.js\n+++ rebuilt/exception/ignore-fields.js\n@@ -1,13 +1,27 @@\n-module.exports = [\n+export default [\n+  'babel',\n+  'browserslist',\n+  'c8',\n+  'clean-publish',\n+  'commitlint',\n+  'devDependencies',\n   'eslintConfig',\n+  'eslintIgnore',\n+  'husky',\n   'jest',\n-  'yaspeller',\n-  'size-limit',\n-  'devDependencies',\n-  'babel',\n   'lint-staged',\n+  'nano-staged',\n   'pre-commit',\n   'prettier',\n-  'browserslist',\n-  'pwmetrics'\n+  'pwmetrics',\n+  'remarkConfig',\n+  'renovate',\n+  'resolutions',\n+  'sharec',\n+  'simple-git-hooks',\n+  'simple-pre-commit',\n+  'size-limit',\n+  'typeCoverage',\n+  'yaspeller',\n+  'pnpm'\n ]\n",
+					"match": false,
+					"packageHash": "b22d292659f392407705deed9e463f05e7426242e1b402ffc39ebd9d945efd49",
+					"size": 191,
+					"sourceHash": "e0ded6cc5b57716d69f9a20fe35ddc9e0b9d13348c2b579842568b1db14e0ce5",
+					"status": "content"
+				},
+				"exception/ignore-files.js": {
+					"diff": "--- published/exception/ignore-files.js\n+++ rebuilt/exception/ignore-files.js\n@@ -1,29 +1,50 @@\n-module.exports = [\n+export default [\n   '.circleci',\n+  '.DS_Store',\n+  '.editorconfig',\n+  '.eslintignore',\n+  '.flowconfig',\n+  '.git',\n   '.github',\n+  '.travis.yml',\n   '.vscode',\n+  '.watchmanconfig',\n+  '.yarnrc',\n+  'appveyor.yml',\n+  'karma.conf.js',\n   'node_modules',\n+  'package-lock.json',\n+  'pnpm-debug.log',\n+  'pnpm-lock.yaml',\n+  'pnpm-workspace.yaml',\n+  '.devcontainer.json',\n   'test',\n-  /^\\.eslintrc/,\n+  'yarn-error.log',\n+  '.prettierignore',\n+  'yarn.lock',\n+  '.claude',\n+  /.oxfmtrc.jsonc?/,\n+  'oxfmt.config.ts',\n+  /.oxlintrc.jsonc?/,\n+  'oxlint.config.ts',\n+  /^(babel|commitlint|jest|vitest)\\.config\\.[cm]?(j|t)s$/,\n+  /^\\.?nano-staged\\.(c|m)?js(on)?$/,\n+  /^\\.?simple-git-hooks.js(on)?$/,\n+  /^\\.?simple-pre-commit.js(on)?$/,\n   /^\\.babelrc/,\n-  /^\\.yaspellerrc/,\n-  /^\\.prettierrc/,\n+  /^\\.clean-publish/,\n+  /^\\.commitlintrc/,\n+  /^\\.eslintrc/,\n+  /^\\.jsconfig/,\n   /^\\.jsdocrc/,\n   /^\\.lintstagedrc/,\n-  /^\\.jsconfig/,\n-  '.git',\n-  '.DS_Store',\n-  '.eslintignore',\n-  '.editorconfig',\n-  '.size-limit',\n-  'jest.config.js',\n-  '.travis.yml',\n-  'yarn.lock',\n-  'package-lock.json',\n-  'yarn-error.log',\n-  'appveyor.yml',\n-  '.watchmanconfig',\n-  '.yarnrc',\n-  'karma.conf.js',\n-  '.flowconfig'\n+  /^\\.nanostagedrc/,\n+  /^\\.prettierrc/,\n+  /^\\.remarkrc/,\n+  /^\\.renovaterc/,\n+  /^\\.size-limit/,\n+  /^\\.yaspellerrc/,\n+  /^changelog(\\.md|\\.txt)?$/i,\n+  /eslint.config.(c|m)?js/,\n+  /README\\.[\\w-]+\\.md/\n ]\n",
+					"match": false,
+					"packageHash": "8dfdfc8e3910a3f84966d9764b9a7231dba50b65c4d0643ca3f555b4566f15e8",
+					"size": 478,
+					"sourceHash": "6405dad7c9e451222d5c51354c3b2a93a488fbe4ef50512a0c418dd72ac662e9",
+					"status": "content"
+				},
+				"exception/npm-scripts.js": {
+					"diff": "--- published/exception/npm-scripts.js\n+++ rebuilt/exception/npm-scripts.js\n@@ -1,9 +1,11 @@\n-module.exports = [\n-  'version',\n-  'postversion',\n+export default [\n+  'postinstall',\n   'postpack',\n+  'postpublish',\n+  'postversion',\n+  'prepare',\n   'prepublish',\n   'publish',\n-  'postpublish',\n-  'postinstall'\n+  'uninstall',\n+  'version'\n ]\n",
+					"match": false,
+					"packageHash": "9370c1dce155a0b8eecf7c4bfd9d6bee69684f7dc76720a161bd5d2b39d87074",
+					"size": 127,
+					"sourceHash": "f6b0004c819671624c878dd9875e1f9ff45032fa9fe6be26402d6f9d55ec25dc",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,25 +1,48 @@\n {\n   \"name\": \"clean-publish\",\n-  \"version\": \"1.0.8\",\n+  \"version\": \"7.1.0\",\n   \"description\": \"Clean your package before publish\",\n   \"keywords\": [\n+    \"clean\",\n     \"npm\",\n     \"package\",\n-    \"publish\",\n-    \"clean\"\n+    \"publish\"\n   ],\n-  \"author\": \"Shashkov Danil <shashkovdanil@gmail.com>\",\n   \"license\": \"MIT\",\n+  \"author\": \"Shashkov Danil <shashkovdanil@gmail.com>\",\n   \"repository\": \"shashkovdanil/clean-publish\",\n-  \"bin\": \"clean-publish.js\",\n-  \"engines\": {\n-    \"node\": \">=6.11.5\"\n+  \"bin\": {\n+    \"clean-publish\": \"clean-publish.js\",\n+    \"clear-package-json\": \"clear-package-json.js\"\n+  },\n+  \"type\": \"module\",\n+  \"types\": \"types.d.ts\",\n+  \"scripts\": {\n+    \"test:lint\": \"oxlint *.js test/*.js\",\n+    \"test:unit\": \"tsx node_modules/uvu/bin.js . 'test/[^/]+\\\\.test\\\\.js$'\",\n+    \"schema\": \"ts-json-schema-generator --path types.d.ts --type Config --no-type-check --out schema.json\",\n+    \"test\": \"pnpm run -r /^test:/\",\n+    \"clean-publish\": \"node ./clean-publish.js\"\n   },\n   \"dependencies\": {\n-    \"chalk\": \"^2.4.1\",\n-    \"cross-spawn\": \"^6.0.5\",\n-    \"fs-extra\": \"^6.0.1\",\n-    \"ramda\": \"^0.25.0\",\n-    \"yargs\": \"^12.0.1\"\n+    \"lilconfig\": \"^3.1.3\",\n+    \"picomatch\": \"^4.0.4\",\n+    \"tinyexec\": \"^1.1.2\",\n+    \"tinyglobby\": \"^0.2.16\"\n+  },\n+  \"devDependencies\": {\n+    \"@logux/oxc-configs\": \"^0.4.0\",\n+    \"actions-up\": \"^1.14.1\",\n+    \"eslint-plugin-prefer-let\": \"^4.2.2\",\n+    \"multiocular\": \"^0.8.3\",\n+    \"oxlint\": \"^1.66.0\",\n+    \"oxlint-tsgolint\": \"^0.23.0\",\n+    \"ts-json-schema-generator\": \"^2.9.0\",\n+    \"tsx\": \"^4.22.3\",\n+    \"typescript\": \"^6.0.3\",\n+    \"uvu\": \"^0.5.6\"\n+  },\n+  \"engines\": {\n+    \"node\": \">= 22.0.0\"\n   }\n }\n",
+					"match": false,
+					"packageHash": "c46e7b8e80b8e451bc585ba0ad13eb59ad9da2ce8b1595819d35a6a8c63ec29b",
+					"size": 525,
+					"sourceHash": "9296776450976067c402d19d97bac7bc30e0251f389637c6fe0b3238cb38cf1c",
+					"status": "content"
+				},
+				"utils.js": {
+					"diff": "--- published/utils.js\n+++ rebuilt/utils.js\n@@ -1,28 +1,94 @@\n-const fse = require('fs-extra')\n+import { cp, readFile, rm, writeFile } from 'node:fs/promises'\n \n-function regExpIndexOf (array, item) {\n-  for (const i in array) {\n-    if (typeof array[i] === 'string' && item === array[i]) {\n-      return true\n-    }\n-    if (array[i] instanceof RegExp && array[i].test(item)) {\n-      return true\n-    }\n-  }\n-  return false\n+export async function remove(dir) {\n+  await rm(dir, { force: true, recursive: true })\n+}\n+\n+export async function copy(from, to, opts) {\n+  await cp(from, to, { recursive: true, ...opts })\n+}\n+\n+export async function readJSON(file) {\n+  let data = await readFile(file)\n+  return JSON.parse(data.toString())\n }\n \n-function cp (file) {\n+export async function writeJSON(file, json) {\n+  await writeFile(file, JSON.stringify(json, null, '  ') + '\\n')\n+}\n+\n+export function readJSONFromStdin() {\n+  process.stdin.setEncoding('utf8')\n   return new Promise((resolve, reject) => {\n-    fse.copy(file.from, file.to, err => (err ? reject(err) : resolve()))\n+    let jsonString = ''\n+    process.stdin\n+      .on('readable', () => {\n+        const chunk = process.stdin.read()\n+        if (typeof chunk === 'string') {\n+          jsonString += chunk\n+        }\n+      })\n+      .on('end', () => {\n+        try {\n+          const json = JSON.parse(jsonString)\n+          resolve(json)\n+        } catch (error) {\n+          reject(error)\n+        }\n+      })\n+      .on('error', reject)\n   })\n }\n \n-function multiCp (files) {\n-  return Promise.all(files.map(file => cp(file)))\n+export function parseListArg(arg) {\n+  return arg.trim().split(/\\s*,\\s*/)\n+}\n+\n+export function isObject(object) {\n+  return Boolean(object) && typeof object === 'object'\n+}\n+\n+export function filterObjectByKey(object, filterByKey = () => true, deep) {\n+  let result = {}\n+  let changed = false\n+\n+  for (const key in object) {\n+    if (filterByKey(key)) {\n+      if (deep && isObject(object[key])) {\n+        result[key] = filterObjectByKey(object[key], filterByKey, deep)\n+\n+        if (result[key] !== object[key]) {\n+          changed = true\n+        }\n+      } else {\n+        result[key] = object[key]\n+      }\n+    } else {\n+      changed = true\n+    }\n+  }\n+\n+  return changed ? result : object\n+}\n+\n+const RE_PATH = /(?<!\\\\)\\./\n+export function pathToKeys(path) {\n+  return path.split(RE_PATH).map(s => s.replace('\\\\.', '.'))\n }\n \n-module.exports = {\n-  regExpIndexOf,\n-  multiCp\n+export function deleteProperty(object, keys) {\n",
+					"match": false,
+					"packageHash": "a778de5e8500e0bc504d0c90945c94842b601374994a980f9dbcb9b1a1dc1784",
+					"size": 565,
+					"sourceHash": "5253e904514b721d2229ea4e3c643b59f61505caab4a470f480d55d0c8153424",
+					"status": "content"
+				},
+				".clean-publish": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".devcontainer.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".editorconfig": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/release.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/test.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".prettierrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"clear-package-json.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"core.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"get-config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"oxfmt.config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"oxlint.config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"pnpm-workspace.yaml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"types.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 8,
+				"matchingFiles": 1,
+				"missingInPackage": 14,
+				"missingInSource": 0,
+				"score": 0.043478260869565216,
+				"totalFiles": 23
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "fdir",
+				"version": "6.5.0"
+			},
+			{
+				"name": "lilconfig",
+				"version": "3.1.5"
+			},
+			{
+				"name": "picomatch",
+				"version": "4.0.7"
+			},
+			{
+				"name": "tinyexec",
+				"version": "1.3.1"
+			},
+			{
+				"name": "tinyglobby",
+				"version": "0.2.17"
+			}
+		]
+	}
+]

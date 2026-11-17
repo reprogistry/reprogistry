@@ -1,0 +1,128 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-17T16:13:11.059Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:7.21.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "clean-publish@3.0.1",
+			"name": "clean-publish",
+			"version": "3.0.1",
+			"location": "https://registry.npmjs.org/clean-publish/-/clean-publish-3.0.1.tgz",
+			"integrity": "sha512-knWD655d7Ya3jyNBe6NnnaxkVtn2sreqbuWieSX5VUHelExp4Ld/5thBDqznQNSRE/8FZiCBDxdJacwYEbQPlA==",
+			"publishedAt": "2021-09-26T06:33:55.179Z",
+			"publishedWith": {
+				"node": "16.8.0",
+				"npm": "7.21.0"
+			},
+			"dependencies": {
+				"fs-extra": "^10.0.0",
+				"lilconfig": "^2.0.3",
+				"cross-spawn": "^7.0.3"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/shashkovdanil/clean-publish.git",
+			"spec": "github:shashkovdanil/clean-publish#3.0.1"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -5,5 +5,365 @@\n \n Clean Publish is a tool for removing configuration files, fields and script for development from `package.json` before publishing to `npm`.\n \n-## Docs\n-Read **[full docs](https://github.com/shashkovdanil/clean-publish#readme)** on GitHub.\n+## Table of Contents\n+1. [How it works](#how-it-works)\n+2. [Usage](#usage)\n+3. [Config](#config)\n+4. [Exclude files and package.json fields](#exclude-files-and-packagejson-fields)\n+5. [Examples](#examples)\n+\n+## How it works\n+\n+`clean-publish` command copies project files (excluding configuration files) to a temporary folder, removes the extra and development script from `package.json`, and calls `npm publish` on the temporary folder.\n+\n+**Simple example:**\n+\n+- Before clean:\n+\n+```\n+node_modules\n+src\n+.eslintrc\n+.prettierrc\n+package.json\n+```\n+```json\n+{\n+  \"name\": \"author\",\n+  \"scripts\": {\n+    \"lint\": \"eslint\"\n+  },\n+  \"dependencies\": {},\n+  \"devDependencies\": {}\n+}\n+```\n+\n+- After clean:\n+\n+`node_modules`, `.eslintrc`, `.prettierrc`, `lint` script and `devDependecies` field was removed (empty objects will also be deleted).\n+\n+```\n+src\n+package.json\n+```\n+```json\n+{\n+  \"name\": \"author\",\n+}\n+```\n+\n+[More examples](#examples)\n+\n+## Usage\n+\n+1. install `clean-publish`:\n+\n+```sh\n+$ npm install --save-dev clean-publish\n+\n+# or\n+\n+$ yarn add clean-publish --dev\n+```\n+\n+2. Add `clean-publish` script to `package.json`:\n+\n+```diff\n+{\n+  \"scripts\": {\n+    \"test\": \"echo \\\"Error: no test specified\\\" && exit 1\",\n++    \"publish\": \"clean-publish\"\n+  }\n+}\n+\n+```\n+\n+3. Usage with arguments:\n+\n+- `cleanDocs` - keep only main section of `README.md`.\n+- `files` - list of files that you want to delete before publishing\n+- `fields` - list of fields in the `package.json` file that you want to delete before publishing\n+- `without-publish` - clean project without `npm publish` (tmp directory will not be deleted automatically)\n+- `package-manager` - name of package manager to use (`npm` by default)\n+- `access` - whether the npm registry publishes this package as a public package, or restricted\n+- `before-script` - run script on the to-release dir before `npm publish`.\n+\n+```sh\n+$ npm run clean-publish --files file1.js file2.js --fields scripts name\n+```\n+\n+### clear-package-json\n+\n+`clear-package-json` is additional tool to work only with `package.json` file.\n+\n+```sh\n",
+					"match": false,
+					"packageHash": "e37eda237d6c338d510e76c5796ac9b71375fe884e0427626519ec762a313f7b",
+					"size": 524,
+					"sourceHash": "3e2493f1c106a465b512a840d6e693809f4ac2410ff6e11a94bd377720e4e1e8",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -23,5 +23,24 @@\n     \"cross-spawn\": \"^7.0.3\",\n     \"fs-extra\": \"^10.0.0\",\n     \"lilconfig\": \"^2.0.3\"\n+  },\n+  \"devDependencies\": {\n+    \"@logux/eslint-config\": \"^45.4.8\",\n+    \"eslint\": \"^7.32.0\",\n+    \"eslint-config-standard\": \"^16.0.3\",\n+    \"eslint-plugin-import\": \"^2.24.2\",\n+    \"eslint-plugin-jest\": \"^24.4.2\",\n+    \"eslint-plugin-node\": \"^11.1.0\",\n+    \"eslint-plugin-prefer-let\": \"^1.1.0\",\n+    \"eslint-plugin-promise\": \"^5.1.0\",\n+    \"eslint-plugin-security\": \"^1.4.0\",\n+    \"eslint-plugin-unicorn\": \"^36.0.0\",\n+    \"jest\": \"^27.2.2\",\n+    \"lint-staged\": \"^11.1.2\",\n+    \"simple-git-hooks\": \"^2.6.1\"\n+  },\n+  \"scripts\": {\n+    \"lint\": \"eslint *.js\",\n+    \"test\": \"node --experimental-vm-modules node_modules/.bin/jest --runInBand && yarn run lint\"\n   }\n }\n",
+					"match": false,
+					"packageHash": "6b6d34cf4eb8fa158c0223f4b1c59effb91cfcd4cbaa6b4962a554626f1e2a8e",
+					"size": 603,
+					"sourceHash": "fd9577e690fd70c899ef9b2ae71e199027ef2327dd44a42a12cce62b13457de4",
+					"status": "content"
+				},
+				".clean-publish": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/test.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".simple-git-hooks.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"jest.config.cjs": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 9,
+				"missingInPackage": 5,
+				"missingInSource": 0,
+				"score": 0.5625,
+				"totalFiles": 16
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "cross-spawn",
+				"version": "7.0.3"
+			},
+			{
+				"name": "fs-extra",
+				"version": "10.0.0"
+			},
+			{
+				"name": "graceful-fs",
+				"version": "4.2.8"
+			},
+			{
+				"name": "isexe",
+				"version": "2.0.0"
+			},
+			{
+				"name": "jsonfile",
+				"version": "6.1.0"
+			},
+			{
+				"name": "lilconfig",
+				"version": "2.0.3"
+			},
+			{
+				"name": "path-key",
+				"version": "3.1.1"
+			},
+			{
+				"name": "shebang-command",
+				"version": "2.0.0"
+			},
+			{
+				"name": "shebang-regex",
+				"version": "3.0.0"
+			},
+			{
+				"name": "universalify",
+				"version": "2.0.0"
+			},
+			{
+				"name": "which",
+				"version": "2.0.2"
+			}
+		]
+	}
+]

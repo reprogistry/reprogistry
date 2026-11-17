@@ -1,0 +1,185 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-17T17:47:22.653Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:10.9.2",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "clean-publish@5.2.2",
+			"name": "clean-publish",
+			"version": "5.2.2",
+			"location": "https://registry.npmjs.org/clean-publish/-/clean-publish-5.2.2.tgz",
+			"integrity": "sha512-sqM9uAXG+K7QzEn0Ur00otEHfbQTsyle4enj/388ZZQhG6daXMJ15dfD/ALsFCQCJvMZPxYwDx/QrdcdzWVPyg==",
+			"publishedAt": "2025-06-11T17:29:47.279Z",
+			"publishedWith": {
+				"node": "22.16.0",
+				"npm": "10.9.2"
+			},
+			"dependencies": {
+				"fast-glob": "^3.3.3",
+				"lilconfig": "^3.1.3",
+				"micromatch": "^4.0.8",
+				"cross-spawn": "^7.0.6"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/shashkovdanil/clean-publish.git",
+			"spec": "github:shashkovdanil/clean-publish#6ef0f200c990c54d43bc01ec506975117b38860b"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -4,5 +4,459 @@\n \n Clean Publish is a tool for removing configuration files, fields and script for development from `package.json` before publishing to `npm`.\n \n-## Docs\n-Read full docs **[here](https://github.com/shashkovdanil/clean-publish#readme)**.\n+## Table of Contents\n+1. [How it works](#how-it-works)\n+2. [Usage](#usage)\n+3. [Config](#config)\n+4. [Exclude files and package.json fields](#exclude-files-and-packagejson-fields)\n+5. [Examples](#examples)\n+\n+## How it works\n+\n+`clean-publish` command copies project files (excluding configuration files) to a temporary folder, removes the extra and development script from `package.json`, and calls `npm publish` on the temporary folder.\n+\n+**Simple example:**\n+\n+- Before clean:\n+\n+```\n+node_modules\n+src\n+.eslintrc\n+.prettierrc\n+package.json\n+```\n+```json\n+{\n+  \"name\": \"author\",\n+  \"scripts\": {\n+    \"lint\": \"eslint\"\n+  },\n+  \"dependencies\": {},\n+  \"devDependencies\": {}\n+}\n+```\n+\n+- After clean:\n+\n+`node_modules`, `.eslintrc`, `.prettierrc`, `lint` script and `devDependecies` field was removed (empty objects will also be deleted).\n+\n+```\n+src\n+package.json\n+```\n+```json\n+{\n+  \"name\": \"author\",\n+}\n+```\n+\n+[More examples](#examples)\n+\n+## Usage\n+\n+1. install `clean-publish`:\n+\n+```sh\n+$ npm install --save-dev clean-publish\n+\n+# or\n+\n+$ yarn add clean-publish --dev\n+```\n+\n+2. Add `clean-publish` script to `package.json`:\n+\n+```diff\n+{\n+  \"scripts\": {\n+    \"test\": \"echo \\\"Error: no test specified\\\" && exit 1\",\n++   \"publish\": \"clean-publish\"\n+  }\n+}\n+\n+```\n+\n+3. Usage with arguments:\n+\n+- `clean-docs` - keep only main section of `README.md`.\n+- `clean-comments` - clean inline comments from JS files.\n+- `files` - list of files that you want to delete before publishing (supports regex and glob patterns)\n+- `fields` - list of fields in the `package.json` file that you want to delete before publishing\n+- `without-publish` - clean project without `npm publish` (tmp directory will not be deleted automatically)\n+- `package-manager` - name of package manager to use (`npm` by default)\n+- `access` - whether the npm registry publishes this package as a public package, or restricted\n+- `before-script` - run script on the to-release dir before `npm publish`\n+- `temp-dir` - create temporary directory with given name.\n+\n+```sh\n+$ npx clean-publish --files \"file1.js, file2.js\" --fields \"scripts, name\"\n+```\n+\n+Also you are able to pass additional options to package manager:\n+\n+```sh\n",
+					"match": false,
+					"packageHash": "e9fb46fde71bf295ecd8de9fa942f7696cd4e4b09720466e5af39b6c0053f4ef",
+					"size": 381,
+					"sourceHash": "2a68c98a4693c79a290c04b9e6dd2d45ffb70e09d92f4885477033ab668156a8",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -20,10 +20,24 @@\n     \"clean-publish\": \"clean-publish.js\",\n     \"clear-package-json\": \"clear-package-json.js\"\n   },\n+  \"scripts\": {\n+    \"lint\": \"eslint *.js test/*.js\",\n+    \"unit\": \"tsx node_modules/uvu/bin.js . 'test/[^/]+\\\\.test\\\\.js$'\",\n+    \"schema\": \"ts-json-schema-generator --path types.d.ts --type Config --no-type-check --out schema.json\",\n+    \"test\": \"pnpm unit && pnpm lint\",\n+    \"clean-publish\": \"node ./clean-publish.js\"\n+  },\n   \"dependencies\": {\n     \"cross-spawn\": \"^7.0.6\",\n     \"fast-glob\": \"^3.3.3\",\n     \"lilconfig\": \"^3.1.3\",\n     \"micromatch\": \"^4.0.8\"\n+  },\n+  \"devDependencies\": {\n+    \"@logux/eslint-config\": \"^55.2.1\",\n+    \"eslint\": \"^9.27.0\",\n+    \"ts-json-schema-generator\": \"^2.4.0\",\n+    \"tsx\": \"^4.19.4\",\n+    \"uvu\": \"^0.5.6\"\n   }\n }\n",
+					"match": false,
+					"packageHash": "eb5d9f713b520b331480f40f8415af107d463fcad06e77cf0d54c656340293ba",
+					"size": 634,
+					"sourceHash": "0611300745de11c68261f9a0f224ed3765b75165f4fea209282d8ff9c6887b2e",
+					"status": "content"
+				},
+				".clean-publish": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/test.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".prettierrc": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"eslint.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 11,
+				"missingInPackage": 5,
+				"missingInSource": 0,
+				"score": 0.6111111111111112,
+				"totalFiles": 18
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "@nodelib/fs.scandir",
+				"version": "2.1.5"
+			},
+			{
+				"name": "@nodelib/fs.stat",
+				"version": "2.0.5"
+			},
+			{
+				"name": "@nodelib/fs.walk",
+				"version": "1.2.8"
+			},
+			{
+				"name": "braces",
+				"version": "3.0.3"
+			},
+			{
+				"name": "cross-spawn",
+				"version": "7.0.6"
+			},
+			{
+				"name": "fast-glob",
+				"version": "3.3.3"
+			},
+			{
+				"name": "glob-parent",
+				"version": "5.1.2"
+			},
+			{
+				"name": "fastq",
+				"version": "1.20.3"
+			},
+			{
+				"name": "fill-range",
+				"version": "7.1.1"
+			},
+			{
+				"name": "is-extglob",
+				"version": "2.1.1"
+			},
+			{
+				"name": "is-glob",
+				"version": "4.0.3"
+			},
+			{
+				"name": "is-number",
+				"version": "7.0.0"
+			},
+			{
+				"name": "isexe",
+				"version": "2.0.0"
+			},
+			{
+				"name": "lilconfig",
+				"version": "3.1.5"
+			},
+			{
+				"name": "merge2",
+				"version": "1.4.1"
+			},
+			{
+				"name": "micromatch",
+				"version": "4.0.8"
+			},
+			{
+				"name": "path-key",
+				"version": "3.1.1"
+			},
+			{
+				"name": "picomatch",
+				"version": "2.3.2"
+			},
+			{
+				"name": "queue-microtask",
+				"version": "1.2.3"
+			},
+			{
+				"name": "reusify",
+				"version": "1.1.0"
+			},
+			{
+				"name": "run-parallel",
+				"version": "1.2.0"
+			},
+			{
+				"name": "shebang-command",
+				"version": "2.0.0"
+			},
+			{
+				"name": "shebang-regex",
+				"version": "3.0.0"
+			},
+			{
+				"name": "to-regex-range",
+				"version": "5.0.1"
+			},
+			{
+				"name": "which",
+				"version": "2.0.2"
+			}
+		]
+	}
+]

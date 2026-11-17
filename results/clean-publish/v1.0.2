@@ -1,0 +1,91 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-17T16:15:19.100Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:6.1.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "clean-publish@1.0.2",
+			"name": "clean-publish",
+			"version": "1.0.2",
+			"location": "https://registry.npmjs.org/clean-publish/-/clean-publish-1.0.2.tgz",
+			"integrity": "sha512-+ifRK/AMkbC7BHVZt9Y5b5Idpg7bldRAhlJjdoy2pW6kHxIcnE+nq2ih6cYFwNkUH7qtMK7sbUxWNeqrbOKA/w==",
+			"publishedAt": "2018-07-11T14:20:31.066Z",
+			"publishedWith": {
+				"node": "10.4.1",
+				"npm": "6.1.0"
+			},
+			"dependencies": {
+				"fs-extra": "^6.0.1",
+				"lodash.omit": "^4.5.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/shashkovdanil/clean-publish.git",
+			"spec": "github:shashkovdanil/clean-publish#f1efe8db8932f917954882f528681c81d9798eb4"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"CHANGELOG.md": {
+					"diff": "--- published/CHANGELOG.md\n+++ rebuilt/CHANGELOG.md\n@@ -1,5 +1 @@\n-# Change Log\n-\n-## 1.0.2\n-* Remove fields from package.json\n-* Publish after clean\n\\ No newline at end of file\n+# Change Log\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "98ef555a05139906e2fbd5e2475180fbe31e3c15d14a0a2d5d64d0ef307d80f5",
+					"size": 78,
+					"sourceHash": "54f56cf0872b39dec163910ffec3c024fd32b36057cb207ed84bbdd5ebf8630c",
+					"status": "content"
+				},
+				"clean-publish.js": {
+					"diff": "--- published/clean-publish.js\n+++ rebuilt/clean-publish.js\n@@ -3,11 +3,6 @@\n const fs = require('fs');\n const fse = require('fs-extra');\n const omit = require('lodash.omit');\n-const {\n-  spawn,\n-  execSync,\n-} = require('child_process');\n-\n const IGNORE_FILES = require('./ignore-files');\n const IGNORE_FIELDS = require('./ignore-fields');\n \n@@ -31,12 +26,4 @@\n       }\n     }\n   })\n-  process.chdir(tmp);\n-  const publish = spawn('npm', ['publish'], {\n-    stdio: 'inherit'\n-  });\n-  publish.on('exit', () => {\n-    fse.removeSync(tmp);\n-  })\n-  process.chdir('../');\n })();\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "241cbe3e2b4de4c2a021cf6bb3545decbe43a13013e525145e782635a38b2157",
+					"size": 1052,
+					"sourceHash": "ef0e045efcd5f4bba6634ca4b9f730650fa9feeacba5603cb4973aae8c7d15a1",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,6 +1,6 @@\n {\n   \"name\": \"clean-publish\",\n-  \"version\": \"1.0.2\",\n+  \"version\": \"1.0.1\",\n   \"description\": \"Clean your package before publish\",\n   \"keywords\": [\n     \"npm\",\n@@ -14,7 +14,8 @@\n   \"bin\": \"clean-publish.js\",\n   \"scripts\": {\n     \"clean-publish\": \"node clean-publish.js\",\n-    \"clean\": \"clean-publish\"\n+    \"clean\": \"clean-publish\",\n+    \"test\": \"echo \\\"Error: no test specified\\\" && exit 1\"\n   },\n   \"bugs\": {\n     \"url\": \"https://github.com/shashkovdanil/clean-publish/issues\"\n",
+					"match": false,
+					"packageHash": "5474af01ac5bd262097ab71e38610cc77d6612e5c2f259eaae4a89d2abc97bc1",
+					"size": 661,
+					"sourceHash": "b8089b2023b2b5bef3a9f22a33b71e7b893ae02279052c73bd03bdc1d188072d",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 3,
+				"matchingFiles": 4,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.5714285714285714,
+				"totalFiles": 7
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "fs-extra",
+				"version": "6.0.1"
+			},
+			{
+				"name": "graceful-fs",
+				"version": "4.1.11"
+			},
+			{
+				"name": "jsonfile",
+				"version": "4.0.0"
+			},
+			{
+				"name": "lodash.omit",
+				"version": "4.5.0"
+			},
+			{
+				"name": "universalify",
+				"version": "0.1.2"
+			}
+		]
+	}
+]
