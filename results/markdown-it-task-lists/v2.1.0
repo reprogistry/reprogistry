@@ -1,0 +1,59 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-17T20:51:56.483Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:3.10.10",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "markdown-it-task-lists@2.1.0",
+			"name": "markdown-it-task-lists",
+			"version": "2.1.0",
+			"location": "https://registry.npmjs.org/markdown-it-task-lists/-/markdown-it-task-lists-2.1.0.tgz",
+			"integrity": "sha512-3mT1oQ/brZiV719l3iY/ZIEQLIn60Y9U840l4hh3sA1seHM+ZZjzE5Env1+V1bWqKE1BeVffiuE7qNALzh7r2Q==",
+			"publishedAt": "2017-10-23T23:33:33.895Z",
+			"publishedWith": {
+				"node": "6.11.2",
+				"npm": "5.5.1"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+ssh://git@github.com/revin/markdown-it-task-lists.git",
+			"spec": "github:revin/markdown-it-task-lists#87d36c93c03b65fa4535a1d665e0186f93d8b0c9"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"dist/markdown-it-task-lists.js": {
+					"diff": "--- published/dist/markdown-it-task-lists.js\n+++ rebuilt/dist/markdown-it-task-lists.js\n@@ -1,4 +1,4 @@\n-/*! markdown-it-task-lists 2.1.0 https://github.com/revin/markdown-it-task-lists#readme by @license ISC */\n+/*! markdown-it-task-lists 1.4.0 https://github.com/revin/markdown-it-task-lists#readme by @license ISC */\n (function(f){if(typeof exports===\"object\"&&typeof module!==\"undefined\"){module.exports=f()}else if(typeof define===\"function\"&&define.amd){define([],f)}else{var g;if(typeof window!==\"undefined\"){g=window}else if(typeof global!==\"undefined\"){g=global}else if(typeof self!==\"undefined\"){g=self}else{g=this}g.markdownitTaskLists = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require==\"function\"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error(\"Cannot find module '\"+o+\"'\");throw f.code=\"MODULE_NOT_FOUND\",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require==\"function\"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){\n // Markdown-it plugin to render GitHub-style task lists; see\n //\n@@ -7,13 +7,11 @@\n \n var disableCheckboxes = true;\n var useLabelWrapper = false;\n-var useLabelAfter = false;\n \n module.exports = function(md, options) {\n \tif (options) {\n \t\tdisableCheckboxes = !options.enabled;\n \t\tuseLabelWrapper = !!options.label;\n-\t\tuseLabelAfter = !!options.labelAfter;\n \t}\n \n \tmd.core.ruler.after('inline', 'github-task-lists', function(state) {\n@@ -21,8 +19,8 @@\n \t\tfor (var i = 2; i < tokens.length; i++) {\n \t\t\tif (isTodoItem(tokens, i)) {\n \t\t\t\ttodoify(tokens[i], state.Token);\n-\t\t\t\tattrSet(tokens[i-2], 'class', 'task-list-item' + (!disableCheckboxes ? ' enabled' : ''));\n-\t\t\t\tattrSet(tokens[parentToken(tokens, i-2)], 'class', 'contains-task-list');\n+\t\t\t\tattrSet(tokens[i-2], 'class', 'task-list-item');\n+\t\t\t\tattrSet(tokens[parentToken(tokens, i-2)], 'class', 'task-list');\n \t\t\t}\n \t\t}\n \t});\n@@ -62,26 +60,17 @@\n \ttoken.content = token.content.slice(3);\n \n \tif (useLabelWrapper) {\n-\t\tif (useLabelAfter) {\n-\t\t\ttoken.children.pop();\n-\n-\t\t\t// Use large random number as id property of the checkbox.\n-\t\t\tvar id = 'task-item-' + Math.ceil(Math.random() * (10000 * 1000) - 1000);\n-\t\t\ttoken.children[0].content = token.children[0].content.slice(0, -1) + ' id=\"' + id + '\">';\n-\t\t\ttoken.children.push(afterLabel(token.content, id, TokenConstructor));\n-\t\t} else {\n-\t\t\ttoken.children.unshift(beginLabel(TokenConstructor));\n-\t\t\ttoken.children.push(endLabel(TokenConstructor));\n-\t\t}\n+\t\ttoken.children.unshift(beginLabel(TokenConstructor));\n+\t\ttoken.children.push(endLabel(TokenConstructor));\n \t}\n }\n \n function makeCheckbox(token, TokenConstructor) {\n \tvar checkbox = new TokenConstructor('html_inline', '', 0);\n \tvar disabledAttr = disableCheckboxes ? ' disabled=\"\" ' : '';\n-\tif (token.content.indexOf('[ ] ') === 0) {\n+\tif (token.content.indexOf('[ ]') === 0) {\n \t\tcheckbox.content = '<input class=\"task-list-item-checkbox\"' + disabledAttr + 'type=\"checkbox\">';\n-\t} else if (token.content.indexOf('[x] ') === 0 || token.content.indexOf('[X] ') === 0) {\n+\t} else if (token.content.indexOf('[x]') === 0 || token.content.indexOf('[X]') === 0) {\n \t\tcheckbox.content = '<input class=\"task-list-item-checkbox\" checked=\"\"' + disabledAttr + 'type=\"checkbox\">';\n \t}\n \treturn checkbox;\n@@ -101,20 +90,13 @@\n \treturn token;\n }\n \n-function afterLabel(content, id, TokenConstructor) {\n-\tvar token = new TokenConstructor('html_inline', '', 0);\n-\ttoken.content = '<label class=\"task-list-item-label\" for=\"' + id + '\">' + content + '</label>';\n-\ttoken.attrs = [{for: id}];\n-\treturn token;\n-}\n-\n function isInline(token) { return token.type === 'inline'; }\n function isParagraph(token) { return token.type === 'paragraph_open'; }\n function isListItem(token) { return token.type === 'list_item_open'; }\n \n function startsWithTodoMarkdown(token) {\n \t// leading whitespace in a list item is already trimmed off by markdown-it\n-\treturn token.content.indexOf('[ ] ') === 0 || token.content.indexOf('[x] ') === 0 || token.content.indexOf('[X] ') === 0;\n+\treturn token.content.indexOf('[ ]') === 0 || token.content.indexOf('[x]') === 0 || token.content.indexOf('[X]') === 0;\n }\n \n },{}]},{},[1])(1)\n",
+					"match": false,
+					"packageHash": "ef25fb9942a362d5b1d2b68e993f1c2ca2ce5170ae5c3c011708c5c49b97d6f3",
+					"size": 4821,
+					"sourceHash": "b4a803eee641c138b1c270b0a4201a18c90d307c2c6dbb6a9b27ce44d3d46779",
+					"status": "content"
+				},
+				"dist/markdown-it-task-lists.min.js": {
+					"diff": "--- published/dist/markdown-it-task-lists.min.js\n+++ rebuilt/dist/markdown-it-task-lists.min.js\n@@ -1,2 +1,2 @@\n-/*! markdown-it-task-lists 2.1.0 https://github.com/revin/markdown-it-task-lists#readme by  @license {ISC} */\n-!function(n){if(\"object\"==typeof exports&&\"undefined\"!=typeof module)module.exports=n();else if(\"function\"==typeof define&&define.amd)define([],n);else{var e;e=\"undefined\"!=typeof window?window:\"undefined\"!=typeof global?global:\"undefined\"!=typeof self?self:this,e.markdownitTaskLists=n()}}(function(){return function n(e,t,i){function r(c,l){if(!t[c]){if(!e[c]){var f=\"function\"==typeof require&&require;if(!l&&f)return f(c,!0);if(o)return o(c,!0);var u=new Error(\"Cannot find module '\"+c+\"'\");throw u.code=\"MODULE_NOT_FOUND\",u}var a=t[c]={exports:{}};e[c][0].call(a.exports,function(n){var t=e[c][1][n];return r(t?t:n)},a,a.exports,n,e,t,i)}return t[c].exports}for(var o=\"function\"==typeof require&&require,c=0;c<i.length;c++)r(i[c]);return r}({1:[function(n,e,t){function i(n,e,t){var i=n.attrIndex(e),r=[e,t];0>i?n.attrPush(r):n.attrs[i]=r}function r(n,e){for(var t=n[e].level-1,i=e-1;i>=0;i--)if(n[i].level===t)return i;return-1}function o(n,e){return s(n[e])&&d(n[e-1])&&h(n[e-2])&&p(n[e])}function c(n,e){if(n.children.unshift(l(n,e)),n.children[1].content=n.children[1].content.slice(3),n.content=n.content.slice(3),b)if(v){n.children.pop();var t=\"task-item-\"+Math.ceil(1e7*Math.random()-1e3);n.children[0].content=n.children[0].content.slice(0,-1)+' id=\"'+t+'\">',n.children.push(a(n.content,t,e))}else n.children.unshift(f(e)),n.children.push(u(e))}function l(n,e){var t=new e(\"html_inline\",\"\",0),i=x?' disabled=\"\" ':\"\";return 0===n.content.indexOf(\"[ ] \")?t.content='<input class=\"task-list-item-checkbox\"'+i+'type=\"checkbox\">':(0===n.content.indexOf(\"[x] \")||0===n.content.indexOf(\"[X] \"))&&(t.content='<input class=\"task-list-item-checkbox\" checked=\"\"'+i+'type=\"checkbox\">'),t}function f(n){var e=new n(\"html_inline\",\"\",0);return e.content=\"<label>\",e}function u(n){var e=new n(\"html_inline\",\"\",0);return e.content=\"</label>\",e}function a(n,e,t){var i=new t(\"html_inline\",\"\",0);return i.content='<label class=\"task-list-item-label\" for=\"'+e+'\">'+n+\"</label>\",i.attrs=[{\"for\":e}],i}function s(n){return\"inline\"===n.type}function d(n){return\"paragraph_open\"===n.type}function h(n){return\"list_item_open\"===n.type}function p(n){return 0===n.content.indexOf(\"[ ] \")||0===n.content.indexOf(\"[x] \")||0===n.content.indexOf(\"[X] \")}var x=!0,b=!1,v=!1;e.exports=function(n,e){e&&(x=!e.enabled,b=!!e.label,v=!!e.labelAfter),n.core.ruler.after(\"inline\",\"github-task-lists\",function(n){for(var e=n.tokens,t=2;t<e.length;t++)o(e,t)&&(c(e[t],n.Token),i(e[t-2],\"class\",\"task-list-item\"+(x?\"\":\" enabled\")),i(e[r(e,t-2)],\"class\",\"contains-task-list\"))})}},{}]},{},[1])(1)});\n+/*! markdown-it-task-lists 1.4.0 https://github.com/revin/markdown-it-task-lists#readme by  @license {ISC} */\n+!function(n){if(\"object\"==typeof exports&&\"undefined\"!=typeof module)module.exports=n();else if(\"function\"==typeof define&&define.amd)define([],n);else{var e;e=\"undefined\"!=typeof window?window:\"undefined\"!=typeof global?global:\"undefined\"!=typeof self?self:this,e.markdownitTaskLists=n()}}(function(){return function n(e,t,i){function r(c,f){if(!t[c]){if(!e[c]){var u=\"function\"==typeof require&&require;if(!f&&u)return u(c,!0);if(o)return o(c,!0);var l=new Error(\"Cannot find module '\"+c+\"'\");throw l.code=\"MODULE_NOT_FOUND\",l}var s=t[c]={exports:{}};e[c][0].call(s.exports,function(n){var t=e[c][1][n];return r(t?t:n)},s,s.exports,n,e,t,i)}return t[c].exports}for(var o=\"function\"==typeof require&&require,c=0;c<i.length;c++)r(i[c]);return r}({1:[function(n,e,t){function i(n,e,t){var i=n.attrIndex(e),r=[e,t];0>i?n.attrPush(r):n.attrs[i]=r}function r(n,e){for(var t=n[e].level-1,i=e-1;i>=0;i--)if(n[i].level===t)return i;return-1}function o(n,e){return s(n[e])&&a(n[e-1])&&d(n[e-2])&&p(n[e])}function c(n,e){n.children.unshift(f(n,e)),n.children[1].content=n.children[1].content.slice(3),n.content=n.content.slice(3),x&&(n.children.unshift(u(e)),n.children.push(l(e)))}function f(n,e){var t=new e(\"html_inline\",\"\",0),i=h?' disabled=\"\" ':\"\";return 0===n.content.indexOf(\"[ ]\")?t.content='<input class=\"task-list-item-checkbox\"'+i+'type=\"checkbox\">':(0===n.content.indexOf(\"[x]\")||0===n.content.indexOf(\"[X]\"))&&(t.content='<input class=\"task-list-item-checkbox\" checked=\"\"'+i+'type=\"checkbox\">'),t}function u(n){var e=new n(\"html_inline\",\"\",0);return e.content=\"<label>\",e}function l(n){var e=new n(\"html_inline\",\"\",0);return e.content=\"</label>\",e}function s(n){return\"inline\"===n.type}function a(n){return\"paragraph_open\"===n.type}function d(n){return\"list_item_open\"===n.type}function p(n){return 0===n.content.indexOf(\"[ ]\")||0===n.content.indexOf(\"[x]\")||0===n.content.indexOf(\"[X]\")}var h=!0,x=!1;e.exports=function(n,e){e&&(h=!e.enabled,x=!!e.label),n.core.ruler.after(\"inline\",\"github-task-lists\",function(n){for(var e=n.tokens,t=2;t<e.length;t++)o(e,t)&&(c(e[t],n.Token),i(e[t-2],\"class\",\"task-list-item\"),i(e[r(e,t-2)],\"class\",\"task-list\"))})}},{}]},{},[1])(1)});\n",
+					"match": false,
+					"packageHash": "ae2e2bebfcfa43946f7535e5c08a68bb5a3eeb89d824bce17f277dcbe93c4845",
+					"size": 2680,
+					"sourceHash": "31bf5b74aec5a73c76196fc78f6b9221fc61743f61ec103c6253bdaac4b14427",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 11,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.8461538461538461,
+				"totalFiles": 13
+			}
+		},
+		"prodDependencies": []
+	}
+]
