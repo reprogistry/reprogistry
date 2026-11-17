@@ -1,0 +1,563 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-17T20:38:47.982Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:12.2.2",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "q-io@1.5.4",
+			"name": "q-io",
+			"version": "1.5.4",
+			"location": "https://registry.npmjs.org/q-io/-/q-io-1.5.4.tgz",
+			"integrity": "sha512-iM05Ww/4J07wNyAOFl/w3StevTvBSoyPEputbpU2lkqJgNQ0fehLpROkOzUONMKJRiIE44dw5NYsyVYpY3aIng==",
+			"publishedAt": "2013-03-06T22:05:03.175Z",
+			"publishedWith": {
+				"node": null,
+				"npm": "1.2.2"
+			},
+			"dependencies": {
+				"q": "~0.8.11",
+				"qs": "~0.1.0",
+				"url2": "~0.0.0",
+				"mime": "~1.2",
+				"mimeparse": "~0.1.4",
+				"collections": "~0.1.3"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "http://github.com/kriskowal/q-io.git",
+			"spec": "github:kriskowal/q-io#HEAD"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".npmignore": {
+					"match": false,
+					"packageHash": "f88cb31843d0c3b23dd85143974f8ac0db8980ac923d0969a22197a5ae30c55f",
+					"size": 45,
+					"status": "missing-in-source"
+				},
+				".travis.yml": {
+					"diff": "--- published/.travis.yml\n+++ rebuilt/.travis.yml\n@@ -1,3 +1,9 @@\n+sudo: false\n language: node_js\n node_js:\n-  - 0.8\n+  - 4\n+  - 6\n+  - 8\n+script:\n+  - npm run lint\n+  - npm run test\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "a74a0a320aa986067e3507230514cc33aaeb032d73512a58dea71693c59bda82",
+					"size": 35,
+					"sourceHash": "b26373dad5508180030db3594ea89083948b7d13fd916976addd89b36ab34bda",
+					"status": "content"
+				},
+				"CHANGES": {
+					"match": false,
+					"packageHash": "c0eb2ebe5af18a6e30623011b1345935039fcefd8ea45e15712f93c6623dc1d9",
+					"size": 594,
+					"status": "missing-in-source"
+				},
+				"LICENSE": {
+					"diff": "--- published/LICENSE\n+++ rebuilt/LICENSE\n@@ -1,5 +1,5 @@\n \n-Copyright 2009-2011 Kristopher Michael Kowal. All rights reserved.\n+Copyright 2009-2013 Kristopher Michael Kowal. All rights reserved.\n Permission is hereby granted, free of charge, to any person obtaining a copy\n of this software and associated documentation files (the \"Software\"), to\n deal in the Software without restriction, including without limitation the\n",
+					"match": false,
+					"packageHash": "d9c1b0e64d22c520b174d587487849b4f9468c85df17076f2a96a51c80cbc18e",
+					"size": 1091,
+					"sourceHash": "5395366838383affbad53aa485696adf1978f8c39698c8008ff526c1b72e78aa",
+					"status": "content"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,7 +1,8 @@\n+# Q-IO\n \n-[![Build Status](https://secure.travis-ci.org/kriskowal/q-io.png)](http://travis-ci.org/kriskowal/q-io)\n+[![npm version](https://img.shields.io/npm/v/q-io.svg?style=flat)](https://www.npmjs.com/package/q-io)\n \n-# Q-IO\n+[![Build Status](https://secure.travis-ci.org/kriskowal/q-io.png?branch=v1)](http://travis-ci.org/kriskowal/q-io)\n \n Interfaces for IO that make use of promises.\n \n@@ -31,7 +32,7 @@\n The options can be omitted, abbreviated to a `flags` string, or expanded\n to an `options` object.\n \n--   ``flags``: ``r``, ``w``, ``a``, ``b``, default of `r`, not binary\n+-   ``flags``: ``r``, ``w``, ``a``, ``b``, default of `r`, not bytewise\n -   ``charset``: default of ``utf-8``\n -   ``bufferSize``: in bytes\n -   ``mode``: UNIX permissions\n@@ -42,7 +43,7 @@\n \n `read` is a shortcut for opening a file and reading the entire contents\n into memory.  It returns a promise for the whole file contents.  By\n-default, `read` provides a string decoded from UTF-8.  With the binary\n+default, `read` provides a string decoded from UTF-8.  With the bytewise\n mode flag, provides a `Buffer`.\n \n The options argument is identical to that of `open`.  \n@@ -152,25 +153,25 @@\n Removes a file or directory at a given path, recursively removing any\n contained files and directories, without following symbolic links.\n \n+### rename(source, target)\n+\n+Moves a file or directory from one path to another using the underlying\n+`rename(2)` implementation, thus it cannot move a file across devices.\n+\n ### move(source, target)\n \n-Moves a file or directory from one path to another.  Cannot move over a\n-target directory, even if it is empty.  Otherwise, does nothing if the\n-source and target are the same entry in the file system.\n-\n-Node's `rename` implementation, at least on Mac OS X, does not enforce\n-the rule that writing over an empty directory should fail.  Since Q-IO\n-enforces this rule in software, it is not atomic and there is a chance\n-that an empty directory will be created over the target path between\n-when `move` checks for it and when it overwrites it.\n+Moves a file or directory from one path to another.  If the source and\n+target are on different devices, falls back to copying and removing,\n+using `copyTree(source, target)` and, if completely successful,\n+`removeTree(source)`.\n \n-### link(source, taget)\n+### link(source, target)\n \n Creates a hard link from the source\n \n ### symbolicCopy(source, target, type)\n \n-Creates a relative symoblic link from the target to the source with an\n+Creates a relative symbolic link from the target to the source with an\n effect that resembles copying a file.\n \n The type is important for Windows.  It is \"file\" by default, but may be\n@@ -192,7 +193,7 @@\n \n ### stat(path)\n \n-Follows all symoblic links along a path and returns a promise for the\n+Follows all symbolic links along a path and returns a promise for the\n metadata about a path as a `Stats` object.  The Stats object implements:\n \n -   `size` the size of the file in bytes\n@@ -230,7 +231,7 @@\n \n ### exists(path)\n \n-Follows symoblic links and returns a promise for whether an entry exists\n+Follows symbolic links and returns a promise for whether an entry exists\n at a given path.\n \n ### isFile(path)\n@@ -443,16 +444,16 @@\n The `http` module exports a `request` function that returns a promise\n for a response.\n \n--   accepts a request or a URL string.\n--   returns a promise for a response.\n+-   accepts a [request object](\\#request) or a URL string.\n+-   returns a promise for a [response object](\\#response).\n \n ### read(request object or url)\n \n The `http` module exports a `read` function, analogous to\n-`Fs.read(path)`, but returning a promise for the contento of an OK HTTP\n+`Fs.read(path)`, but returning a promise for the content of an OK HTTP\n",
+					"match": false,
+					"packageHash": "0b5668dcaa87e55c2e36086885411f3dc5ad4de8ac8b354f1f3897f04cc826c3",
+					"size": 28302,
+					"sourceHash": "ca692e1d962b8d29c9f021ac5105a9c150d3082031577e6e1b4e99a2afd6a0d5",
+					"status": "content"
+				},
+				"browser/buffer.js": {
+					"match": false,
+					"packageHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+					"size": 0,
+					"status": "missing-in-source"
+				},
+				"browser/http.js": {
+					"match": false,
+					"packageHash": "db5bfda3d65cb609d858cad91c2d71ec29ef461c96f811f3a2537d41a315bb4c",
+					"size": 972,
+					"status": "missing-in-source"
+				},
+				"coverage-report.js": {
+					"diff": "--- published/coverage-report.js\n+++ rebuilt/coverage-report.js\n@@ -1,5 +1,5 @@\n+/* global __dirname:true */\n \n-require(\"collections/shim\");\n var Q = require(\"q\");\n var FS = require(\"./fs\");\n \n@@ -22,7 +22,8 @@\n             console.log(\"        </tr>\");\n             console.log(\"    </thead>\");\n             console.log(\"    <tbody>\");\n-            Object.forEach(coverage.files, function (file, path) {\n+            Object.keys(coverage.files).forEach(function (path) {\n+                var file = coverage.files[path];\n                 path = FS.relativeFromDirectory(__dirname, path);\n                 if (/^spec/.test(path))\n                     return;\n",
+					"match": false,
+					"packageHash": "7ec107f65f9a578cc89809b498a74007a97da4a85f552d565a495c9a5bf7baff",
+					"size": 1639,
+					"sourceHash": "dde726457ddeec0132a10624f7543024fa2c2992f68c235aed6630dc5e15df05",
+					"status": "content"
+				},
+				"fs-boot.js": {
+					"diff": "--- published/fs-boot.js\n+++ rebuilt/fs-boot.js\n@@ -1,3 +1,5 @@\n+/* global process:false, FS_BOOT:true */\n+\n (function (exports) {\n \n // -- kriskowal Kris Kowal Copyright (C) 2009-2010 MIT License\n@@ -15,8 +17,9 @@\n /*whatsupdoc*/\n /*markup markdown*/\n \n+var ESCAPE_REG_EXP = /[-[\\]{}()*+?.\\\\^$|,#\\s]/g;\n var regExpEscape = function (str) {\n-    return str.replace(/[-[\\]{}()*+?.\\\\^$|,#\\s]/g, \"\\\\$&\");\n+    return str.replace(ESCAPE_REG_EXP, \"\\\\$&\");\n };\n \n var path = require(\"path\");\n@@ -39,7 +42,7 @@\n  * * `/` on Windows\n  */\n \n-exports.ROOT = exports.SEPARATOR = path.sep;\n+exports.ROOT = exports.SEPARATOR = path.sep || (process.platform === \"win32\" ? \"\\\\\": \"/\");\n if (path.sep === \"\\\\\") {\n     exports.ALT_SEPARATOR = \"/\";\n } else {\n@@ -52,6 +55,7 @@\n /**\n  * @function\n  */\n+\n exports.SEPARATORS_RE = function () {\n     if (\n         separatorCached !== exports.SEPARATOR ||\n@@ -60,8 +64,8 @@\n         separatorCached = exports.SEPARATOR;\n         altSeparatorCached = exports.ALT_SEPARATOR;\n         separatorReCached = new RegExp(\"[\" +\n-            (separatorCached || \"\").replace(/[-[\\]{}()*+?.\\\\^$|,#\\s]/g, \"\\\\$&\") +\n-            (altSeparatorCached || \"\").replace(/[-[\\]{}()*+?.\\\\^$|,#\\s]/g, \"\\\\$&\") +\n+            (separatorCached || \"\").replace(ESCAPE_REG_EXP, \"\\\\$&\") +\n+            (altSeparatorCached || \"\").replace(ESCAPE_REG_EXP, \"\\\\$&\") +\n         \"]\", \"g\");\n     }\n     return separatorReCached;\n@@ -120,8 +124,9 @@\n     var parents = [];\n     var children = [];\n     var leaf = \"\";\n+    var path;\n     for (var i = 0; i < arguments.length; i++) {\n-        var path = String(arguments[i]);\n+        path = String(arguments[i]);\n         if (path == \"\")\n             continue;\n         var parts = path.split(exports.SEPARATORS_RE());\n@@ -150,10 +155,15 @@\n             } else {\n                 children.push(part);\n             }\n-        };\n+        }\n     }\n+\n     path = parents.concat(children).join(exports.SEPARATOR);\n-    if (path) leaf = exports.SEPARATOR + leaf;\n+    \n+    if (path) {\n+        leaf = exports.SEPARATOR + leaf;\n+    }\n+\n     return root + path + leaf;\n };\n \n@@ -168,8 +178,9 @@\n     var root = \"\";\n     var parents = [];\n     var children = [];\n+    var path;\n     for (var i = 0, ii = arguments.length; i < ii; i++) {\n-        var path = String(arguments[i]);\n+        path = String(arguments[i]);\n         // empty paths have no affect\n         if (path === \"\")\n             continue;\n",
+					"match": false,
+					"packageHash": "a089dd024a566f43a98442c18ac24668b8e122e77e03c5c5452987dbf8920cb1",
+					"size": 8823,
+					"sourceHash": "d507fd9df7dbb07ca20606a8f81577cd33788a4eee312ad9b761a61704bdd286",
+					"status": "content"
+				},
+				"fs-common.js": {
+					"diff": "--- published/fs-common.js\n+++ rebuilt/fs-common.js\n@@ -1,4 +1,3 @@\n-\n var Q = require(\"q\");\n var Boot = require(\"./fs-boot\");\n var RootFs = require(\"./fs-root\");\n@@ -19,19 +18,26 @@\n     }\n \n     /**\n-     * @param {String} path\n-     * @param {Object} options\n+     * Read a complete file.\n+     * @param {String} path    Path to the file.\n+     * @param {String} [options.flags]  The mode to open the file with.\n+     * @param {String} [options.charset]  The charset to open the file with.\n+     * @param {Object} [options]   An object with options.\n+     * second argument.\n      * @returns {Promise * (String || Buffer)}\n      */\n     exports.read = function (path, flags, charset, options) {\n-        if (typeof flags == \"object\") {\n+        if (typeof flags === \"object\") {\n             options = flags;\n+        } else if (typeof charset === \"object\") {\n+            options = charset;\n+            options.flags = flags;\n         } else {\n             options = options || {};\n             options.flags = flags;\n-            options.carset = charset;\n+            options.charset = charset;\n         }\n-        options.flags = \"r\" + (options.flags || \"\").replace(/r/g, \"\");\n+        options.flags = options.flags || \"r\";\n         return Q.when(this.open(path, options), function (stream) {\n             return stream.read();\n         }, function (error) {\n@@ -44,23 +50,33 @@\n     };\n \n     /**\n-     * @param {String} path\n+     * Write content to a file, overwriting the existing content.\n+     * @param {String} path    Path to the file.\n      * @param {String || Buffer} content\n-     * @param {Object} options\n+     * @param {String} [options.flags]  The mode to open the file with.\n+     * @param {String} [options.charset]  The charset to open the file with.\n+     * @param {Object} [options]   An object with options.\n      * @returns {Promise * Undefined} a promise that resolves\n      * when the writing is complete.\n      */\n     exports.write = function (path, content, flags, charset, options) {\n         var self = this;\n-        if (typeof flags == \"object\") {\n+        if (typeof flags === \"object\") {\n             options = flags;\n+        } else if (typeof charset === \"object\") {\n+            options = charset;\n+            options.flags = flags;\n         } else {\n             options = options || {};\n             options.flags = flags;\n-            options.carset = charset;\n+            options.charset = charset;\n         }\n-        flags = \"w\" + (flags || \"\").replace(/[wb]/g, \"\");\n-        if (content instanceof Buffer) {\n+        flags = options.flags || \"w\";\n+        if (flags.indexOf(\"b\") !== -1) {\n+            if (!(content instanceof Buffer)) {\n+                content = new Buffer(content);\n+            }\n+        } else if (content instanceof Buffer) {\n             flags += \"b\";\n         }\n         options.flags = flags;\n@@ -71,16 +87,29 @@\n         });\n     };\n \n+    /**\n+     * Append content to the end of a file.\n+     * @param {String} path    Path to the file.\n+     * @param {String || Buffer} content\n+     * @param {String} [options.flags]  The mode to open the file with.\n+     * @param {String} [options.charset]  The charset to open the file with.\n+     * @param {Object} [options]   An object with options.\n+     * @returns {Promise * Undefined} a promise that resolves\n+     * when the writing is complete.\n+     */\n     exports.append = function (path, content, flags, charset, options) {\n         var self = this;\n-        if (typeof flags == \"object\") {\n+        if (typeof flags === \"object\") {\n             options = flags;\n+        } else if (typeof charset === \"object\") {\n+            options = charset;\n",
+					"match": false,
+					"packageHash": "24b2074cae844c315258f573a3df74fb17b89d2df20195367892ab9c9a2a9273",
+					"size": 13317,
+					"sourceHash": "3593f675e7d062ae65f532a29f56f3a0b4decc414e5038caed05af5aca1a822f",
+					"status": "content"
+				},
+				"fs-mock.js": {
+					"diff": "--- published/fs-mock.js\n+++ rebuilt/fs-mock.js\n@@ -4,7 +4,7 @@\n var Common = require(\"./fs-common\");\n var BufferStream = require(\"./buffer-stream\");\n var Reader = require(\"./reader\");\n-var Set = require(\"collections/set\");\n+var Set = require(\"es6-set\");\n \n module.exports = MockFs;\n \n@@ -61,7 +61,7 @@\n         path = self.absolute(path);\n         var node = self._root._walk(path)._follow(path);\n         if (!node.isDirectory()) {\n-            new Error(\"Can't list non-directory: \" + JSON.stringify(path));\n+            throw new Error(\"Can't list non-directory: \" + JSON.stringify(path));\n         }\n         return Object.keys(node._entries).sort();\n     });\n@@ -87,29 +87,37 @@\n         flags = flags || \"r\";\n         var binary = flags.indexOf(\"b\") >= 0;\n         var write = flags.indexOf(\"w\") >= 0;\n+        var append = flags.indexOf(\"a\") >= 0;\n         if (!binary) {\n             charset = charset || \"utf-8\";\n         }\n-        if (write) {\n+        var fileNode;\n+        if (write || append) { // write\n             if (!node._entries[base]) {\n                 node._entries[base] = new FileNode(this);\n+                if (\"mode\" in options) {\n+                    node._entries[base].mode = options.mode;\n+                }\n             }\n-            var fileNode = node._entries[base]._follow(path);\n+            fileNode = node._entries[base]._follow(path);\n             if (!fileNode.isFile()) {\n                 throw new Error(\"Can't write non-file \" + path);\n             }\n-            fileNode._lastModified = new Date();\n-            fileNode._lastAccessed = new Date();\n+            fileNode.mtime = Date.now();\n+            fileNode.atime = Date.now();\n+            if (!append) {\n+                fileNode._chunks.length = 0;\n+            }\n             return new BufferStream(fileNode._chunks, charset);\n         } else { // read\n             if (!node._entries[base]) {\n                 throw new Error(\"Can't read non-existant \" + path);\n             }\n-            var fileNode = node._entries[base]._follow(path);\n+            fileNode = node._entries[base]._follow(path);\n             if (!fileNode.isFile()) {\n                 throw new Error(\"Can't read non-file \" + path);\n             }\n-            fileNode._lastAccessed = new Date();\n+            fileNode.atime = Date.now();\n             if (\"begin\" in options && \"end\" in options) {\n                 return new BufferStream(\n                     [\n@@ -119,7 +127,9 @@\n                     charset\n                 );\n             } else {\n-                return new BufferStream(fileNode._chunks, charset);\n+                // Clone chunks to avoid side effect\n+                var bufferChunks = fileNode._chunks.slice();\n+                return new BufferStream(bufferChunks, charset);\n             }\n         }\n     });\n@@ -145,27 +155,31 @@\n     });\n };\n \n-MockFs.prototype.makeDirectory = function (path) {\n+MockFs.prototype.makeDirectory = function (path, mode) {\n     var self = this;\n     return Q.fcall(function () {\n         path = self.absolute(path);\n         var directory = self.directory(path);\n         var name = self.base(path);\n         var node = self._root._walk(directory);\n+        var error;\n         if (!node.isDirectory()) {\n-            var error =  new Error(\"Can't make directory in non-directory: \" + path);\n+            error =  new Error(\"Can't make directory in non-directory: \" + path);\n             error.code = \"EEXISTS\";\n             error.exists = true;\n             throw error;\n         }\n         if (node._entries[name]) {\n-            var error = new Error(\"Can't make directory. Entry exists: \" + path);\n+            error = new Error(\"Can't make directory. Entry exists: \" + path);\n             error.code = \"EISDIR\";\n             error.exists = true;\n",
+					"match": false,
+					"packageHash": "495a3a2f8e9ec8de39f20070c3cd0c5f8550f29b566ee28311b5889784e310ab",
+					"size": 16093,
+					"sourceHash": "19fe46c92420c8dbdde61159549246efd8dc6939768fff69dd60e3e87da052bd",
+					"status": "content"
+				},
+				"fs-root.js": {
+					"diff": "--- published/fs-root.js\n+++ rebuilt/fs-root.js\n@@ -31,8 +31,12 @@\n         // and rejoin it on the outer root\n         actual = outer.join(root, actual);\n         // and find the corresponding real path\n-        actual = outer.canonical(actual);\n-        return Q.when(actual, function (actual) {\n+        return outer.canonical(actual)\n+        .then(function (actual) {\n+            return actual;\n+        }, function () {\n+            return actual;\n+        }).then(function (actual) {\n             // and verify that the outer canonical path is\n             // actually inside the inner canonical path, to\n             // prevent break-outs\n@@ -54,7 +58,7 @@\n     COMMON.update(inner, workingDirectory);\n \n     inner.list = function (path) {\n-        return Q.when(attenuate(path), function (path) {\n+        return attenuate(path).then(function (path) {\n             return outer.list(path.outer);\n         }).then(null, function (reason) {\n             return Q.reject(\"Can't list \" + JSON.stringify(path));\n@@ -62,7 +66,7 @@\n     };\n \n     inner.open = function (path, flags, charset) {\n-        return Q.when(attenuate(path), function (path) {\n+        return attenuate(path).then(function (path) {\n             return outer.open(path.outer, flags, charset);\n         }).then(null, function (reason) {\n             return Q.reject(\"Can't open \" + JSON.stringify(path));\n@@ -70,21 +74,69 @@\n     };\n \n     inner.stat = function (path) {\n-        return Q.when(attenuate(path), function (path) {\n+        return attenuate(path).then(function (path) {\n             return outer.stat(path.outer);\n         }).then(null, function (reason) {\n             return Q.reject(\"Can't stat \" + JSON.stringify(path));\n         });\n     };\n \n+    inner.statLink = function (path) {\n+        return attenuate(path).then(function (path) {\n+            return outer.statLink(path.outer);\n+        }).then(null, function (reason) {\n+            return Q.reject(\"Can't statLink \" + JSON.stringify(path));\n+        });\n+    };\n+\n     inner.canonical = function (path) {\n-        return Q.when(attenuate(path), function (path) {\n+        return attenuate(path).then(function (path) {\n             return path.inner;\n         }).then(null, function (reason) {\n             return Q.reject(\"Can't find canonical of \" + JSON.stringify(path));\n         });\n     };\n \n+    inner.makeDirectory = function (path) {\n+        return attenuate(path).then(function (path) {\n+            return outer.makeDirectory(path.outer);\n+        }).catch(function (error) {\n+            throw new Error(\"Can't make directory \" + JSON.stringify(path));\n+        });\n+    };\n+\n+    inner.removeDirectory = function (path) {\n+        return attenuate(path).then(function (path) {\n+            return outer.removeDirectory(path.outer);\n+        }).catch(function (error) {\n+            throw new Error(\"Can't remove directory \" + JSON.stringify(path));\n+        });\n+    };\n+\n+    inner.remove = function (path) {\n+        return attenuate(path).then(function (path) {\n+            return outer.remove(path.outer);\n+        }).catch(function (error) {\n+            throw new Error(\"Can't remove \" + JSON.stringify(path));\n+        });\n+    };\n+\n+    inner.makeTree = function (path) {\n+        return attenuate(path).then(function (path) {\n+            return outer.makeTree(path.outer);\n+        }).catch(function (error) {\n+            throw new Error(\"Can't make tree \" + JSON.stringify(path));\n+        });\n+    };\n+\n+    inner.removeTree = function (path) {\n+        return attenuate(path).then(function (path) {\n+            return outer.removeTree(path.outer);\n+        }).catch(function (error) {\n",
+					"match": false,
+					"packageHash": "bf069288781215f0a2ff3d2585a2918d166db9b9cb9162cd47ad725481d57aab",
+					"size": 3018,
+					"sourceHash": "d03b9a17fc37835851874bd38768fac9772b5810cbc4cac210e9e0653abc0b71",
+					"status": "content"
+				},
+				"fs.js": {
+					"diff": "--- published/fs.js\n+++ rebuilt/fs.js\n@@ -1,3 +1,5 @@\n+/* global process:true */\n+\n /**\n  * An asynchronous local file system API, based on a subset\n  * of the `narwhal/fs` API and the `narwhal/promise` API,\n@@ -58,8 +60,9 @@\n     }\n     options = options || {};\n     flags = flags || \"r\";\n+    var nodeFlags = flags.replace(/b/g, \"\") || \"r\";\n     var nodeOptions = {\n-        \"flags\": flags.replace(/b/g, \"\")\n+        \"flags\": nodeFlags\n     };\n     if (\"bufferSize\" in options) {\n         nodeOptions.bufferSize = options.bufferSize;\n@@ -78,11 +81,12 @@\n     } else {\n         charset = charset || 'utf-8';\n     }\n-    if (flags.indexOf(\"w\") >= 0) {\n-        var stream = FS.createWriteStream(String(path), nodeOptions);\n+    var stream;\n+    if (flags.indexOf(\"w\") >= 0 || flags.indexOf(\"a\") >= 0) {\n+        stream = FS.createWriteStream(String(path), nodeOptions);\n         return Writer(stream, charset);\n     } else {\n-        var stream = FS.createReadStream(String(path), nodeOptions);\n+        stream = FS.createReadStream(String(path), nodeOptions);\n         return Reader(stream, charset);\n     }\n });\n@@ -101,24 +105,20 @@\n     return done.promise;\n };\n \n-exports.move = function (source, target) {\n+exports.rename = function (source, target) {\n     source = String(source);\n     target = String(target);\n-    return exports.exists(target)\n-    .then(function (exists) {\n-        if (exists) {\n-            var error = new Error(\"Can't move over existing entry \" + target);\n-            error.code = \"EEXISTS\";\n-            throw error;\n-        }\n-        return Q.ninvoke(FS, \"rename\", source, target)\n-        .fail(function (error) {\n-            error.message = (\n-                \"Can't move \" + JSON.stringify(source) + \" to \" +\n-                JSON.stringify(target) + \" because \" + error.message\n-            );\n-            throw error;\n-        });\n+    return Q.ninvoke(FS, \"rename\", source, target)\n+    .fail(function (error) {\n+        if (error.code === \"EXDEV\") {\n+            error.message = \"source and target are on different devices: \" + error.message;\n+            error.crossDevice = true;\n+        }\n+        error.message = (\n+            \"Can't move \" + JSON.stringify(source) + \" to \" +\n+            JSON.stringify(target) + \" because \" + error.message\n+        );\n+        throw error;\n     });\n };\n \n@@ -132,14 +132,16 @@\n     }\n     FS.mkdir(path, mode, function (error) {\n         if (error) {\n-            error.message = \"Can't makeDirectory \" + JSON.stringify(path) + \" with mode \" + mode + \": \" + error.message;\n             if (error.code === \"EISDIR\") {\n                 error.exists = true;\n                 error.isDirectory = true;\n+                error.message = \"directory already exists: \" + error.message;\n             }\n             if (error.code === \"EEXIST\") {\n                 error.exists = true;\n+                error.message = \"file exists at that path: \" + error.message;\n             }\n+            error.message = \"Can't makeDirectory \" + JSON.stringify(path) + \" with mode \" + mode + \": \" + error.message;\n             done.reject(error);\n         } else {\n             done.resolve();\n@@ -192,7 +194,7 @@\n                 error.message = \"Can't stat \" + JSON.stringify(path) + \": \" + error;\n                 done.reject(error);\n             } else {\n-                done.resolve(new Stats(stat));\n+                done.resolve(new self.Stats(stat));\n             }\n         });\n     } catch (error) {\n@@ -201,35 +203,6 @@\n",
+					"match": false,
+					"packageHash": "dc730eb4c8f753c11257d0c8d887f1f1b223792fea58bb3f503415cb16508f85",
+					"size": 10959,
+					"sourceHash": "67d48df58a6eb20b3e4a9a2978140f1e91462c8afd09544d71a1b2f4c5001e52",
+					"status": "content"
+				},
+				"http-apps.js": {
+					"diff": "--- published/http-apps.js\n+++ rebuilt/http-apps.js\n@@ -39,1377 +39,113 @@\n  * @module\n  */\n \n-/*\n-    Multiplexing Routing:\n-        Cap\n-        Branch\n-        Method\n-        Accept\n-        Language\n-    Trial Routing:\n-        FirstFound\n-    Decorators:\n-        Error\n-        Log\n-        CookieSession TODO reevaluate\n-        PathSession TODO reevaluate\n-        Limit TODO\n-        Cache TODO\n-        Time\n-        Decorators\n-        Tap\n-        Trap\n-        Permanent\n-        Date\n-    Adapters:\n-        ParseQuery\n-        ContentRequest\n-        JsonRequest\n-        Json\n-        Inspect\n-    Producers:\n-        Content\n-        File\n-        FileTree\n-        Redirect\n-        PermanentRedirect\n-        TemporaryRedirect\n-        RedirectTree\n-        PermanentRedirectTree\n-        TemporaryRedirectTree\n-    Producer Functions:\n-        ok\n-        badRequest\n-        notFound\n-        methodNotAllowed\n-        notAcceptable\n-        file\n-        directory\n-        redirect\n-        json\n-    Utility:\n-        etag\n-\n-*/\n-\n-require(\"collections/shim\");\n var Q = require(\"q\");\n-var NODE_FS = require(\"fs\");\n var HTTP = require(\"./http\");\n var FS = require(\"./fs\");\n-var URL = require(\"url\");\n-var MIME_PARSE = require(\"mimeparse\");\n-var MIME_TYPES = require(\"mime\");\n-var URL = require(\"url\");\n+var URL = require(\"url2\");\n var inspect = require(\"util\").inspect;\n-var QS = require(\"querystring\");\n-var Cookie = require(\"./http-cookie\");\n-\n-//var UUID = require(\"uuid\");\n-var UUID = {\n-    generate: function () {\n-        return Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);\n-    }\n-};\n-\n-/**\n- * Makes a  Q-JSGI app that only responds when there is nothing left\n- * on the path to route.  If the there is unprocessed data on the\n- * path, the returned app either forwards to the `notFound` app or\n- * returns a `404 Not Found` response.\n- *\n- * @param {App} app a Q-JSGI application to\n- * respond to this end of the routing chain.\n- * @param {App} notFound (optional) defaults\n- * to the `notFound` app.\n- * @returns {App}\n- */\n-exports.Cap = function (app, notFound) {\n-    notFound = notFound || exports.notFound;\n-    return function (request, response) {\n-        // TODO Distinguish these cases\n-        if (request.pathInfo === \"\" || request.pathInfo === \"/\") {\n-            return app(request, response);\n-        } else {\n-            return notFound(request, response);\n",
+					"match": false,
+					"packageHash": "7dc076f10eeb6c6b99dbc9cb01ecc084ab08609c8401f1699e00c425a573e337",
+					"size": 42865,
+					"sourceHash": "5a607767fee5aa23efd6b47406bbff7e6abddd46732e6d29745f3859c4a96727",
+					"status": "content"
+				},
+				"http-cookie.js": {
+					"diff": "--- published/http-cookie.js\n+++ rebuilt/http-cookie.js\n@@ -12,35 +12,42 @@\n  * @param {String} cookie\n  * @returns {Object}\n  */\n+var DOMAIN_REG_EXP = /^domain$/i,   \n+    PATH_REG_EXP = /^path$/i,\n+    EXPIRE_REG_EXP = /^expires$/i,\n+    MAX_AGE_REG_EXP = /^max-age$/i,\n+    SECURE_REG_EXP = /^secure$/i,\n+    HTTP_ONLY_REG_EXP = /^httponly$/i;\n+\n exports.parse = function (cookie, date) {\n     date = date || new Date();\n     var parsed = {};\n     var terms = cookie.split(/[;,]/g);\n     var keyValue = terms.shift().split(\"=\");\n-    parsed.key = keyValue[0];\n-    parsed.value = keyValue[1];\n+    parsed.key = decodeURIComponent(keyValue[0]);\n+    parsed.value = decodeURIComponent(keyValue[1]);\n     terms.forEach(function (term) {\n         var parts = term.split(\"=\").map(function (part) {\n             return part.trim();\n         });\n         var key = parts[0], value = parts[1];\n-        if (/^domain$/i.test(key)) {\n+        if (DOMAIN_REG_EXP.test(key)) {\n             parsed.domain = value;\n-        } else if (/^path$/i.test(key)) {\n+        } else if (PATH_REG_EXP.test(key)) {\n             parsed.path = value;\n-        } else if (/^expires$/i.test(key)) {\n+        } else if (EXPIRE_REG_EXP.test(key)) {\n             parsed.expires = new Date(\n                 +new Date() + // actual now\n                 (new Date(value) - date) // server offset\n             );\n-        } else if (/^max-age$/i.test(key)) {\n+        } else if (MAX_AGE_REG_EXP.test(key)) {\n             parsed.expires = new Date(\n                 new Date().getTime() +\n                 (value * 1000)\n             );\n-        } else if (/^secure$/i.test(key)) {\n+        } else if (SECURE_REG_EXP.test(key)) {\n             parsed.secure = true;\n-        } else if (/^httponly$/i.test(key)) {\n+        } else if (HTTP_ONLY_REG_EXP.test(key)) {\n             parsed.httpOnly = true;\n         }\n     });\n@@ -72,4 +79,3 @@\n     }\n     return cookie;\n };\n-\n",
+					"match": false,
+					"packageHash": "b2d61774ba4f64caa48e16a46b78a25497c88f79536feee0ab9c6bdf82081d58",
+					"size": 2070,
+					"sourceHash": "00413bd1b28e70b77f1cb7339e79fea07eda9f8ef1cf6596873d3357db4e4253",
+					"status": "content"
+				},
+				"http.js": {
+					"diff": "--- published/http.js\n+++ rebuilt/http.js\n@@ -136,6 +136,7 @@\n \n     self.node = server;\n     self.nodeServer = server; // Deprecated\n+    self.address = server.address.bind(server);\n \n     return self;\n };\n@@ -160,8 +161,9 @@\n  * A wrapper for a Node HTTP Request, as received by\n  * the Q HTTP Server, suitable for use by the Q HTTP Client.\n  */\n+\n exports.ServerRequest = function (_request, ssl) {\n-    var request = Object.create(_request);\n+    var request = Object.create(_request, requestDescriptor);\n     /*** {Array} HTTP version. (JSGI) */\n     request.version = _request.httpVersion.split(\".\").map(Math.floor);\n     /*** {String} HTTP method, e.g., `\"GET\"` (JSGI) */\n@@ -171,15 +173,24 @@\n     /*** {String} pathInfo, starting with `\"/\"`, the\n      * portion of the path that has not yet\n      * been routed (JSGI) */\n-    request.pathInfo = URL.parse(_request.url).pathname;\n+    request._pathInfo = null;\n     /*** {String} scriptName, the portion of the path that\n      * has already been routed (JSGI) */\n     request.scriptName = \"\";\n     /*** {String} (JSGI) */\n     request.scheme = \"http\";\n \n-    request.host = _request.headers.host;\n-    request.port = _request.connection.address().port;\n+    var address = _request.connection.address();\n+    /*** {String} hostname */\n+    if (_request.headers.host) {\n+        request.hostname = _request.headers.host.split(\":\")[0];\n+    } else {\n+        request.hostname = address.address;\n+    }\n+    /*** {String} host */\n+    request.port = address.port;\n+    var defaultPort = request.port === (ssl ? 443 : 80);\n+    request.host = request.hostname + (defaultPort ? \"\" : \":\" + request.port);\n \n     var socket = _request.socket;\n     /*** {String} */\n@@ -190,7 +201,7 @@\n     /*** {String} url */\n     request.url = URL.format({\n         protocol: request.scheme,\n-        hostname: _request.headers.host,\n+        host: _request.headers.host,\n         port: request.port === (ssl ? 443 : 80) ? null : request.port,\n         path: request.path\n     });\n@@ -210,6 +221,24 @@\n     });\n };\n \n+var requestDescriptor = {\n+    pathInfo: {\n+        get: function () {\n+            // Postpone this until the server requests it because\n+            // decodeURIComponent may throw an error if the path is not valid.\n+            // If we throw while making a server request, it will crash the\n+            // server and be uncatchable.\n+            if (this._pathInfo === null) {\n+                this._pathInfo = decodeURIComponent(URL.parse(this.url).pathname);\n+            }\n+            return this._pathInfo;\n+        },\n+        set: function (pathInfo) {\n+            this._pathInfo = pathInfo;\n+        }\n+    }\n+};\n+\n exports.ServerResponse = function (_response, ssl) {\n     var response = Object.create(_response);\n     response.ssl = ssl;\n@@ -220,20 +249,30 @@\n \n exports.normalizeRequest = function (request) {\n     if (typeof request === \"string\") {\n-        request = {\n-            url: request\n-        };\n+        request = {url: request};\n     }\n+    request.method = request.method || \"GET\";\n+    request.headers = request.headers || {};\n     if (request.url) {\n         var url = URL.parse(request.url);\n-        request.host = url.hostname;\n-        request.port = url.port;\n         request.ssl = url.protocol === \"https:\";\n-        request.method = request.method || \"GET\";\n",
+					"match": false,
+					"packageHash": "b839ca840b566c222b3fc207bb2dedb7d8fc65a80755c834f2db5777a4936165",
+					"size": 11380,
+					"sourceHash": "071d38c23659921563510d314ba33d7da4cbbf60ec1f00585b59a61609e7d7cc",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,44 +1,46 @@\n {\n   \"name\": \"q-io\",\n-  \"version\": \"1.5.4\",\n+  \"version\": \"1.13.6\",\n   \"description\": \"IO using Q promises\",\n   \"homepage\": \"http://github.com/kriskowal/q-io/\",\n   \"author\": \"Kris Kowal <kris@cixar.com> (http://github.com/kriskowal/)\",\n+  \"contributors\": [\n+    \"Montage Studio\",\n+    \"Stuart Knightley\",\n+    \"Jean-romain Prevost\",\n+    \"Andreas Pizsa (http://github.com/AndreasPizsa/)\",\n+    \"Harold Thetiot\"\n+  ],\n   \"bugs\": {\n     \"mail\": \"kris@cixar.com\",\n     \"url\": \"http://github.com/kriskowal/q-io/issues\"\n   },\n-  \"licenses\": [\n-    {\n-      \"type\": \"MIT\",\n-      \"url\": \"http://github.com/kriskowal/q-io/raw/master/LICENSE\"\n-    }\n-  ],\n+  \"license\": \"MIT\",\n   \"repository\": {\n     \"type\": \"git\",\n     \"url\": \"http://github.com/kriskowal/q-io.git\"\n   },\n   \"dependencies\": {\n-    \"q\": \"~0.8.11\",\n-    \"qs\": \"~0.1.0\",\n-    \"url2\": \"~0.0.0\",\n-    \"mime\": \"~1.2\",\n-    \"mimeparse\": \"~0.1.4\",\n-    \"collections\": \"~0.1.3\"\n+    \"es6-set\": \"^0.1.1\",\n+    \"mime\": \"^1.2.11\",\n+    \"mimeparse\": \"^0.1.4\",\n+    \"q\": \"^1.0.1\",\n+    \"qs\": \"^6.9.6\",\n+    \"url2\": \"^0.0.0\"\n   },\n   \"devDependencies\": {\n-    \"jshint\": \"~0.9.1\",\n-    \"cover\": \"~0.2.8\",\n-    \"jasmine-node\": \"~1.0\",\n-    \"opener\": \"~1.3\"\n+    \"cover\": \"^0.2.8\",\n+    \"jasmine-node\": \"^3.0.0\",\n+    \"jshint\": \"^2.9.5\",\n+    \"opener\": \"^1.3\"\n   },\n   \"scripts\": {\n     \"test\": \"jasmine-node spec\",\n-    \"test-browser\": \"opener spec/q-spec.html\",\n-    \"lint\": \"jshint q.js\",\n-    \"cover\": \"cover run node_modules/jasmine-node/bin/jasmine-node spec && cover report html && opener cover_html/index.html\"\n+    \"test:browser\": \"opener spec/q-spec.html\",\n+    \"lint\": \"jshint .\",\n+    \"cover\": \"cover run jasmine-node spec && cover report html && opener cover_html/index.html\"\n   },\n   \"engines\": {\n-    \"node\": \">=0.6.0\"\n+    \"node\": \">=4\"\n   }\n }\n",
+					"match": false,
+					"packageHash": "c60bfec59142aa5b6a808e82a6c52698f564c4e16990bf40f40b69bfa9e3a8a4",
+					"size": 1102,
+					"sourceHash": "62686c385274d4c9ff3147e04e44d74c151e71c250838ae6749b16bbdb9b4db4",
+					"status": "content"
+				},
+				"reader.js": {
+					"diff": "--- published/reader.js\n+++ rebuilt/reader.js\n@@ -87,6 +87,8 @@\n         _stream.destroy();\n     };\n \n+    self.node = _stream;\n+\n     return begin.promise;\n }\n \n",
+					"match": false,
+					"packageHash": "f2a1ae47a2f07d9b19128c9fe3e065f023a79d5faf8778e6af66c7615a4e90ba",
+					"size": 3146,
+					"sourceHash": "1ac750eef5c81e55605f17a912f4d6d274c5dfa40da9601aa865da470d082cd2",
+					"status": "content"
+				},
+				"spec/fs/boot-directory-spec.js": {
+					"match": false,
+					"packageHash": "76083aa4d3893dce991f969ca3862c7cdb1892d2e4315a4cc761ebcd084bcfef",
+					"size": 790,
+					"status": "missing-in-source"
+				},
+				"spec/fs/issues/1-spec.js": {
+					"match": false,
+					"packageHash": "469d04ef776b6241589d3b2332696dc9fc9c12c477cf2d53fde9e67cffe11912",
+					"size": 728,
+					"status": "missing-in-source"
+				},
+				"spec/fs/make-tree-spec.js": {
+					"match": false,
+					"packageHash": "a84d18d7b9736c3e1a59944acf97ffdb3dc0c3e073caa7bb18141356d729278a",
+					"size": 1986,
+					"status": "missing-in-source"
+				},
+				"spec/fs/mock/copy-tree-spec.js": {
+					"match": false,
+					"packageHash": "c5fc8fa897fcd01b4ff24ea98becba143fab3e1cccb96354022f967df4c9c46a",
+					"size": 1383,
+					"status": "missing-in-source"
+				},
+				"spec/fs/mock/fixture/hello.txt": {
+					"match": false,
+					"packageHash": "c98c24b677eff44860afea6f493bbaec5bb1c4cbb209c6fc2bbb47f66ff2ad31",
+					"size": 14,
+					"status": "missing-in-source"
+				},
+				"spec/fs/mock/link-spec.js": {
+					"match": false,
+					"packageHash": "7e9ee698f9b2aec6906459b3fc69e0dd040dbef1ce0083ae86b485adff1c2d1d",
+					"size": 1724,
+					"status": "missing-in-source"
+				},
+				"spec/fs/mock/make-tree-spec.js": {
+					"match": false,
+					"packageHash": "9fd59b4a194e7f8a6e8f1e41ea32cfbd77615d27a7b91700c7a5f8e931fe41cd",
+					"size": 2572,
+					"status": "missing-in-source"
+				},
+				"spec/fs/mock/merge-spec.js": {
+					"match": false,
+					"packageHash": "ffea6d855be9e9f6388eb413c623f58d5fb5d2cabb6f7f14a187b55ed97280ec",
+					"size": 1538,
+					"status": "missing-in-source"
+				},
+				"spec/fs/mock/move-spec.js": {
+					"match": false,
+					"packageHash": "bf59b2cf8f376265ec3fea1bfc4213b42aee6c60f34059745e6bb6cff8cd2ee4",
+					"size": 5747,
+					"status": "missing-in-source"
+				},
+				"spec/fs/mock/object-spec.js": {
+					"match": false,
+					"packageHash": "4cc0dbe5296c656f0262ebc399fb3e184325f37d654f90ab78c14d890eff36c4",
+					"size": 489,
+					"status": "missing-in-source"
+				},
+				"spec/fs/mock/range-spec.js": {
+					"match": false,
+					"packageHash": "f21bce56c982ae42125aa42fc0b62b723249405fef0e406344fd47fb63bf666a",
+					"size": 562,
+					"status": "missing-in-source"
+				},
+				"spec/fs/mock/read-spec.js": {
+					"match": false,
+					"packageHash": "ac618414c95e5f6b2ce75fc7fe1bfad2b8e0e95f51dc691e098ad11a1c37e621",
+					"size": 534,
+					"status": "missing-in-source"
+				},
+				"spec/fs/mock/remove-directory-spec.js": {
+					"match": false,
+					"packageHash": "db8f55bd71ad966290682888dc4bb34f2ba0541714cf6fa40259d9bfdfcdcf09",
+					"size": 889,
+					"status": "missing-in-source"
+				},
+				"spec/fs/mock/remove-tree-spec.js": {
+					"match": false,
+					"packageHash": "d8b44ddd616800b27b01c3f43b938a4d10deb2cc676d98a22f72e17b58509258",
+					"size": 784,
+					"status": "missing-in-source"
+				},
+				"spec/fs/mock/root-spec.js": {
+					"match": false,
+					"packageHash": "45ed9d7047794be5f08f043a3a8b0c3b8dd5c1f35f5b68e6599a548f88cd80f5",
+					"size": 693,
+					"status": "missing-in-source"
+				},
+				"spec/fs/mock/symbolic-link-spec.js": {
+					"match": false,
+					"packageHash": "90561c9408e9b5854c259096fc9827f9f5b56d9bce77ad026b35be7b11da0878",
+					"size": 2198,
+					"status": "missing-in-source"
+				},
+				"spec/fs/mock/working-directory-spec.js": {
+					"match": false,
+					"packageHash": "478bca31561120361c667e52cb896bff2cb1c0f36183d4558fb7f0b0f2e34827",
+					"size": 636,
+					"status": "missing-in-source"
+				},
+				"spec/fs/mock/write-spec.js": {
+					"match": false,
+					"packageHash": "e81eeab4129dcb5fb8f9b1c15274f002f0da072eb94f848c1ccbd4bcc1a8b144",
+					"size": 630,
+					"status": "missing-in-source"
+				},
+				"spec/fs/range-spec.js": {
+					"match": false,
+					"packageHash": "42f8d6b6538b45dd0a3a3f8396c3d06b6d2e6cc319f6dd1453751b0bf20c3def",
+					"size": 481,
+					"status": "missing-in-source"
+				},
+				"spec/fs/range-spec.txt": {
+					"match": false,
+					"packageHash": "a883dafc480d466ee04e0d6da986bd78eb1fdd2178d04693723da3a8f95d42f4",
+					"size": 5,
+					"status": "missing-in-source"
+				},
+				"spec/fs/relative-spec.js": {
+					"match": false,
+					"packageHash": "695e2c416887d80d26afcc6ab06b892c8529cef4022189be7a29050922fdaf9c",
+					"size": 997,
+					"status": "missing-in-source"
+				},
+				"spec/http/basic-spec.js": {
+					"match": false,
+					"packageHash": "e98265d26ec90b15c72c6fa96a7ba2018ebea493df98548e636e10f53bb205ee",
+					"size": 2584,
+					"status": "missing-in-source"
+				},
+				"spec/http-apps/cookie-spec.js": {
+					"match": false,
+					"packageHash": "fccf759922838ca27d893acc87466988ee8d022fbb7401f8a63354031a378e74",
+					"size": 1628,
+					"status": "missing-in-source"
+				},
+				"spec/http-apps/fixtures/1234.txt": {
+					"match": false,
+					"packageHash": "a883dafc480d466ee04e0d6da986bd78eb1fdd2178d04693723da3a8f95d42f4",
+					"size": 5,
+					"status": "missing-in-source"
+				},
+				"spec/http-apps/interpret-range-spec.js": {
+					"match": false,
+					"packageHash": "015e53d852faf285b97b0446dbcb29fd4629d8779875e7d04ca638a2539c6a90",
+					"size": 1641,
+					"status": "missing-in-source"
+				},
+				"spec/http-apps/partial-range-spec.js": {
+					"match": false,
+					"packageHash": "a7c5c2d88fd3468299b04b52d5c271de25688c007d36de7d928c68905ab8ccb8",
+					"size": 970,
+					"status": "missing-in-source"
+				},
+				"spec/http-apps/proxy-spec.js": {
+					"match": false,
+					"packageHash": "bb0cede1e148a23945d094ac82fc56082f1cb93214948f274e0c1a063a08f551",
+					"size": 2280,
+					"status": "missing-in-source"
+				},
+				"spec/lib/jasmine-promise.js": {
+					"match": false,
+					"packageHash": "619167335fddfe5ff213851018fd3a730a5a6d418f1f76fa2135e5f730fba564",
+					"size": 1360,
+					"status": "missing-in-source"
+				},
+				"writer.js": {
+					"diff": "--- published/writer.js\n+++ rebuilt/writer.js\n@@ -1,4 +1,4 @@\n-\n+/* global process:true */\n var Q = require(\"q\");\n \n /**\n@@ -11,21 +11,24 @@\n  * text writer.\n  */\n module.exports = Writer;\n+\n+var version = process.versions.node.split('.');\n+var supportsFinish = version[0] >= 1 || version[1] >= 10;\n+\n function Writer(_stream, charset) {\n     var self = Object.create(Writer.prototype);\n \n     if (charset && _stream.setEncoding) // TODO complain about inconsistency\n         _stream.setEncoding(charset);\n \n-    var begin = Q.defer();\n     var drained = Q.defer();\n \n     _stream.on(\"error\", function (reason) {\n-        begin.reject(reason);\n+        drained.reject(reason);\n+        drained = Q.defer();\n     });\n \n     _stream.on(\"drain\", function () {\n-        begin.resolve(self);\n         drained.resolve();\n         drained = Q.defer();\n     });\n@@ -40,6 +43,9 @@\n     self.write = function (content) {\n         if (!_stream.writeable && !_stream.writable)\n             return Q.reject(new Error(\"Can't write to non-writable (possibly closed) stream\"));\n+        if (typeof content !== \"string\") {\n+            content = new Buffer(content);\n+        }\n         if (!_stream.write(content)) {\n             return drained.promise;\n         } else {\n@@ -66,9 +72,25 @@\n      * flushing, and closed.\n      */\n     self.close = function () {\n+        var finished;\n+\n+        if (supportsFinish) { // new Streams, listen for `finish` event\n+            finished = Q.defer();\n+            _stream.on(\"finish\", function () {\n+                finished.resolve();\n+            });\n+            _stream.on(\"error\", function (reason) {\n+                finished.reject(reason);\n+            });\n+        }\n+\n         _stream.end();\n         drained.resolve(); // we will get no further drain events\n-        return Q.resolve(); // closing not explicitly observable\n+        if (finished) { // closing not explicitly observable\n+            return finished.promise;\n+        } else {\n+            return Q(); // just resolve for old Streams\n+        }\n     };\n \n     /***\n@@ -84,6 +106,8 @@\n         return Q.resolve(); // destruction not explicitly observable\n     };\n \n-    return Q.resolve(self); // todo returns the begin.promise\n+    self.node = _stream;\n+\n+    return Q(self); // todo returns the begin.promise\n }\n \n",
+					"match": false,
+					"packageHash": "1bea7fa47d137639cdacac1e0fa6e99a10675056fa429b682390695e49aed950",
+					"size": 2562,
+					"sourceHash": "65afeb855268bc279f58ff94892d0e156c1136359ed5ed3b66621d0b537b4139",
+					"status": "content"
+				},
+				".gitattributes": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".jshintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".jshintrc": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"CHANGES.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"deprecate.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"http-apps/chain.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"http-apps/content.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"http-apps/cookie.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"http-apps/decorators.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"http-apps/fs.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"http-apps/html.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"http-apps/json.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"http-apps/negotiate.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"http-apps/proxy.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"http-apps/redirect.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"http-apps/route.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"http-apps/status.js": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 15,
+				"matchingFiles": 2,
+				"missingInPackage": 17,
+				"missingInSource": 32,
+				"score": 0.030303030303030304,
+				"totalFiles": 66
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "call-bind-apply-helpers",
+				"version": "1.0.2"
+			},
+			{
+				"name": "call-bound",
+				"version": "1.0.4"
+			},
+			{
+				"name": "d",
+				"version": "1.0.2"
+			},
+			{
+				"name": "dunder-proto",
+				"version": "1.0.1"
+			},
+			{
+				"name": "es-define-property",
+				"version": "1.0.1"
+			},
+			{
+				"name": "es-errors",
+				"version": "1.3.0"
+			},
+			{
+				"name": "es-object-atoms",
+				"version": "1.1.2"
+			},
+			{
+				"name": "es5-ext",
+				"version": "0.10.64"
+			},
+			{
+				"name": "es6-iterator",
+				"version": "2.0.3"
+			},
+			{
+				"name": "es6-set",
+				"version": "0.1.6"
+			},
+			{
+				"name": "es6-symbol",
+				"version": "3.1.4"
+			},
+			{
+				"name": "esniff",
+				"version": "2.0.1"
+			},
+			{
+				"name": "event-emitter",
+				"version": "0.3.7"
+			},
+			{
+				"name": "ext",
+				"version": "1.7.0"
+			},
+			{
+				"name": "function-bind",
+				"version": "1.1.2"
+			},
+			{
+				"name": "get-intrinsic",
+				"version": "1.3.0"
+			},
+			{
+				"name": "get-proto",
+				"version": "1.0.1"
+			},
+			{
+				"name": "gopd",
+				"version": "1.2.0"
+			},
+			{
+				"name": "has-symbols",
+				"version": "1.1.0"
+			},
+			{
+				"name": "hasown",
+				"version": "2.0.4"
+			},
+			{
+				"name": "math-intrinsics",
+				"version": "1.1.0"
+			},
+			{
+				"name": "mime",
+				"version": "1.6.0"
+			},
+			{
+				"name": "mimeparse",
+				"version": "0.1.4"
+			},
+			{
+				"name": "next-tick",
+				"version": "1.1.0"
+			},
+			{
+				"name": "object-inspect",
+				"version": "1.13.4"
+			},
+			{
+				"name": "q",
+				"version": "1.5.1"
+			},
+			{
+				"name": "qs",
+				"version": "6.17.1"
+			},
+			{
+				"name": "side-channel",
+				"version": "1.1.1"
+			},
+			{
+				"name": "side-channel-list",
+				"version": "1.0.1"
+			},
+			{
+				"name": "side-channel-map",
+				"version": "1.0.1"
+			},
+			{
+				"name": "side-channel-weakmap",
+				"version": "1.0.2"
+			},
+			{
+				"name": "type",
+				"version": "2.7.3"
+			},
+			{
+				"name": "url2",
+				"version": "0.0.0"
+			}
+		]
+	}
+]

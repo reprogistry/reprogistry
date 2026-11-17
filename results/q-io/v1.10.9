@@ -1,0 +1,637 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-17T21:26:16.461Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:12.2.2",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "q-io@1.10.9",
+			"name": "q-io",
+			"version": "1.10.9",
+			"location": "https://registry.npmjs.org/q-io/-/q-io-1.10.9.tgz",
+			"integrity": "sha512-oaCkmPvkd/iAXs5MnZ3UBJFKQ5QNc3JKsryohWj00IRjEi2HNWwaHi7Yso84rdPjReoIoEX388ss/e9XVKJDmA==",
+			"publishedAt": "2014-02-10T19:55:20.999Z",
+			"publishedWith": {
+				"node": null,
+				"npm": "1.3.11"
+			},
+			"dependencies": {
+				"q": "~0.9.7",
+				"qs": "~0.1.0",
+				"url2": "~0.0.0",
+				"mime": "~1.2.11",
+				"mimeparse": "~0.1.4",
+				"collections": "~0.2.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "http://github.com/kriskowal/q-io.git",
+			"spec": "github:kriskowal/q-io#HEAD"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".npmignore": {
+					"match": false,
+					"packageHash": "4873b1e22285419e4ace146ddcd5391202c1a6ff7baa465fe03a11a72ebc5637",
+					"size": 5,
+					"status": "missing-in-source"
+				},
+				".travis.yml": {
+					"diff": "--- published/.travis.yml\n+++ rebuilt/.travis.yml\n@@ -1,3 +1,9 @@\n+sudo: false\n language: node_js\n node_js:\n-  - 0.8\n+  - 4\n+  - 6\n+  - 8\n+script:\n+  - npm run lint\n+  - npm run test\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "a74a0a320aa986067e3507230514cc33aaeb032d73512a58dea71693c59bda82",
+					"size": 35,
+					"sourceHash": "b26373dad5508180030db3594ea89083948b7d13fd916976addd89b36ab34bda",
+					"status": "content"
+				},
+				"CHANGES.md": {
+					"diff": "--- published/CHANGES.md\n+++ rebuilt/CHANGES.md\n@@ -1,9 +1,80 @@\n-<!-- vim:ts=4:sts=4:sw=4:et:tw=60 -->\n+## 1.13.6\n+ - Remove collections dependency and es6-set instead #168\n+ - Add tests for request cancelation support #124\n \n-## 1.10.9\n+## 1.13.5\n+ - Fix range header parsing RexExp DOS #165\n \n- - Fixes bug where the mock file system would not truncate before writing to an\n-   existing file. #81\n+## 1.13.3\n+ - Upgrade to qs@^1.2.2 to fix prototype Override Protection Bypass Vulnerability in qs.\n+\n+## 1.13.1\n+\n+ - Reverts the new read feature in 1.13.0 since this was backward incompatible\n+   and needs to be revisited.\n+\n+## 1.13.0\n+\n+ - Uses iconv-lite to understand more charsets on HTTP read. @Tomalak\n+\n+## 1.12.0\n+\n+ - Adds support for socket timeout on HTTP requests as `http.request({timeout:\n+   50})` @akiron\n+\n+## 1.11.5\n+\n+ - Allow HTTP requests to specified a false agent, per the underlying Node.js\n+   behavior. (@grahamjenson)\n+ - Use npm carat operator for dependencies. (@anton-rudeshko)\n+ - The Node.js response argument is no longer being forwarded to HTTP request\n+   handlers.\n+\n+## 1.11.4\n+\n+ - Fixes mock modification and access times.\n+\n+## 1.11.3\n+\n+ - Update dependency to Q 1.0.1.\n+ - Fix an invalid reference in HTTP apps.\n+\n+## 1.11.2\n+\n+ - Fix race condition in `copyTree`\n+ - Decode `pathInfo` in HTTP requests\n+ - Pass all options through HTTP requests to Node.js’s HTTP client.\n+ - Allow `listDirectories` override in HTTP file services. (@stuk)\n+\n+## 1.11.1\n+\n+ - Fix to `fs.reroot`, binding this properly (@Stuk)\n+ - `fs.reroot` no longer traverses into directory prefixes implicitly.\n+   We do not expect anyone was depending on this strange behavior,\n+   but do expect folks were not using `reroot` because of it.\n+ - Many missing methods added to RootFs (@3on)\n+ - HTTP request normalization has been greatly improved.\n+   Particularly, the ambiguity of `host` vs `hostname` is resolved.\n+   `host` stands for both the hostname and the port, but only includes the port\n+   if it differs from the default port for the protocol.\n+   HTTP requests will normalize any combination of `host`, `port`, and\n+   `hostname`.\n+   The cookie jar HTTP application adapter has been updated.\n+ - Support for URL authorization has been improved. If you use the `auth`\n+   portion of a URL, it will be implicitly normalized to the corresponding\n+   `Authorization` header, for basic HTTP auth.\n+   Note that the convention in Q-IO is to use lower-case for all input and\n+   output headers, since they are case-insensitive.\n+ - MockFS now handles file modes properly (@Stuk)\n+ - `fs.copyTree` fixed for duplicate file modes (@Stuk)\n+ - Fix for HTTP clients on Node.js 0.11, which changed how it interprets the\n+   `agent` option.\n+ - Fixed a bug, NodeWriter was missing a `node` property, referring back to the\n+   Node.js writable stream.\n+\n+## 1.11.0\n+\n+ - Adds `removeDirectory` and `statLink` to the Mock file system interface.\n \n ## 1.10.7-8\n \n",
+					"match": false,
+					"packageHash": "06854ed1bef6ebd551a28b7da17638adb96bb5d4942586fd40070c4366bc572b",
+					"size": 2550,
+					"sourceHash": "5cf396161b6b056bf41853cd469414e410d863fda9c924f54a6fa25de872c623",
+					"status": "content"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,7 +1,8 @@\n+# Q-IO\n \n-[![Build Status](https://secure.travis-ci.org/kriskowal/q-io.png)](http://travis-ci.org/kriskowal/q-io)\n+[![npm version](https://img.shields.io/npm/v/q-io.svg?style=flat)](https://www.npmjs.com/package/q-io)\n \n-# Q-IO\n+[![Build Status](https://secure.travis-ci.org/kriskowal/q-io.png?branch=v1)](http://travis-ci.org/kriskowal/q-io)\n \n Interfaces for IO that make use of promises.\n \n@@ -164,13 +165,13 @@\n using `copyTree(source, target)` and, if completely successful,\n `removeTree(source)`.\n \n-### link(source, taget)\n+### link(source, target)\n \n Creates a hard link from the source\n \n ### symbolicCopy(source, target, type)\n \n-Creates a relative symoblic link from the target to the source with an\n+Creates a relative symbolic link from the target to the source with an\n effect that resembles copying a file.\n \n The type is important for Windows.  It is \"file\" by default, but may be\n@@ -192,7 +193,7 @@\n \n ### stat(path)\n \n-Follows all symoblic links along a path and returns a promise for the\n+Follows all symbolic links along a path and returns a promise for the\n metadata about a path as a `Stats` object.  The Stats object implements:\n \n -   `size` the size of the file in bytes\n@@ -230,7 +231,7 @@\n \n ### exists(path)\n \n-Follows symoblic links and returns a promise for whether an entry exists\n+Follows symbolic links and returns a promise for whether an entry exists\n at a given path.\n \n ### isFile(path)\n@@ -443,16 +444,16 @@\n The `http` module exports a `request` function that returns a promise\n for a response.\n \n--   accepts a request or a URL string.\n--   returns a promise for a response.\n+-   accepts a [request object](\\#request) or a URL string.\n+-   returns a promise for a [response object](\\#response).\n \n ### read(request object or url)\n \n The `http` module exports a `read` function, analogous to\n-`Fs.read(path)`, but returning a promise for the contento of an OK HTTP\n+`Fs.read(path)`, but returning a promise for the content of an OK HTTP\n response.\n \n--   accepts a request or a URL string.\n+-   accepts a [request object](\\#request) or a URL string.\n -   returns a promise for the response body as a string provided\n     that the request is successful with a 200 status.\n     -   rejects the promise with the response as the reason for\n@@ -471,7 +472,7 @@\n     a singal to the requester that the responder has taken control of\n     the response stream.\n \n-### request\n+### Request\n \n A complete request object has the following properties.\n \n@@ -484,8 +485,9 @@\n     if no routing has occurred.\n -   ``version`` the requested HTTP version as an array of strings.\n -   ``method`` like ``\"GET\"``\n--   ``scheme`` like ``\"http:\"``\n--   ``host`` like ``\"example.com\"``\n+-   ``scheme`` like ``\"http\"``\n+-   ``host`` like ``\"example.com\"`` in case of default ports (80 or 443), otherwise like ``example.com:8080``\n+-   ``hostname`` like ``\"example.com\"``\n -   ``port`` the port number, like ``80``\n -   ``remoteHost``\n -   ``remotePort``\n@@ -497,16 +499,21 @@\n     or [HTTPS](http://nodejs.org/api/https.html#https_class_https_agent)\n     agent. HTTP and HTTPS agents can implement custom socket pools,\n     allow use of SSL client certificates and self-signed certificates.\n--   ``body``\n+-   ``body`` an array of string or node buffers\n+-   ``timeout`` an optional socket timeout in miliseconds to thread through to\n+    the HTTP agent.\n -   ``node`` the wrapped Node request object\n+-   ``cancelled`` a promise that indicates by rejection that the HTTP request\n+    should be aborted and the response promise should be rejected with the given\n",
+					"match": false,
+					"packageHash": "d8d49ea3d3a4b696fea5fb75af60a4574d787f12c9e2459d15fc59f1eec356a2",
+					"size": 29358,
+					"sourceHash": "ca692e1d962b8d29c9f021ac5105a9c150d3082031577e6e1b4e99a2afd6a0d5",
+					"status": "content"
+				},
+				"coverage-report.js": {
+					"diff": "--- published/coverage-report.js\n+++ rebuilt/coverage-report.js\n@@ -1,5 +1,5 @@\n+/* global __dirname:true */\n \n-require(\"collections/shim\");\n var Q = require(\"q\");\n var FS = require(\"./fs\");\n \n@@ -22,7 +22,8 @@\n             console.log(\"        </tr>\");\n             console.log(\"    </thead>\");\n             console.log(\"    <tbody>\");\n-            Object.forEach(coverage.files, function (file, path) {\n+            Object.keys(coverage.files).forEach(function (path) {\n+                var file = coverage.files[path];\n                 path = FS.relativeFromDirectory(__dirname, path);\n                 if (/^spec/.test(path))\n                     return;\n",
+					"match": false,
+					"packageHash": "7ec107f65f9a578cc89809b498a74007a97da4a85f552d565a495c9a5bf7baff",
+					"size": 1639,
+					"sourceHash": "dde726457ddeec0132a10624f7543024fa2c2992f68c235aed6630dc5e15df05",
+					"status": "content"
+				},
+				"deprecate.js": {
+					"diff": "--- published/deprecate.js\n+++ rebuilt/deprecate.js\n@@ -11,8 +11,9 @@\n  * @param {Number} [stackTraceLimit] - depth of the stack trace to print out. Set to falsy value to disable stack.\n  */\n exports.deprecationWarning = function deprecationWarning(name, alternative, stackTraceLimit) {\n+    var depth;\n     if (stackTraceLimit) {\n-        var depth = Error.stackTraceLimit;\n+        depth = Error.stackTraceLimit;\n         Error.stackTraceLimit = stackTraceLimit;\n     }\n     if (typeof console !== \"undefined\" && typeof console.warn === \"function\") {\n@@ -43,7 +44,7 @@\n exports.deprecateMethod = function deprecate(scope, deprecatedFunction, name, alternative) {\n     var deprecationWrapper = function () {\n         // stackTraceLimit = 3 // deprecationWarning + deprecate + caller of the deprecated method\n-        deprecationWarning(name, alternative, 3);\n+        exports.deprecationWarning(name, alternative, 3);\n         return deprecatedFunction.apply(scope ? scope : this, arguments);\n     };\n     deprecationWrapper.deprecatedFunction = deprecatedFunction;\n",
+					"match": false,
+					"packageHash": "ef527ff7391a908b3cbf92aedabd579ef263ebc96fe9c22a6eb442513a6b8996",
+					"size": 2283,
+					"sourceHash": "7ca104b970b480dacb1449c99b8cef1cc56f0f872ed885d9ff04e14df35aea57",
+					"status": "content"
+				},
+				"fs-boot.js": {
+					"diff": "--- published/fs-boot.js\n+++ rebuilt/fs-boot.js\n@@ -1,3 +1,5 @@\n+/* global process:false, FS_BOOT:true */\n+\n (function (exports) {\n \n // -- kriskowal Kris Kowal Copyright (C) 2009-2010 MIT License\n@@ -15,8 +17,9 @@\n /*whatsupdoc*/\n /*markup markdown*/\n \n+var ESCAPE_REG_EXP = /[-[\\]{}()*+?.\\\\^$|,#\\s]/g;\n var regExpEscape = function (str) {\n-    return str.replace(/[-[\\]{}()*+?.\\\\^$|,#\\s]/g, \"\\\\$&\");\n+    return str.replace(ESCAPE_REG_EXP, \"\\\\$&\");\n };\n \n var path = require(\"path\");\n@@ -52,6 +55,7 @@\n /**\n  * @function\n  */\n+\n exports.SEPARATORS_RE = function () {\n     if (\n         separatorCached !== exports.SEPARATOR ||\n@@ -60,8 +64,8 @@\n         separatorCached = exports.SEPARATOR;\n         altSeparatorCached = exports.ALT_SEPARATOR;\n         separatorReCached = new RegExp(\"[\" +\n-            (separatorCached || \"\").replace(/[-[\\]{}()*+?.\\\\^$|,#\\s]/g, \"\\\\$&\") +\n-            (altSeparatorCached || \"\").replace(/[-[\\]{}()*+?.\\\\^$|,#\\s]/g, \"\\\\$&\") +\n+            (separatorCached || \"\").replace(ESCAPE_REG_EXP, \"\\\\$&\") +\n+            (altSeparatorCached || \"\").replace(ESCAPE_REG_EXP, \"\\\\$&\") +\n         \"]\", \"g\");\n     }\n     return separatorReCached;\n@@ -120,8 +124,9 @@\n     var parents = [];\n     var children = [];\n     var leaf = \"\";\n+    var path;\n     for (var i = 0; i < arguments.length; i++) {\n-        var path = String(arguments[i]);\n+        path = String(arguments[i]);\n         if (path == \"\")\n             continue;\n         var parts = path.split(exports.SEPARATORS_RE());\n@@ -150,10 +155,15 @@\n             } else {\n                 children.push(part);\n             }\n-        };\n+        }\n     }\n+\n     path = parents.concat(children).join(exports.SEPARATOR);\n-    if (path) leaf = exports.SEPARATOR + leaf;\n+    \n+    if (path) {\n+        leaf = exports.SEPARATOR + leaf;\n+    }\n+\n     return root + path + leaf;\n };\n \n@@ -168,8 +178,9 @@\n     var root = \"\";\n     var parents = [];\n     var children = [];\n+    var path;\n     for (var i = 0, ii = arguments.length; i < ii; i++) {\n-        var path = String(arguments[i]);\n+        path = String(arguments[i]);\n         // empty paths have no affect\n         if (path === \"\")\n             continue;\n",
+					"match": false,
+					"packageHash": "0020bc36e1268244e352f422ce4241fe0f0e55dc2949a9a8ee0ef9c6372318bc",
+					"size": 8869,
+					"sourceHash": "d507fd9df7dbb07ca20606a8f81577cd33788a4eee312ad9b761a61704bdd286",
+					"status": "content"
+				},
+				"fs-common.js": {
+					"diff": "--- published/fs-common.js\n+++ rebuilt/fs-common.js\n@@ -138,10 +138,14 @@\n \n     exports.copy = function (source, target) {\n         var self = this;\n-        return Q.spread([\n-            self.open(source, {flags: \"rb\"}),\n-            self.open(target, {flags: \"wb\"})\n-        ], function (reader, writer) {\n+        return Q.when(self.stat(source), function (stat) {\n+            var mode = stat.node.mode;\n+            return Q.all([\n+                self.open(source, {flags: \"rb\"}),\n+                self.open(target, {flags: \"wb\", mode: mode})\n+            ]);\n+        })\n+        .spread(function (reader, writer) {\n             return Q.when(reader.forEach(function (block) {\n                 return writer.write(block);\n             }), function () {\n@@ -160,20 +164,20 @@\n                 return self.copy(source, target);\n             } else if (stat.isDirectory()) {\n                 return self.exists(target).then(function (targetExists) {\n-                    var copySubTree = Q.when(self.list(source), function (list) {\n-                        return Q.all(list.map(function (child) {\n-                            return self.copyTree(\n-                                self.join(source, child),\n-                                self.join(target, child)\n-                            );\n-                        }));\n-                    });\n+                    function copySubTree() {\n+                        return Q.when(self.list(source), function (list) {\n+                            return Q.all(list.map(function (child) {\n+                                return self.copyTree(\n+                                    self.join(source, child),\n+                                    self.join(target, child)\n+                                );\n+                            }));\n+                        });\n+                    }\n                     if (targetExists) {\n-                        return copySubTree;\n+                        return copySubTree();\n                     } else {\n-                        return Q.when(self.makeDirectory(target), function () {\n-                            return copySubTree;\n-                        });\n+                        return Q.when(self.makeDirectory(target, stat.node.mode), copySubTree);\n                     }\n                 });\n             } else if (stat.isSymbolicLink()) {\n@@ -196,8 +200,9 @@\n         return Q.when(stat, function (stat) {\n             var paths = [];\n             var mode; // true:include, false:exclude, null:no-recur\n+            var include;\n             try {\n-                var include = guard(basePath, stat);\n+                include = guard(basePath, stat);\n             } catch (exception) {\n                 return Q.reject(exception);\n             }\n@@ -412,18 +417,7 @@\n     function reroot(path) {\n         var self = this;\n         path = path || this.ROOT;\n-        return Q.when(this.list(path), function (list) {\n-            if (list.length !== 1)\n-                return RootFs(self, path);\n-            var nextPath = self.join(path, list[0]);\n-            return Q.when(self.stat(nextPath), function (stat) {\n-                if (stat.isDirectory()) {\n-                    return reroot(nextPath);\n-                } else {\n-                    return RootFs(self, path);\n-                }\n-            });\n-        });\n+        return RootFs(self, path);\n     }\n \n     exports.toObject = function (path) {\n",
+					"match": false,
+					"packageHash": "3edcb0afd7507cec025f65a11c125596425d64dad708c1b0a9cfba2456f0a676",
+					"size": 16151,
+					"sourceHash": "3593f675e7d062ae65f532a29f56f3a0b4decc414e5038caed05af5aca1a822f",
+					"status": "content"
+				},
+				"fs-mock.js": {
+					"diff": "--- published/fs-mock.js\n+++ rebuilt/fs-mock.js\n@@ -4,7 +4,7 @@\n var Common = require(\"./fs-common\");\n var BufferStream = require(\"./buffer-stream\");\n var Reader = require(\"./reader\");\n-var Set = require(\"collections/set\");\n+var Set = require(\"es6-set\");\n \n module.exports = MockFs;\n \n@@ -61,7 +61,7 @@\n         path = self.absolute(path);\n         var node = self._root._walk(path)._follow(path);\n         if (!node.isDirectory()) {\n-            new Error(\"Can't list non-directory: \" + JSON.stringify(path));\n+            throw new Error(\"Can't list non-directory: \" + JSON.stringify(path));\n         }\n         return Object.keys(node._entries).sort();\n     });\n@@ -91,16 +91,20 @@\n         if (!binary) {\n             charset = charset || \"utf-8\";\n         }\n-        if (write || append) {\n+        var fileNode;\n+        if (write || append) { // write\n             if (!node._entries[base]) {\n                 node._entries[base] = new FileNode(this);\n+                if (\"mode\" in options) {\n+                    node._entries[base].mode = options.mode;\n+                }\n             }\n-            var fileNode = node._entries[base]._follow(path);\n+            fileNode = node._entries[base]._follow(path);\n             if (!fileNode.isFile()) {\n                 throw new Error(\"Can't write non-file \" + path);\n             }\n-            fileNode._modified = new Date();\n-            fileNode._accessed = new Date();\n+            fileNode.mtime = Date.now();\n+            fileNode.atime = Date.now();\n             if (!append) {\n                 fileNode._chunks.length = 0;\n             }\n@@ -109,11 +113,11 @@\n             if (!node._entries[base]) {\n                 throw new Error(\"Can't read non-existant \" + path);\n             }\n-            var fileNode = node._entries[base]._follow(path);\n+            fileNode = node._entries[base]._follow(path);\n             if (!fileNode.isFile()) {\n                 throw new Error(\"Can't read non-file \" + path);\n             }\n-            fileNode._accessed = new Date();\n+            fileNode.atime = Date.now();\n             if (\"begin\" in options && \"end\" in options) {\n                 return new BufferStream(\n                     [\n@@ -123,7 +127,9 @@\n                     charset\n                 );\n             } else {\n-                return new BufferStream(fileNode._chunks, charset);\n+                // Clone chunks to avoid side effect\n+                var bufferChunks = fileNode._chunks.slice();\n+                return new BufferStream(bufferChunks, charset);\n             }\n         }\n     });\n@@ -149,27 +155,31 @@\n     });\n };\n \n-MockFs.prototype.makeDirectory = function (path) {\n+MockFs.prototype.makeDirectory = function (path, mode) {\n     var self = this;\n     return Q.fcall(function () {\n         path = self.absolute(path);\n         var directory = self.directory(path);\n         var name = self.base(path);\n         var node = self._root._walk(directory);\n+        var error;\n         if (!node.isDirectory()) {\n-            var error =  new Error(\"Can't make directory in non-directory: \" + path);\n+            error =  new Error(\"Can't make directory in non-directory: \" + path);\n             error.code = \"EEXISTS\";\n             error.exists = true;\n             throw error;\n         }\n         if (node._entries[name]) {\n-            var error = new Error(\"Can't make directory. Entry exists: \" + path);\n+            error = new Error(\"Can't make directory. Entry exists: \" + path);\n             error.code = \"EISDIR\";\n             error.exists = true;\n             error.isDirectory = true;\n             throw error;\n         }\n         node._entries[name] = new DirectoryNode(self);\n+        if (mode) {\n",
+					"match": false,
+					"packageHash": "4eaf1dde1ad43060e53b06c360d482d4a8fa7bd68cbaea82cd39c6f10be8bc9d",
+					"size": 16491,
+					"sourceHash": "19fe46c92420c8dbdde61159549246efd8dc6939768fff69dd60e3e87da052bd",
+					"status": "content"
+				},
+				"fs-root.js": {
+					"diff": "--- published/fs-root.js\n+++ rebuilt/fs-root.js\n@@ -81,6 +81,14 @@\n         });\n     };\n \n+    inner.statLink = function (path) {\n+        return attenuate(path).then(function (path) {\n+            return outer.statLink(path.outer);\n+        }).then(null, function (reason) {\n+            return Q.reject(\"Can't statLink \" + JSON.stringify(path));\n+        });\n+    };\n+\n     inner.canonical = function (path) {\n         return attenuate(path).then(function (path) {\n             return path.inner;\n@@ -97,6 +105,38 @@\n         });\n     };\n \n+    inner.removeDirectory = function (path) {\n+        return attenuate(path).then(function (path) {\n+            return outer.removeDirectory(path.outer);\n+        }).catch(function (error) {\n+            throw new Error(\"Can't remove directory \" + JSON.stringify(path));\n+        });\n+    };\n+\n+    inner.remove = function (path) {\n+        return attenuate(path).then(function (path) {\n+            return outer.remove(path.outer);\n+        }).catch(function (error) {\n+            throw new Error(\"Can't remove \" + JSON.stringify(path));\n+        });\n+    };\n+\n+    inner.makeTree = function (path) {\n+        return attenuate(path).then(function (path) {\n+            return outer.makeTree(path.outer);\n+        }).catch(function (error) {\n+            throw new Error(\"Can't make tree \" + JSON.stringify(path));\n+        });\n+    };\n+\n+    inner.removeTree = function (path) {\n+        return attenuate(path).then(function (path) {\n+            return outer.removeTree(path.outer);\n+        }).catch(function (error) {\n+            throw new Error(\"Can't remove tree \" + JSON.stringify(path));\n+        });\n+    };\n+\n     return Q.when(outer.canonical(root), function (_root) {\n         root = _root;\n         return inner;\n",
+					"match": false,
+					"packageHash": "4812f335863c23e6fe334b22bf3925268798a25e44bea6fb8e8de20baf5ca7fe",
+					"size": 3385,
+					"sourceHash": "d03b9a17fc37835851874bd38768fac9772b5810cbc4cac210e9e0653abc0b71",
+					"status": "content"
+				},
+				"fs.js": {
+					"diff": "--- published/fs.js\n+++ rebuilt/fs.js\n@@ -1,3 +1,5 @@\n+/* global process:true */\n+\n /**\n  * An asynchronous local file system API, based on a subset\n  * of the `narwhal/fs` API and the `narwhal/promise` API,\n@@ -79,11 +81,12 @@\n     } else {\n         charset = charset || 'utf-8';\n     }\n+    var stream;\n     if (flags.indexOf(\"w\") >= 0 || flags.indexOf(\"a\") >= 0) {\n-        var stream = FS.createWriteStream(String(path), nodeOptions);\n+        stream = FS.createWriteStream(String(path), nodeOptions);\n         return Writer(stream, charset);\n     } else {\n-        var stream = FS.createReadStream(String(path), nodeOptions);\n+        stream = FS.createReadStream(String(path), nodeOptions);\n         return Reader(stream, charset);\n     }\n });\n",
+					"match": false,
+					"packageHash": "5d7a4440409cfa973f37a7bf82134bb50ab91e507d7e080f9afa1129dc8b3dfa",
+					"size": 10552,
+					"sourceHash": "67d48df58a6eb20b3e4a9a2978140f1e91462c8afd09544d71a1b2f4c5001e52",
+					"status": "content"
+				},
+				"http-apps/chain.js": {
+					"diff": "--- published/http-apps/chain.js\n+++ rebuilt/http-apps/chain.js\n@@ -1,12 +1,13 @@\n \n module.exports = Chain;\n+\n function Chain(end) {\n     var self = Object.create(Chain.prototype);\n     self.end = end || function (next) {\n         return next;\n     };\n     return self;\n-};\n+}\n \n Chain.prototype.use = function (App /*, ...args*/) {\n     if (!App) throw new Error(\"App is not defined after \" + this.app);\n@@ -21,4 +22,3 @@\n     this.app = App;\n     return this;\n };\n-\n",
+					"match": false,
+					"packageHash": "0c29c70c25342365f3a3655ae3af19b8b92af34dd6ade2366118105227537f1e",
+					"size": 684,
+					"sourceHash": "3af6ea5689af35dfc8ed50393924c7a9a1febeba3ed55951bb700d03abce6abc",
+					"status": "content"
+				},
+				"http-apps/content.js": {
+					"diff": "--- published/http-apps/content.js\n+++ rebuilt/http-apps/content.js\n@@ -1,3 +1,5 @@\n+/* global inspect:true */\n+\n var Q = require(\"q\");\n var Negotiate = require(\"./negotiate\");\n var QS = require(\"qs\");\n@@ -13,14 +15,8 @@\n  * @returns {App} a Q-JSGI app\n  */\n exports.Content = function (body, contentType, status) {\n-    return function (request, response) {\n-        return {\n-            \"status\": status || 200,\n-            \"headers\": {\n-                \"content-type\": contentType || \"text/plain\"\n-            },\n-            \"body\": body || \"\"\n-        };\n+    return function () {\n+        return exports.content(body, contentType, status);\n     };\n };\n \n",
+					"match": false,
+					"packageHash": "ab261f1d6611da0984e1a6d97bb277b695bd59a640b398bd4f399a5edae82bf4",
+					"size": 2429,
+					"sourceHash": "a37de25f15737d530f16ee281bdcd2fe81168d58229de651fff95ba4d670ac7d",
+					"status": "content"
+				},
+				"http-apps/cookie.js": {
+					"diff": "--- published/http-apps/cookie.js\n+++ rebuilt/http-apps/cookie.js\n@@ -1,61 +1,62 @@\n \n var Q = require(\"q\");\n var Cookie = require(\"../http-cookie\");\n+Q.longStackSupport = true;\n \n exports.CookieJar = function (app) {\n     var hostCookies = {}; // to {} of pathCookies to [] of cookies\n     return function (request) {\n \n+        if (!request.headers.host) {\n+            throw new Error(\"Requests must have a host header\");\n+        }\n         var hosts = allHostsContaining(request.headers.host);\n \n         var now = new Date();\n \n-        var requestCookies = concat(hosts.map(function (host) {\n-\n-            // delete expired cookies\n-            for (var host in hostCookies) {\n-                var pathCookies = hostCookies[host];\n-                for (var path in pathCookies) {\n-                    var cookies = pathCookies[path];\n-                    for (var name in cookies) {\n-                        var cookie = cookies[name];\n-                        if (cookie.expires && cookie.expires > now) {\n-                            delete cookie[name];\n-                        }\n+        // delete expired cookies\n+        for (var host in hostCookies) {\n+            var pathCookies = hostCookies[host];\n+            for (var path in pathCookies) {\n+                var cookies = pathCookies[path];\n+                for (var name in cookies) {\n+                    var cookie = cookies[name];\n+                    if (cookie.expires && cookie.expires > now) {\n+                        delete cookie[name];\n                     }\n                 }\n             }\n+        }\n \n-            // collect applicable cookies\n-            return concat(\n-                Object.keys(hostCookies)\n-                .map(function (host) {\n-                    if (!hostContains(host, request.headers.host))\n-                        return [];\n-                    var pathCookies = hostCookies[host];\n-                    return concat(\n-                        Object.keys(pathCookies)\n-                        .map(function (path) {\n-                            if (!pathContains(path, request.path))\n-                                return [];\n-                            var cookies = pathCookies[path];\n-                            return (\n-                                Object.keys(cookies)\n-                                .map(function (name) {\n-                                    return cookies[name];\n-                                })\n-                                .filter(function (cookie) {\n-                                    return cookie.secure ?\n-                                        request.ssl :\n-                                        true;\n-                                })\n-                            );\n-                        })\n-                    )\n-                })\n-            );\n-\n-        }));\n+        // collect applicable cookies\n+        var requestCookies = concat(\n+            Object.keys(hostCookies)\n+            .map(function (host) {\n+                if (!hostContains(host, request.headers.host)) {\n+                    return [];\n+                }\n+                var pathCookies = hostCookies[host];\n+                return concat(\n+                    Object.keys(pathCookies)\n+                    .map(function (path) {\n+                        if (!pathContains(path, request.path))\n+                            return [];\n+                        var cookies = pathCookies[path];\n+                        return (\n+                            Object.keys(cookies)\n+                            .map(function (name) {\n+                                return cookies[name];\n+                            })\n+                            .filter(function (cookie) {\n+                                return cookie.secure ?\n+                                    request.ssl :\n+                                    true;\n+                            })\n+                        );\n",
+					"match": false,
+					"packageHash": "e8d209458cd19a4bbd4b7eefa1dbcf82e6a5a822ef8adaf7fad44d4f1d8ae1fb",
+					"size": 5162,
+					"sourceHash": "53a355411a913bd36717106c18d75497e5ea4f8274f9cd5f80564393a3965851",
+					"status": "content"
+				},
+				"http-apps/decorators.js": {
+					"diff": "--- published/http-apps/decorators.js\n+++ rebuilt/http-apps/decorators.js\n@@ -6,7 +6,7 @@\n \n exports.Normalize = function (app) {\n     return function (request, response) {\n-        var request = HTTP.normalizeRequest(request);\n+        request = HTTP.normalizeRequest(request);\n         return Q.when(app(request, response), function (response) {\n             return HTTP.normalizeResponse(response);\n         });\n",
+					"match": false,
+					"packageHash": "c15cd4965c36b5199d08886f09480db61ef5505fd8bef81068370378164453a9",
+					"size": 5102,
+					"sourceHash": "2cf9f8ebdaf27beb418b1adaa331e73c8a1941a2c65e88e129185c7548707175",
+					"status": "content"
+				},
+				"http-apps/fs.js": {
+					"diff": "--- published/http-apps/fs.js\n+++ rebuilt/http-apps/fs.js\n@@ -101,9 +101,10 @@\n             // Invalid cache\n             if (\n                 \"if-range\" in request.headers &&\n-                etag != request.headers[\"if-range\"]\n+                    etag != request.headers[\"if-range\"]\n             ) {\n                 // Normal 200 for entire, altered content\n+                range = null;\n             } else {\n                 // Truncate to the first requested continuous range\n                 range = interpretFirstRange(request.headers[\"range\"], stat.size);\n@@ -149,7 +150,6 @@\n     });\n };\n \n-var rangesExpression = /^\\s*bytes\\s*=\\s*(\\d*\\s*-\\s*\\d*\\s*(?:,\\s*\\d*\\s*-\\s*\\d*\\s*)*)$/;\n var rangeExpression = /^\\s*(\\d*)\\s*-\\s*(\\d*)\\s*$/;\n \n var interpretRange = function (text, size) {\n@@ -176,19 +176,27 @@\n };\n \n var interpretFirstRange = exports.interpretFirstRange = function (text, size) {\n-    var match = rangesExpression.exec(text);\n-    if (!match)\n+    var index = text.indexOf('=');\n+    if (index === -1) {\n         return;\n-    var texts = match[1].split(/\\s*,\\s*/);\n-    var range = interpretRange(texts[0], size);\n-    for (var i = 0, ii = texts.length; i < ii; i++) {\n-        var next = interpretRange(texts[i], size);\n-        if (next.begin <= range.end) {\n+    }\n+\n+    // split the range string\n+    var range,\n+        arr = text.slice(index + 1).split(',');\n+    \n+    // parse all ranges\n+    for (var i = 0; i < arr.length; i++) {\n+        var next = interpretRange(arr[i], size);\n+        if (!range) {\n+            range = next;\n+        } else if (next.begin <= range.end) {\n             range.end = next.end;\n         } else {\n             return; // Can't satisfy non-contiguous ranges TODO\n         }\n     }\n+\n     return range;\n };\n \n@@ -225,7 +233,7 @@\n         return Q.fcall(app, request)\n         .then(function (response) {\n             if (response.directory !== void 0) {\n-                return exports.listDirectory(request, response);\n+                return listDirectory(request, response);\n             } else {\n                 return response;\n             }\n@@ -365,7 +373,7 @@\n             }, function () {\n                 // ignore unstatable entries\n             });\n-        })\n+        });\n     })\n     .all()\n     .then(function (stats) {\n",
+					"match": false,
+					"packageHash": "e841f8e9673f20d44f4c4c46a02b727a5b11333b4615a71f082b132f77c281a2",
+					"size": 14025,
+					"sourceHash": "18d7cd104a3564da6fdbb2154194dac36a572002b5761e4aabd06584c570a62b",
+					"status": "content"
+				},
+				"http-apps/json.js": {
+					"diff": "--- published/http-apps/json.js\n+++ rebuilt/http-apps/json.js\n@@ -50,12 +50,13 @@\n  * @returns {Response}\n  */\n exports.json = function (content, reviver, tabs) {\n+    var json;\n     try {\n-        var json = JSON.stringify(content, reviver, tabs);\n+        json = JSON.stringify(content, reviver, tabs);\n     } catch (exception) {\n         return Q.reject(exception);\n     }\n-    return Content.ok([json]);\n+    return Content.ok([json], \"application/json\");\n };\n \n /**\n@@ -67,8 +68,9 @@\n     if (!badRequest)\n         badRequest = Status.badRequest;\n     return Content.ContentRequest(function (content, request, response) {\n+        var object;\n         try {\n-            var object = JSON.parse(content);\n+            object = JSON.parse(content);\n         } catch (error) {\n             return badRequest(request, error);\n         }\n",
+					"match": false,
+					"packageHash": "0e9460e40dc9d2c85ae3f92245cc34e9664aad6b8472f7ac48f212fe86f9da2e",
+					"size": 2231,
+					"sourceHash": "141ee1dab69f77db4e978d28ddce0ed811ff26ef821af114009f3f41052852e2",
+					"status": "content"
+				},
+				"http-apps/negotiate.js": {
+					"diff": "--- published/http-apps/negotiate.js\n+++ rebuilt/http-apps/negotiate.js\n@@ -18,15 +18,14 @@\n  * @returns {App}\n  */\n exports.Method = function (methods, methodNotAllowed) {\n-    var keys = Object.keys(methods);\n     if (!methodNotAllowed)\n-        methodNotAllowed = exports.methodNotAllowed;\n-    return function (request, response) {\n+        methodNotAllowed = Status.methodNotAllowed;\n+    return function (request) {\n         var method = request.method;\n-        if (Object.has(keys, method)) {\n-            return Object.get(methods, method)(request, response);\n+        if (Object.prototype.hasOwnProperty.call(methods, method) !== -1) {\n+            return methods[method](request);\n         } else {\n-            return methodNotAllowed(request, response);\n+            return methodNotAllowed(request);\n         }\n     };\n };\n@@ -41,8 +40,8 @@\n             var type = MimeParse.bestMatch(keys, accept);\n             request.terms = request.terms || {};\n             request.terms[responseHeader] = type;\n-            if (Object.has(keys, type)) {\n-                return Q.when(types[type](request, response), function (response) {\n+            if (keys.indexOf(type) !== -1) {\n+                return Q.when(types[type](request), function (response) {\n                     if (\n                         respond !== null &&\n                         response &&\n@@ -111,9 +110,9 @@\n \n // Branch on a selector function based on the request\n exports.Select = function (select) {\n-    return function (request, response) {\n-        return Q.when(select(request, response), function (app) {\n-            return app(request, response);\n+    return function (request) {\n+        return Q.when(select(request), function (app) {\n+            return app(request);\n         });\n     };\n };\n",
+					"match": false,
+					"packageHash": "9384678da3c825c08ab9d89d41da6557944de11268b326040501feb3b3d5102a",
+					"size": 3919,
+					"sourceHash": "485ab1d877d382f291f65fdad900925a84dd884db8310c467ddad0b5c1567a42",
+					"status": "content"
+				},
+				"http-apps/route.js": {
+					"diff": "--- published/http-apps/route.js\n+++ rebuilt/http-apps/route.js\n@@ -85,10 +85,10 @@\n         var path = request.pathInfo.slice(1);\n         var parts = path.split(\"/\");\n         var part = decodeURIComponent(parts.shift());\n-        if (Object.has(paths, part)) {\n+        if (hasOwnProperty.call(paths, part)) {\n             request.scriptName = request.scriptName + part + \"/\";\n             request.pathInfo = path.slice(part.length);\n-            return Object.get(paths, part)(request, response);\n+            return paths[part](request, response);\n         }\n         return notFound(request, response);\n     };\n",
+					"match": false,
+					"packageHash": "367d265f70d68403a55d64d78ad3f3330902cc2de9891a39b0363eb8eacb0337",
+					"size": 4076,
+					"sourceHash": "75d95b400cc0905a8e4e259b78fc95933fd0a67123e3c63ace1832c19be7c6e0",
+					"status": "content"
+				},
+				"http-apps.js": {
+					"diff": "--- published/http-apps.js\n+++ rebuilt/http-apps.js\n@@ -39,7 +39,6 @@\n  * @module\n  */\n \n-require(\"collections/shim\");\n var Q = require(\"q\");\n var HTTP = require(\"./http\");\n var FS = require(\"./fs\");\n",
+					"match": false,
+					"packageHash": "287df02c3ffd4bc3cc3c2c7e42b6cf4534ed6e8330f8c1d9803b0ac6c88ae98e",
+					"size": 6020,
+					"sourceHash": "5a607767fee5aa23efd6b47406bbff7e6abddd46732e6d29745f3859c4a96727",
+					"status": "content"
+				},
+				"http-cookie.js": {
+					"diff": "--- published/http-cookie.js\n+++ rebuilt/http-cookie.js\n@@ -12,35 +12,42 @@\n  * @param {String} cookie\n  * @returns {Object}\n  */\n+var DOMAIN_REG_EXP = /^domain$/i,   \n+    PATH_REG_EXP = /^path$/i,\n+    EXPIRE_REG_EXP = /^expires$/i,\n+    MAX_AGE_REG_EXP = /^max-age$/i,\n+    SECURE_REG_EXP = /^secure$/i,\n+    HTTP_ONLY_REG_EXP = /^httponly$/i;\n+\n exports.parse = function (cookie, date) {\n     date = date || new Date();\n     var parsed = {};\n     var terms = cookie.split(/[;,]/g);\n     var keyValue = terms.shift().split(\"=\");\n-    parsed.key = keyValue[0];\n-    parsed.value = keyValue[1];\n+    parsed.key = decodeURIComponent(keyValue[0]);\n+    parsed.value = decodeURIComponent(keyValue[1]);\n     terms.forEach(function (term) {\n         var parts = term.split(\"=\").map(function (part) {\n             return part.trim();\n         });\n         var key = parts[0], value = parts[1];\n-        if (/^domain$/i.test(key)) {\n+        if (DOMAIN_REG_EXP.test(key)) {\n             parsed.domain = value;\n-        } else if (/^path$/i.test(key)) {\n+        } else if (PATH_REG_EXP.test(key)) {\n             parsed.path = value;\n-        } else if (/^expires$/i.test(key)) {\n+        } else if (EXPIRE_REG_EXP.test(key)) {\n             parsed.expires = new Date(\n                 +new Date() + // actual now\n                 (new Date(value) - date) // server offset\n             );\n-        } else if (/^max-age$/i.test(key)) {\n+        } else if (MAX_AGE_REG_EXP.test(key)) {\n             parsed.expires = new Date(\n                 new Date().getTime() +\n                 (value * 1000)\n             );\n-        } else if (/^secure$/i.test(key)) {\n+        } else if (SECURE_REG_EXP.test(key)) {\n             parsed.secure = true;\n-        } else if (/^httponly$/i.test(key)) {\n+        } else if (HTTP_ONLY_REG_EXP.test(key)) {\n             parsed.httpOnly = true;\n         }\n     });\n@@ -72,4 +79,3 @@\n     }\n     return cookie;\n };\n-\n",
+					"match": false,
+					"packageHash": "b2d61774ba4f64caa48e16a46b78a25497c88f79536feee0ab9c6bdf82081d58",
+					"size": 2070,
+					"sourceHash": "00413bd1b28e70b77f1cb7339e79fea07eda9f8ef1cf6596873d3357db4e4253",
+					"status": "content"
+				},
+				"http.js": {
+					"diff": "--- published/http.js\n+++ rebuilt/http.js\n@@ -161,8 +161,9 @@\n  * A wrapper for a Node HTTP Request, as received by\n  * the Q HTTP Server, suitable for use by the Q HTTP Client.\n  */\n+\n exports.ServerRequest = function (_request, ssl) {\n-    var request = Object.create(_request);\n+    var request = Object.create(_request, requestDescriptor);\n     /*** {Array} HTTP version. (JSGI) */\n     request.version = _request.httpVersion.split(\".\").map(Math.floor);\n     /*** {String} HTTP method, e.g., `\"GET\"` (JSGI) */\n@@ -172,7 +173,7 @@\n     /*** {String} pathInfo, starting with `\"/\"`, the\n      * portion of the path that has not yet\n      * been routed (JSGI) */\n-    request.pathInfo = URL.parse(_request.url).pathname;\n+    request._pathInfo = null;\n     /*** {String} scriptName, the portion of the path that\n      * has already been routed (JSGI) */\n     request.scriptName = \"\";\n@@ -187,8 +188,9 @@\n         request.hostname = address.address;\n     }\n     /*** {String} host */\n-    request.host = request.hostname + \":\" + address.port;\n     request.port = address.port;\n+    var defaultPort = request.port === (ssl ? 443 : 80);\n+    request.host = request.hostname + (defaultPort ? \"\" : \":\" + request.port);\n \n     var socket = _request.socket;\n     /*** {String} */\n@@ -219,6 +221,24 @@\n     });\n };\n \n+var requestDescriptor = {\n+    pathInfo: {\n+        get: function () {\n+            // Postpone this until the server requests it because\n+            // decodeURIComponent may throw an error if the path is not valid.\n+            // If we throw while making a server request, it will crash the\n+            // server and be uncatchable.\n+            if (this._pathInfo === null) {\n+                this._pathInfo = decodeURIComponent(URL.parse(this.url).pathname);\n+            }\n+            return this._pathInfo;\n+        },\n+        set: function (pathInfo) {\n+            this._pathInfo = pathInfo;\n+        }\n+    }\n+};\n+\n exports.ServerResponse = function (_response, ssl) {\n     var response = Object.create(_response);\n     response.ssl = ssl;\n@@ -229,20 +249,30 @@\n \n exports.normalizeRequest = function (request) {\n     if (typeof request === \"string\") {\n-        request = {\n-            url: request\n-        };\n+        request = {url: request};\n     }\n+    request.method = request.method || \"GET\";\n+    request.headers = request.headers || {};\n     if (request.url) {\n         var url = URL.parse(request.url);\n-        request.host = url.hostname;\n-        request.port = url.port;\n         request.ssl = url.protocol === \"https:\";\n-        request.method = request.method || \"GET\";\n+        request.hostname = url.hostname;\n+        request.host = url.host;\n+        request.port = +url.port;\n         request.path = (url.pathname || \"\") + (url.search || \"\");\n-        request.headers = request.headers || {};\n-        request.headers.host = url.hostname; // FIXME name consistency\n+        request.auth = url.auth || void 0;\n     }\n+    request.host = request.host || request.headers.host;\n+    request.port = request.port || (request.ssl ? 443 : 80);\n+    if (request.host && !request.hostname) {\n+        request.hostname = request.host.split(\":\")[0];\n+    }\n+    if (request.hostname && request.port && !request.host) {\n+        var defaultPort = request.ssl ? 443 : 80;\n+        request.host = request.hostname + (defaultPort ? \"\" : \":\" + request.port);\n+    }\n+    request.headers.host = request.headers.host || request.host;\n+    request.path = request.path || \"/\";\n     return request;\n };\n \n@@ -276,21 +306,34 @@\n         request = exports.normalizeRequest(request);\n \n",
+					"match": false,
+					"packageHash": "7e3578ace383805eb7d0b0476c80a993a20e551e7dd91ffe0add2096f0228410",
+					"size": 11726,
+					"sourceHash": "071d38c23659921563510d314ba33d7da4cbbf60ec1f00585b59a61609e7d7cc",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,44 +1,46 @@\n {\n   \"name\": \"q-io\",\n-  \"version\": \"1.10.9\",\n+  \"version\": \"1.13.6\",\n   \"description\": \"IO using Q promises\",\n   \"homepage\": \"http://github.com/kriskowal/q-io/\",\n   \"author\": \"Kris Kowal <kris@cixar.com> (http://github.com/kriskowal/)\",\n+  \"contributors\": [\n+    \"Montage Studio\",\n+    \"Stuart Knightley\",\n+    \"Jean-romain Prevost\",\n+    \"Andreas Pizsa (http://github.com/AndreasPizsa/)\",\n+    \"Harold Thetiot\"\n+  ],\n   \"bugs\": {\n     \"mail\": \"kris@cixar.com\",\n     \"url\": \"http://github.com/kriskowal/q-io/issues\"\n   },\n-  \"licenses\": [\n-    {\n-      \"type\": \"MIT\",\n-      \"url\": \"http://github.com/kriskowal/q-io/raw/master/LICENSE\"\n-    }\n-  ],\n+  \"license\": \"MIT\",\n   \"repository\": {\n     \"type\": \"git\",\n     \"url\": \"http://github.com/kriskowal/q-io.git\"\n   },\n   \"dependencies\": {\n-    \"q\": \"~0.9.7\",\n-    \"qs\": \"~0.1.0\",\n-    \"url2\": \"~0.0.0\",\n-    \"mime\": \"~1.2.11\",\n-    \"mimeparse\": \"~0.1.4\",\n-    \"collections\": \"~0.2.0\"\n+    \"es6-set\": \"^0.1.1\",\n+    \"mime\": \"^1.2.11\",\n+    \"mimeparse\": \"^0.1.4\",\n+    \"q\": \"^1.0.1\",\n+    \"qs\": \"^6.9.6\",\n+    \"url2\": \"^0.0.0\"\n   },\n   \"devDependencies\": {\n-    \"jshint\": \"~0.9.1\",\n-    \"cover\": \"~0.2.8\",\n-    \"jasmine-node\": \"~1.7\",\n-    \"opener\": \"~1.3\"\n+    \"cover\": \"^0.2.8\",\n+    \"jasmine-node\": \"^3.0.0\",\n+    \"jshint\": \"^2.9.5\",\n+    \"opener\": \"^1.3\"\n   },\n   \"scripts\": {\n     \"test\": \"jasmine-node spec\",\n-    \"test-browser\": \"opener spec/q-spec.html\",\n-    \"lint\": \"jshint q.js\",\n+    \"test:browser\": \"opener spec/q-spec.html\",\n+    \"lint\": \"jshint .\",\n     \"cover\": \"cover run jasmine-node spec && cover report html && opener cover_html/index.html\"\n   },\n   \"engines\": {\n-    \"node\": \">=0.6.0\"\n+    \"node\": \">=4\"\n   }\n }\n",
+					"match": false,
+					"packageHash": "ff03c0d6cdc55ac4722b925c06826b0c45649d5602db4f6a6db60b97cb4391d3",
+					"size": 1075,
+					"sourceHash": "62686c385274d4c9ff3147e04e44d74c151e71c250838ae6749b16bbdb9b4db4",
+					"status": "content"
+				},
+				"spec/fs/boot-directory-spec.js": {
+					"match": false,
+					"packageHash": "76083aa4d3893dce991f969ca3862c7cdb1892d2e4315a4cc761ebcd084bcfef",
+					"size": 790,
+					"status": "missing-in-source"
+				},
+				"spec/fs/contains-spec.js": {
+					"match": false,
+					"packageHash": "86c29d89d954f3107b240fb6b5736fcdf59dfb9351fdbf2a2a4c9e24a0ab7696",
+					"size": 211,
+					"status": "missing-in-source"
+				},
+				"spec/fs/fixtures/hello.txt": {
+					"match": false,
+					"packageHash": "c98c24b677eff44860afea6f493bbaec5bb1c4cbb209c6fc2bbb47f66ff2ad31",
+					"size": 14,
+					"status": "missing-in-source"
+				},
+				"spec/fs/issues/1-spec.js": {
+					"match": false,
+					"packageHash": "469d04ef776b6241589d3b2332696dc9fc9c12c477cf2d53fde9e67cffe11912",
+					"size": 728,
+					"status": "missing-in-source"
+				},
+				"spec/fs/make-tree-spec.js": {
+					"match": false,
+					"packageHash": "1026ec9b086aa3af2cca690e1f8b339aa0e37817c48dd927fc5ce6dcfd061038",
+					"size": 2122,
+					"status": "missing-in-source"
+				},
+				"spec/fs/mock/append-spec.js": {
+					"match": false,
+					"packageHash": "328ff3dbbbf89c1b7db15c54ac778c62b423afad9e5a823e4599a134b48b416c",
+					"size": 1211,
+					"status": "missing-in-source"
+				},
+				"spec/fs/mock/copy-tree-spec.js": {
+					"match": false,
+					"packageHash": "c5fc8fa897fcd01b4ff24ea98becba143fab3e1cccb96354022f967df4c9c46a",
+					"size": 1383,
+					"status": "missing-in-source"
+				},
+				"spec/fs/mock/fixture/hello.txt": {
+					"match": false,
+					"packageHash": "c98c24b677eff44860afea6f493bbaec5bb1c4cbb209c6fc2bbb47f66ff2ad31",
+					"size": 14,
+					"status": "missing-in-source"
+				},
+				"spec/fs/mock/link-spec.js": {
+					"match": false,
+					"packageHash": "7e9ee698f9b2aec6906459b3fc69e0dd040dbef1ce0083ae86b485adff1c2d1d",
+					"size": 1724,
+					"status": "missing-in-source"
+				},
+				"spec/fs/mock/make-tree-spec.js": {
+					"match": false,
+					"packageHash": "9fd59b4a194e7f8a6e8f1e41ea32cfbd77615d27a7b91700c7a5f8e931fe41cd",
+					"size": 2572,
+					"status": "missing-in-source"
+				},
+				"spec/fs/mock/merge-spec.js": {
+					"match": false,
+					"packageHash": "ffea6d855be9e9f6388eb413c623f58d5fb5d2cabb6f7f14a187b55ed97280ec",
+					"size": 1538,
+					"status": "missing-in-source"
+				},
+				"spec/fs/mock/move-spec.js": {
+					"match": false,
+					"packageHash": "bf59b2cf8f376265ec3fea1bfc4213b42aee6c60f34059745e6bb6cff8cd2ee4",
+					"size": 5747,
+					"status": "missing-in-source"
+				},
+				"spec/fs/mock/object-spec.js": {
+					"match": false,
+					"packageHash": "4cc0dbe5296c656f0262ebc399fb3e184325f37d654f90ab78c14d890eff36c4",
+					"size": 489,
+					"status": "missing-in-source"
+				},
+				"spec/fs/mock/range-spec.js": {
+					"match": false,
+					"packageHash": "f21bce56c982ae42125aa42fc0b62b723249405fef0e406344fd47fb63bf666a",
+					"size": 562,
+					"status": "missing-in-source"
+				},
+				"spec/fs/mock/read-spec.js": {
+					"match": false,
+					"packageHash": "9cc9d0fe5661da708e5cc8b08fc0a856c5a0cd34115769726ab609f64c612504",
+					"size": 1074,
+					"status": "missing-in-source"
+				},
+				"spec/fs/mock/remove-directory-spec.js": {
+					"match": false,
+					"packageHash": "db8f55bd71ad966290682888dc4bb34f2ba0541714cf6fa40259d9bfdfcdcf09",
+					"size": 889,
+					"status": "missing-in-source"
+				},
+				"spec/fs/mock/remove-tree-spec.js": {
+					"match": false,
+					"packageHash": "d8b44ddd616800b27b01c3f43b938a4d10deb2cc676d98a22f72e17b58509258",
+					"size": 784,
+					"status": "missing-in-source"
+				},
+				"spec/fs/mock/root-spec.js": {
+					"match": false,
+					"packageHash": "45ed9d7047794be5f08f043a3a8b0c3b8dd5c1f35f5b68e6599a548f88cd80f5",
+					"size": 693,
+					"status": "missing-in-source"
+				},
+				"spec/fs/mock/stat-spec.js": {
+					"match": false,
+					"packageHash": "0df92faee1a90bcc1ee9b8365e9821dcdad865cf6fd1e8a134b9a3a0558ea19f",
+					"size": 662,
+					"status": "missing-in-source"
+				},
+				"spec/fs/mock/symbolic-link-spec.js": {
+					"match": false,
+					"packageHash": "90561c9408e9b5854c259096fc9827f9f5b56d9bce77ad026b35be7b11da0878",
+					"size": 2198,
+					"status": "missing-in-source"
+				},
+				"spec/fs/mock/working-directory-spec.js": {
+					"match": false,
+					"packageHash": "478bca31561120361c667e52cb896bff2cb1c0f36183d4558fb7f0b0f2e34827",
+					"size": 636,
+					"status": "missing-in-source"
+				},
+				"spec/fs/mock/write-spec.js": {
+					"match": false,
+					"packageHash": "8c37cc0bb9d20e1a2d3eaef9134e17ce31d27c49ec55d3c12d3a69a02b4d5911",
+					"size": 2366,
+					"status": "missing-in-source"
+				},
+				"spec/fs/range-spec.js": {
+					"match": false,
+					"packageHash": "42f8d6b6538b45dd0a3a3f8396c3d06b6d2e6cc319f6dd1453751b0bf20c3def",
+					"size": 481,
+					"status": "missing-in-source"
+				},
+				"spec/fs/range-spec.txt": {
+					"match": false,
+					"packageHash": "a883dafc480d466ee04e0d6da986bd78eb1fdd2178d04693723da3a8f95d42f4",
+					"size": 5,
+					"status": "missing-in-source"
+				},
+				"spec/fs/read-spec.js": {
+					"match": false,
+					"packageHash": "eedf2381ad642e050b16f01f1f454c6d7cadbf9850981d575e3a1eca684bf289",
+					"size": 545,
+					"status": "missing-in-source"
+				},
+				"spec/fs/relative-spec.js": {
+					"match": false,
+					"packageHash": "695e2c416887d80d26afcc6ab06b892c8529cef4022189be7a29050922fdaf9c",
+					"size": 997,
+					"status": "missing-in-source"
+				},
+				"spec/fs/reroot-spec.js": {
+					"match": false,
+					"packageHash": "1fc671435087f90766a3b8a2f6ad03b2f6630f2e5fd154c40fff4c02af7783a3",
+					"size": 1474,
+					"status": "missing-in-source"
+				},
+				"spec/fs/write-spec.js": {
+					"match": false,
+					"packageHash": "094103bb0d85b23bff75ee40bdf33e1b3c18a604a026e63249ebf26c64fd8ff1",
+					"size": 1149,
+					"status": "missing-in-source"
+				},
+				"spec/http/agent-spec.js": {
+					"match": false,
+					"packageHash": "9b7b54f53f850a847efab1f30ac9f78d1041396d491c4f128f8c90cabf35bfd7",
+					"size": 3949,
+					"status": "missing-in-source"
+				},
+				"spec/http/basic-spec.js": {
+					"match": false,
+					"packageHash": "67e38058c21e4668c261e968d023cf4c8c210bb8805b0ac0bb8bb13c62b750aa",
+					"size": 2579,
+					"status": "missing-in-source"
+				},
+				"spec/http-apps/cookie-spec.js": {
+					"match": false,
+					"packageHash": "fccf759922838ca27d893acc87466988ee8d022fbb7401f8a63354031a378e74",
+					"size": 1628,
+					"status": "missing-in-source"
+				},
+				"spec/http-apps/directory-list-spec.js": {
+					"match": false,
+					"packageHash": "330177e4f9b05b715c43c9f98d0ce8381e5e8b8164d57f575fe6e8a53c0f7645",
+					"size": 2769,
+					"status": "missing-in-source"
+				},
+				"spec/http-apps/fixtures/01234.txt": {
+					"match": false,
+					"packageHash": "9fe4105f41affb91be2cb5f10715a86882126e2b13f55370566dbe7d2db0b66a",
+					"size": 10,
+					"status": "missing-in-source"
+				},
+				"spec/http-apps/fixtures/1234.txt": {
+					"match": false,
+					"packageHash": "a883dafc480d466ee04e0d6da986bd78eb1fdd2178d04693723da3a8f95d42f4",
+					"size": 5,
+					"status": "missing-in-source"
+				},
+				"spec/http-apps/fixtures/5678.txt": {
+					"match": false,
+					"packageHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+					"size": 0,
+					"status": "missing-in-source"
+				},
+				"spec/http-apps/fixtures/9012/3456.txt": {
+					"match": false,
+					"packageHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+					"size": 0,
+					"status": "missing-in-source"
+				},
+				"spec/http-apps/hosts-spec.js": {
+					"match": false,
+					"packageHash": "d24237613c04372746034303587b71de4529c2aea4ee9ce662756d82d077ba5a",
+					"size": 1620,
+					"status": "missing-in-source"
+				},
+				"spec/http-apps/interpret-range-spec.js": {
+					"match": false,
+					"packageHash": "fdb7116a5534301ccc503bbb2804f8bffe814b802766e04b06742cb69cc5f9b6",
+					"size": 1485,
+					"status": "missing-in-source"
+				},
+				"spec/http-apps/partial-range-spec.js": {
+					"match": false,
+					"packageHash": "4041a6496924c6d2e439bcbd7c50f3d6b707dc79eb5507f097baab6ee32ae5fc",
+					"size": 8580,
+					"status": "missing-in-source"
+				},
+				"spec/http-apps/proxy-spec.js": {
+					"match": false,
+					"packageHash": "b33f5f88f07c77387d50557ac303bd802053940bd1270bb5af74baf18aaa2124",
+					"size": 2395,
+					"status": "missing-in-source"
+				},
+				"spec/http-apps/symbolic-link-spec.js": {
+					"match": false,
+					"packageHash": "51f8a1200f7a142f06ca5de0eb150e40142534c3237ce2b6d46d55d19ca1f1be",
+					"size": 4056,
+					"status": "missing-in-source"
+				},
+				"spec/lib/jasmine-promise.js": {
+					"match": false,
+					"packageHash": "619167335fddfe5ff213851018fd3a730a5a6d418f1f76fa2135e5f730fba564",
+					"size": 1360,
+					"status": "missing-in-source"
+				},
+				"writer.js": {
+					"diff": "--- published/writer.js\n+++ rebuilt/writer.js\n@@ -1,4 +1,4 @@\n-\n+/* global process:true */\n var Q = require(\"q\");\n \n /**\n@@ -13,7 +13,7 @@\n module.exports = Writer;\n \n var version = process.versions.node.split('.');\n-var supportsFinish = version[0] >= 0 && version[1] >= 10;\n+var supportsFinish = version[0] >= 1 || version[1] >= 10;\n \n function Writer(_stream, charset) {\n     var self = Object.create(Writer.prototype);\n@@ -106,6 +106,8 @@\n         return Q.resolve(); // destruction not explicitly observable\n     };\n \n+    self.node = _stream;\n+\n     return Q(self); // todo returns the begin.promise\n }\n \n",
+					"match": false,
+					"packageHash": "026f9baff8d970fadc1ce2c26083f7837cce44018578e3d08f2ca2f525c7ab3c",
+					"size": 3197,
+					"sourceHash": "65afeb855268bc279f58ff94892d0e156c1136359ed5ed3b66621d0b537b4139",
+					"status": "content"
+				},
+				".gitattributes": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".jshintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".jshintrc": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 23,
+				"matchingFiles": 8,
+				"missingInPackage": 3,
+				"missingInSource": 43,
+				"score": 0.1038961038961039,
+				"totalFiles": 77
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "call-bind-apply-helpers",
+				"version": "1.0.2"
+			},
+			{
+				"name": "call-bound",
+				"version": "1.0.4"
+			},
+			{
+				"name": "d",
+				"version": "1.0.2"
+			},
+			{
+				"name": "dunder-proto",
+				"version": "1.0.1"
+			},
+			{
+				"name": "es-define-property",
+				"version": "1.0.1"
+			},
+			{
+				"name": "es-errors",
+				"version": "1.3.0"
+			},
+			{
+				"name": "es-object-atoms",
+				"version": "1.1.2"
+			},
+			{
+				"name": "es5-ext",
+				"version": "0.10.64"
+			},
+			{
+				"name": "es6-iterator",
+				"version": "2.0.3"
+			},
+			{
+				"name": "es6-set",
+				"version": "0.1.6"
+			},
+			{
+				"name": "es6-symbol",
+				"version": "3.1.4"
+			},
+			{
+				"name": "esniff",
+				"version": "2.0.1"
+			},
+			{
+				"name": "event-emitter",
+				"version": "0.3.7"
+			},
+			{
+				"name": "ext",
+				"version": "1.7.0"
+			},
+			{
+				"name": "function-bind",
+				"version": "1.1.2"
+			},
+			{
+				"name": "get-intrinsic",
+				"version": "1.3.0"
+			},
+			{
+				"name": "get-proto",
+				"version": "1.0.1"
+			},
+			{
+				"name": "gopd",
+				"version": "1.2.0"
+			},
+			{
+				"name": "has-symbols",
+				"version": "1.1.0"
+			},
+			{
+				"name": "hasown",
+				"version": "2.0.4"
+			},
+			{
+				"name": "math-intrinsics",
+				"version": "1.1.0"
+			},
+			{
+				"name": "mime",
+				"version": "1.6.0"
+			},
+			{
+				"name": "mimeparse",
+				"version": "0.1.4"
+			},
+			{
+				"name": "next-tick",
+				"version": "1.1.0"
+			},
+			{
+				"name": "object-inspect",
+				"version": "1.13.4"
+			},
+			{
+				"name": "q",
+				"version": "1.5.1"
+			},
+			{
+				"name": "qs",
+				"version": "6.17.1"
+			},
+			{
+				"name": "side-channel",
+				"version": "1.1.1"
+			},
+			{
+				"name": "side-channel-list",
+				"version": "1.0.1"
+			},
+			{
+				"name": "side-channel-map",
+				"version": "1.0.1"
+			},
+			{
+				"name": "side-channel-weakmap",
+				"version": "1.0.2"
+			},
+			{
+				"name": "type",
+				"version": "2.7.3"
+			},
+			{
+				"name": "url2",
+				"version": "0.0.0"
+			}
+		]
+	}
+]
