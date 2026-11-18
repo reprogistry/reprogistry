@@ -1,0 +1,119 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-18T14:30:29.038Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:3.10.8",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "draft-js-export-html@1.0.1",
+			"name": "draft-js-export-html",
+			"version": "1.0.1",
+			"location": "https://registry.npmjs.org/draft-js-export-html/-/draft-js-export-html-1.0.1.tgz",
+			"integrity": "sha512-KLpQAmtqeEsAXXvzso+X+UAudaOhjGN5fR56Rj8b18+muYT1b5C5UX1fQ2+tlcHeWoLvw6n4XgTWAIATPQ6kGQ==",
+			"publishedAt": "2017-09-03T08:38:48.722Z",
+			"publishedWith": {
+				"node": "6.9.1",
+				"npm": "3.10.8"
+			},
+			"dependencies": {
+				"draft-js-utils": "^1.0.1"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "https://github.com/sstur/draft-js-utils/tree/master/packages/draft-js-export-html",
+			"spec": "github:sstur/draft-js-utils#v1.0.1::path:packages/draft-js-export-html"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".npmignore": {
+					"match": false,
+					"packageHash": "6a0eb2792a94f795a5b508aeca1b58c6ebbfc316260fdca224b455567a3af9e2",
+					"size": 23,
+					"status": "missing-in-source"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -42,6 +42,30 @@\n };\n let html = stateToHTML(contentState, options);\n ```\n+### `inlineStylesFn`\n+\n+You can define custom function to return rendering options based on inline styles. Similar to draft.js [customStyleFn](https://draftjs.org/docs/api-reference-editor.html#customstylefn).\n+\n+Example:\n+\n+```javascript\n+let options = {\n+  inlineStyleFn: (styles) => {\n+    let key = 'color-';\n+    let color = styles.filter((value) => value.startsWith(key)).first();\n+\n+    if (color) {\n+      return {\n+        element: 'span',\n+        style: {\n+          color: color.replace(key, ''),\n+        },\n+      };\n+    }\n+  },\n+};\n+let html = stateToHTML(contentState, options);\n+```\n \n ### `blockRenderers`\n \n@@ -67,6 +91,8 @@\n \n If you don't want to define the full custom render for a block, you can define the type of the parent block tag that will be created if the block type doesn't match any known type.\n \n+If you don't want any parent block tag, you can set `defaultBlockTag` to `null`.\n+\n Example:\n \n ```javascript\n@@ -90,12 +116,12 @@\n Example:\n ```js\n let options = {\n-  blockStyleFn(block) => {\n+  blockStyleFn: (block) => {\n     if (block.getData().get('color')) {\n       return {\n         style: {\n-          color: block.getData().get('color')\n-        }\n+          color: block.getData().get('color'),\n+        },\n       }\n     }\n   }\n",
+					"match": false,
+					"packageHash": "106f96c01061c4d5bbb6a34c099be5c0f08d185776cdf2c8eb3dae8ff5b540df",
+					"size": 3911,
+					"sourceHash": "c91471a4d9d1b1321955b5e0e2b9a418cd979d9aff19a57bd26c89a6209cd58d",
+					"status": "content"
+				},
+				"lib/helpers/combineOrderedStyles.js": {
+					"match": false,
+					"packageHash": "12d6bbb7014b832ed788fc931b2bc8bcc179af89f52b08e0ce19baa9e2f2148f",
+					"size": 2561,
+					"status": "missing-in-source"
+				},
+				"lib/helpers/normalizeAttributes.js": {
+					"match": false,
+					"packageHash": "703c74e61bd1f08b5f05758a71daa0a450fc98679f8c8d302092a733826e64d5",
+					"size": 1375,
+					"status": "missing-in-source"
+				},
+				"lib/helpers/styleToCSS.js": {
+					"match": false,
+					"packageHash": "e80a2f818dda8fa41844efef34986388118559b38218b385e4a57fdd16663c98",
+					"size": 2213,
+					"status": "missing-in-source"
+				},
+				"lib/main.js": {
+					"match": false,
+					"packageHash": "4b7c6d316b659b92b565a3b7f25b2589af2a30f15c8f8a2f76a529dfb9cf49ef",
+					"size": 380,
+					"status": "missing-in-source"
+				},
+				"lib/stateToHTML.js": {
+					"match": false,
+					"packageHash": "afb6fd05b06ea01e2bfc419d174979d30a8e7dce41eb608346ee08fe06f30c66",
+					"size": 21275,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,14 +1,23 @@\n {\n   \"name\": \"draft-js-export-html\",\n-  \"version\": \"1.0.1\",\n+  \"version\": \"1.4.1\",\n   \"description\": \"DraftJS: Export ContentState to HTML\",\n   \"main\": \"lib/main.js\",\n+  \"module\": \"esm/main.js\",\n   \"typings\": \"typings/index.d.ts\",\n+  \"files\": [\n+    \"lib\",\n+    \"esm\",\n+    \"typings\"\n+  ],\n   \"scripts\": {\n-    \"build\": \"babel src --out-dir lib --ignore \\\"_*\\\"\"\n+    \"build:cjs\": \"babel src --root-mode upward --out-dir lib --ignore \\\"_*\\\"\",\n+    \"build:esm\": \"NODE_ENV=esm babel src --root-mode upward --out-dir esm --ignore \\\"_*\\\"\",\n+    \"build\": \"yarn build:cjs && yarn build:esm\",\n+    \"prepublishOnly\": \"yarn build\"\n   },\n   \"dependencies\": {\n-    \"draft-js-utils\": \"^1.0.1\"\n+    \"draft-js-utils\": \"^1.4.0\"\n   },\n   \"peerDependencies\": {\n     \"draft-js\": \">=0.10.0\",\n",
+					"match": false,
+					"packageHash": "cb6a05920e453398b92ade2f0c12f426e409d0a9cc7467e42097518c5f9379c5",
+					"size": 840,
+					"sourceHash": "b4069f6cf94844ef3d8b38f3f3e9238493e49d69c1a778cc566b763866dc2c61",
+					"status": "content"
+				},
+				"typings/draft-js-export-html-tests.ts": {
+					"diff": "--- published/typings/draft-js-export-html-tests.ts\n+++ rebuilt/typings/draft-js-export-html-tests.ts\n@@ -26,3 +26,19 @@\n         },\n     },\n });\n+res = stateToHTML(state, {\n+    defaultBlockTag: 'div',\n+});\n+res = stateToHTML(state, {\n+    defaultBlockTag: null,\n+});\n+res = stateToHTML(state, {\n+    entityStyleFn: (entity) => {\n+        if (entity.getType() === 'FOO') {\n+            return {\n+                element: 'div',\n+                style: { color: 'red' }\n+            };\n+        }\n+    }\n+})\n",
+					"match": false,
+					"packageHash": "0cbe4c2f01bef0684e8dc0510aa916a4b7054f066460cf4bad5e1818241c68cc",
+					"size": 877,
+					"sourceHash": "2020a442c9e9114cf5c230cc139e6751d43eebef71b83fe17491ab8278bec962",
+					"status": "content"
+				},
+				"typings/index.d.ts": {
+					"diff": "--- published/typings/index.d.ts\n+++ rebuilt/typings/index.d.ts\n@@ -3,8 +3,8 @@\n declare module 'draft-js-export-html' {\n     import draftjs = require(\"draft-js\");\n \n-    type BlockStyleFn = (block: draftjs.ContentBlock) => RenderConfig;\n-    type EntityStyleFn = (entity: draftjs.EntityInstance) => RenderConfig;\n+    type BlockStyleFn = (block: draftjs.ContentBlock) => RenderConfig|undefined;\n+    type EntityStyleFn = (entity: draftjs.EntityInstance) => RenderConfig|undefined;\n     type BlockRenderer = (block: draftjs.ContentBlock) => string;\n     type RenderConfig = {\n         element?: string;\n@@ -13,6 +13,7 @@\n     };\n \n     export interface Options {\n+        defaultBlockTag?: string | null;\n         inlineStyles?: { [styleName: string]: RenderConfig };\n         blockRenderers?: { [blockType: string]: BlockRenderer };\n         blockStyleFn?: BlockStyleFn;\n",
+					"match": false,
+					"packageHash": "3136cf0cc1fc5b7a331c4316320f58a201b915c5d0e7fafd9f089ca36ab91ef8",
+					"size": 772,
+					"sourceHash": "e5c3a325faa7afc5d177646c27bf8f338d1c8f4aca51d52334b21b3d205a5f0f",
+					"status": "content"
+				},
+				"yarn.lock": {
+					"match": false,
+					"packageHash": "6d6173fd91961baec310a3124889a28d8ff813b7768e8f18ad569251b7518ed1",
+					"size": 620,
+					"status": "missing-in-source"
+				}
+			},
+			"summary": {
+				"differentFiles": 4,
+				"matchingFiles": 1,
+				"missingInPackage": 0,
+				"missingInSource": 7,
+				"score": 0.08333333333333333,
+				"totalFiles": 12
+			}
+		},
+		"prodDependencies": []
+	}
+]
