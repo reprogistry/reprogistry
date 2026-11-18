@@ -1,0 +1,59 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-18T09:09:51.803Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:7.21.1",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "ts-pattern@4.0.1-rc.11",
+			"name": "ts-pattern",
+			"version": "4.0.1-rc.11",
+			"location": "https://registry.npmjs.org/ts-pattern/-/ts-pattern-4.0.1-rc.11.tgz",
+			"integrity": "sha512-TdEH1BLTQvgT7DNl7eo1XkMdTgkmkVxBrf6lcITCqZ2PzPU+Flqkpf/B5CEchjX4nXqFP/a6PQp8TaEmtuXH1w==",
+			"publishedAt": "2022-03-08T20:57:38.295Z",
+			"publishedWith": {
+				"node": "16.9.1",
+				"npm": "7.23.0"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+ssh://git@github.com/gvergnaud/ts-pattern.git",
+			"spec": "github:gvergnaud/ts-pattern#325715413fbeb1d9cf8fa4748d6e8d344423fb1a"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,4 +1,4 @@\n-<h1 align=\"center\">ts-pattern</h1>\n+<h1 align=\"center\">TS-Pattern</h1>\n \n <p align=\"center\">\n The exhaustive Pattern Matching library for <a href=\"https://github.com/microsoft/TypeScript\">TypeScript</a>\n@@ -7,17 +7,17 @@\n \n <p align=\"center\">\n   <a href=\"https://www.npmjs.com/package/ts-pattern\">\n-    <img src=\"https://img.shields.io/npm/dm/ts-pattern.svg\" alt=\"downloads per month\" height=\"18\">\n+    <img src=\"https://img.shields.io/npm/dm/ts-pattern.svg\" alt=\"downloads\" height=\"18\">\n   </a>\n   <a href=\"https://www.npmjs.com/package/ts-pattern\">\n     <img src=\"https://img.shields.io/npm/v/ts-pattern.svg\" alt=\"npm version\" height=\"18\">\n   </a>\n   <a href=\"https://github.com/gvergnaud/ts-pattern\">\n-    <img src=\"https://img.shields.io/npm/l/ts-pattern.svg\" alt=\"license\" height=\"18\">\n+    <img src=\"https://img.shields.io/npm/l/ts-pattern.svg\" alt=\"MIT license\" height=\"18\">\n   </a>\n </p>\n \n-```ts\n+```tsx\n import { match, P } from 'ts-pattern';\n \n type Data =\n@@ -30,10 +30,10 @@\n \n const result: Result = ...;\n \n-return match(result)\n-  .with({ type: 'error' }, (res) => `<p>Oups! An error occured</p>`)\n-  .with({ type: 'ok', data: { type: 'text' } }, (res) => `<p>${res.data.content}</p>`)\n-  .with({ type: 'ok', data: { type: 'img', src: P.select() } }, (src) => `<img src=${src} />`)\n+const html = match(result)\n+  .with({ type: 'error' }, () => <p>Oups! An error occured</p>)\n+  .with({ type: 'ok', data: { type: 'text' } }, (res) => <p>{res.data.content}</p>)\n+  .with({ type: 'ok', data: { type: 'img', src: P.select() } }, (src) => <img src={src} />)\n   .exhaustive();\n ```\n \n@@ -41,106 +41,104 @@\n \n Write **better** and **safer conditions**. Pattern matching lets you express complex conditions in a single, compact expression. Your code becomes **shorter** and **more readable**. Exhaustiveness checking ensures you haven’t forgotten **any possible case**.\n \n+![ts-pattern](https://user-images.githubusercontent.com/9265418/231688650-7cd957a9-8edc-4db8-a5fe-61e1c2179d91.gif)\n+\n+<p align=\"center\"><i>Animation by <a target=\"_blank\" href=\"https://twitter.com/nicoespeon/status/1644342570389061634?s=20\">@nicoespeon</a></i></p>\n+\n ## Features\n \n-- Works on **any data structure**: nested objects, arrays, tuples, Sets, Maps and all primitive types.\n-- **Typesafe**, with helpful type inference.\n-- **Exhaustiveness checking** support, enforcing that you are matching every possible case with `.exhaustive()`.\n-- **Expressive API**, with catch-all and type specific **wildcards**: `__`.\n-- Supports **predicates**, **unions**, **intersections** and **exclusions** patterns for non-trivial cases.\n-- Supports properties selection, via the `P.select(name?)` function.\n-- Tiny bundle footprint ([**only 1.9kB**](https://bundlephobia.com/package/ts-pattern@3.2.4)).\n+- Pattern-match on **any data structure**: nested [Objects](#objects), [Arrays](#tuples-arrays), [Tuples](#tuples-arrays), [Sets](#pset-patterns), [Maps](#pmap-patterns) and all primitive types.\n+- **Typesafe**, with helpful [type inference](#type-inference).\n+- **Exhaustiveness checking** support, enforcing that you are matching every possible case with [`.exhaustive()`](#exhaustive).\n+- Use [patterns](#patterns) to **validate** the shape of your data with [`isMatching`](#ismatching).\n+- **Expressive API**, with catch-all and type specific **wildcards**: [`P._`](#p_-wildcard), [`P.string`](#pstring-wildcard), [`P.number`](#pnumber-wildcard), etc.\n+- Supports [**predicates**](#pwhen-patterns), [**unions**](#punion-patterns), [**intersections**](#pintersection-patterns) and [**exclusion**](#pnot-patterns) patterns for non-trivial cases.\n+- Supports properties selection, via the [`P.select(name?)`](#pselect-patterns) function.\n+- Tiny bundle footprint ([**only ~2kB**](https://bundlephobia.com/package/ts-pattern)).\n \n ## What is Pattern Matching?\n \n-Pattern Matching is a code-branching technique coming from functional programming languages which let you scrutinize the structure of values in a declarative way. It has proven itself to be less verbose and more powerful than imperative alternatives (if/else/switch statements), especially when branching on complex data structures or on several values.\n+[Pattern Matching](https://en.wikipedia.org/wiki/Pattern_matching) is a code-branching technique coming from functional programming languages that's more powerful and often less verbose than imperative alternatives (if/else/switch statements), especially for complex conditions.\n \n-Pattern Matching is implemented in Haskell, Rust, Swift, Elixir and many other languages. There is [a tc39 proposal](https://github.com/tc39/proposal-pattern-matching) to add Pattern Matching to the EcmaScript specification, but it is still in stage 1 and isn't likely to land before several years. Luckily, pattern matching can be implemented in userland. `ts-pattern` Provides a typesafe pattern matching implementation that you can start using today.\n+Pattern Matching is implemented in Python, Rust, Swift, Elixir, Haskell and many other languages. There is [a tc39 proposal](https://github.com/tc39/proposal-pattern-matching) to add Pattern Matching to EcmaScript, but it is still in stage 1 and isn't likely to land before several years. Luckily, pattern matching can be implemented in userland. `ts-pattern` Provides a typesafe pattern matching implementation that you can start using today.\n \n-Read the introduction blog post: [Bringing Pattern Matching to TypeScript 🎨 Introducing TS-Pattern v3.0](https://dev.to/gvergnaud/bringing-pattern-matching-to-typescript-introducing-ts-pattern-v3-0-o1k)\n+Read the introduction blog post: [Bringing Pattern Matching to TypeScript 🎨 Introducing TS-Pattern](https://dev.to/gvergnaud/bringing-pattern-matching-to-typescript-introducing-ts-pattern-v3-0-o1k)\n \n ## Installation\n \n Via npm\n \n-```\n+```sh\n npm install ts-pattern\n ```\n \n-Via yarn\n+You can also use your favorite package manager:\n \n-```\n+```sh\n+pnpm add ts-pattern\n+# OR\n yarn add ts-pattern\n+# OR\n+bun add ts-pattern\n",
+					"match": false,
+					"packageHash": "f67c4e3f7dfbbeda4184cb9d42be596e9853ee8539c33e874adf1110af9a5da0",
+					"size": 35095,
+					"sourceHash": "933825510c2f157707b6b805a5070b66714c53e2a69608292cf305e9e81f3578",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,29 +1,57 @@\n {\n   \"name\": \"ts-pattern\",\n-  \"version\": \"4.0.1-rc.11\",\n+  \"version\": \"5.9.2\",\n   \"description\": \" The exhaustive Pattern Matching library for TypeScript.\",\n   \"type\": \"module\",\n+  \"sideEffects\": false,\n   \"source\": \"src/index.ts\",\n   \"exports\": {\n-    \"require\": \"./dist/index.cjs\",\n-    \"default\": \"./dist/index.modern.js\"\n+    \".\": {\n+      \"require\": {\n+        \"types\": \"./dist/index.d.cts\",\n+        \"default\": \"./dist/index.cjs\"\n+      },\n+      \"import\": {\n+        \"types\": \"./dist/index.d.ts\",\n+        \"default\": \"./dist/index.js\"\n+      },\n+      \"types\": \"./dist/index.d.ts\",\n+      \"default\": \"./dist/index.js\"\n+    },\n+    \"./types\": {\n+      \"require\": {\n+        \"types\": \"./dist/types/index.d.cts\"\n+      },\n+      \"import\": {\n+        \"types\": \"./dist/types/index.d.ts\"\n+      },\n+      \"types\": \"./dist/types/index.d.ts\"\n+    },\n+    \"./package.json\": \"./package.json\"\n   },\n-  \"main\": \"./dist/index.cjs\",\n   \"types\": \"dist/index.d.ts\",\n-  \"module\": \"./dist/index.module.js\",\n-  \"unpkg\": \"./dist/index.umd.js\",\n+  \"main\": \"dist/index.cjs\",\n+  \"module\": \"dist/index.js\",\n+  \"unpkg\": \"dist/index.umd.js\",\n   \"scripts\": {\n-    \"build\": \"microbundle\",\n+    \"build\": \"rimraf dist && microbundle --format modern,cjs,umd && sh ./scripts/generate-cts.sh\",\n     \"dev\": \"microbundle watch\",\n     \"prepublishOnly\": \"npm run test && npm run build\",\n+    \"publish:jsr\": \"npm run prepublishOnly && npx jsr publish\",\n+    \"release\": \"npm run prepublishOnly && npm publish && npx jsr publish\",\n     \"test\": \"jest\",\n     \"clear-test\": \"jest --clearCache\",\n-    \"perf\": \"tsc --project tests/tsconfig.json --noEmit --extendedDiagnostics\",\n     \"fmt\": \"prettier ./src/** ./tests/** -w\",\n-    \"check\": \"tsc --strict --noEmit --extendedDiagnostics\"\n+    \"check\": \"tsc --strict --noEmit --extendedDiagnostics\",\n+    \"perf\": \"tsc --project tests/tsconfig.json --noEmit --extendedDiagnostics\",\n+    \"perf:compile-time\": \"tsc --project benchmarks/compile-time/tsconfig.json --extendedDiagnostics\",\n+    \"completions\": \"node scripts/completions/run.mjs\",\n+    \"trace\": \"tsc --project tests/tsconfig.json --generateTrace trace --incremental false  --noEmit\",\n+    \"analyzeTrace\": \"npx @typescript/analyze-trace trace\"\n   },\n   \"files\": [\n-    \"lib/**/*\"\n+    \"dist/**/*\",\n+    \"package.json\"\n   ],\n   \"repository\": {\n     \"type\": \"git\",\n@@ -46,11 +74,18 @@\n   },\n   \"homepage\": \"https://github.com/gvergnaud/ts-pattern#readme\",\n   \"devDependencies\": {\n-    \"@types/jest\": \"^27.0.2\",\n-    \"jest\": \"^27.4.5\",\n-    \"microbundle\": \"^0.14.2\",\n-    \"prettier\": \"^2.5.1\",\n-    \"ts-jest\": \"^27.1.2\",\n-    \"typescript\": \"^4.5.4\"\n+    \"@types/jest\": \"^30.0.0\",\n+    \"jest\": \"^30.1.3\",\n+    \"microbundle\": \"^0.15.1\",\n+    \"prettier\": \"^2.8.8\",\n+    \"rimraf\": \"^5.0.1\",\n+    \"ts-jest\": \"^29.4.1\",\n+    \"typescript\": \"^5.9.2\"\n+  },\n+  \"overrides\": {\n+    \"microbundle\": {\n+      \".\": \"$microbundle\",\n+      \"rollup-plugin-typescript2\": \"0.37.0\"\n+    }\n   }\n }\n",
+					"match": false,
+					"packageHash": "936dca36c90c49fc6869ef49ee672c091fc0a74f7eb11209667fd2a06b062c0e",
+					"size": 1456,
+					"sourceHash": "80d38d8ee14ca765c09a4aace76b81d88840ea6d881a6096b99beb49ed33b802",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 1,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.3333333333333333,
+				"totalFiles": 3
+			}
+		},
+		"prodDependencies": []
+	}
+]

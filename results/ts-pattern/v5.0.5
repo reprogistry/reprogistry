@@ -1,0 +1,287 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-18T09:34:01.204Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:8.19.2",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "ts-pattern@5.0.5",
+			"name": "ts-pattern",
+			"version": "5.0.5",
+			"location": "https://registry.npmjs.org/ts-pattern/-/ts-pattern-5.0.5.tgz",
+			"integrity": "sha512-tL0w8U/pgaacOmkb9fRlYzWEUDCfVjjv9dD4wHTgZ61MjhuMt46VNWTG747NqW6vRzoWIKABVhFSOJ82FvXrfA==",
+			"publishedAt": "2023-08-06T21:35:42.130Z",
+			"publishedWith": {
+				"node": "18.12.1",
+				"npm": "9.1.2"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+ssh://git@github.com/gvergnaud/ts-pattern.git",
+			"spec": "github:gvergnaud/ts-pattern#6eee0f9ac8cbbf7d8c7accbd9372a15b55426d77"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -17,7 +17,7 @@\n   </a>\n </p>\n \n-```ts\n+```tsx\n import { match, P } from 'ts-pattern';\n \n type Data =\n@@ -31,9 +31,9 @@\n const result: Result = ...;\n \n const html = match(result)\n-  .with({ type: 'error' }, () => `<p>Oups! An error occured</p>`)\n-  .with({ type: 'ok', data: { type: 'text' } }, (res) => `<p>${res.data.content}</p>`)\n-  .with({ type: 'ok', data: { type: 'img', src: P.select() } }, (src) => `<img src=${src} />`)\n+  .with({ type: 'error' }, () => <p>Oups! An error occured</p>)\n+  .with({ type: 'ok', data: { type: 'text' } }, (res) => <p>{res.data.content}</p>)\n+  .with({ type: 'ok', data: { type: 'img', src: P.select() } }, (src) => <img src={src} />)\n   .exhaustive();\n ```\n \n@@ -58,9 +58,9 @@\n \n ## What is Pattern Matching?\n \n-[Pattern Matching](https://stackoverflow.com/questions/2502354/what-is-pattern-matching-in-functional-languages) is a code-branching technique coming from functional programming languages that's more powerful and often less verbose than imperative alternatives (if/else/switch statements), especially for complex conditions.\n+[Pattern Matching](https://en.wikipedia.org/wiki/Pattern_matching) is a code-branching technique coming from functional programming languages that's more powerful and often less verbose than imperative alternatives (if/else/switch statements), especially for complex conditions.\n \n-Pattern Matching is implemented in Haskell, Rust, Swift, Elixir, and many other languages. There is [a tc39 proposal](https://github.com/tc39/proposal-pattern-matching) to add Pattern Matching to EcmaScript, but it is still in stage 1 and isn't likely to land before several years. Luckily, pattern matching can be implemented in userland. `ts-pattern` Provides a typesafe pattern matching implementation that you can start using today.\n+Pattern Matching is implemented in Python, Rust, Swift, Elixir, Haskell and many other languages. There is [a tc39 proposal](https://github.com/tc39/proposal-pattern-matching) to add Pattern Matching to EcmaScript, but it is still in stage 1 and isn't likely to land before several years. Luckily, pattern matching can be implemented in userland. `ts-pattern` Provides a typesafe pattern matching implementation that you can start using today.\n \n Read the introduction blog post: [Bringing Pattern Matching to TypeScript 🎨 Introducing TS-Pattern](https://dev.to/gvergnaud/bringing-pattern-matching-to-typescript-introducing-ts-pattern-v3-0-o1k)\n \n@@ -68,32 +68,29 @@\n \n Via npm\n \n-```\n+```sh\n npm install ts-pattern\n ```\n \n-Via yarn\n+You can also use your favorite package manager:\n \n-```\n+```sh\n+pnpm add ts-pattern\n+# OR\n yarn add ts-pattern\n+# OR\n+bun add ts-pattern\n+# OR\n+npx jsr add @gabriel/ts-pattern\n ```\n \n-### Compatibility with different TypeScript versions\n-\n-TS-Pattern assumes that [Strict Mode](https://www.typescriptlang.org/tsconfig#strict) is enabled in your `tsconfig.json` file.\n+## Want to become a TypeScript Expert?\n \n-| ts-pattern                                                                                                                                                                              | TypeScript v5+ | TypeScript v4.5+ | TypeScript v4.2+ |\n-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- | ---------------- | ---------------- |\n-| v5.x [(Docs)](#documentation) [(Migration Guide)](https://github.com/gvergnaud/ts-pattern/tree/master/docs/v4-to-v5-migration-guide.md)                                                 | ✅             | ❌               | ❌               |\n-| v4.x [(Docs)](https://github.com/gvergnaud/ts-pattern/tree/v4##documentation) [(Migration Guide)](https://github.com/gvergnaud/ts-pattern/tree/master/docs/v3-to-v4-migration-guide.md) | ✅             | ✅               | ❌               |\n-| v3.x [(Docs)](https://github.com/gvergnaud/ts-pattern/tree/v3#documentation)                                                                                                            | ✅             | ✅               | ✅               |\n-\n-- ✅ Full support\n-- ❌ Not supported\n+Check out 👉 [Type-Level TypeScript](https://type-level-typescript.com/), an online course teaching you how to unleash the full potential of TypeScript's Turing-complete type system. You already know how to code, and types are simply another programming language to master. This course **bridges the gap**, helping you apply your **existing programming knowledge** to **TypeScript's type system**, so you never again struggle with type errors or feel unable to type complex generic code correctly!\n \n # Documentation\n \n-- [Code Sandbox Examples](#code-sandbox-examples)\n+- [Sandbox examples](#sandbox-examples)\n - [Getting Started](#getting-started)\n - [API Reference](#api-reference)\n   - [`match`](#match)\n@@ -102,16 +99,17 @@\n   - [`.returnType`](#returntype)\n   - [`.exhaustive`](#exhaustive)\n   - [`.otherwise`](#otherwise)\n-  - [`.run`](#run)\n+  - [`.narrow`](#narrow)\n   - [`isMatching`](#ismatching)\n   - [Patterns](#patterns)\n     - [Literals](#literals)\n     - [Wildcards](#wildcards)\n     - [Objects](#objects)\n     - [Tuples (arrays)](#tuples-arrays)\n-    - [Sets](#pset-patterns)\n-    - [Maps](#pmap-patterns)\n     - [`P.array` patterns](#parray-patterns)\n+    - [`P.record` patterns](#precord-patterns)\n+    - [`P.set`](#pset-patterns)\n+    - [`P.map`](#pmap-patterns)\n     - [`P.when` patterns](#pwhen-patterns)\n",
+					"match": false,
+					"packageHash": "92637e0ff87e218510ad909cdac4466848103ac29c9e506f709ecf8caada6340",
+					"size": 47849,
+					"sourceHash": "933825510c2f157707b6b805a5070b66714c53e2a69608292cf305e9e81f3578",
+					"status": "content"
+				},
+				"dist/index.cjs": {
+					"match": false,
+					"packageHash": "438b0b0fbb70e57ae346f08f93bdfefb382328be03e1030edd0d24db3c690b4e",
+					"size": 10315,
+					"status": "missing-in-source"
+				},
+				"dist/index.cjs.map": {
+					"match": false,
+					"packageHash": "2b65e54fab623f5a21a1cf26ec72fa4ec4d7bf6f34282acbf4a1697657411dbc",
+					"size": 61630,
+					"status": "missing-in-source"
+				},
+				"dist/index.d.cts": {
+					"match": false,
+					"packageHash": "d08c3fab3add1d488ac11ff584bf8d9fe2109180c6f7c04c3c735cc4ade3a90f",
+					"size": 162,
+					"status": "missing-in-source"
+				},
+				"dist/index.d.ts": {
+					"match": false,
+					"packageHash": "b1152042664d55d993ef4336bc1aad185858bbf45fae754d42b59539e5f3e45a",
+					"size": 159,
+					"status": "missing-in-source"
+				},
+				"dist/index.js": {
+					"match": false,
+					"packageHash": "c14ed1a488dce41dd4866122ae095fb605f1dea844f8e067e1064b3db53faa66",
+					"size": 7077,
+					"status": "missing-in-source"
+				},
+				"dist/index.js.map": {
+					"match": false,
+					"packageHash": "7300366e0291d703fe34d5546ba42f5e946141b4c368cc0b0cf7592b262adc19",
+					"size": 58926,
+					"status": "missing-in-source"
+				},
+				"dist/index.umd.js": {
+					"match": false,
+					"packageHash": "9180318c8ce1be71e039d533265b0fda8f8e91363e66e69474b1ad91d4d7cd47",
+					"size": 10479,
+					"status": "missing-in-source"
+				},
+				"dist/index.umd.js.map": {
+					"match": false,
+					"packageHash": "cb83d928152bc66f92e979ebfa3276dea0eddcc793fd525feef93d8d123b0af2",
+					"size": 61633,
+					"status": "missing-in-source"
+				},
+				"dist/internals/helpers.d.cts": {
+					"match": false,
+					"packageHash": "2491f038e2673c4ed48028af76a5ec75f38c5f7291da5c4bf248304f97ac0d78",
+					"size": 627,
+					"status": "missing-in-source"
+				},
+				"dist/internals/helpers.d.ts": {
+					"match": false,
+					"packageHash": "b93e1054591ec9fdf4db7a504944605e96ebc52971d9430aba863978c21483c6",
+					"size": 625,
+					"status": "missing-in-source"
+				},
+				"dist/internals/symbols.d.cts": {
+					"match": false,
+					"packageHash": "d0112c7965d438d2018bf4f25a59b98b1a9a49809560a1c6130ab83f530c91c9",
+					"size": 971,
+					"status": "missing-in-source"
+				},
+				"dist/internals/symbols.d.ts": {
+					"match": false,
+					"packageHash": "d0112c7965d438d2018bf4f25a59b98b1a9a49809560a1c6130ab83f530c91c9",
+					"size": 971,
+					"status": "missing-in-source"
+				},
+				"dist/is-matching.d.cts": {
+					"match": false,
+					"packageHash": "7f29a73d25fe50a2d08d8387ad3bb08ce0848b7192eaf166ecd1c16fed2f883f",
+					"size": 1128,
+					"status": "missing-in-source"
+				},
+				"dist/is-matching.d.ts": {
+					"match": false,
+					"packageHash": "8e1358facdd7b6a3036663a0006d43a4b834daf91d802e0082593c0ab7d88b2e",
+					"size": 1126,
+					"status": "missing-in-source"
+				},
+				"dist/match.d.cts": {
+					"match": false,
+					"packageHash": "cf469922bbdb440ed3dda253461e1c3825025ac901bb33d8b3669695cb545e2b",
+					"size": 705,
+					"status": "missing-in-source"
+				},
+				"dist/match.d.ts": {
+					"match": false,
+					"packageHash": "b4800a82c9c607b544bf831b1f89ed6e432f517702c4816028222128a2c806fc",
+					"size": 703,
+					"status": "missing-in-source"
+				},
+				"dist/patterns.d.cts": {
+					"match": false,
+					"packageHash": "b7759db12f80b683472bf9aab51fb639f47a32b934e431fb201c34ba232de235",
+					"size": 12464,
+					"status": "missing-in-source"
+				},
+				"dist/patterns.d.ts": {
+					"match": false,
+					"packageHash": "028dacc0ba3abebf2cf229debadc09b7586e3983b162b125cd40558b7fe01a72",
+					"size": 12458,
+					"status": "missing-in-source"
+				},
+				"dist/types/BuildMany.d.cts": {
+					"match": false,
+					"packageHash": "83eecf5a433369a7a718fcc608e5549d0e8cc059f57e6687003d48d85fb941e6",
+					"size": 1232,
+					"status": "missing-in-source"
+				},
+				"dist/types/BuildMany.d.ts": {
+					"match": false,
+					"packageHash": "5d69aa9208a5bee2e66bae22fefbb91a71e55a39e99458fcf2a903c3264e7671",
+					"size": 1231,
+					"status": "missing-in-source"
+				},
+				"dist/types/DeepExclude.d.cts": {
+					"match": false,
+					"packageHash": "b0f572c6d99ea18357395d03154074427449d7590548263b113fed1a2d5e9b67",
+					"size": 143,
+					"status": "missing-in-source"
+				},
+				"dist/types/DeepExclude.d.ts": {
+					"match": false,
+					"packageHash": "4e17486c14175f1eb6ce1b3e0072cf685b9fb9167cbac597ca3827b848903916",
+					"size": 142,
+					"status": "missing-in-source"
+				},
+				"dist/types/DistributeUnions.d.cts": {
+					"match": false,
+					"packageHash": "36f544f8a2c6dabd45534a6be96a9e3eadef735c6dace3405ae901d920300e37",
+					"size": 4866,
+					"status": "missing-in-source"
+				},
+				"dist/types/DistributeUnions.d.ts": {
+					"match": false,
+					"packageHash": "02d035ff7d4aa492f4cf187cc9334159659ec8f7d18ebeb95c078f9c34810efa",
+					"size": 4863,
+					"status": "missing-in-source"
+				},
+				"dist/types/ExtractPreciseValue.d.cts": {
+					"match": false,
+					"packageHash": "0c0239bff91663d7701a9321a4c0afc375da191892ce1ad8f6bd3d9342efbe63",
+					"size": 2793,
+					"status": "missing-in-source"
+				},
+				"dist/types/ExtractPreciseValue.d.ts": {
+					"match": false,
+					"packageHash": "35b79c6bee0be1ee94bfea90d7791d2d011d5deaedb224a76920369dabbeb56b",
+					"size": 2791,
+					"status": "missing-in-source"
+				},
+				"dist/types/FindSelected.d.cts": {
+					"match": false,
+					"packageHash": "3996f9ec0fe4edfdd114b15f3ec2f140260e4cc42defacc53208667cb7e4e8ec",
+					"size": 4251,
+					"status": "missing-in-source"
+				},
+				"dist/types/FindSelected.d.ts": {
+					"match": false,
+					"packageHash": "33c6896904b6d2a51cd90bd3a4d2211f30175372893dd98f572f0bf56a392edb",
+					"size": 4248,
+					"status": "missing-in-source"
+				},
+				"dist/types/InvertPattern.d.cts": {
+					"match": false,
+					"packageHash": "70b00a7a1f52ad2c70a8c5c3746d3b701310bc08bf22f28661718593f59e8a49",
+					"size": 8411,
+					"status": "missing-in-source"
+				},
+				"dist/types/InvertPattern.d.ts": {
+					"match": false,
+					"packageHash": "9876fe95f6846dd30b0d91588378cb6e460423a9a3c3a4dfbefb401983865e2e",
+					"size": 8408,
+					"status": "missing-in-source"
+				},
+				"dist/types/IsMatching.d.cts": {
+					"match": false,
+					"packageHash": "9e33ec69bf77684127372496a67c5cf352f996d30a995aeefedcae79e16f0c0e",
+					"size": 1937,
+					"status": "missing-in-source"
+				},
+				"dist/types/IsMatching.d.ts": {
+					"match": false,
+					"packageHash": "9ac5937cb54fdb69aeadd27047fd5ddebc07d3c86c45fa17ad4a7bbd0000c9b5",
+					"size": 1936,
+					"status": "missing-in-source"
+				},
+				"dist/types/Match.d.cts": {
+					"match": false,
+					"packageHash": "b490b7da6dd45ea16a788cda4b868c7f54c222accaa822591596c591b4324b63",
+					"size": 6848,
+					"status": "missing-in-source"
+				},
+				"dist/types/Match.d.ts": {
+					"match": false,
+					"packageHash": "8d07bafb82c5b416d0365473a23efc96b71b0eaedb72d194e043e3f58e063e19",
+					"size": 6842,
+					"status": "missing-in-source"
+				},
+				"dist/types/Pattern.d.cts": {
+					"match": false,
+					"packageHash": "c13b6df79965de6edd1285963f77f2ca6bb90460ff2557519aa5361dde97d258",
+					"size": 18968,
+					"status": "missing-in-source"
+				},
+				"dist/types/Pattern.d.ts": {
+					"match": false,
+					"packageHash": "32be7cb3db27abbef790eff9354142315e2dfccfd58915067b6ea2b9940fd56a",
+					"size": 18963,
+					"status": "missing-in-source"
+				},
+				"dist/types/helpers.d.cts": {
+					"match": false,
+					"packageHash": "5c5ac4f9bbcb97566c8591c8a070f3d84bc823c55e85a0f32c2e4db6c7449ce4",
+					"size": 6328,
+					"status": "missing-in-source"
+				},
+				"dist/types/helpers.d.ts": {
+					"match": false,
+					"packageHash": "5c5ac4f9bbcb97566c8591c8a070f3d84bc823c55e85a0f32c2e4db6c7449ce4",
+					"size": 6328,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,8 +1,9 @@\n {\n   \"name\": \"ts-pattern\",\n-  \"version\": \"5.0.5\",\n+  \"version\": \"5.9.2\",\n   \"description\": \" The exhaustive Pattern Matching library for TypeScript.\",\n   \"type\": \"module\",\n+  \"sideEffects\": false,\n   \"source\": \"src/index.ts\",\n   \"exports\": {\n     \".\": {\n@@ -17,6 +18,15 @@\n       \"types\": \"./dist/index.d.ts\",\n       \"default\": \"./dist/index.js\"\n     },\n+    \"./types\": {\n+      \"require\": {\n+        \"types\": \"./dist/types/index.d.cts\"\n+      },\n+      \"import\": {\n+        \"types\": \"./dist/types/index.d.ts\"\n+      },\n+      \"types\": \"./dist/types/index.d.ts\"\n+    },\n     \"./package.json\": \"./package.json\"\n   },\n   \"types\": \"dist/index.d.ts\",\n@@ -27,11 +37,17 @@\n     \"build\": \"rimraf dist && microbundle --format modern,cjs,umd && sh ./scripts/generate-cts.sh\",\n     \"dev\": \"microbundle watch\",\n     \"prepublishOnly\": \"npm run test && npm run build\",\n+    \"publish:jsr\": \"npm run prepublishOnly && npx jsr publish\",\n+    \"release\": \"npm run prepublishOnly && npm publish && npx jsr publish\",\n     \"test\": \"jest\",\n     \"clear-test\": \"jest --clearCache\",\n-    \"perf\": \"tsc --project tests/tsconfig.json --noEmit --extendedDiagnostics\",\n     \"fmt\": \"prettier ./src/** ./tests/** -w\",\n-    \"check\": \"tsc --strict --noEmit --extendedDiagnostics\"\n+    \"check\": \"tsc --strict --noEmit --extendedDiagnostics\",\n+    \"perf\": \"tsc --project tests/tsconfig.json --noEmit --extendedDiagnostics\",\n+    \"perf:compile-time\": \"tsc --project benchmarks/compile-time/tsconfig.json --extendedDiagnostics\",\n+    \"completions\": \"node scripts/completions/run.mjs\",\n+    \"trace\": \"tsc --project tests/tsconfig.json --generateTrace trace --incremental false  --noEmit\",\n+    \"analyzeTrace\": \"npx @typescript/analyze-trace trace\"\n   },\n   \"files\": [\n     \"dist/**/*\",\n@@ -58,12 +74,18 @@\n   },\n   \"homepage\": \"https://github.com/gvergnaud/ts-pattern#readme\",\n   \"devDependencies\": {\n-    \"@types/jest\": \"^29.5.2\",\n-    \"jest\": \"^29.5.0\",\n+    \"@types/jest\": \"^30.0.0\",\n+    \"jest\": \"^30.1.3\",\n     \"microbundle\": \"^0.15.1\",\n     \"prettier\": \"^2.8.8\",\n     \"rimraf\": \"^5.0.1\",\n-    \"ts-jest\": \"^29.1.0\",\n-    \"typescript\": \"^5.1.3\"\n+    \"ts-jest\": \"^29.4.1\",\n+    \"typescript\": \"^5.9.2\"\n+  },\n+  \"overrides\": {\n+    \"microbundle\": {\n+      \".\": \"$microbundle\",\n+      \"rollup-plugin-typescript2\": \"0.37.0\"\n+    }\n   }\n }\n",
+					"match": false,
+					"packageHash": "cb7e02fc7e95db7413270482697e612dba259f1b14c7eb61f4678a3962876dbf",
+					"size": 1813,
+					"sourceHash": "80d38d8ee14ca765c09a4aace76b81d88840ea6d881a6096b99beb49ed33b802",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 1,
+				"missingInPackage": 0,
+				"missingInSource": 38,
+				"score": 0.024390243902439025,
+				"totalFiles": 41
+			}
+		},
+		"prodDependencies": []
+	}
+]
