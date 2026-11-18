@@ -1,0 +1,59 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-18T19:42:56.239Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:6.14.11",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "@finsweet/ts-utils@0.7.4",
+			"name": "@finsweet/ts-utils",
+			"version": "0.7.4",
+			"location": "https://registry.npmjs.org/@finsweet/ts-utils/-/ts-utils-0.7.4.tgz",
+			"integrity": "sha512-wsdkpZ9HyPm+in0qqOjt7nzY+hMP8CrkvGWviY8Ll810R3b13HNHRdKqvYOD6BUDH9OX7/bWbjDy1Rl2ivlKdQ==",
+			"publishedAt": "2021-06-02T12:12:54.585Z",
+			"publishedWith": {
+				"node": "14.16.0",
+				"npm": "7.15.0"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/finsweet/ts-utils.git",
+			"spec": "github:finsweet/ts-utils#9171944a5ea74c6dc646357a7f482823b728acb7"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"components/DisplayController.ts": {
+					"diff": "--- published/components/DisplayController.ts\n+++ rebuilt/components/DisplayController.ts\n@@ -1,105 +1,105 @@\n-import Interaction, { InteractionParams } from './Interaction';\r\n-import { fadeIn, fadeOut } from '../animations/fade';\r\n-import isVisible from '../helpers/isVisible';\r\n-import { queryElement } from '../helpers';\r\n-import { Debug } from '.';\r\n-\r\n-// Types\r\n-export interface DisplayControllerParams {\r\n-  /**\r\n-   * The main element. Accepts both an HTMLElement or a string selector.\r\n-   */\r\n-  element: HTMLElement | string;\r\n-\r\n-  /**\r\n-   * If the display must be controlled thorugh a Webflow interaction.\r\n-   */\r\n-  interaction?: InteractionParams;\r\n-\r\n-  /**\r\n-   * The display property of the element when displayed.\r\n-   * Not applicable when interaction parameters ara passed to the instance, as it's assumed that the Webflow interaction will set the display property.\r\n-   * Defaults to `block`.\r\n-   */\r\n-  displayProperty?: typeof DisplayController['displayProperties'][number];\r\n-\r\n-  /**\r\n-   * If set to true, the element will be straitgh showed / hidden without any transition.\r\n-   */\r\n-  noTransition?: boolean;\r\n-\r\n-  /**\r\n-   * If set to true, the element will be set to `display: none`.\r\n-   */\r\n-  startsHidden?: boolean;\r\n-}\r\n-\r\n-/**\r\n- * Controls showing/hiding an element.\r\n- * Works with Webflow interactions, built-in fade animations or no animations at all.\r\n- */\r\n-export default class DisplayController {\r\n-  private readonly interaction;\r\n-  private readonly noTransition;\r\n-  private readonly displayProperty: Required<DisplayControllerParams>['displayProperty'];\r\n-  private visible;\r\n-\r\n-  public readonly element: HTMLElement;\r\n-  public static readonly displayProperties = ['block', 'flex', 'grid', 'inline-block', 'inline'] as const;\r\n-\r\n-  constructor({ element, interaction, displayProperty, noTransition, startsHidden }: DisplayControllerParams) {\r\n-    // Store properties\r\n-    this.element =\r\n-      typeof element === 'string'\r\n-        ? queryElement(element, HTMLElement) ||\r\n-          Debug.alert(`No element with the ${element} selector was found.`, 'error')\r\n-        : element;\r\n-\r\n-    this.noTransition = noTransition;\r\n-    this.displayProperty = displayProperty || 'block';\r\n-\r\n-    // Visibility check\r\n-    if (startsHidden) {\r\n-      this.element.style.display = 'none';\r\n-      this.visible = false;\r\n-    } else this.visible = isVisible(this.element);\r\n-\r\n-    if (interaction) {\r\n-      const { element, duration } = interaction;\r\n-      this.interaction = new Interaction({ element, duration });\r\n-    }\r\n-  }\r\n-\r\n-  /**\r\n-   * @returns If the element is visible\r\n-   */\r\n-  public isVisible = (): boolean => this.visible;\r\n-\r\n-  /**\r\n-   * Displays the element\r\n-   * @returns An awaitable promise\r\n-   */\r\n-  public async show(): Promise<void> {\r\n-    if (this.visible) return;\r\n-\r\n-    if (this.interaction) await this.interaction.trigger('first');\r\n-    else if (this.noTransition) this.element.style.display = this.displayProperty;\r\n-    else await fadeIn(this.element, this.displayProperty);\r\n-\r\n-    this.visible = true;\r\n-  }\r\n-\r\n-  /**\r\n-   * Hides the element\r\n-   * @returns An awaitable promise\r\n-   */\r\n-  public async hide(): Promise<void> {\r\n-    if (!this.visible) return;\r\n",
+					"match": false,
+					"packageHash": "cac8205d1d9fa7b066b9e6ae2466655a3a8dcdbf1e91182610ff9cc2cc936f9e",
+					"size": 3274,
+					"sourceHash": "39b088c4d8525431172fc65f11f5479f94c3f8931fc948665852605699f73edf",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,41 +1,41 @@\n-{\r\n-  \"name\": \"@finsweet/ts-utils\",\r\n-  \"version\": \"0.7.4\",\r\n-  \"description\": \"Typescript utils for custom Webflow projects.\",\r\n-  \"main\": \"index.ts\",\r\n-  \"module\": \"index.ts\",\r\n-  \"type\": \"module\",\r\n-  \"repository\": {\r\n-    \"type\": \"git\",\r\n-    \"url\": \"git+https://github.com/finsweet/ts-utils.git\"\r\n-  },\r\n-  \"scripts\": {\r\n-    \"build\": \"node .\\\\bin\\\\build.js\"\r\n-  },\r\n-  \"keywords\": [\r\n-    \"webflow\",\r\n-    \"finsweet\",\r\n-    \"no-code\",\r\n-    \"typescript\",\r\n-    \"utils\"\r\n-  ],\r\n-  \"author\": {\r\n-    \"name\": \"Finsweet\",\r\n-    \"url\": \"https://www.finsweet.com/\"\r\n-  },\r\n-  \"license\": \"ISC\",\r\n-  \"bugs\": {\r\n-    \"url\": \"https://github.com/finsweet/ts-utils/issues\"\r\n-  },\r\n-  \"homepage\": \"https://github.com/finsweet/ts-utils#readme\",\r\n-  \"devDependencies\": {\r\n-    \"@finsweet/eslint-config\": \"^1.0.9\",\r\n-    \"@typescript-eslint/eslint-plugin\": \"^4.26.0\",\r\n-    \"@typescript-eslint/parser\": \"^4.26.0\",\r\n-    \"eslint\": \"^7.27.0\",\r\n-    \"eslint-config-prettier\": \"^8.3.0\",\r\n-    \"eslint-plugin-prettier\": \"^3.4.0\",\r\n-    \"prettier\": \"^2.3.0\",\r\n-    \"typescript\": \"^4.3.2\"\r\n-  }\r\n-}\r\n+{\n+  \"name\": \"@finsweet/ts-utils\",\n+  \"version\": \"0.7.3\",\n+  \"description\": \"Typescript utils for custom Webflow projects.\",\n+  \"main\": \"index.ts\",\n+  \"module\": \"index.ts\",\n+  \"type\": \"module\",\n+  \"repository\": {\n+    \"type\": \"git\",\n+    \"url\": \"git+https://github.com/finsweet/ts-utils.git\"\n+  },\n+  \"scripts\": {\n+    \"build\": \"node .\\\\bin\\\\build.js\"\n+  },\n+  \"keywords\": [\n+    \"webflow\",\n+    \"finsweet\",\n+    \"no-code\",\n+    \"typescript\",\n+    \"utils\"\n+  ],\n+  \"author\": {\n+    \"name\": \"Finsweet\",\n+    \"url\": \"https://www.finsweet.com/\"\n+  },\n+  \"license\": \"ISC\",\n+  \"bugs\": {\n+    \"url\": \"https://github.com/finsweet/ts-utils/issues\"\n+  },\n+  \"homepage\": \"https://github.com/finsweet/ts-utils#readme\",\n+  \"devDependencies\": {\n+    \"@finsweet/eslint-config\": \"^1.0.9\",\n+    \"@typescript-eslint/eslint-plugin\": \"^4.26.0\",\n+    \"@typescript-eslint/parser\": \"^4.26.0\",\n+    \"eslint\": \"^7.27.0\",\n+    \"eslint-config-prettier\": \"^8.3.0\",\n+    \"eslint-plugin-prettier\": \"^3.4.0\",\n+    \"prettier\": \"^2.3.0\",\n+    \"typescript\": \"^4.3.2\"\n+  }\n+}\n",
+					"match": false,
+					"packageHash": "d12f6102050dc1d3390cea43ba2e44b9f9de400be9214704a8a8b490ea56aefe",
+					"size": 1043,
+					"sourceHash": "5517ac4c27c9b9928092fe3c1592df285362145f9f332813646f93b743ec6cc2",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 42,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.9545454545454546,
+				"totalFiles": 44
+			}
+		},
+		"prodDependencies": []
+	}
+]

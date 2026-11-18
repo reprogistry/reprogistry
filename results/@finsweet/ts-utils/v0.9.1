@@ -1,0 +1,59 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-18T19:42:26.943Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:6.14.11",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "@finsweet/ts-utils@0.9.1",
+			"name": "@finsweet/ts-utils",
+			"version": "0.9.1",
+			"location": "https://registry.npmjs.org/@finsweet/ts-utils/-/ts-utils-0.9.1.tgz",
+			"integrity": "sha512-CDs0Pkv//rSObCtkK7QiL9F9sVPc8FglBX0ko/cg+4E2yDIi1chBW14fR10SzaKouP9KwmLFcmvbfntfoWFXhw==",
+			"publishedAt": "2021-06-21T11:13:13.024Z",
+			"publishedWith": {
+				"node": "14.16.0",
+				"npm": "7.17.0"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/finsweet/ts-utils.git",
+			"spec": "github:finsweet/ts-utils#0e91ce71467db5264eb8017eb1d81a328f62422a"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"helpers/clearFormField.ts": {
+					"diff": "--- published/helpers/clearFormField.ts\n+++ rebuilt/helpers/clearFormField.ts\n@@ -1,29 +1,29 @@\n-import type { FormField } from '../types';\r\n-import simulateEvent from './simulateEvent';\r\n-\r\n-/**\r\n- * Clears the form field's value and emits an input and changed event.\r\n- * If the field is a checkbox or a radio, it will unselect it.\r\n- * @param field\r\n- */\r\n-const clearFormField = (field: FormField): void => {\r\n-  const { type } = field;\r\n-\r\n-  if (field instanceof HTMLInputElement && ['checkbox', 'radio'].includes(type) && field.checked) {\r\n-    // Reset the field's value\r\n-    field.checked = false;\r\n-\r\n-    // Emit DOM events\r\n-    (['click', 'input', 'change'] as const).forEach((event) => simulateEvent(field, event));\r\n-\r\n-    return;\r\n-  }\r\n-\r\n-  // Reset the field's value\r\n-  field.value = '';\r\n-\r\n-  // Emit DOM events\r\n-  (['input', 'change'] as const).forEach((event) => simulateEvent(field, event));\r\n-};\r\n-\r\n-export default clearFormField;\r\n+import type { FormField } from '../types';\n+import simulateEvent from './simulateEvent';\n+\n+/**\n+ * Clears the form field's value and emits an input and changed event.\n+ * If the field is a checkbox or a radio, it will unselect it.\n+ * @param field\n+ */\n+const clearFormField = (field: FormField): void => {\n+  const { type } = field;\n+\n+  if (field instanceof HTMLInputElement && ['checkbox', 'radio'].includes(type)) {\n+    // Reset the field's value\n+    field.checked = false;\n+\n+    // Emit DOM events\n+    (['click', 'input', 'change'] as const).forEach((event) => simulateEvent(field, event));\n+\n+    return;\n+  }\n+\n+  // Reset the field's value\n+  field.value = '';\n+\n+  // Emit DOM events\n+  (['input', 'change'] as const).forEach((event) => simulateEvent(field, event));\n+};\n+\n+export default clearFormField;\n",
+					"match": false,
+					"packageHash": "1b99356ac802d047992f421b1ffe4527a6e64840e48ff35c9835809835aa3c87",
+					"size": 837,
+					"sourceHash": "2eaac35ae48fd8d30bd9c045e1946a618f526c233b1328af7e5cb19005a2e210",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,42 +1,42 @@\n-{\r\n-  \"name\": \"@finsweet/ts-utils\",\r\n-  \"version\": \"0.9.1\",\r\n-  \"description\": \"Typescript utils for custom Webflow projects.\",\r\n-  \"main\": \"index.ts\",\r\n-  \"module\": \"index.ts\",\r\n-  \"sideEffects\": false,\r\n-  \"type\": \"module\",\r\n-  \"repository\": {\r\n-    \"type\": \"git\",\r\n-    \"url\": \"git+https://github.com/finsweet/ts-utils.git\"\r\n-  },\r\n-  \"scripts\": {\r\n-    \"build\": \"node .\\\\bin\\\\build.js\"\r\n-  },\r\n-  \"keywords\": [\r\n-    \"webflow\",\r\n-    \"finsweet\",\r\n-    \"no-code\",\r\n-    \"typescript\",\r\n-    \"utils\"\r\n-  ],\r\n-  \"author\": {\r\n-    \"name\": \"Finsweet\",\r\n-    \"url\": \"https://www.finsweet.com/\"\r\n-  },\r\n-  \"license\": \"ISC\",\r\n-  \"bugs\": {\r\n-    \"url\": \"https://github.com/finsweet/ts-utils/issues\"\r\n-  },\r\n-  \"homepage\": \"https://github.com/finsweet/ts-utils#readme\",\r\n-  \"devDependencies\": {\r\n-    \"@finsweet/eslint-config\": \"^1.0.9\",\r\n-    \"@typescript-eslint/eslint-plugin\": \"^4.27.0\",\r\n-    \"@typescript-eslint/parser\": \"^4.27.0\",\r\n-    \"eslint\": \"^7.29.0\",\r\n-    \"eslint-config-prettier\": \"^8.3.0\",\r\n-    \"eslint-plugin-prettier\": \"^3.4.0\",\r\n-    \"prettier\": \"^2.3.1\",\r\n-    \"typescript\": \"^4.3.4\"\r\n-  }\r\n-}\r\n+{\n+  \"name\": \"@finsweet/ts-utils\",\n+  \"version\": \"0.9.0\",\n+  \"description\": \"Typescript utils for custom Webflow projects.\",\n+  \"main\": \"index.ts\",\n+  \"module\": \"index.ts\",\n+  \"sideEffects\": false,\n+  \"type\": \"module\",\n+  \"repository\": {\n+    \"type\": \"git\",\n+    \"url\": \"git+https://github.com/finsweet/ts-utils.git\"\n+  },\n+  \"scripts\": {\n+    \"build\": \"node .\\\\bin\\\\build.js\"\n+  },\n+  \"keywords\": [\n+    \"webflow\",\n+    \"finsweet\",\n+    \"no-code\",\n+    \"typescript\",\n+    \"utils\"\n+  ],\n+  \"author\": {\n+    \"name\": \"Finsweet\",\n+    \"url\": \"https://www.finsweet.com/\"\n+  },\n+  \"license\": \"ISC\",\n+  \"bugs\": {\n+    \"url\": \"https://github.com/finsweet/ts-utils/issues\"\n+  },\n+  \"homepage\": \"https://github.com/finsweet/ts-utils#readme\",\n+  \"devDependencies\": {\n+    \"@finsweet/eslint-config\": \"^1.0.9\",\n+    \"@typescript-eslint/eslint-plugin\": \"^4.27.0\",\n+    \"@typescript-eslint/parser\": \"^4.27.0\",\n+    \"eslint\": \"^7.29.0\",\n+    \"eslint-config-prettier\": \"^8.3.0\",\n+    \"eslint-plugin-prettier\": \"^3.4.0\",\n+    \"prettier\": \"^2.3.1\",\n+    \"typescript\": \"^4.3.4\"\n+  }\n+}\n",
+					"match": false,
+					"packageHash": "1c2cf78060f8b7e13e4d1127d5c28502ca951654d58f92e136e4ccd7ddb18a08",
+					"size": 1068,
+					"sourceHash": "e58f3eb9a19f6f841429209726223288d4c882c6cc311c5fe149d7c88dcf9943",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 44,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.9565217391304348,
+				"totalFiles": 46
+			}
+		},
+		"prodDependencies": []
+	}
+]

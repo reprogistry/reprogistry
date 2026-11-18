@@ -1,0 +1,59 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-18T21:02:41.861Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:8.1.4",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "@finsweet/ts-utils@0.31.4",
+			"name": "@finsweet/ts-utils",
+			"version": "0.31.4",
+			"location": "https://registry.npmjs.org/@finsweet/ts-utils/-/ts-utils-0.31.4.tgz",
+			"integrity": "sha512-8DZEHEtKU7N98Iyd3HdNHBsr3ftbHyyuWt6ON15jtTEKj2yXJVKNg8aZEfPfuIsfSB6gNjJgSvGx15LJ+DMXUA==",
+			"publishedAt": "2022-04-26T13:12:41.103Z",
+			"publishedWith": {
+				"node": "17.2.0",
+				"npm": "8.1.4"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/finsweet/ts-utils.git",
+			"spec": "github:finsweet/ts-utils#4958c52d31ebf34657aafc13a862d2f9b49272dd"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"dist/helpers/setFormFieldValue.js": {
+					"diff": "--- published/dist/helpers/setFormFieldValue.js\n+++ rebuilt/dist/helpers/setFormFieldValue.js\n@@ -1,21 +1,19 @@\n-import { simulateEvent } from '.';\r\n-export const setFormFieldValue = (element, value) => {\r\n-    const { type } = element;\r\n-    const isRadio = type === 'radio';\r\n-    const isCheckbox = type === 'checkbox';\r\n-    if (isRadio || isCheckbox) {\r\n-        if (!(element instanceof HTMLInputElement) ||\r\n-            typeof value !== 'boolean' ||\r\n-            value === element.checked ||\r\n-            (isRadio && value === false)) {\r\n-            return;\r\n-        }\r\n-        element.checked = value;\r\n-    }\r\n-    else {\r\n-        if (element.value === value)\r\n-            return;\r\n-        element.value = value.toString();\r\n-    }\r\n-    simulateEvent(element, ['click', 'input', 'change']);\r\n-};\r\n+import { simulateEvent } from '.';\n+export const setFormFieldValue = (element, value) => {\n+    const { type } = element;\n+    const isRadio = type === 'radio';\n+    const isCheckbox = type === 'checkbox';\n+    if (isRadio || isCheckbox) {\n+        if (!(element instanceof HTMLInputElement) ||\n+            typeof value !== 'boolean' ||\n+            value === element.checked ||\n+            (isRadio && value === false)) {\n+            return;\n+        }\n+        element.checked = value;\n+    }\n+    else if (element.value !== value) {\n+        element.value = value.toString();\n+    }\n+    simulateEvent(element, ['click', 'input', 'change']);\n+};\n",
+					"match": false,
+					"packageHash": "2d1c81026e27fce994c9ba8f5a97a109b0fcac7c8dee89b19f68e1f7f0c45f8d",
+					"size": 683,
+					"sourceHash": "e9888b5ffe287751cdd5ce6ff67a58a2a0bbd0b462d0a802b80491b1f5c525f2",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,46 +1,46 @@\n-{\r\n-  \"name\": \"@finsweet/ts-utils\",\r\n-  \"version\": \"0.31.4\",\r\n-  \"description\": \"Typescript utils for custom Webflow projects.\",\r\n-  \"type\": \"module\",\r\n-  \"main\": \"dist/index.js\",\r\n-  \"module\": \"./dist/index.js\",\r\n-  \"types\": \"./dist/index.d.ts\",\r\n-  \"sideEffects\": false,\r\n-  \"files\": [\r\n-    \"dist\"\r\n-  ],\r\n-  \"repository\": {\r\n-    \"type\": \"git\",\r\n-    \"url\": \"git+https://github.com/finsweet/ts-utils.git\"\r\n-  },\r\n-  \"scripts\": {\r\n-    \"build\": \"tsc\"\r\n-  },\r\n-  \"keywords\": [\r\n-    \"webflow\",\r\n-    \"finsweet\",\r\n-    \"no-code\",\r\n-    \"typescript\",\r\n-    \"utils\"\r\n-  ],\r\n-  \"author\": {\r\n-    \"name\": \"Finsweet\",\r\n-    \"url\": \"https://www.finsweet.com/\"\r\n-  },\r\n-  \"license\": \"ISC\",\r\n-  \"bugs\": {\r\n-    \"url\": \"https://github.com/finsweet/ts-utils/issues\"\r\n-  },\r\n-  \"homepage\": \"https://github.com/finsweet/ts-utils#readme\",\r\n-  \"devDependencies\": {\r\n-    \"@finsweet/eslint-config\": \"^1.1.2\",\r\n-    \"@typescript-eslint/eslint-plugin\": \"^5.10.0\",\r\n-    \"@typescript-eslint/parser\": \"^5.10.0\",\r\n-    \"eslint\": \"^8.7.0\",\r\n-    \"eslint-config-prettier\": \"^8.3.0\",\r\n-    \"eslint-plugin-prettier\": \"^4.0.0\",\r\n-    \"prettier\": \"^2.5.1\",\r\n-    \"typescript\": \"^4.5.4\"\r\n-  }\r\n-}\r\n+{\n+  \"name\": \"@finsweet/ts-utils\",\n+  \"version\": \"0.31.3\",\n+  \"description\": \"Typescript utils for custom Webflow projects.\",\n+  \"type\": \"module\",\n+  \"main\": \"dist/index.js\",\n+  \"module\": \"./dist/index.js\",\n+  \"types\": \"./dist/index.d.ts\",\n+  \"sideEffects\": false,\n+  \"files\": [\n+    \"dist\"\n+  ],\n+  \"repository\": {\n+    \"type\": \"git\",\n+    \"url\": \"git+https://github.com/finsweet/ts-utils.git\"\n+  },\n+  \"scripts\": {\n+    \"build\": \"tsc\"\n+  },\n+  \"keywords\": [\n+    \"webflow\",\n+    \"finsweet\",\n+    \"no-code\",\n+    \"typescript\",\n+    \"utils\"\n+  ],\n+  \"author\": {\n+    \"name\": \"Finsweet\",\n+    \"url\": \"https://www.finsweet.com/\"\n+  },\n+  \"license\": \"ISC\",\n+  \"bugs\": {\n+    \"url\": \"https://github.com/finsweet/ts-utils/issues\"\n+  },\n+  \"homepage\": \"https://github.com/finsweet/ts-utils#readme\",\n+  \"devDependencies\": {\n+    \"@finsweet/eslint-config\": \"^1.1.2\",\n+    \"@typescript-eslint/eslint-plugin\": \"^5.10.0\",\n+    \"@typescript-eslint/parser\": \"^5.10.0\",\n+    \"eslint\": \"^8.7.0\",\n+    \"eslint-config-prettier\": \"^8.3.0\",\n+    \"eslint-plugin-prettier\": \"^4.0.0\",\n+    \"prettier\": \"^2.5.1\",\n+    \"typescript\": \"^4.5.4\"\n+  }\n+}\n",
+					"match": false,
+					"packageHash": "c6454f481e64da58bb5e8d22b062ea69aed842c94c9da0d897e7b2fe5429de6f",
+					"size": 1127,
+					"sourceHash": "2fea9edfcf6ee77c47e35e7b15480d91a203e3266ed927e0de9afddaacae4306",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 116,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.9830508474576272,
+				"totalFiles": 118
+			}
+		},
+		"prodDependencies": []
+	}
+]

@@ -1,0 +1,59 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-18T21:10:05.516Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:8.5.5",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "@finsweet/ts-utils@0.33.2",
+			"name": "@finsweet/ts-utils",
+			"version": "0.33.2",
+			"location": "https://registry.npmjs.org/@finsweet/ts-utils/-/ts-utils-0.33.2.tgz",
+			"integrity": "sha512-J4rlLOXBoO9TrQyXJDmhWzoNceuBWMZ60sycH9e+jSnqpQBdozfa4g6LHA05xS4j4ivxPNgZNjcsMZxPKdH1Ww==",
+			"publishedAt": "2022-09-20T14:59:24.791Z",
+			"publishedWith": {
+				"node": "16.15.0",
+				"npm": "8.9.0"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/finsweet/ts-utils.git",
+			"spec": "github:finsweet/ts-utils#682cfae2e892367525ee325dbf9fb28a65ed2979"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"dist/components/CopyJSONButton.js": {
+					"diff": "--- published/dist/components/CopyJSONButton.js\n+++ rebuilt/dist/components/CopyJSONButton.js\n@@ -1,117 +1,116 @@\n-import { findTextNode } from '..';\r\n-export class CopyJSONButton {\r\n-    element;\r\n-    hiddenTrigger;\r\n-    successCSSClass;\r\n-    textNode;\r\n-    copyData;\r\n-    successText = 'Copied!';\r\n-    errorText = 'Something went wrong';\r\n-    notificationDuration = 500;\r\n-    notificationActive = false;\r\n-    originalText;\r\n-    constructor({ element, copyData, successText, errorText, notificationDuration, successCSSClass, }) {\r\n-        this.element = element;\r\n-        this.copyData = copyData;\r\n-        if (successText)\r\n-            this.successText = successText;\r\n-        if (errorText)\r\n-            this.errorText = errorText;\r\n-        if (notificationDuration)\r\n-            this.notificationDuration = notificationDuration;\r\n-        if (successCSSClass)\r\n-            this.successCSSClass = successCSSClass;\r\n-        this.textNode = findTextNode(element) || element;\r\n-        this.originalText = this.textNode.textContent || '';\r\n-        this.hiddenTrigger = this.createHiddenTrigger();\r\n-        this.init();\r\n-    }\r\n-    /**\r\n-     * Inits the component.\r\n-     */\r\n-    init() {\r\n-        const { element, hiddenTrigger } = this;\r\n-        element.addEventListener('click', (e) => this.handleClick(e));\r\n-        hiddenTrigger.addEventListener('copy', (e) => this.handleCopy(e));\r\n-    }\r\n-    /**\r\n-     * Creates a hidden button that will serve as the copy trigger.\r\n-     * @returns The new button element.\r\n-     */\r\n-    createHiddenTrigger() {\r\n-        const { element } = this;\r\n-        const button = document.createElement('button');\r\n-        button.contentEditable = 'true';\r\n-        Object.assign(button.style, {\r\n-            position: 'absolute',\r\n-            clip: 'rect(1px, 1px, 1px, 1px)',\r\n-            clipPath: 'inset(0px 0px 99.9% 99.9%)',\r\n-            overflow: 'hidden',\r\n-            height: '1px',\r\n-            width: '1px',\r\n-            padding: '0',\r\n-            border: '0',\r\n-        });\r\n-        (element.parentElement || document.body).appendChild(button);\r\n-        return button;\r\n-    }\r\n-    /**\r\n-     * Handles click events: triggers a copy command on the element.\r\n-     */\r\n-    handleClick(e) {\r\n-        e.preventDefault();\r\n-        this.hiddenTrigger.focus();\r\n-        document.execCommand('copy');\r\n-    }\r\n-    /**\r\n-     * Handles the copy event, transfers the JSON data to the user's clipboard.\r\n-     * @param e\r\n-     */\r\n-    handleCopy(e) {\r\n-        try {\r\n-            // Copy starter form JSON to clipboard\r\n-            e.clipboardData?.setData('application/json', JSON.stringify(this.copyData).trim());\r\n-            e.preventDefault();\r\n-            // Trigger notification\r\n-            this.triggerNotification('success');\r\n-        }\r\n-        catch {\r\n-            this.triggerNotification('error');\r\n-        }\r\n-    }\r\n-    /**\r\n-     * Triggers a `success`/`error` notification on the button.\r\n-     * If the `successCSSClass` is specific, it adds/removes on the button.\r\n-     * @param state `success` or `error`\r\n-     */\r\n-    triggerNotification(state) {\r\n-        const { notificationActive, notificationDuration, originalText, element, successCSSClass, successText, errorText } = this;\r\n-        if (notificationActive)\r\n-            return;\r\n-        this.notificationActive = true;\r\n-        this.textNode.textContent = state === 'success' ? successText : errorText;\r\n-        if (successCSSClass)\r\n-            element.classList.add(successCSSClass);\r\n-        window.setTimeout(() => {\r\n-            this.textNode.textContent = originalText;\r\n-            if (successCSSClass)\r\n",
+					"match": false,
+					"packageHash": "3a5f077e8cc4c37c2a4beb526f4cce318ab502a7fc8a287dd578fde296724535",
+					"size": 4046,
+					"sourceHash": "f796b827e78b1d4e66eb87dbe27ca4ee6f30e1bbf1055ac339daf522b9374d28",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,46 +1,46 @@\n-{\r\n-  \"name\": \"@finsweet/ts-utils\",\r\n-  \"version\": \"0.33.2\",\r\n-  \"description\": \"Typescript utils for custom Webflow projects.\",\r\n-  \"type\": \"module\",\r\n-  \"main\": \"dist/index.js\",\r\n-  \"module\": \"./dist/index.js\",\r\n-  \"types\": \"./dist/index.d.ts\",\r\n-  \"sideEffects\": false,\r\n-  \"files\": [\r\n-    \"dist\"\r\n-  ],\r\n-  \"repository\": {\r\n-    \"type\": \"git\",\r\n-    \"url\": \"git+https://github.com/finsweet/ts-utils.git\"\r\n-  },\r\n-  \"scripts\": {\r\n-    \"build\": \"tsc\"\r\n-  },\r\n-  \"keywords\": [\r\n-    \"webflow\",\r\n-    \"finsweet\",\r\n-    \"no-code\",\r\n-    \"typescript\",\r\n-    \"utils\"\r\n-  ],\r\n-  \"author\": {\r\n-    \"name\": \"Finsweet\",\r\n-    \"url\": \"https://www.finsweet.com/\"\r\n-  },\r\n-  \"license\": \"ISC\",\r\n-  \"bugs\": {\r\n-    \"url\": \"https://github.com/finsweet/ts-utils/issues\"\r\n-  },\r\n-  \"homepage\": \"https://github.com/finsweet/ts-utils#readme\",\r\n-  \"devDependencies\": {\r\n-    \"@finsweet/eslint-config\": \"^1.1.2\",\r\n-    \"@typescript-eslint/eslint-plugin\": \"^5.10.0\",\r\n-    \"@typescript-eslint/parser\": \"^5.10.0\",\r\n-    \"eslint\": \"^8.7.0\",\r\n-    \"eslint-config-prettier\": \"^8.3.0\",\r\n-    \"eslint-plugin-prettier\": \"^4.0.0\",\r\n-    \"prettier\": \"^2.5.1\",\r\n-    \"typescript\": \"^4.5.4\"\r\n-  }\r\n-}\r\n+{\n+  \"name\": \"@finsweet/ts-utils\",\n+  \"version\": \"0.33.1\",\n+  \"description\": \"Typescript utils for custom Webflow projects.\",\n+  \"type\": \"module\",\n+  \"main\": \"dist/index.js\",\n+  \"module\": \"./dist/index.js\",\n+  \"types\": \"./dist/index.d.ts\",\n+  \"sideEffects\": false,\n+  \"files\": [\n+    \"dist\"\n+  ],\n+  \"repository\": {\n+    \"type\": \"git\",\n+    \"url\": \"git+https://github.com/finsweet/ts-utils.git\"\n+  },\n+  \"scripts\": {\n+    \"build\": \"tsc\"\n+  },\n+  \"keywords\": [\n+    \"webflow\",\n+    \"finsweet\",\n+    \"no-code\",\n+    \"typescript\",\n+    \"utils\"\n+  ],\n+  \"author\": {\n+    \"name\": \"Finsweet\",\n+    \"url\": \"https://www.finsweet.com/\"\n+  },\n+  \"license\": \"ISC\",\n+  \"bugs\": {\n+    \"url\": \"https://github.com/finsweet/ts-utils/issues\"\n+  },\n+  \"homepage\": \"https://github.com/finsweet/ts-utils#readme\",\n+  \"devDependencies\": {\n+    \"@finsweet/eslint-config\": \"^1.1.2\",\n+    \"@typescript-eslint/eslint-plugin\": \"^5.10.0\",\n+    \"@typescript-eslint/parser\": \"^5.10.0\",\n+    \"eslint\": \"^8.7.0\",\n+    \"eslint-config-prettier\": \"^8.3.0\",\n+    \"eslint-plugin-prettier\": \"^4.0.0\",\n+    \"prettier\": \"^2.5.1\",\n+    \"typescript\": \"^4.5.4\"\n+  }\n+}\n",
+					"match": false,
+					"packageHash": "95e74ec6b507c5f1be0909d82c1ecfa42fb6751f3ef471c2484ad60e700ad9c1",
+					"size": 1127,
+					"sourceHash": "183da8174022a6083a0c0fb0c9d8c3cc891a60773034e48dd85616f5c2b7bb27",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 120,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.9836065573770492,
+				"totalFiles": 122
+			}
+		},
+		"prodDependencies": []
+	}
+]

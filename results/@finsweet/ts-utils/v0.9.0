@@ -1,0 +1,105 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-18T19:49:12.776Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:6.14.11",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "@finsweet/ts-utils@0.9.0",
+			"name": "@finsweet/ts-utils",
+			"version": "0.9.0",
+			"location": "https://registry.npmjs.org/@finsweet/ts-utils/-/ts-utils-0.9.0.tgz",
+			"integrity": "sha512-UQfyCp5+OYi58VH8Ply0Ivwj5WAzYW72Iuxerd15D1Q9FqfObaEq66CnkSQ3gvjsDzerHjJCm7fIVkcnoWBBtg==",
+			"publishedAt": "2021-06-21T10:28:44.556Z",
+			"publishedWith": {
+				"node": "14.16.0",
+				"npm": "7.17.0"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/finsweet/ts-utils.git",
+			"spec": "github:finsweet/ts-utils#10a0f56beac1facce68867338e772af2ef81bc10"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"components/DisplayController.ts": {
+					"diff": "--- published/components/DisplayController.ts\n+++ rebuilt/components/DisplayController.ts\n@@ -1,106 +1,105 @@\n-import type { InteractionParams } from './Interaction';\r\n-import Interaction from './Interaction';\r\n-import { fadeIn, fadeOut } from '../animations/fade';\r\n-import isVisible from '../helpers/isVisible';\r\n-import { queryElement } from '../helpers';\r\n-import { Debug } from '.';\r\n-\r\n-// Types\r\n-export interface DisplayControllerParams {\r\n-  /**\r\n-   * The main element. Accepts both an HTMLElement or a string selector.\r\n-   */\r\n-  element: HTMLElement | string;\r\n-\r\n-  /**\r\n-   * If the display must be controlled thorugh a Webflow interaction.\r\n-   */\r\n-  interaction?: InteractionParams;\r\n-\r\n-  /**\r\n-   * The display property of the element when displayed.\r\n-   * Not applicable when interaction parameters ara passed to the instance, as it's assumed that the Webflow interaction will set the display property.\r\n-   * Defaults to `block`.\r\n-   */\r\n-  displayProperty?: typeof DisplayController['displayProperties'][number];\r\n-\r\n-  /**\r\n-   * If set to true, the element will be straitgh showed / hidden without any transition.\r\n-   */\r\n-  noTransition?: boolean;\r\n-\r\n-  /**\r\n-   * If set to true, the element will be set to `display: none`.\r\n-   */\r\n-  startsHidden?: boolean;\r\n-}\r\n-\r\n-/**\r\n- * Controls showing/hiding an element.\r\n- * Works with Webflow interactions, built-in fade animations or no animations at all.\r\n- */\r\n-export default class DisplayController {\r\n-  private readonly interaction;\r\n-  private readonly noTransition;\r\n-  private readonly displayProperty: Required<DisplayControllerParams>['displayProperty'];\r\n-  private visible;\r\n-\r\n-  public readonly element: HTMLElement;\r\n-  public static readonly displayProperties = ['block', 'flex', 'grid', 'inline-block', 'inline'] as const;\r\n-\r\n-  constructor({ element, interaction, displayProperty, noTransition, startsHidden }: DisplayControllerParams) {\r\n-    // Store properties\r\n-    this.element =\r\n-      typeof element === 'string'\r\n-        ? queryElement(element, HTMLElement) ||\r\n-          Debug.alert(`No element with the ${element} selector was found.`, 'error')\r\n-        : element;\r\n-\r\n-    this.noTransition = noTransition;\r\n-    this.displayProperty = displayProperty || 'block';\r\n-\r\n-    // Visibility check\r\n-    if (startsHidden) {\r\n-      this.element.style.display = 'none';\r\n-      this.visible = false;\r\n-    } else this.visible = isVisible(this.element);\r\n-\r\n-    if (interaction) {\r\n-      const { element, duration } = interaction;\r\n-      this.interaction = new Interaction({ element, duration });\r\n-    }\r\n-  }\r\n-\r\n-  /**\r\n-   * @returns If the element is visible\r\n-   */\r\n-  public isVisible = (): boolean => this.visible;\r\n-\r\n-  /**\r\n-   * Displays the element\r\n-   * @returns An awaitable promise\r\n-   */\r\n-  public async show(): Promise<void> {\r\n-    if (this.visible) return;\r\n-\r\n-    if (this.interaction) await this.interaction.trigger('first');\r\n-    else if (this.noTransition) this.element.style.display = this.displayProperty;\r\n-    else await fadeIn(this.element, this.displayProperty);\r\n-\r\n-    this.visible = true;\r\n-  }\r\n-\r\n-  /**\r\n-   * Hides the element\r\n-   * @returns An awaitable promise\r\n-   */\r\n-  public async hide(): Promise<void> {\r\n",
+					"match": false,
+					"packageHash": "3027a4eb3f28a489d17ca27b17aeb610965adfb9392f163391d17966fe207914",
+					"size": 3308,
+					"sourceHash": "cac8205d1d9fa7b066b9e6ae2466655a3a8dcdbf1e91182610ff9cc2cc936f9e",
+					"status": "content"
+				},
+				"helpers/clearFormField.ts": {
+					"match": false,
+					"packageHash": "2eaac35ae48fd8d30bd9c045e1946a618f526c233b1328af7e5cb19005a2e210",
+					"size": 820,
+					"status": "missing-in-source"
+				},
+				"helpers/getFormFieldValue.ts": {
+					"diff": "--- published/helpers/getFormFieldValue.ts\n+++ rebuilt/helpers/getFormFieldValue.ts\n@@ -1,23 +1,23 @@\n-import type FormField from '../types/FormField';\r\n-\r\n-/**\r\n- * Gets the value of a given input element.\r\n- * @param {FormField} input\r\n- */\r\n-const getFormFieldValue = (input: FormField): string => {\r\n-  let { value } = input;\r\n-\r\n-  // Perform actions depending on input type\r\n-  if (input.type === 'checkbox') value = (<HTMLInputElement>input).checked.toString();\r\n-  if (input.type === 'radio') {\r\n-    // Get the checked radio\r\n-    const checkedOption = input.closest('form')?.querySelector(`input[name=\"${input.name}\"]:checked`);\r\n-\r\n-    // If exists, set its value\r\n-    value = checkedOption instanceof HTMLInputElement ? checkedOption.value : '';\r\n-  }\r\n-\r\n-  return value.toString();\r\n-};\r\n-\r\n-export default getFormFieldValue;\r\n+import FormField from '../types/FormField';\n+\n+/**\n+ * Gets the value of a given input element.\n+ * @param {FormField} input\n+ */\n+const getFormFieldValue = (input: FormField): string => {\n+  let { value } = input;\n+\n+  // Perform actions depending on input type\n+  if (input.type === 'checkbox') value = (<HTMLInputElement>input).checked.toString();\n+  if (input.type === 'radio') {\n+    // Get the checked radio\n+    const checkedOption = input.closest('form')?.querySelector(`input[name=\"${input.name}\"]:checked`);\n+\n+    // If exists, set its value\n+    value = checkedOption instanceof HTMLInputElement ? checkedOption.value : '';\n+  }\n+\n+  return value.toString();\n+};\n+\n+export default getFormFieldValue;\n",
+					"match": false,
+					"packageHash": "03ebab65d85df9e9b84c3602182aef0a8adf37f4ef14652e4d460c1bebdf47e4",
+					"size": 718,
+					"sourceHash": "868c95fcd91a3ef7ddd9f6c2039f3aef5ad06cde4edd7d5270533fb8e5fc275b",
+					"status": "content"
+				},
+				"helpers/getObjectEntries.ts": {
+					"diff": "--- published/helpers/getObjectEntries.ts\n+++ rebuilt/helpers/getObjectEntries.ts\n@@ -1,10 +1,10 @@\n-import type Entry from '../types/Entry';\r\n-\r\n-/**\r\n- * Get type safe Object.entries()\r\n- * @param object\r\n- */\r\n-// prettier-ignore\r\n-const getObjectEntries = <T extends Readonly<Record<string, unknown>>>(object: T): Entry<T>[] => Object.entries(object) as Entry<T>[];\r\n-\r\n-export default getObjectEntries;\r\n+import Entry from '../types/Entry';\n+\n+/**\n+ * Get type safe Object.entries()\n+ * @param object\n+ */\n+// prettier-ignore\n+const getObjectEntries = <T extends Readonly<Record<string, unknown>>>(object: T): Entry<T>[] => Object.entries(object) as Entry<T>[];\n+\n+export default getObjectEntries;\n",
+					"match": false,
+					"packageHash": "60e391a5446c923b5e3bd2ddc6fc9cf7a49616b2e9406b7eaa84ae2d6484c346",
+					"size": 299,
+					"sourceHash": "80a5044859329b6ec2e763d042f59144ed1f53474a7cf0c625c025bf5a449ba6",
+					"status": "content"
+				},
+				"helpers/index.ts": {
+					"diff": "--- published/helpers/index.ts\n+++ rebuilt/helpers/index.ts\n@@ -1,17 +1,16 @@\n-export { default as clearFormField } from './clearFormField';\r\n-export { default as cloneNode } from './cloneNode';\r\n-export { default as extractCommaSeparatedValues } from './extractCommaSeparatedValues';\r\n-export { default as findTextNode } from './findTextNode';\r\n-export { default as getDistanceFromTop } from './getDistanceFromTop';\r\n-export { default as getFormFieldValue } from './getFormFieldValue';\r\n-export { default as getObjectEntries } from './getObjectEntries';\r\n-export { default as getObjectKeys } from './getObjectKeys';\r\n-export { default as isScrollable } from './isScrollable';\r\n-export { default as isVisible } from './isVisible';\r\n-export { default as queryElement } from './queryElement';\r\n-export { default as removeChildElements } from './removeChildElements';\r\n-export { default as removeSpaces } from './removeSpaces';\r\n-export { default as selectInputElement } from './selectInputElement';\r\n-export { default as simulateEvent } from './simulateEvent';\r\n-export { default as throwError } from './throwError';\r\n-export { default as wait } from './wait';\r\n+export { default as cloneNode } from './cloneNode';\n+export { default as extractCommaSeparatedValues } from './extractCommaSeparatedValues';\n+export { default as findTextNode } from './findTextNode';\n+export { default as getDistanceFromTop } from './getDistanceFromTop';\n+export { default as getFormFieldValue } from './getFormFieldValue';\n+export { default as getObjectEntries } from './getObjectEntries';\n+export { default as getObjectKeys } from './getObjectKeys';\n+export { default as isScrollable } from './isScrollable';\n+export { default as isVisible } from './isVisible';\n+export { default as queryElement } from './queryElement';\n+export { default as removeChildElements } from './removeChildElements';\n+export { default as removeSpaces } from './removeSpaces';\n+export { default as selectInputElement } from './selectInputElement';\n+export { default as simulateEvent } from './simulateEvent';\n+export { default as throwError } from './throwError';\n+export { default as wait } from './wait';\n",
+					"match": false,
+					"packageHash": "5f8b080504f078bd1bee00e2ab55ef831840af06cf435f774dc039137ccb68fb",
+					"size": 1065,
+					"sourceHash": "b75fab6a41f8afd103309fcef5cc368ad391b437d4763ad026514a26dba9a82a",
+					"status": "content"
+				},
+				"helpers/queryElement.ts": {
+					"diff": "--- published/helpers/queryElement.ts\n+++ rebuilt/helpers/queryElement.ts\n@@ -1,19 +1,19 @@\n-import type Instance from '../types/Instance';\r\n-\r\n-/**\r\n- * Query an element and make sure it's the correct type\r\n- * @param selector Selector string\r\n- * @param instance Instance target of the element type. Example: HTMLElement\r\n- * @param scope The scope context where to query. Defaults to document\r\n- * @returns The queried element or undefined\r\n- */\r\n-const queryElement = <T extends Element>(\r\n-  selector: string,\r\n-  instance: Instance<T>,\r\n-  scope: ParentNode = document\r\n-): T | undefined => {\r\n-  const element = scope.querySelector(selector);\r\n-  if (element instanceof instance) return element;\r\n-};\r\n-\r\n-export default queryElement;\r\n+import Instance from '../types/Instance';\n+\n+/**\n+ * Query an element and make sure it's the correct type\n+ * @param selector Selector string\n+ * @param instance Instance target of the element type. Example: HTMLElement\n+ * @param scope The scope context where to query. Defaults to document\n+ * @returns The queried element or undefined\n+ */\n+const queryElement = <T extends Element>(\n+  selector: string,\n+  instance: Instance<T>,\n+  scope: ParentNode = document\n+): T | undefined => {\n+  const element = scope.querySelector(selector);\n+  if (element instanceof instance) return element;\n+};\n+\n+export default queryElement;\n",
+					"match": false,
+					"packageHash": "a601fc28e9189c39b92fceda3fdad460ceaeb21a770f784826228c8cc229c627",
+					"size": 632,
+					"sourceHash": "17c49e04bb2f805934ecffe7533437df16e2522421eae78e83fd47dd01b4f329",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,42 +1,42 @@\n-{\r\n-  \"name\": \"@finsweet/ts-utils\",\r\n-  \"version\": \"0.9.0\",\r\n-  \"description\": \"Typescript utils for custom Webflow projects.\",\r\n-  \"main\": \"index.ts\",\r\n-  \"module\": \"index.ts\",\r\n-  \"sideEffects\": false,\r\n-  \"type\": \"module\",\r\n-  \"repository\": {\r\n-    \"type\": \"git\",\r\n-    \"url\": \"git+https://github.com/finsweet/ts-utils.git\"\r\n-  },\r\n-  \"scripts\": {\r\n-    \"build\": \"node .\\\\bin\\\\build.js\"\r\n-  },\r\n-  \"keywords\": [\r\n-    \"webflow\",\r\n-    \"finsweet\",\r\n-    \"no-code\",\r\n-    \"typescript\",\r\n-    \"utils\"\r\n-  ],\r\n-  \"author\": {\r\n-    \"name\": \"Finsweet\",\r\n-    \"url\": \"https://www.finsweet.com/\"\r\n-  },\r\n-  \"license\": \"ISC\",\r\n-  \"bugs\": {\r\n-    \"url\": \"https://github.com/finsweet/ts-utils/issues\"\r\n-  },\r\n-  \"homepage\": \"https://github.com/finsweet/ts-utils#readme\",\r\n-  \"devDependencies\": {\r\n-    \"@finsweet/eslint-config\": \"^1.0.9\",\r\n-    \"@typescript-eslint/eslint-plugin\": \"^4.27.0\",\r\n-    \"@typescript-eslint/parser\": \"^4.27.0\",\r\n-    \"eslint\": \"^7.29.0\",\r\n-    \"eslint-config-prettier\": \"^8.3.0\",\r\n-    \"eslint-plugin-prettier\": \"^3.4.0\",\r\n-    \"prettier\": \"^2.3.1\",\r\n-    \"typescript\": \"^4.3.4\"\r\n-  }\r\n-}\r\n+{\n+  \"name\": \"@finsweet/ts-utils\",\n+  \"version\": \"0.8.0\",\n+  \"description\": \"Typescript utils for custom Webflow projects.\",\n+  \"main\": \"index.ts\",\n+  \"module\": \"index.ts\",\n+  \"sideEffects\": false,\n+  \"type\": \"module\",\n+  \"repository\": {\n+    \"type\": \"git\",\n+    \"url\": \"git+https://github.com/finsweet/ts-utils.git\"\n+  },\n+  \"scripts\": {\n+    \"build\": \"node .\\\\bin\\\\build.js\"\n+  },\n+  \"keywords\": [\n+    \"webflow\",\n+    \"finsweet\",\n+    \"no-code\",\n+    \"typescript\",\n+    \"utils\"\n+  ],\n+  \"author\": {\n+    \"name\": \"Finsweet\",\n+    \"url\": \"https://www.finsweet.com/\"\n+  },\n+  \"license\": \"ISC\",\n+  \"bugs\": {\n+    \"url\": \"https://github.com/finsweet/ts-utils/issues\"\n+  },\n+  \"homepage\": \"https://github.com/finsweet/ts-utils#readme\",\n+  \"devDependencies\": {\n+    \"@finsweet/eslint-config\": \"^1.0.9\",\n+    \"@typescript-eslint/eslint-plugin\": \"^4.27.0\",\n+    \"@typescript-eslint/parser\": \"^4.27.0\",\n+    \"eslint\": \"^7.29.0\",\n+    \"eslint-config-prettier\": \"^8.3.0\",\n+    \"eslint-plugin-prettier\": \"^3.4.0\",\n+    \"prettier\": \"^2.3.1\",\n+    \"typescript\": \"^4.3.4\"\n+  }\n+}\n",
+					"match": false,
+					"packageHash": "e58f3eb9a19f6f841429209726223288d4c882c6cc311c5fe149d7c88dcf9943",
+					"size": 1068,
+					"sourceHash": "28a20d906e0a8ace8fa9458898fc7e67ae994060f328362120a4f2509ecafa5f",
+					"status": "content"
+				},
+				"type-guards/isFormField.ts": {
+					"diff": "--- published/type-guards/isFormField.ts\n+++ rebuilt/type-guards/isFormField.ts\n@@ -1,10 +1,10 @@\n-import type FormField from '../types/FormField';\r\n-\r\n-/**\r\n- * Checks if an element is a form field element\r\n- * @param element\r\n- */\r\n-// prettier-ignore\r\n-const isFormField = (element: Element | EventTarget | null): element is FormField => element instanceof HTMLInputElement || element instanceof HTMLSelectElement || element instanceof HTMLTextAreaElement;\r\n-\r\n-export default isFormField;\r\n+import FormField from '../types/FormField';\n+\n+/**\n+ * Checks if an element is a form field element\n+ * @param element\n+ */\n+// prettier-ignore\n+const isFormField = (element: Element | EventTarget | null): element is FormField => element instanceof HTMLInputElement || element instanceof HTMLSelectElement || element instanceof HTMLTextAreaElement;\n+\n+export default isFormField;\n",
+					"match": false,
+					"packageHash": "bf899d937273f6b8eaf61c6e379c4c5055560a1c8809b5fdbb908d43e14764be",
+					"size": 386,
+					"sourceHash": "316731ef3d02dd77311d577cd2d5e48eb48bd70182ab9350c1dd4793a177bd71",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 7,
+				"matchingFiles": 38,
+				"missingInPackage": 0,
+				"missingInSource": 1,
+				"score": 0.8260869565217391,
+				"totalFiles": 46
+			}
+		},
+		"prodDependencies": []
+	}
+]

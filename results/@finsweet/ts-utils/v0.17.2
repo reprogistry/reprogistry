@@ -1,0 +1,67 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-18T20:48:26.735Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:7.19.1",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "@finsweet/ts-utils@0.17.2",
+			"name": "@finsweet/ts-utils",
+			"version": "0.17.2",
+			"location": "https://registry.npmjs.org/@finsweet/ts-utils/-/ts-utils-0.17.2.tgz",
+			"integrity": "sha512-Mo5iCauOVuxObbeC7oBz+YrDGUaOaNePuQZtSEL3IilJYStZBTVcD/lPUklyjObDyuGEREjGgQOOX5Qt2b6t0g==",
+			"publishedAt": "2021-10-08T08:25:28.279Z",
+			"publishedWith": {
+				"node": "16.5.0",
+				"npm": "7.17.0"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/finsweet/ts-utils.git",
+			"spec": "github:finsweet/ts-utils#2107c09c6705fbe5e14ea7c17dac0433b032f302"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"helpers/clearFormField.ts": {
+					"diff": "--- published/helpers/clearFormField.ts\n+++ rebuilt/helpers/clearFormField.ts\n@@ -1,48 +1,29 @@\n-import { FORM_CSS_CLASSES } from '..';\r\n-import { simulateEvent } from './simulateEvent';\r\n-\r\n-import type { FormField } from '../types';\r\n-\r\n-const {\r\n-  radioInput: radioInputCSSClass,\r\n-  checkboxOrRadioFocus: focusCSSClass,\r\n-  checkboxOrRadioChecked: checkedCSSClass,\r\n-} = FORM_CSS_CLASSES;\r\n-\r\n-/**\r\n- * Clears the form field's value and emits an input and changed event.\r\n- * If the field is a checkbox or a radio, it will unselect it.\r\n- * @param field\r\n- */\r\n-export const clearFormField = (field: FormField): void => {\r\n-  const { type } = field;\r\n-\r\n-  if (field instanceof HTMLInputElement && ['checkbox', 'radio'].includes(type)) {\r\n-    if (!field.checked) return;\r\n-\r\n-    // Reset the field's value\r\n-    field.checked = false;\r\n-\r\n-    // Emit DOM events\r\n-    simulateEvent(field, ['click', 'input', 'change']);\r\n-\r\n-    if (type === 'checkbox') return;\r\n-\r\n-    // Clear custom radio button classes\r\n-    const { parentElement } = field;\r\n-    if (!parentElement) return;\r\n-\r\n-    const radioInput = parentElement.querySelector(`.${radioInputCSSClass}`);\r\n-    if (!radioInput) return;\r\n-\r\n-    radioInput.classList.remove(focusCSSClass, checkedCSSClass);\r\n-\r\n-    return;\r\n-  }\r\n-\r\n-  // Reset the field's value\r\n-  field.value = '';\r\n-\r\n-  // Emit DOM events\r\n-  simulateEvent(field, ['input', 'change']);\r\n-};\r\n+import type { FormField } from '../types';\n+import { simulateEvent } from './simulateEvent';\n+\n+/**\n+ * Clears the form field's value and emits an input and changed event.\n+ * If the field is a checkbox or a radio, it will unselect it.\n+ * @param field\n+ */\n+export const clearFormField = (field: FormField): void => {\n+  const { type } = field;\n+\n+  if (field instanceof HTMLInputElement && ['checkbox', 'radio'].includes(type)) {\n+    if (field.checked) {\n+      // Reset the field's value\n+      field.checked = false;\n+\n+      // Emit DOM events\n+      simulateEvent(field, ['click', 'input', 'change']);\n+    }\n+\n+    return;\n+  }\n+\n+  // Reset the field's value\n+  field.value = '';\n+\n+  // Emit DOM events\n+  simulateEvent(field, ['input', 'change']);\n+};\n",
+					"match": false,
+					"packageHash": "a852de1907673971abffbbba3912f45a9428612cfa16e0a00163608f1f24c586",
+					"size": 1287,
+					"sourceHash": "f00c53f6ec72fddd0fcaf1acf26df1560387289eb29b6ec53571338947dc2252",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,42 +1,42 @@\n-{\r\n-  \"name\": \"@finsweet/ts-utils\",\r\n-  \"version\": \"0.17.2\",\r\n-  \"description\": \"Typescript utils for custom Webflow projects.\",\r\n-  \"main\": \"index.ts\",\r\n-  \"module\": \"index.ts\",\r\n-  \"sideEffects\": false,\r\n-  \"type\": \"module\",\r\n-  \"repository\": {\r\n-    \"type\": \"git\",\r\n-    \"url\": \"git+https://github.com/finsweet/ts-utils.git\"\r\n-  },\r\n-  \"scripts\": {\r\n-    \"build\": \"node .\\\\bin\\\\build.js\"\r\n-  },\r\n-  \"keywords\": [\r\n-    \"webflow\",\r\n-    \"finsweet\",\r\n-    \"no-code\",\r\n-    \"typescript\",\r\n-    \"utils\"\r\n-  ],\r\n-  \"author\": {\r\n-    \"name\": \"Finsweet\",\r\n-    \"url\": \"https://www.finsweet.com/\"\r\n-  },\r\n-  \"license\": \"ISC\",\r\n-  \"bugs\": {\r\n-    \"url\": \"https://github.com/finsweet/ts-utils/issues\"\r\n-  },\r\n-  \"homepage\": \"https://github.com/finsweet/ts-utils#readme\",\r\n-  \"devDependencies\": {\r\n-    \"@finsweet/eslint-config\": \"^1.0.12\",\r\n-    \"@typescript-eslint/eslint-plugin\": \"^4.30.0\",\r\n-    \"@typescript-eslint/parser\": \"^4.30.0\",\r\n-    \"eslint\": \"^7.32.0\",\r\n-    \"eslint-config-prettier\": \"^8.3.0\",\r\n-    \"eslint-plugin-prettier\": \"^4.0.0\",\r\n-    \"prettier\": \"^2.3.2\",\r\n-    \"typescript\": \"^4.4.2\"\r\n-  }\r\n-}\r\n+{\n+  \"name\": \"@finsweet/ts-utils\",\n+  \"version\": \"0.17.1\",\n+  \"description\": \"Typescript utils for custom Webflow projects.\",\n+  \"main\": \"index.ts\",\n+  \"module\": \"index.ts\",\n+  \"sideEffects\": false,\n+  \"type\": \"module\",\n+  \"repository\": {\n+    \"type\": \"git\",\n+    \"url\": \"git+https://github.com/finsweet/ts-utils.git\"\n+  },\n+  \"scripts\": {\n+    \"build\": \"node .\\\\bin\\\\build.js\"\n+  },\n+  \"keywords\": [\n+    \"webflow\",\n+    \"finsweet\",\n+    \"no-code\",\n+    \"typescript\",\n+    \"utils\"\n+  ],\n+  \"author\": {\n+    \"name\": \"Finsweet\",\n+    \"url\": \"https://www.finsweet.com/\"\n+  },\n+  \"license\": \"ISC\",\n+  \"bugs\": {\n+    \"url\": \"https://github.com/finsweet/ts-utils/issues\"\n+  },\n+  \"homepage\": \"https://github.com/finsweet/ts-utils#readme\",\n+  \"devDependencies\": {\n+    \"@finsweet/eslint-config\": \"^1.0.12\",\n+    \"@typescript-eslint/eslint-plugin\": \"^4.30.0\",\n+    \"@typescript-eslint/parser\": \"^4.30.0\",\n+    \"eslint\": \"^7.32.0\",\n+    \"eslint-config-prettier\": \"^8.3.0\",\n+    \"eslint-plugin-prettier\": \"^4.0.0\",\n+    \"prettier\": \"^2.3.2\",\n+    \"typescript\": \"^4.4.2\"\n+  }\n+}\n",
+					"match": false,
+					"packageHash": "a280c6eb1374227c36d20b4e571eb780c503d4de3cd88ed13e6fa14e1a8f7f57",
+					"size": 1070,
+					"sourceHash": "c338ad08ebc506cb0769344a457c9f06898918f5291f9c231932594cfa16a05e",
+					"status": "content"
+				},
+				"webflow/css.ts": {
+					"diff": "--- published/webflow/css.ts\n+++ rebuilt/webflow/css.ts\n@@ -1,42 +1,40 @@\n-export const CURRENT_CSS_CLASS = 'w--current';\r\n-\r\n-export const SLIDER_CSS_CLASSES = {\r\n-  slider: 'w-slider',\r\n-  slide: 'w-slide',\r\n-  sliderMask: 'w-slider-mask',\r\n-  sliderNav: 'w-slider-nav',\r\n-  sliderDot: 'w-slider-dot',\r\n-  activeSliderDot: 'w-active',\r\n-} as const;\r\n-\r\n-export const TABS_CSS_CLASSES = {\r\n-  tabs: 'w-tabs',\r\n-  tabsContent: 'w-tab-content',\r\n-  tabPane: 'w-tab-pane',\r\n-  tabsMenu: 'w-tab-menu',\r\n-  tabLink: 'w-tab-link',\r\n-  activeTab: 'w--tab-active',\r\n-} as const;\r\n-\r\n-export const NAVBAR_CSS_CLASSES = {\r\n-  navMenu: 'w-nav-menu',\r\n-} as const;\r\n-\r\n-export const CMS_CSS_CLASSES = {\r\n-  wrapper: 'w-dyn-list',\r\n-  list: 'w-dyn-items',\r\n-  item: 'w-dyn-item',\r\n-  paginationNext: 'w-pagination-next',\r\n-  paginationPrevious: 'w-pagination-previous',\r\n-} as const;\r\n-\r\n-export const FORM_CSS_CLASSES = {\r\n-  formBlock: 'w-form',\r\n-  checkboxField: 'w-checkbox',\r\n-  checkboxInput: 'w-checkbox-input',\r\n-  radioField: 'w-radio',\r\n-  radioInput: 'w-radio-input',\r\n-  checkboxOrRadioLabel: 'w-form-label',\r\n-  checkboxOrRadioFocus: 'w--redirected-focus',\r\n-  checkboxOrRadioChecked: 'w--redirected-checked',\r\n-} as const;\r\n+export const CURRENT_CSS_CLASS = 'w--current';\n+\n+export const SLIDER_CSS_CLASSES = {\n+  slider: 'w-slider',\n+  slide: 'w-slide',\n+  sliderMask: 'w-slider-mask',\n+  sliderNav: 'w-slider-nav',\n+  sliderDot: 'w-slider-dot',\n+  activeSliderDot: 'w-active',\n+} as const;\n+\n+export const TABS_CSS_CLASSES = {\n+  tabs: 'w-tabs',\n+  tabsContent: 'w-tab-content',\n+  tabPane: 'w-tab-pane',\n+  tabsMenu: 'w-tab-menu',\n+  tabLink: 'w-tab-link',\n+  activeTab: 'w--tab-active',\n+} as const;\n+\n+export const NAVBAR_CSS_CLASSES = {\n+  navMenu: 'w-nav-menu',\n+} as const;\n+\n+export const CMS_CSS_CLASSES = {\n+  wrapper: 'w-dyn-list',\n+  list: 'w-dyn-items',\n+  item: 'w-dyn-item',\n+  paginationNext: 'w-pagination-next',\n+  paginationPrevious: 'w-pagination-previous',\n+} as const;\n+\n+export const FORM_CSS_CLASSES = {\n+  formBlock: 'w-form',\n+  checkboxField: 'w-checkbox',\n+  checkboxInput: 'w-checkbox-input',\n+  radioField: 'w-radio',\n+  radioInput: 'w-radio-input',\n+  checkboxOrRadioLabel: 'w-form-label',\n+} as const;\n",
+					"match": false,
+					"packageHash": "7ad516e96b174187e40973a94f3a3a2febd241585c61f8cc363d241ea6001823",
+					"size": 1111,
+					"sourceHash": "b331afa56008976f81133155d3ea6e14e619bfdc07332604ed8048e576c86fcc",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 3,
+				"matchingFiles": 52,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.9454545454545454,
+				"totalFiles": 55
+			}
+		},
+		"prodDependencies": []
+	}
+]

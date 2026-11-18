@@ -1,0 +1,59 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-18T21:01:02.981Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:8.1.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "@finsweet/ts-utils@0.27.2",
+			"name": "@finsweet/ts-utils",
+			"version": "0.27.2",
+			"location": "https://registry.npmjs.org/@finsweet/ts-utils/-/ts-utils-0.27.2.tgz",
+			"integrity": "sha512-AMsXuj7tZjcluEYyrs2UFydcMDz4MoiDtASj5cYpgUsit4kfr9jKbuR5K5NeEnLyM64htvLEwL5iGqZb+Q6MKw==",
+			"publishedAt": "2021-12-12T16:26:42.661Z",
+			"publishedWith": {
+				"node": "16.13.0",
+				"npm": "8.1.4"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/finsweet/ts-utils.git",
+			"spec": "github:finsweet/ts-utils#40c11d10b74ab4b9921b8fa57e24eae4cbc70ecf"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"helpers/findTextNode.ts": {
+					"diff": "--- published/helpers/findTextNode.ts\n+++ rebuilt/helpers/findTextNode.ts\n@@ -1,17 +1,15 @@\n-/**\r\n- * Finds the first child text node of an element\r\n- * @param element The element to search into.\r\n- */\r\n-export const findTextNode = (element: HTMLElement): ChildNode | undefined => {\r\n-  let textNode: ChildNode | undefined;\r\n-\r\n-  for (const node of element.childNodes) {\r\n-    if (node instanceof HTMLElement && node.childNodes.length) textNode = findTextNode(node);\r\n-    else if (node.nodeType === Node.TEXT_NODE && node.textContent?.trim()) {\r\n-      textNode = node;\r\n-      break;\r\n-    }\r\n-  }\r\n-\r\n-  return textNode;\r\n-};\r\n+/**\n+ * Find the first child text node of an element\n+ * @param element\n+ */\n+export const findTextNode = (element: HTMLElement): ChildNode | undefined => {\n+  let textNode: ChildNode | undefined;\n+\n+  for (const node of element.childNodes) {\n+    if (node instanceof HTMLElement && node.childNodes.length) textNode = findTextNode(node);\n+    else if (node.nodeType === Node.TEXT_NODE) textNode = node;\n+    if (textNode) break;\n+  }\n+\n+  return textNode;\n+};\n",
+					"match": false,
+					"packageHash": "6c67f0da9df3f7c7919f49da5a550b7f0096ba0b56b82caa39d6290ca9656bea",
+					"size": 522,
+					"sourceHash": "d70cf5455da35a1f8fda8f3c8be4c108efb5b375db06c6b39ff28572761511f7",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,42 +1,42 @@\n-{\r\n-  \"name\": \"@finsweet/ts-utils\",\r\n-  \"version\": \"0.27.2\",\r\n-  \"description\": \"Typescript utils for custom Webflow projects.\",\r\n-  \"main\": \"index.ts\",\r\n-  \"module\": \"index.ts\",\r\n-  \"sideEffects\": false,\r\n-  \"type\": \"module\",\r\n-  \"repository\": {\r\n-    \"type\": \"git\",\r\n-    \"url\": \"git+https://github.com/finsweet/ts-utils.git\"\r\n-  },\r\n-  \"scripts\": {\r\n-    \"build\": \"node .\\\\bin\\\\build.js\"\r\n-  },\r\n-  \"keywords\": [\r\n-    \"webflow\",\r\n-    \"finsweet\",\r\n-    \"no-code\",\r\n-    \"typescript\",\r\n-    \"utils\"\r\n-  ],\r\n-  \"author\": {\r\n-    \"name\": \"Finsweet\",\r\n-    \"url\": \"https://www.finsweet.com/\"\r\n-  },\r\n-  \"license\": \"ISC\",\r\n-  \"bugs\": {\r\n-    \"url\": \"https://github.com/finsweet/ts-utils/issues\"\r\n-  },\r\n-  \"homepage\": \"https://github.com/finsweet/ts-utils#readme\",\r\n-  \"devDependencies\": {\r\n-    \"@finsweet/eslint-config\": \"^1.0.12\",\r\n-    \"@typescript-eslint/eslint-plugin\": \"^4.30.0\",\r\n-    \"@typescript-eslint/parser\": \"^4.30.0\",\r\n-    \"eslint\": \"^7.32.0\",\r\n-    \"eslint-config-prettier\": \"^8.3.0\",\r\n-    \"eslint-plugin-prettier\": \"^4.0.0\",\r\n-    \"prettier\": \"^2.3.2\",\r\n-    \"typescript\": \"^4.4.2\"\r\n-  }\r\n-}\r\n+{\n+  \"name\": \"@finsweet/ts-utils\",\n+  \"version\": \"0.27.1\",\n+  \"description\": \"Typescript utils for custom Webflow projects.\",\n+  \"main\": \"index.ts\",\n+  \"module\": \"index.ts\",\n+  \"sideEffects\": false,\n+  \"type\": \"module\",\n+  \"repository\": {\n+    \"type\": \"git\",\n+    \"url\": \"git+https://github.com/finsweet/ts-utils.git\"\n+  },\n+  \"scripts\": {\n+    \"build\": \"node .\\\\bin\\\\build.js\"\n+  },\n+  \"keywords\": [\n+    \"webflow\",\n+    \"finsweet\",\n+    \"no-code\",\n+    \"typescript\",\n+    \"utils\"\n+  ],\n+  \"author\": {\n+    \"name\": \"Finsweet\",\n+    \"url\": \"https://www.finsweet.com/\"\n+  },\n+  \"license\": \"ISC\",\n+  \"bugs\": {\n+    \"url\": \"https://github.com/finsweet/ts-utils/issues\"\n+  },\n+  \"homepage\": \"https://github.com/finsweet/ts-utils#readme\",\n+  \"devDependencies\": {\n+    \"@finsweet/eslint-config\": \"^1.0.12\",\n+    \"@typescript-eslint/eslint-plugin\": \"^4.30.0\",\n+    \"@typescript-eslint/parser\": \"^4.30.0\",\n+    \"eslint\": \"^7.32.0\",\n+    \"eslint-config-prettier\": \"^8.3.0\",\n+    \"eslint-plugin-prettier\": \"^4.0.0\",\n+    \"prettier\": \"^2.3.2\",\n+    \"typescript\": \"^4.4.2\"\n+  }\n+}\n",
+					"match": false,
+					"packageHash": "e969ed1e7ef9a090827be30ebd8355db5fe5066c52240b3f1b8fb5f5cb24fdcb",
+					"size": 1070,
+					"sourceHash": "633fab4b2e6f0fa3221830299face696fd697d633aa7753318a5c0ea64cb6e61",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 60,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.967741935483871,
+				"totalFiles": 62
+			}
+		},
+		"prodDependencies": []
+	}
+]

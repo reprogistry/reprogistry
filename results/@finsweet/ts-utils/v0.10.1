@@ -1,0 +1,75 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-18T19:35:44.089Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:7.19.1",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "@finsweet/ts-utils@0.10.1",
+			"name": "@finsweet/ts-utils",
+			"version": "0.10.1",
+			"location": "https://registry.npmjs.org/@finsweet/ts-utils/-/ts-utils-0.10.1.tgz",
+			"integrity": "sha512-E4ZccIxOjWA5zutBv5EYKam4jYrS6+umYo/UT0GBMUdXxDt04YfNHF7nS8Nm/cQfGFCnnWswMB3OSZb6eoA24Q==",
+			"publishedAt": "2021-09-03T19:19:43.609Z",
+			"publishedWith": {
+				"node": "16.5.0",
+				"npm": "7.17.0"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/finsweet/ts-utils.git",
+			"spec": "github:finsweet/ts-utils#25f587d9a1e1707af9bfdb5dc67279cd7dc9bfa7"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"helpers/clearFormField.ts": {
+					"diff": "--- published/helpers/clearFormField.ts\n+++ rebuilt/helpers/clearFormField.ts\n@@ -1,27 +1,27 @@\n-import type { FormField } from '../types';\r\n-import { simulateEvent } from './simulateEvent';\r\n-\r\n-/**\r\n- * Clears the form field's value and emits an input and changed event.\r\n- * If the field is a checkbox or a radio, it will unselect it.\r\n- * @param field\r\n- */\r\n-export const clearFormField = (field: FormField): void => {\r\n-  const { type } = field;\r\n-\r\n-  if (field instanceof HTMLInputElement && ['checkbox', 'radio'].includes(type) && field.checked) {\r\n-    // Reset the field's value\r\n-    field.checked = false;\r\n-\r\n-    // Emit DOM events\r\n-    simulateEvent(field, ['click', 'input', 'change']);\r\n-\r\n-    return;\r\n-  }\r\n-\r\n-  // Reset the field's value\r\n-  field.value = '';\r\n-\r\n-  // Emit DOM events\r\n-  simulateEvent(field, ['input', 'change']);\r\n-};\r\n+import type { FormField } from '../types';\n+import { simulateEvent } from './simulateEvent';\n+\n+/**\n+ * Clears the form field's value and emits an input and changed event.\n+ * If the field is a checkbox or a radio, it will unselect it.\n+ * @param field\n+ */\n+export const clearFormField = (field: FormField): void => {\n+  const { type } = field;\n+\n+  if (field instanceof HTMLInputElement && ['checkbox', 'radio'].includes(type) && field.checked) {\n+    // Reset the field's value\n+    field.checked = false;\n+\n+    // Emit DOM events\n+    (['click', 'input', 'change'] as const).forEach((event) => simulateEvent(field, event));\n+\n+    return;\n+  }\n+\n+  // Reset the field's value\n+  field.value = '';\n+\n+  // Emit DOM events\n+  (['input', 'change'] as const).forEach((event) => simulateEvent(field, event));\n+};\n",
+					"match": false,
+					"packageHash": "b015d6dbf361b3e70b4598f75c222ac600426c54e83ba0718ee323e6c20bba8d",
+					"size": 740,
+					"sourceHash": "6d0e1708faba3e8d4587c589c069d9fd0952d57ad9db643f22bc99bad34f08f2",
+					"status": "content"
+				},
+				"helpers/selectInputElement.ts": {
+					"diff": "--- published/helpers/selectInputElement.ts\n+++ rebuilt/helpers/selectInputElement.ts\n@@ -1,19 +1,19 @@\n-import { simulateEvent } from './simulateEvent';\r\n-\r\n-/**\r\n- * Selects a custom radio or checkbox element\r\n- * @param element Element to select\r\n- * @param select - Defaults to true. If set to false, the input element will be unselected.\r\n- * @returns The value of the element: Boolean for checkboxes and string for radios\r\n- */\r\n-export const selectInputElement = (element: HTMLInputElement, select = true): string | boolean => {\r\n-  if (select !== element.checked) {\r\n-    // Set the new checked value\r\n-    element.checked = select;\r\n-\r\n-    // Emit DOM events\r\n-    simulateEvent(element, ['click', 'input', 'change']);\r\n-  }\r\n-\r\n-  return element.type === 'checkbox' ? element.checked : element.value;\r\n-};\r\n+import { simulateEvent } from './simulateEvent';\n+\n+/**\n+ * Selects a custom radio or checkbox element\n+ * @param element Element to select\n+ * @param select - Defaults to true. If set to false, the input element will be unselected.\n+ * @returns The value of the element: Boolean for checkboxes and string for radios\n+ */\n+export const selectInputElement = (element: HTMLInputElement, select = true): string | boolean => {\n+  if (select !== element.checked) {\n+    // Set the new checked value\n+    element.checked = select;\n+\n+    // Emit DOM events\n+    (['click', 'input', 'change'] as const).forEach((event) => simulateEvent(element, event));\n+  }\n+\n+  return element.type === 'checkbox' ? element.checked : element.value;\n+};\n",
+					"match": false,
+					"packageHash": "64ef0d00d967f3bd36aacc477ef64e1272d130f2ce055d30ee72239a464115cd",
+					"size": 695,
+					"sourceHash": "6e8a82c57a76a209d6462acaef4e37f0eb87839459da952fbea866551a17849e",
+					"status": "content"
+				},
+				"helpers/simulateEvent.ts": {
+					"diff": "--- published/helpers/simulateEvent.ts\n+++ rebuilt/helpers/simulateEvent.ts\n@@ -1,16 +1,8 @@\n-/**\r\n- * Dispatches a custom event that bubbles from the target.\r\n- * @param target The element where the event will originate.\r\n- * @param events The event name or an array of event names.\r\n- * @returns True if either event's cancelable attribute value is false or its preventDefault() method was not invoked, and false otherwise.\r\n- */\r\n-export const simulateEvent = (\r\n-  target: EventTarget,\r\n-  events: keyof DocumentEventMap | Array<keyof DocumentEventMap>\r\n-): boolean => {\r\n-  if (!Array.isArray(events)) events = [events];\r\n-\r\n-  const eventsSuccess = events.map((event) => target.dispatchEvent(new Event(event, { bubbles: true })));\r\n-\r\n-  return eventsSuccess.every((success) => success);\r\n-};\r\n+/**\n+ * Dispatches a custom event that bubbles from the target.\n+ * @param target The element where the event will originate.\n+ * @param event The event name\n+ * @returns True if either event's cancelable attribute value is false or its preventDefault() method was not invoked, and false otherwise.\n+ */\n+// prettier-ignore\n+export const simulateEvent = (target: EventTarget, event: keyof DocumentEventMap): boolean => target.dispatchEvent(new Event(event, { bubbles: true }));\n",
+					"match": false,
+					"packageHash": "9a3f9fe1f37375f1847d724f65182a3525154d8646c3a92058dd7c0fa23bd18f",
+					"size": 691,
+					"sourceHash": "ddb3214e64aa81a992c3bc3fa011b5764331ccfa8d5e4133092e60549fb3eb5b",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,42 +1,42 @@\n-{\r\n-  \"name\": \"@finsweet/ts-utils\",\r\n-  \"version\": \"0.10.1\",\r\n-  \"description\": \"Typescript utils for custom Webflow projects.\",\r\n-  \"main\": \"index.ts\",\r\n-  \"module\": \"index.ts\",\r\n-  \"sideEffects\": false,\r\n-  \"type\": \"module\",\r\n-  \"repository\": {\r\n-    \"type\": \"git\",\r\n-    \"url\": \"git+https://github.com/finsweet/ts-utils.git\"\r\n-  },\r\n-  \"scripts\": {\r\n-    \"build\": \"node .\\\\bin\\\\build.js\"\r\n-  },\r\n-  \"keywords\": [\r\n-    \"webflow\",\r\n-    \"finsweet\",\r\n-    \"no-code\",\r\n-    \"typescript\",\r\n-    \"utils\"\r\n-  ],\r\n-  \"author\": {\r\n-    \"name\": \"Finsweet\",\r\n-    \"url\": \"https://www.finsweet.com/\"\r\n-  },\r\n-  \"license\": \"ISC\",\r\n-  \"bugs\": {\r\n-    \"url\": \"https://github.com/finsweet/ts-utils/issues\"\r\n-  },\r\n-  \"homepage\": \"https://github.com/finsweet/ts-utils#readme\",\r\n-  \"devDependencies\": {\r\n-    \"@finsweet/eslint-config\": \"^1.0.12\",\r\n-    \"@typescript-eslint/eslint-plugin\": \"^4.30.0\",\r\n-    \"@typescript-eslint/parser\": \"^4.30.0\",\r\n-    \"eslint\": \"^7.32.0\",\r\n-    \"eslint-config-prettier\": \"^8.3.0\",\r\n-    \"eslint-plugin-prettier\": \"^4.0.0\",\r\n-    \"prettier\": \"^2.3.2\",\r\n-    \"typescript\": \"^4.4.2\"\r\n-  }\r\n-}\r\n+{\n+  \"name\": \"@finsweet/ts-utils\",\n+  \"version\": \"0.10.0\",\n+  \"description\": \"Typescript utils for custom Webflow projects.\",\n+  \"main\": \"index.ts\",\n+  \"module\": \"index.ts\",\n+  \"sideEffects\": false,\n+  \"type\": \"module\",\n+  \"repository\": {\n+    \"type\": \"git\",\n+    \"url\": \"git+https://github.com/finsweet/ts-utils.git\"\n+  },\n+  \"scripts\": {\n+    \"build\": \"node .\\\\bin\\\\build.js\"\n+  },\n+  \"keywords\": [\n+    \"webflow\",\n+    \"finsweet\",\n+    \"no-code\",\n+    \"typescript\",\n+    \"utils\"\n+  ],\n+  \"author\": {\n+    \"name\": \"Finsweet\",\n+    \"url\": \"https://www.finsweet.com/\"\n+  },\n+  \"license\": \"ISC\",\n+  \"bugs\": {\n+    \"url\": \"https://github.com/finsweet/ts-utils/issues\"\n+  },\n+  \"homepage\": \"https://github.com/finsweet/ts-utils#readme\",\n+  \"devDependencies\": {\n+    \"@finsweet/eslint-config\": \"^1.0.12\",\n+    \"@typescript-eslint/eslint-plugin\": \"^4.30.0\",\n+    \"@typescript-eslint/parser\": \"^4.30.0\",\n+    \"eslint\": \"^7.32.0\",\n+    \"eslint-config-prettier\": \"^8.3.0\",\n+    \"eslint-plugin-prettier\": \"^4.0.0\",\n+    \"prettier\": \"^2.3.2\",\n+    \"typescript\": \"^4.4.2\"\n+  }\n+}\n",
+					"match": false,
+					"packageHash": "716ca0595812eb5f8a7707f86c8db3755b121f9f45d44b7ba96ac075e384e26a",
+					"size": 1070,
+					"sourceHash": "e8b24282b0b6560ff2507f6985866d09aa01bcb161e417c32c4cd3138893cdeb",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 4,
+				"matchingFiles": 44,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.9166666666666666,
+				"totalFiles": 48
+			}
+		},
+		"prodDependencies": []
+	}
+]
