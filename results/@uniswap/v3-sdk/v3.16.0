@@ -1,0 +1,5347 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-18T04:32:15.780Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:10.7.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "@uniswap/v3-sdk@3.16.0",
+			"name": "@uniswap/v3-sdk",
+			"version": "3.16.0",
+			"location": "https://registry.npmjs.org/@uniswap/v3-sdk/-/v3-sdk-3.16.0.tgz",
+			"integrity": "sha512-T3mTppJxOawknBN/yEV6b+w4b64ahq8+bLfFiD2YenLgEG0TyEOSSBif9CUQPEPdswCnpgQ0ujbX+6aafKjSkw==",
+			"publishedAt": "2024-10-01T18:26:14.081Z",
+			"publishedWith": {
+				"node": "18.20.4",
+				"npm": "8.19.4"
+			},
+			"dependencies": {
+				"tiny-warning": "^1.0.3",
+				"tiny-invariant": "^1.1.0",
+				"@uniswap/sdk-core": "^5.6.0",
+				"@ethersproject/abi": "^5.5.0",
+				"@uniswap/v3-staker": "1.0.0",
+				"@uniswap/v3-periphery": "^1.1.1",
+				"@ethersproject/solidity": "^5.0.9",
+				"@uniswap/swap-router-contracts": "^1.3.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/Uniswap/sdks.git",
+			"spec": "github:Uniswap/sdks#2a68888e998119e6bb1f0c8a6da3f7c516168c0b"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"LICENSE": {
+					"match": false,
+					"packageHash": "e89988c656bb1a9cb6fd13d95afa571350497cbc868d5adf8ebc5447003b74cd",
+					"size": 1068,
+					"status": "missing-in-source"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,13 +1,35 @@\n-# Alpha software\n+# Uniswap SDK's\n \n-The latest version of the SDK is used in production in the Uniswap Interface,\n-but it is considered Alpha software and may contain bugs or change significantly between patch versions.\n-If you have questions about how to use the SDK, please reach out in the `#dev-chat` channel of the Discord.\n-Pull requests welcome!\n+A repository for many Uniswap SDK's. All SDK's can be found in `sdk/` and have more information in their individual README's.\n \n-# Uniswap V3 SDK\n+## Development Commands\n \n-[![npm version](https://img.shields.io/npm/v/@uniswap/v3-sdk/latest.svg)](https://www.npmjs.com/package/@uniswap/v3-sdk/v/latest)\n-[![npm bundle size (scoped version)](https://img.shields.io/bundlephobia/minzip/@uniswap/v3-sdk/latest.svg)](https://bundlephobia.com/result?p=@uniswap/v3-sdk@latest)\n+```markdown\n+# Clone\n+git clone --recurse-submodules https://github.com/Uniswap/sdks.git\n+# Install\n+yarn\n+# Build\n+yarn g:build\n+# Typecheck\n+yarn g:typecheck\n+# Lint\n+yarn g:lint\n+# Test\n+yarn g:test\n+# Run a specific package.json command for an individual SDK\n+yarn sdk @uniswap/{sdk-name} {command}\n+```\n \n-In-depth documentation on this SDK is available at [uniswap.org](https://docs.uniswap.org/).\n+## Publishing SDK's\n+\n+Publishing of each SDK is done on merge to main using semantic-release and semantic-release-monorepo. PR titles / commits follow angular conventional commits with custom settings that map as follows:\n+\n+```markdown\n+- `fix(SDK name):` will trigger a patch version\n+- `<type>(public):` will trigger a patch version\n+- `feat(SDK name):` will trigger a minor version\n+- `feat(breaking):` will trigger a major version for a breaking change\n+```\n+\n+Versions will only be generated based on the changelog of the relevant SDK's folder/files.\n",
+					"match": false,
+					"packageHash": "f03ec70d27ccb85833bc9d501aaf63b52652cbfd99cf014b6bf5cfa1e9bb2a20",
+					"size": 742,
+					"sourceHash": "18f70ae795a26ee8e5bd98bcd4481e15e0261cbd502a1ce144a3f42abe5a7661",
+					"status": "content"
+				},
+				"dist/constants.d.ts": {
+					"match": false,
+					"packageHash": "b0a16efbb41e6b88543703921aa51ded5dfbcf3f081392b19055a649711e9889",
+					"size": 800,
+					"status": "missing-in-source"
+				},
+				"dist/entities/index.d.ts": {
+					"match": false,
+					"packageHash": "6ac6ab65e66599e6b924e3e956dd8c79476e8ce5da7423021a9aee7fc69d0f20",
+					"size": 209,
+					"status": "missing-in-source"
+				},
+				"dist/entities/pool.d.ts": {
+					"match": false,
+					"packageHash": "1aedbd63ed952ff8b62fda076ac700133ac7fbaedba30000792f950a66da3ba6",
+					"size": 4205,
+					"status": "missing-in-source"
+				},
+				"dist/entities/position.d.ts": {
+					"match": false,
+					"packageHash": "9b07a4bd00a8cb357c4aac6cc712180306f5768fa7b53ed69c2c079ba41b3b0e",
+					"size": 5374,
+					"status": "missing-in-source"
+				},
+				"dist/entities/route.d.ts": {
+					"match": false,
+					"packageHash": "3a6508b495dab965e85482d14a5a9223a9f60a0ac846002c29a699ad8833d446",
+					"size": 892,
+					"status": "missing-in-source"
+				},
+				"dist/entities/tick.d.ts": {
+					"match": false,
+					"packageHash": "f003dff1c2ed8f7bf4eead229ad9bfca128c775b940547dce30dd574b2eb4fa9",
+					"size": 410,
+					"status": "missing-in-source"
+				},
+				"dist/entities/tickDataProvider.d.ts": {
+					"match": false,
+					"packageHash": "60d1890d15d75500603556d35a2e40d529ce01df498e46d98ab73df511a633f6",
+					"size": 1192,
+					"status": "missing-in-source"
+				},
+				"dist/entities/tickListDataProvider.d.ts": {
+					"match": false,
+					"packageHash": "747343314c4b496df0ec5a30c182d1aa16036096e8d1a749d21617df00d27e9d",
+					"size": 651,
+					"status": "missing-in-source"
+				},
+				"dist/entities/trade.d.ts": {
+					"match": false,
+					"packageHash": "64c61968955be0e57d159f5af12581f84fa95f7e81f51c71abac9fecc0b0c5b7",
+					"size": 12258,
+					"status": "missing-in-source"
+				},
+				"dist/index.d.ts": {
+					"match": false,
+					"packageHash": "f1c3e8bee0eadb412b80d4c3c15d86d2cf1b1e183195b4d777d7c03dbfffae75",
+					"size": 307,
+					"status": "missing-in-source"
+				},
+				"dist/index.js": {
+					"match": false,
+					"packageHash": "f1db18e6cd77813ac11fabd9abaa40797542c32263d796fbe5cc5a4f8eb90575",
+					"size": 190,
+					"status": "missing-in-source"
+				},
+				"dist/internalConstants.d.ts": {
+					"match": false,
+					"packageHash": "ca8ef2027813aefa85f890b438c227fb67de3fb1d47d5780919bd6d58f72f71a",
+					"size": 202,
+					"status": "missing-in-source"
+				},
+				"dist/multicall.d.ts": {
+					"match": false,
+					"packageHash": "4209e2fa36e37efde1e9e77b323d2b45c49ce6415090a93897d5e720b8c2cb58",
+					"size": 273,
+					"status": "missing-in-source"
+				},
+				"dist/nonfungiblePositionManager.d.ts": {
+					"match": false,
+					"packageHash": "2960b11afa79e3bca826113842d93c683165bd5ca4a732d6487cf80db18bed30",
+					"size": 5205,
+					"status": "missing-in-source"
+				},
+				"dist/payments.d.ts": {
+					"match": false,
+					"packageHash": "32ce07728b1ca3e5d9f44116133a618a627501b243f294a62c15924f2b72697b",
+					"size": 789,
+					"status": "missing-in-source"
+				},
+				"dist/quoter.d.ts": {
+					"match": false,
+					"packageHash": "9c88f25dcb0e0876df9b47a3535f164a2b8c7dfde9fcb4493b923a7f35f40878",
+					"size": 1659,
+					"status": "missing-in-source"
+				},
+				"dist/selfPermit.d.ts": {
+					"match": false,
+					"packageHash": "89bf25770969686158208c6471a80c06fae577de64210a7b7a6041004fda8100",
+					"size": 725,
+					"status": "missing-in-source"
+				},
+				"dist/staker.d.ts": {
+					"match": false,
+					"packageHash": "e0a5b573761a3176735a244f51ff1dfff538ce0df323c2a68272db38125031dc",
+					"size": 3876,
+					"status": "missing-in-source"
+				},
+				"dist/swapRouter.d.ts": {
+					"match": false,
+					"packageHash": "045a240871c34d0f5ae05b62442a56a0d394d2a5c54b5e53f50371f578a420e3",
+					"size": 1758,
+					"status": "missing-in-source"
+				},
+				"dist/utils/calldata.d.ts": {
+					"match": false,
+					"packageHash": "988633f86cfc47ffe6565a0bdd5637af6bdde174b116f598d93867987edc9c8c",
+					"size": 515,
+					"status": "missing-in-source"
+				},
+				"dist/utils/computePoolAddress.d.ts": {
+					"match": false,
+					"packageHash": "8f4263e5d5f597a58a95914fa6085b06cafa8acf216cb38afc68ab06fcd9fce2",
+					"size": 835,
+					"status": "missing-in-source"
+				},
+				"dist/utils/encodeRouteToPath.d.ts": {
+					"match": false,
+					"packageHash": "cfa95ae3d2ed256de60ae239e7e8a0020ac8716318daacc127397405f34916b1",
+					"size": 412,
+					"status": "missing-in-source"
+				},
+				"dist/utils/encodeSqrtRatioX96.d.ts": {
+					"match": false,
+					"packageHash": "1fc97ccbcddfc38652c6337527cb56bb67df792cda822ec8de3ba06c06f79c00",
+					"size": 432,
+					"status": "missing-in-source"
+				},
+				"dist/utils/fullMath.d.ts": {
+					"match": false,
+					"packageHash": "ee647c445101025c36e56d1348e06c8e0b4a512e379832afa63e70f52bf74517",
+					"size": 221,
+					"status": "missing-in-source"
+				},
+				"dist/utils/index.d.ts": {
+					"match": false,
+					"packageHash": "ff0154346e283505ebe8f53cd8f1dec8c460400dcba2a1974dad51445797408f",
+					"size": 607,
+					"status": "missing-in-source"
+				},
+				"dist/utils/isSorted.d.ts": {
+					"match": false,
+					"packageHash": "d2b66d545a873ef716a760f18fa03044523ec63fb197dcf4eba7695029ad5c1c",
+					"size": 244,
+					"status": "missing-in-source"
+				},
+				"dist/utils/liquidityMath.d.ts": {
+					"match": false,
+					"packageHash": "c544d4a881ca03f8946295a9d282088060a019e59f2855c226235834c1b6b58e",
+					"size": 199,
+					"status": "missing-in-source"
+				},
+				"dist/utils/maxLiquidityForAmounts.d.ts": {
+					"match": false,
+					"packageHash": "035e3f3f0b86dd0afe8ff3dd056fb7d4dc61bcdcd38d850ad0c02bc5fb6f24ca",
+					"size": 777,
+					"status": "missing-in-source"
+				},
+				"dist/utils/mostSignificantBit.d.ts": {
+					"match": false,
+					"packageHash": "73d37ff956707d96435688349aa8b9f018a2a2142c0d03312705e260bbef346f",
+					"size": 88,
+					"status": "missing-in-source"
+				},
+				"dist/utils/nearestUsableTick.d.ts": {
+					"match": false,
+					"packageHash": "520042d302ff414870106271115b38142eff46d5d7cc2af97478b3cc9e4251e9",
+					"size": 272,
+					"status": "missing-in-source"
+				},
+				"dist/utils/position.d.ts": {
+					"match": false,
+					"packageHash": "304dbb0360027011907a6c06fb0c8a6551d8223b536eb5aa908880a7fb4543f1",
+					"size": 327,
+					"status": "missing-in-source"
+				},
+				"dist/utils/priceTickConversions.d.ts": {
+					"match": false,
+					"packageHash": "b8de5859af34b6892fb0b1c8d708dfbea45822240b1735c5e396eb7a214283f0",
+					"size": 902,
+					"status": "missing-in-source"
+				},
+				"dist/utils/sqrtPriceMath.d.ts": {
+					"match": false,
+					"packageHash": "c7559a8138bcb5c240b2a3e0baa26dc40d880bc71343dde06ac7c81b8fe8716b",
+					"size": 729,
+					"status": "missing-in-source"
+				},
+				"dist/utils/swapMath.d.ts": {
+					"match": false,
+					"packageHash": "49a5d8a78ed65d809b0bdca96ea3821c22af840cde869d8636fe21c8bb6364b4",
+					"size": 366,
+					"status": "missing-in-source"
+				},
+				"dist/utils/tickLibrary.d.ts": {
+					"match": false,
+					"packageHash": "baa1c5fed3c7d5d43685fc8f10c9e5e9a53af90f87116fdf952f48971cf1746d",
+					"size": 560,
+					"status": "missing-in-source"
+				},
+				"dist/utils/tickList.d.ts": {
+					"match": false,
+					"packageHash": "b204f7f7707bea2b58a421be2311d1cc594063c4fef9c64194ca1efbccb45ae3",
+					"size": 1030,
+					"status": "missing-in-source"
+				},
+				"dist/utils/tickMath.d.ts": {
+					"match": false,
+					"packageHash": "b12203e68a6c71c24a326da7420a20d31a99fe5159f5c54d05851efe20610fd2",
+					"size": 1211,
+					"status": "missing-in-source"
+				},
+				"dist/utils/v3swap.d.ts": {
+					"match": false,
+					"packageHash": "0d9a6c12fa78fbe7cb307cb0d17f157616f298835ebe3de80ee6035a34bf9de4",
+					"size": 438,
+					"status": "missing-in-source"
+				},
+				"dist/v3-sdk.cjs.development.js": {
+					"match": false,
+					"packageHash": "e8b0201ca393ca6687f75ac431bb1d5f45cb0a873a0daf8f7724dcc4396715b8",
+					"size": 143954,
+					"status": "missing-in-source"
+				},
+				"dist/v3-sdk.cjs.development.js.map": {
+					"match": false,
+					"packageHash": "785d8d1fe7f8bdb9b8d1bcdbe70a03b659bccd44c13557fd6aaf8f26767cd2d5",
+					"size": 236059,
+					"status": "missing-in-source"
+				},
+				"dist/v3-sdk.cjs.production.min.js": {
+					"match": false,
+					"packageHash": "1708e7cce445460e5b1ca2f5d659e91ee50a15760672d4295a1c4bb8ee0224fc",
+					"size": 54299,
+					"status": "missing-in-source"
+				},
+				"dist/v3-sdk.cjs.production.min.js.map": {
+					"match": false,
+					"packageHash": "300b4af3c7b63e268c39452b6e72a1e27be3d526f65b677295ac9d7426cb8e1c",
+					"size": 190218,
+					"status": "missing-in-source"
+				},
+				"dist/v3-sdk.esm.js": {
+					"match": false,
+					"packageHash": "905fca42bc3b178efe879b37b1c80feec545c9f999ae84cd9fc9cfe9d7b151ba",
+					"size": 146083,
+					"status": "missing-in-source"
+				},
+				"dist/v3-sdk.esm.js.map": {
+					"match": false,
+					"packageHash": "ac6c0f469e4dbe66e74215f9929c710b1e09c3c7346c017f7fad68ef03a56668",
+					"size": 238659,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,87 +1,41 @@\n {\n-  \"name\": \"@uniswap/v3-sdk\",\n-  \"description\": \"⚒️ An SDK for building applications on top of Uniswap V3\",\n-  \"repository\": \"https://github.com/Uniswap/sdks.git\",\n-  \"keywords\": [\n-    \"uniswap\",\n-    \"ethereum\"\n-  ],\n-  \"license\": \"MIT\",\n-  \"main\": \"dist/index.js\",\n-  \"typings\": \"dist/index.d.ts\",\n-  \"module\": \"dist/v3-sdk.esm.js\",\n-  \"files\": [\n-    \"dist\"\n-  ],\n-  \"engines\": {\n-    \"node\": \">=10\"\n-  },\n-  \"scripts\": {\n-    \"build\": \"tsdx build\",\n-    \"lint\": \"tsdx lint src\",\n-    \"release\": \"semantic-release\",\n-    \"start\": \"tsdx watch\",\n-    \"test\": \"tsdx test\"\n-  },\n+  \"name\": \"sdks\",\n+  \"version\": \"0.0.0\",\n   \"dependencies\": {\n-    \"@ethersproject/abi\": \"^5.5.0\",\n-    \"@ethersproject/solidity\": \"^5.0.9\",\n-    \"@uniswap/sdk-core\": \"^5.6.0\",\n-    \"@uniswap/swap-router-contracts\": \"^1.3.0\",\n-    \"@uniswap/v3-periphery\": \"^1.1.1\",\n-    \"@uniswap/v3-staker\": \"1.0.0\",\n-    \"tiny-invariant\": \"^1.1.0\",\n-    \"tiny-warning\": \"^1.0.3\"\n+    \"@babel/runtime\": \"7.18.9\",\n+    \"@manypkg/cli\": \"^0.19.2\",\n+    \"@semantic-release/exec\": \"6.0.3\",\n+    \"@typescript-eslint/eslint-plugin\": \"^5.62\",\n+    \"danger\": \"11.2.6\",\n+    \"eslint\": \"^7.8.0\",\n+    \"eslint-plugin-prettier\": \"^3.4.1\",\n+    \"husky\": \"^8.0.3\",\n+    \"semantic-release\": \"^20.1.0\",\n+    \"semantic-release-monorepo\": \"7.0.5\",\n+    \"syncpack\": \"^8.5.14\",\n+    \"turbo\": \"1.10.16\"\n   },\n-  \"devDependencies\": {\n-    \"@types/jest\": \"^24.0.25\",\n-    \"@uniswap/v3-core\": \"1.0.0\",\n-    \"babel-jest\": \"25.5.1\",\n-    \"tsdx\": \"^0.14.1\"\n+  \"engines\": {\n+    \"node\": \">=10\",\n+    \"yarn\": \">=3.2.3\"\n   },\n+  \"packageManager\": \"yarn@3.2.3\",\n+  \"private\": true,\n+  \"scripts\": {\n+    \"g:check:deps:mismatch\": \"manypkg check\",\n+    \"g:build\": \"turbo run build\",\n+    \"g:lint\": \"turbo run lint\",\n+    \"g:release\": \"turbo run release --concurrency=1 --continue\",\n+    \"g:test\": \"turbo run test\",\n+    \"g:typecheck\": \"turbo run typecheck\",\n+    \"sdk\": \"yarn workspace\",\n+    \"postinstall\": \"husky\"\n+  },\n+  \"workspaces\": [\n+    \"sdks/*\",\n+    \"sdks/uniswapx-sdk/integration\"\n+  ],\n   \"resolutions\": {\n-    \"regenerator-runtime\": \"^0.14.1\"\n-  },\n-  \"resolutionsComments\": {\n-    \"regenerator-runtime\": \"Fixes https://github.com/facebook/regenerator/pull/480. It can be removed when `tsdx` updates their dependencies.\"\n-  },\n-  \"prettier\": {\n-    \"printWidth\": 120,\n-    \"semi\": false,\n-    \"singleQuote\": true\n-  },\n-  \"publishConfig\": {\n-    \"access\": \"public\",\n-    \"provenance\": true\n-  },\n-  \"release\": {\n-    \"extends\": \"semantic-release-monorepo\",\n-    \"branches\": [\n-      {\n-        \"name\": \"main\",\n-        \"prerelease\": false\n-      }\n-    ],\n",
+					"match": false,
+					"packageHash": "3c36110ab8e7961cfb135ef9f564978b834f786f2df2867d01a9bfc9e63a1bfc",
+					"size": 2125,
+					"sourceHash": "b7b1dd3cb324e461c63268b806632cbcac43ef64dbf236cd459ee464a86e5d3a",
+					"status": "content"
+				},
+				".github/CODEOWNERS": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/pull_request_template.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/check-pr-title.yaml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/monorepo-checks.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/monorepo-integrity.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/push-branches-from-main.yaml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/semantic-release.yaml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/semgrep.yaml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/trufflehog.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".gitmodules": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".husky/pre-commit": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".nvmrc": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".vscode/settings.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".yarn/patches/@manypkg-cli-npm-0.19.2-ea52ff91d4.patch": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".yarn/plugins/@yarnpkg/plugin-constraints.cjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".yarn/plugins/@yarnpkg/plugin-version.cjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".yarn/plugins/@yarnpkg/plugin-workspace-tools.cjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".yarn/releases/yarn-3.2.3.cjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".yarnrc.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"publishing/release-rules.cjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/permit2-sdk/.gitattributes": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/permit2-sdk/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/permit2-sdk/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/permit2-sdk/abis/Permit2.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/permit2-sdk/foundry.toml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/permit2-sdk/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/permit2-sdk/remappings.txt": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/permit2-sdk/src/allowanceTransfer.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/permit2-sdk/src/allowanceTransfer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/permit2-sdk/src/constants.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/permit2-sdk/src/constants.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/permit2-sdk/src/domain.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/permit2-sdk/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/permit2-sdk/src/providers/AllowanceProvider.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/permit2-sdk/src/providers/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/permit2-sdk/src/signatureTransfer.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/permit2-sdk/src/signatureTransfer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/permit2-sdk/test/Permit2.t.sol": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/permit2-sdk/test/interop.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/permit2-sdk/test/mock/MockERC20.sol": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/permit2-sdk/test/mock/MockWitness.sol": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/permit2-sdk/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/permit2-sdk/writeInterop.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/router-sdk/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/router-sdk/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/router-sdk/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/router-sdk/src/approveAndCall.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/router-sdk/src/constants.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/router-sdk/src/entities/mixedRoute/route.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/router-sdk/src/entities/mixedRoute/route.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/router-sdk/src/entities/mixedRoute/trade.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/router-sdk/src/entities/mixedRoute/trade.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/router-sdk/src/entities/protocol.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/router-sdk/src/entities/route.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/router-sdk/src/entities/route.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/router-sdk/src/entities/trade.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/router-sdk/src/entities/trade.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/router-sdk/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/router-sdk/src/multicallExtended.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/router-sdk/src/multicallExtended.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/router-sdk/src/paymentsExtended.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/router-sdk/src/paymentsExtended.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/router-sdk/src/swapRouter.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/router-sdk/src/swapRouter.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/router-sdk/src/utils/TPool.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/router-sdk/src/utils/encodeMixedRouteToPath.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/router-sdk/src/utils/encodeMixedRouteToPath.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/router-sdk/src/utils/getOutputAmount.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/router-sdk/src/utils/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/router-sdk/src/utils/isValidTokenPath.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/router-sdk/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/sdk-core/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/sdk-core/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/sdk-core/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/sdk-core/src/addresses.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/sdk-core/src/addresses.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/sdk-core/src/chains.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/sdk-core/src/constants.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/sdk-core/src/declarations.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/sdk-core/src/entities/baseCurrency.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/sdk-core/src/entities/currency.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/sdk-core/src/entities/currency.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/sdk-core/src/entities/ether.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/sdk-core/src/entities/ether.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/sdk-core/src/entities/fractions/currencyAmount.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/sdk-core/src/entities/fractions/currencyAmount.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/sdk-core/src/entities/fractions/fraction.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/sdk-core/src/entities/fractions/fraction.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/sdk-core/src/entities/fractions/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/sdk-core/src/entities/fractions/percent.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/sdk-core/src/entities/fractions/percent.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/sdk-core/src/entities/fractions/price.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/sdk-core/src/entities/fractions/price.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/sdk-core/src/entities/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/sdk-core/src/entities/nativeCurrency.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/sdk-core/src/entities/token.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/sdk-core/src/entities/token.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/sdk-core/src/entities/weth9.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/sdk-core/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/sdk-core/src/utils/computePriceImpact.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/sdk-core/src/utils/computePriceImpact.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/sdk-core/src/utils/computeZksyncCreate2Address.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/sdk-core/src/utils/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/sdk-core/src/utils/sortedInsert.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/sdk-core/src/utils/sortedInsert.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/sdk-core/src/utils/sqrt.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/sdk-core/src/utils/sqrt.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/sdk-core/src/utils/validateAndParseAddress.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/sdk-core/src/utils/validateAndParseAddress.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/sdk-core/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/.eslintrc.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/abis/ExclusiveDutchOrderReactor.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/abis/ExclusiveFillerValidation.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/abis/MockERC20.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/abis/OrderQuoter.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/abis/Permit2.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/abis/PriorityOrderReactor.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/abis/RelayOrderReactor.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/abis/SwapRouter02Executor.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/abis/V2DutchOrderReactor.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/abis/deploylessMulticall2.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/abis/multicall2.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/integration/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/integration/hardhat.config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/integration/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/integration/test/DutchOrder.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/integration/test/EventWatcher.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/integration/test/NonceManager.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/integration/test/OrderValidator.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/integration/test/PriorityOrder.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/integration/test/PriorityOrderValidator.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/integration/test/RelayOrder.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/integration/test/RelayOrderValidator.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/integration/test/V2DutchOrder.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/integration/test/utils/multicall.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/integration/test/utils/permit2.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/integration/test/utils/time.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/integration/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/jest.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/builder/DutchOrderBuilder.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/builder/DutchOrderBuilder.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/builder/OrderBuilder.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/builder/PriorityOrderBuilder.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/builder/PriorityOrderBuilder.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/builder/RelayOrderBuilder.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/builder/RelayOrderBuilder.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/builder/V2DutchOrderBuilder.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/builder/V2DutchOrderBuilder.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/builder/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/constants.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/constants.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/contracts/DeploylessMulticall2.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/contracts/DutchLimitOrderReactor.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/contracts/DutchOrderReactor.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/contracts/ExclusiveDutchOrderReactor.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/contracts/ExclusiveFillerValidation.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/contracts/MockERC20.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/contracts/Multicall2.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/contracts/OrderQuoter.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/contracts/Permit2.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/contracts/PriorityOrderReactor.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/contracts/RelayOrderReactor.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/contracts/SwapRouter02Executor.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/contracts/V2DutchOrderReactor.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/contracts/common.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/contracts/factories/DeploylessMulticall2__factory.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/contracts/factories/DutchLimitOrderReactor__factory.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/contracts/factories/DutchOrderReactor__factory.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/contracts/factories/ExclusiveDutchOrderReactor__factory.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/contracts/factories/ExclusiveFillerValidation__factory.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/contracts/factories/MockERC20__factory.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/contracts/factories/Multicall2__factory.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/contracts/factories/OrderQuoter__factory.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/contracts/factories/Permit2__factory.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/contracts/factories/PriorityOrderReactor__factory.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/contracts/factories/RelayOrderReactor__factory.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/contracts/factories/SwapRouter02Executor__factory.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/contracts/factories/V2DutchOrderReactor__factory.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/contracts/factories/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/contracts/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/errors.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/order/DutchOrder.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/order/DutchOrder.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/order/PriorityOrder.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/order/PriorityOrder.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/order/RelayOrder.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/order/RelayOrder.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/order/V2DutchOrder.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/order/V2DutchOrder.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/order/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/order/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/order/validation.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/order/validation.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/trade/DutchOrderTrade.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/trade/DutchOrderTrade.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/trade/PriorityOrderTrade.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/trade/PriorityOrderTrade.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/trade/RelayOrderTrade.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/trade/RelayOrderTrade.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/trade/V2DutchOrderTrade.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/trade/V2DutchOrderTrade.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/trade/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/trade/utils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/utils/EventWatcher.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/utils/NonceManager.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/utils/NonceManager.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/utils/OrderQuoter.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/utils/OrderValidator.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/utils/dutchDecay.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/utils/dutchDecay.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/utils/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/utils/multicall.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/utils/order.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/src/utils/order.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/uniswapx-sdk/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/universal-router-sdk/.prettierignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/universal-router-sdk/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/universal-router-sdk/abis/Element.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/universal-router-sdk/abis/Foundation.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/universal-router-sdk/abis/LooksRareV2.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/universal-router-sdk/abis/NFT20.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/universal-router-sdk/abis/NFTXZap.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/universal-router-sdk/abis/Seaport.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/universal-router-sdk/abis/Sudoswap.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/universal-router-sdk/abis/X2Y2.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/universal-router-sdk/foundry.toml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/universal-router-sdk/hardhat.config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/universal-router-sdk/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/universal-router-sdk/remappings.txt": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/universal-router-sdk/src/entities/Command.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/universal-router-sdk/src/entities/actions/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/universal-router-sdk/src/entities/actions/uniswap.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/universal-router-sdk/src/entities/actions/unwrapWETH.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/universal-router-sdk/src/entities/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/universal-router-sdk/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/universal-router-sdk/src/swapRouter.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/universal-router-sdk/src/utils/constants.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/universal-router-sdk/src/utils/inputTokens.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/universal-router-sdk/src/utils/numbers.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/universal-router-sdk/src/utils/routerCommands.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/universal-router-sdk/src/utils/routerTradeAdapter.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/universal-router-sdk/test/forge/SwapERC20CallParameters.t.sol": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/universal-router-sdk/test/forge/bin/permit2.bin": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/universal-router-sdk/test/forge/interop.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/universal-router-sdk/test/forge/utils/DeployRouter.sol": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/universal-router-sdk/test/forge/utils/Interop.sol": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/universal-router-sdk/test/forge/writeInterop.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/universal-router-sdk/test/uniswapTrades.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/universal-router-sdk/test/utils/addresses.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/universal-router-sdk/test/utils/constants.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/universal-router-sdk/test/utils/hexToDecimalString.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/universal-router-sdk/test/utils/permit2.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/universal-router-sdk/test/utils/permit2.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/universal-router-sdk/test/utils/uniswapData.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/universal-router-sdk/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v2-sdk/.babelrc": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v2-sdk/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v2-sdk/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v2-sdk/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v2-sdk/src/constants.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v2-sdk/src/constants.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v2-sdk/src/entities/entities.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v2-sdk/src/entities/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v2-sdk/src/entities/pair.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v2-sdk/src/entities/pair.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v2-sdk/src/entities/route.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v2-sdk/src/entities/route.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v2-sdk/src/entities/trade.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v2-sdk/src/entities/trade.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v2-sdk/src/errors.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v2-sdk/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v2-sdk/src/router.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v2-sdk/src/router.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v2-sdk/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/.prettierignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/constants.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/constants.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/entities/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/entities/pool.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/entities/pool.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/entities/position.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/entities/position.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/entities/route.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/entities/route.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/entities/tick.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/entities/tick.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/entities/tickDataProvider.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/entities/tickDataProvider.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/entities/tickListDataProvider.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/entities/tickListDataProvider.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/entities/trade.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/entities/trade.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/internalConstants.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/multicall.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/multicall.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/nonfungiblePositionManager.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/nonfungiblePositionManager.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/payments.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/payments.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/quoter.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/quoter.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/selfPermit.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/selfPermit.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/staker.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/staker.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/swapRouter.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/swapRouter.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/utils/calldata.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/utils/computePoolAddress.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/utils/computePoolAddress.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/utils/encodeRouteToPath.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/utils/encodeRouteToPath.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/utils/encodeSqrtRatioX96.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/utils/encodeSqrtRatioX96.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/utils/fullMath.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/utils/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/utils/isSorted.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/utils/isSorted.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/utils/liquidityMath.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/utils/maxLiquidityForAmounts.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/utils/maxLiquidityForAmounts.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/utils/mostSignificantBit.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/utils/mostSignificantBit.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/utils/nearestUsableTick.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/utils/nearestUsableTick.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/utils/position.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/utils/position.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/utils/priceTickConversions.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/utils/priceTickConversions.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/utils/sqrtPriceMath.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/utils/swapMath.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/utils/tickLibrary.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/utils/tickLibrary.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/utils/tickList.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/utils/tickList.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/utils/tickMath.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/utils/tickMath.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/src/utils/v3swap.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v3-sdk/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v4-sdk/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v4-sdk/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v4-sdk/src/PositionManager.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v4-sdk/src/PositionManager.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v4-sdk/src/actionConstants.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v4-sdk/src/entities/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v4-sdk/src/entities/pool.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v4-sdk/src/entities/pool.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v4-sdk/src/entities/position.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v4-sdk/src/entities/route.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v4-sdk/src/entities/route.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v4-sdk/src/entities/trade.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v4-sdk/src/entities/trade.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v4-sdk/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v4-sdk/src/internalConstants.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v4-sdk/src/multicall.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v4-sdk/src/utils/abi.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v4-sdk/src/utils/calldata.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v4-sdk/src/utils/currencyMap.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v4-sdk/src/utils/encodeRouteToPath.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v4-sdk/src/utils/encodeRouteToPath.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v4-sdk/src/utils/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v4-sdk/src/utils/priceTickConversions.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v4-sdk/src/utils/sortsBefore.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v4-sdk/src/utils/v4Planner.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v4-sdk/src/utils/v4Planner.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v4-sdk/src/utils/v4PositionPlanner.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"sdks/v4-sdk/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"turbo.json": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 0,
+				"missingInPackage": 376,
+				"missingInSource": 45,
+				"score": 0,
+				"totalFiles": 423
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "@babel/code-frame",
+				"version": "7.29.7"
+			},
+			{
+				"name": "@babel/helper-validator-identifier",
+				"version": "7.29.7"
+			},
+			{
+				"name": "@babel/highlight",
+				"version": "7.25.9"
+			},
+			{
+				"name": "@babel/runtime",
+				"version": "7.18.9"
+			},
+			{
+				"name": "@changesets/types",
+				"version": "4.1.0"
+			},
+			{
+				"name": "@colors/colors",
+				"version": "1.5.0"
+			},
+			{
+				"name": "@eslint-community/eslint-utils",
+				"version": "4.10.1"
+			},
+			{
+				"name": "@eslint-community/regexpp",
+				"version": "4.12.3"
+			},
+			{
+				"name": "@eslint/eslintrc",
+				"version": "0.4.3"
+			},
+			{
+				"name": "ignore",
+				"version": "4.0.6"
+			},
+			{
+				"name": "@ethersproject/abi",
+				"version": "5.8.0"
+			},
+			{
+				"name": "@ethersproject/abstract-provider",
+				"version": "5.8.0"
+			},
+			{
+				"name": "@ethersproject/abstract-signer",
+				"version": "5.8.0"
+			},
+			{
+				"name": "@ethersproject/address",
+				"version": "5.8.0"
+			},
+			{
+				"name": "@ethersproject/base64",
+				"version": "5.8.0"
+			},
+			{
+				"name": "@ethersproject/basex",
+				"version": "5.8.0"
+			},
+			{
+				"name": "@ethersproject/bignumber",
+				"version": "5.8.0"
+			},
+			{
+				"name": "@ethersproject/bytes",
+				"version": "5.8.0"
+			},
+			{
+				"name": "@ethersproject/constants",
+				"version": "5.8.0"
+			},
+			{
+				"name": "@ethersproject/contracts",
+				"version": "5.8.0"
+			},
+			{
+				"name": "@ethersproject/hash",
+				"version": "5.8.0"
+			},
+			{
+				"name": "@ethersproject/hdnode",
+				"version": "5.8.0"
+			},
+			{
+				"name": "@ethersproject/json-wallets",
+				"version": "5.8.0"
+			},
+			{
+				"name": "@ethersproject/keccak256",
+				"version": "5.8.0"
+			},
+			{
+				"name": "@ethersproject/logger",
+				"version": "5.8.0"
+			},
+			{
+				"name": "@ethersproject/networks",
+				"version": "5.8.0"
+			},
+			{
+				"name": "@ethersproject/pbkdf2",
+				"version": "5.8.0"
+			},
+			{
+				"name": "@ethersproject/properties",
+				"version": "5.8.0"
+			},
+			{
+				"name": "@ethersproject/providers",
+				"version": "5.8.0"
+			},
+			{
+				"name": "@ethersproject/random",
+				"version": "5.8.0"
+			},
+			{
+				"name": "@ethersproject/rlp",
+				"version": "5.8.0"
+			},
+			{
+				"name": "@ethersproject/sha2",
+				"version": "5.8.0"
+			},
+			{
+				"name": "@ethersproject/signing-key",
+				"version": "5.8.0"
+			},
+			{
+				"name": "@ethersproject/solidity",
+				"version": "5.8.0"
+			},
+			{
+				"name": "@ethersproject/strings",
+				"version": "5.8.0"
+			},
+			{
+				"name": "@ethersproject/transactions",
+				"version": "5.8.0"
+			},
+			{
+				"name": "@ethersproject/units",
+				"version": "5.8.0"
+			},
+			{
+				"name": "@ethersproject/wallet",
+				"version": "5.8.0"
+			},
+			{
+				"name": "@ethersproject/web",
+				"version": "5.8.0"
+			},
+			{
+				"name": "@ethersproject/wordlists",
+				"version": "5.8.0"
+			},
+			{
+				"name": "@gitbeaker/core",
+				"version": "21.7.0"
+			},
+			{
+				"name": "form-data",
+				"version": "3.0.5"
+			},
+			{
+				"name": "@gitbeaker/node",
+				"version": "21.7.0"
+			},
+			{
+				"name": "@gitbeaker/requester-utils",
+				"version": "21.7.0"
+			},
+			{
+				"name": "@humanwhocodes/config-array",
+				"version": "0.5.0"
+			},
+			{
+				"name": "@humanwhocodes/object-schema",
+				"version": "1.2.1"
+			},
+			{
+				"name": "@manypkg/cli",
+				"version": "0.19.2"
+			},
+			{
+				"name": "@manypkg/find-root",
+				"version": "1.1.0"
+			},
+			{
+				"name": "@types/node",
+				"version": "12.20.55"
+			},
+			{
+				"name": "@manypkg/get-packages",
+				"version": "1.1.3"
+			},
+			{
+				"name": "@nodelib/fs.scandir",
+				"version": "2.1.5"
+			},
+			{
+				"name": "@nodelib/fs.stat",
+				"version": "2.0.5"
+			},
+			{
+				"name": "@nodelib/fs.walk",
+				"version": "1.2.8"
+			},
+			{
+				"name": "@octokit/auth-token",
+				"version": "2.5.0"
+			},
+			{
+				"name": "@octokit/core",
+				"version": "3.6.0"
+			},
+			{
+				"name": "@octokit/endpoint",
+				"version": "6.0.12"
+			},
+			{
+				"name": "@octokit/graphql",
+				"version": "4.8.0"
+			},
+			{
+				"name": "@octokit/openapi-types",
+				"version": "12.11.0"
+			},
+			{
+				"name": "@octokit/plugin-paginate-rest",
+				"version": "2.21.3"
+			},
+			{
+				"name": "@octokit/plugin-request-log",
+				"version": "1.0.4"
+			},
+			{
+				"name": "@octokit/plugin-rest-endpoint-methods",
+				"version": "5.16.2"
+			},
+			{
+				"name": "@octokit/plugin-retry",
+				"version": "4.1.6"
+			},
+			{
+				"name": "@octokit/openapi-types",
+				"version": "18.1.1"
+			},
+			{
+				"name": "@octokit/types",
+				"version": "9.3.2"
+			},
+			{
+				"name": "@octokit/plugin-throttling",
+				"version": "5.2.3"
+			},
+			{
+				"name": "@octokit/request",
+				"version": "5.6.3"
+			},
+			{
+				"name": "@octokit/request-error",
+				"version": "2.1.0"
+			},
+			{
+				"name": "@octokit/rest",
+				"version": "18.12.0"
+			},
+			{
+				"name": "@octokit/tsconfig",
+				"version": "1.0.2"
+			},
+			{
+				"name": "@octokit/types",
+				"version": "6.41.0"
+			},
+			{
+				"name": "@openzeppelin/contracts",
+				"version": "4.7.0"
+			},
+			{
+				"name": "@pnpm/config.env-replace",
+				"version": "1.1.0"
+			},
+			{
+				"name": "@pnpm/network.ca-file",
+				"version": "1.0.2"
+			},
+			{
+				"name": "graceful-fs",
+				"version": "4.2.10"
+			},
+			{
+				"name": "@pnpm/npm-conf",
+				"version": "3.0.3"
+			},
+			{
+				"name": "@semantic-release/commit-analyzer",
+				"version": "9.0.2"
+			},
+			{
+				"name": "@semantic-release/error",
+				"version": "3.0.0"
+			},
+			{
+				"name": "@semantic-release/exec",
+				"version": "6.0.3"
+			},
+			{
+				"name": "@semantic-release/github",
+				"version": "8.1.0"
+			},
+			{
+				"name": "@octokit/auth-token",
+				"version": "3.0.4"
+			},
+			{
+				"name": "@octokit/core",
+				"version": "4.2.4"
+			},
+			{
+				"name": "@octokit/endpoint",
+				"version": "7.0.6"
+			},
+			{
+				"name": "@octokit/graphql",
+				"version": "5.0.6"
+			},
+			{
+				"name": "@octokit/plugin-paginate-rest",
+				"version": "6.1.2"
+			},
+			{
+				"name": "@octokit/request",
+				"version": "6.2.8"
+			},
+			{
+				"name": "@octokit/request-error",
+				"version": "3.0.3"
+			},
+			{
+				"name": "agent-base",
+				"version": "7.1.4"
+			},
+			{
+				"name": "fs-extra",
+				"version": "11.4.1"
+			},
+			{
+				"name": "http-proxy-agent",
+				"version": "7.0.2"
+			},
+			{
+				"name": "https-proxy-agent",
+				"version": "7.0.6"
+			},
+			{
+				"name": "jsonfile",
+				"version": "6.2.1"
+			},
+			{
+				"name": "universalify",
+				"version": "2.0.1"
+			},
+			{
+				"name": "@semantic-release/npm",
+				"version": "9.0.2"
+			},
+			{
+				"name": "read-pkg",
+				"version": "5.2.0"
+			},
+			{
+				"name": "registry-auth-token",
+				"version": "5.1.1"
+			},
+			{
+				"name": "semver",
+				"version": "7.8.6"
+			},
+			{
+				"name": "type-fest",
+				"version": "0.6.0"
+			},
+			{
+				"name": "@semantic-release/release-notes-generator",
+				"version": "10.0.3"
+			},
+			{
+				"name": "@sindresorhus/is",
+				"version": "4.6.0"
+			},
+			{
+				"name": "@szmarczak/http-timer",
+				"version": "4.0.6"
+			},
+			{
+				"name": "@tootallnate/once",
+				"version": "2.0.1"
+			},
+			{
+				"name": "@typechain/ethers-v5",
+				"version": "10.2.1"
+			},
+			{
+				"name": "@typechain/hardhat",
+				"version": "6.1.6"
+			},
+			{
+				"name": "fs-extra",
+				"version": "9.1.0"
+			},
+			{
+				"name": "@types/cacheable-request",
+				"version": "6.0.3"
+			},
+			{
+				"name": "@types/http-cache-semantics",
+				"version": "4.2.0"
+			},
+			{
+				"name": "@types/json-schema",
+				"version": "7.0.15"
+			},
+			{
+				"name": "@types/keyv",
+				"version": "3.1.4"
+			},
+			{
+				"name": "@types/minimist",
+				"version": "1.2.5"
+			},
+			{
+				"name": "@types/node",
+				"version": "18.19.130"
+			},
+			{
+				"name": "@types/normalize-package-data",
+				"version": "2.4.4"
+			},
+			{
+				"name": "@types/responselike",
+				"version": "1.0.3"
+			},
+			{
+				"name": "@types/semver",
+				"version": "7.8.0"
+			},
+			{
+				"name": "@typescript-eslint/eslint-plugin",
+				"version": "5.62.0"
+			},
+			{
+				"name": "@typescript-eslint/scope-manager",
+				"version": "5.62.0"
+			},
+			{
+				"name": "@typescript-eslint/type-utils",
+				"version": "5.62.0"
+			},
+			{
+				"name": "@typescript-eslint/types",
+				"version": "5.62.0"
+			},
+			{
+				"name": "@typescript-eslint/typescript-estree",
+				"version": "5.62.0"
+			},
+			{
+				"name": "@typescript-eslint/utils",
+				"version": "5.62.0"
+			},
+			{
+				"name": "@typescript-eslint/visitor-keys",
+				"version": "5.62.0"
+			},
+			{
+				"name": "@uniswap/lib",
+				"version": "4.0.1-alpha"
+			},
+			{
+				"name": "@uniswap/swap-router-contracts",
+				"version": "1.3.1"
+			},
+			{
+				"name": "@openzeppelin/contracts",
+				"version": "3.4.2-solc-0.7"
+			},
+			{
+				"name": "dotenv",
+				"version": "14.3.2"
+			},
+			{
+				"name": "@uniswap/universal-router",
+				"version": "2.0.0-beta.1"
+			},
+			{
+				"name": "@openzeppelin/contracts",
+				"version": "5.0.2"
+			},
+			{
+				"name": "@uniswap/v2-core",
+				"version": "1.0.1"
+			},
+			{
+				"name": "@uniswap/v3-core",
+				"version": "1.0.0"
+			},
+			{
+				"name": "@uniswap/v3-periphery",
+				"version": "1.4.4"
+			},
+			{
+				"name": "@uniswap/v3-staker",
+				"version": "1.0.0"
+			},
+			{
+				"name": "@openzeppelin/contracts",
+				"version": "3.4.1-solc-0.7-2"
+			},
+			{
+				"name": "acorn",
+				"version": "7.4.1"
+			},
+			{
+				"name": "acorn-jsx",
+				"version": "5.3.2"
+			},
+			{
+				"name": "aes-js",
+				"version": "3.0.0"
+			},
+			{
+				"name": "agent-base",
+				"version": "6.0.2"
+			},
+			{
+				"name": "aggregate-error",
+				"version": "3.1.0"
+			},
+			{
+				"name": "ajv",
+				"version": "6.15.0"
+			},
+			{
+				"name": "ansi-colors",
+				"version": "4.1.3"
+			},
+			{
+				"name": "ansi-regex",
+				"version": "5.0.1"
+			},
+			{
+				"name": "ansi-styles",
+				"version": "3.2.1"
+			},
+			{
+				"name": "ansicolors",
+				"version": "0.3.2"
+			},
+			{
+				"name": "anymatch",
+				"version": "3.1.3"
+			},
+			{
+				"name": "argparse",
+				"version": "1.0.10"
+			},
+			{
+				"name": "argv-formatter",
+				"version": "1.0.0"
+			},
+			{
+				"name": "array-back",
+				"version": "3.1.0"
+			},
+			{
+				"name": "array-ify",
+				"version": "1.0.0"
+			},
+			{
+				"name": "array-union",
+				"version": "2.1.0"
+			},
+			{
+				"name": "arrify",
+				"version": "1.0.1"
+			},
+			{
+				"name": "async-retry",
+				"version": "1.2.3"
+			},
+			{
+				"name": "asynckit",
+				"version": "0.4.0"
+			},
+			{
+				"name": "at-least-node",
+				"version": "1.0.0"
+			},
+			{
+				"name": "balanced-match",
+				"version": "1.0.2"
+			},
+			{
+				"name": "base64-sol",
+				"version": "1.0.1"
+			},
+			{
+				"name": "bech32",
+				"version": "1.1.4"
+			},
+			{
+				"name": "before-after-hook",
+				"version": "2.2.3"
+			},
+			{
+				"name": "big.js",
+				"version": "5.2.2"
+			},
+			{
+				"name": "bignumber.js",
+				"version": "9.3.1"
+			},
+			{
+				"name": "binary-extensions",
+				"version": "2.3.0"
+			},
+			{
+				"name": "bn.js",
+				"version": "5.2.5"
+			},
+			{
+				"name": "bottleneck",
+				"version": "2.19.5"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "1.1.22"
+			},
+			{
+				"name": "braces",
+				"version": "3.0.3"
+			},
+			{
+				"name": "brorand",
+				"version": "1.1.0"
+			},
+			{
+				"name": "buffer-equal-constant-time",
+				"version": "1.0.1"
+			},
+			{
+				"name": "builtins",
+				"version": "1.0.3"
+			},
+			{
+				"name": "cacheable-lookup",
+				"version": "5.0.4"
+			},
+			{
+				"name": "cacheable-request",
+				"version": "7.0.4"
+			},
+			{
+				"name": "get-stream",
+				"version": "5.2.0"
+			},
+			{
+				"name": "call-bind-apply-helpers",
+				"version": "1.0.2"
+			},
+			{
+				"name": "callsites",
+				"version": "3.1.0"
+			},
+			{
+				"name": "camelcase",
+				"version": "5.3.1"
+			},
+			{
+				"name": "camelcase-keys",
+				"version": "6.2.2"
+			},
+			{
+				"name": "quick-lru",
+				"version": "4.0.1"
+			},
+			{
+				"name": "cardinal",
+				"version": "2.1.1"
+			},
+			{
+				"name": "chalk",
+				"version": "2.4.2"
+			},
+			{
+				"name": "clean-stack",
+				"version": "2.2.0"
+			},
+			{
+				"name": "cli-table3",
+				"version": "0.6.5"
+			},
+			{
+				"name": "clone-response",
+				"version": "1.0.3"
+			},
+			{
+				"name": "color-convert",
+				"version": "1.9.3"
+			},
+			{
+				"name": "color-name",
+				"version": "1.1.3"
+			},
+			{
+				"name": "colors",
+				"version": "1.4.0"
+			},
+			{
+				"name": "combined-stream",
+				"version": "1.0.8"
+			},
+			{
+				"name": "command-line-args",
+				"version": "5.2.1"
+			},
+			{
+				"name": "command-line-usage",
+				"version": "6.1.3"
+			},
+			{
+				"name": "array-back",
+				"version": "4.0.2"
+			},
+			{
+				"name": "typical",
+				"version": "5.2.0"
+			},
+			{
+				"name": "commander",
+				"version": "2.20.3"
+			},
+			{
+				"name": "compare-func",
+				"version": "2.0.0"
+			},
+			{
+				"name": "concat-map",
+				"version": "0.0.1"
+			},
+			{
+				"name": "config-chain",
+				"version": "1.1.13"
+			},
+			{
+				"name": "conventional-changelog-angular",
+				"version": "5.0.13"
+			},
+			{
+				"name": "conventional-changelog-writer",
+				"version": "5.0.1"
+			},
+			{
+				"name": "conventional-commits-filter",
+				"version": "2.0.7"
+			},
+			{
+				"name": "conventional-commits-parser",
+				"version": "3.2.4"
+			},
+			{
+				"name": "core-js",
+				"version": "3.51.0"
+			},
+			{
+				"name": "core-util-is",
+				"version": "1.0.2"
+			},
+			{
+				"name": "cross-spawn",
+				"version": "7.0.6"
+			},
+			{
+				"name": "crypto-random-string",
+				"version": "2.0.0"
+			},
+			{
+				"name": "danger",
+				"version": "11.2.6"
+			},
+			{
+				"name": "dateformat",
+				"version": "3.0.3"
+			},
+			{
+				"name": "debug",
+				"version": "4.4.3"
+			},
+			{
+				"name": "decamelize",
+				"version": "1.2.0"
+			},
+			{
+				"name": "decamelize-keys",
+				"version": "1.1.1"
+			},
+			{
+				"name": "map-obj",
+				"version": "1.0.1"
+			},
+			{
+				"name": "decimal.js-light",
+				"version": "2.5.1"
+			},
+			{
+				"name": "decode-uri-component",
+				"version": "0.2.2"
+			},
+			{
+				"name": "decompress-response",
+				"version": "6.0.0"
+			},
+			{
+				"name": "mimic-response",
+				"version": "3.1.0"
+			},
+			{
+				"name": "deep-extend",
+				"version": "0.6.0"
+			},
+			{
+				"name": "deep-is",
+				"version": "0.1.4"
+			},
+			{
+				"name": "defer-to-connect",
+				"version": "2.0.1"
+			},
+			{
+				"name": "del",
+				"version": "6.1.1"
+			},
+			{
+				"name": "delayed-stream",
+				"version": "1.0.0"
+			},
+			{
+				"name": "deprecation",
+				"version": "2.3.1"
+			},
+			{
+				"name": "detect-indent",
+				"version": "6.1.0"
+			},
+			{
+				"name": "dir-glob",
+				"version": "3.0.1"
+			},
+			{
+				"name": "doctrine",
+				"version": "3.0.0"
+			},
+			{
+				"name": "dot-prop",
+				"version": "5.3.0"
+			},
+			{
+				"name": "dotenv",
+				"version": "16.6.1"
+			},
+			{
+				"name": "dunder-proto",
+				"version": "1.0.1"
+			},
+			{
+				"name": "duplexer2",
+				"version": "0.1.4"
+			},
+			{
+				"name": "isarray",
+				"version": "1.0.0"
+			},
+			{
+				"name": "readable-stream",
+				"version": "2.3.8"
+			},
+			{
+				"name": "safe-buffer",
+				"version": "5.1.2"
+			},
+			{
+				"name": "string_decoder",
+				"version": "1.1.1"
+			},
+			{
+				"name": "duplexer3",
+				"version": "0.1.5"
+			},
+			{
+				"name": "ecdsa-sig-formatter",
+				"version": "1.0.11"
+			},
+			{
+				"name": "elliptic",
+				"version": "6.6.1"
+			},
+			{
+				"name": "bn.js",
+				"version": "4.12.5"
+			},
+			{
+				"name": "end-of-stream",
+				"version": "1.4.5"
+			},
+			{
+				"name": "enquirer",
+				"version": "2.4.1"
+			},
+			{
+				"name": "env-ci",
+				"version": "8.0.0"
+			},
+			{
+				"name": "execa",
+				"version": "6.1.0"
+			},
+			{
+				"name": "human-signals",
+				"version": "3.0.1"
+			},
+			{
+				"name": "is-stream",
+				"version": "3.0.0"
+			},
+			{
+				"name": "mimic-fn",
+				"version": "4.0.0"
+			},
+			{
+				"name": "npm-run-path",
+				"version": "5.3.0"
+			},
+			{
+				"name": "onetime",
+				"version": "6.0.0"
+			},
+			{
+				"name": "path-key",
+				"version": "4.0.0"
+			},
+			{
+				"name": "strip-final-newline",
+				"version": "3.0.0"
+			},
+			{
+				"name": "error-ex",
+				"version": "1.3.4"
+			},
+			{
+				"name": "es-define-property",
+				"version": "1.0.1"
+			},
+			{
+				"name": "es-errors",
+				"version": "1.3.0"
+			},
+			{
+				"name": "es-object-atoms",
+				"version": "1.1.2"
+			},
+			{
+				"name": "es-set-tostringtag",
+				"version": "2.1.0"
+			},
+			{
+				"name": "escalade",
+				"version": "3.2.0"
+			},
+			{
+				"name": "escape-string-regexp",
+				"version": "1.0.5"
+			},
+			{
+				"name": "eslint",
+				"version": "7.32.0"
+			},
+			{
+				"name": "eslint-plugin-prettier",
+				"version": "3.4.1"
+			},
+			{
+				"name": "eslint-scope",
+				"version": "5.1.1"
+			},
+			{
+				"name": "estraverse",
+				"version": "4.3.0"
+			},
+			{
+				"name": "eslint-utils",
+				"version": "2.1.0"
+			},
+			{
+				"name": "eslint-visitor-keys",
+				"version": "1.3.0"
+			},
+			{
+				"name": "eslint-visitor-keys",
+				"version": "3.4.3"
+			},
+			{
+				"name": "@babel/code-frame",
+				"version": "7.12.11"
+			},
+			{
+				"name": "ansi-styles",
+				"version": "4.3.0"
+			},
+			{
+				"name": "chalk",
+				"version": "4.1.2"
+			},
+			{
+				"name": "color-convert",
+				"version": "2.0.1"
+			},
+			{
+				"name": "color-name",
+				"version": "1.1.4"
+			},
+			{
+				"name": "escape-string-regexp",
+				"version": "4.0.0"
+			},
+			{
+				"name": "eslint-visitor-keys",
+				"version": "2.1.0"
+			},
+			{
+				"name": "has-flag",
+				"version": "4.0.0"
+			},
+			{
+				"name": "supports-color",
+				"version": "7.2.0"
+			},
+			{
+				"name": "espree",
+				"version": "7.3.1"
+			},
+			{
+				"name": "esprima",
+				"version": "4.0.1"
+			},
+			{
+				"name": "esquery",
+				"version": "1.7.0"
+			},
+			{
+				"name": "esrecurse",
+				"version": "4.3.0"
+			},
+			{
+				"name": "estraverse",
+				"version": "5.3.0"
+			},
+			{
+				"name": "esutils",
+				"version": "2.0.3"
+			},
+			{
+				"name": "ethers",
+				"version": "5.8.0"
+			},
+			{
+				"name": "execa",
+				"version": "5.1.1"
+			},
+			{
+				"name": "expand-tilde",
+				"version": "2.0.2"
+			},
+			{
+				"name": "expect-more",
+				"version": "1.3.0"
+			},
+			{
+				"name": "extend-shallow",
+				"version": "2.0.1"
+			},
+			{
+				"name": "fast-deep-equal",
+				"version": "3.1.3"
+			},
+			{
+				"name": "fast-diff",
+				"version": "1.3.0"
+			},
+			{
+				"name": "fast-glob",
+				"version": "3.3.3"
+			},
+			{
+				"name": "fast-json-patch",
+				"version": "3.1.1"
+			},
+			{
+				"name": "fast-json-stable-stringify",
+				"version": "2.1.0"
+			},
+			{
+				"name": "fast-levenshtein",
+				"version": "2.0.6"
+			},
+			{
+				"name": "fast-uri",
+				"version": "3.1.9"
+			},
+			{
+				"name": "fastq",
+				"version": "1.20.3"
+			},
+			{
+				"name": "figures",
+				"version": "5.0.0"
+			},
+			{
+				"name": "escape-string-regexp",
+				"version": "5.0.0"
+			},
+			{
+				"name": "is-unicode-supported",
+				"version": "1.3.0"
+			},
+			{
+				"name": "file-entry-cache",
+				"version": "6.0.1"
+			},
+			{
+				"name": "fill-range",
+				"version": "7.1.1"
+			},
+			{
+				"name": "filter-obj",
+				"version": "1.1.0"
+			},
+			{
+				"name": "find-replace",
+				"version": "3.0.0"
+			},
+			{
+				"name": "find-up",
+				"version": "4.1.0"
+			},
+			{
+				"name": "find-versions",
+				"version": "5.1.0"
+			},
+			{
+				"name": "flat-cache",
+				"version": "3.2.0"
+			},
+			{
+				"name": "flatted",
+				"version": "3.4.4"
+			},
+			{
+				"name": "from2",
+				"version": "2.3.0"
+			},
+			{
+				"name": "fs-exists-sync",
+				"version": "0.1.0"
+			},
+			{
+				"name": "fs-extra",
+				"version": "8.1.0"
+			},
+			{
+				"name": "fs.realpath",
+				"version": "1.0.0"
+			},
+			{
+				"name": "fsevents",
+				"version": "2.3.3"
+			},
+			{
+				"name": "function-bind",
+				"version": "1.1.2"
+			},
+			{
+				"name": "functional-red-black-tree",
+				"version": "1.0.1"
+			},
+			{
+				"name": "get-caller-file",
+				"version": "2.0.5"
+			},
+			{
+				"name": "get-intrinsic",
+				"version": "1.3.0"
+			},
+			{
+				"name": "get-proto",
+				"version": "1.0.1"
+			},
+			{
+				"name": "get-stdin",
+				"version": "6.0.0"
+			},
+			{
+				"name": "get-stream",
+				"version": "6.0.1"
+			},
+			{
+				"name": "git-config-path",
+				"version": "1.0.1"
+			},
+			{
+				"name": "git-log-parser",
+				"version": "1.2.1"
+			},
+			{
+				"name": "split2",
+				"version": "1.0.0"
+			},
+			{
+				"name": "through2",
+				"version": "2.0.5"
+			},
+			{
+				"name": "glob",
+				"version": "7.2.3"
+			},
+			{
+				"name": "glob-parent",
+				"version": "5.1.2"
+			},
+			{
+				"name": "globals",
+				"version": "13.24.0"
+			},
+			{
+				"name": "globby",
+				"version": "11.1.0"
+			},
+			{
+				"name": "gopd",
+				"version": "1.2.0"
+			},
+			{
+				"name": "got",
+				"version": "11.8.6"
+			},
+			{
+				"name": "graceful-fs",
+				"version": "4.2.12"
+			},
+			{
+				"name": "graphemer",
+				"version": "1.4.0"
+			},
+			{
+				"name": "handlebars",
+				"version": "4.7.10"
+			},
+			{
+				"name": "hard-rejection",
+				"version": "2.1.0"
+			},
+			{
+				"name": "hardhat-watcher",
+				"version": "2.5.0"
+			},
+			{
+				"name": "chokidar",
+				"version": "3.6.0"
+			},
+			{
+				"name": "readdirp",
+				"version": "3.6.0"
+			},
+			{
+				"name": "has-flag",
+				"version": "3.0.0"
+			},
+			{
+				"name": "has-symbols",
+				"version": "1.1.0"
+			},
+			{
+				"name": "has-tostringtag",
+				"version": "1.0.2"
+			},
+			{
+				"name": "hash.js",
+				"version": "1.1.7"
+			},
+			{
+				"name": "hasown",
+				"version": "2.0.4"
+			},
+			{
+				"name": "hmac-drbg",
+				"version": "1.0.1"
+			},
+			{
+				"name": "homedir-polyfill",
+				"version": "1.0.3"
+			},
+			{
+				"name": "hook-std",
+				"version": "3.0.0"
+			},
+			{
+				"name": "hosted-git-info",
+				"version": "2.8.9"
+			},
+			{
+				"name": "http-cache-semantics",
+				"version": "4.3.0"
+			},
+			{
+				"name": "http-proxy-agent",
+				"version": "5.0.0"
+			},
+			{
+				"name": "http2-wrapper",
+				"version": "1.0.3"
+			},
+			{
+				"name": "https-proxy-agent",
+				"version": "5.0.1"
+			},
+			{
+				"name": "human-signals",
+				"version": "2.1.0"
+			},
+			{
+				"name": "husky",
+				"version": "8.0.3"
+			},
+			{
+				"name": "hyperlinker",
+				"version": "1.0.0"
+			},
+			{
+				"name": "ignore",
+				"version": "5.3.2"
+			},
+			{
+				"name": "import-fresh",
+				"version": "3.3.1"
+			},
+			{
+				"name": "resolve-from",
+				"version": "4.0.0"
+			},
+			{
+				"name": "import-from",
+				"version": "4.0.0"
+			},
+			{
+				"name": "imurmurhash",
+				"version": "0.1.4"
+			},
+			{
+				"name": "indent-string",
+				"version": "4.0.0"
+			},
+			{
+				"name": "inflight",
+				"version": "1.0.6"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.4"
+			},
+			{
+				"name": "ini",
+				"version": "1.3.8"
+			},
+			{
+				"name": "into-stream",
+				"version": "6.0.0"
+			},
+			{
+				"name": "is-arrayish",
+				"version": "0.2.1"
+			},
+			{
+				"name": "is-binary-path",
+				"version": "2.1.0"
+			},
+			{
+				"name": "is-core-module",
+				"version": "2.18.0"
+			},
+			{
+				"name": "is-extendable",
+				"version": "0.1.1"
+			},
+			{
+				"name": "is-extglob",
+				"version": "2.1.1"
+			},
+			{
+				"name": "is-fullwidth-code-point",
+				"version": "3.0.0"
+			},
+			{
+				"name": "is-glob",
+				"version": "4.0.3"
+			},
+			{
+				"name": "is-number",
+				"version": "7.0.0"
+			},
+			{
+				"name": "is-obj",
+				"version": "2.0.0"
+			},
+			{
+				"name": "is-path-cwd",
+				"version": "2.2.0"
+			},
+			{
+				"name": "is-path-inside",
+				"version": "3.0.3"
+			},
+			{
+				"name": "is-plain-obj",
+				"version": "1.1.0"
+			},
+			{
+				"name": "is-plain-object",
+				"version": "5.1.0"
+			},
+			{
+				"name": "is-stream",
+				"version": "2.0.1"
+			},
+			{
+				"name": "is-text-path",
+				"version": "1.0.1"
+			},
+			{
+				"name": "is-typedarray",
+				"version": "1.0.0"
+			},
+			{
+				"name": "isexe",
+				"version": "2.0.0"
+			},
+			{
+				"name": "issue-parser",
+				"version": "6.0.0"
+			},
+			{
+				"name": "java-properties",
+				"version": "1.0.2"
+			},
+			{
+				"name": "js-sha3",
+				"version": "0.8.0"
+			},
+			{
+				"name": "js-tokens",
+				"version": "4.0.0"
+			},
+			{
+				"name": "js-yaml",
+				"version": "3.15.2"
+			},
+			{
+				"name": "jsbi",
+				"version": "3.2.5"
+			},
+			{
+				"name": "json-buffer",
+				"version": "3.0.1"
+			},
+			{
+				"name": "json-parse-better-errors",
+				"version": "1.0.2"
+			},
+			{
+				"name": "json-parse-even-better-errors",
+				"version": "2.3.1"
+			},
+			{
+				"name": "json-schema-traverse",
+				"version": "0.4.1"
+			},
+			{
+				"name": "json-stable-stringify-without-jsonify",
+				"version": "1.0.1"
+			},
+			{
+				"name": "json-stringify-safe",
+				"version": "5.0.1"
+			},
+			{
+				"name": "json5",
+				"version": "2.2.3"
+			},
+			{
+				"name": "jsonfile",
+				"version": "4.0.0"
+			},
+			{
+				"name": "jsonparse",
+				"version": "1.3.1"
+			},
+			{
+				"name": "jsonpointer",
+				"version": "5.0.1"
+			},
+			{
+				"name": "JSONStream",
+				"version": "1.3.5"
+			},
+			{
+				"name": "jsonwebtoken",
+				"version": "9.0.3"
+			},
+			{
+				"name": "jwa",
+				"version": "2.0.1"
+			},
+			{
+				"name": "jws",
+				"version": "4.0.1"
+			},
+			{
+				"name": "keyv",
+				"version": "4.5.4"
+			},
+			{
+				"name": "kind-of",
+				"version": "6.0.3"
+			},
+			{
+				"name": "levn",
+				"version": "0.4.1"
+			},
+			{
+				"name": "li",
+				"version": "1.3.0"
+			},
+			{
+				"name": "lines-and-columns",
+				"version": "1.2.4"
+			},
+			{
+				"name": "load-json-file",
+				"version": "4.0.0"
+			},
+			{
+				"name": "parse-json",
+				"version": "4.0.0"
+			},
+			{
+				"name": "strip-bom",
+				"version": "3.0.0"
+			},
+			{
+				"name": "locate-path",
+				"version": "5.0.0"
+			},
+			{
+				"name": "lodash",
+				"version": "4.18.1"
+			},
+			{
+				"name": "lodash-es",
+				"version": "4.18.1"
+			},
+			{
+				"name": "lodash.camelcase",
+				"version": "4.3.0"
+			},
+			{
+				"name": "lodash.capitalize",
+				"version": "4.2.1"
+			},
+			{
+				"name": "lodash.escaperegexp",
+				"version": "4.1.2"
+			},
+			{
+				"name": "lodash.find",
+				"version": "4.6.0"
+			},
+			{
+				"name": "lodash.includes",
+				"version": "4.3.0"
+			},
+			{
+				"name": "lodash.isboolean",
+				"version": "3.0.3"
+			},
+			{
+				"name": "lodash.isinteger",
+				"version": "4.0.4"
+			},
+			{
+				"name": "lodash.ismatch",
+				"version": "4.4.0"
+			},
+			{
+				"name": "lodash.isnumber",
+				"version": "3.0.3"
+			},
+			{
+				"name": "lodash.isobject",
+				"version": "3.0.2"
+			},
+			{
+				"name": "lodash.isplainobject",
+				"version": "4.0.6"
+			},
+			{
+				"name": "lodash.isstring",
+				"version": "4.0.1"
+			},
+			{
+				"name": "lodash.keys",
+				"version": "4.2.0"
+			},
+			{
+				"name": "lodash.mapvalues",
+				"version": "4.6.0"
+			},
+			{
+				"name": "lodash.memoize",
+				"version": "4.1.2"
+			},
+			{
+				"name": "lodash.merge",
+				"version": "4.6.2"
+			},
+			{
+				"name": "lodash.once",
+				"version": "4.1.1"
+			},
+			{
+				"name": "lodash.uniqby",
+				"version": "4.7.0"
+			},
+			{
+				"name": "lowercase-keys",
+				"version": "2.0.0"
+			},
+			{
+				"name": "map-obj",
+				"version": "4.3.0"
+			},
+			{
+				"name": "marked",
+				"version": "4.3.0"
+			},
+			{
+				"name": "marked-terminal",
+				"version": "5.2.1"
+			},
+			{
+				"name": "ansi-escapes",
+				"version": "6.2.1"
+			},
+			{
+				"name": "chalk",
+				"version": "5.6.2"
+			},
+			{
+				"name": "supports-hyperlinks",
+				"version": "2.3.0"
+			},
+			{
+				"name": "math-intrinsics",
+				"version": "1.1.0"
+			},
+			{
+				"name": "memfs-or-file-map-to-github-branch",
+				"version": "1.3.0"
+			},
+			{
+				"name": "meow",
+				"version": "8.1.2"
+			},
+			{
+				"name": "hosted-git-info",
+				"version": "4.1.0"
+			},
+			{
+				"name": "lru-cache",
+				"version": "6.0.0"
+			},
+			{
+				"name": "normalize-package-data",
+				"version": "3.0.3"
+			},
+			{
+				"name": "type-fest",
+				"version": "0.18.1"
+			},
+			{
+				"name": "yallist",
+				"version": "4.0.0"
+			},
+			{
+				"name": "yargs-parser",
+				"version": "20.2.9"
+			},
+			{
+				"name": "merge-stream",
+				"version": "2.0.0"
+			},
+			{
+				"name": "merge2",
+				"version": "1.4.1"
+			},
+			{
+				"name": "micromatch",
+				"version": "4.0.8"
+			},
+			{
+				"name": "mime",
+				"version": "3.0.0"
+			},
+			{
+				"name": "mime-db",
+				"version": "1.52.0"
+			},
+			{
+				"name": "mime-types",
+				"version": "2.1.35"
+			},
+			{
+				"name": "mimic-fn",
+				"version": "2.1.0"
+			},
+			{
+				"name": "mimic-response",
+				"version": "1.0.1"
+			},
+			{
+				"name": "min-indent",
+				"version": "1.0.1"
+			},
+			{
+				"name": "minimalistic-assert",
+				"version": "1.0.1"
+			},
+			{
+				"name": "minimalistic-crypto-utils",
+				"version": "1.0.1"
+			},
+			{
+				"name": "minimatch",
+				"version": "3.1.5"
+			},
+			{
+				"name": "minimist",
+				"version": "1.2.8"
+			},
+			{
+				"name": "minimist-options",
+				"version": "4.1.0"
+			},
+			{
+				"name": "minipass",
+				"version": "7.1.3"
+			},
+			{
+				"name": "mkdirp",
+				"version": "0.5.6"
+			},
+			{
+				"name": "modify-values",
+				"version": "1.0.1"
+			},
+			{
+				"name": "ms",
+				"version": "2.1.3"
+			},
+			{
+				"name": "natural-compare",
+				"version": "1.4.0"
+			},
+			{
+				"name": "natural-compare-lite",
+				"version": "1.4.1"
+			},
+			{
+				"name": "neo-async",
+				"version": "2.6.2"
+			},
+			{
+				"name": "nerf-dart",
+				"version": "1.0.0"
+			},
+			{
+				"name": "node-cleanup",
+				"version": "2.1.2"
+			},
+			{
+				"name": "node-emoji",
+				"version": "1.11.0"
+			},
+			{
+				"name": "node-fetch",
+				"version": "2.7.0"
+			},
+			{
+				"name": "tr46",
+				"version": "0.0.3"
+			},
+			{
+				"name": "webidl-conversions",
+				"version": "3.0.1"
+			},
+			{
+				"name": "whatwg-url",
+				"version": "5.0.0"
+			},
+			{
+				"name": "normalize-package-data",
+				"version": "2.5.0"
+			},
+			{
+				"name": "semver",
+				"version": "5.7.3"
+			},
+			{
+				"name": "normalize-path",
+				"version": "3.0.0"
+			},
+			{
+				"name": "normalize-url",
+				"version": "6.1.0"
+			},
+			{
+				"name": "npm",
+				"version": "8.19.4"
+			},
+			{
+				"name": "npm-run-path",
+				"version": "4.0.1"
+			},
+			{
+				"name": "@gar/promisify",
+				"version": "1.1.3"
+			},
+			{
+				"name": "@isaacs/string-locale-compare",
+				"version": "1.1.0"
+			},
+			{
+				"name": "@npmcli/arborist",
+				"version": "5.6.3"
+			},
+			{
+				"name": "@npmcli/ci-detect",
+				"version": "2.0.0"
+			},
+			{
+				"name": "@npmcli/config",
+				"version": "4.2.2"
+			},
+			{
+				"name": "@npmcli/disparity-colors",
+				"version": "2.0.0"
+			},
+			{
+				"name": "@npmcli/fs",
+				"version": "2.1.2"
+			},
+			{
+				"name": "@npmcli/git",
+				"version": "3.0.2"
+			},
+			{
+				"name": "@npmcli/installed-package-contents",
+				"version": "1.0.7"
+			},
+			{
+				"name": "npm-bundled",
+				"version": "1.1.2"
+			},
+			{
+				"name": "@npmcli/map-workspaces",
+				"version": "2.0.4"
+			},
+			{
+				"name": "@npmcli/metavuln-calculator",
+				"version": "3.1.1"
+			},
+			{
+				"name": "@npmcli/move-file",
+				"version": "2.0.1"
+			},
+			{
+				"name": "@npmcli/name-from-folder",
+				"version": "1.0.1"
+			},
+			{
+				"name": "@npmcli/node-gyp",
+				"version": "2.0.0"
+			},
+			{
+				"name": "@npmcli/package-json",
+				"version": "2.0.0"
+			},
+			{
+				"name": "@npmcli/promise-spawn",
+				"version": "3.0.0"
+			},
+			{
+				"name": "@npmcli/query",
+				"version": "1.2.0"
+			},
+			{
+				"name": "@npmcli/run-script",
+				"version": "4.2.1"
+			},
+			{
+				"name": "@tootallnate/once",
+				"version": "2.0.0"
+			},
+			{
+				"name": "abbrev",
+				"version": "1.1.1"
+			},
+			{
+				"name": "agentkeepalive",
+				"version": "4.2.1"
+			},
+			{
+				"name": "aproba",
+				"version": "2.0.0"
+			},
+			{
+				"name": "archy",
+				"version": "1.0.0"
+			},
+			{
+				"name": "are-we-there-yet",
+				"version": "3.0.1"
+			},
+			{
+				"name": "asap",
+				"version": "2.0.6"
+			},
+			{
+				"name": "bin-links",
+				"version": "3.0.3"
+			},
+			{
+				"name": "npm-normalize-package-bin",
+				"version": "2.0.0"
+			},
+			{
+				"name": "binary-extensions",
+				"version": "2.2.0"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "2.0.1"
+			},
+			{
+				"name": "builtins",
+				"version": "5.0.1"
+			},
+			{
+				"name": "cacache",
+				"version": "16.1.3"
+			},
+			{
+				"name": "chownr",
+				"version": "2.0.0"
+			},
+			{
+				"name": "cidr-regex",
+				"version": "3.1.1"
+			},
+			{
+				"name": "cli-columns",
+				"version": "4.0.0"
+			},
+			{
+				"name": "cli-table3",
+				"version": "0.6.2"
+			},
+			{
+				"name": "clone",
+				"version": "1.0.4"
+			},
+			{
+				"name": "cmd-shim",
+				"version": "5.0.0"
+			},
+			{
+				"name": "color-support",
+				"version": "1.1.3"
+			},
+			{
+				"name": "columnify",
+				"version": "1.6.0"
+			},
+			{
+				"name": "common-ancestor-path",
+				"version": "1.0.1"
+			},
+			{
+				"name": "console-control-strings",
+				"version": "1.1.0"
+			},
+			{
+				"name": "cssesc",
+				"version": "3.0.0"
+			},
+			{
+				"name": "debug",
+				"version": "4.3.4"
+			},
+			{
+				"name": "ms",
+				"version": "2.1.2"
+			},
+			{
+				"name": "debuglog",
+				"version": "1.0.1"
+			},
+			{
+				"name": "defaults",
+				"version": "1.0.3"
+			},
+			{
+				"name": "delegates",
+				"version": "1.0.0"
+			},
+			{
+				"name": "depd",
+				"version": "1.1.2"
+			},
+			{
+				"name": "dezalgo",
+				"version": "1.0.4"
+			},
+			{
+				"name": "diff",
+				"version": "5.1.0"
+			},
+			{
+				"name": "emoji-regex",
+				"version": "8.0.0"
+			},
+			{
+				"name": "encoding",
+				"version": "0.1.13"
+			},
+			{
+				"name": "env-paths",
+				"version": "2.2.1"
+			},
+			{
+				"name": "err-code",
+				"version": "2.0.3"
+			},
+			{
+				"name": "fastest-levenshtein",
+				"version": "1.0.12"
+			},
+			{
+				"name": "fs-minipass",
+				"version": "2.1.0"
+			},
+			{
+				"name": "function-bind",
+				"version": "1.1.1"
+			},
+			{
+				"name": "gauge",
+				"version": "4.0.4"
+			},
+			{
+				"name": "glob",
+				"version": "8.0.3"
+			},
+			{
+				"name": "has",
+				"version": "1.0.3"
+			},
+			{
+				"name": "has-unicode",
+				"version": "2.0.1"
+			},
+			{
+				"name": "hosted-git-info",
+				"version": "5.2.1"
+			},
+			{
+				"name": "http-cache-semantics",
+				"version": "4.1.1"
+			},
+			{
+				"name": "humanize-ms",
+				"version": "1.2.1"
+			},
+			{
+				"name": "iconv-lite",
+				"version": "0.6.3"
+			},
+			{
+				"name": "ignore-walk",
+				"version": "5.0.1"
+			},
+			{
+				"name": "infer-owner",
+				"version": "1.0.4"
+			},
+			{
+				"name": "ini",
+				"version": "3.0.1"
+			},
+			{
+				"name": "init-package-json",
+				"version": "3.0.2"
+			},
+			{
+				"name": "ip",
+				"version": "2.0.0"
+			},
+			{
+				"name": "ip-regex",
+				"version": "4.3.0"
+			},
+			{
+				"name": "is-cidr",
+				"version": "4.0.2"
+			},
+			{
+				"name": "is-core-module",
+				"version": "2.10.0"
+			},
+			{
+				"name": "is-lambda",
+				"version": "1.0.1"
+			},
+			{
+				"name": "json-stringify-nice",
+				"version": "1.1.4"
+			},
+			{
+				"name": "just-diff",
+				"version": "5.1.1"
+			},
+			{
+				"name": "just-diff-apply",
+				"version": "5.4.1"
+			},
+			{
+				"name": "libnpmaccess",
+				"version": "6.0.4"
+			},
+			{
+				"name": "libnpmdiff",
+				"version": "4.0.5"
+			},
+			{
+				"name": "libnpmexec",
+				"version": "4.0.14"
+			},
+			{
+				"name": "libnpmfund",
+				"version": "3.0.5"
+			},
+			{
+				"name": "libnpmhook",
+				"version": "8.0.4"
+			},
+			{
+				"name": "libnpmorg",
+				"version": "4.0.4"
+			},
+			{
+				"name": "libnpmpack",
+				"version": "4.1.3"
+			},
+			{
+				"name": "libnpmpublish",
+				"version": "6.0.5"
+			},
+			{
+				"name": "libnpmsearch",
+				"version": "5.0.4"
+			},
+			{
+				"name": "libnpmteam",
+				"version": "4.0.4"
+			},
+			{
+				"name": "libnpmversion",
+				"version": "3.0.7"
+			},
+			{
+				"name": "lru-cache",
+				"version": "7.13.2"
+			},
+			{
+				"name": "make-fetch-happen",
+				"version": "10.2.1"
+			},
+			{
+				"name": "minimatch",
+				"version": "5.1.0"
+			},
+			{
+				"name": "minipass",
+				"version": "3.3.4"
+			},
+			{
+				"name": "minipass-collect",
+				"version": "1.0.2"
+			},
+			{
+				"name": "minipass-fetch",
+				"version": "2.1.1"
+			},
+			{
+				"name": "minipass-flush",
+				"version": "1.0.5"
+			},
+			{
+				"name": "minipass-json-stream",
+				"version": "1.0.1"
+			},
+			{
+				"name": "minipass-pipeline",
+				"version": "1.2.4"
+			},
+			{
+				"name": "minipass-sized",
+				"version": "1.0.3"
+			},
+			{
+				"name": "minizlib",
+				"version": "2.1.2"
+			},
+			{
+				"name": "mkdirp",
+				"version": "1.0.4"
+			},
+			{
+				"name": "mkdirp-infer-owner",
+				"version": "2.0.0"
+			},
+			{
+				"name": "mute-stream",
+				"version": "0.0.8"
+			},
+			{
+				"name": "negotiator",
+				"version": "0.6.3"
+			},
+			{
+				"name": "node-gyp",
+				"version": "9.1.0"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "1.1.11"
+			},
+			{
+				"name": "minimatch",
+				"version": "3.1.2"
+			},
+			{
+				"name": "nopt",
+				"version": "5.0.0"
+			},
+			{
+				"name": "nopt",
+				"version": "6.0.0"
+			},
+			{
+				"name": "normalize-package-data",
+				"version": "4.0.1"
+			},
+			{
+				"name": "npm-audit-report",
+				"version": "3.0.0"
+			},
+			{
+				"name": "npm-bundled",
+				"version": "2.0.1"
+			},
+			{
+				"name": "npm-install-checks",
+				"version": "5.0.0"
+			},
+			{
+				"name": "npm-normalize-package-bin",
+				"version": "1.0.1"
+			},
+			{
+				"name": "npm-package-arg",
+				"version": "9.1.0"
+			},
+			{
+				"name": "npm-packlist",
+				"version": "5.1.3"
+			},
+			{
+				"name": "npm-pick-manifest",
+				"version": "7.0.2"
+			},
+			{
+				"name": "npm-profile",
+				"version": "6.2.1"
+			},
+			{
+				"name": "npm-registry-fetch",
+				"version": "13.3.1"
+			},
+			{
+				"name": "npm-user-validate",
+				"version": "1.0.1"
+			},
+			{
+				"name": "npmlog",
+				"version": "6.0.2"
+			},
+			{
+				"name": "once",
+				"version": "1.4.0"
+			},
+			{
+				"name": "opener",
+				"version": "1.5.2"
+			},
+			{
+				"name": "p-map",
+				"version": "4.0.0"
+			},
+			{
+				"name": "pacote",
+				"version": "13.6.2"
+			},
+			{
+				"name": "parse-conflict-json",
+				"version": "2.0.2"
+			},
+			{
+				"name": "path-is-absolute",
+				"version": "1.0.1"
+			},
+			{
+				"name": "postcss-selector-parser",
+				"version": "6.0.10"
+			},
+			{
+				"name": "proc-log",
+				"version": "2.0.1"
+			},
+			{
+				"name": "promise-all-reject-late",
+				"version": "1.0.1"
+			},
+			{
+				"name": "promise-call-limit",
+				"version": "1.0.1"
+			},
+			{
+				"name": "promise-inflight",
+				"version": "1.0.1"
+			},
+			{
+				"name": "promise-retry",
+				"version": "2.0.1"
+			},
+			{
+				"name": "promzard",
+				"version": "0.3.0"
+			},
+			{
+				"name": "qrcode-terminal",
+				"version": "0.12.0"
+			},
+			{
+				"name": "read",
+				"version": "1.0.7"
+			},
+			{
+				"name": "read-cmd-shim",
+				"version": "3.0.0"
+			},
+			{
+				"name": "read-package-json",
+				"version": "5.0.2"
+			},
+			{
+				"name": "read-package-json-fast",
+				"version": "2.0.3"
+			},
+			{
+				"name": "readable-stream",
+				"version": "3.6.0"
+			},
+			{
+				"name": "readdir-scoped-modules",
+				"version": "1.1.0"
+			},
+			{
+				"name": "retry",
+				"version": "0.12.0"
+			},
+			{
+				"name": "rimraf",
+				"version": "3.0.2"
+			},
+			{
+				"name": "safe-buffer",
+				"version": "5.2.1"
+			},
+			{
+				"name": "safer-buffer",
+				"version": "2.1.2"
+			},
+			{
+				"name": "semver",
+				"version": "7.3.7"
+			},
+			{
+				"name": "set-blocking",
+				"version": "2.0.0"
+			},
+			{
+				"name": "signal-exit",
+				"version": "3.0.7"
+			},
+			{
+				"name": "smart-buffer",
+				"version": "4.2.0"
+			},
+			{
+				"name": "socks",
+				"version": "2.7.0"
+			},
+			{
+				"name": "socks-proxy-agent",
+				"version": "7.0.0"
+			},
+			{
+				"name": "spdx-correct",
+				"version": "3.1.1"
+			},
+			{
+				"name": "spdx-exceptions",
+				"version": "2.3.0"
+			},
+			{
+				"name": "spdx-expression-parse",
+				"version": "3.0.1"
+			},
+			{
+				"name": "spdx-license-ids",
+				"version": "3.0.11"
+			},
+			{
+				"name": "ssri",
+				"version": "9.0.1"
+			},
+			{
+				"name": "string_decoder",
+				"version": "1.3.0"
+			},
+			{
+				"name": "string-width",
+				"version": "4.2.3"
+			},
+			{
+				"name": "strip-ansi",
+				"version": "6.0.1"
+			},
+			{
+				"name": "tar",
+				"version": "6.1.11"
+			},
+			{
+				"name": "text-table",
+				"version": "0.2.0"
+			},
+			{
+				"name": "tiny-relative-date",
+				"version": "1.3.0"
+			},
+			{
+				"name": "treeverse",
+				"version": "2.0.0"
+			},
+			{
+				"name": "unique-filename",
+				"version": "2.0.1"
+			},
+			{
+				"name": "unique-slug",
+				"version": "3.0.0"
+			},
+			{
+				"name": "util-deprecate",
+				"version": "1.0.2"
+			},
+			{
+				"name": "validate-npm-package-license",
+				"version": "3.0.4"
+			},
+			{
+				"name": "validate-npm-package-name",
+				"version": "4.0.0"
+			},
+			{
+				"name": "walk-up-path",
+				"version": "1.0.0"
+			},
+			{
+				"name": "wcwidth",
+				"version": "1.0.1"
+			},
+			{
+				"name": "which",
+				"version": "2.0.2"
+			},
+			{
+				"name": "wide-align",
+				"version": "1.1.5"
+			},
+			{
+				"name": "wrappy",
+				"version": "1.0.2"
+			},
+			{
+				"name": "write-file-atomic",
+				"version": "4.0.2"
+			},
+			{
+				"name": "onetime",
+				"version": "5.1.2"
+			},
+			{
+				"name": "optionator",
+				"version": "0.9.4"
+			},
+			{
+				"name": "override-require",
+				"version": "1.1.1"
+			},
+			{
+				"name": "p-cancelable",
+				"version": "2.1.1"
+			},
+			{
+				"name": "p-filter",
+				"version": "2.1.0"
+			},
+			{
+				"name": "p-map",
+				"version": "2.1.0"
+			},
+			{
+				"name": "p-is-promise",
+				"version": "3.0.0"
+			},
+			{
+				"name": "p-limit",
+				"version": "2.3.0"
+			},
+			{
+				"name": "p-locate",
+				"version": "4.1.0"
+			},
+			{
+				"name": "p-reduce",
+				"version": "3.0.0"
+			},
+			{
+				"name": "p-try",
+				"version": "2.2.0"
+			},
+			{
+				"name": "package-json",
+				"version": "6.5.0"
+			},
+			{
+				"name": "@sindresorhus/is",
+				"version": "0.14.0"
+			},
+			{
+				"name": "@szmarczak/http-timer",
+				"version": "1.1.2"
+			},
+			{
+				"name": "cacheable-request",
+				"version": "6.1.0"
+			},
+			{
+				"name": "decompress-response",
+				"version": "3.3.0"
+			},
+			{
+				"name": "defer-to-connect",
+				"version": "1.1.3"
+			},
+			{
+				"name": "get-stream",
+				"version": "4.1.0"
+			},
+			{
+				"name": "got",
+				"version": "9.6.0"
+			},
+			{
+				"name": "lowercase-keys",
+				"version": "1.0.1"
+			},
+			{
+				"name": "json-buffer",
+				"version": "3.0.0"
+			},
+			{
+				"name": "keyv",
+				"version": "3.1.0"
+			},
+			{
+				"name": "normalize-url",
+				"version": "4.5.1"
+			},
+			{
+				"name": "p-cancelable",
+				"version": "1.1.0"
+			},
+			{
+				"name": "responselike",
+				"version": "1.0.2"
+			},
+			{
+				"name": "parent-module",
+				"version": "1.0.1"
+			},
+			{
+				"name": "parse-diff",
+				"version": "0.7.1"
+			},
+			{
+				"name": "parse-git-config",
+				"version": "2.0.3"
+			},
+			{
+				"name": "parse-github-url",
+				"version": "1.0.4"
+			},
+			{
+				"name": "parse-json",
+				"version": "5.2.0"
+			},
+			{
+				"name": "parse-link-header",
+				"version": "2.0.0"
+			},
+			{
+				"name": "parse-passwd",
+				"version": "1.0.0"
+			},
+			{
+				"name": "path-exists",
+				"version": "4.0.0"
+			},
+			{
+				"name": "path-key",
+				"version": "3.1.1"
+			},
+			{
+				"name": "path-parse",
+				"version": "1.0.7"
+			},
+			{
+				"name": "path-type",
+				"version": "4.0.0"
+			},
+			{
+				"name": "picocolors",
+				"version": "1.1.1"
+			},
+			{
+				"name": "picomatch",
+				"version": "2.3.2"
+			},
+			{
+				"name": "pify",
+				"version": "3.0.0"
+			},
+			{
+				"name": "pinpoint",
+				"version": "1.1.0"
+			},
+			{
+				"name": "pkg-conf",
+				"version": "2.1.0"
+			},
+			{
+				"name": "find-up",
+				"version": "2.1.0"
+			},
+			{
+				"name": "locate-path",
+				"version": "2.0.0"
+			},
+			{
+				"name": "p-limit",
+				"version": "1.3.0"
+			},
+			{
+				"name": "p-locate",
+				"version": "2.0.0"
+			},
+			{
+				"name": "p-try",
+				"version": "1.0.0"
+			},
+			{
+				"name": "path-exists",
+				"version": "3.0.0"
+			},
+			{
+				"name": "pkg-up",
+				"version": "2.0.0"
+			},
+			{
+				"name": "prelude-ls",
+				"version": "1.2.1"
+			},
+			{
+				"name": "prepend-http",
+				"version": "2.0.0"
+			},
+			{
+				"name": "prettier",
+				"version": "2.8.8"
+			},
+			{
+				"name": "prettier-linter-helpers",
+				"version": "1.0.1"
+			},
+			{
+				"name": "prettyjson",
+				"version": "1.2.5"
+			},
+			{
+				"name": "process-nextick-args",
+				"version": "2.0.1"
+			},
+			{
+				"name": "progress",
+				"version": "2.0.3"
+			},
+			{
+				"name": "proto-list",
+				"version": "1.2.4"
+			},
+			{
+				"name": "pseudomap",
+				"version": "1.0.2"
+			},
+			{
+				"name": "pump",
+				"version": "3.0.4"
+			},
+			{
+				"name": "punycode",
+				"version": "2.3.1"
+			},
+			{
+				"name": "q",
+				"version": "1.5.1"
+			},
+			{
+				"name": "query-string",
+				"version": "6.14.1"
+			},
+			{
+				"name": "queue-microtask",
+				"version": "1.2.3"
+			},
+			{
+				"name": "quick-lru",
+				"version": "5.1.1"
+			},
+			{
+				"name": "ramda",
+				"version": "0.25.0"
+			},
+			{
+				"name": "rc",
+				"version": "1.2.8"
+			},
+			{
+				"name": "strip-json-comments",
+				"version": "2.0.1"
+			},
+			{
+				"name": "read-pkg-up",
+				"version": "7.0.1"
+			},
+			{
+				"name": "type-fest",
+				"version": "0.8.1"
+			},
+			{
+				"name": "read-yaml-file",
+				"version": "1.1.0"
+			},
+			{
+				"name": "pify",
+				"version": "4.0.1"
+			},
+			{
+				"name": "readable-stream",
+				"version": "3.6.2"
+			},
+			{
+				"name": "readline-sync",
+				"version": "1.4.10"
+			},
+			{
+				"name": "redent",
+				"version": "3.0.0"
+			},
+			{
+				"name": "redeyed",
+				"version": "2.1.1"
+			},
+			{
+				"name": "reduce-flatten",
+				"version": "2.0.0"
+			},
+			{
+				"name": "regenerator-runtime",
+				"version": "0.13.11"
+			},
+			{
+				"name": "regexpp",
+				"version": "3.2.0"
+			},
+			{
+				"name": "registry-auth-token",
+				"version": "4.2.2"
+			},
+			{
+				"name": "registry-url",
+				"version": "5.1.0"
+			},
+			{
+				"name": "require-directory",
+				"version": "2.1.1"
+			},
+			{
+				"name": "require-from-string",
+				"version": "2.0.2"
+			},
+			{
+				"name": "resolve",
+				"version": "1.22.14"
+			},
+			{
+				"name": "resolve-alpn",
+				"version": "1.2.1"
+			},
+			{
+				"name": "resolve-from",
+				"version": "5.0.0"
+			},
+			{
+				"name": "responselike",
+				"version": "2.0.1"
+			},
+			{
+				"name": "reusify",
+				"version": "1.1.0"
+			},
+			{
+				"name": "run-parallel",
+				"version": "1.2.0"
+			},
+			{
+				"name": "scrypt-js",
+				"version": "3.0.1"
+			},
+			{
+				"name": "semantic-release",
+				"version": "20.1.3"
+			},
+			{
+				"name": "semantic-release-monorepo",
+				"version": "7.0.5"
+			},
+			{
+				"name": "cross-spawn",
+				"version": "5.1.0"
+			},
+			{
+				"name": "debug",
+				"version": "3.2.7"
+			},
+			{
+				"name": "execa",
+				"version": "0.8.0"
+			},
+			{
+				"name": "get-stream",
+				"version": "3.0.0"
+			},
+			{
+				"name": "is-stream",
+				"version": "1.1.0"
+			},
+			{
+				"name": "lru-cache",
+				"version": "4.1.5"
+			},
+			{
+				"name": "npm-run-path",
+				"version": "2.0.2"
+			},
+			{
+				"name": "p-finally",
+				"version": "1.0.0"
+			},
+			{
+				"name": "path-key",
+				"version": "2.0.1"
+			},
+			{
+				"name": "shebang-command",
+				"version": "1.2.0"
+			},
+			{
+				"name": "shebang-regex",
+				"version": "1.0.0"
+			},
+			{
+				"name": "which",
+				"version": "1.3.1"
+			},
+			{
+				"name": "yallist",
+				"version": "2.1.2"
+			},
+			{
+				"name": "semantic-release-plugin-decorators",
+				"version": "3.0.3"
+			},
+			{
+				"name": "aggregate-error",
+				"version": "4.0.1"
+			},
+			{
+				"name": "argparse",
+				"version": "2.0.1"
+			},
+			{
+				"name": "clean-stack",
+				"version": "4.2.0"
+			},
+			{
+				"name": "cliui",
+				"version": "8.0.1"
+			},
+			{
+				"name": "cosmiconfig",
+				"version": "8.3.6"
+			},
+			{
+				"name": "execa",
+				"version": "7.2.0"
+			},
+			{
+				"name": "find-up",
+				"version": "6.3.0"
+			},
+			{
+				"name": "hosted-git-info",
+				"version": "6.1.3"
+			},
+			{
+				"name": "human-signals",
+				"version": "4.3.1"
+			},
+			{
+				"name": "indent-string",
+				"version": "5.0.0"
+			},
+			{
+				"name": "js-yaml",
+				"version": "4.3.2"
+			},
+			{
+				"name": "locate-path",
+				"version": "7.2.0"
+			},
+			{
+				"name": "lru-cache",
+				"version": "7.18.3"
+			},
+			{
+				"name": "p-each-series",
+				"version": "3.0.0"
+			},
+			{
+				"name": "p-limit",
+				"version": "4.0.0"
+			},
+			{
+				"name": "p-locate",
+				"version": "6.0.0"
+			},
+			{
+				"name": "path-exists",
+				"version": "5.0.0"
+			},
+			{
+				"name": "read-pkg",
+				"version": "7.1.0"
+			},
+			{
+				"name": "read-pkg-up",
+				"version": "9.1.0"
+			},
+			{
+				"name": "type-fest",
+				"version": "2.19.0"
+			},
+			{
+				"name": "y18n",
+				"version": "5.0.8"
+			},
+			{
+				"name": "yargs",
+				"version": "17.7.3"
+			},
+			{
+				"name": "yocto-queue",
+				"version": "1.2.2"
+			},
+			{
+				"name": "sembear",
+				"version": "0.5.2"
+			},
+			{
+				"name": "@types/semver",
+				"version": "6.2.7"
+			},
+			{
+				"name": "semver",
+				"version": "6.3.2"
+			},
+			{
+				"name": "semver-diff",
+				"version": "4.0.0"
+			},
+			{
+				"name": "semver-regex",
+				"version": "4.0.5"
+			},
+			{
+				"name": "shebang-command",
+				"version": "2.0.0"
+			},
+			{
+				"name": "shebang-regex",
+				"version": "3.0.0"
+			},
+			{
+				"name": "signale",
+				"version": "1.4.0"
+			},
+			{
+				"name": "figures",
+				"version": "2.0.0"
+			},
+			{
+				"name": "slash",
+				"version": "3.0.0"
+			},
+			{
+				"name": "slice-ansi",
+				"version": "4.0.0"
+			},
+			{
+				"name": "astral-regex",
+				"version": "2.0.0"
+			},
+			{
+				"name": "source-map",
+				"version": "0.6.1"
+			},
+			{
+				"name": "spawn-error-forwarder",
+				"version": "1.0.0"
+			},
+			{
+				"name": "spawndamnit",
+				"version": "2.0.0"
+			},
+			{
+				"name": "spdx-correct",
+				"version": "3.2.0"
+			},
+			{
+				"name": "spdx-exceptions",
+				"version": "2.5.0"
+			},
+			{
+				"name": "spdx-license-ids",
+				"version": "3.0.24"
+			},
+			{
+				"name": "split",
+				"version": "1.0.1"
+			},
+			{
+				"name": "split-on-first",
+				"version": "1.1.0"
+			},
+			{
+				"name": "split2",
+				"version": "3.2.2"
+			},
+			{
+				"name": "sprintf-js",
+				"version": "1.0.3"
+			},
+			{
+				"name": "stream-combiner2",
+				"version": "1.1.1"
+			},
+			{
+				"name": "strict-uri-encode",
+				"version": "2.0.0"
+			},
+			{
+				"name": "string-format",
+				"version": "2.0.0"
+			},
+			{
+				"name": "strip-bom",
+				"version": "4.0.0"
+			},
+			{
+				"name": "strip-eof",
+				"version": "1.0.0"
+			},
+			{
+				"name": "strip-final-newline",
+				"version": "2.0.0"
+			},
+			{
+				"name": "strip-indent",
+				"version": "3.0.0"
+			},
+			{
+				"name": "strip-json-comments",
+				"version": "3.1.1"
+			},
+			{
+				"name": "supports-color",
+				"version": "5.5.0"
+			},
+			{
+				"name": "supports-hyperlinks",
+				"version": "1.0.1"
+			},
+			{
+				"name": "has-flag",
+				"version": "2.0.0"
+			},
+			{
+				"name": "supports-preserve-symlinks-flag",
+				"version": "1.0.0"
+			},
+			{
+				"name": "syncpack",
+				"version": "8.5.14"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "2.1.8"
+			},
+			{
+				"name": "commander",
+				"version": "10.0.0"
+			},
+			{
+				"name": "cosmiconfig",
+				"version": "8.0.0"
+			},
+			{
+				"name": "fp-ts",
+				"version": "2.13.1"
+			},
+			{
+				"name": "fs-extra",
+				"version": "11.1.0"
+			},
+			{
+				"name": "glob",
+				"version": "8.1.0"
+			},
+			{
+				"name": "minimatch",
+				"version": "5.1.9"
+			},
+			{
+				"name": "minimatch",
+				"version": "6.1.6"
+			},
+			{
+				"name": "read-yaml-file",
+				"version": "2.1.0"
+			},
+			{
+				"name": "semver",
+				"version": "7.3.8"
+			},
+			{
+				"name": "table",
+				"version": "6.10.1"
+			},
+			{
+				"name": "table-layout",
+				"version": "1.0.2"
+			},
+			{
+				"name": "ajv",
+				"version": "8.20.0"
+			},
+			{
+				"name": "json-schema-traverse",
+				"version": "1.0.0"
+			},
+			{
+				"name": "temp-dir",
+				"version": "2.0.0"
+			},
+			{
+				"name": "tempy",
+				"version": "1.0.1"
+			},
+			{
+				"name": "type-fest",
+				"version": "0.16.0"
+			},
+			{
+				"name": "text-extensions",
+				"version": "1.9.0"
+			},
+			{
+				"name": "through",
+				"version": "2.3.8"
+			},
+			{
+				"name": "through2",
+				"version": "4.0.2"
+			},
+			{
+				"name": "tiny-invariant",
+				"version": "1.3.3"
+			},
+			{
+				"name": "tiny-warning",
+				"version": "1.0.3"
+			},
+			{
+				"name": "to-readable-stream",
+				"version": "1.0.0"
+			},
+			{
+				"name": "to-regex-range",
+				"version": "5.0.1"
+			},
+			{
+				"name": "toformat",
+				"version": "2.0.0"
+			},
+			{
+				"name": "traverse",
+				"version": "0.6.8"
+			},
+			{
+				"name": "trim-newlines",
+				"version": "3.0.1"
+			},
+			{
+				"name": "ts-command-line-args",
+				"version": "2.5.1"
+			},
+			{
+				"name": "ts-essentials",
+				"version": "7.0.3"
+			},
+			{
+				"name": "tslib",
+				"version": "2.9.1"
+			},
+			{
+				"name": "tsutils",
+				"version": "3.21.0"
+			},
+			{
+				"name": "tslib",
+				"version": "1.14.1"
+			},
+			{
+				"name": "turbo",
+				"version": "1.10.16"
+			},
+			{
+				"name": "turbo-darwin-64",
+				"version": "1.10.16"
+			},
+			{
+				"name": "turbo-darwin-arm64",
+				"version": "1.10.16"
+			},
+			{
+				"name": "turbo-linux-64",
+				"version": "1.10.16"
+			},
+			{
+				"name": "turbo-linux-arm64",
+				"version": "1.10.16"
+			},
+			{
+				"name": "turbo-windows-64",
+				"version": "1.10.16"
+			},
+			{
+				"name": "turbo-windows-arm64",
+				"version": "1.10.16"
+			},
+			{
+				"name": "type-check",
+				"version": "0.4.0"
+			},
+			{
+				"name": "type-fest",
+				"version": "0.20.2"
+			},
+			{
+				"name": "typechain",
+				"version": "8.3.2"
+			},
+			{
+				"name": "@types/prettier",
+				"version": "2.7.3"
+			},
+			{
+				"name": "fs-extra",
+				"version": "7.0.1"
+			},
+			{
+				"name": "glob",
+				"version": "7.1.7"
+			},
+			{
+				"name": "typedarray-to-buffer",
+				"version": "3.1.5"
+			},
+			{
+				"name": "typical",
+				"version": "4.0.0"
+			},
+			{
+				"name": "uglify-js",
+				"version": "3.19.3"
+			},
+			{
+				"name": "undici-types",
+				"version": "5.26.5"
+			},
+			{
+				"name": "unique-string",
+				"version": "2.0.0"
+			},
+			{
+				"name": "universal-user-agent",
+				"version": "6.0.1"
+			},
+			{
+				"name": "universalify",
+				"version": "0.1.2"
+			},
+			{
+				"name": "uri-js",
+				"version": "4.4.1"
+			},
+			{
+				"name": "url-join",
+				"version": "4.0.1"
+			},
+			{
+				"name": "url-parse-lax",
+				"version": "3.0.0"
+			},
+			{
+				"name": "v8-compile-cache",
+				"version": "2.4.0"
+			},
+			{
+				"name": "validate-npm-package-name",
+				"version": "3.0.0"
+			},
+			{
+				"name": "word-wrap",
+				"version": "1.2.5"
+			},
+			{
+				"name": "wordwrap",
+				"version": "1.0.0"
+			},
+			{
+				"name": "wordwrapjs",
+				"version": "4.0.1"
+			},
+			{
+				"name": "wrap-ansi",
+				"version": "7.0.0"
+			},
+			{
+				"name": "write-file-atomic",
+				"version": "3.0.3"
+			},
+			{
+				"name": "ws",
+				"version": "8.18.0"
+			},
+			{
+				"name": "xcase",
+				"version": "2.0.1"
+			},
+			{
+				"name": "xtend",
+				"version": "4.0.2"
+			},
+			{
+				"name": "yargs-parser",
+				"version": "21.1.1"
+			},
+			{
+				"name": "@ethersproject/keccak256",
+				"version": "5.7.0"
+			},
+			{
+				"name": "@ethersproject/strings",
+				"version": "5.7.0"
+			},
+			{
+				"name": "@uniswap/sdk-core",
+				"version": "5.9.0"
+			},
+			{
+				"name": "@uniswap/v2-sdk",
+				"version": "4.21.11"
+			},
+			{
+				"name": "@uniswap/sdk-core",
+				"version": "7.22.0"
+			},
+			{
+				"name": "@uniswap/v3-sdk",
+				"version": "3.31.11"
+			},
+			{
+				"name": "@uniswap/v4-sdk",
+				"version": "1.30.0"
+			},
+			{
+				"name": "@uniswap/permit2-sdk",
+				"version": "1.4.1"
+			},
+			{
+				"name": "@uniswap/router-sdk",
+				"version": "1.23.0"
+			},
+			{
+				"name": "@uniswap/v3-sdk",
+				"version": "3.12.0"
+			}
+		]
+	}
+]
