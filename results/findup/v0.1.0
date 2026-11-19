@@ -1,0 +1,106 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-19T12:49:50.582Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:2.15.11",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "findup@0.1.0",
+			"name": "findup",
+			"version": "0.1.0",
+			"location": "https://registry.npmjs.org/findup/-/findup-0.1.0.tgz",
+			"integrity": "sha512-GkvHZur3BEPfXNY8qB/umbBH6b0V7G1HCWxt1GMFGFdL2oS5IbtccJheU2UsDERy7YwYHHaQhuxFbFlC9igzbw==",
+			"publishedAt": "2012-04-19T16:10:24.509Z",
+			"publishedWith": {
+				"node": "v0.6.14",
+				"npm": "1.1.12"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git://github.com/Filirom1/findup.git",
+			"spec": "github:Filirom1/findup#HEAD"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".npmignore": {
+					"match": false,
+					"packageHash": "204f2ad804a26d32bd0696901f37636ec0fb4e87d47c76fbb0d01ed65fac1609",
+					"size": 96,
+					"status": "missing-in-source"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,9 +1,12 @@\n+[![build status](https://secure.travis-ci.org/Filirom1/findup.png)](http://travis-ci.org/Filirom1/findup)\n Find-up\n =======\n \n ### Install\n \n-    npm install -g findup\n+```sh\n+npm install -g findup\n+```\n \n ### Usage\n \n@@ -17,51 +20,122 @@\n             └── d\n                 └── c\n                     ├── b\n-                    │   └── a\n+                    │   └── a\n                     └── config.json\n \n-#### Async\n+### Options\n \n-    var findup = require('findup');\n+- `maxdepth`: (Number, default -1) How far to traverse before giving up. If maxdepth is `-1`, then there is no limit.\n \n-    // Usage: findup(dir, fileName, callback)\n-    // Or     findup(dir, iterator, callback) with `iterator(dir, cb)` where cb only accept `true` or `false`\n+#### Async\n \n-    findup(__dirname + '/f/e/d/c/b/a', 'config.json', function(err, dir){\n-      // if(e) e === new Error('not found')\n-      // dir === '/f/e/d/c'\n-    });\n+findup(dir, fileName, options, callback)\n+findup(dir, iterator, options, callback) with `iterator(dir, cb)` where cb only accept `true` or `false`\n \n-or\n+```js\n+var findup = require('findup');\n \n-    findup(__dirname + '/f/e/d/c/b/a', function(cb){\n-      require('path').exists('config.json', cb);\n-    }, function(err, dir){\n-      // if(e) e === new Error('not found')\n-      // dir === '/f/e/d/c'\n-    });\n \n+findup(__dirname + '/f/e/d/c/b/a', 'config.json', function(err, dir){\n+  // if(e) e === new Error('not found')\n+  // dir === '/f/e/d/c'\n+});\n+```\n \n-#### Sync\n+or\n \n-    var findup = require('findup');\n+```js\n+findup(__dirname + '/f/e/d/c/b/a', function(dir, cb){\n+  require('path').exists(dir + '/config.json', cb);\n+}, function(err, dir){\n+  // if(e) e === new Error('not found')\n+  // dir === '/f/e/d/c'\n+});\n+```\n+\n+#### EventEmitter\n+\n+findup(dir, fileName, options)\n+\n+```js\n+var findup = require('findup');\n+var fup = findup(__dirname + '/f/e/d/c/b/a', 'config.json');\n+```\n+\n+findup(dir, iterator, options) with `iterator(dir, cb)` where cb only accept `true` or `false`\n+\n+```js\n+var findup = require('findup');\n+var fup = findup(__dirname + '/f/e/d/c/b/a', function(dir, cb){\n+  require('path').exists(dir + '/config.json', cb);\n+});\n+```\n+\n+findup return an EventEmitter. 3 events are emitted: `found`, `error`, `end`\n+\n+`found` event is emitted each time a file is found.\n+\n+You can stop the traversing by calling `stop` manually.\n+\n+```js\n+fup.on('found', function(dir){\n+  // dir === '/f/e/d/c'\n+  fup.stop();\n+});\n",
+					"match": false,
+					"packageHash": "ac3f7259c1ea4eadb0fffeb11d83152ec4d0ddb41987c8e910ff62b5dec47203",
+					"size": 1421,
+					"sourceHash": "cb4e9f9e34a91b618356ad8085df5dbfcafde485cf121a2b5e3f9361d75d5c0a",
+					"status": "content"
+				},
+				"bin/findup.js": {
+					"diff": "--- published/bin/findup.js\n+++ rebuilt/bin/findup.js\n@@ -1,15 +1,41 @@\n #!/usr/bin/env node\n \n var findup = require('..'),\n-  Path = require('path');\n+  path = require('path'),\n+  pkg = require('../package'),\n+  program = require('commander'),\n+  options = {},\n+  optionKeys = ['name', 'dir', 'maxdepth', 'verbose'],\n+  EXIT_FAILURE = -1;\n+  \n+  program\n+    .version(pkg.version)\n+    .option('--name <name>', 'The name of the file to find', String)\n+    .option('--dir <dir>', 'The directoy where we will start walking up', process.cwd(), path)\n+    .option('--maxdepth <levels>', 'Ascend at most <levels> levels before giving up. -1 means no limit', -1, Number)\n+    .option('--verbose', 'print log', false, Boolean)\n+    .parse(process.argv);\n \n-if(process.argv.length < 3) {\n-  console.error('Usage: findup [FILE]');\n-  process.exit(-1);\n+optionKeys.forEach(function(optionKey){\n+  if (optionKey === 'maxdepth') {\n+    options[optionKey] = +program[optionKey];\n+  } else {\n+    options[optionKey] = program[optionKey];\n+  }\n+});\n+\n+if(program.args && program.args.length >=1 && !options.name){\n+  options.name = program.args[0];\n }\n \n-var file = process.argv[2];\n-findup(process.cwd(), file, function(err, dir){\n+if(!options.name) {\n+  program.outputHelp();\n+  process.exit(EXIT_FAILURE);\n+}\n+\n+var file = options.name;\n+\n+findup(options.dir, file, options, function(err, dir){\n   if(err) return console.error(err.message ? err.message : err);\n-  console.log(Path.join(dir, file))\n+  console.log(path.join(dir, file));\n });\n",
+					"match": false,
+					"packageHash": "f3beb86f5f34deb6650b9f61d8272e9c1081ebda49062622cce7967112edfe1c",
+					"size": 351,
+					"sourceHash": "902920a11f57f0e7b5185cf1a451e075c63ae4de233a35d3dc6dc1165bf00107",
+					"status": "content"
+				},
+				"index.js": {
+					"diff": "--- published/index.js\n+++ rebuilt/index.js\n@@ -1,30 +1,104 @@\n-var fs = require('fs'),\n-  Path = require('path');\n+var fs   = require('fs'),\n+  Path   = require('path'),\n+  util   = require('util'),\n+  colors = require('colors'),\n+  EE     = require('events').EventEmitter,\n+  fsExists = fs.exists ? fs.exists : Path.exists,\n+  fsExistsSync = fs.existsSync ? fs.existsSync : Path.existsSync;\n+\n+module.exports = function(dir, iterator, options, callback){\n+  return FindUp(dir, iterator, options, callback);\n+};\n+\n+function FindUp(dir, iterator, options, callback){\n+  if (!(this instanceof FindUp)) {\n+    return new FindUp(dir, iterator, options, callback);\n+  }\n+  if(typeof options === 'function'){\n+    callback = options;\n+    options = {};\n+  }\n+  options = options || {};\n+\n+  EE.call(this);\n+  this.found = false;\n+  this.stopPlease = false;\n+  var self = this;\n \n-module.exports = function findup(dir, iterator, cb){\n   if(typeof iterator === 'string'){\n     var file = iterator;\n     iterator = function(dir, cb){\n-      return Path.exists(Path.join(dir, file), cb);\n-    }\n+      return fsExists(Path.join(dir, file), cb);\n+    };\n   }\n-  cb = cb || function(){};\n \n-  if (dir === '/') return cb(new Error('not found'));\n+  if(callback) {\n+    this.on('found', function(dir){\n+      if(options.verbose) console.log(('found '+ dir ).green);\n+      callback(null, dir);\n+      self.stop();\n+    });\n+\n+    this.on('end', function(){\n+      if(options.verbose) console.log('end'.grey);\n+      if(!self.found) callback(new Error('not found'));\n+    });\n+\n+    this.on('error', function(err){\n+      if(options.verbose) console.log('error'.red, err);\n+      callback(err);\n+    });\n+  }\n+\n+  this._find(dir, iterator, options, callback);\n+}\n+util.inherits(FindUp, EE);\n+\n+FindUp.prototype._find = function(dir, iterator, options, callback, currentDepth){\n+  var self = this;\n+  if (typeof currentDepth !== 'number') currentDepth = 0;\n+\n   iterator(dir, function(exists){\n-    if(exists) return cb(null, dir);\n-    findup(Path.join(dir, '..'), iterator, cb);\n+    if(options.verbose) console.log(('traverse '+ dir).grey);\n+    if (typeof options.maxdepth === 'number' && options.maxdepth >= 0 && currentDepth > options.maxdepth) {\n+      return self.emit('end');\n+    }\n+    currentDepth++;\n+    if(exists) {\n+      self.found = true;\n+      self.emit('found', dir);\n+    }\n+\n+    var parentDir = Path.join(dir, '..');\n+    if (self.stopPlease) return self.emit('end');\n+    if (dir === parentDir) return self.emit('end');\n+    if(dir.indexOf('../../') !== -1 ) return self.emit('error', new Error(dir + ' is not correct.'));\n+    self._find(parentDir, iterator, options, callback, currentDepth);\n   });\n-}\n+};\n+\n+FindUp.prototype.stop = function(){\n+  this.stopPlease = true;\n+};\n+\n+module.exports.FindUp = FindUp;\n \n-module.exports.sync = function(dir, iteratorSync){\n+module.exports.sync = function(dir, iteratorSync, options){\n",
+					"match": false,
+					"packageHash": "fa286b7630f2f12906bd5b0149e5f7d3386a438b2cd26866bf940569b54565eb",
+					"size": 826,
+					"sourceHash": "3ffedc04080c8afc91b38502462224a6a7ebe6eb1b790b78da20d4480ae8a42b",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -2,7 +2,7 @@\n   \"author\": \"Filirom1 <filirom1@gmail.com>\",\n   \"name\": \"findup\",\n   \"description\": \"Walk up ancester's dir up to root\",\n-  \"version\": \"0.1.0\",\n+  \"version\": \"0.1.5\",\n   \"repository\": {\n     \"type\": \"git\",\n     \"url\": \"https://github.com/Filirom1/findup.git\"\n@@ -11,21 +11,24 @@\n     \"findup\": \"bin/findup.js\"\n   },\n   \"scripts\": {\n-    \"test\": \"vows test/*.js --spec\"\n+    \"test\": \"mocha ./test/*.js\"\n   },\n   \"dependencies\": {\n+    \"colors\": \"~0.6.0-1\",\n+    \"commander\": \"~2.1.0\"\n   },\n   \"devDependencies\": {\n-    \"vows\": \"~0.6.2\"\n+    \"mocha\": \"~1.3.0\",\n+    \"chai\": \"~1.1.1\"\n   },\n   \"optionalDependencies\": {},\n   \"engines\": {\n-    \"node\": \"*\"\n+    \"node\": \">=0.6\"\n   },\n- \"licenses\": [\n+  \"licenses\": [\n     {\n       \"type\": \"MIT\",\n-      \"url\": \"http://www.opensource.org/licenses/MIT\"\n+      \"url\": \"http  : //www.opensource.org/licenses/MIT\"\n     }\n   ]\n }\n",
+					"match": false,
+					"packageHash": "24a29950a80fdafa04190bbf9032aa9d130b9ce6dbe1418d65e1a41381f5f683",
+					"size": 587,
+					"sourceHash": "e6d500d0ea2144b9af8b3b14f6a458fd85b977f461617d7d77a39cddb23370c5",
+					"status": "content"
+				},
+				"test/findup-test.js": {
+					"diff": "--- published/test/findup-test.js\n+++ rebuilt/test/findup-test.js\n@@ -1,91 +1,164 @@\n-var vows = require('vows'),\n-  assert = require('assert'),\n+var assert = require('chai').assert,\n   Path = require('path'),\n   fs = require('fs'),\n   findup = require('..');\n \n-vows.describe('Test find-up')\n-.addBatch({\n-  'Given a great file structure using a function': {\n-    topic: Path.join(__dirname, 'fixture', 'f', 'e', 'd', 'c', 'b', 'a'),\n-    \n-    'When findup a file in ancestors dir': {\n-      topic: function(fixtureDir){\n-        findup(fixtureDir, function(dir, cb){\n-          return Path.exists(Path.join(dir, 'config.json'), cb);\n-        }, this.callback);\n-      },\n-\n-      'Then the dir containing the file is returned': function(err, file){\n-        assert.ifError(err);\n-        assert.equal(file, Path.join(__dirname, 'fixture', 'f', 'e', 'd', 'c'));\n-      }\n-    },\n-\n-    'When findup a file in ancestors dir using a string': {\n-      topic: function(fixtureDir){\n-        findup(fixtureDir, 'config.json', this.callback);\n-      },\n-\n-      'Then the dir containing the file is returned': function(err, file){\n-        assert.ifError(err);\n-        assert.equal(file, Path.join(__dirname, 'fixture', 'f', 'e', 'd', 'c'));\n-      }\n-    },\n-\n-    'When findup a file in top dir': {\n-      topic: function(fixtureDir){\n-        findup(fixtureDir, 'top.json', this.callback);\n-      },\n-\n-      'Then the dir containing the file is returned': function(err, file){\n-        assert.ifError(err);\n-        assert.equal(file, Path.join(__dirname, 'fixture', 'f', 'e', 'd', 'c', 'b', 'a'));\n-      }\n-    },\n-\n-    'When findup a non existing file': {\n-      topic: function(fixtureDir){\n-        findup(fixtureDir, 'toto.json', this.callback);\n-      },\n-\n-      'Then an error is returned': function(err, file){\n-        assert.isNotNull(err);\n-      }\n-    },\n-\n-    'When findup a file in ancestors dir in synchronous mode': {\n-      topic: function(fixtureDir){\n-        return findup.sync(fixtureDir, 'config.json');\n-      },\n-\n-      'Then the dir containing the file is returned': function(file){\n-        assert.equal(file, Path.join(__dirname, 'fixture', 'f', 'e', 'd', 'c'));\n-      }\n-    },\n-\n-    'When findup a file in top dir in synchronous mode': {\n-      topic: function(fixtureDir){\n-        return findup.sync(fixtureDir, 'top.json');\n-      },\n-\n-      'Then the dir containing the file is returned': function(file){\n-        assert.equal(file, Path.join(__dirname, 'fixture', 'f', 'e', 'd', 'c', 'b', 'a'));\n-      }\n-    },\n-\n-    'When findup a non existing file in synchronous mode': {\n-      topic: function(fixtureDir){\n-        try{\n-          return findup.sync(fixtureDir, 'toto.json');\n-        }catch(e){\n-          return e;\n-        }\n-      },\n-\n-      'Then an error is returned': function(err){\n-        assert.isNotNull(err);\n-      }\n-    }\n-  }\n-}).exportTo(module);\n+describe('find-up', function(){\n+  var fixtureDir = Path.join(__dirname, 'fixture', 'f', 'e', 'd', 'c', 'b', 'a'),\n+    fsExists = fs.exists ? fs.exists : Path.exists;\n+  it('accept a function', function(done){\n+    findup(fixtureDir, function(dir, cb){\n",
+					"match": false,
+					"packageHash": "e0464dfd8fd9d7b586631e386f64cba617a5f6fd8e8c8a5445f6055aaa098966",
+					"size": 2703,
+					"sourceHash": "d36e760aab320cea8a1e903b7548d31b9129012f4f6595abf64f76b201e4f9cc",
+					"status": "content"
+				},
+				".travis.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/mocha.opts": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 5,
+				"matchingFiles": 3,
+				"missingInPackage": 2,
+				"missingInSource": 1,
+				"score": 0.2727272727272727,
+				"totalFiles": 11
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "colors",
+				"version": "0.6.2"
+			},
+			{
+				"name": "commander",
+				"version": "2.1.0"
+			}
+		]
+	}
+]
