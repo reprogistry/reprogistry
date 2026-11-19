@@ -1,0 +1,2691 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-19T21:33:12.425Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:10.9.8",
+		"reproduced": false,
+		"attested": true,
+		"package": {
+			"spec": "clean-jsdoc-theme@5.2.0",
+			"name": "clean-jsdoc-theme",
+			"version": "5.2.0",
+			"location": "https://registry.npmjs.org/clean-jsdoc-theme/-/clean-jsdoc-theme-5.2.0.tgz",
+			"integrity": "sha512-f9oaohdGfX0AT6SQurNUNI1Yt3gPg2Ue0lHUYhbnv6QeFK8PmdsLCniTXFGU8ctPgC9xrlaWBLF/lqOsBMb2KA==",
+			"publishedAt": "2026-08-27T18:28:52.919Z",
+			"publishedWith": {
+				"node": "22.23.2",
+				"npm": "10.9.8"
+			},
+			"dependencies": {
+				"ora": "^9.3.0",
+				"preact": "^10.22.0",
+				"@clean-jsdoc-theme/dwar": "^5.2.0",
+				"@clean-jsdoc-theme/rang": "^5.2.0",
+				"@clean-jsdoc-theme/setu": "^5.2.0",
+				"@clean-jsdoc-theme/utils": "^5.2.0",
+				"@clean-jsdoc-theme/bhasha": "^5.2.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/ankitskvmdam/clean-jsdoc-theme.git",
+			"spec": "github:ankitskvmdam/clean-jsdoc-theme#v5.2.0"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,100 +1,127 @@\n-<div align=\"center\">\n+# clean-jsdoc-theme\n \n-<a href=\"https://ankdev.me/clean-jsdoc-theme\">\n-  <picture>\n-    <source media=\"(prefers-color-scheme: dark)\" srcset=\"https://raw.githubusercontent.com/ankitskvmdam/clean-jsdoc-theme/master/packages/clean-jsdoc-theme/media/clean-jsdoc-theme-dark.svg\" />\n-    <img src=\"https://raw.githubusercontent.com/ankitskvmdam/clean-jsdoc-theme/master/packages/clean-jsdoc-theme/media/clean-jsdoc-theme-light.svg\" alt=\"clean-jsdoc-theme\" width=\"340\" />\n-  </picture>\n-</a>\n-\n-A fast, modern, LLM-friendly documentation theme for **JSDoc**.\n-\n-[![npm version](https://img.shields.io/npm/v/clean-jsdoc-theme)](https://www.npmjs.com/package/clean-jsdoc-theme)\n-[![npm downloads](https://img.shields.io/npm/dm/clean-jsdoc-theme)](https://www.npmjs.com/package/clean-jsdoc-theme)\n+[![npm](https://img.shields.io/npm/v/clean-jsdoc-theme?logo=npm)](https://www.npmjs.com/package/clean-jsdoc-theme)\n+[![typedoc plugin](https://img.shields.io/npm/v/@clean-jsdoc-theme/typedoc?logo=npm&label=%40clean-jsdoc-theme%2Ftypedoc)](https://www.npmjs.com/package/@clean-jsdoc-theme/typedoc)\n [![license](https://img.shields.io/npm/l/clean-jsdoc-theme)](https://github.com/ankitskvmdam/clean-jsdoc-theme/blob/master/LICENSE)\n [![docs](https://img.shields.io/badge/docs-ankdev.me-005bff)](https://ankdev.me/clean-jsdoc-theme)\n [![live demo](https://img.shields.io/badge/live%20demo-api--docs-7c3aed)](https://ankdev.me/clean-jsdoc-theme/api-docs)\n-[![stars](https://img.shields.io/github/stars/ankitskvmdam/clean-jsdoc-theme)](https://github.com/ankitskvmdam/clean-jsdoc-theme)\n-[![forks](https://img.shields.io/github/forks/ankitskvmdam/clean-jsdoc-theme)](https://github.com/ankitskvmdam/clean-jsdoc-theme/fork)\n-[![issues](https://img.shields.io/github/issues/ankitskvmdam/clean-jsdoc-theme)](https://github.com/ankitskvmdam/clean-jsdoc-theme/issues)\n-[![contributors](https://img.shields.io/github/contributors/ankitskvmdam/clean-jsdoc-theme)](https://github.com/ankitskvmdam/clean-jsdoc-theme/graphs/contributors)\n [![sponsor](https://img.shields.io/badge/sponsor-%E2%9D%A4-db61a2?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/ankitskvmdam)\n-[![socket](https://socket.dev/api/badge/npm/package/clean-jsdoc-theme)](https://socket.dev/npm/package/clean-jsdoc-theme)\n \n-</div>\n+A fast, modern, LLM-friendly documentation theme for **JSDoc _and_ TypeDoc**. Point it at your source comments — and, optionally, a folder of Markdown guides — and v5 produces a static site: SSR-rendered chrome, lazy-hydrated Preact islands (sidebar, TOC, fuzzy command palette, theme toggle, settings, mobile nav, language switcher, copy-page button, code-block copy, tabbed code blocks, a Monaco source viewer), a co-located `.md` per page for LLMs, a built-in fuzzy search index (plus an optional Pagefind full-text index), and optional multi-language (i18n) builds — all framework-free, with no CSS or build config required to get started.\n+\n+> If clean-jsdoc-theme saves you time, please consider [sponsoring its development](https://github.com/sponsors/ankitskvmdam) — it directly funds the v5 rewrite and ongoing maintenance.\n+\n+---\n+\n+## Architecture\n+\n+![clean-jsdoc-theme Architecture.](https://raw.githubusercontent.com/ankitskvmdam/clean-jsdoc-theme/refs/heads/master/docs/architecture.svg)\n+\n+Four boundary packages (utils → setu/rang → dwar), each independently testable, glued together by thin JSDoc and TypeDoc bridges, plus the i18n pair (aadesh + bhasha):\n+\n+| Package                                             | What it does                                                                                                                                                                                                                                                                         |\n+| --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |\n+| [`@clean-jsdoc-theme/utils`](./packages/utils)      | Shared type contracts (`SiteManifest`, `Page`, `RenderOptions`, `IslandName`, …) and slug rules used by both setu and dwar.                                                                                                                                                          |\n+| [`@clean-jsdoc-theme/setu`](./packages/setu)        | JSDoc → `SiteManifest`. Walks the salty doclet collection into one MDX page per documented symbol (classes, interfaces, mixins, modules, namespaces, typedefs, globals) plus README/tutorials/source pages, and resolves `{@link}`/`@see` cross-references. No HTML, no JSX, no I/O. |\n+| [`@clean-jsdoc-theme/rang`](./packages/rang)        | Preact component library: chrome (`Layout`, `Header`, `Footer`, `Brand`), the hydratable islands (`IslandName` set), shadcn-style primitives (`Button`, `ButtonGroup`, `Dialog`, `DropdownMenu`), MDX element map, `ISLAND_REGISTRY`.                                                |\n+| [`@clean-jsdoc-theme/dwar`](./packages/dwar)        | Pure `SiteManifest` → HTML/CSS/JS renderer. Server-renders pages, bundles each island as its own ESM chunk via esbuild, emits CSS, exposes a separate Pagefind post-write step.                                                                                                      |\n+| [`clean-jsdoc-theme`](./packages/clean-jsdoc-theme) | The JSDoc theme entry. A thin `publish.ts` bridge that wires the packages together and is what `jsdoc -t clean-jsdoc-theme` actually invokes.                                                                                                                                        |\n+| [`@clean-jsdoc-theme/typedoc`](./packages/typedoc)  | The TypeDoc bridge — a plugin that feeds TypeDoc's reflections through the same setu → dwar pipeline, so a TypeScript project gets identical output. Selected via the `outputs` option in `typedoc.json`.                                                                            |\n+| [`@clean-jsdoc-theme/aadesh`](./packages/aadesh)    | The `clean-jsdoc` CLI for the theme. Localization authoring lives under the `i18n` group (`clean-jsdoc i18n extract`/`prompt`/`validate`); `build` is top-level (one static site per locale). Reads locales from your existing `jsdoc.json` opts; the top-level namespace is reserved for future groups. |\n+| [`@clean-jsdoc-theme/bhasha`](./packages/bhasha)    | The pure, browser-safe i18n core: the UI string catalog, the `t` translator + `LanguageProvider`, and the API-slot key/hash scheme that setu, aadesh, and rang all share.                                                                                                            |\n+\n+---\n \n-<p align=\"center\">\n-  <img src=\"https://raw.githubusercontent.com/ankitskvmdam/clean-jsdoc-theme/master/packages/clean-jsdoc-theme/media/screenshot.png\" width=\"49%\" alt=\"clean-jsdoc-theme — light theme\" />\n-  <img src=\"https://raw.githubusercontent.com/ankitskvmdam/clean-jsdoc-theme/master/packages/clean-jsdoc-theme/media/screenshot-dark.png\" width=\"49%\" alt=\"clean-jsdoc-theme — dark theme\" />\n-</p>\n-\n-Point it at your source comments — and, optionally, a folder of Markdown guides —\n-and it produces a static site: server-rendered HTML, lazily-hydrated interactive\n-islands, fuzzy + full-text search, light and dark themes, and a companion `.md`\n-of every page for LLMs. No CSS or build config required to get started.\n-\n-## Highlights\n-\n-- **Built for JSDoc** — point it at your JSDoc sources and get a modern static\n-  site. No CSS or build config to get started.\n-- **Fast & framework-free** — server-rendered pages with lazily-hydrated Preact\n-  islands; each page loads only the JS it actually uses.\n-- **Search built in** — a fuzzy command palette (`Ctrl K`) over titles,\n-  descriptions, content, and per-member deep links, plus an optional\n-  [Pagefind](https://pagefind.app/) full-text index.\n-- **Guides + API in one site** — hand-written Markdown guides and the\n-  auto-generated reference share one sidebar and one search.\n-- **Localization built in** — declare your locales and the `clean-jsdoc` CLI\n-  builds one static site per language (translated UI, API descriptions, and\n-  prose) with a header language switcher, per-language fonts, and `hreflang`.\n-- **LLM-friendly** — every page ships a clean companion `.md`, plus a\n-  copy-page button to hand any page to Claude / ChatGPT / Perplexity. A\n-  downloadable [skill](https://ankdev.me/clean-jsdoc-theme/theme/llm-skill) turns\n-  any coding assistant into a setup expert.\n-- **Polished by default** — light/dark OKLCH themes, Google Fonts, shiki syntax\n-  highlighting, a Monaco source viewer, and `Source: file:line` links.\n+## Quickstart\n \n-## Quick start\n+Both toolchains render through the same pipeline, so the output is identical — pick the entry point that matches your source. Serve over HTTP (Pagefind's full-text index needs HTTP to load).\n+\n+### JSDoc\n \n ```sh\n-npm install --save-dev clean-jsdoc-theme jsdoc\n+pnpm add -D clean-jsdoc-theme jsdoc\n ```\n \n-Add a `jsdoc.json`:\n+Minimal `jsdoc.json`:\n \n",
+					"match": false,
+					"packageHash": "033c3cdb8870451c62cb664af865a23bbf61d065285d99e08461403fef70d3d6",
+					"size": 5518,
+					"sourceHash": "ec91e047afa0ceb89d7f633696f7b12f2729a4115582dc877453ffbd660b4511",
+					"status": "content"
+				},
+				"dist/publish.d.mts": {
+					"match": false,
+					"packageHash": "5938d4f696ca35f2aad3834c0e194fcbf96d30d2b995df32b3a685cb96f0d9a7",
+					"size": 29401,
+					"status": "missing-in-source"
+				},
+				"dist/publish.d.ts": {
+					"match": false,
+					"packageHash": "618deba301ccac342302071c1d4a776d85f3c717b4221e4fdfb1de0fd954ffee",
+					"size": 29400,
+					"status": "missing-in-source"
+				},
+				"dist/publish.js": {
+					"match": false,
+					"packageHash": "60f0c0a7dc5f2362899d36d785b1d32533db4c63cf944c08ea09c06d9c1ba8d4",
+					"size": 68080,
+					"status": "missing-in-source"
+				},
+				"dist/publish.js.map": {
+					"match": false,
+					"packageHash": "ce5ba6ecb2adfa0fe4c73e3aed67806636b345f38f19c7fa52b97c9f6f48a649",
+					"size": 145593,
+					"status": "missing-in-source"
+				},
+				"dist/publish.mjs": {
+					"match": false,
+					"packageHash": "73ff08ffc29f7e57007788109719ac5e4c4adc8389613f23e643710a6285f60b",
+					"size": 66588,
+					"status": "missing-in-source"
+				},
+				"dist/publish.mjs.map": {
+					"match": false,
+					"packageHash": "255f6a4262b0dcb1bddcff724db789edab327751442a6df8b4ee9bf53d6620ee",
+					"size": 144730,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,71 +1,79 @@\n {\n   \"name\": \"clean-jsdoc-theme\",\n   \"version\": \"5.2.0\",\n-  \"description\": \"A modern, markdown-first JSDoc theme with i18n support\",\n-  \"main\": \"./dist/publish.js\",\n-  \"types\": \"./dist/publish.d.ts\",\n-  \"exports\": {\n-    \".\": {\n-      \"require\": \"./dist/publish.js\",\n-      \"types\": \"./dist/publish.d.ts\",\n-      \"import\": \"./dist/publish.mjs\"\n-    },\n-    \"./publish\": {\n-      \"require\": \"./dist/publish.js\",\n-      \"types\": \"./dist/publish.d.ts\",\n-      \"import\": \"./dist/publish.mjs\"\n-    }\n-  },\n-  \"files\": [\n-    \"publish.js\",\n-    \"dist\",\n-    \"README.md\"\n-  ],\n+  \"private\": false,\n   \"repository\": {\n     \"type\": \"git\",\n     \"url\": \"git+https://github.com/ankitskvmdam/clean-jsdoc-theme.git\"\n   },\n   \"author\": \"Ankit Kumar (hello@ankdev.me)\",\n-  \"homepage\": \"https://ankdev.me/clean-jsdoc-theme/theme/jsdoc-getting-started\",\n   \"license\": \"MIT\",\n   \"funding\": {\n     \"type\": \"github\",\n     \"url\": \"https://github.com/sponsors/ankitskvmdam\"\n   },\n-  \"peerDependencies\": {\n-    \"jsdoc\": \">=4.x\"\n-  },\n-  \"dependencies\": {\n-    \"ora\": \"^9.3.0\",\n-    \"preact\": \"^10.22.0\",\n-    \"@clean-jsdoc-theme/bhasha\": \"^5.2.0\",\n-    \"@clean-jsdoc-theme/dwar\": \"^5.2.0\",\n-    \"@clean-jsdoc-theme/rang\": \"^5.2.0\",\n-    \"@clean-jsdoc-theme/setu\": \"^5.2.0\",\n-    \"@clean-jsdoc-theme/utils\": \"^5.2.0\"\n-  },\n-  \"devDependencies\": {\n-    \"@types/node\": \"^22.0.0\",\n-    \"tsdown\": \"^0.22.14\",\n-    \"typescript\": \"^5.5.0\",\n-    \"vitest\": \"^4.1.10\"\n+  \"packageManager\": \"pnpm@9.0.0\",\n+  \"engines\": {\n+    \"node\": \">=22.18.0\",\n+    \"pnpm\": \">=9\"\n   },\n-  \"publishConfig\": {\n-    \"access\": \"public\"\n+  \"scripts\": {\n+    \"build\": \"turbo run build\",\n+    \"build:docs\": \"turbo run build:docs\",\n+    \"build:all\": \"turbo run build build:docs\",\n+    \"dev\": \"turbo run dev\",\n+    \"test\": \"turbo run test\",\n+    \"lint\": \"turbo run lint\",\n+    \"format\": \"prettier --write .\",\n+    \"format:check\": \"prettier --check .\",\n+    \"typecheck\": \"turbo run typecheck\",\n+    \"check:docs\": \"node scripts/check-docs.mjs\",\n+    \"gen:llms\": \"node scripts/gen-llms-txt.mjs\",\n+    \"clean\": \"pnpm -r --parallel run clean && node scripts/clean.mjs node_modules\",\n+    \"clean-node-modules\": \"pnpm -r --parallel run clean-node-modules && node scripts/clean.mjs node_modules\",\n+    \"changeset\": \"changeset\",\n+    \"release:check\": \"changeset status --verbose\",\n+    \"version-packages\": \"changeset version && pnpm install --lockfile-only\",\n+    \"release\": \"turbo run build && changeset publish\"\n   },\n+  \"homepage\": \"https://ankdev.me/clean-jsdoc-theme/v4/index.html\",\n   \"keywords\": [\n     \"jsdoc\",\n+    \"template\",\n     \"jsdoc-template\",\n-    \"jsdoc-theme\",\n-    \"documentation\"\n+    \"jsdoc to markdown\",\n+    \"javascript documentation\",\n+    \"customizable jsdoc theme / template\",\n+    \"llm docs\"\n   ],\n-  \"scripts\": {\n-    \"build\": \"tsdown\",\n-    \"dev\": \"tsdown --watch\",\n-    \"lint\": \"eslint src\",\n-    \"test\": \"vitest run\",\n-    \"typecheck\": \"tsc --noEmit\",\n-    \"clean\": \"node ../../scripts/clean.mjs dist .turbo\",\n",
+					"match": false,
+					"packageHash": "c93bbd5158f73136789114d50d4d659a3d0b1f0f59a2cd61667f61316d017fc9",
+					"size": 1796,
+					"sourceHash": "7770afe8382469ea589a6e52d6ad11f1afcfa8a4eac52feb2e13c8ec23c963fe",
+					"status": "content"
+				},
+				".changeset/config.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/FUNDING.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/ISSUE_TEMPLATE/bug_report.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/ISSUE_TEMPLATE/config.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/ISSUE_TEMPLATE/feature_request.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/PULL_REQUEST_TEMPLATE.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/ci.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/release.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/wiki-sync.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".prettierignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".prettierrc.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"CODE_OF_CONDUCT.hi.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"CODE_OF_CONDUCT.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"CONTRIBUTING.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"MIGRATION.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"SECURITY.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"SKILLS/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"SKILLS/clean-jsdoc-theme/SKILL.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"SKILLS/clean-jsdoc-theme/reference/architecture.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"SKILLS/clean-jsdoc-theme/reference/authoring.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"SKILLS/clean-jsdoc-theme/reference/configuration.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"SKILLS/clean-jsdoc-theme/reference/content-and-sidebar.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"SKILLS/clean-jsdoc-theme/reference/images.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"SKILLS/clean-jsdoc-theme/reference/localization.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"SKILLS/clean-jsdoc-theme/reference/troubleshooting.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"SKILLS/migrate-v4-to-v5/SKILL.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"SKILLS/typedoc/SKILL.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"SKILLS/typedoc/reference/document-model.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/ARCHITECTURE.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/BREAKING_CHANGES.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/INSTRUCTION_ON_RELEASING.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/RELEASING.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/architecture.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/build-pipeline.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/assets/build-pipeline.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/assets/clean-jsdoc-theme-white.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/assets/clean-jsdoc-theme.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/assets/logo-small.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/clean-jsdoc-theme-artifacts/locales/en.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/clean-jsdoc-theme-artifacts/locales/en.meta.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/clean-jsdoc-theme-artifacts/locales/hi.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/clean-jsdoc-theme-artifacts/locales/hi.meta.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/clean-jsdoc-theme-artifacts/locales/ja.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/clean-jsdoc-theme-artifacts/locales/ja.meta.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/clean-jsdoc-theme-artifacts/locales/zh.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/clean-jsdoc-theme-artifacts/locales/zh.meta.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs/components/callouts.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs/components/category.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs/components/embeds.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs/components/order.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs/components/overview.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs/components/playground.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs/components/steps.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs/components/tabs.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs/guides/build-a-guides-site.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs/guides/build-an-api-reference.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs/guides/combine-guides-and-api.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs/guides/faq.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs/guides/localize-your-docs.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs/guides/structure-your-sidebar.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs/guides/working-with-images.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs/index.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs/packages/aadesh-overview.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs/packages/bhasha-overview.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs/packages/dwar-examples.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs/packages/dwar-overview.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs/packages/rang-examples.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs/packages/rang-overview.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs/packages/setu-examples.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs/packages/setu-overview.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs/packages/utils-examples.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs/packages/utils-overview.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs/theme/configuration.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs/theme/jsdoc-getting-started.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs/theme/llm-skill.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs/theme/migrate-v4-to-v5.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs/theme/overview.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs/theme/typedoc-getting-started.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.hi/components/callouts.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.hi/components/category.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.hi/components/embeds.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.hi/components/order.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.hi/components/overview.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.hi/components/playground.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.hi/components/steps.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.hi/components/tabs.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.hi/guides/build-a-guides-site.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.hi/guides/build-an-api-reference.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.hi/guides/combine-guides-and-api.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.hi/guides/faq.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.hi/guides/localize-your-docs.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.hi/guides/structure-your-sidebar.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.hi/guides/working-with-images.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.hi/index.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.hi/packages/aadesh-overview.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.hi/packages/bhasha-overview.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.hi/packages/dwar-examples.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.hi/packages/dwar-overview.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.hi/packages/rang-examples.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.hi/packages/rang-overview.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.hi/packages/setu-examples.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.hi/packages/setu-overview.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.hi/packages/utils-examples.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.hi/packages/utils-overview.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.hi/theme/configuration.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.hi/theme/jsdoc-getting-started.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.hi/theme/llm-skill.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.hi/theme/migrate-v4-to-v5.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.hi/theme/overview.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.hi/theme/typedoc-getting-started.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.ja/components/callouts.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.ja/components/category.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.ja/components/embeds.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.ja/components/order.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.ja/components/overview.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.ja/components/playground.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.ja/components/steps.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.ja/components/tabs.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.ja/guides/build-a-guides-site.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.ja/guides/build-an-api-reference.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.ja/guides/combine-guides-and-api.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.ja/guides/faq.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.ja/guides/localize-your-docs.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.ja/guides/structure-your-sidebar.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.ja/guides/working-with-images.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.ja/index.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.ja/packages/aadesh-overview.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.ja/packages/bhasha-overview.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.ja/packages/dwar-examples.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.ja/packages/dwar-overview.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.ja/packages/rang-examples.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.ja/packages/rang-overview.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.ja/packages/setu-examples.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.ja/packages/setu-overview.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.ja/packages/utils-examples.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.ja/packages/utils-overview.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.ja/theme/configuration.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.ja/theme/jsdoc-getting-started.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.ja/theme/llm-skill.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.ja/theme/migrate-v4-to-v5.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.ja/theme/overview.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.ja/theme/typedoc-getting-started.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.zh/components/callouts.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.zh/components/category.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.zh/components/embeds.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.zh/components/order.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.zh/components/overview.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.zh/components/playground.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.zh/components/steps.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.zh/components/tabs.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.zh/guides/build-a-guides-site.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.zh/guides/build-an-api-reference.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.zh/guides/combine-guides-and-api.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.zh/guides/faq.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.zh/guides/localize-your-docs.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.zh/guides/structure-your-sidebar.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.zh/guides/working-with-images.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.zh/index.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.zh/packages/aadesh-overview.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.zh/packages/bhasha-overview.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.zh/packages/dwar-examples.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.zh/packages/dwar-overview.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.zh/packages/rang-examples.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.zh/packages/rang-overview.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.zh/packages/setu-examples.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.zh/packages/setu-overview.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.zh/packages/utils-examples.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.zh/packages/utils-overview.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.zh/theme/configuration.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.zh/theme/jsdoc-getting-started.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.zh/theme/llm-skill.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.zh/theme/migrate-v4-to-v5.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.zh/theme/overview.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/docs.zh/theme/typedoc-getting-started.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/empty.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/jsdoc.api.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/jsdoc.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/src/cache.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/src/contracts.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/src/globals.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/src/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/src/queue.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/tsconfig.typedoc.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/typedoc-src/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/typedoc-src/components/Form.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/typedoc-src/components/base/Component.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/typedoc-src/models/Product.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/typedoc-src/models/User.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/typedoc-src/parity.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/typedoc-src/services/EventEmitter.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/typedoc-src/services/HttpClient.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/typedoc-src/services/cache/Cache.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/typedoc-src/services/cache/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/typedoc-src/types/api.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/typedoc-src/types/common.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/typedoc-src/utils/array.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/typedoc-src/utils/date.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/typedoc-src/utils/string.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/typedoc.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs-site/vite.config.mjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"eslint.config.mjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/assets/clean-jsdoc-theme-white.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/assets/clean-jsdoc-theme.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/assets/logo-small.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/img/data-flow.puml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/img/data-flow.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/jsdoc.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/src/CoreShema.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/src/DataProcessor.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/src/base/chains.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/src/base/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/src/constants/roles.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/src/documents/binder.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/src/documents/collector.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/src/documents/model.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/src/documents/probe.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/src/documents/schema.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/src/generators/generator.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/src/globals.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/src/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/src/mixins/bussable.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/src/mixins/signalable.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/src/models/Users.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/src/queue/AbstractJob.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/src/queue/Queue.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/src/queue/README.txt": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/src/queue/RetryJob.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/src/queue/externals.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/src/queue/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/src/queue/interfaces.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/src/queue/mixins.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/src/queue/types.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/src/services/UserService.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/src/strings/format.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/src/types/global.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/src/utils/logger.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/src/utils/math.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/tutorials/advanced-usage.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/tutorials/configuration.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/tutorials/getting-started.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/tutorials/how-jsdoc-works.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/tutorials/markdown-examples.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/tutorials/processing-guide.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/tutorials/tutorials.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/tutorials/working-with-images.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/tutorials.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic/vite.config.mjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-basic/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-basic/docs/guides/getting-started.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-basic/docs/index.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-basic/img/event-flow.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-basic/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-basic/src/components/Form.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-basic/src/components/base/Component.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-basic/src/models/Product.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-basic/src/models/User.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-basic/src/services/EventEmitter.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-basic/src/services/HttpClient.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-basic/src/services/cache/Cache.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-basic/src/services/cache/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-basic/src/types/api.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-basic/src/types/common.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-basic/src/utils/array.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-basic/src/utils/date.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-basic/src/utils/string.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-basic/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-basic/typedoc.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-basic/vite.config.mjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-parity/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-parity/docs/guides/getting-started.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-parity/docs/index.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-parity/documents/guide.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-parity/img/event-flow.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-parity/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-parity/src/components/Form.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-parity/src/components/base/Component.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-parity/src/models/Product.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-parity/src/models/User.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-parity/src/parity.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-parity/src/services/EventEmitter.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-parity/src/services/HttpClient.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-parity/src/services/cache/Cache.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-parity/src/services/cache/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-parity/src/types/api.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-parity/src/types/common.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-parity/src/utils/array.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-parity/src/utils/date.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-parity/src/utils/string.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-parity/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-parity/typedoc.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/typedoc-parity/vite.config.mjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/with-i18n-example/README.hi.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/with-i18n-example/README.ja.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/with-i18n-example/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/with-i18n-example/clean-jsdoc-theme-artifacts/locales/en.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/with-i18n-example/clean-jsdoc-theme-artifacts/locales/en.meta.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/with-i18n-example/clean-jsdoc-theme-artifacts/locales/hi.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/with-i18n-example/clean-jsdoc-theme-artifacts/locales/hi.meta.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/with-i18n-example/clean-jsdoc-theme-artifacts/locales/ja.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/with-i18n-example/clean-jsdoc-theme-artifacts/locales/ja.meta.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/with-i18n-example/docs/configuration.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/with-i18n-example/docs/getting-started.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/with-i18n-example/docs.hi/getting-started.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/with-i18n-example/docs.ja/configuration.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/with-i18n-example/docs.ja/getting-started.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/with-i18n-example/jsdoc.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/with-i18n-example/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/with-i18n-example/src/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/with-i18n-example/vite.config.mjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"migration-map.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/aadesh/CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/aadesh/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/aadesh/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/aadesh/socket.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/aadesh/src/__tests__/build-plan.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/aadesh/src/__tests__/commands.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/aadesh/src/__tests__/interactive.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/aadesh/src/__tests__/locale.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/aadesh/src/__tests__/prompt.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/aadesh/src/artifacts.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/aadesh/src/build-plan.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/aadesh/src/cli.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/aadesh/src/commands/build.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/aadesh/src/commands/extract.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/aadesh/src/commands/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/aadesh/src/commands/prompt.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/aadesh/src/commands/validate.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/aadesh/src/config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/aadesh/src/extract-manifest.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/aadesh/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/aadesh/src/interactive/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/aadesh/src/interactive/package-json.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/aadesh/src/interactive/registry.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/aadesh/src/locale/file.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/aadesh/src/locale/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/aadesh/src/locale/merge.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/aadesh/src/locale/template.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/aadesh/src/locale/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/aadesh/src/prompt.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/aadesh/src/report.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/aadesh/src/runners.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/aadesh/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/aadesh/tsdown.config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/aadesh/vitest.config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/bhasha/CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/bhasha/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/bhasha/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/bhasha/scripts/check-browser-safe.mjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/bhasha/src/__tests__/interpolate.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/bhasha/src/__tests__/keys.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/bhasha/src/__tests__/provider.test.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/bhasha/src/__tests__/translate.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/bhasha/src/__tests__/validate.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/bhasha/src/catalog.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/bhasha/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/bhasha/src/interpolate.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/bhasha/src/keys.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/bhasha/src/provider.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/bhasha/src/translate.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/bhasha/src/validate.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/bhasha/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/bhasha/tsdown.config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/bhasha/vitest.config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/clean-jsdoc-theme/CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/clean-jsdoc-theme/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/clean-jsdoc-theme/media/clean-jsdoc-theme-dark.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/clean-jsdoc-theme/media/clean-jsdoc-theme-light.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/clean-jsdoc-theme/media/clean-jsdoc-theme.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/clean-jsdoc-theme/media/screenshot-dark.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/clean-jsdoc-theme/media/screenshot.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/clean-jsdoc-theme/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/clean-jsdoc-theme/src/__tests__/publish.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/clean-jsdoc-theme/src/__tests__/static-files.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/clean-jsdoc-theme/src/publish.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/clean-jsdoc-theme/src/write-output-files.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/clean-jsdoc-theme/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/clean-jsdoc-theme/tsdown.config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/dwar/CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/dwar/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/dwar/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/dwar/scripts/build-css.mjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/dwar/scripts/smoke.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/dwar/src/__tests__/collapsible.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/dwar/src/__tests__/fixtures.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/dwar/src/__tests__/fonts.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/dwar/src/__tests__/html.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/dwar/src/__tests__/islands-bundle.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/dwar/src/__tests__/llms-txt.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/dwar/src/__tests__/mdx.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/dwar/src/__tests__/pagefind.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/dwar/src/__tests__/playground.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/dwar/src/__tests__/render.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/dwar/src/__tests__/scrollbar-css.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/dwar/src/__tests__/scrollbar-render.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/dwar/src/__tests__/sitemap.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/dwar/src/css.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/dwar/src/generated/utility-css.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/dwar/src/heading-anchors.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/dwar/src/html.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/dwar/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/dwar/src/islands-bundle.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/dwar/src/islands-loader.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/dwar/src/layout.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/dwar/src/llms-txt.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/dwar/src/mdx.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/dwar/src/pagefind.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/dwar/src/scrollbar-script.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/dwar/src/sitemap.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/dwar/src/theme-script.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/dwar/styles/tailwind.css": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/dwar/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/dwar/tsdown.config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/dwar/vitest.config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/__tests__/base-path-context.test.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/__tests__/button-group.test.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/__tests__/code-tabs.test.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/__tests__/code-viewer.test.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/__tests__/copy-btn.test.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/__tests__/copy-page-button.test.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/__tests__/ctrlk.test.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/__tests__/dropdown-menu.test.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/__tests__/embed.test.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/__tests__/footer.test.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/__tests__/heading-slot.test.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/__tests__/i18n-chrome.test.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/__tests__/i18n-seeding.test.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/__tests__/language-switcher.test.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/__tests__/mdx-components.test.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/__tests__/playground.test.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/__tests__/search-utils.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/__tests__/settings.test.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/__tests__/sidebar.test.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/__tests__/theme-toggle.test.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/__tests__/toc-utils.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/__tests__/toc.test.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/Brand.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/Button.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/ButtonGroup.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/CodeBlock.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/CodeTabs.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/CodeViewer.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/CopyBtn.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/CopyPageButton.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/CtrlK/Highlighted.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/CtrlK/ResultRow.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/CtrlK/SavedRow.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/CtrlK/SavedSections.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/CtrlK/SearchFooter.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/CtrlK/SearchInput.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/CtrlK/SearchResults.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/CtrlK/SearchTrigger.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/CtrlK/constants.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/CtrlK/index.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/CtrlK/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/CtrlK/use-saved-searches.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/CtrlK/use-search-index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/CtrlK/use-search-results.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/CtrlK/utils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/Dialog.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/DropdownMenu.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/Embed.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/Footer.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/Header.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/LanguageSwitcher.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/Layout.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/MobileNav.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/PageNav.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/Playground.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/PlaygroundMenu.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/Settings.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/Sidebar.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/SimpleIcon.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/Steps.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/TOC.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/Tabs.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/ThemeToggle.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/TocPopover.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/icons/ChatGptIcon.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/icons/CodepenIcon.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/icons/CodesandboxIcon.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/icons/JsfiddleIcon.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/icons/chatgpt.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/icons/codepen.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/icons/codesandbox.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/icons/jsfiddle.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/mdx-tags.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/mdx-utils.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/playground/codepen.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/playground/codesandbox.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/playground/jsfiddle.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/playground/submit.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/search-utils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/components/toc-utils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/hooks/use-list-keyboard-nav.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/islands.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/lib/cn.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/src/mdx-components.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/tsdown.config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/rang/vitest.config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/@types/jsdoc-salty.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/nodemon.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/scripts/preview-class.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/__tests__/assemble-nav.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/__tests__/callout-alerts.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/__tests__/class-view.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/__tests__/collapsible-groups.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/__tests__/containers.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/__tests__/doclet-embed.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/__tests__/doclet.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/__tests__/embed-fences.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/__tests__/embed.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/__tests__/factory.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/__tests__/generate-site.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/__tests__/guide-view.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/__tests__/helper.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/__tests__/index.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/__tests__/link-registry.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/__tests__/link-resolution.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/__tests__/link-tags.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/__tests__/mdx-class-view.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/__tests__/name-registry.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/__tests__/playground-prose.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/__tests__/playground.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/__tests__/raw-taffy-data.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/__tests__/see-inline.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/__tests__/sidebar-groups.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/__tests__/slots.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/__tests__/source-view.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/__tests__/typedoc-flavor.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/__tests__/validate.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/class-view.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/doclet.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/embed.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/generate-site.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/guide-view.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/helper.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/link-registry.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/mdast/builders.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/mdast/class-view.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/mdast/doclet.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/mdast/from-html.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/mdast/link-tags.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/mdx.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/name-registry.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/playground.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/slots.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/source-view.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/src/validate.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/setu/tsdown.config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/typedoc/@types/jsdoc-salty.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/typedoc/CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/typedoc/NOTES.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/typedoc/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/typedoc/__fixtures__/basic/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/typedoc/__fixtures__/basic/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/typedoc/__fixtures__/basic/typedoc.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/typedoc/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/typedoc/src/__tests__/docs.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/typedoc/src/__tests__/options.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/typedoc/src/__tests__/reflection-to-doclets.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/typedoc/src/comment.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/typedoc/src/comment.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/typedoc/src/docs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/typedoc/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/typedoc/src/names.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/typedoc/src/options.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/typedoc/src/reflection-to-doclets.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/typedoc/src/types.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/typedoc/src/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/typedoc/src/write-output-files.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/typedoc/src/write-site.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/typedoc/src/write-site.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/typedoc/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/typedoc/tsdown.config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/__tests__/base-path.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/__tests__/collapsible.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/__tests__/config/diagnostics.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/__tests__/config/format.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/__tests__/config/google-fonts.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/__tests__/config/llms-txt.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/__tests__/config/locales.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/__tests__/config/opts-schema.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/__tests__/config/report.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/__tests__/config/site-url.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/__tests__/config/suggest.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/__tests__/config/validate-opts.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/__tests__/extract-manifest.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/__tests__/render.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/__tests__/scrollbar.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/__tests__/slug-rules.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/config/diagnostics.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/config/fonts.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/config/format.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/config/google-fonts.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/config/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/config/llms-txt.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/config/locales.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/config/opts-schema.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/config/report.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/config/scrollbar.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/config/site-name.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/config/site-url.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/config/suggest.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/config/validate-opts.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/doclet-schema.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/salty.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/site/base-path.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/site/collapsible.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/site/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/site/islands.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/site/llms.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/site/manifest.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/site/page.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/site/render.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/site/site-name.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/site/slug-rules.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/src/site/theme.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/utils/tsdown.config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"pnpm-workspace.yaml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/check-docs.mjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/clean.mjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/gen-llms-txt.mjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/sync-wiki.mjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/vite-static-docs.mjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"socket.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tsconfig.base.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"turbo.json": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 1,
+				"missingInPackage": 647,
+				"missingInSource": 6,
+				"score": 0.001524390243902439,
+				"totalFiles": 656
+			}
+		},
+		"prodDependencies": []
+	}
+]
