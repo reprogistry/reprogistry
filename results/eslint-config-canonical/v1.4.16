@@ -1,0 +1,2066 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-19T20:15:03.327Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:3.6.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "eslint-config-canonical@1.4.16",
+			"name": "eslint-config-canonical",
+			"version": "1.4.16",
+			"location": "https://registry.npmjs.org/eslint-config-canonical/-/eslint-config-canonical-1.4.16.tgz",
+			"integrity": "sha512-JJCjKLQ7X3eFBr/HtOu1m4AEKDznbFd2xlBO+supPmtC5pOL3WJ9NdGeiLVxd8LDtWew7AcQp6iVA19e/4J4og==",
+			"publishedAt": "2016-02-14T14:27:50.875Z",
+			"publishedWith": {
+				"node": "5.6.0",
+				"npm": "3.7.2"
+			},
+			"dependencies": {
+				"eslint-plugin-babel": "^3.1.0",
+				"eslint-plugin-import": "^1.0.0-beta.0",
+				"eslint-plugin-objects": "^1.1.1",
+				"eslint-plugin-sorting": "^0.0.1",
+				"eslint-plugin-no-use-extend-native": "^0.3.4"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/gajus/eslint-config-canonical.git",
+			"spec": "github:gajus/eslint-config-canonical#75cd2403b147d5b4bd1fa475805179f633faf447"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".npmignore": {
+					"match": false,
+					"packageHash": "f18137064f774103f7a89662ce4cc466d7a9cad4784173695288e930f59d7fed",
+					"size": 20,
+					"status": "missing-in-source"
+				},
+				".travis.yml": {
+					"match": false,
+					"packageHash": "09c41727526e76ee5ee1b8e4b8449529b1615f3453d1879939e72ad1b30de031",
+					"size": 165,
+					"status": "missing-in-source"
+				},
+				"LICENSE": {
+					"diff": "--- published/LICENSE\n+++ rebuilt/LICENSE\n@@ -1,4 +1,4 @@\n-Copyright (c) 2016, Gajus Kuizinas (http://gajus.com/)\n+Copyright (c) 2023, Gajus Kuizinas (https://gajus.com/)\n All rights reserved.\n \n Redistribution and use in source and binary forms, with or without\n@@ -8,14 +8,14 @@\n     * Redistributions in binary form must reproduce the above copyright\n       notice, this list of conditions and the following disclaimer in the\n       documentation and/or other materials provided with the distribution.\n-    * Neither the name of the Gajus Kuizinas (http://gajus.com/) nor the\n+    * Neither the name of the Gajus Kuizinas (https://gajus.com/) nor the\n       names of its contributors may be used to endorse or promote products\n       derived from this software without specific prior written permission.\n \n THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\n ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\n WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\n-DISCLAIMED. IN NO EVENT SHALL ANUARY BE LIABLE FOR ANY\n+DISCLAIMED. IN NO EVENT SHALL GAJUS KUIZINAS BE LIABLE FOR ANY\n DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\n LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND\n",
+					"match": false,
+					"packageHash": "ef088ddea300fe4ea038bc47db929e320033b66981cf12a20b517d6b66a2fa3e",
+					"size": 1529,
+					"sourceHash": "ab61ca227f894bcfb6186ad6378c5c1a83772e75b5ddde340233e4b93efec05b",
+					"status": "content"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,4 +1,241 @@\n # Canonical ESLint Config\n \n-[![Travis build status](http://img.shields.io/travis/gajus/eslint-config-canonical/master.svg?style=flat-square)](https://travis-ci.org/gajus/eslint-config-canonical)\n-[![NPM version](http://img.shields.io/npm/v/eslint-config-canonical.svg?style=flat-square)](https://www.npmjs.org/package/eslint-config-canonical)\n\\ No newline at end of file\n+[![NPM version](http://img.shields.io/npm/v/eslint-config-canonical.svg?style=flat-square)](https://www.npmjs.org/package/eslint-config-canonical)\n+\n+The most comprehensive code style guide.\n+\n+Canonical consists of 1,000+ rules (40% auto-fixable), some of which are [custom written](https://github.com/gajus/eslint-plugin-canonical) for Canonical. Canonical goal is to reduce noise in code version control and promote use of the latest ES features.\n+\n+## Usage\n+\n+Most projects should simply extend from [`canonical/auto`](#canonicalauto-ruleset):\n+\n+```ts\n+// eslint.config.ts\n+import auto from 'eslint-config-canonical/auto';\n+import tseslint from 'typescript-eslint';\n+\n+export default tseslint.config(auto);\n+```\n+\n+## Rulesets\n+\n+> **Note** Most projects should just use [`canonical/auto`](#canonicalauto-ruleset) and override settings when necessary for individual frameworks or file patterns (e.g. vitest vs ava).\n+\n+This package includes the following rulesets:\n+\n+* [`canonical/auto`](./configurations/auto.ts) – The Canonical code style guide.\n+* [`canonical/ava`](./configurations/ava.ts) – for projects that use [AVA](https://ava.li/).\n+* [`canonical/browser`](./configurations/browser.ts) – for projects that use DOM and other browser APIs.\n+* [`canonical/graphql`](./configurations/graphql.ts) – for projects that use [GraphQL](https://graphql.org/).\n+* [`canonical/jest`](./configurations/jest.ts) – for projects that use [jest](https://facebook.github.io/jest/).\n+* [`canonical/jsdoc`](./configurations/jsdoc.ts) – for projects that use [JSDoc](https://jsdoc.app/).\n+* [`canonical/json`](./configurations/json.ts) – for projects that use JSON.\n+* [`canonical/jsx-a11y`](./configurations/jsx-a11y.ts) – for projects that use [React](https://facebook.github.io/react/) and want to include [accessibility checks](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y).\n+* [`canonical/lodash`](./configurations/lodash.ts) – for projects that use [lodash](https://lodash.com/).\n+* [`canonical/mocha`](./configurations/mocha.ts) – for projects that use [Mocha](https://mochajs.org/).\n+* [`canonical/module`](./configurations/module.ts) – for projects that use ESM modules.\n+* [`canonical/next`](./configurations/next.ts) – for projects that use [Next.js](https://nextjs.org/).\n+* [`canonical/node`](./configurations/node.ts) – for projects that use Node.js.\n+* [`canonical/prettier`](./configurations/prettier.ts) – applies [Prettier](https://prettier.io/) formatting.\n+* [`canonical/react`](./configurations/react.ts) – for projects that use [React](https://facebook.github.io/react/).\n+* [`canonical/react-hooks`](./configurations/react-hooks.ts) – for projects that use [React Hooks](https://react.dev/reference/react/hooks).\n+* [`canonical/regexp`](./configurations/regexp.ts) – for projects that use regular expressions.\n+* [`canonical/typescript-type-checking`](./configurations/typescript-type-checking.ts) – for projects that use [TypeScript](http://typescriptlang.org/) and want additional rules that require type information (rules using type information take longer to run).\n+* [`canonical/typescript`](./configurations/typescript.ts) – for projects that use [TypeScript](http://typescriptlang.org/).\n+* [`canonical/vitest`](./configurations/vitest.ts) – for projects that use [Vitest](https://vitest.dev/).\n+* [`canonical/yaml`](./configurations/yaml.ts) – for projects that use YAML.\n+* [`canonical/zod`](./configurations/zod.ts) – for projects that use [Zod](https://github.com/colinhacks/zod).\n+\n+## `canonical/auto` ruleset\n+\n+[`canonical/auto`](./configurations/auto.ts) is a special ruleset that uses [overrides](https://eslint.org/docs/user-guide/configuring/configuration-files#how-do-overrides-work) to only apply relevant style guides. This reduces the linting time and the number of false-positives.\n+\n+`canonical/auto` can be fine-tuned using `overrides` just like any other ESLint ruleset, e.g.\n+\n+```json\n+{\n+  \"extends\": [\n+    \"canonical/auto\"\n+  ],\n+  \"overrides\": [\n+    {\n+      \"extends\": [\n+        \"canonical/jsx-a11y\"\n+      ],\n+      \"files\": \"*.tsx\"\n+    },\n+    {\n+      \"extends\": [\n+        \"canonical/vitest\"\n+      ],\n+      \"files\": \"*.test.{ts,tsx}\"\n+    }\n+  ],\n+  \"root\": true\n+}\n+```\n+\n+### Compatibility with Prettier\n+\n+For the most part, Prettier and Canonical are already compatible. There are only a few transformations that are incompatible, e.g. Prettier enforces line-length and Canonical does not. As such, there is no good reason to use both. However, if you wish to use Prettier, you can do so by using `canonical/prettier` ruleset, which uses [`eslint-plugin-prettier`](https://www.npmjs.com/package/eslint-plugin-prettier) to apply Prettier formatting after applying Canonical rules.\n+\n+```json\n+{\n+  \"extends\": [\n+    \"canonical\",\n+    \"canonical/jsdoc\",\n+    \"canonical/regexp\",\n+    \"canonical/react\",\n+    \"canonical/react-hooks\",\n+    \"canonical/typescript\",\n+    \"canonical/jest\",\n+    \"canonical/prettier\"\n+  ]\n",
+					"match": false,
+					"packageHash": "76bb84e0cf458fdf7ba6fe73923f2f21952ede85fda86eb965b44eadcc04e0b1",
+					"size": 340,
+					"sourceHash": "f373d1ef35bbd7911f89a4d469cfc8ada47c9397cb6aabd7ab0806fdbd19ad0e",
+					"status": "content"
+				},
+				"eslintrc.json": {
+					"match": false,
+					"packageHash": "f22eb1b0b56bf750933f86f759a36f6fdb403f9398932d0bbadb22fc9ba35b35",
+					"size": 11556,
+					"status": "missing-in-source"
+				},
+				"index.js": {
+					"match": false,
+					"packageHash": "7bcc2f5b740584cf62eaab8d349ca678a29a2ad513828df1b9d3be373c7d6869",
+					"size": 45,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -4,33 +4,107 @@\n     \"name\": \"Gajus Kuizinas\",\n     \"url\": \"http://gajus.com\"\n   },\n+  \"ava\": {\n+    \"extensions\": {\n+      \"ts\": \"module\"\n+    },\n+    \"files\": [\n+      \"configurations/auto.test.ts\"\n+    ],\n+    \"nodeArguments\": [\n+      \"--import=tsimp/import\"\n+    ]\n+  },\n   \"dependencies\": {\n-    \"eslint-plugin-babel\": \"^3.1.0\",\n-    \"eslint-plugin-import\": \"^1.0.0-beta.0\",\n-    \"eslint-plugin-no-use-extend-native\": \"^0.3.4\",\n-    \"eslint-plugin-objects\": \"^1.1.1\",\n-    \"eslint-plugin-sorting\": \"^0.0.1\"\n+    \"@eslint-community/eslint-plugin-eslint-comments\": \"^4.6.0\",\n+    \"@graphql-eslint/eslint-plugin\": \"^4.4.0\",\n+    \"@next/eslint-plugin-next\": \"^15.5.0\",\n+    \"@stylistic/eslint-plugin\": \"^5.7.1\",\n+    \"@typescript-eslint/eslint-plugin\": \"^8.53.1\",\n+    \"@typescript-eslint/parser\": \"^8.53.1\",\n+    \"@vitest/eslint-plugin\": \"^1.5.1\",\n+    \"eslint-config-prettier\": \"^10.1.8\",\n+    \"eslint-import-resolver-typescript\": \"^4.4.4\",\n+    \"eslint-plugin-ava\": \"^15.1.0\",\n+    \"eslint-plugin-canonical\": \"^5.1.3\",\n+    \"eslint-plugin-fp\": \"^2.3.0\",\n+    \"eslint-plugin-functional\": \"^9.0.2\",\n+    \"eslint-plugin-import\": \"npm:eslint-plugin-import-x@^4.16.1\",\n+    \"eslint-plugin-jest\": \"^28.11.0\",\n+    \"eslint-plugin-jsdoc\": \"^50.6.8\",\n+    \"eslint-plugin-jsonc\": \"^2.21.0\",\n+    \"eslint-plugin-jsx-a11y\": \"^6.10.2\",\n+    \"eslint-plugin-lodash\": \"^8.0.0\",\n+    \"eslint-plugin-mocha\": \"^10.5.0\",\n+    \"eslint-plugin-modules-newline\": \"0.0.6\",\n+    \"eslint-plugin-n\": \"^17.23.2\",\n+    \"eslint-plugin-perfectionist\": \"^5.4.0\",\n+    \"eslint-plugin-prettier\": \"^5.5.5\",\n+    \"eslint-plugin-promise\": \"^7.2.1\",\n+    \"eslint-plugin-react\": \"^7.37.5\",\n+    \"eslint-plugin-react-hooks\": \"^7.0.1\",\n+    \"eslint-plugin-regexp\": \"^3.0.0\",\n+    \"eslint-plugin-unicorn\": \"^62.0.0\",\n+    \"eslint-plugin-yml\": \"^3.0.0\",\n+    \"eslint-plugin-zod\": \"^3.0.2\",\n+    \"globals\": \"^16.5.0\",\n+    \"graphql\": \"^16.12.0\",\n+    \"prettier\": \"^3.7.4\",\n+    \"ramda\": \"^0.32.0\"\n   },\n   \"description\": \"Canonical ESLint Shareable Config\",\n   \"devDependencies\": {\n-    \"eslint\": \"^2.0.0\",\n-    \"jsonlint\": \"^1.6.2\"\n+    \"@semantic-release/commit-analyzer\": \"^13.0.1\",\n+    \"@semantic-release/github\": \"^12.0.2\",\n+    \"@semantic-release/npm\": \"^13.1.3\",\n+    \"ava\": \"^6.4.1\",\n+    \"eslint\": \"^9.39.1\",\n+    \"got\": \"^14.6.5\",\n+    \"husky\": \"^9.1.7\",\n+    \"semantic-release\": \"^25.0.2\",\n+    \"tsimp\": \"^2.0.12\",\n+    \"typescript\": \"^5.9.3\"\n+  },\n+  \"engines\": {\n+    \"node\": \">=16.0.0\"\n+  },\n+  \"exports\": {\n+    \".\": {\n+      \"import\": \"./dist/configurations/index.js\",\n+      \"types\": \"./dist/configurations/index.d.ts\"\n+    },\n+    \"./*\": {\n+      \"import\": \"./dist/configurations/*.js\",\n+      \"types\": \"./dist/configurations/*.d.ts\"\n+    }\n   },\n+  \"files\": [\n+    \"dist\"\n+  ],\n   \"keywords\": [\n     \"eslint\",\n+    \"config\",\n     \"canonical\"\n   ],\n   \"license\": \"BSD-3-Clause\",\n-  \"main\": \"./index.js\",\n+  \"main\": \"./eslintrc.js\",\n   \"name\": \"eslint-config-canonical\",\n+  \"peerDependencies\": {\n",
+					"match": false,
+					"packageHash": "635c9cd00014ef449fa2373c2ae95beb65eb7ea08c41cd5d8b50d553d43239d5",
+					"size": 965,
+					"sourceHash": "530b2304cd6130c27839f85b76146c17cba4653b37ddbf522d75a26384275bbd",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 3,
+				"matchingFiles": 0,
+				"missingInPackage": 0,
+				"missingInSource": 4,
+				"score": 0,
+				"totalFiles": 7
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "@ampproject/remapping",
+				"version": "2.3.0"
+			},
+			{
+				"name": "@babel/code-frame",
+				"version": "7.27.1"
+			},
+			{
+				"name": "@babel/compat-data",
+				"version": "7.26.8"
+			},
+			{
+				"name": "@babel/core",
+				"version": "7.26.10"
+			},
+			{
+				"name": "@babel/generator",
+				"version": "7.28.3"
+			},
+			{
+				"name": "@babel/helper-compilation-targets",
+				"version": "7.26.5"
+			},
+			{
+				"name": "lru-cache",
+				"version": "5.1.1"
+			},
+			{
+				"name": "yallist",
+				"version": "3.1.1"
+			},
+			{
+				"name": "@babel/helper-globals",
+				"version": "7.28.0"
+			},
+			{
+				"name": "@babel/helper-module-imports",
+				"version": "7.25.9"
+			},
+			{
+				"name": "@babel/helper-module-transforms",
+				"version": "7.26.0"
+			},
+			{
+				"name": "@babel/helper-plugin-utils",
+				"version": "7.26.5"
+			},
+			{
+				"name": "@babel/helper-string-parser",
+				"version": "7.27.1"
+			},
+			{
+				"name": "@babel/helper-validator-identifier",
+				"version": "7.28.5"
+			},
+			{
+				"name": "@babel/helper-validator-option",
+				"version": "7.25.9"
+			},
+			{
+				"name": "@babel/helpers",
+				"version": "7.26.10"
+			},
+			{
+				"name": "@babel/parser",
+				"version": "7.28.4"
+			},
+			{
+				"name": "@babel/plugin-syntax-import-assertions",
+				"version": "7.26.0"
+			},
+			{
+				"name": "@babel/template",
+				"version": "7.27.2"
+			},
+			{
+				"name": "@babel/traverse",
+				"version": "7.28.4"
+			},
+			{
+				"name": "@babel/types",
+				"version": "7.28.4"
+			},
+			{
+				"name": "@emnapi/core",
+				"version": "1.4.5"
+			},
+			{
+				"name": "@emnapi/runtime",
+				"version": "1.4.5"
+			},
+			{
+				"name": "@emnapi/wasi-threads",
+				"version": "1.0.4"
+			},
+			{
+				"name": "@envelop/core",
+				"version": "5.2.3"
+			},
+			{
+				"name": "@envelop/instrumentation",
+				"version": "1.0.0"
+			},
+			{
+				"name": "@envelop/types",
+				"version": "5.2.1"
+			},
+			{
+				"name": "@es-joy/jsdoccomment",
+				"version": "0.49.0"
+			},
+			{
+				"name": "@eslint-community/eslint-plugin-eslint-comments",
+				"version": "4.6.0"
+			},
+			{
+				"name": "ignore",
+				"version": "7.0.5"
+			},
+			{
+				"name": "@eslint-community/eslint-utils",
+				"version": "4.9.1"
+			},
+			{
+				"name": "eslint-visitor-keys",
+				"version": "3.4.3"
+			},
+			{
+				"name": "@eslint-community/regexpp",
+				"version": "4.12.2"
+			},
+			{
+				"name": "@eslint/core",
+				"version": "0.17.0"
+			},
+			{
+				"name": "@eslint/plugin-kit",
+				"version": "0.4.1"
+			},
+			{
+				"name": "@graphql-eslint/eslint-plugin",
+				"version": "4.4.0"
+			},
+			{
+				"name": "@graphql-tools/batch-execute",
+				"version": "9.0.14"
+			},
+			{
+				"name": "@graphql-tools/code-file-loader",
+				"version": "8.1.20"
+			},
+			{
+				"name": "@graphql-tools/delegate",
+				"version": "10.2.15"
+			},
+			{
+				"name": "@graphql-tools/executor",
+				"version": "1.4.6"
+			},
+			{
+				"name": "@graphql-tools/executor-common",
+				"version": "0.0.4"
+			},
+			{
+				"name": "@graphql-tools/executor-graphql-ws",
+				"version": "2.0.5"
+			},
+			{
+				"name": "@graphql-tools/executor-http",
+				"version": "1.3.1"
+			},
+			{
+				"name": "@graphql-tools/executor-legacy-ws",
+				"version": "1.1.17"
+			},
+			{
+				"name": "@graphql-tools/graphql-file-loader",
+				"version": "8.0.19"
+			},
+			{
+				"name": "@graphql-tools/graphql-tag-pluck",
+				"version": "8.3.19"
+			},
+			{
+				"name": "@graphql-tools/import",
+				"version": "7.0.18"
+			},
+			{
+				"name": "@graphql-tools/json-file-loader",
+				"version": "8.0.18"
+			},
+			{
+				"name": "@graphql-tools/load",
+				"version": "8.0.19"
+			},
+			{
+				"name": "@graphql-tools/merge",
+				"version": "9.0.24"
+			},
+			{
+				"name": "@graphql-tools/schema",
+				"version": "10.0.23"
+			},
+			{
+				"name": "@graphql-tools/url-loader",
+				"version": "8.0.31"
+			},
+			{
+				"name": "@graphql-tools/utils",
+				"version": "10.8.6"
+			},
+			{
+				"name": "@graphql-tools/wrap",
+				"version": "10.0.33"
+			},
+			{
+				"name": "@graphql-typed-document-node/core",
+				"version": "3.2.0"
+			},
+			{
+				"name": "@jridgewell/gen-mapping",
+				"version": "0.3.13"
+			},
+			{
+				"name": "@jridgewell/resolve-uri",
+				"version": "3.1.2"
+			},
+			{
+				"name": "@jridgewell/sourcemap-codec",
+				"version": "1.5.0"
+			},
+			{
+				"name": "@jridgewell/trace-mapping",
+				"version": "0.3.31"
+			},
+			{
+				"name": "@napi-rs/wasm-runtime",
+				"version": "0.2.12"
+			},
+			{
+				"name": "@next/eslint-plugin-next",
+				"version": "15.5.0"
+			},
+			{
+				"name": "fast-glob",
+				"version": "3.3.1"
+			},
+			{
+				"name": "@nodelib/fs.scandir",
+				"version": "2.1.5"
+			},
+			{
+				"name": "@nodelib/fs.stat",
+				"version": "2.0.5"
+			},
+			{
+				"name": "@nodelib/fs.walk",
+				"version": "1.2.8"
+			},
+			{
+				"name": "@nolyfill/is-core-module",
+				"version": "1.0.39"
+			},
+			{
+				"name": "@pkgr/core",
+				"version": "0.1.1"
+			},
+			{
+				"name": "@repeaterjs/repeater",
+				"version": "3.0.6"
+			},
+			{
+				"name": "@stylistic/eslint-plugin",
+				"version": "5.7.1"
+			},
+			{
+				"name": "eslint-visitor-keys",
+				"version": "4.2.1"
+			},
+			{
+				"name": "espree",
+				"version": "10.4.0"
+			},
+			{
+				"name": "@tybys/wasm-util",
+				"version": "0.10.0"
+			},
+			{
+				"name": "@types/json-schema",
+				"version": "7.0.15"
+			},
+			{
+				"name": "@types/node",
+				"version": "22.13.11"
+			},
+			{
+				"name": "@types/ws",
+				"version": "8.18.0"
+			},
+			{
+				"name": "@typescript-eslint/eslint-plugin",
+				"version": "8.53.1"
+			},
+			{
+				"name": "@typescript-eslint/parser",
+				"version": "8.53.1"
+			},
+			{
+				"name": "@typescript-eslint/project-service",
+				"version": "8.53.1"
+			},
+			{
+				"name": "@typescript-eslint/scope-manager",
+				"version": "8.53.1"
+			},
+			{
+				"name": "@typescript-eslint/tsconfig-utils",
+				"version": "8.53.1"
+			},
+			{
+				"name": "@typescript-eslint/type-utils",
+				"version": "8.53.1"
+			},
+			{
+				"name": "@typescript-eslint/types",
+				"version": "8.53.1"
+			},
+			{
+				"name": "@typescript-eslint/typescript-estree",
+				"version": "8.53.1"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "2.0.2"
+			},
+			{
+				"name": "minimatch",
+				"version": "9.0.5"
+			},
+			{
+				"name": "semver",
+				"version": "7.7.3"
+			},
+			{
+				"name": "@typescript-eslint/utils",
+				"version": "8.53.1"
+			},
+			{
+				"name": "@typescript-eslint/visitor-keys",
+				"version": "8.53.1"
+			},
+			{
+				"name": "@unrs/resolver-binding-android-arm-eabi",
+				"version": "1.11.1"
+			},
+			{
+				"name": "@unrs/resolver-binding-android-arm64",
+				"version": "1.11.1"
+			},
+			{
+				"name": "@unrs/resolver-binding-darwin-arm64",
+				"version": "1.11.1"
+			},
+			{
+				"name": "@unrs/resolver-binding-darwin-x64",
+				"version": "1.11.1"
+			},
+			{
+				"name": "@unrs/resolver-binding-freebsd-x64",
+				"version": "1.11.1"
+			},
+			{
+				"name": "@unrs/resolver-binding-linux-arm-gnueabihf",
+				"version": "1.11.1"
+			},
+			{
+				"name": "@unrs/resolver-binding-linux-arm-musleabihf",
+				"version": "1.11.1"
+			},
+			{
+				"name": "@unrs/resolver-binding-linux-arm64-gnu",
+				"version": "1.11.1"
+			},
+			{
+				"name": "@unrs/resolver-binding-linux-arm64-musl",
+				"version": "1.11.1"
+			},
+			{
+				"name": "@unrs/resolver-binding-linux-ppc64-gnu",
+				"version": "1.11.1"
+			},
+			{
+				"name": "@unrs/resolver-binding-linux-riscv64-gnu",
+				"version": "1.11.1"
+			},
+			{
+				"name": "@unrs/resolver-binding-linux-riscv64-musl",
+				"version": "1.11.1"
+			},
+			{
+				"name": "@unrs/resolver-binding-linux-s390x-gnu",
+				"version": "1.11.1"
+			},
+			{
+				"name": "@unrs/resolver-binding-linux-x64-gnu",
+				"version": "1.11.1"
+			},
+			{
+				"name": "@unrs/resolver-binding-linux-x64-musl",
+				"version": "1.11.1"
+			},
+			{
+				"name": "@unrs/resolver-binding-wasm32-wasi",
+				"version": "1.11.1"
+			},
+			{
+				"name": "@unrs/resolver-binding-win32-arm64-msvc",
+				"version": "1.11.1"
+			},
+			{
+				"name": "@unrs/resolver-binding-win32-ia32-msvc",
+				"version": "1.11.1"
+			},
+			{
+				"name": "@unrs/resolver-binding-win32-x64-msvc",
+				"version": "1.11.1"
+			},
+			{
+				"name": "@unrs/rspack-resolver-binding-darwin-arm64",
+				"version": "1.2.2"
+			},
+			{
+				"name": "@unrs/rspack-resolver-binding-darwin-x64",
+				"version": "1.2.2"
+			},
+			{
+				"name": "@unrs/rspack-resolver-binding-freebsd-x64",
+				"version": "1.2.2"
+			},
+			{
+				"name": "@unrs/rspack-resolver-binding-linux-arm-gnueabihf",
+				"version": "1.2.2"
+			},
+			{
+				"name": "@unrs/rspack-resolver-binding-linux-arm64-gnu",
+				"version": "1.2.2"
+			},
+			{
+				"name": "@unrs/rspack-resolver-binding-linux-arm64-musl",
+				"version": "1.2.2"
+			},
+			{
+				"name": "@unrs/rspack-resolver-binding-linux-x64-gnu",
+				"version": "1.2.2"
+			},
+			{
+				"name": "@unrs/rspack-resolver-binding-linux-x64-musl",
+				"version": "1.2.2"
+			},
+			{
+				"name": "@unrs/rspack-resolver-binding-wasm32-wasi",
+				"version": "1.2.2"
+			},
+			{
+				"name": "@unrs/rspack-resolver-binding-win32-arm64-msvc",
+				"version": "1.2.2"
+			},
+			{
+				"name": "@unrs/rspack-resolver-binding-win32-x64-msvc",
+				"version": "1.2.2"
+			},
+			{
+				"name": "@vitest/eslint-plugin",
+				"version": "1.5.1"
+			},
+			{
+				"name": "@whatwg-node/disposablestack",
+				"version": "0.0.6"
+			},
+			{
+				"name": "@whatwg-node/fetch",
+				"version": "0.10.5"
+			},
+			{
+				"name": "@whatwg-node/node-fetch",
+				"version": "0.7.14"
+			},
+			{
+				"name": "@whatwg-node/promise-helpers",
+				"version": "1.3.0"
+			},
+			{
+				"name": "acorn",
+				"version": "8.15.0"
+			},
+			{
+				"name": "acorn-jsx",
+				"version": "5.3.2"
+			},
+			{
+				"name": "are-docs-informative",
+				"version": "0.0.2"
+			},
+			{
+				"name": "argparse",
+				"version": "2.0.1"
+			},
+			{
+				"name": "aria-query",
+				"version": "5.3.2"
+			},
+			{
+				"name": "array-buffer-byte-length",
+				"version": "1.0.2"
+			},
+			{
+				"name": "array-includes",
+				"version": "3.1.8"
+			},
+			{
+				"name": "array-union",
+				"version": "2.1.0"
+			},
+			{
+				"name": "array.prototype.findlast",
+				"version": "1.2.5"
+			},
+			{
+				"name": "array.prototype.flat",
+				"version": "1.3.2"
+			},
+			{
+				"name": "array.prototype.flatmap",
+				"version": "1.3.3"
+			},
+			{
+				"name": "array.prototype.tosorted",
+				"version": "1.1.4"
+			},
+			{
+				"name": "arraybuffer.prototype.slice",
+				"version": "1.0.4"
+			},
+			{
+				"name": "ast-types",
+				"version": "0.16.1"
+			},
+			{
+				"name": "ast-types-flow",
+				"version": "0.0.8"
+			},
+			{
+				"name": "available-typed-arrays",
+				"version": "1.0.7"
+			},
+			{
+				"name": "axe-core",
+				"version": "4.10.0"
+			},
+			{
+				"name": "axobject-query",
+				"version": "4.1.0"
+			},
+			{
+				"name": "balanced-match",
+				"version": "1.0.2"
+			},
+			{
+				"name": "baseline-browser-mapping",
+				"version": "2.8.24"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "1.1.12"
+			},
+			{
+				"name": "braces",
+				"version": "3.0.3"
+			},
+			{
+				"name": "browserslist",
+				"version": "4.27.0"
+			},
+			{
+				"name": "builtin-modules",
+				"version": "5.0.0"
+			},
+			{
+				"name": "busboy",
+				"version": "1.6.0"
+			},
+			{
+				"name": "call-bind",
+				"version": "1.0.8"
+			},
+			{
+				"name": "call-bind-apply-helpers",
+				"version": "1.0.2"
+			},
+			{
+				"name": "call-bound",
+				"version": "1.0.4"
+			},
+			{
+				"name": "callsites",
+				"version": "3.1.0"
+			},
+			{
+				"name": "caniuse-lite",
+				"version": "1.0.30001753"
+			},
+			{
+				"name": "change-case",
+				"version": "5.4.4"
+			},
+			{
+				"name": "ci-info",
+				"version": "4.3.1"
+			},
+			{
+				"name": "clean-regexp",
+				"version": "1.0.0"
+			},
+			{
+				"name": "escape-string-regexp",
+				"version": "1.0.5"
+			},
+			{
+				"name": "comment-parser",
+				"version": "1.4.1"
+			},
+			{
+				"name": "concat-map",
+				"version": "0.0.1"
+			},
+			{
+				"name": "convert-source-map",
+				"version": "2.0.0"
+			},
+			{
+				"name": "core-js-compat",
+				"version": "3.46.0"
+			},
+			{
+				"name": "create-eslint-index",
+				"version": "1.0.0"
+			},
+			{
+				"name": "cross-inspect",
+				"version": "1.0.1"
+			},
+			{
+				"name": "damerau-levenshtein",
+				"version": "1.0.8"
+			},
+			{
+				"name": "data-uri-to-buffer",
+				"version": "4.0.1"
+			},
+			{
+				"name": "data-view-buffer",
+				"version": "1.0.2"
+			},
+			{
+				"name": "data-view-byte-length",
+				"version": "1.0.2"
+			},
+			{
+				"name": "data-view-byte-offset",
+				"version": "1.0.1"
+			},
+			{
+				"name": "dataloader",
+				"version": "2.2.3"
+			},
+			{
+				"name": "debug",
+				"version": "4.4.3"
+			},
+			{
+				"name": "deepmerge-ts",
+				"version": "7.1.5"
+			},
+			{
+				"name": "define-data-property",
+				"version": "1.1.4"
+			},
+			{
+				"name": "define-properties",
+				"version": "1.2.1"
+			},
+			{
+				"name": "diff-sequences",
+				"version": "27.5.1"
+			},
+			{
+				"name": "dir-glob",
+				"version": "3.0.1"
+			},
+			{
+				"name": "doctrine",
+				"version": "3.0.0"
+			},
+			{
+				"name": "dset",
+				"version": "3.1.4"
+			},
+			{
+				"name": "dunder-proto",
+				"version": "1.0.1"
+			},
+			{
+				"name": "electron-to-chromium",
+				"version": "1.5.244"
+			},
+			{
+				"name": "enhance-visitors",
+				"version": "1.0.0"
+			},
+			{
+				"name": "enhanced-resolve",
+				"version": "5.17.1"
+			},
+			{
+				"name": "error-ex",
+				"version": "1.3.2"
+			},
+			{
+				"name": "es-abstract",
+				"version": "1.23.9"
+			},
+			{
+				"name": "es-define-property",
+				"version": "1.0.1"
+			},
+			{
+				"name": "es-errors",
+				"version": "1.3.0"
+			},
+			{
+				"name": "es-iterator-helpers",
+				"version": "1.2.1"
+			},
+			{
+				"name": "es-module-lexer",
+				"version": "1.5.4"
+			},
+			{
+				"name": "es-object-atoms",
+				"version": "1.1.1"
+			},
+			{
+				"name": "es-set-tostringtag",
+				"version": "2.1.0"
+			},
+			{
+				"name": "es-shim-unscopables",
+				"version": "1.0.2"
+			},
+			{
+				"name": "es-to-primitive",
+				"version": "1.3.0"
+			},
+			{
+				"name": "escalade",
+				"version": "3.2.0"
+			},
+			{
+				"name": "escape-string-regexp",
+				"version": "4.0.0"
+			},
+			{
+				"name": "eslint-ast-utils",
+				"version": "1.1.0"
+			},
+			{
+				"name": "eslint-compat-utils",
+				"version": "0.5.1"
+			},
+			{
+				"name": "semver",
+				"version": "7.6.2"
+			},
+			{
+				"name": "eslint-config-prettier",
+				"version": "10.1.8"
+			},
+			{
+				"name": "eslint-import-context",
+				"version": "0.1.9"
+			},
+			{
+				"name": "eslint-import-resolver-typescript",
+				"version": "4.4.4"
+			},
+			{
+				"name": "is-bun-module",
+				"version": "2.0.0"
+			},
+			{
+				"name": "semver",
+				"version": "7.7.2"
+			},
+			{
+				"name": "eslint-json-compat-utils",
+				"version": "0.2.1"
+			},
+			{
+				"name": "eslint-module-utils",
+				"version": "2.12.0"
+			},
+			{
+				"name": "debug",
+				"version": "3.2.7"
+			},
+			{
+				"name": "eslint-plugin-ava",
+				"version": "15.1.0"
+			},
+			{
+				"name": "espurify",
+				"version": "2.1.1"
+			},
+			{
+				"name": "eslint-plugin-canonical",
+				"version": "5.1.3"
+			},
+			{
+				"name": "eslint-import-resolver-typescript",
+				"version": "3.9.1"
+			},
+			{
+				"name": "eslint-plugin-es-x",
+				"version": "7.8.0"
+			},
+			{
+				"name": "eslint-plugin-fp",
+				"version": "2.3.0"
+			},
+			{
+				"name": "eslint-plugin-functional",
+				"version": "9.0.2"
+			},
+			{
+				"name": "escape-string-regexp",
+				"version": "5.0.0"
+			},
+			{
+				"name": "eslint-plugin-import",
+				"version": "4.16.1"
+			},
+			{
+				"name": "minimatch",
+				"version": "10.0.1"
+			},
+			{
+				"name": "eslint-plugin-jest",
+				"version": "28.11.0"
+			},
+			{
+				"name": "eslint-plugin-jsdoc",
+				"version": "50.6.8"
+			},
+			{
+				"name": "eslint-visitor-keys",
+				"version": "4.0.0"
+			},
+			{
+				"name": "espree",
+				"version": "10.1.0"
+			},
+			{
+				"name": "semver",
+				"version": "7.6.3"
+			},
+			{
+				"name": "spdx-expression-parse",
+				"version": "4.0.0"
+			},
+			{
+				"name": "synckit",
+				"version": "0.9.1"
+			},
+			{
+				"name": "eslint-plugin-jsonc",
+				"version": "2.21.0"
+			},
+			{
+				"name": "eslint-compat-utils",
+				"version": "0.6.5"
+			},
+			{
+				"name": "eslint-plugin-jsx-a11y",
+				"version": "6.10.2"
+			},
+			{
+				"name": "emoji-regex",
+				"version": "9.2.2"
+			},
+			{
+				"name": "eslint-plugin-lodash",
+				"version": "8.0.0"
+			},
+			{
+				"name": "eslint-plugin-mocha",
+				"version": "10.5.0"
+			},
+			{
+				"name": "globals",
+				"version": "13.24.0"
+			},
+			{
+				"name": "type-fest",
+				"version": "0.20.2"
+			},
+			{
+				"name": "eslint-plugin-modules-newline",
+				"version": "0.0.6"
+			},
+			{
+				"name": "eslint-plugin-n",
+				"version": "17.23.2"
+			},
+			{
+				"name": "globals",
+				"version": "15.15.0"
+			},
+			{
+				"name": "eslint-plugin-perfectionist",
+				"version": "5.4.0"
+			},
+			{
+				"name": "eslint-plugin-prettier",
+				"version": "5.5.5"
+			},
+			{
+				"name": "eslint-plugin-promise",
+				"version": "7.2.1"
+			},
+			{
+				"name": "eslint-plugin-react",
+				"version": "7.37.5"
+			},
+			{
+				"name": "eslint-plugin-react-hooks",
+				"version": "7.0.1"
+			},
+			{
+				"name": "doctrine",
+				"version": "2.1.0"
+			},
+			{
+				"name": "resolve",
+				"version": "2.0.0-next.5"
+			},
+			{
+				"name": "eslint-plugin-regexp",
+				"version": "3.0.0"
+			},
+			{
+				"name": "jsdoc-type-pratt-parser",
+				"version": "7.1.0"
+			},
+			{
+				"name": "eslint-plugin-unicorn",
+				"version": "62.0.0"
+			},
+			{
+				"name": "eslint-plugin-yml",
+				"version": "3.0.0"
+			},
+			{
+				"name": "@eslint/core",
+				"version": "1.0.1"
+			},
+			{
+				"name": "@eslint/plugin-kit",
+				"version": "0.5.1"
+			},
+			{
+				"name": "diff-sequences",
+				"version": "29.6.3"
+			},
+			{
+				"name": "eslint-plugin-zod",
+				"version": "3.0.2"
+			},
+			{
+				"name": "eslint-utils",
+				"version": "3.0.0"
+			},
+			{
+				"name": "eslint-visitor-keys",
+				"version": "2.1.0"
+			},
+			{
+				"name": "espree",
+				"version": "9.6.1"
+			},
+			{
+				"name": "eslint-visitor-keys",
+				"version": "3.4.1"
+			},
+			{
+				"name": "esprima",
+				"version": "4.0.1"
+			},
+			{
+				"name": "esquery",
+				"version": "1.6.0"
+			},
+			{
+				"name": "estraverse",
+				"version": "5.3.0"
+			},
+			{
+				"name": "esutils",
+				"version": "2.0.3"
+			},
+			{
+				"name": "fast-diff",
+				"version": "1.2.0"
+			},
+			{
+				"name": "fast-glob",
+				"version": "3.3.3"
+			},
+			{
+				"name": "fast-printf",
+				"version": "1.6.10"
+			},
+			{
+				"name": "fastq",
+				"version": "1.13.0"
+			},
+			{
+				"name": "fdir",
+				"version": "6.5.0"
+			},
+			{
+				"name": "fetch-blob",
+				"version": "3.2.0"
+			},
+			{
+				"name": "fill-range",
+				"version": "7.1.1"
+			},
+			{
+				"name": "find-up",
+				"version": "5.0.0"
+			},
+			{
+				"name": "find-up-simple",
+				"version": "1.0.1"
+			},
+			{
+				"name": "for-each",
+				"version": "0.3.3"
+			},
+			{
+				"name": "formdata-polyfill",
+				"version": "4.0.10"
+			},
+			{
+				"name": "function-bind",
+				"version": "1.1.2"
+			},
+			{
+				"name": "function.prototype.name",
+				"version": "1.1.8"
+			},
+			{
+				"name": "functions-have-names",
+				"version": "1.2.3"
+			},
+			{
+				"name": "gensync",
+				"version": "1.0.0-beta.2"
+			},
+			{
+				"name": "get-intrinsic",
+				"version": "1.3.0"
+			},
+			{
+				"name": "get-proto",
+				"version": "1.0.1"
+			},
+			{
+				"name": "get-set-props",
+				"version": "0.1.0"
+			},
+			{
+				"name": "get-symbol-description",
+				"version": "1.1.0"
+			},
+			{
+				"name": "get-tsconfig",
+				"version": "4.10.1"
+			},
+			{
+				"name": "glob-parent",
+				"version": "5.1.2"
+			},
+			{
+				"name": "globals",
+				"version": "16.5.0"
+			},
+			{
+				"name": "globalthis",
+				"version": "1.0.4"
+			},
+			{
+				"name": "globby",
+				"version": "11.1.0"
+			},
+			{
+				"name": "globrex",
+				"version": "0.1.2"
+			},
+			{
+				"name": "gopd",
+				"version": "1.2.0"
+			},
+			{
+				"name": "graceful-fs",
+				"version": "4.2.10"
+			},
+			{
+				"name": "graphemer",
+				"version": "1.4.0"
+			},
+			{
+				"name": "graphql",
+				"version": "16.12.0"
+			},
+			{
+				"name": "graphql-config",
+				"version": "5.1.3"
+			},
+			{
+				"name": "cosmiconfig",
+				"version": "8.3.6"
+			},
+			{
+				"name": "parse-json",
+				"version": "5.2.0"
+			},
+			{
+				"name": "graphql-depth-limit",
+				"version": "1.1.0"
+			},
+			{
+				"name": "arrify",
+				"version": "1.0.1"
+			},
+			{
+				"name": "graphql-ws",
+				"version": "6.0.4"
+			},
+			{
+				"name": "has",
+				"version": "1.0.3"
+			},
+			{
+				"name": "has-bigints",
+				"version": "1.1.0"
+			},
+			{
+				"name": "has-property-descriptors",
+				"version": "1.0.2"
+			},
+			{
+				"name": "has-proto",
+				"version": "1.2.0"
+			},
+			{
+				"name": "has-symbols",
+				"version": "1.1.0"
+			},
+			{
+				"name": "has-tostringtag",
+				"version": "1.0.2"
+			},
+			{
+				"name": "hasown",
+				"version": "2.0.2"
+			},
+			{
+				"name": "hermes-estree",
+				"version": "0.25.1"
+			},
+			{
+				"name": "hermes-parser",
+				"version": "0.25.1"
+			},
+			{
+				"name": "ignore",
+				"version": "5.3.2"
+			},
+			{
+				"name": "import-fresh",
+				"version": "3.3.0"
+			},
+			{
+				"name": "resolve-from",
+				"version": "4.0.0"
+			},
+			{
+				"name": "import-modules",
+				"version": "2.1.0"
+			},
+			{
+				"name": "indent-string",
+				"version": "5.0.0"
+			},
+			{
+				"name": "internal-slot",
+				"version": "1.1.0"
+			},
+			{
+				"name": "is-array-buffer",
+				"version": "3.0.5"
+			},
+			{
+				"name": "is-arrayish",
+				"version": "0.2.1"
+			},
+			{
+				"name": "is-async-function",
+				"version": "2.1.0"
+			},
+			{
+				"name": "is-bigint",
+				"version": "1.1.0"
+			},
+			{
+				"name": "is-boolean-object",
+				"version": "1.2.1"
+			},
+			{
+				"name": "is-builtin-module",
+				"version": "5.0.0"
+			},
+			{
+				"name": "is-bun-module",
+				"version": "1.3.0"
+			},
+			{
+				"name": "is-callable",
+				"version": "1.2.7"
+			},
+			{
+				"name": "is-core-module",
+				"version": "2.13.0"
+			},
+			{
+				"name": "is-data-view",
+				"version": "1.0.2"
+			},
+			{
+				"name": "is-date-object",
+				"version": "1.1.0"
+			},
+			{
+				"name": "is-extglob",
+				"version": "2.1.1"
+			},
+			{
+				"name": "is-finalizationregistry",
+				"version": "1.1.1"
+			},
+			{
+				"name": "is-generator-function",
+				"version": "1.1.0"
+			},
+			{
+				"name": "is-get-set-prop",
+				"version": "1.0.0"
+			},
+			{
+				"name": "lowercase-keys",
+				"version": "1.0.1"
+			},
+			{
+				"name": "is-glob",
+				"version": "4.0.3"
+			},
+			{
+				"name": "is-immutable-type",
+				"version": "5.0.1"
+			},
+			{
+				"name": "is-js-type",
+				"version": "2.0.0"
+			},
+			{
+				"name": "is-map",
+				"version": "2.0.3"
+			},
+			{
+				"name": "is-number",
+				"version": "7.0.0"
+			},
+			{
+				"name": "is-number-object",
+				"version": "1.1.1"
+			},
+			{
+				"name": "is-obj-prop",
+				"version": "1.0.0"
+			},
+			{
+				"name": "is-proto-prop",
+				"version": "2.0.0"
+			},
+			{
+				"name": "is-regex",
+				"version": "1.2.1"
+			},
+			{
+				"name": "is-set",
+				"version": "2.0.3"
+			},
+			{
+				"name": "is-shared-array-buffer",
+				"version": "1.0.4"
+			},
+			{
+				"name": "is-string",
+				"version": "1.1.1"
+			},
+			{
+				"name": "is-symbol",
+				"version": "1.1.1"
+			},
+			{
+				"name": "is-typed-array",
+				"version": "1.1.15"
+			},
+			{
+				"name": "is-weakmap",
+				"version": "2.0.2"
+			},
+			{
+				"name": "is-weakref",
+				"version": "1.1.0"
+			},
+			{
+				"name": "is-weakset",
+				"version": "2.0.4"
+			},
+			{
+				"name": "isomorphic-ws",
+				"version": "5.0.0"
+			},
+			{
+				"name": "iterator.prototype",
+				"version": "1.1.5"
+			},
+			{
+				"name": "jiti",
+				"version": "2.4.2"
+			},
+			{
+				"name": "js-tokens",
+				"version": "4.0.0"
+			},
+			{
+				"name": "js-types",
+				"version": "1.0.0"
+			},
+			{
+				"name": "js-yaml",
+				"version": "4.1.0"
+			},
+			{
+				"name": "jsdoc-type-pratt-parser",
+				"version": "4.1.0"
+			},
+			{
+				"name": "jsesc",
+				"version": "3.1.0"
+			},
+			{
+				"name": "json-parse-even-better-errors",
+				"version": "2.3.1"
+			},
+			{
+				"name": "json5",
+				"version": "2.2.3"
+			},
+			{
+				"name": "jsonc-eslint-parser",
+				"version": "2.4.0"
+			},
+			{
+				"name": "eslint-visitor-keys",
+				"version": "3.3.0"
+			},
+			{
+				"name": "jsx-ast-utils",
+				"version": "3.3.5"
+			},
+			{
+				"name": "language-subtag-registry",
+				"version": "0.3.22"
+			},
+			{
+				"name": "language-tags",
+				"version": "1.0.9"
+			},
+			{
+				"name": "levn",
+				"version": "0.4.1"
+			},
+			{
+				"name": "lines-and-columns",
+				"version": "1.1.6"
+			},
+			{
+				"name": "locate-path",
+				"version": "6.0.0"
+			},
+			{
+				"name": "lodash",
+				"version": "4.17.21"
+			},
+			{
+				"name": "lodash.get",
+				"version": "4.4.2"
+			},
+			{
+				"name": "lodash.lowercase",
+				"version": "4.3.0"
+			},
+			{
+				"name": "lodash.zip",
+				"version": "4.2.0"
+			},
+			{
+				"name": "loose-envify",
+				"version": "1.4.0"
+			},
+			{
+				"name": "math-intrinsics",
+				"version": "1.1.0"
+			},
+			{
+				"name": "merge2",
+				"version": "1.4.1"
+			},
+			{
+				"name": "meros",
+				"version": "1.3.0"
+			},
+			{
+				"name": "micro-spelling-correcter",
+				"version": "1.1.1"
+			},
+			{
+				"name": "micromatch",
+				"version": "4.0.8"
+			},
+			{
+				"name": "picomatch",
+				"version": "2.3.1"
+			},
+			{
+				"name": "minimatch",
+				"version": "3.1.2"
+			},
+			{
+				"name": "minimist",
+				"version": "1.2.6"
+			},
+			{
+				"name": "ms",
+				"version": "2.1.3"
+			},
+			{
+				"name": "napi-postinstall",
+				"version": "0.3.3"
+			},
+			{
+				"name": "natural-compare",
+				"version": "1.4.0"
+			},
+			{
+				"name": "natural-orderby",
+				"version": "5.0.0"
+			},
+			{
+				"name": "node-domexception",
+				"version": "1.0.0"
+			},
+			{
+				"name": "node-releases",
+				"version": "2.0.27"
+			},
+			{
+				"name": "normalize-path",
+				"version": "2.1.1"
+			},
+			{
+				"name": "obj-props",
+				"version": "1.3.0"
+			},
+			{
+				"name": "object-assign",
+				"version": "4.1.1"
+			},
+			{
+				"name": "object-inspect",
+				"version": "1.13.3"
+			},
+			{
+				"name": "object-keys",
+				"version": "1.1.1"
+			},
+			{
+				"name": "object.assign",
+				"version": "4.1.7"
+			},
+			{
+				"name": "object.entries",
+				"version": "1.1.9"
+			},
+			{
+				"name": "object.fromentries",
+				"version": "2.0.8"
+			},
+			{
+				"name": "object.values",
+				"version": "1.2.1"
+			},
+			{
+				"name": "own-keys",
+				"version": "1.0.1"
+			},
+			{
+				"name": "p-limit",
+				"version": "3.1.0"
+			},
+			{
+				"name": "p-locate",
+				"version": "5.0.0"
+			},
+			{
+				"name": "parent-module",
+				"version": "1.0.1"
+			},
+			{
+				"name": "parse-imports",
+				"version": "2.1.1"
+			},
+			{
+				"name": "path-exists",
+				"version": "4.0.0"
+			},
+			{
+				"name": "path-parse",
+				"version": "1.0.7"
+			},
+			{
+				"name": "path-type",
+				"version": "4.0.0"
+			},
+			{
+				"name": "picocolors",
+				"version": "1.1.1"
+			},
+			{
+				"name": "picomatch",
+				"version": "4.0.3"
+			},
+			{
+				"name": "pkg-dir",
+				"version": "5.0.0"
+			},
+			{
+				"name": "pluralize",
+				"version": "8.0.0"
+			},
+			{
+				"name": "possible-typed-array-names",
+				"version": "1.0.0"
+			},
+			{
+				"name": "prelude-ls",
+				"version": "1.2.1"
+			},
+			{
+				"name": "prettier",
+				"version": "3.7.4"
+			},
+			{
+				"name": "prettier-linter-helpers",
+				"version": "1.0.1"
+			},
+			{
+				"name": "prop-types",
+				"version": "15.8.1"
+			},
+			{
+				"name": "proto-props",
+				"version": "2.0.0"
+			},
+			{
+				"name": "queue-microtask",
+				"version": "1.2.3"
+			},
+			{
+				"name": "rambda",
+				"version": "7.5.0"
+			},
+			{
+				"name": "ramda",
+				"version": "0.32.0"
+			},
+			{
+				"name": "react-is",
+				"version": "16.13.1"
+			},
+			{
+				"name": "recast",
+				"version": "0.23.9"
+			},
+			{
+				"name": "refa",
+				"version": "0.12.1"
+			},
+			{
+				"name": "reflect.getprototypeof",
+				"version": "1.0.10"
+			},
+			{
+				"name": "regexp-ast-analysis",
+				"version": "0.7.1"
+			},
+			{
+				"name": "regexp-tree",
+				"version": "0.1.27"
+			},
+			{
+				"name": "regexp.prototype.flags",
+				"version": "1.5.4"
+			},
+			{
+				"name": "regjsparser",
+				"version": "0.13.0"
+			},
+			{
+				"name": "remove-trailing-separator",
+				"version": "1.1.0"
+			},
+			{
+				"name": "req-all",
+				"version": "0.1.0"
+			},
+			{
+				"name": "requireindex",
+				"version": "1.1.0"
+			},
+			{
+				"name": "resolve-from",
+				"version": "5.0.0"
+			},
+			{
+				"name": "resolve-pkg-maps",
+				"version": "1.0.0"
+			},
+			{
+				"name": "reusify",
+				"version": "1.0.4"
+			},
+			{
+				"name": "roarr",
+				"version": "7.21.1"
+			},
+			{
+				"name": "rspack-resolver",
+				"version": "1.2.2"
+			},
+			{
+				"name": "run-parallel",
+				"version": "1.2.0"
+			},
+			{
+				"name": "safe-array-concat",
+				"version": "1.1.3"
+			},
+			{
+				"name": "isarray",
+				"version": "2.0.5"
+			},
+			{
+				"name": "safe-push-apply",
+				"version": "1.0.0"
+			},
+			{
+				"name": "safe-regex-test",
+				"version": "1.1.0"
+			},
+			{
+				"name": "safe-stable-stringify",
+				"version": "2.5.0"
+			},
+			{
+				"name": "scslre",
+				"version": "0.3.0"
+			},
+			{
+				"name": "semver",
+				"version": "6.3.1"
+			},
+			{
+				"name": "semver-compare",
+				"version": "1.0.0"
+			},
+			{
+				"name": "set-function-length",
+				"version": "1.2.2"
+			},
+			{
+				"name": "set-function-name",
+				"version": "2.0.2"
+			},
+			{
+				"name": "set-proto",
+				"version": "1.0.0"
+			},
+			{
+				"name": "side-channel",
+				"version": "1.1.0"
+			},
+			{
+				"name": "side-channel-list",
+				"version": "1.0.0"
+			},
+			{
+				"name": "side-channel-map",
+				"version": "1.0.1"
+			},
+			{
+				"name": "side-channel-weakmap",
+				"version": "1.0.2"
+			},
+			{
+				"name": "slash",
+				"version": "3.0.0"
+			},
+			{
+				"name": "slashes",
+				"version": "3.0.12"
+			},
+			{
+				"name": "source-map",
+				"version": "0.6.1"
+			},
+			{
+				"name": "spdx-exceptions",
+				"version": "2.3.0"
+			},
+			{
+				"name": "spdx-license-ids",
+				"version": "3.0.11"
+			},
+			{
+				"name": "stable-hash",
+				"version": "0.0.5"
+			},
+			{
+				"name": "stable-hash-x",
+				"version": "0.2.0"
+			},
+			{
+				"name": "streamsearch",
+				"version": "1.1.0"
+			},
+			{
+				"name": "string-env-interpolation",
+				"version": "1.0.1"
+			},
+			{
+				"name": "string.prototype.includes",
+				"version": "2.0.1"
+			},
+			{
+				"name": "string.prototype.matchall",
+				"version": "4.0.12"
+			},
+			{
+				"name": "string.prototype.repeat",
+				"version": "1.0.0"
+			},
+			{
+				"name": "string.prototype.trim",
+				"version": "1.2.10"
+			},
+			{
+				"name": "string.prototype.trimend",
+				"version": "1.0.9"
+			},
+			{
+				"name": "string.prototype.trimstart",
+				"version": "1.0.8"
+			},
+			{
+				"name": "strip-bom",
+				"version": "3.0.0"
+			},
+			{
+				"name": "strip-indent",
+				"version": "4.1.1"
+			},
+			{
+				"name": "supports-preserve-symlinks-flag",
+				"version": "1.0.0"
+			},
+			{
+				"name": "sync-fetch",
+				"version": "0.6.0-2"
+			},
+			{
+				"name": "node-fetch",
+				"version": "3.3.2"
+			},
+			{
+				"name": "synckit",
+				"version": "0.11.12"
+			},
+			{
+				"name": "@pkgr/core",
+				"version": "0.2.9"
+			},
+			{
+				"name": "tapable",
+				"version": "2.2.1"
+			},
+			{
+				"name": "timeout-signal",
+				"version": "2.0.0"
+			},
+			{
+				"name": "tiny-invariant",
+				"version": "1.3.3"
+			},
+			{
+				"name": "tinyglobby",
+				"version": "0.2.15"
+			},
+			{
+				"name": "to-regex-range",
+				"version": "5.0.1"
+			},
+			{
+				"name": "ts-api-utils",
+				"version": "2.4.0"
+			},
+			{
+				"name": "ts-declaration-location",
+				"version": "1.0.6"
+			},
+			{
+				"name": "tsconfig-paths",
+				"version": "4.2.0"
+			},
+			{
+				"name": "tslib",
+				"version": "2.8.1"
+			},
+			{
+				"name": "type-check",
+				"version": "0.4.0"
+			},
+			{
+				"name": "typed-array-buffer",
+				"version": "1.0.3"
+			},
+			{
+				"name": "typed-array-byte-length",
+				"version": "1.0.3"
+			},
+			{
+				"name": "typed-array-byte-offset",
+				"version": "1.0.4"
+			},
+			{
+				"name": "typed-array-length",
+				"version": "1.0.7"
+			},
+			{
+				"name": "unbox-primitive",
+				"version": "1.1.0"
+			},
+			{
+				"name": "undici-types",
+				"version": "6.20.0"
+			},
+			{
+				"name": "unixify",
+				"version": "1.0.0"
+			},
+			{
+				"name": "unrs-resolver",
+				"version": "1.11.1"
+			},
+			{
+				"name": "update-browserslist-db",
+				"version": "1.1.4"
+			},
+			{
+				"name": "urlpattern-polyfill",
+				"version": "10.0.0"
+			},
+			{
+				"name": "web-streams-polyfill",
+				"version": "3.3.3"
+			},
+			{
+				"name": "whatwg-mimetype",
+				"version": "4.0.0"
+			},
+			{
+				"name": "which-boxed-primitive",
+				"version": "1.1.1"
+			},
+			{
+				"name": "which-builtin-type",
+				"version": "1.2.1"
+			},
+			{
+				"name": "which-collection",
+				"version": "1.0.2"
+			},
+			{
+				"name": "which-typed-array",
+				"version": "1.1.18"
+			},
+			{
+				"name": "ws",
+				"version": "8.18.1"
+			},
+			{
+				"name": "yaml",
+				"version": "2.8.2"
+			},
+			{
+				"name": "yaml-eslint-parser",
+				"version": "2.0.0"
+			},
+			{
+				"name": "eslint-visitor-keys",
+				"version": "5.0.0"
+			},
+			{
+				"name": "yocto-queue",
+				"version": "0.1.0"
+			},
+			{
+				"name": "zod",
+				"version": "4.3.6"
+			},
+			{
+				"name": "zod-validation-error",
+				"version": "3.5.3"
+			}
+		]
+	}
+]
