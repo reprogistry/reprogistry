@@ -1,0 +1,107 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-19T01:07:21.741Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:2.15.5",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "cleave.js@0.0.3",
+			"name": "cleave.js",
+			"version": "0.0.3",
+			"location": "https://registry.npmjs.org/cleave.js/-/cleave.js-0.0.3.tgz",
+			"integrity": "sha512-oCSBClbVp8B+v5Tun31NrqLTsco1wbmgKTN7hU0bL+w5sFIBNGce3HLHup9+PNZXD7A9C77Qf0wpIEOGMHYv8g==",
+			"publishedAt": "2016-06-07T08:43:08.054Z",
+			"publishedWith": {
+				"node": "4.4.5",
+				"npm": "2.15.5"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "https://github.com/nosir/cleave.js.git",
+			"spec": "github:nosir/cleave.js#fab652a91e10017b896de70cd95da1914e9323d6"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".npmignore": {
+					"match": false,
+					"packageHash": "478ac7e65f067e55020d191524f990767c654af7e5fa5fb1bdd57e24e94b6828",
+					"size": 52,
+					"status": "missing-in-source"
+				},
+				"gulp-tasks/test.js": {
+					"diff": "--- published/gulp-tasks/test.js\n+++ rebuilt/gulp-tasks/test.js\n@@ -2,7 +2,7 @@\n var mocha = require('gulp-mocha');\n \n gulp.task('test:phone', function () {\n-    return gulp.src('./test/PhoneFormatter_spec.js', {read: false})\n+    return gulp.src('./test/PhoneNumberFormatter_spec.js', {read: false})\n         // gulp-mocha needs filepaths so you can't have any plugins before it\n         .pipe(mocha({reporter: 'spec'}));\n });\n",
+					"match": false,
+					"packageHash": "63426d2672265762784928a462c6ad8c9839a421419fadae4719e7b88ee60518",
+					"size": 750,
+					"sourceHash": "1d499f1f792655573f170d36106c9b22f039b2e2da522b8eeb1f5988f8ce9c33",
+					"status": "content"
+				},
+				"src/Cleave.js": {
+					"diff": "--- published/src/Cleave.js\n+++ rebuilt/src/Cleave.js\n@@ -27,26 +27,19 @@\n \n     opts = opts || {};\n \n-    // credit card\n-    owner.creditCard = !!opts.creditCard;\n-    owner.creditCardStrictMode = !!opts.creditCardStrictMode;\n+    owner.prefix = opts.prefix || '';\n \n-    // phone\n-    owner.phone = !!opts.phone;\n-    owner.phoneRegionCode = opts.phoneRegionCode || '';\n-    owner.phoneFormatter = {};\n+    owner.delimiter = opts.delimiter || ' ';\n+    owner.delimiterRE = new RegExp(owner.delimiter, \"g\");\n \n-    // date\n-    owner.date = !!opts.date;\n-    owner.datePattern = opts.datePattern || ['d', 'm', 'Y'];\n-    owner.dateFormatter = {};\n+    owner.regionCode = opts.regionCode || '';\n \n-    owner.numericOnly = owner.creditCard || owner.date || !!opts.numericOnly;\n+    owner.creditCard = !!opts.creditCard;\n+    owner.creditCardStrictMode = !!opts.creditCardStrictMode;\n \n-    owner.prefix = opts.prefix || '';\n+    owner.numericOnly = owner.creditCard || !!owner.numericOnly;\n \n-    owner.delimiter = opts.delimiter || (owner.date ? '/' : ' ');\n-    owner.delimiterRE = new RegExp(owner.delimiter, \"g\");\n+    owner.phone = !!opts.phone;\n \n     owner.blocks = opts.blocks || [];\n     owner.blocksLength = owner.blocks.length;\n@@ -74,7 +67,7 @@\n         var owner = this;\n \n         // so no need for this lib at all\n-        if (!owner.phone && !owner.creditCard && !owner.date && owner.blocks.length === 0) {\n+        if (!owner.phone && !owner.creditCard && owner.blocks.length === 0) {\n             return;\n         }\n \n@@ -83,26 +76,12 @@\n \n         owner.element.value = owner.prefix;\n \n-        owner.initPhoneFormatter();\n-        owner.initDateFormatter();\n+        owner.initPhoneNumberFormatter();\n \n         owner.onInput();\n     },\n \n-    initDateFormatter: function () {\n-        var owner = this;\n-\n-        if (!owner.date) {\n-            return;\n-        }\n-\n-        owner.dateFormatter = new Cleave.DateFormatter(owner.datePattern);\n-        owner.blocks = owner.dateFormatter.getBlocks();\n-        owner.blocksLength = owner.blocks.length;\n-        owner.maxLength = owner.getMaxLength();\n-    },\n-\n-    initPhoneFormatter: function () {\n+    initPhoneNumberFormatter: function () {\n         var owner = this;\n \n         if (!owner.phone) {\n@@ -112,8 +91,8 @@\n         // Cleave.AsYouTypeFormatter should be provided by\n         // external google closure lib\n         try {\n-            owner.phoneFormatter = new Cleave.PhoneFormatter(\n-                new window.Cleave.AsYouTypeFormatter(owner.phoneRegionCode),\n+            owner.phoneNumberFormatter = new Cleave.PhoneNumberFormatter(\n+                new window.Cleave.AsYouTypeFormatter(owner.regionCode),\n                 owner.delimiter\n             );\n         } catch (ex) {\n@@ -157,16 +136,11 @@\n \n         // phone formatter\n         if (owner.phone) {\n-            owner.element.value = owner.phoneFormatter.format(value);\n+            owner.element.value = owner.phoneNumberFormatter.format(value);\n \n             return;\n         }\n \n-        // date\n-        if (owner.date) {\n-            value = owner.dateFormatter.getValidatedDate(value);\n-        }\n",
+					"match": false,
+					"packageHash": "c5620dd2ef78d59ace2b2a065bff4b9f0cd6b85f6aa19d3707c16af1d09ac63f",
+					"size": 6954,
+					"sourceHash": "6d1f7f2f3f4ed3a367179910f74ec3409b0ce0f4e15a8bf05ff2f63afd0d038f",
+					"status": "content"
+				},
+				"src/shortcuts/DateFormatter.js": {
+					"match": false,
+					"packageHash": "2121a9776e65e6945c7cc991a9e84de287be1ac04e7b4603b0ce754830005e0a",
+					"size": 1690,
+					"status": "missing-in-source"
+				},
+				"src/shortcuts/PhoneFormatter.js": {
+					"match": false,
+					"packageHash": "f42a8de61bd5a0b726a33b7bbf75c5c2ffff2322b35636c69919f79eb1ee1bea",
+					"size": 1814,
+					"status": "missing-in-source"
+				},
+				"test/DateFormatter_spec.js": {
+					"match": false,
+					"packageHash": "7c4af734c0d036661ca5d8de2840805a201ee2e0a0d20baa859b0de4960cdac0",
+					"size": 566,
+					"status": "missing-in-source"
+				},
+				"test/PhoneFormatter_spec.js": {
+					"match": false,
+					"packageHash": "e0b0c38cde1897ce591caf4d257085bed03a0e6bb62e0339935fc768ac0a17cc",
+					"size": 1420,
+					"status": "missing-in-source"
+				},
+				"test/fixtures/date.json": {
+					"match": false,
+					"packageHash": "fe72b36df12853a23c06b429e0265a04b989550819912e28a2a9332033c918d1",
+					"size": 963,
+					"status": "missing-in-source"
+				},
+				"dist/cleave.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shortcuts/PhoneNumberFormatter.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/PhoneNumberFormatter_spec.js": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 258,
+				"missingInPackage": 3,
+				"missingInSource": 6,
+				"score": 0.9591078066914498,
+				"totalFiles": 269
+			}
+		},
+		"prodDependencies": []
+	}
+]
