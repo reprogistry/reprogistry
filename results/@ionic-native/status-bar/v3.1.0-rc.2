@@ -1,0 +1,77 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-19T18:53:31.983Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:4.0.5",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "@ionic-native/status-bar@3.1.0-rc.2",
+			"name": "@ionic-native/status-bar",
+			"version": "3.1.0-rc.2",
+			"location": "https://registry.npmjs.org/@ionic-native/status-bar/-/status-bar-3.1.0-rc.2.tgz",
+			"integrity": "sha512-JY5WVzXjz635xT04OmM+5CYX0qH9/Ph87haVBLTq9D+gu0TAbBanesFsxk27mOolmg6645IzLs//jk2T96kEsA==",
+			"publishedAt": "2017-03-10T16:08:10.746Z",
+			"publishedWith": {
+				"node": "7.4.0",
+				"npm": "4.0.5"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/driftyco/ionic-native.git",
+			"spec": "github:driftyco/ionic-native#v3.1.0-rc.2"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"index.d.ts": {
+					"match": false,
+					"packageHash": "716d0b7c69ea932ba5dfb0a41beb5e933bd48486e202e0e1755d6da9eb2c49fd",
+					"size": 2314,
+					"status": "missing-in-source"
+				},
+				"index.js": {
+					"match": false,
+					"packageHash": "793defcb9375ad4639d7a40e10ee5d98e66464206b70938afd6a71ebc7f25c01",
+					"size": 6604,
+					"status": "missing-in-source"
+				},
+				"index.metadata.json": {
+					"match": false,
+					"packageHash": "88cc76f036b7fb2428f1f93d6ae056dceddfdef928146e71a331fbbfbdcf95cc",
+					"size": 2570,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,18 +1,82 @@\n {\n-  \"name\": \"@ionic-native/status-bar\",\n+  \"name\": \"ionic-native\",\n   \"version\": \"3.1.0-rc.2\",\n-  \"description\": \"Ionic Native - Native plugins for ionic apps\",\n-  \"module\": \"index.js\",\n-  \"typings\": \"index.d.ts\",\n-  \"author\": \"ionic\",\n-  \"license\": \"MIT\",\n-  \"peerDependencies\": {\n-    \"@ionic-native/core\": \"3.1.0-rc.2\",\n+  \"description\": \"Native plugin wrappers for Cordova and Ionic with TypeScript, ES6+, Promise and Observable support\",\n+  \"main\": \"dist/es5/index.js\",\n+  \"module\": \"dist/esm/index.js\",\n+  \"typings\": \"dist/es5/index.d.ts\",\n+  \"files\": [\n+    \"dist\"\n+  ],\n+  \"devDependencies\": {\n+    \"@angular/compiler\": \"2.2.1\",\n+    \"@angular/compiler-cli\": \"2.2.1\",\n     \"@angular/core\": \"2.2.1\",\n-    \"rxjs\": \"5.0.0-beta.12\"\n+    \"browserify\": \"^13.3.0\",\n+    \"canonical-path\": \"0.0.2\",\n+    \"child-process-promise\": \"^2.2.0\",\n+    \"conventional-changelog-cli\": \"^1.2.0\",\n+    \"conventional-github-releaser\": \"^1.1.3\",\n+    \"cpr\": \"^2.0.2\",\n+    \"cz-conventional-changelog\": \"^1.2.0\",\n+    \"decamelize\": \"^1.2.0\",\n+    \"dgeni\": \"^0.4.2\",\n+    \"dgeni-packages\": \"^0.10.18\",\n+    \"es6-shim\": \"~0.35.2\",\n+    \"fs-extra\": \"^2.0.0\",\n+    \"fs-extra-promise\": \"^0.4.1\",\n+    \"glob\": \"^7.1.1\",\n+    \"gulp\": \"^3.9.1\",\n+    \"gulp-rename\": \"^1.2.2\",\n+    \"gulp-replace\": \"^0.5.4\",\n+    \"gulp-tslint\": \"^6.1.2\",\n+    \"gulp-uglify\": \"^2.0.0\",\n+    \"jasmine-core\": \"~2.5.2\",\n+    \"karma\": \"~1.3.0\",\n+    \"karma-browserify\": \"~5.1.0\",\n+    \"karma-jasmine\": \"~1.1.0\",\n+    \"karma-phantomjs-launcher\": \"~1.0.2\",\n+    \"lodash\": \"4.17.4\",\n+    \"minimist\": \"^1.1.3\",\n+    \"node-html-encoder\": \"0.0.2\",\n+    \"q\": \"1.4.1\",\n+    \"queue\": \"^4.2.1\",\n+    \"rimraf\": \"^2.5.4\",\n+    \"rxjs\": \"5.0.1\",\n+    \"semver\": \"^5.3.0\",\n+    \"tsify\": \"~3.0.0\",\n+    \"tslint\": \"^3.15.1\",\n+    \"tslint-ionic-rules\": \"0.0.7\",\n+    \"typescript\": \"2.0.09\",\n+    \"watchify\": \"~3.7.0\",\n+    \"zone.js\": \"0.7.2\"\n+  },\n+  \"scripts\": {\n+    \"test\": \"karma start\",\n+    \"test:watch\": \"npm test -- --watch\",\n+    \"start\": \"npm run test:watch\",\n+    \"lint\": \"gulp lint\",\n+    \"build\": \"npm run clean && npm run lint && npm run build:core && npm run build:modules\",\n+    \"build:core\": \"ngc -p scripts/build/tsconfig-core.json\",\n+    \"build:modules\": \"node scripts/build/build.js\",\n+    \"clean\": \"rimraf dist\",\n+    \"shipit\": \"npm run build && gulp readmes && npm run npmpub\",\n+    \"npmpub\": \"node scripts/build/publish.js\",\n+    \"changelog\": \"conventional-changelog -p angular -i CHANGELOG.md -s -r 0\",\n+    \"plugin:create\": \"gulp plugin:create\"\n   },\n   \"repository\": {\n     \"type\": \"git\",\n     \"url\": \"https://github.com/driftyco/ionic-native.git\"\n+  },\n+  \"license\": \"MIT\",\n+  \"bugs\": {\n+    \"url\": \"https://github.com/driftyco/ionic-native/issues\"\n+  },\n+  \"homepage\": \"https://github.com/driftyco/ionic-native\",\n+  \"config\": {\n+    \"commitizen\": {\n+      \"path\": \"./node_modules/cz-conventional-changelog\"\n+    }\n   }\n }\n",
+					"match": false,
+					"packageHash": "d3753dcb78f7127e0209e3239c0258f03479f0ef5081e10b7ddd14248cab7704",
+					"size": 452,
+					"sourceHash": "8bcc28b37ba2cd9dc44126943c7ada6202112219b33c08e02265ffa1f20e9a52",
+					"status": "content"
+				},
+				"LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 1,
+				"matchingFiles": 0,
+				"missingInPackage": 2,
+				"missingInSource": 3,
+				"score": 0,
+				"totalFiles": 6
+			}
+		},
+		"prodDependencies": []
+	}
+]

@@ -1,0 +1,1143 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-19T20:30:23.457Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:5.6.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "@ionic-native/status-bar@4.9.2",
+			"name": "@ionic-native/status-bar",
+			"version": "4.9.2",
+			"location": "https://registry.npmjs.org/@ionic-native/status-bar/-/status-bar-4.9.2.tgz",
+			"integrity": "sha512-k3ZJDAdCwBhubjw29gsRlNhEcA06JIxm5xeSpSWzhrvY+3+eHUgTwNMYGkkVurmMYFcuWPEOCpNZ2oelMqYA0Q==",
+			"publishedAt": "2018-07-13T15:26:28.595Z",
+			"publishedWith": {
+				"node": "8.11.3",
+				"npm": "6.1.0"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/ionic-team/ionic-native.git",
+			"spec": "github:ionic-team/ionic-native#v4.9.2"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,26 +1,178 @@\n-<a style=\"float:right;font-size:12px;\" href=\"http://github.com/ionic-team/ionic-native/edit/master/src/@ionic-native/plugins/status-bar/index.ts#L1\">\n-  Improve this doc\n-</a>\n+[![Circle CI](https://circleci.com/gh/ionic-team/ionic-native.svg?style=shield)](https://circleci.com/gh/ionic-team/ionic-native) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/) ![](https://img.shields.io/npm/v/@ionic-native/core.svg)\n \n-# Status Bar\n \n+# Ionic Native\n+\n+Ionic Native is a curated set of wrappers for Cordova plugins that make adding any native functionality you need to your [Ionic](https://ionicframework.com/) mobile app easy.\n+\n+Ionic Native wraps plugin callbacks in a Promise or Observable, providing a common interface for all plugins and making it easy to use plugins with Angular change detection.\n+\n+## Installation\n+\n+Run following command to install Ionic Native in your project.\n+```bash\n+npm install @ionic-native/core --save\n+```\n+\n+You also need to install the Ionic Native package for each plugin you want to add. Please see the [Ionic Native documentation](https://ionicframework.com/docs/native/) for complete instructions on how to add and use the plugins.\n+\n+## Documentation\n+\n+For the full Ionic Native documentation, please visit [https://ionicframework.com/docs/native/](https://ionicframework.com/docs/native/).\n+\n+### Basic Usage\n+\n+To use a plugin, import and add the plugin provider to your `@NgModule`, and then inject it where you wish to use it.\n+\n+```typescript\n+// app.module.ts\n+import { Camera } from '@ionic-native/camera';\n+\n+...\n+\n+@NgModule({\n+  ...\n+\n+  providers: [\n+    ...\n+    Camera\n+    ...\n+  ]\n+  ...\n+})\n+export class AppModule { }\n+```\n+\n+```typescript\n+import { Geolocation } from '@ionic-native/geolocation';\n+import { Platform } from 'ionic-angular';\n+\n+@Component({ ... })\n+export class MyComponent {\n+\n+  constructor(private geolocation: Geolocation, private platform: Platform) {\n+\n+    this.platform.ready().then(() => {\n+\n+      // get position\n+      this.geolocation.getCurrentPosition().then(pos => {\n+        console.log(`lat: ${pos.coords.latitude}, lon: ${pos.coords.longitude}`)\n+      });\n+\n+\n+      // watch position\n+      const watch = geolocation.watchPosition().subscribe(pos => {\n+        console.log(`lat: ${pos.coords.latitude}, lon: ${pos.coords.longitude}`)\n+      });\n+\n+      // to stop watching\n+      watch.unsubscribe();\n+    });\n+    \n+  }\n+  \n+}\n+```\n+\n+### Mocking and Browser Development\n+\n+Ionic Native 3.x makes it possible to mock plugins and develop nearly the entirety of your app in the browser or in `ionic serve`.\n+\n+To do this, you need to provide a mock implementation of the plugins you wish to use. Here's an example of mocking the `Camera` plugin to return a stock image while in development:\n+\n+First import the `Camera` class in your `src/app/app.module.ts` file:\n+\n+```typescript\n+import { Camera } from '@ionic-native/camera';\n+```\n+\n+Then create a new class that extends the `Camera` class with a mock implementation:\n+\n+```typescript\n+class CameraMock extends Camera {\n+  getPicture(options) {\n",
+					"match": false,
+					"packageHash": "1d617b8c4e2df56c7a2c2d730963428797be1c89c06219c9212849e8ba48e083",
+					"size": 755,
+					"sourceHash": "28900a3498d5bcb148330d322a2079fc3197bdaa4d8fcea6d7986de0c4272ce7",
+					"status": "content"
+				},
+				"index.d.ts": {
+					"match": false,
+					"packageHash": "bc14d49659658c068b53d01bed7b44f4801609b4c51bce2ac53287b641068f54",
+					"size": 2392,
+					"status": "missing-in-source"
+				},
+				"index.js": {
+					"match": false,
+					"packageHash": "b8ccca0279b8983523cd4903f0a3e41082547070344d0372a396ebdab47e7142",
+					"size": 7112,
+					"status": "missing-in-source"
+				},
+				"index.js.map": {
+					"match": false,
+					"packageHash": "7fef51df311199442c470a45e0e2d5829b7c29424e6da45f79a181e7927bb8d0",
+					"size": 5068,
+					"status": "missing-in-source"
+				},
+				"index.metadata.json": {
+					"match": false,
+					"packageHash": "311de361cba79348834bf24a3cbcc00916dad8556099b8b056527b0918cf9f06",
+					"size": 5047,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,18 +1,75 @@\n {\n-  \"name\": \"@ionic-native/status-bar\",\n+  \"name\": \"ionic-native\",\n   \"version\": \"4.9.2\",\n-  \"description\": \"Ionic Native - Native plugins for ionic apps\",\n-  \"module\": \"index.js\",\n-  \"typings\": \"index.d.ts\",\n-  \"author\": \"ionic\",\n+  \"description\": \"Native plugin wrappers for Cordova and Ionic with TypeScript, ES6+, Promise and Observable support\",\n+  \"homepage\": \"https://ionicframework.com/\",\n+  \"author\": \"Ionic Team <hi@ionic.io> (https://ionic.io)\",\n   \"license\": \"MIT\",\n-  \"peerDependencies\": {\n-    \"@ionic-native/core\": \"^4.2.0\",\n-    \"@angular/core\": \"*\",\n-    \"rxjs\": \"^5.0.1\"\n+  \"devDependencies\": {\n+    \"@angular/compiler\": \"4.4.4\",\n+    \"@angular/compiler-cli\": \"4.4.4\",\n+    \"@angular/core\": \"4.4.4\",\n+    \"@types/cordova\": \"0.0.34\",\n+    \"@types/jasmine\": \"^2.8.8\",\n+    \"@types/node\": \"^8.10.20\",\n+    \"canonical-path\": \"0.0.2\",\n+    \"child-process-promise\": \"2.2.1\",\n+    \"conventional-changelog-cli\": \"1.3.4\",\n+    \"cpr\": \"2.0.0\",\n+    \"cz-conventional-changelog\": \"2.0.0\",\n+    \"dgeni\": \"0.4.7\",\n+    \"dgeni-packages\": \"0.16.10\",\n+    \"fs-extra\": \"2.0.0\",\n+    \"fs-extra-promise\": \"0.4.1\",\n+    \"gulp\": \"3.9.1\",\n+    \"gulp-rename\": \"1.2.2\",\n+    \"gulp-replace\": \"0.5.4\",\n+    \"gulp-tslint\": \"6.1.2\",\n+    \"jasmine-core\": \"^2.99.1\",\n+    \"karma\": \"^1.7.0\",\n+    \"karma-cli\": \"^1.0.1\",\n+    \"karma-jasmine\": \"^1.1.2\",\n+    \"karma-phantomjs-launcher\": \"^1.0.4\",\n+    \"karma-typescript\": \"^3.0.12\",\n+    \"karma-typescript-es6-transform\": \"^1.0.4\",\n+    \"lodash\": \"4.17.4\",\n+    \"minimist\": \"1.2.0\",\n+    \"node-html-encoder\": \"0.0.2\",\n+    \"q\": \"1.5.0\",\n+    \"queue\": \"4.2.1\",\n+    \"rimraf\": \"2.6.1\",\n+    \"rxjs\": \"^5.5.11\",\n+    \"semver\": \"5.3.0\",\n+    \"tslint\": \"3.15.1\",\n+    \"tslint-ionic-rules\": \"0.0.8\",\n+    \"typescript\": \"~2.4.2\",\n+    \"zone.js\": \"^0.8.26\"\n+  },\n+  \"scripts\": {\n+    \"start\": \"npm run test:watch\",\n+    \"lint\": \"gulp lint\",\n+    \"build\": \"npm run clean && npm run lint && npm run build:core && npm run build:modules\",\n+    \"build:core\": \"ngc -p scripts/build/tsconfig-core.json\",\n+    \"build:modules\": \"node scripts/build/build.js\",\n+    \"clean\": \"rimraf dist .tmp\",\n+    \"shipit\": \"npm run build && gulp readmes && npm run npmpub\",\n+    \"npmpub\": \"node scripts/build/publish.js\",\n+    \"changelog\": \"conventional-changelog -p angular -i CHANGELOG.md -s -r 0\",\n+    \"postchangelog\": \"git commit -am \\\"chore(): update changelog\\\"\",\n+    \"test\": \"karma start karma.conf.js --single-run\",\n+    \"test:watch\": \"karma start karma.conf.js\",\n+    \"readmes\": \"gulp readmes\"\n   },\n   \"repository\": {\n     \"type\": \"git\",\n-    \"url\": \"https://github.com/ionic-team/ionic-native.git\"\n+    \"url\": \"git+https://github.com/ionic-team/ionic-native.git\"\n+  },\n+  \"bugs\": {\n+    \"url\": \"https://github.com/ionic-team/ionic-native/issues\"\n+  },\n+  \"config\": {\n+    \"commitizen\": {\n+      \"path\": \"./node_modules/cz-conventional-changelog\"\n+    }\n   }\n }\n",
+					"match": false,
+					"packageHash": "ae8afb1dc1e74bd5e34cb77b649cd785fc7bc8d5c53e666eb5c4e197a2a199bc",
+					"size": 434,
+					"sourceHash": "a4308248707a6c82015edf07db36162b3643e519e51322a133b37e2a3657e1c4",
+					"status": "content"
+				},
+				".editorconfig": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/CONTRIBUTING.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/ISSUE_TEMPLATE.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"CODE_OF_CONDUCT.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"DEVELOPER.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"circle.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gulpfile.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"karma.conf.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/build/build.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/build/core-package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/build/plugin-package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/build/publish.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/build/tsconfig-core.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/build/tsconfig-plugin.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/ci-tests.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/config.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/docs/configs/links.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/docs/configs/log.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/docs/configs/tag-defs.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/docs/configs/template-filters.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/docs/configs/template-tags.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/docs/dgeni-config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/docs/dgeni-readmes-config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/docs/filters/capital.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/docs/filters/code.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/docs/filters/dashify.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/docs/filters/dump.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/docs/gulp-tasks.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/docs/prepare.sh": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/docs/processors/debug.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/docs/processors/hide-private-api.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/docs/processors/jekyll.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/docs/processors/mark-properties.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/docs/processors/npm-id.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/docs/processors/parse-optional.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/docs/processors/readmes.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/docs/processors/remove-private-members.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/docs/tag-defs/tag-defs.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/docs/templates/common.template.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/docs/templates/native_menu.template.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/docs/templates/readme.template.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/docs/update_docs.sh": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/docs/update_readmes.sh": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/git/clone.sh": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/git/config.sh": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/templates/wrap-min.tmpl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/templates/wrap.tmpl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/utils.inc.sh": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/core/bootstrap.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/core/decorators.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/core/decorators.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/core/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/core/ionic-native-plugin.spec.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/core/ionic-native-plugin.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/core/plugin.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/core/util.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/action-sheet/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/admob-free/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/admob-pro/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/aes-256/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/alipay/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/android-exoplayer/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/android-fingerprint-auth/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/android-full-screen/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/android-permissions/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/app-availability/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/app-center-analytics/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/app-center-crashes/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/app-center-push/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/app-minimize/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/app-preferences/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/app-rate/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/app-update/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/app-version/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/apple-pay/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/appodeal/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/autostart/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/background-fetch/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/background-geolocation/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/background-mode/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/backlight/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/badge/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/barcode-scanner/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/base64/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/base64-to-gallery/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/battery-status/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/ble/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/blinkup/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/bluetooth-serial/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/braintree/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/brightness/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/broadcaster/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/browser-tab/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/calendar/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/call-directory/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/call-log/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/call-number/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/camera/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/camera-preview/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/card-io/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/clipboard/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/cloud-settings/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/code-push/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/contacts/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/couchbase-lite/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/crop/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/date-picker/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/db-meter/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/deeplinks/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/device/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/device-accounts/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/device-feedback/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/device-motion/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/device-orientation/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/diagnostic/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/dialogs/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/dns/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/document-picker/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/document-viewer/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/email-composer/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/estimote-beacons/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/extended-device-information/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/facebook/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/fcm/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/file/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/file-chooser/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/file-encryption/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/file-opener/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/file-path/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/file-picker/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/file-transfer/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/fingerprint-aio/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/firebase/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/firebase-analytics/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/firebase-config/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/firebase-dynamic-links/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/firebase-messaging/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/flashlight/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/flurry-analytics/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/ftp/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/geofence/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/geolocation/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/globalization/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/google-analytics/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/google-nearby/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/google-play-games-services/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/google-plus/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/gyroscope/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/hce/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/header-color/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/health/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/health-kit/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/hot-code-push/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/hotspot/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/http/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/httpd/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/hyper-track/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/ibeacon/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/image-picker/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/image-resizer/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/in-app-browser/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/in-app-purchase/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/in-app-purchase-2/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/index-app-content/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/insomnia/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/instagram/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/intel-security/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/intercom/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/is-debug/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/jins-meme/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/keyboard/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/keychain/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/keychain-touch-id/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/launch-navigator/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/launch-review/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/linkedin/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/local-notifications/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/location-accuracy/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/market/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/media/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/media-capture/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/mixpanel/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/mobile-accessibility/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/ms-adal/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/music-controls/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/native-audio/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/native-geocoder/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/native-keyboard/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/native-page-transitions/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/native-ringtones/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/native-storage/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/navigation-bar/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/network/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/network-interface/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/nfc/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/onesignal/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/open-native-settings/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/openalpr/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/paypal/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/pedometer/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/phonegap-local-notification/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/photo-library/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/photo-viewer/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/pin-check/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/pin-dialog/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/pinterest/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/power-management/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/printer/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/pro/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/push/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/qqsdk/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/qr-scanner/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/regula-document-reader/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/rollbar/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/safari-view-controller/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/screen-orientation/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/screenshot/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/secure-storage/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/sensors/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/serial/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/shake/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/sim/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/siri-shortcuts/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/sms/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/social-sharing/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/speech-recognition/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/speechkit/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/spinner-dialog/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/splash-screen/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/sqlite/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/sqlite-porter/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/star-prnt/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/status-bar/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/stepcounter/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/streaming-media/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/stripe/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/taptic-engine/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/tealium/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/tealium-adidentifier/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/tealium-installreferrer/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/text-to-speech/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/themeable-browser/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/three-dee-touch/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/toast/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/touch-id/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/twitter-connect/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/uid/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/unique-device-id/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/uptime/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/user-agent/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/vibration/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/video-capture-plus/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/video-editor/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/video-player/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/web-intent/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/wheel-selector/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/youtube-video-player/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/zbar/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/zeroconf/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/@ionic-native/plugins/zip/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ionic-native/plugins/in-app-review": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tslint.json": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 0,
+				"missingInPackage": 265,
+				"missingInSource": 4,
+				"score": 0,
+				"totalFiles": 271
+			}
+		},
+		"prodDependencies": []
+	}
+]
