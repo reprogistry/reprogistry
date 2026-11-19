@@ -1,0 +1,270 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-19T20:40:59.676Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:10.9.2",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "googleapis-common@8.0.0-rc.0",
+			"name": "googleapis-common",
+			"version": "8.0.0-rc.0",
+			"location": "https://registry.npmjs.org/googleapis-common/-/googleapis-common-8.0.0-rc.0.tgz",
+			"integrity": "sha512-pA2nzR7U5VF+NXoSuHOLqZMrOdSJtCvJysAo+i0aVMKhzJDEW3ZPwgLKMzLW+XW0ivrCSXAyAsRgEQEOXdTh3w==",
+			"publishedAt": "2025-04-28T21:31:20.324Z",
+			"publishedWith": {
+				"node": "23.8.0",
+				"npm": "10.9.2"
+			},
+			"dependencies": {
+				"qs": "^6.7.0",
+				"extend": "^3.0.2",
+				"gaxios": "^7.0.0-rc.4",
+				"url-template": "^2.0.8",
+				"google-auth-library": "^10.0.0-rc.1"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/googleapis/nodejs-googleapis-common.git",
+			"spec": "github:googleapis/nodejs-googleapis-common#a7fccfc4502d4041bcc8f8c3cff3cd7345762626"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,3 +1,4 @@\n+**_THIS REPOSITORY IS DEPRECATED. ALL OF ITS CONTENT AND HISTORY HAS BEEN MOVED TO [GOOGLE-CLOUD-NODE-CORE](https://github.com/googleapis/google-cloud-node-core)_**\n [//]: # \"This README.md file is auto-generated, all changes to this file will be lost.\"\n [//]: # \"To regenerate it, use `python -m synthtool`.\"\n <img src=\"https://avatars2.githubusercontent.com/u/2810941?v=3&s=96\" alt=\"Google Cloud Platform logo\" title=\"Google Cloud Platform\" align=\"right\" height=\"96\" width=\"96\"/>\n",
+					"match": false,
+					"packageHash": "98d80a8926ef11bdaa5242cbf9a571871b61c18053d77e0ffe06671781005d1a",
+					"size": 4257,
+					"sourceHash": "12ab895235bb782e35f58594c75c057adb9281f7586c11ce1e81b20cfe890490",
+					"status": "content"
+				},
+				"build/src/apirequest.js": {
+					"diff": "--- published/build/src/apirequest.js\n+++ rebuilt/build/src/apirequest.js\n@@ -306,13 +306,13 @@\n         }\n         else {\n             const res = await authClient.request(options);\n-            return (0, util_1.martialGaxiosResponse)(res);\n+            return (0, util_1.marshallGaxiosResponse)(res);\n         }\n     }\n     else {\n         return new gaxios_1.Gaxios()\n             .request(options)\n-            .then(res => (0, util_1.martialGaxiosResponse)(res));\n+            .then(res => (0, util_1.marshallGaxiosResponse)(res));\n     }\n }\n /**\n",
+					"match": false,
+					"packageHash": "c2a9e0efd7076eaf90cdf5932249e7f58d4a34949b072361c91c3a821122de4f",
+					"size": 14483,
+					"sourceHash": "51958856fcf14898bc08f52e4b8bb06a0215fab3983a9dbdac4430c93b0b156a",
+					"status": "content"
+				},
+				"build/src/index.d.ts": {
+					"diff": "--- published/build/src/index.d.ts\n+++ rebuilt/build/src/index.d.ts\n@@ -9,4 +9,5 @@\n export { Discovery, DiscoveryOptions, EndpointCreator } from './discovery';\n export { Endpoint, Target } from './endpoint';\n export { FragmentResponse, HttpMethod, ParameterFormat, Schema, SchemaItem, SchemaItems, SchemaMethod, SchemaMethods, SchemaParameter, SchemaParameters, SchemaResource, SchemaResources, Schemas, SchemaType, } from './schema';\n+export { GaxiosResponseWithHTTP2 } from './http2';\n export * from './util';\n",
+					"match": false,
+					"packageHash": "cd513c5a94173cabbab8b5015ff018edaa6bc4f978fd41460f0f6e2f6d9508af",
+					"size": 1059,
+					"sourceHash": "30dc519377f45f89f39b2f4fd6f1126f5f6b544c1be82f2a9c23aec5c928a411",
+					"status": "content"
+				},
+				"build/src/util.d.ts": {
+					"diff": "--- published/build/src/util.d.ts\n+++ rebuilt/build/src/util.d.ts\n@@ -1,4 +1,5 @@\n import { GaxiosResponse } from 'gaxios';\n+import { GaxiosResponseWithHTTP2 } from './http2';\n export type HeadersInit = ConstructorParameters<typeof Headers>[0];\n /**\n  * A utility for converting potential {@link Headers `Headers`} objects to plain headers objects.\n@@ -8,11 +9,9 @@\n  */\n export declare function headersToClassicHeaders<T extends Record<string, string>>(headers: HeadersInit): T;\n /**\n- * Martial a GaxiosResponse into a library-friendly type.\n+ * marshall a GaxiosResponse into a library-friendly type.\n  *\n  * @param res the Gaxios Response\n  * @returns the GaxiosResponse with HTTP2-ready/compatible headers\n  */\n-export declare function martialGaxiosResponse<T extends GaxiosResponse>(res?: T): T & {\n-    headers: Record<string, string>;\n-};\n+export declare function marshallGaxiosResponse<T extends GaxiosResponse>(res?: T): GaxiosResponseWithHTTP2;\n",
+					"match": false,
+					"packageHash": "dfb27043fc201382d8927b8871d29b70e9ca2a312a968aee8408f4460e1ca9b4",
+					"size": 765,
+					"sourceHash": "dac09eae16e9619e26df91fac46269f48e3c4e86954de92ff69f8cee1c3619c4",
+					"status": "content"
+				},
+				"build/src/util.js": {
+					"diff": "--- published/build/src/util.js\n+++ rebuilt/build/src/util.js\n@@ -13,7 +13,7 @@\n // limitations under the License.\n Object.defineProperty(exports, \"__esModule\", { value: true });\n exports.headersToClassicHeaders = headersToClassicHeaders;\n-exports.martialGaxiosResponse = martialGaxiosResponse;\n+exports.marshallGaxiosResponse = marshallGaxiosResponse;\n /**\n  * A utility for converting potential {@link Headers `Headers`} objects to plain headers objects.\n  *\n@@ -38,14 +38,19 @@\n     return classicHeaders;\n }\n /**\n- * Martial a GaxiosResponse into a library-friendly type.\n+ * marshall a GaxiosResponse into a library-friendly type.\n  *\n  * @param res the Gaxios Response\n  * @returns the GaxiosResponse with HTTP2-ready/compatible headers\n  */\n-function martialGaxiosResponse(res) {\n-    return Object.assign({}, res, {\n-        headers: headersToClassicHeaders(res?.headers),\n+function marshallGaxiosResponse(res) {\n+    return Object.defineProperties(res || {}, {\n+        headers: {\n+            configurable: true,\n+            writable: true,\n+            enumerable: true,\n+            value: headersToClassicHeaders(res?.headers),\n+        },\n     });\n }\n //# sourceMappingURL=util.js.map\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "2a1548a0fa8692e1c54b0b3aa8fdf724d43b901ebe4b8adee1d22a7ff6bd9a73",
+					"size": 1806,
+					"sourceHash": "9c4eefb739128dc87f0fad646c46ac9b5abadf0d3e0f4c595e2dcad231bde160",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,6 +1,6 @@\n {\n   \"name\": \"googleapis-common\",\n-  \"version\": \"8.0.0-rc.0\",\n+  \"version\": \"8.0.0\",\n   \"description\": \"A common tooling library used by the googleapis npm module. You probably don't want to use this directly.\",\n   \"repository\": \"googleapis/nodejs-googleapis-common\",\n   \"main\": \"build/src/index.js\",\n@@ -36,13 +36,12 @@\n   \"dependencies\": {\n     \"extend\": \"^3.0.2\",\n     \"gaxios\": \"^7.0.0-rc.4\",\n-    \"google-auth-library\": \"^10.0.0-rc.1\",\n+    \"google-auth-library\": \"^10.1.0\",\n     \"qs\": \"^6.7.0\",\n     \"url-template\": \"^2.0.8\"\n   },\n   \"devDependencies\": {\n     \"@babel/plugin-proposal-private-methods\": \"^7.18.6\",\n-    \"@types/execa\": \"^2.0.0\",\n     \"@types/extend\": \"^3.0.1\",\n     \"@types/mocha\": \"^10.0.10\",\n     \"@types/mv\": \"^2.1.0\",\n@@ -55,7 +54,6 @@\n     \"@types/url-template\": \"^2.0.28\",\n     \"c8\": \"^10.1.3\",\n     \"codecov\": \"^3.5.0\",\n-    \"execa\": \"^5.0.0\",\n     \"gts\": \"^6.0.2\",\n     \"http2spy\": \"^2.0.0\",\n     \"is-docker\": \"^2.0.0\",\n",
+					"match": false,
+					"packageHash": "ef8ab7281895ab6ba8322caf53e7fd50e6ce7fbc31040e0e7fd4d781471a61d1",
+					"size": 2683,
+					"sourceHash": "d0476479a550f46ccc7b3a5c3ac90d12457844ff8bb59a22d88d5ee538cced89",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 6,
+				"matchingFiles": 19,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.76,
+				"totalFiles": 25
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "agent-base",
+				"version": "7.1.4"
+			},
+			{
+				"name": "base64-js",
+				"version": "1.5.1"
+			},
+			{
+				"name": "bignumber.js",
+				"version": "9.3.1"
+			},
+			{
+				"name": "buffer-equal-constant-time",
+				"version": "1.0.1"
+			},
+			{
+				"name": "call-bind-apply-helpers",
+				"version": "1.0.2"
+			},
+			{
+				"name": "call-bound",
+				"version": "1.0.4"
+			},
+			{
+				"name": "data-uri-to-buffer",
+				"version": "4.0.1"
+			},
+			{
+				"name": "debug",
+				"version": "4.4.3"
+			},
+			{
+				"name": "dunder-proto",
+				"version": "1.0.1"
+			},
+			{
+				"name": "ecdsa-sig-formatter",
+				"version": "1.0.11"
+			},
+			{
+				"name": "es-define-property",
+				"version": "1.0.1"
+			},
+			{
+				"name": "es-errors",
+				"version": "1.3.0"
+			},
+			{
+				"name": "es-object-atoms",
+				"version": "1.1.2"
+			},
+			{
+				"name": "extend",
+				"version": "3.0.2"
+			},
+			{
+				"name": "fetch-blob",
+				"version": "3.2.0"
+			},
+			{
+				"name": "formdata-polyfill",
+				"version": "4.0.10"
+			},
+			{
+				"name": "function-bind",
+				"version": "1.1.2"
+			},
+			{
+				"name": "gaxios",
+				"version": "7.3.1"
+			},
+			{
+				"name": "gcp-metadata",
+				"version": "8.1.2"
+			},
+			{
+				"name": "get-intrinsic",
+				"version": "1.3.0"
+			},
+			{
+				"name": "get-proto",
+				"version": "1.0.1"
+			},
+			{
+				"name": "google-auth-library",
+				"version": "10.9.1"
+			},
+			{
+				"name": "google-logging-utils",
+				"version": "1.1.3"
+			},
+			{
+				"name": "gopd",
+				"version": "1.2.0"
+			},
+			{
+				"name": "has-symbols",
+				"version": "1.1.0"
+			},
+			{
+				"name": "hasown",
+				"version": "2.0.4"
+			},
+			{
+				"name": "https-proxy-agent",
+				"version": "7.0.6"
+			},
+			{
+				"name": "json-bigint",
+				"version": "1.0.0"
+			},
+			{
+				"name": "jwa",
+				"version": "2.0.1"
+			},
+			{
+				"name": "jws",
+				"version": "4.0.1"
+			},
+			{
+				"name": "math-intrinsics",
+				"version": "1.1.0"
+			},
+			{
+				"name": "ms",
+				"version": "2.1.3"
+			},
+			{
+				"name": "node-domexception",
+				"version": "1.0.0"
+			},
+			{
+				"name": "node-fetch",
+				"version": "3.3.2"
+			},
+			{
+				"name": "object-inspect",
+				"version": "1.14.0"
+			},
+			{
+				"name": "qs",
+				"version": "6.17.1"
+			},
+			{
+				"name": "safe-buffer",
+				"version": "5.2.1"
+			},
+			{
+				"name": "side-channel",
+				"version": "1.1.1"
+			},
+			{
+				"name": "side-channel-list",
+				"version": "1.0.1"
+			},
+			{
+				"name": "side-channel-map",
+				"version": "1.0.1"
+			},
+			{
+				"name": "side-channel-weakmap",
+				"version": "1.0.2"
+			},
+			{
+				"name": "url-template",
+				"version": "2.0.8"
+			},
+			{
+				"name": "web-streams-polyfill",
+				"version": "3.3.3"
+			}
+		]
+	}
+]
