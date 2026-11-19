@@ -1,0 +1,256 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-19T08:05:04.926Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:5.0.3",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "react-inspector@2.1.6",
+			"name": "react-inspector",
+			"version": "2.1.6",
+			"location": "https://registry.npmjs.org/react-inspector/-/react-inspector-2.1.6.tgz",
+			"integrity": "sha512-YAM/GXQq457luk1u00ChwpxZ9MICXAgs+9XqL5DNml/jLJWBApHjbzLbT5rgU1g6MVCKO2TxFPAiLnKNZ70FBg==",
+			"publishedAt": "2017-09-23T18:43:29.192Z",
+			"publishedWith": {
+				"node": "8.1.2",
+				"npm": "5.0.3"
+			},
+			"dependencies": {
+				"is-dom": "^1.0.9",
+				"babel-runtime": "^6.23.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/xyc/react-inspector.git",
+			"spec": "github:xyc/react-inspector#39f0574b0ec6cdd46ceca179c2acb2734bf9fe67"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"HISTORY.md": {
+					"diff": "--- published/HISTORY.md\n+++ rebuilt/HISTORY.md\n@@ -1,3 +1,34 @@\n+\n+## 7.0.0 (20/08/2025)\n+- Port to React 18/19 syntax\n+- Add Storybook 9 to peer dependencies\n+- Port local package to Storybook 9\n+- Update CI runners and jobs\n+- Audit and update all tooling except Jest\n+\n+## 6.0.0 (04/07/2022)\n+- Upgrade devDependencies\n+- Remove all dependencies\n+- Migrate to typescript (correct types are a WIP, please contribute!)\n+- Migrate to use use TSup as a build tool, also outputting modern ESM\n+\n+## 5.1.1 (04/02/2021)\n+- Include support for React 17 in peerDependencies. [120](https://github.com/storybookjs/react-inspector/pull/120) [124](https://github.com/storybookjs/react-inspector/pull/124)\n+- Only publish required files. [119](https://github.com/storybookjs/react-inspector/pull/119)\n+\n+## 5.1.0 (09/10/2020)\n+- Upgrade all dependencies\n+- Fix component crash on getters [#116](https://github.com/storybookjs/react-inspector/pull/116)\n+\n+## 5.0.0 (09/10/2020)\n+- Upgrade all dependencies\n+\n+## 3.0.2 (03/28/2019)\n+- Fixes [#72](https://github.com/xyc/react-inspector/issues/72)\n+\n+## 3.0.0 (03/20/2019)\n+[@xadn](https://github.com/xadn)'s [hooks](https://github.com/xyc/react-inspector/pull/68) PR and minor [fixes](https://github.com/xyc/react-inspector/pull/70)\n+\n ## 2.1.3 (08/08/2017)\n - Fix display of objects with empty keys\n \n",
+					"match": false,
+					"packageHash": "1dece8d18966ae211e1312179a2935e5ff5aa4c9136a8633f3145976a7847d2d",
+					"size": 1523,
+					"sourceHash": "dfa33c7f31389e8e174808e492d231cc66f5e9068f6fa904fc4dc67c18589eaf",
+					"status": "content"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,91 +1,114 @@\n # react-inspector\n \n-[![build status](https://img.shields.io/travis/xyc/react-inspector/master.svg?style=flat-square)](https://travis-ci.org/xyc/react-inspector)\n+[![build status](https://img.shields.io/travis/storybookjs/react-inspector/master.svg?style=flat-square)](https://travis-ci.org/storybookjs/react-inspector)\n [![npm version](https://img.shields.io/npm/v/react-inspector.svg?style=flat-square)](https://www.npmjs.com/package/react-inspector)\n [![npm downloads](https://img.shields.io/npm/dm/react-inspector.svg?style=flat-square)](https://www.npmjs.com/package/react-inspector)\n \n-Power of [Browser DevTools](https://developers.google.com/web/tools/chrome-devtools/) inspectors right inside your React app. Check out the [interactive playground](http://xyc.github.io/react-inspector/).\n+Power of [Browser DevTools](https://developers.google.com/web/tools/chrome-devtools/) inspectors right inside your React app. Check out the [storybook](https://sb-react-inspector.netlify.app/) for a demo.\n \n-![](http://xyc.github.io/react-inspector/objectinspector.png)\n+![''](https://storybookjs.github.io/react-inspector/objectinspector.png)\n \n-![](https://cldup.com/XhNGcBq9h2.png)\n+![''](https://cldup.com/XhNGcBq9h2.png)\n \n-![](http://xyc.github.io/react-inspector/tableinspector.png)\n+![''](https://storybookjs.github.io/react-inspector/tableinspector.png)\n \n ## Install\n \n NPM:\n+\n ```sh\n npm install react-inspector\n ```\n \n+Recommended versions:\n+\n+- version `3.0.2`: If you are using React 16.8.4 or later.\n+- version `2.3.1`: If you are using an earlier version of React.\n+\n+## Getting started\n+\n ### &lt;Inspector />\n+\n A shorthand for the inspectors.\n \n - `<Inspector/>` is equivalent to `<ObjectInspector>` or `<DOMInspector>` if inspecting a DOM Node.\n - `<Inspector table/>` is equivalent to `<TableInspector>`.\n \n ### &lt;ObjectInspector />\n+\n Like `console.log`. Consider this as a glorified version of `<pre>JSON.stringify(data, null, 2)</pre>`.\n \n-###### How it works\n+#### How it works\n+\n Tree state is saved at root. If you click to expand some elements in the hierarchy, the state will be preserved after the element is unmounted.\n \n #### API\n+\n The component accepts the following props:\n \n-#### `data: PropTypes.any`: the Javascript object you would like to inspect\n+**`data: PropTypes.any`:** the Javascript object you would like to inspect\n \n-#### `name: PropTypes.string`: specify the optional name of the root node, default to `undefined`\n+**`name: PropTypes.string`:** specify the optional name of the root node, default to `undefined`\n \n-#### `expandLevel: PropTypes.number`: an integer specifying to which level the tree should be initially expanded.\n+**`expandLevel: PropTypes.number`:** an integer specifying to which level the tree should be initially expanded\n \n-#### `expandPaths: PropTypes.oneOfType([PropTypes.string, PropTypes.array])`: an array containing all the paths that should be expanded when the component is initialized, or a string of just one path\n-- The path string is similar to [JSONPath](http://goessner.net/articles/JsonPath/).\n+**`expandPaths: PropTypes.oneOfType([PropTypes.string, PropTypes.array])`:** an array containing all the paths that should be expanded when the component is initialized, or a string of just one path\n+\n+- The path string is similar to [JSONPath](https://goessner.net/articles/JsonPath/).\n   - It is a dot separated string like `$.foo.bar`. `$.foo.bar` expands the path `$.foo.bar` where `$` refers to the root node. Note that it only expands that single node (but not all its parents and the root node). Instead, you should use `expandPaths={['$', '$.foo', '$.foo.bar']}` to expand all the way to the `$.foo.bar` node.\n   - You can refer to array index paths using `['$', '$.1']`\n   - You can use wildcard to expand all paths on a specific level\n     - For example, to expand all first level and second level nodes, use `['$', '$.*']` (equivalent to `expandLevel={2}`)\n - the results are merged with expandLevel\n \n-#### `showNonenumerable: PropTypes.bool`: show non-enumerable properties.\n+**`showNonenumerable: PropTypes.bool`:** show non-enumerable properties\n+\n+**`sortObjectKeys: PropTypes.oneOfType([PropTypes.bool, PropTypes.func])`:** Sort object keys with optional compare function\n \n-#### `sortObjectKeys: PropTypes.oneOfType([PropTypes.bool, PropTypes.func])`: Sort object keys with optional compare function.\n+When `sortObjectKeys={true}` is provided, keys of objects are sorted in alphabetical order except for arrays.\n+\n+**`nodeRenderer: PropTypes.func`:** Use a custom `nodeRenderer` to render the object properties (optional)\n \n-#### `nodeRenderer: PropTypes.func`: Use a custom `nodeRenderer` to render the object properties (optional)\n - Instead of using the default `nodeRenderer`, you can provide a\n   custom function for rendering object properties. The _default_\n   nodeRender looks like this:\n-  ```\n-  import { ObjectRootLabel } from 'react-inspector'\n-  import { ObjectLabel } from 'react-inspector'\n \n-  const defaultNodeRenderer = ({ depth, name, data, isNonenumerable }) =>\n+  ```js\n+  import { ObjectRootLabel, ObjectLabel } from 'react-inspector'\n+\n+  const defaultNodeRenderer = ({ depth, name, data, isNonenumerable, expanded }) =>\n",
+					"match": false,
+					"packageHash": "4e51c29db37c9835a280ff3a6caca89b3d7dfa4d43aeeb0de9d41829266a3706",
+					"size": 5884,
+					"sourceHash": "fc1b7b8a9f243a8addcd5e949fc87bdf2ae8dd806dae252d1365e0d951eb25c4",
+					"status": "content"
+				},
+				"lib/dom-inspector/DOMInspector.js": {
+					"match": false,
+					"packageHash": "4f2efffed14f91683093bb7cf5bc6c40c55496115e90bc8a7f4c3127e63df5d3",
+					"size": 4219,
+					"status": "missing-in-source"
+				},
+				"lib/dom-inspector/DOMNodePreview.js": {
+					"match": false,
+					"packageHash": "b9eb04777f2726380d87233c28a87a31b81233b2fc7eec642603844f5175e97c",
+					"size": 5354,
+					"status": "missing-in-source"
+				},
+				"lib/dom-inspector/shouldInline.js": {
+					"match": false,
+					"packageHash": "c4d01cd8ca07576f74ff9f160d3e30170741d74955186294cf5eb5af8f416a04",
+					"size": 379,
+					"status": "missing-in-source"
+				},
+				"lib/index.js": {
+					"match": false,
+					"packageHash": "a207416c5d4ce506978fe18dcf076ac5fa244d8f5bc48548ae94d4219651e51e",
+					"size": 3340,
+					"status": "missing-in-source"
+				},
+				"lib/object/ObjectName.js": {
+					"match": false,
+					"packageHash": "671188905848d9b0a6b8dbbe72626e6f35603f4b8d3380d9e2ea538998753137",
+					"size": 1704,
+					"status": "missing-in-source"
+				},
+				"lib/object/ObjectName.spec.js": {
+					"match": false,
+					"packageHash": "46c1f9810e36a9f8a72549a3903a561536a0759476de8212a58846f8fae35f48",
+					"size": 2466,
+					"status": "missing-in-source"
+				},
+				"lib/object/ObjectValue.js": {
+					"match": false,
+					"packageHash": "1736ecb920578ca4666099b8d29316fdbb0fb9642b689fc9743ea38dc611c69d",
+					"size": 3681,
+					"status": "missing-in-source"
+				},
+				"lib/object/ObjectValue.spec.js": {
+					"match": false,
+					"packageHash": "3f374237f2e05a815b3a2e2adc283f7f472e27aa6cea002f8c80354baacc8a36",
+					"size": 6012,
+					"status": "missing-in-source"
+				},
+				"lib/object-inspector/ObjectInspector.js": {
+					"match": false,
+					"packageHash": "e2d33f36064715655ca73372a1e405b89f8834b28966806bdb1f079191968899",
+					"size": 11387,
+					"status": "missing-in-source"
+				},
+				"lib/object-inspector/ObjectInspector.spec.js": {
+					"match": false,
+					"packageHash": "4de6b42684bcf9feece790b23814ba08291f3163ea539b61c36a1e54ec05bf01",
+					"size": 1524,
+					"status": "missing-in-source"
+				},
+				"lib/object-inspector/ObjectLabel.js": {
+					"match": false,
+					"packageHash": "b9b5a6b686f04a7d9433df829c43b6f765035e796d4b12e30dd8a0376bae4d43",
+					"size": 1348,
+					"status": "missing-in-source"
+				},
+				"lib/object-inspector/ObjectPreview.js": {
+					"match": false,
+					"packageHash": "5d21eabc8e1d796ddd73370889e7ab4d29bb961c64dcd2a26deead10f3b70f7a",
+					"size": 3030,
+					"status": "missing-in-source"
+				},
+				"lib/object-inspector/ObjectRootLabel.js": {
+					"match": false,
+					"packageHash": "e13eb7e521fb0ad63028187dd768bcb61a2c649d0bc22ca812caf1a232d3e6f2",
+					"size": 1069,
+					"status": "missing-in-source"
+				},
+				"lib/styles/ThemeProvider.js": {
+					"match": false,
+					"packageHash": "05b80fffd27d040b0a0b3b2a8a9c109f26fb5e84491078e94ec31f0142d9899a",
+					"size": 1768,
+					"status": "missing-in-source"
+				},
+				"lib/styles/base.js": {
+					"match": false,
+					"packageHash": "d08fc8daef3ecee31ea3f683456e9cca23f1fb02da8281d11c0c7efd239456fb",
+					"size": 6883,
+					"status": "missing-in-source"
+				},
+				"lib/styles/createStyles.js": {
+					"match": false,
+					"packageHash": "ac8f3da9f47e858a4b252e0cdfb801dbf2ccab13ffb0a1a1eb724a167f389fe2",
+					"size": 1291,
+					"status": "missing-in-source"
+				},
+				"lib/styles/themes/chromeDark.js": {
+					"match": false,
+					"packageHash": "0b7f591b5c8e7f76b88044ea247fb8d20e40dd026babd5feb6728f6066d245ef",
+					"size": 1695,
+					"status": "missing-in-source"
+				},
+				"lib/styles/themes/chromeLight.js": {
+					"match": false,
+					"packageHash": "7dc525b8f2a7b6c076c5702218ff93b0cd50ff6a44d85679e1d1be7e1a6c0258",
+					"size": 1564,
+					"status": "missing-in-source"
+				},
+				"lib/styles/themes/index.js": {
+					"match": false,
+					"packageHash": "22df7a3383bb097080e650aa43d797f5cf9ffcde1af84e0587221fed520215c2",
+					"size": 529,
+					"status": "missing-in-source"
+				},
+				"lib/styles/unselectable.js": {
+					"match": false,
+					"packageHash": "4e90f988bcd8107561601b74a77bf111a0c044545920dc2e88058c4b234ba261",
+					"size": 280,
+					"status": "missing-in-source"
+				},
+				"lib/table-inspector/DataContainer.js": {
+					"match": false,
+					"packageHash": "bb9924e77ccb782fff198d15c2985a2ba03b55b8145cc4d2eb0565d93862865a",
+					"size": 3118,
+					"status": "missing-in-source"
+				},
+				"lib/table-inspector/HeaderContainer.js": {
+					"match": false,
+					"packageHash": "7948ad396035c46aedb72e4619006fea747e4507292d0d9daf2d89f529075971",
+					"size": 2452,
+					"status": "missing-in-source"
+				},
+				"lib/table-inspector/TH.js": {
+					"match": false,
+					"packageHash": "cedf486b459994afacf6467b1ffcd3513cf1863085f19d082ef9e980fbd2503d",
+					"size": 4150,
+					"status": "missing-in-source"
+				},
+				"lib/table-inspector/TableInspector.js": {
+					"match": false,
+					"packageHash": "cae8a142c680e433a65356de91c414b1c0c63bc020df261d76f5c39cd720496f",
+					"size": 8687,
+					"status": "missing-in-source"
+				},
+				"lib/table-inspector/getHeaders.js": {
+					"match": false,
+					"packageHash": "d1f9dede48e7f5665a87400f62701c7662851e031d384e1a2adf0e505664294d",
+					"size": 2382,
+					"status": "missing-in-source"
+				},
+				"lib/table-inspector/getHeaders.spec.js": {
+					"match": false,
+					"packageHash": "8db91f3d8fbcd8fd6d4fb003e7ef289fbdb71cdf85c249ad083e608f39189090",
+					"size": 3057,
+					"status": "missing-in-source"
+				},
+				"lib/tree-view/TreeNode.js": {
+					"match": false,
+					"packageHash": "c7a12bf70d70997886d0bde0ea7792f05efcc71775a3ee2b49a3c6ed6bd4e9c5",
+					"size": 4075,
+					"status": "missing-in-source"
+				},
+				"lib/tree-view/TreeView.js": {
+					"match": false,
+					"packageHash": "e09b514af44879cf3b42ac6437e26e0ef16b91d41bfbd159df746cb93d351454",
+					"size": 8159,
+					"status": "missing-in-source"
+				},
+				"lib/tree-view/pathUtils.js": {
+					"match": false,
+					"packageHash": "d0e9ce9cd055e713bbaef97cb955c0ff29ed1e6ed01a2d171f4885a12e4d47ae",
+					"size": 2927,
+					"status": "missing-in-source"
+				},
+				"lib/tree-view/pathUtils.spec.js": {
+					"match": false,
+					"packageHash": "815fad2e5d35aa8dd69cdebd1d2e90353fbec0e197a4a26aaec55af3833b7629",
+					"size": 1057,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,84 +1,99 @@\n {\n   \"name\": \"react-inspector\",\n-  \"version\": \"2.1.6\",\n+  \"version\": \"8.0.0\",\n   \"description\": \"Power of Browser DevTools inspectors right inside your React app\",\n-  \"main\": \"lib/index.js\",\n-  \"scripts\": {\n-    \"storybook\": \"start-storybook -p 9001\",\n-    \"build:storybook\": \"build-storybook -o storybook-static\",\n-    \"build\": \"babel src --out-dir lib && webpack --config webpack.prod.config.js\",\n-    \"lint\": \"eslint src --fix\",\n-    \"test\": \"mocha src --compilers js:babel-register --recursive\",\n-    \"test:watch\": \"npm run test -- --watch\",\n-    \"clean\": \"rimraf lib\",\n-    \"prerelease\": \"npm run lint && npm run test && npm run clean && npm run build\",\n-    \"release\": \"npm publish . --access public\"\n-  },\n-  \"repository\": {\n-    \"type\": \"git\",\n-    \"url\": \"https://github.com/xyc/react-inspector.git\"\n-  },\n   \"keywords\": [\n-    \"react\",\n-    \"reactjs\",\n+    \"devtools\",\n+    \"inspector\",\n     \"object\",\n     \"object-inspector\",\n+    \"react\",\n+    \"react-component\",\n+    \"reactjs\",\n+    \"table\",\n     \"table-inspector\",\n-    \"treeview\",\n-    \"tableview\",\n-    \"tree-view\",\n     \"table-view\",\n+    \"tableview\",\n     \"tree\",\n-    \"table\",\n-    \"view\",\n-    \"inspector\",\n-    \"react-component\",\n+    \"tree-view\",\n+    \"treeview\",\n     \"ui\",\n-    \"devtools\"\n+    \"view\"\n   ],\n-  \"author\": \"Xiaoyi Chen <cxychina@gmail.com> (http://github.com/xyc)\",\n-  \"license\": \"MIT\",\n+  \"homepage\": \"https://github.com/xyc/react-inspector\",\n   \"bugs\": {\n     \"url\": \"https://github.com/xyc/react-inspector/issues\"\n   },\n-  \"homepage\": \"https://github.com/xyc/react-inspector\",\n+  \"repository\": {\n+    \"type\": \"git\",\n+    \"url\": \"https://github.com/xyc/react-inspector.git\"\n+  },\n+  \"license\": \"MIT\",\n+  \"author\": \"Xiaoyi Chen <cxychina@gmail.com> (http://github.com/xyc)\",\n+  \"type\": \"module\",\n+  \"exports\": {\n+    \".\": {\n+      \"types\": \"./dist/index.d.ts\",\n+      \"require\": \"./dist/index.cjs\",\n+      \"import\": \"./dist/index.js\"\n+    },\n+    \"./package.json\": \"./package.json\"\n+  },\n+  \"files\": [\n+    \"dist/**/*\",\n+    \"README.md\",\n+    \"LICENSE\",\n+    \"HISTORY.md\",\n+    \".js\",\n+    \".mjs\",\n+    \".d.ts\"\n+  ],\n+  \"scripts\": {\n+    \"build\": \"tsup\",\n+    \"build-storybook\": \"storybook build\",\n+    \"chromatic\": \"chromatic --project-token=17yeg4lpa7q\",\n+    \"lint\": \"eslint src stories\",\n+    \"release\": \"auto latest\",\n+    \"release:canary\": \"auto canary\",\n+    \"storybook\": \"storybook dev -p 9001\",\n+    \"test\": \"vitest src\"\n+  },\n   \"devDependencies\": {\n-    \"@kadira/storybook\": \"^2.35.3\",\n-    \"babel-cli\": \"^6.24.1\",\n-    \"babel-core\": \"^6.24.1\",\n-    \"babel-eslint\": \"^7.2.3\",\n-    \"babel-loader\": \"^7.0.0\",\n-    \"babel-plugin-transform-runtime\": \"^6.23.0\",\n",
+					"match": false,
+					"packageHash": "cc7ba2bf8af3c35693a0f28ee8555a442f7c149456175707b6f71eb7bc6eed23",
+					"size": 2376,
+					"sourceHash": "06c32ed36aa4272dcd523e2e4c83e04eff56e766c8d3ae34901f05f9b427cfc2",
+					"status": "content"
+				},
+				"yarn.lock": {
+					"match": false,
+					"packageHash": "42c64e3c71dc170c831f8f01bb3fade8b4f936273817003060e7c70edbe56d25",
+					"size": 218306,
+					"status": "missing-in-source"
+				}
+			},
+			"summary": {
+				"differentFiles": 3,
+				"matchingFiles": 1,
+				"missingInPackage": 0,
+				"missingInSource": 31,
+				"score": 0.02857142857142857,
+				"totalFiles": 35
+			}
+		},
+		"prodDependencies": []
+	}
+]

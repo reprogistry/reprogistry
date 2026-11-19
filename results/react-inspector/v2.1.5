@@ -1,0 +1,76 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-19T08:03:35.151Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:5.0.3",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "react-inspector@2.1.5",
+			"name": "react-inspector",
+			"version": "2.1.5",
+			"location": "https://registry.npmjs.org/react-inspector/-/react-inspector-2.1.5.tgz",
+			"integrity": "sha512-D5XlrbF/EkUqFTmpKXf7BA2xvgXLM2sKcHt7PaoB5YsDNFlzyhhgrHo9tQJ+zUSGYI2yqq8nu4MozZ2YGTn0zQ==",
+			"publishedAt": "2017-09-23T18:42:48.806Z",
+			"publishedWith": {
+				"node": "8.1.2",
+				"npm": "5.0.3"
+			},
+			"dependencies": {
+				"is-dom": "^1.0.9",
+				"babel-runtime": "^6.23.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/xyc/react-inspector.git",
+			"spec": "github:xyc/react-inspector#848177578519be85bffa47c32c034a71638fc8e1"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"HISTORY.md": {
+					"diff": "--- published/HISTORY.md\n+++ rebuilt/HISTORY.md\n@@ -1,3 +1,34 @@\n+\n+## 7.0.0 (20/08/2025)\n+- Port to React 18/19 syntax\n+- Add Storybook 9 to peer dependencies\n+- Port local package to Storybook 9\n+- Update CI runners and jobs\n+- Audit and update all tooling except Jest\n+\n+## 6.0.0 (04/07/2022)\n+- Upgrade devDependencies\n+- Remove all dependencies\n+- Migrate to typescript (correct types are a WIP, please contribute!)\n+- Migrate to use use TSup as a build tool, also outputting modern ESM\n+\n+## 5.1.1 (04/02/2021)\n+- Include support for React 17 in peerDependencies. [120](https://github.com/storybookjs/react-inspector/pull/120) [124](https://github.com/storybookjs/react-inspector/pull/124)\n+- Only publish required files. [119](https://github.com/storybookjs/react-inspector/pull/119)\n+\n+## 5.1.0 (09/10/2020)\n+- Upgrade all dependencies\n+- Fix component crash on getters [#116](https://github.com/storybookjs/react-inspector/pull/116)\n+\n+## 5.0.0 (09/10/2020)\n+- Upgrade all dependencies\n+\n+## 3.0.2 (03/28/2019)\n+- Fixes [#72](https://github.com/xyc/react-inspector/issues/72)\n+\n+## 3.0.0 (03/20/2019)\n+[@xadn](https://github.com/xadn)'s [hooks](https://github.com/xyc/react-inspector/pull/68) PR and minor [fixes](https://github.com/xyc/react-inspector/pull/70)\n+\n ## 2.1.3 (08/08/2017)\n - Fix display of objects with empty keys\n \n",
+					"match": false,
+					"packageHash": "1dece8d18966ae211e1312179a2935e5ff5aa4c9136a8633f3145976a7847d2d",
+					"size": 1523,
+					"sourceHash": "dfa33c7f31389e8e174808e492d231cc66f5e9068f6fa904fc4dc67c18589eaf",
+					"status": "content"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,91 +1,114 @@\n # react-inspector\n \n-[![build status](https://img.shields.io/travis/xyc/react-inspector/master.svg?style=flat-square)](https://travis-ci.org/xyc/react-inspector)\n+[![build status](https://img.shields.io/travis/storybookjs/react-inspector/master.svg?style=flat-square)](https://travis-ci.org/storybookjs/react-inspector)\n [![npm version](https://img.shields.io/npm/v/react-inspector.svg?style=flat-square)](https://www.npmjs.com/package/react-inspector)\n [![npm downloads](https://img.shields.io/npm/dm/react-inspector.svg?style=flat-square)](https://www.npmjs.com/package/react-inspector)\n \n-Power of [Browser DevTools](https://developers.google.com/web/tools/chrome-devtools/) inspectors right inside your React app. Check out the [interactive playground](http://xyc.github.io/react-inspector/).\n+Power of [Browser DevTools](https://developers.google.com/web/tools/chrome-devtools/) inspectors right inside your React app. Check out the [storybook](https://sb-react-inspector.netlify.app/) for a demo.\n \n-![](http://xyc.github.io/react-inspector/objectinspector.png)\n+![''](https://storybookjs.github.io/react-inspector/objectinspector.png)\n \n-![](https://cldup.com/XhNGcBq9h2.png)\n+![''](https://cldup.com/XhNGcBq9h2.png)\n \n-![](http://xyc.github.io/react-inspector/tableinspector.png)\n+![''](https://storybookjs.github.io/react-inspector/tableinspector.png)\n \n ## Install\n \n NPM:\n+\n ```sh\n npm install react-inspector\n ```\n \n+Recommended versions:\n+\n+- version `3.0.2`: If you are using React 16.8.4 or later.\n+- version `2.3.1`: If you are using an earlier version of React.\n+\n+## Getting started\n+\n ### &lt;Inspector />\n+\n A shorthand for the inspectors.\n \n - `<Inspector/>` is equivalent to `<ObjectInspector>` or `<DOMInspector>` if inspecting a DOM Node.\n - `<Inspector table/>` is equivalent to `<TableInspector>`.\n \n ### &lt;ObjectInspector />\n+\n Like `console.log`. Consider this as a glorified version of `<pre>JSON.stringify(data, null, 2)</pre>`.\n \n-###### How it works\n+#### How it works\n+\n Tree state is saved at root. If you click to expand some elements in the hierarchy, the state will be preserved after the element is unmounted.\n \n #### API\n+\n The component accepts the following props:\n \n-#### `data: PropTypes.any`: the Javascript object you would like to inspect\n+**`data: PropTypes.any`:** the Javascript object you would like to inspect\n \n-#### `name: PropTypes.string`: specify the optional name of the root node, default to `undefined`\n+**`name: PropTypes.string`:** specify the optional name of the root node, default to `undefined`\n \n-#### `expandLevel: PropTypes.number`: an integer specifying to which level the tree should be initially expanded.\n+**`expandLevel: PropTypes.number`:** an integer specifying to which level the tree should be initially expanded\n \n-#### `expandPaths: PropTypes.oneOfType([PropTypes.string, PropTypes.array])`: an array containing all the paths that should be expanded when the component is initialized, or a string of just one path\n-- The path string is similar to [JSONPath](http://goessner.net/articles/JsonPath/).\n+**`expandPaths: PropTypes.oneOfType([PropTypes.string, PropTypes.array])`:** an array containing all the paths that should be expanded when the component is initialized, or a string of just one path\n+\n+- The path string is similar to [JSONPath](https://goessner.net/articles/JsonPath/).\n   - It is a dot separated string like `$.foo.bar`. `$.foo.bar` expands the path `$.foo.bar` where `$` refers to the root node. Note that it only expands that single node (but not all its parents and the root node). Instead, you should use `expandPaths={['$', '$.foo', '$.foo.bar']}` to expand all the way to the `$.foo.bar` node.\n   - You can refer to array index paths using `['$', '$.1']`\n   - You can use wildcard to expand all paths on a specific level\n     - For example, to expand all first level and second level nodes, use `['$', '$.*']` (equivalent to `expandLevel={2}`)\n - the results are merged with expandLevel\n \n-#### `showNonenumerable: PropTypes.bool`: show non-enumerable properties.\n+**`showNonenumerable: PropTypes.bool`:** show non-enumerable properties\n+\n+**`sortObjectKeys: PropTypes.oneOfType([PropTypes.bool, PropTypes.func])`:** Sort object keys with optional compare function\n \n-#### `sortObjectKeys: PropTypes.oneOfType([PropTypes.bool, PropTypes.func])`: Sort object keys with optional compare function.\n+When `sortObjectKeys={true}` is provided, keys of objects are sorted in alphabetical order except for arrays.\n+\n+**`nodeRenderer: PropTypes.func`:** Use a custom `nodeRenderer` to render the object properties (optional)\n \n-#### `nodeRenderer: PropTypes.func`: Use a custom `nodeRenderer` to render the object properties (optional)\n - Instead of using the default `nodeRenderer`, you can provide a\n   custom function for rendering object properties. The _default_\n   nodeRender looks like this:\n-  ```\n-  import { ObjectRootLabel } from 'react-inspector'\n-  import { ObjectLabel } from 'react-inspector'\n \n-  const defaultNodeRenderer = ({ depth, name, data, isNonenumerable }) =>\n+  ```js\n+  import { ObjectRootLabel, ObjectLabel } from 'react-inspector'\n+\n+  const defaultNodeRenderer = ({ depth, name, data, isNonenumerable, expanded }) =>\n",
+					"match": false,
+					"packageHash": "4e51c29db37c9835a280ff3a6caca89b3d7dfa4d43aeeb0de9d41829266a3706",
+					"size": 5884,
+					"sourceHash": "fc1b7b8a9f243a8addcd5e949fc87bdf2ae8dd806dae252d1365e0d951eb25c4",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,84 +1,99 @@\n {\n   \"name\": \"react-inspector\",\n-  \"version\": \"2.1.5\",\n+  \"version\": \"8.0.0\",\n   \"description\": \"Power of Browser DevTools inspectors right inside your React app\",\n-  \"main\": \"lib/index.js\",\n-  \"scripts\": {\n-    \"storybook\": \"start-storybook -p 9001\",\n-    \"build:storybook\": \"build-storybook -o storybook-static\",\n-    \"build\": \"babel src --out-dir lib && webpack --config webpack.prod.config.js\",\n-    \"lint\": \"eslint src --fix\",\n-    \"test\": \"mocha src --compilers js:babel-register --recursive\",\n-    \"test:watch\": \"npm run test -- --watch\",\n-    \"clean\": \"rimraf lib\",\n-    \"prerelease\": \"npm run lint && npm run test && npm run clean && npm run build\",\n-    \"release\": \"npm publish . --access public\"\n-  },\n-  \"repository\": {\n-    \"type\": \"git\",\n-    \"url\": \"https://github.com/xyc/react-inspector.git\"\n-  },\n   \"keywords\": [\n-    \"react\",\n-    \"reactjs\",\n+    \"devtools\",\n+    \"inspector\",\n     \"object\",\n     \"object-inspector\",\n+    \"react\",\n+    \"react-component\",\n+    \"reactjs\",\n+    \"table\",\n     \"table-inspector\",\n-    \"treeview\",\n-    \"tableview\",\n-    \"tree-view\",\n     \"table-view\",\n+    \"tableview\",\n     \"tree\",\n-    \"table\",\n-    \"view\",\n-    \"inspector\",\n-    \"react-component\",\n+    \"tree-view\",\n+    \"treeview\",\n     \"ui\",\n-    \"devtools\"\n+    \"view\"\n   ],\n-  \"author\": \"Xiaoyi Chen <cxychina@gmail.com> (http://github.com/xyc)\",\n-  \"license\": \"MIT\",\n+  \"homepage\": \"https://github.com/xyc/react-inspector\",\n   \"bugs\": {\n     \"url\": \"https://github.com/xyc/react-inspector/issues\"\n   },\n-  \"homepage\": \"https://github.com/xyc/react-inspector\",\n+  \"repository\": {\n+    \"type\": \"git\",\n+    \"url\": \"https://github.com/xyc/react-inspector.git\"\n+  },\n+  \"license\": \"MIT\",\n+  \"author\": \"Xiaoyi Chen <cxychina@gmail.com> (http://github.com/xyc)\",\n+  \"type\": \"module\",\n+  \"exports\": {\n+    \".\": {\n+      \"types\": \"./dist/index.d.ts\",\n+      \"require\": \"./dist/index.cjs\",\n+      \"import\": \"./dist/index.js\"\n+    },\n+    \"./package.json\": \"./package.json\"\n+  },\n+  \"files\": [\n+    \"dist/**/*\",\n+    \"README.md\",\n+    \"LICENSE\",\n+    \"HISTORY.md\",\n+    \".js\",\n+    \".mjs\",\n+    \".d.ts\"\n+  ],\n+  \"scripts\": {\n+    \"build\": \"tsup\",\n+    \"build-storybook\": \"storybook build\",\n+    \"chromatic\": \"chromatic --project-token=17yeg4lpa7q\",\n+    \"lint\": \"eslint src stories\",\n+    \"release\": \"auto latest\",\n+    \"release:canary\": \"auto canary\",\n+    \"storybook\": \"storybook dev -p 9001\",\n+    \"test\": \"vitest src\"\n+  },\n   \"devDependencies\": {\n-    \"@kadira/storybook\": \"^2.35.3\",\n-    \"babel-cli\": \"^6.24.1\",\n-    \"babel-core\": \"^6.24.1\",\n-    \"babel-eslint\": \"^7.2.3\",\n-    \"babel-loader\": \"^7.0.0\",\n-    \"babel-plugin-transform-runtime\": \"^6.23.0\",\n",
+					"match": false,
+					"packageHash": "1953545f0d9b0a4edb92db13cee3c507a261a0bf7cd9ec34fd99c38f56904e29",
+					"size": 2376,
+					"sourceHash": "06c32ed36aa4272dcd523e2e4c83e04eff56e766c8d3ae34901f05f9b427cfc2",
+					"status": "content"
+				},
+				"yarn.lock": {
+					"match": false,
+					"packageHash": "42c64e3c71dc170c831f8f01bb3fade8b4f936273817003060e7c70edbe56d25",
+					"size": 218306,
+					"status": "missing-in-source"
+				}
+			},
+			"summary": {
+				"differentFiles": 3,
+				"matchingFiles": 1,
+				"missingInPackage": 0,
+				"missingInSource": 1,
+				"score": 0.2,
+				"totalFiles": 5
+			}
+		},
+		"prodDependencies": []
+	}
+]

@@ -1,0 +1,107 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-19T08:05:22.636Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:2.14.2",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "react-inspector@1.0.0-alpha.1",
+			"name": "react-inspector",
+			"version": "1.0.0-alpha.1",
+			"location": "https://registry.npmjs.org/react-inspector/-/react-inspector-1.0.0-alpha.1.tgz",
+			"integrity": "sha512-1Um/8pk/lmkIoVfze2k0N2tgmaCJkvD3QrL/to+tlA1aXmiLptpvFB7APNatWkZBfKo4POrY90OfHPGzB0xXjw==",
+			"publishedAt": "2016-03-04T15:18:06.719Z",
+			"publishedWith": {
+				"node": "4.0.0",
+				"npm": "2.14.2"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/xyc/react-inspector.git",
+			"spec": "github:xyc/react-inspector#871df1aab6e5c83a264431da0ab56d3b6317f1cd"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"lib/index.js": {
+					"match": false,
+					"packageHash": "b2d6de8efaabe010277856e83e3be960fe4b0db935dfab0f25eec35e7b6bbc47",
+					"size": 734,
+					"status": "missing-in-source"
+				},
+				"lib/object/ObjectDescription.js": {
+					"match": false,
+					"packageHash": "b67bc5473052b2796725abb924f9d25cd4923384edf50e7acd9be638d5eb8565",
+					"size": 5121,
+					"status": "missing-in-source"
+				},
+				"lib/object/ObjectPreview.js": {
+					"match": false,
+					"packageHash": "ff7864a70fbb62a282751a8221d701e86fc4f3a8f274ccfb02f7fd35cc035265",
+					"size": 5070,
+					"status": "missing-in-source"
+				},
+				"lib/object/objectStyles.js": {
+					"match": false,
+					"packageHash": "3f2bc6d1c66c7170bf7eee24923a13a0029d65cf9ba5a145f64b960fdd1cb040",
+					"size": 647,
+					"status": "missing-in-source"
+				},
+				"lib/object-inspector/ObjectInspector.js": {
+					"match": false,
+					"packageHash": "cd35a972e19f0d0e55490b32ad3ffd9733992c4fc975018408e781fff67715c0",
+					"size": 10651,
+					"status": "missing-in-source"
+				},
+				"lib/styles/glyphs.js": {
+					"match": false,
+					"packageHash": "3af8b4ec49202925158f0d4f1ccec3c1cc50b84a2636577bd3beb11b54d5741c",
+					"size": 259,
+					"status": "missing-in-source"
+				},
+				"lib/styles/unselectable.js": {
+					"match": false,
+					"packageHash": "4e90f988bcd8107561601b74a77bf111a0c044545920dc2e88058c4b234ba261",
+					"size": 280,
+					"status": "missing-in-source"
+				},
+				"lib/table-inspector/TableInspector.js": {
+					"match": false,
+					"packageHash": "7e8b014fc5fa0ec6663c373b45edf06e154aa5b39ca76b0c23c76510a884d67c",
+					"size": 18501,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,6 +1,6 @@\n {\n   \"name\": \"react-inspector\",\n-  \"version\": \"1.0.0-alpha.1\",\n+  \"version\": \"1.0.0-alpha.0\",\n   \"description\": \"Power of Browser DevTools inspectors right inside your React app\",\n   \"main\": \"lib/index.js\",\n   \"directories\": {\n",
+					"match": false,
+					"packageHash": "0ffc2508715087dca03199e78f4361d780b0e39110129bec3d770e7536d5f1d7",
+					"size": 2050,
+					"sourceHash": "66e0f2ecffc4440cb2afcf791b47d7d8569db939225bde52a8ccec7ac5959e88",
+					"status": "content"
+				},
+				"test/ObjectDescription.spec.js": {
+					"diff": "--- published/test/ObjectDescription.spec.js\n+++ rebuilt/test/ObjectDescription.spec.js\n@@ -2,7 +2,6 @@\n import TestUtils from 'react-addons-test-utils'\n import expect from 'expect'\n import ObjectDescription from '../src/object/ObjectDescription'\n-import objectStyles from '../src/object/objectStyles'\n \n const renderer = TestUtils.createRenderer()\n \n@@ -11,106 +10,115 @@\n   })\n \n   it('should render', () => {\n-    // console.log(ObjectDescription)\n-    renderer.render(<ObjectDescription object={0} />)\n-    const tree = renderer.getRenderOutput()\n-    expect(tree.type).toBe('span')\n+    console.log(ObjectDescription)\n+    const tree = renderer.render(<ObjectDescription object={0} />)\n+    expect(1).toBe(1)\n   })\n+})\n+\n+/*\n+import React, {PropTypes} from 'react';\n+import ReactDOM from 'react-dom';\n+import TestUtils from 'react-addons-test-utils';\n+\n+const ObjectDescription = require('../src/object/ObjectDescription');\n+\n+describe('ObjectDescription', () => {\n+\n+  beforeEach(() => {\n+\n+  });\n \n   it('should render number', () => {\n-    renderer.render(<ObjectDescription object={0} />)\n-    const tree = renderer.getRenderOutput()\n-    expect(tree.type).toBe('span')\n-    expect(tree.props.children).toEqual(0)\n-  })\n+    const desc = TestUtils.renderIntoDocument(<ObjectDescription object={0} />);\n+    const span = TestUtils.findRenderedDOMComponentWithTag(desc, 'span');\n+\n+    expect(ReactDOM.findDOMNode(span).textContent).toBe(\"0\");\n+  });\n \n   it('should render string with quotes', () => {\n-    renderer.render(<ObjectDescription object={\"octocat\"} />)\n-    const tree = renderer.getRenderOutput()\n-    expect(tree.type).toBe('span')\n-    expect(tree.props.children).toEqual([ '\"', 'octocat', '\"' ])\n-  })\n+    const desc = TestUtils.renderIntoDocument(<ObjectDescription object={\"octocat\"} />);\n+    const span = TestUtils.findRenderedDOMComponentWithTag(desc, 'span');\n+\n+    expect(ReactDOM.findDOMNode(span).textContent).toBe(\"\\\"octocat\\\"\");\n+  });\n \n   it('should render boolean', () => {\n-    renderer.render(<ObjectDescription object={true} />)\n-    const tree = renderer.getRenderOutput()\n-    expect(tree.type).toBe('span')\n-    expect(tree.props.children).toEqual('true')\n-  })\n+    for(let value of [true, false]){\n+      const desc = TestUtils.renderIntoDocument(<ObjectDescription object={value} />);\n+      const span = TestUtils.findRenderedDOMComponentWithTag(desc, 'span');\n+\n+      expect(ReactDOM.findDOMNode(span).textContent).toBe(value.toString());\n+    }\n+  });\n \n   it('should render undefined', () => {\n-    renderer.render(<ObjectDescription object={undefined} />)\n-    const tree = renderer.getRenderOutput()\n-    expect(tree.type).toBe('span')\n-    expect(tree.props.children).toEqual('undefined')\n-  })\n+    const desc = TestUtils.renderIntoDocument(<ObjectDescription />);\n+    const span = TestUtils.findRenderedDOMComponentWithTag(desc, 'span');\n \n-  it('should render null', () => {\n-    renderer.render(<ObjectDescription object={null} />)\n-    const tree = renderer.getRenderOutput()\n-    expect(tree.type).toBe('span')\n-    expect(tree.props.children).toEqual('null')\n-  })\n+    expect(ReactDOM.findDOMNode(span).textContent).toBe(\"undefined\");\n+  });\n+\n+  it('shoudl render null', () => {\n+    const desc = TestUtils.renderIntoDocument(<ObjectDescription object={null}/>);\n+    const span = TestUtils.findRenderedDOMComponentWithTag(desc, 'span');\n+\n+    expect(ReactDOM.findDOMNode(span).textContent).toBe(\"null\");\n+  });\n \n",
+					"match": false,
+					"packageHash": "282f011624d4b7c4397e27ecdfb22c064da784daa4ed14e4e8863d8b7fc8a331",
+					"size": 4220,
+					"sourceHash": "ece0b9e4506a2262f4704bd2a9c7247c434ca246b686880d3522cd59b69f5b1e",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 9,
+				"missingInPackage": 0,
+				"missingInSource": 8,
+				"score": 0.47368421052631576,
+				"totalFiles": 19
+			}
+		},
+		"prodDependencies": []
+	}
+]
