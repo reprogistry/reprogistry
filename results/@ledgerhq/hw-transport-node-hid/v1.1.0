@@ -1,0 +1,729 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-20T14:20:00.224Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:5.6.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "@ledgerhq/hw-transport-node-hid@1.1.0",
+			"name": "@ledgerhq/hw-transport-node-hid",
+			"version": "1.1.0",
+			"location": "https://registry.npmjs.org/@ledgerhq/hw-transport-node-hid/-/hw-transport-node-hid-1.1.0.tgz",
+			"integrity": "sha512-61WonPVIvVuNfarFhudI/B+tPYOX4i2mMET9DnHEAVljpBCOWqE3Mfy0rrP601I78mlqDbDNVnd5zUsoQ+x8Iw==",
+			"publishedAt": "2018-01-12T16:27:04.599Z",
+			"publishedWith": {
+				"node": "8.9.4",
+				"npm": "5.6.0"
+			},
+			"dependencies": {
+				"node-hid": "^0.7.2",
+				"@ledgerhq/hw-transport": "^1.1.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/LedgerHQ/ledger-node-js-api.git",
+			"spec": "github:LedgerHQ/ledger-node-js-api#1.1.0"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".flowconfig": {
+					"match": false,
+					"packageHash": "656344ddbebc48a49b2885c701e79f2790d0e98e5c47ae66023159b122c6a6bd",
+					"size": 69,
+					"status": "missing-in-source"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,9 +1,140 @@\n-<img src=\"https://user-images.githubusercontent.com/211411/34776833-6f1ef4da-f618-11e7-8b13-f0697901d6a8.png\" height=\"100\" />\n+# ledger-node-js-api\n+Node and browser communication APIs for Ledger Nano / Nano S / Blue application \n \n-## @ledgerhq/hw-transport-node-hid\n+This package defines basic communication methods for Ledger Personal Security Devices products as well as bindings for the Bitcoin and Ethereum APIs.\n \n-Library for Ledger Hardware Wallets.\n+When using in a browser, make sure to set up \"Browser mode\" in the application settings on the device if available.\n \n-[Github](https://github.com/LedgerHQ/ledger-node-js-api/),\n-[API Doc](https://github.com/LedgerHQ/ledger-node-js-api/blob/master/API.md),\n-[Ledger Devs Slack](https://ledger-dev.slack.com/)\n+## Initialization on Node\n+\n+The communication API relies on node-hid\n+\n+```javascript\n+ledger.comm_node.create_async().then(function(comm)) {\n+\t ...\n+}\n+```\n+\n+You can also use list_async and create the communication object manually to pick one specific device if several are connected\n+\n+## Initialization on a browser\n+\n+The communication API is compatible with every browser supporting FIDO U2F either directly (Chrome, Opera) or through a third party extension (Firefox). Pages shall be served from an HTTPS connection as a requirement of the U2F API.\n+\n+Make sure to include browser/ledger.min.js and browser/u2f-api.js in your web page and initialize with \n+\n+```javascript\n+ledger.comm_u2f.create_async().then(function(comm)) {\n+\t ...\n+}\n+```\n+\n+To re-create the browser bindings, use\n+\n+```\n+npm run browserify\n+npm run uglify\n+```\n+\n+## Using with Bitcoin\n+\n+Create an application object after opening the device\n+\n+```javascript\n+var btc = new ledger.btc(comm);\n+```\n+\n+You can retrieve a public key and an address given its BIP 32 path\n+\n+```javascript\n+btc.getWalletPublicKey_async(\"44'/0'/0'/0\").then(\n+     function(result) { console.log(result);}).fail(\n+     function(error) { console.log(error); });\n+);\n+```\n+\n+For each UTXO included in your transaction, create a transaction object from the raw serialized version of the transaction used in this UTXO\n+\n+```javascript\n+var tx1 = btc.splitTransaction(\"01000000014ea60aeac5252c14291d428915bd7ccd1bfc4af009f4d4dc57ae597ed0420b71010000008a47304402201f36a12c240dbf9e566bc04321050b1984cd6eaf6caee8f02bb0bfec08e3354b022012ee2aeadcbbfd1e92959f57c15c1c6debb757b798451b104665aa3010569b49014104090b15bde569386734abf2a2b99f9ca6a50656627e77de663ca7325702769986cf26cc9dd7fdea0af432c8e2becc867c932e1b9dd742f2a108997c2252e2bdebffffffff0281b72e00000000001976a91472a5d75c8d2d0565b656a5232703b167d50d5a2b88aca0860100000000001976a9144533f5fb9b4817f713c48f0bfe96b9f50c476c9b88ac00000000\");\n+\n+var tx2 = btc.splitTransaction(\"...\")\n+```\n+\n+To sign a transaction involving standard (P2PKH) inputs, call createPaymentTransactionNew_async with the folowing parameters \n+\n+ - `inputs` is an array of [ transaction, output_index, optional redeem script, optional sequence ] where\n+   - transaction is the previously computed transaction object for this UTXO\n+   - output_index is the output in the transaction used as input for this UTXO (counting from 0)\n+   - redeem script is the optional redeem script to use when consuming a Segregated Witness input\n+   - sequence is the sequence number to use for this input (when using RBF), or non present\n+ - `associatedKeysets` is an array of BIP 32 paths pointing to the path to the private key used for each UTXO  \n+ - `changePath` is an optional BIP 32 path pointing to the path to the public key used to compute the change address\n+ - `outputScript` is the hexadecimal serialized outputs of the transaction to sign  \n+ - `lockTime` is the optional lockTime of the transaction to sign, or default (0)\n+ - `sigHashType` is the hash type of the transaction to sign, or default (all) \n+\n+This method returns the signed transaction ready to be broadcast \n+\n+```javascript\n+btc.createPaymentTransactionNew_async(\n+   [ [tx1, 1] ], \n+   [\"0'/0/0\"], \n+   undefined, \n+   \"01905f0100000000001976a91472a5d75c8d2d0565b656a5232703b167d50d5a2b88ac\").then(\n+     function(result) { console.log(result);}).fail(\n+     function(error) { console.log(error); });\n+);\n+```\n+\n+To obtain the signature of multisignature (P2SH) inputs, call signP2SHTransaction_async with the folowing parameters \n+\n",
+					"match": false,
+					"packageHash": "653d71e361e11b20169260c2535bf740eae17a3937be8bb6b6a5446aa5a2bfb6",
+					"size": 389,
+					"sourceHash": "25136aedc6928d494d10a7a25d4e604fba139d87cb2a31c05aef837ed04526eb",
+					"status": "content"
+				},
+				"flow-typed/npm/@ledgerhq/hw-transport_vx.x.x.js": {
+					"match": false,
+					"packageHash": "1c28060b1619b7e1742f9cb3053f3acf478e87907d475dea8694051cb53bc727",
+					"size": 1488,
+					"status": "missing-in-source"
+				},
+				"flow-typed/npm/flow-bin_v0.x.x.js": {
+					"match": false,
+					"packageHash": "81b9b42a77429fafc11864a311137d8623005807f47ee1b78dd95582eaaba657",
+					"size": 188,
+					"status": "missing-in-source"
+				},
+				"flow-typed/npm/flow-typed_vx.x.x.js": {
+					"match": false,
+					"packageHash": "954d871b754362956daa5e12974c4b977317eb5d73165b03c6a84739766b5942",
+					"size": 5763,
+					"status": "missing-in-source"
+				},
+				"flow-typed/npm/node-hid_v0.x.x.js": {
+					"match": false,
+					"packageHash": "6ca147e9c071c79da8ded80a00e79442db04b40c93f20d1baf67f98481ed86fa",
+					"size": 887,
+					"status": "missing-in-source"
+				},
+				"lib/TransportNodeHid.js": {
+					"match": false,
+					"packageHash": "f5621e36ff8d53ccdb12feb382e485f363b48e0ce81caba1520df1d0f6e7134e",
+					"size": 15907,
+					"status": "missing-in-source"
+				},
+				"lib/TransportNodeHid.js.flow": {
+					"match": false,
+					"packageHash": "573627f7b6fefdc528b3f6afb497cab45da0d9f9b5c78819b5d93c9f8b7885c4",
+					"size": 11685,
+					"status": "missing-in-source"
+				},
+				"lib/TransportNodeHid.js.map": {
+					"match": false,
+					"packageHash": "645694a99a0d34759a33cd3b1cf88b2f652e10ec059510806c9f66963bf0226b",
+					"size": 22208,
+					"status": "missing-in-source"
+				},
+				"lib/getDevices.js": {
+					"match": false,
+					"packageHash": "2bc1e59f315701f84468d8b94b1fbf3bf8f018ccb60fb776b7d84107d5592fe6",
+					"size": 398,
+					"status": "missing-in-source"
+				},
+				"lib/getDevices.js.flow": {
+					"match": false,
+					"packageHash": "bfa39fee2e0d3df9e19c101b4bb0265cdec12f01c556ae27001419ce1c516b1e",
+					"size": 114,
+					"status": "missing-in-source"
+				},
+				"lib/getDevices.js.map": {
+					"match": false,
+					"packageHash": "62ba1d39f28bff290c8ccf7425eab53f852bea5d4e131d1144a3ab2bf93a99d2",
+					"size": 344,
+					"status": "missing-in-source"
+				},
+				"lib/listenDevices.js": {
+					"match": false,
+					"packageHash": "c8bb95b36b42b73d0a9cbd7a92d93ebb5150573eee970f2e46f3def417d472d8",
+					"size": 2467,
+					"status": "missing-in-source"
+				},
+				"lib/listenDevices.js.flow": {
+					"match": false,
+					"packageHash": "b2d81a3eb26bd137d6f55b3c8436c487b6a0a46379fa9999c7ec95f31557930e",
+					"size": 1607,
+					"status": "missing-in-source"
+				},
+				"lib/listenDevices.js.map": {
+					"match": false,
+					"packageHash": "93d5209ba5d16bed5ea56c4339a2d60220c9fc3251f9b301f6851830c37779d0",
+					"size": 3505,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,41 +1,42 @@\n {\n-  \"name\": \"@ledgerhq/hw-transport-node-hid\",\n+  \"name\": \"ledgerco\",\n   \"version\": \"1.1.0\",\n-  \"description\": \"Ledger Hardware Wallet Node implementation of the communication layer, using node-hid\",\n-  \"keywords\": [\n-    \"Ledger\",\n-    \"LedgerWallet\",\n-    \"hid\",\n-    \"node-hid\",\n-    \"NanoS\",\n-    \"Blue\",\n-    \"Hardware Wallet\"\n-  ],\n+  \"description\": \"Node API for Ledger Hardware Wallets (HW.1 / Nano / Nano S / Blue)\",\n+  \"main\": \"./src/index.js\",\n+  \"scripts\": {\n+    \"test\": \"echo \\\"Error: no test specified\\\" && exit 1\"\n+  },\n   \"repository\": {\n     \"type\": \"git\",\n     \"url\": \"https://github.com/LedgerHQ/ledger-node-js-api\"\n   },\n+  \"keywords\": [\n+    \"Ledger\",\n+    \"Wallet\",\n+    \"HW.1\",\n+    \"Bitcoin\",\n+    \"Ethereum\",    \n+    \"Hardware Wallet\"\n+  ],\n+  \"author\": \"Nicolas Bacca\",\n+  \"license\": \"Apache-2.0\",\n   \"bugs\": {\n     \"url\": \"https://github.com/LedgerHQ/ledger-node-js-api/issues\"\n   },\n   \"homepage\": \"https://github.com/LedgerHQ/ledger-node-js-api\",\n-  \"publishConfig\": {\n-    \"access\": \"public\"\n-  },\n-  \"main\": \"lib/TransportNodeHid.js\",\n-  \"license\": \"Apache-2.0\",\n   \"dependencies\": {\n-    \"@ledgerhq/hw-transport\": \"^1.1.0\",\n-    \"node-hid\": \"^0.7.2\"\n+\t  \"node-hid\": \"0.5.4\",\n+\t  \"q\": \"1.4.1\",\n+\t  \"async\" : \"2.1.4\"\n   },\n   \"devDependencies\": {\n-    \"flow-bin\": \"^0.63.1\",\n-    \"flow-typed\": \"^2.2.3\"\n+    \"browserify\": \"13.1.0\",\n+    \"uglify-js\": \"2.7.3\"\n   },\n   \"scripts\": {\n-    \"flow\": \"flow\",\n-    \"clean\": \"rm -rf lib/\",\n-    \"build\": \"cd ../.. && export PATH=$(yarn bin):$PATH && cd - && babel --source-maps -d lib src && flow-copy-source -v src lib\",\n-    \"watch\": \"cd ../.. && export PATH=$(yarn bin):$PATH && cd - && babel --watch --source-maps -d lib src & flow-copy-source -w -v src lib\"\n+    \"browserify\": \"browserify --im -o browser/ledger.js src/index-browserify.js\",\n+    \"uglify\": \"uglifyjs -o browser/ledger.min.js browser/ledger.js\",\n+    \"clean\": \"rm -f browser/ledger.js browser/ledger.min.js\"\n   }\n }\n+\n",
+					"match": false,
+					"packageHash": "ca77cb6b00fda8ccaa9b585e5279fbf5ccf7ed6e4a305314afe2c4b4a5e709aa",
+					"size": 1179,
+					"sourceHash": "51aae1f2da4ad1019f9081c481e75ac0c500b7381df97fd84b16399a15b85e41",
+					"status": "content"
+				},
+				"src/TransportNodeHid.js": {
+					"match": false,
+					"packageHash": "573627f7b6fefdc528b3f6afb497cab45da0d9f9b5c78819b5d93c9f8b7885c4",
+					"size": 11685,
+					"status": "missing-in-source"
+				},
+				"src/getDevices.js": {
+					"match": false,
+					"packageHash": "bfa39fee2e0d3df9e19c101b4bb0265cdec12f01c556ae27001419ce1c516b1e",
+					"size": 114,
+					"status": "missing-in-source"
+				},
+				"src/listenDevices.js": {
+					"match": false,
+					"packageHash": "b2d81a3eb26bd137d6f55b3c8436c487b6a0a46379fa9999c7ec95f31557930e",
+					"size": 1607,
+					"status": "missing-in-source"
+				},
+				"LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"browser/ledger.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"browser/ledger.min.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"browser/u2f-api.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/index-browserify.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ledger-btc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ledger-comm-node.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ledger-comm-u2f.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ledger-eth.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/utils.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/index.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/testBtc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/testBtc2.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/testBtc3.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/testEth.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/testEth2.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/testEth3.js": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 0,
+				"missingInPackage": 18,
+				"missingInSource": 17,
+				"score": 0,
+				"totalFiles": 37
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "async",
+				"version": "2.1.4"
+			},
+			{
+				"name": "lodash",
+				"version": "4.18.1"
+			},
+			{
+				"name": "nan",
+				"version": "2.30.0"
+			},
+			{
+				"name": "node-hid",
+				"version": "0.5.4"
+			},
+			{
+				"name": "abbrev",
+				"version": "1.0.9"
+			},
+			{
+				"name": "ansi-regex",
+				"version": "2.1.1"
+			},
+			{
+				"name": "ansi-styles",
+				"version": "2.2.1"
+			},
+			{
+				"name": "aproba",
+				"version": "1.0.4"
+			},
+			{
+				"name": "are-we-there-yet",
+				"version": "1.1.2"
+			},
+			{
+				"name": "asn1",
+				"version": "0.2.3"
+			},
+			{
+				"name": "assert-plus",
+				"version": "0.2.0"
+			},
+			{
+				"name": "asynckit",
+				"version": "0.4.0"
+			},
+			{
+				"name": "aws-sign2",
+				"version": "0.6.0"
+			},
+			{
+				"name": "aws4",
+				"version": "1.5.0"
+			},
+			{
+				"name": "balanced-match",
+				"version": "0.4.2"
+			},
+			{
+				"name": "bcrypt-pbkdf",
+				"version": "1.0.0"
+			},
+			{
+				"name": "block-stream",
+				"version": "0.0.9"
+			},
+			{
+				"name": "boom",
+				"version": "2.10.1"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "1.1.6"
+			},
+			{
+				"name": "buffer-shims",
+				"version": "1.0.0"
+			},
+			{
+				"name": "caseless",
+				"version": "0.11.0"
+			},
+			{
+				"name": "chalk",
+				"version": "1.1.3"
+			},
+			{
+				"name": "supports-color",
+				"version": "2.0.0"
+			},
+			{
+				"name": "code-point-at",
+				"version": "1.1.0"
+			},
+			{
+				"name": "combined-stream",
+				"version": "1.0.5"
+			},
+			{
+				"name": "commander",
+				"version": "2.9.0"
+			},
+			{
+				"name": "concat-map",
+				"version": "0.0.1"
+			},
+			{
+				"name": "console-control-strings",
+				"version": "1.1.0"
+			},
+			{
+				"name": "core-util-is",
+				"version": "1.0.2"
+			},
+			{
+				"name": "cryptiles",
+				"version": "2.0.5"
+			},
+			{
+				"name": "dashdash",
+				"version": "1.14.1"
+			},
+			{
+				"name": "assert-plus",
+				"version": "1.0.0"
+			},
+			{
+				"name": "debug",
+				"version": "2.2.0"
+			},
+			{
+				"name": "deep-extend",
+				"version": "0.4.1"
+			},
+			{
+				"name": "delayed-stream",
+				"version": "1.0.0"
+			},
+			{
+				"name": "delegates",
+				"version": "1.0.0"
+			},
+			{
+				"name": "ecc-jsbn",
+				"version": "0.1.1"
+			},
+			{
+				"name": "escape-string-regexp",
+				"version": "1.0.5"
+			},
+			{
+				"name": "extend",
+				"version": "3.0.0"
+			},
+			{
+				"name": "extsprintf",
+				"version": "1.0.2"
+			},
+			{
+				"name": "forever-agent",
+				"version": "0.6.1"
+			},
+			{
+				"name": "form-data",
+				"version": "2.1.2"
+			},
+			{
+				"name": "fs.realpath",
+				"version": "1.0.0"
+			},
+			{
+				"name": "fstream",
+				"version": "1.0.10"
+			},
+			{
+				"name": "fstream-ignore",
+				"version": "1.0.5"
+			},
+			{
+				"name": "gauge",
+				"version": "2.7.2"
+			},
+			{
+				"name": "generate-function",
+				"version": "2.0.0"
+			},
+			{
+				"name": "generate-object-property",
+				"version": "1.2.0"
+			},
+			{
+				"name": "getpass",
+				"version": "0.1.6"
+			},
+			{
+				"name": "glob",
+				"version": "7.1.1"
+			},
+			{
+				"name": "graceful-fs",
+				"version": "4.1.11"
+			},
+			{
+				"name": "graceful-readlink",
+				"version": "1.0.1"
+			},
+			{
+				"name": "har-validator",
+				"version": "2.0.6"
+			},
+			{
+				"name": "has-ansi",
+				"version": "2.0.0"
+			},
+			{
+				"name": "has-unicode",
+				"version": "2.0.1"
+			},
+			{
+				"name": "hawk",
+				"version": "3.1.3"
+			},
+			{
+				"name": "hoek",
+				"version": "2.16.3"
+			},
+			{
+				"name": "http-signature",
+				"version": "1.1.1"
+			},
+			{
+				"name": "inflight",
+				"version": "1.0.6"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.3"
+			},
+			{
+				"name": "ini",
+				"version": "1.3.4"
+			},
+			{
+				"name": "is-fullwidth-code-point",
+				"version": "1.0.0"
+			},
+			{
+				"name": "is-my-json-valid",
+				"version": "2.15.0"
+			},
+			{
+				"name": "is-property",
+				"version": "1.0.2"
+			},
+			{
+				"name": "is-typedarray",
+				"version": "1.0.0"
+			},
+			{
+				"name": "isarray",
+				"version": "1.0.0"
+			},
+			{
+				"name": "isstream",
+				"version": "0.1.2"
+			},
+			{
+				"name": "jodid25519",
+				"version": "1.0.2"
+			},
+			{
+				"name": "jsbn",
+				"version": "0.1.0"
+			},
+			{
+				"name": "json-schema",
+				"version": "0.2.3"
+			},
+			{
+				"name": "json-stringify-safe",
+				"version": "5.0.1"
+			},
+			{
+				"name": "jsonpointer",
+				"version": "4.0.1"
+			},
+			{
+				"name": "jsprim",
+				"version": "1.3.1"
+			},
+			{
+				"name": "mime-db",
+				"version": "1.26.0"
+			},
+			{
+				"name": "mime-types",
+				"version": "2.1.14"
+			},
+			{
+				"name": "minimatch",
+				"version": "3.0.3"
+			},
+			{
+				"name": "minimist",
+				"version": "0.0.8"
+			},
+			{
+				"name": "mkdirp",
+				"version": "0.5.1"
+			},
+			{
+				"name": "ms",
+				"version": "0.7.1"
+			},
+			{
+				"name": "node-pre-gyp",
+				"version": "0.6.31"
+			},
+			{
+				"name": "nopt",
+				"version": "3.0.6"
+			},
+			{
+				"name": "npmlog",
+				"version": "4.0.2"
+			},
+			{
+				"name": "number-is-nan",
+				"version": "1.0.1"
+			},
+			{
+				"name": "oauth-sign",
+				"version": "0.8.2"
+			},
+			{
+				"name": "object-assign",
+				"version": "4.1.0"
+			},
+			{
+				"name": "once",
+				"version": "1.4.0"
+			},
+			{
+				"name": "path-is-absolute",
+				"version": "1.0.1"
+			},
+			{
+				"name": "pinkie",
+				"version": "2.0.4"
+			},
+			{
+				"name": "pinkie-promise",
+				"version": "2.0.1"
+			},
+			{
+				"name": "process-nextick-args",
+				"version": "1.0.7"
+			},
+			{
+				"name": "punycode",
+				"version": "1.4.1"
+			},
+			{
+				"name": "qs",
+				"version": "6.3.0"
+			},
+			{
+				"name": "rc",
+				"version": "1.1.6"
+			},
+			{
+				"name": "minimist",
+				"version": "1.2.0"
+			},
+			{
+				"name": "readable-stream",
+				"version": "2.2.2"
+			},
+			{
+				"name": "request",
+				"version": "2.79.0"
+			},
+			{
+				"name": "rimraf",
+				"version": "2.5.4"
+			},
+			{
+				"name": "semver",
+				"version": "5.3.0"
+			},
+			{
+				"name": "set-blocking",
+				"version": "2.0.0"
+			},
+			{
+				"name": "signal-exit",
+				"version": "3.0.2"
+			},
+			{
+				"name": "sntp",
+				"version": "1.0.9"
+			},
+			{
+				"name": "sshpk",
+				"version": "1.10.2"
+			},
+			{
+				"name": "string_decoder",
+				"version": "0.10.31"
+			},
+			{
+				"name": "string-width",
+				"version": "1.0.2"
+			},
+			{
+				"name": "stringstream",
+				"version": "0.0.5"
+			},
+			{
+				"name": "strip-ansi",
+				"version": "3.0.1"
+			},
+			{
+				"name": "strip-json-comments",
+				"version": "1.0.4"
+			},
+			{
+				"name": "supports-color",
+				"version": "0.2.0"
+			},
+			{
+				"name": "tar",
+				"version": "2.2.1"
+			},
+			{
+				"name": "tar-pack",
+				"version": "3.3.0"
+			},
+			{
+				"name": "once",
+				"version": "1.3.3"
+			},
+			{
+				"name": "readable-stream",
+				"version": "2.1.5"
+			},
+			{
+				"name": "tough-cookie",
+				"version": "2.3.2"
+			},
+			{
+				"name": "tunnel-agent",
+				"version": "0.4.3"
+			},
+			{
+				"name": "tweetnacl",
+				"version": "0.14.5"
+			},
+			{
+				"name": "uid-number",
+				"version": "0.0.6"
+			},
+			{
+				"name": "util-deprecate",
+				"version": "1.0.2"
+			},
+			{
+				"name": "uuid",
+				"version": "3.0.1"
+			},
+			{
+				"name": "verror",
+				"version": "1.3.6"
+			},
+			{
+				"name": "wide-align",
+				"version": "1.1.0"
+			},
+			{
+				"name": "wrappy",
+				"version": "1.0.2"
+			},
+			{
+				"name": "xtend",
+				"version": "4.0.1"
+			},
+			{
+				"name": "q",
+				"version": "1.4.1"
+			}
+		]
+	}
+]
