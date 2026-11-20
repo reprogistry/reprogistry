@@ -1,0 +1,131 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-20T02:20:37.911Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:3.8.3",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "single-spa@2.0.3",
+			"name": "single-spa",
+			"version": "2.0.3",
+			"location": "https://registry.npmjs.org/single-spa/-/single-spa-2.0.3.tgz",
+			"integrity": "sha512-uI8gdjI4rQMZ+cZgLXvYmi9rjTfiy5DNV+8HQH5BmYFl6wlPlJl0Z+sRMqixubJrrQRlsq4YV/cHMdyOhUY/sA==",
+			"publishedAt": "2016-05-13T20:33:07.880Z",
+			"publishedWith": {
+				"node": "5.10.1",
+				"npm": "3.8.3"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/CanopyTax/single-spa.git",
+			"spec": "github:CanopyTax/single-spa#1bccd4e8ee2cbd2c647a83bece6177e3ca26f794"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".babelrc": {
+					"match": false,
+					"packageHash": "9da9dfd53f543873f684cc803c40731c7c5dbd5c0e9af34f8b7279723cabcfa2",
+					"size": 77,
+					"status": "missing-in-source"
+				},
+				".npmignore": {
+					"match": false,
+					"packageHash": "3b92cc255009c1a8541990fd00bcde181bc803a80b234f086647210c078bb7e4",
+					"size": 5,
+					"status": "missing-in-source"
+				},
+				".travis.yml": {
+					"match": false,
+					"packageHash": "37f69631e45eb70b647c9a01f5758736da0a25ee0b401f5b2dc8882dbc90af09",
+					"size": 103,
+					"status": "missing-in-source"
+				},
+				"LICENSE": {
+					"diff": "--- published/LICENSE\n+++ rebuilt/LICENSE\n@@ -1,6 +1,6 @@\n License (MIT)\n \n-Copyright (c) 2013-2014 Christopher Simpkins\n+Copyright (c) 2020 single-spa\n \n Permission is hereby granted, free of charge, to any person obtaining a copy\n of this software and associated documentation files (the \"Software\"), to deal\n",
+					"match": false,
+					"packageHash": "613be473aaee5e42ac195279ae75e1eb42278d9b2e19959b2c1ea41b267957ea",
+					"size": 1084,
+					"sourceHash": "683b3de58f68bd76f513841e3aefcdbf63a256f0e7ea734cbaf5f987f82a06d7",
+					"status": "content"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,128 +1,73 @@\n+<img src=\"https://github.com/single-spa/single-spa/assets/5524384/7b1b642d-53d1-409a-b992-e77495bcf631\" height=\"40\">\n+\n+[![npm version](https://img.shields.io/npm/v/single-spa.svg?style=flat-square)](https://www.npmjs.org/package/single-spa)\n+[![](https://data.jsdelivr.com/v1/package/npm/single-spa/badge)](https://www.jsdelivr.com/package/npm/single-spa)\n+[![NPM Downloads](https://badgen.net/npm/dm/single-spa)](https://npmjs.org/package/single-spa)\n+\n # single-spa\n \n-Multiple applications all lazily loaded and mounted/unmounted in the same single page application (SPA). The apps can be deployed independently to your web server of choice, lazy-loaded onto the page independently, and nested. Single-spa also allows for **service oriented javascript**, where a \"service\" (a shared es6 module) is a singleton that each app can call, without resorting to shared libraries that can be out of sync across apps.\n+[Join the chat on Slack](https://join.slack.com/t/single-spa/shared_invite/zt-2uvhef42o-g4H3mvKDaenE9xVAewBKww)\n+\n+[Donate to this project](https://opencollective.com/single-spa)\n+\n+[Official educational courses](https://single-spa-workshop.com)\n+\n+[Official single-spa hosting](https://baseplate.cloud)\n+\n+<div>\n+  <a href=\"https://single-spa-workshop.com\">\n+    <img height=\"50\" alt=\"single-spa-workshop-logo\" src=\"https://github.com/user-attachments/assets/9d485d9a-63d9-4eba-9c53-bc68718806e1\">\n+  </a>\n+</div>\n+\n+<div>\n+  <a href=\"https://baseplate.cloud\">\n+    <img height=\"50\" alt=\"baseplate-logo-standard\" src=\"https://github.com/single-spa/single-spa/assets/5524384/8f07afdb-dd30-4211-a460-8b8a354ccc0f\" style=\"background-color: white;\">\n+  </a>\n+</div>\n+\n+## A javascript framework for front-end microservices\n+\n+Build micro frontends that coexist and can ([but don't need to](https://single-spa.js.org/docs/faq.html#can-i-use-more-than-one-framework)) be written with their own framework. This allows you to:\n+\n+- [Use multiple frameworks](/docs/single-spa-ecosystem.md#help-for-frameworks) on the same page [without refreshing the page](/docs/applications.md)\n+  ([React](https://github.com/single-spa/single-spa-react), [AngularJS](https://github.com/single-spa/single-spa-angularjs), [Angular](https://github.com/single-spa/single-spa-angular), [Ember](https://github.com/single-spa/single-spa-ember), or whatever you're using)\n+- Write new code, possibly with a new framework, without rewriting your existing app\n+- Lazy load code for improved initial load time.\n+\n+## Sponsors\n+\n+<a href=\"https://single-spa-workshop.com\"><img height=\"50\" alt=\"Franklin\" src=\"https://github.com/user-attachments/assets/91f5177b-33ba-448f-be16-90a5c4ec3f70\"></a>\n+\n+To add your company's logo to this section:\n+\n+- Become a [recurring Open Collective sponsor](https://opencollective.com/single-spa) of at least \\$100 a month.\n+- Become a [recurring Github sponsor](https://github.com/sponsors/joeldenning) of at least \\$100 a month.\n+- Sponsor a core team member to implement a specific feature for single-spa. Pay our regular consulting rate. Inquire in our Slack workspace.\n+\n+## Documentation\n+\n+You can find the single-spa documentation [on the website](https://single-spa.js.org/).\n+\n+Check out the [Getting Started](https://single-spa.js.org/docs/getting-started-overview.html) page for a quick overview.\n+\n+## Demo and examples\n+\n+Please see the [examples page](https://single-spa.js.org/docs/examples.html) on the website.\n+\n+## Want to help?\n+\n+Want to file a bug, contribute some code, or improve documentation? Excellent! Read up on our\n+guidelines for [contributing](https://single-spa.js.org/docs/contributing-overview.html) on the [single-spa website](https://single-spa.js.org).\n \n-In this context, an application is an html document that pulls in JS, CSS, and more HTML. This means that many pre-existing applications do not need to change at all in order to work with single-spa. You just need to add a configuration file on top of your existing SPA.\n+## Contributing\n \n-Single-spa works in Chrome, Firefox, Safari, IE11, and Edge.\n+The main purpose of this repository is to continue to evolve single-spa, making it better and easier to use. Development of single-spa, and the [single-spa ecosystem](https://single-spa.js.org/docs/ecosystem.html) happens in the open on GitHub, and we are grateful to the community for contributing bugfixes and improvements. Read below to learn how you can take part in improving single-spa.\n \n-## View the demo!\n-A [demo is live](http://single-spa.surge.sh) on surge.sh. Don't be turned off by the lack of styling -- I'll be fixing that soon. It's based on the code in the [examples](https://github.com/joeldenning/single-spa-examples) repository.\n+### [Code of Conduct](https://single-spa.js.org/docs/code-of-conduct.html)\n \n-## Ideology\n-\n-The hope here is that \"one SPA to rule them all\" will help scale teams and organizations that have complex apps -- this is done by making it easier to split code and then deploy it independently. To explain why single SPA is advantageous, consider the following **disadvantages of a multiple SPA approach**:\n-\n-1. Implementation details are usually reflected in the URL (different subdomains for different SPAs, or different apps own different prefixes in the window.location.pathname)\n-2. Each SPA tends to become a monolith, since it's easier to add to an existing SPA than it is to figure out how to deploy a new SPA.\n-3. Transitioning between the apps is a full page unload-then-load, which generally provides a worse user experience. It *is* possible to mitigate this one with server-side routing + rendering (popularly done with React), but single-spa offers an alternative approach.\n-4. Shared functionality can *only* be accomplished via shared libraries, instead of a service oriented architecture (\"Update it and hope library consumers upgrade\" vs \"Deploy it once and now everyone has it\")\n-\n-## How to use it\n-In general, the process is to create a root app which imports single-spa and declares child applications by calling `singleSpa.declareChildApplication(...)`. Each child application starts out as just a single-spa.config.js file, with the rest of the app (the html document, the js, the css, etc) being lazy loaded later on. As the app is being loaded, mounted, unmounted, etc., lifecycle functions are called to allow customized behavior. SSPA plugins are written to standardize the lifecycle functions for popular technologies like angular, jspm, react, webpack, etc.\n-\n-Example:\n-```javascript\n-// root-app.html\n-<html>\n-    <head>\n-        <script src=\"/jspm_packages/system.src.js\"></script>\n-        <script src=\"/config.js\"></script>\n-        <script>\n-            System.import('/root-app.js');\n-        </script>\n-    </head>\n-</html>\n",
+					"match": false,
+					"packageHash": "e5ed14d77f41cf3e9c26e0a7d9566d642e33f3d970876657d35567c845282689",
+					"size": 8696,
+					"sourceHash": "6c11372cbfc0cad8292d2a922645271d26c276c67abebc0177ddcf7f64b76f88",
+					"status": "content"
+				},
+				"examples/README.md": {
+					"match": false,
+					"packageHash": "12d4c3d58cf27965f6adbfa855acb9bc0309f74fdde662d635e80017ec563546",
+					"size": 455,
+					"status": "missing-in-source"
+				},
+				"lib/jquery-support.js": {
+					"match": false,
+					"packageHash": "e13052fb59ed1817ade49b691121179a8a5211b44e491cb01f1e54f417547ad7",
+					"size": 1623,
+					"status": "missing-in-source"
+				},
+				"lib/single-spa-child-app-error.js": {
+					"match": false,
+					"packageHash": "4aa13a5aba51a24b439db81281a2413ea624285073cb3fbffaa605a7cbbef1c3",
+					"size": 1074,
+					"status": "missing-in-source"
+				},
+				"lib/single-spa.js": {
+					"match": false,
+					"packageHash": "287b9d19a925fd4f31c9ec305dfef80a83f1adcaa7e9d23dd35f96b546292d99",
+					"size": 16190,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,37 +1,144 @@\n {\n   \"name\": \"single-spa\",\n-  \"version\": \"2.0.3\",\n-  \"description\": \"Multiple applications, one page\",\n-  \"main\": \"lib/single-spa.js\",\n+  \"version\": \"6.0.3\",\n+  \"description\": \"The router for easy microfrontends\",\n+  \"main\": \"lib/es2015/umd/single-spa.min.cjs\",\n+  \"types\": \"typings/single-spa.d.ts\",\n+  \"type\": \"module\",\n+  \"publishConfig\": {\n+    \"access\": \"public\"\n+  },\n+  \"exports\": {\n+    \".\": {\n+      \"development\": {\n+        \"import\": {\n+          \"types\": \"./typings/single-spa.d.ts\",\n+          \"default\": \"./lib/es2015/esm/single-spa.dev.js\"\n+        },\n+        \"require\": {\n+          \"types\": \"./typings/single-spa.d.cts\",\n+          \"default\": \"./lib/es2015/umd/single-spa.dev.cjs\"\n+        }\n+      },\n+      \"production\": {\n+        \"import\": {\n+          \"types\": \"./typings/single-spa.d.ts\",\n+          \"default\": \"./lib/es2015/esm/single-spa.min.js\"\n+        },\n+        \"require\": {\n+          \"types\": \"./typings/single-spa.d.cts\",\n+          \"default\": \"./lib/es2015/umd/single-spa.min.cjs\"\n+        }\n+      },\n+      \"default\": {\n+        \"import\": {\n+          \"types\": \"./typings/single-spa.d.ts\",\n+          \"default\": \"./lib/es2015/esm/single-spa.min.js\"\n+        },\n+        \"require\": {\n+          \"types\": \"./typings/single-spa.d.cts\",\n+          \"default\": \"./lib/es2015/umd/single-spa.min.cjs\"\n+        }\n+      }\n+    },\n+    \"./package.json\": \"./package.json\",\n+    \"./lib/*\": \"./lib/*\"\n+  },\n+  \"module\": \"lib/es2015/esm/single-spa.min.js\",\n   \"scripts\": {\n-    \"build\": \"npm run clean && babel src --out-dir lib\",\n-    \"prepublish\": \"npm run build\",\n-    \"clean\": \"rm -rf lib\",\n-    \"test\": \"jasmine\",\n-    \"build:canopy\": \"npm run build && rm -rf ../spalpatine/jspm_packages/npm/single-spa@2.0.3 && rsync -av . ../spalpatine/jspm_packages/npm/single-spa@2.0.3 --exclude node_modules --exclude .git --exclude --spec --exclude examples\"\n+    \"build\": \"pnpm run clean && concurrently pnpm:build:dev pnpm:build:prod pnpm:build:types\",\n+    \"build:prod\": \"rollup -c --environment NODE_ENV:'production'\",\n+    \"build:dev\": \"rollup -c\",\n+    \"build:analyze\": \"rollup -c --environment ANALYZER:'analyzer'\",\n+    \"build:types\": \"node scripts/copy-types.js\",\n+    \"watch\": \"rollup -c -w\",\n+    \"clean\": \"rimraf lib\",\n+    \"test\": \"concurrently -n w: 'pnpm:test:*'\",\n+    \"test:browser\": \"cross-env BABEL_ENV=test jest --config jest-browser.config.js\",\n+    \"test:node\": \"cross-env BABEL_ENV=test jest --config jest-node.config.js\",\n+    \"test:types\": \"tsd\",\n+    \"test:lockfile\": \"js-correct-lockfile pnpm\",\n+    \"format\": \"prettier --write .\",\n+    \"check-format\": \"prettier --check .\",\n+    \"lint\": \"eslint src\",\n+    \"_postinstall\": \"husky install\",\n+    \"prepublishOnly\": \"pinst --disable && pnpm run build\",\n+    \"postpublish\": \"pinst --enable\"\n+  },\n+  \"tsd\": {\n+    \"testDir\": \"spec/typings\",\n+    \"compilerOptions\": {\n+      \"lib\": [\n+        \"dom\",\n+        \"ES2015\"\n+      ]\n+    }\n   },\n-  \"repository\": \"https://github.com/CanopyTax/single-spa\",\n+  \"files\": [\n+    \"lib\",\n+    \"typings/single-spa.d.ts\",\n+    \"typings/single-spa.d.cts\"\n+  ],\n+  \"homepage\": \"https://single-spa.js.org\",\n+  \"repository\": \"https://github.com/single-spa/single-spa\",\n+  \"bugs\": \"https://github.com/single-spa/single-spa/issues\",\n   \"keywords\": [\n+    \"microfrontends\",\n     \"single\",\n     \"page\",\n",
+					"match": false,
+					"packageHash": "29dbf15dc6c9ce3c91343a170861a6dc652a6d223192acedc2095b5e7f448365",
+					"size": 1034,
+					"sourceHash": "6981b1f01b94832f9296b47c1c66704e9a5cafd0326f3b9c79efe4b1d1169104",
+					"status": "content"
+				},
+				"src/jquery-support.js": {
+					"match": false,
+					"packageHash": "44611937d017c9aa3e6e9a14fc9fd01221a96006454980a1f84207ddbcf106e1",
+					"size": 1427,
+					"status": "missing-in-source"
+				},
+				"src/single-spa-child-app-error.js": {
+					"match": false,
+					"packageHash": "3a76add3034493ccfc3569a3514c0c0e1c2f340bb9b709c3986025cb834d2044",
+					"size": 947,
+					"status": "missing-in-source"
+				},
+				"src/single-spa.js": {
+					"match": false,
+					"packageHash": "68389a14acf8ab7f6067458d743e0233ac12ebde9ade7c76d5e11313c03d34f3",
+					"size": 14193,
+					"status": "missing-in-source"
+				},
+				"typings/single-spa.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 3,
+				"matchingFiles": 0,
+				"missingInPackage": 1,
+				"missingInSource": 10,
+				"score": 0,
+				"totalFiles": 14
+			}
+		},
+		"prodDependencies": []
+	}
+]

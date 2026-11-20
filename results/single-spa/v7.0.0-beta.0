@@ -1,0 +1,261 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-20T04:03:42.512Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:10.8.3",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "single-spa@7.0.0-beta.0",
+			"name": "single-spa",
+			"version": "7.0.0-beta.0",
+			"location": "https://registry.npmjs.org/single-spa/-/single-spa-7.0.0-beta.0.tgz",
+			"integrity": "sha512-H9qYHuupJhpieagldkPEy8/CLOgAhk6OP1ue7NXXp3Ooh3/RAkDdz/j7z7e7OGE164C3rZ6LjQ7f93fUnTEDyg==",
+			"publishedAt": "2024-09-30T02:34:15.604Z",
+			"publishedWith": {
+				"node": "22.9.0",
+				"npm": "10.8.3"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/single-spa/single-spa.git",
+			"spec": "github:single-spa/single-spa#v7.0.0-beta.0"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"lib/esm/single-spa.dev.js": {
+					"match": false,
+					"packageHash": "1a07f2a8a00c8945ccea576d7ba84a21d5abe5db5a305df00eeb38b3c9ad7b85",
+					"size": 63131,
+					"status": "missing-in-source"
+				},
+				"lib/esm/single-spa.dev.js.map": {
+					"match": false,
+					"packageHash": "4286258c6044f8bfa99c2317f6c00622d9e2608eed94194e35ca267d2aa079b6",
+					"size": 157582,
+					"status": "missing-in-source"
+				},
+				"lib/esm/single-spa.min.js": {
+					"match": false,
+					"packageHash": "6634ec4fd525d19d88e680fb7cbf6f5eb2d170d801e0d3fd9b1e456d6ab1a544",
+					"size": 19244,
+					"status": "missing-in-source"
+				},
+				"lib/esm/single-spa.min.js.map": {
+					"match": false,
+					"packageHash": "f36040d67dcb0b9d5e7b6b23ba63288384c39068134eda2190242e442977f24c",
+					"size": 121300,
+					"status": "missing-in-source"
+				},
+				"lib/system/single-spa.dev.js": {
+					"match": false,
+					"packageHash": "3ab9b345ed3c7cba3cb882a8f2fbf2b2a5f5811ab48b85ac4f195aa64fad27e3",
+					"size": 68623,
+					"status": "missing-in-source"
+				},
+				"lib/system/single-spa.dev.js.map": {
+					"match": false,
+					"packageHash": "c6de4eb4e506f86b1e504b591c65d8facbef4c14b3d927deb36dedc94abeefb2",
+					"size": 157628,
+					"status": "missing-in-source"
+				},
+				"lib/system/single-spa.min.js": {
+					"match": false,
+					"packageHash": "fb608ba1fee9aa8f9204f3f9ccb224c5217bb47e1f581245f005b9b8d46cbca2",
+					"size": 19253,
+					"status": "missing-in-source"
+				},
+				"lib/system/single-spa.min.js.map": {
+					"match": false,
+					"packageHash": "d00d4cf13053490b90d153ac01713d439f5b30812d6a09381d628603a016f1b4",
+					"size": 121446,
+					"status": "missing-in-source"
+				},
+				"lib/umd/single-spa.dev.cjs": {
+					"match": false,
+					"packageHash": "00975ef748db7904349f4e061b3280787a79f7afe12b1643259bd62d0fa9161e",
+					"size": 65932,
+					"status": "missing-in-source"
+				},
+				"lib/umd/single-spa.dev.cjs.map": {
+					"match": false,
+					"packageHash": "a297972a9d169335ed39a43ce59f29803e5805e857ab7df77ee3f71613d12684",
+					"size": 157626,
+					"status": "missing-in-source"
+				},
+				"lib/umd/single-spa.min.cjs": {
+					"match": false,
+					"packageHash": "c2a80037f49f15edc04198be4b780029c16d283fa30ee96c5c0584a2c605715f",
+					"size": 19440,
+					"status": "missing-in-source"
+				},
+				"lib/umd/single-spa.min.cjs.map": {
+					"match": false,
+					"packageHash": "661779809b8822f203650db409f0f22127d0ccb47b23cdd1b4c0ec2812f9543c",
+					"size": 121301,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -28,6 +28,24 @@\n     \"./package.json\": \"./package.json\",\n     \"./lib/*\": \"./lib/*\"\n   },\n+  \"scripts\": {\n+    \"build\": \"pnpm run clean && concurrently pnpm:build:dev pnpm:build:prod pnpm:build:types\",\n+    \"build:prod\": \"rollup -c --environment ROLLUP_ENV:'production'\",\n+    \"build:dev\": \"rollup -c\",\n+    \"build:analyze\": \"rollup -c --environment ANALYZER:'analyzer'\",\n+    \"build:types\": \"tsc\",\n+    \"watch\": \"rollup -c -w\",\n+    \"clean\": \"rimraf lib typings\",\n+    \"test\": \"concurrently -n w: 'pnpm:test:*'\",\n+    \"test:browser\": \"cross-env BABEL_ENV=test jest --config jest-browser.config.js\",\n+    \"test:node\": \"cross-env BABEL_ENV=test jest --config jest-node.config.js\",\n+    \"test:lockfile\": \"js-correct-lockfile pnpm\",\n+    \"format\": \"prettier --write .\",\n+    \"check-format\": \"prettier --check .\",\n+    \"lint\": \"eslint src\",\n+    \"prepare\": \"husky\",\n+    \"prepublishOnly\": \"pnpm run build\"\n+  },\n   \"files\": [\n     \"lib\",\n     \"typings\"\n@@ -90,21 +108,5 @@\n   \"browserslist\": [\n     \">5%\",\n     \"not ie <= 11\"\n-  ],\n-  \"scripts\": {\n-    \"build\": \"pnpm run clean && concurrently pnpm:build:dev pnpm:build:prod pnpm:build:types\",\n-    \"build:prod\": \"rollup -c --environment ROLLUP_ENV:'production'\",\n-    \"build:dev\": \"rollup -c\",\n-    \"build:analyze\": \"rollup -c --environment ANALYZER:'analyzer'\",\n-    \"build:types\": \"tsc\",\n-    \"watch\": \"rollup -c -w\",\n-    \"clean\": \"rimraf lib typings\",\n-    \"test\": \"concurrently -n w: 'pnpm:test:*'\",\n-    \"test:browser\": \"cross-env BABEL_ENV=test jest --config jest-browser.config.js\",\n-    \"test:node\": \"cross-env BABEL_ENV=test jest --config jest-node.config.js\",\n-    \"test:lockfile\": \"js-correct-lockfile pnpm\",\n-    \"format\": \"prettier --write .\",\n-    \"check-format\": \"prettier --check .\",\n-    \"lint\": \"eslint src\"\n-  }\n-}\n\\ No newline at end of file\n+  ]\n+}\n",
+					"match": false,
+					"packageHash": "4d22cf1f1e1601bed9b243580e790cd4148df2e49bb5c0e0bfefd8c5d7fdaa78",
+					"size": 3326,
+					"sourceHash": "e5e37fd24b5d1e505253e1f364b634fb1b92df8f9b7771410ef4bb28a8474571",
+					"status": "content"
+				},
+				"typings/applications/app-errors.d.ts": {
+					"match": false,
+					"packageHash": "da79c538daeb15aff5e454a561a497512a5ea6b612a7ef196b6c9492e01f81ce",
+					"size": 636,
+					"status": "missing-in-source"
+				},
+				"typings/applications/app.helpers.d.ts": {
+					"match": false,
+					"packageHash": "51a003d3c70f946ab59025b903febbbac6d9cac92b0c1addceb6e98c15d51fc5",
+					"size": 2463,
+					"status": "missing-in-source"
+				},
+				"typings/applications/apps.d.ts": {
+					"match": false,
+					"packageHash": "3209225a71b3eb8d1a9853151fe0e388aae51bc84e50bf99e6f30c7e94b7e202",
+					"size": 1415,
+					"status": "missing-in-source"
+				},
+				"typings/applications/timeouts.d.ts": {
+					"match": false,
+					"packageHash": "c3b38b1e3d632b047b6a79efcd867633f3f1099fd039c116afe801bcc794cf45",
+					"size": 1007,
+					"status": "missing-in-source"
+				},
+				"typings/devtools/devtools.d.ts": {
+					"match": false,
+					"packageHash": "e7af663baec3cb7d02cfc68652f359de3dba1938ae9da9be1f0625933a397de5",
+					"size": 677,
+					"status": "missing-in-source"
+				},
+				"typings/devtools/profiler-api.d.ts": {
+					"match": false,
+					"packageHash": "f3aeb02fb9dcab2a231010ae18dde29595d188fd1156de67ad07139a7631366c",
+					"size": 46,
+					"status": "missing-in-source"
+				},
+				"typings/devtools/profiler.d.ts": {
+					"match": false,
+					"packageHash": "28d5c723c9f7abcbce775bbf627182070f288100d7e468b30562570e2abd5699",
+					"size": 675,
+					"status": "missing-in-source"
+				},
+				"typings/jquery-support.d.ts": {
+					"match": false,
+					"packageHash": "e5f8066841933e7cdbbabc72f137a997d50cf8b87349376e2cb1455822ad82c4",
+					"size": 152,
+					"status": "missing-in-source"
+				},
+				"typings/lifecycles/bootstrap.d.ts": {
+					"match": false,
+					"packageHash": "72192b40d0ce982222cae8319acb39362a8dbd52da908e74bf22181f48474565",
+					"size": 181,
+					"status": "missing-in-source"
+				},
+				"typings/lifecycles/lifecycle.helpers.d.ts": {
+					"match": false,
+					"packageHash": "e1095bda9a16aa64d18645a94971cf8e68146f560d95339720d1364b7934d462",
+					"size": 3620,
+					"status": "missing-in-source"
+				},
+				"typings/lifecycles/load.d.ts": {
+					"match": false,
+					"packageHash": "a7559d08f690db5c4487171392e063db693ed365f8c0a4e523b6f22e76728cad",
+					"size": 235,
+					"status": "missing-in-source"
+				},
+				"typings/lifecycles/mount.d.ts": {
+					"match": false,
+					"packageHash": "58720ee6b416cb9dc7b942705367656e9045865c1cd5842731d33f7a72a62aff",
+					"size": 177,
+					"status": "missing-in-source"
+				},
+				"typings/lifecycles/prop.helpers.d.ts": {
+					"match": false,
+					"packageHash": "e39621dc9f51fd6f7b54f14a8c47021b20ae11b683272870d4feac3809dd5df3",
+					"size": 422,
+					"status": "missing-in-source"
+				},
+				"typings/lifecycles/unload.d.ts": {
+					"match": false,
+					"packageHash": "491aa9b8f31260b303e37c3d32e7b6621b6e9d18e70720e1a18f4c84d4921575",
+					"size": 589,
+					"status": "missing-in-source"
+				},
+				"typings/lifecycles/unmount.d.ts": {
+					"match": false,
+					"packageHash": "8b4b4bab41eb24bf23f8222595a28dac4b07d57cfae2d121a314a4aee2da108f",
+					"size": 179,
+					"status": "missing-in-source"
+				},
+				"typings/lifecycles/update.d.ts": {
+					"match": false,
+					"packageHash": "3e1d6768f3fb1f82d5af9c0d0cb574c603fde5c8fd5887029ea3a9d1500ef4b2",
+					"size": 158,
+					"status": "missing-in-source"
+				},
+				"typings/navigation/navigation-events.d.ts": {
+					"match": false,
+					"packageHash": "b062538301d746ddf9e4ec78a13f5fd1fdce73bcc86354c27815034043704683",
+					"size": 501,
+					"status": "missing-in-source"
+				},
+				"typings/navigation/reroute.d.ts": {
+					"match": false,
+					"packageHash": "a1562199e3d8e152a5e5533043e8b00d735a27c474ab7e50f35bd19411eeba9b",
+					"size": 436,
+					"status": "missing-in-source"
+				},
+				"typings/parcels/mount-parcel.d.ts": {
+					"match": false,
+					"packageHash": "5a5acaef0f9c07954cf40f4840abf58fbb5d305b01d9fef2306a8f79fd2184af",
+					"size": 329,
+					"status": "missing-in-source"
+				},
+				"typings/single-spa.d.ts": {
+					"match": false,
+					"packageHash": "c89bfa4134c4209380956e02ebee6bda4b7557f76c10f40ffcd52b0cf31c0e4a",
+					"size": 1064,
+					"status": "missing-in-source"
+				},
+				"typings/single-spa.profile.d.ts": {
+					"match": false,
+					"packageHash": "e6a5259485392fa3fa04b88deb710b8bbbb3c180bff3ed068c7f558d921d541c",
+					"size": 71,
+					"status": "missing-in-source"
+				},
+				"typings/start.d.ts": {
+					"match": false,
+					"packageHash": "dcd53f3cf6028f57e42b82c2daa6f14b0947def0e17b7831200e5c69e7a7a4fc",
+					"size": 161,
+					"status": "missing-in-source"
+				},
+				"typings/utils/runtime-environment.d.ts": {
+					"match": false,
+					"packageHash": "98b24710ac5f516edb2889838154366cb1f72221a35aef3615be8d6b0d444a37",
+					"size": 43,
+					"status": "missing-in-source"
+				}
+			},
+			"summary": {
+				"differentFiles": 1,
+				"matchingFiles": 2,
+				"missingInPackage": 0,
+				"missingInSource": 35,
+				"score": 0.05263157894736842,
+				"totalFiles": 38
+			}
+		},
+		"prodDependencies": []
+	}
+]

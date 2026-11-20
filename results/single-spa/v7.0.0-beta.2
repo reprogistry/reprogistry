@@ -1,0 +1,135 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-20T04:04:22.338Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:10.9.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "single-spa@7.0.0-beta.2",
+			"name": "single-spa",
+			"version": "7.0.0-beta.2",
+			"location": "https://registry.npmjs.org/single-spa/-/single-spa-7.0.0-beta.2.tgz",
+			"integrity": "sha512-fjvXiiZSj+Hv5LUSOeuAnYFutXJcUmHPoJp5NJ0SrD84jvji0r/y01IrpYizOTAXTag9x4yxLBpb1hnAi7qI2g==",
+			"publishedAt": "2025-03-05T00:00:18.159Z",
+			"publishedWith": {
+				"node": "22.12.0",
+				"npm": "10.9.0"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/single-spa/single-spa.git",
+			"spec": "github:single-spa/single-spa#7.0.0-beta.2"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"lib/esm/single-spa.d.ts": {
+					"match": false,
+					"packageHash": "4c08a37721c905aebbaa50c31e273bd443551801a874be9702eb709f7d211561",
+					"size": 9069,
+					"status": "missing-in-source"
+				},
+				"lib/esm/single-spa.dev.js": {
+					"match": false,
+					"packageHash": "72ca03ed050d3a9de0e195647211924fc5db6e508fe031b3ffdf01dc3f92b920",
+					"size": 63368,
+					"status": "missing-in-source"
+				},
+				"lib/esm/single-spa.dev.js.map": {
+					"match": false,
+					"packageHash": "c8af93dafa3b4158ee3b47b3876e236c6b8ded8554025c0867ab3143f75aaf05",
+					"size": 153784,
+					"status": "missing-in-source"
+				},
+				"lib/esm/single-spa.min.js": {
+					"match": false,
+					"packageHash": "c9b4bc0c5652152eb988a7afbdf0fb45f7d535c1f5127ef227b203d9dda68b0d",
+					"size": 19456,
+					"status": "missing-in-source"
+				},
+				"lib/esm/single-spa.min.js.map": {
+					"match": false,
+					"packageHash": "d634f6c4a1dcc9e939c236edc9b2644e3ebcc4ba86b9f8b9db0dad5be7d9adda",
+					"size": 121705,
+					"status": "missing-in-source"
+				},
+				"lib/system/single-spa.dev.cjs": {
+					"match": false,
+					"packageHash": "090700dbb08cd99d643514877d2a97917160836b6385f25226c24f08ff29cd64",
+					"size": 68624,
+					"status": "missing-in-source"
+				},
+				"lib/system/single-spa.dev.cjs.map": {
+					"match": false,
+					"packageHash": "5b8300ff1b5f58f2113ff9fd57c15386848320606cf3af942677a9e2a39c4040",
+					"size": 153491,
+					"status": "missing-in-source"
+				},
+				"lib/system/single-spa.min.cjs": {
+					"match": false,
+					"packageHash": "fe731bc9a9f54575647eb4faa752d30b498ee29470c591229772deccb7fd37f5",
+					"size": 19254,
+					"status": "missing-in-source"
+				},
+				"lib/system/single-spa.min.cjs.map": {
+					"match": false,
+					"packageHash": "265224493211ed59a1e245f84a10ab616724f1345f7efced7be7d73038d66c06",
+					"size": 121791,
+					"status": "missing-in-source"
+				},
+				"lib/umd/single-spa.d.cts": {
+					"match": false,
+					"packageHash": "4c08a37721c905aebbaa50c31e273bd443551801a874be9702eb709f7d211561",
+					"size": 9069,
+					"status": "missing-in-source"
+				},
+				"lib/umd/single-spa.dev.cjs": {
+					"match": false,
+					"packageHash": "ed397f299409d4966781ab3cebf858805fbe1b5a0c7d59161006e3267b4d3d32",
+					"size": 66169,
+					"status": "missing-in-source"
+				},
+				"lib/umd/single-spa.dev.cjs.map": {
+					"match": false,
+					"packageHash": "26590d9278847f9e03db842453fb2f4f8771237aa992ce1278e3ce328ed13f88",
+					"size": 153828,
+					"status": "missing-in-source"
+				},
+				"lib/umd/single-spa.min.cjs": {
+					"match": false,
+					"packageHash": "4722fb4006339527e4d4af4fbe23e972587d1610a2608688756574150440e50c",
+					"size": 19652,
+					"status": "missing-in-source"
+				},
+				"lib/umd/single-spa.min.cjs.map": {
+					"match": false,
+					"packageHash": "433968b77b8d75816d55b4a1cae121acf6498798939366e388bddc0278e69483",
+					"size": 121706,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -44,6 +44,23 @@\n     \"./package.json\": \"./package.json\",\n     \"./lib/*\": \"./lib/*\"\n   },\n+  \"scripts\": {\n+    \"build\": \"pnpm run clean && concurrently pnpm:build:dev pnpm:build:prod && rimraf ./lib/umd/types-unbundled ./lib/esm/types-unbundled\",\n+    \"build:prod\": \"rollup -c --environment ROLLUP_ENV:'production'\",\n+    \"build:dev\": \"rollup -c\",\n+    \"build:analyze\": \"rollup -c --environment ANALYZER:'analyzer'\",\n+    \"watch\": \"rollup -c -w\",\n+    \"clean\": \"rimraf lib\",\n+    \"test\": \"concurrently -n w: 'pnpm:test:*'\",\n+    \"test:browser\": \"cross-env BABEL_ENV=test jest --config jest-browser.config.js\",\n+    \"test:node\": \"cross-env BABEL_ENV=test jest --config jest-node.config.js\",\n+    \"test:lockfile\": \"js-correct-lockfile pnpm\",\n+    \"format\": \"prettier --write .\",\n+    \"check-format\": \"prettier --check .\",\n+    \"lint\": \"eslint src\",\n+    \"prepare\": \"husky\",\n+    \"prepublishOnly\": \"pnpm run build\"\n+  },\n   \"files\": [\n     \"lib\",\n     \"typings\"\n@@ -108,20 +125,5 @@\n   \"browserslist\": [\n     \">5%\",\n     \"not ie <= 11\"\n-  ],\n-  \"scripts\": {\n-    \"build\": \"pnpm run clean && concurrently pnpm:build:dev pnpm:build:prod && rimraf ./lib/umd/types-unbundled ./lib/esm/types-unbundled\",\n-    \"build:prod\": \"rollup -c --environment ROLLUP_ENV:'production'\",\n-    \"build:dev\": \"rollup -c\",\n-    \"build:analyze\": \"rollup -c --environment ANALYZER:'analyzer'\",\n-    \"watch\": \"rollup -c -w\",\n-    \"clean\": \"rimraf lib\",\n-    \"test\": \"concurrently -n w: 'pnpm:test:*'\",\n-    \"test:browser\": \"cross-env BABEL_ENV=test jest --config jest-browser.config.js\",\n-    \"test:node\": \"cross-env BABEL_ENV=test jest --config jest-node.config.js\",\n-    \"test:lockfile\": \"js-correct-lockfile pnpm\",\n-    \"format\": \"prettier --write .\",\n-    \"check-format\": \"prettier --check .\",\n-    \"lint\": \"eslint src\"\n-  }\n-}\n\\ No newline at end of file\n+  ]\n+}\n",
+					"match": false,
+					"packageHash": "c5d802c255574f62c210626091167dfa1b524d1a54cbc03f0f0b3eef83d6018a",
+					"size": 3809,
+					"sourceHash": "adb4807d49bf8779e98f2956f023eb750cb1b80ca4020f64194824382bc2cfdc",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 1,
+				"matchingFiles": 2,
+				"missingInPackage": 0,
+				"missingInSource": 14,
+				"score": 0.11764705882352941,
+				"totalFiles": 17
+			}
+		},
+		"prodDependencies": []
+	}
+]

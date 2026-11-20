@@ -1,0 +1,81 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-20T04:05:54.448Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:11.4.2",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "single-spa@7.0.0-beta.10",
+			"name": "single-spa",
+			"version": "7.0.0-beta.10",
+			"location": "https://registry.npmjs.org/single-spa/-/single-spa-7.0.0-beta.10.tgz",
+			"integrity": "sha512-ek9tlbe1QqToL4Hoc/3ye6LZ9nUVjzirvz0wZ2rRpTEamhIco4LJMQyU/7i8QQVoQAQ+JIrUSkHtD5ABy6Es3w==",
+			"publishedAt": "2025-09-16T05:37:49.819Z",
+			"publishedWith": {
+				"node": "24.4.0",
+				"npm": "11.4.2"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/single-spa/single-spa.git",
+			"spec": "github:single-spa/single-spa#v7.0.0-beta.10"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"lib/esm/single-spa.d.ts": {
+					"match": false,
+					"packageHash": "10273b9be594ac71ef94a27b9ec188bdac085cde72ba371066d18e764c6e2af7",
+					"size": 8263,
+					"status": "missing-in-source"
+				},
+				"lib/esm/single-spa.dev.js": {
+					"match": false,
+					"packageHash": "3a67cfce55997ccdd72436bdf2e18b2fdf68bff3bed6eeb0832a72e49b12e19a",
+					"size": 59713,
+					"status": "missing-in-source"
+				},
+				"lib/esm/single-spa.dev.js.map": {
+					"match": false,
+					"packageHash": "a7cc5ef3df6e180bdc4f325a17a0e64f5edebe780b3df7dc9b80b21a1ef8f260",
+					"size": 151147,
+					"status": "missing-in-source"
+				},
+				"lib/esm/single-spa.min.js": {
+					"match": false,
+					"packageHash": "721e363504c54587ac96c76d9b63592b32cd6b5bd5264f713129731a4847ce43",
+					"size": 17889,
+					"status": "missing-in-source"
+				},
+				"lib/esm/single-spa.min.js.map": {
+					"match": false,
+					"packageHash": "79ab3b709e7f39d7f297f5897fdbd4e843b6b16699a761283f3abd205a962b5b",
+					"size": 119664,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -3,6 +3,7 @@\n   \"version\": \"7.0.0-beta.10\",\n   \"description\": \"The router for easy microfrontends\",\n   \"type\": \"module\",\n+  \"packageManager\": \"pnpm@10.14.0+sha512.ad27a79641b49c3e481a16a805baa71817a04bbe06a38d17e60e2eaee83f6a146c6a688125f5792e48dd5ba30e7da52a5cda4c3992b9ccf333f9ce223af84748\",\n   \"publishConfig\": {\n     \"access\": \"public\"\n   },\n@@ -19,6 +20,22 @@\n     },\n     \"./package.json\": \"./package.json\"\n   },\n+  \"scripts\": {\n+    \"build\": \"pnpm run clean && concurrently pnpm:build:dev pnpm:build:prod && rimraf ./lib/umd/types-unbundled ./lib/esm/types-unbundled\",\n+    \"build:prod\": \"rollup -c --environment ROLLUP_ENV:'production'\",\n+    \"build:dev\": \"rollup -c\",\n+    \"build:analyze\": \"rollup -c --environment ANALYZER:'analyzer'\",\n+    \"watch\": \"rollup -c -w\",\n+    \"clean\": \"rimraf lib\",\n+    \"test\": \"concurrently -n w: 'pnpm:test:*'\",\n+    \"test:browser\": \"cross-env BABEL_ENV=test jest --config jest-browser.config.js\",\n+    \"test:node\": \"cross-env BABEL_ENV=test jest --config jest-node.config.js\",\n+    \"test:lockfile\": \"js-correct-lockfile pnpm\",\n+    \"format\": \"prettier --write .\",\n+    \"check-format\": \"prettier --check .\",\n+    \"prepare\": \"husky\",\n+    \"prepublishOnly\": \"pnpm run build\"\n+  },\n   \"files\": [\n     \"lib\",\n     \"src\"\n@@ -74,19 +91,5 @@\n   \"browserslist\": [\n     \">5%\",\n     \"not ie <= 11\"\n-  ],\n-  \"scripts\": {\n-    \"build\": \"pnpm run clean && concurrently pnpm:build:dev pnpm:build:prod && rimraf ./lib/umd/types-unbundled ./lib/esm/types-unbundled\",\n-    \"build:prod\": \"rollup -c --environment ROLLUP_ENV:'production'\",\n-    \"build:dev\": \"rollup -c\",\n-    \"build:analyze\": \"rollup -c --environment ANALYZER:'analyzer'\",\n-    \"watch\": \"rollup -c -w\",\n-    \"clean\": \"rimraf lib\",\n-    \"test\": \"concurrently -n w: 'pnpm:test:*'\",\n-    \"test:browser\": \"cross-env BABEL_ENV=test jest --config jest-browser.config.js\",\n-    \"test:node\": \"cross-env BABEL_ENV=test jest --config jest-node.config.js\",\n-    \"test:lockfile\": \"js-correct-lockfile pnpm\",\n-    \"format\": \"prettier --write .\",\n-    \"check-format\": \"prettier --check .\"\n-  }\n-}\n\\ No newline at end of file\n+  ]\n+}\n",
+					"match": false,
+					"packageHash": "0e5431226ebe3d72ef3bb7efbd362384150cba20acb4066cbbb699043fc7cf3c",
+					"size": 2722,
+					"sourceHash": "ce2dabb786ec30d33e6713ee8429fbb782c050c800bcec5ace12aeb1b0ec5624",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 1,
+				"matchingFiles": 27,
+				"missingInPackage": 0,
+				"missingInSource": 5,
+				"score": 0.8181818181818182,
+				"totalFiles": 33
+			}
+		},
+		"prodDependencies": []
+	}
+]
