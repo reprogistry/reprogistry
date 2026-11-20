@@ -1,0 +1,57 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-20T12:49:11.807Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:3.9.3",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "react-image-crop@1.0.1",
+			"name": "react-image-crop",
+			"version": "1.0.1",
+			"location": "https://registry.npmjs.org/react-image-crop/-/react-image-crop-1.0.1.tgz",
+			"integrity": "sha512-DXvAOFcYkzmFqpkOVmpZXRM9Yv1e+Wb9cRdvnfjsBS0QjpAuBIAYAtxNky5+7J/z2coUgB6viZnH5PBn1QNZ2w==",
+			"publishedAt": "2016-09-08T20:29:28.409Z",
+			"publishedWith": {
+				"node": "6.2.1",
+				"npm": "3.9.3"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/DominicTobias/react-image-crop.git",
+			"spec": "github:DominicTobias/react-image-crop#6cd24769db4278c35fda2b4be0f311be59e6b711"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".npmignore": {
+					"match": false,
+					"packageHash": "05d8e1ff937f163ddef5af37b8c48d91b054e205dd4ecaf4b3d734fb5576be7e",
+					"size": 185,
+					"status": "missing-in-source"
+				},
+				"demo/bundle.js": {
+					"diff": "--- published/demo/bundle.js\n+++ rebuilt/demo/bundle.js\n@@ -83,7 +83,7 @@\n \t    function Parent() {\n \t      _classCallCheck(this, Parent);\n \n-\t      var _this = _possibleConstructorReturn(this, (Parent.__proto__ || Object.getPrototypeOf(Parent)).call(this));\n+\t      var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Parent).call(this));\n \n \t      _this.state = {\n \t        crop: {\n@@ -311,30 +311,20 @@\n \tvar cachedSetTimeout;\n \tvar cachedClearTimeout;\n \n-\tfunction defaultSetTimout() {\n-\t    throw new Error('setTimeout has not been defined');\n-\t}\n-\tfunction defaultClearTimeout () {\n-\t    throw new Error('clearTimeout has not been defined');\n-\t}\n \t(function () {\n \t    try {\n-\t        if (typeof setTimeout === 'function') {\n-\t            cachedSetTimeout = setTimeout;\n-\t        } else {\n-\t            cachedSetTimeout = defaultSetTimout;\n-\t        }\n+\t        cachedSetTimeout = setTimeout;\n \t    } catch (e) {\n-\t        cachedSetTimeout = defaultSetTimout;\n+\t        cachedSetTimeout = function () {\n+\t            throw new Error('setTimeout is not defined');\n+\t        }\n \t    }\n \t    try {\n-\t        if (typeof clearTimeout === 'function') {\n-\t            cachedClearTimeout = clearTimeout;\n-\t        } else {\n-\t            cachedClearTimeout = defaultClearTimeout;\n-\t        }\n+\t        cachedClearTimeout = clearTimeout;\n \t    } catch (e) {\n-\t        cachedClearTimeout = defaultClearTimeout;\n+\t        cachedClearTimeout = function () {\n+\t            throw new Error('clearTimeout is not defined');\n+\t        }\n \t    }\n \t} ())\n \tfunction runTimeout(fun) {\n@@ -342,11 +332,6 @@\n \t        //normal enviroments in sane situations\n \t        return setTimeout(fun, 0);\n \t    }\n-\t    // if setTimeout wasn't available but was latter defined\n-\t    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {\n-\t        cachedSetTimeout = setTimeout;\n-\t        return setTimeout(fun, 0);\n-\t    }\n \t    try {\n \t        // when when somebody has screwed with setTimeout but no I.E. maddness\n \t        return cachedSetTimeout(fun, 0);\n@@ -367,11 +352,6 @@\n \t        //normal enviroments in sane situations\n \t        return clearTimeout(marker);\n \t    }\n-\t    // if clearTimeout wasn't available but was latter defined\n-\t    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {\n-\t        cachedClearTimeout = clearTimeout;\n-\t        return clearTimeout(marker);\n-\t    }\n \t    try {\n \t        // when when somebody has screwed with setTimeout but no I.E. maddness\n \t        return cachedClearTimeout(marker);\n@@ -21596,7 +21576,7 @@\n \t  function ReactCrop(props) {\n \t    _classCallCheck(this, ReactCrop);\n \n-\t    var _this = _possibleConstructorReturn(this, (ReactCrop.__proto__ || Object.getPrototypeOf(ReactCrop)).call(this, props));\n+\t    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ReactCrop).call(this, props));\n \n \t    _this.onDocMouseTouchMove = _this.onDocMouseTouchMove.bind(_this);\n \t    _this.onDocMouseTouchEnd = _this.onDocMouseTouchEnd.bind(_this);\n@@ -21606,7 +21586,7 @@\n \t    _this.onCropMouseTouchDown = _this.onCropMouseTouchDown.bind(_this);\n \n \t    _this.state = {\n-\t      crop: _this.nextCropState(props.crop),\n+\t      crop: _this.nextCropState(_this.props.crop),\n \t      polygonId: _this.getRandomInt(1, 900000)\n \t    };\n \t    return _this;\n@@ -22330,7 +22310,6 @@\n \n \t      var cropSelection = void 0;\n \t      var imageClip = void 0;\n-\t      var isDataUrl = this.props.src.indexOf('data:') === 0;\n \n \t      if (!this.cropInvalid) {\n \t        cropSelection = this.createCropSelection();\n",
+					"match": false,
+					"packageHash": "c46f739e0683eb5387f3211d5b7d8cbd399c36b23e27ee9fa2db5c2325868eca",
+					"size": 773245,
+					"sourceHash": "b125addb65bb2dde7f53c8f43de5504c69dbd40588cd20b0fc2e6494d1d883e8",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 1,
+				"matchingFiles": 17,
+				"missingInPackage": 0,
+				"missingInSource": 1,
+				"score": 0.8947368421052632,
+				"totalFiles": 19
+			}
+		},
+		"prodDependencies": []
+	}
+]
