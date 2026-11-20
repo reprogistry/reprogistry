@@ -1,0 +1,182 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-20T07:30:59.260Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:12.2.3",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "openpgp@0.2.0",
+			"name": "openpgp",
+			"version": "0.2.0",
+			"location": "https://registry.npmjs.org/openpgp/-/openpgp-0.2.0.tgz",
+			"integrity": "sha512-0zhK5/IS0pcv3D7xjLlIdoDtOw9AH8SzVKfJKjmnMuAfZv3BdkNOeYFFchN6jKUPGaksHdAT6PzzGM74b9uRrw==",
+			"publishedAt": "2014-01-12T14:26:04.103Z",
+			"publishedWith": {
+				"node": null,
+				"npm": "1.3.22"
+			},
+			"dependencies": {
+				"node-localstorage": "~0.3.4"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "https://github.com/openpgpjs/openpgpjs",
+			"spec": "github:openpgpjs/openpgpjs#v0.2.0"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,63 +1,46 @@\n-OpenPGP.js\n+OpenPGP.js [![Build Status](https://secure.travis-ci.org/openpgpjs/openpgpjs.png?branch=master,v0.1.x)](http://travis-ci.org/openpgpjs/openpgpjs)\n ==========\n \n [OpenPGP.js](http://openpgpjs.org/) is a Javascript implementation of the OpenPGP protocol. This is defined in [RFC 4880](http://tools.ietf.org/html/rfc4880).\n \n-[![Build Status](https://secure.travis-ci.org/openpgpjs/openpgpjs.png?branch=master,v0.1.x)](http://travis-ci.org/openpgpjs/openpgpjs)\n+# Installation\n+## Node\n+    npm install openpgpjs\n \n-### Node support\n+## Browser\n+The library has AMD support but can also be accessed via 'window.openpgp'.\n \n-For server side use, install via npm:\n-\n-    npm install openpgp\n-\n-Example:\n-\n-    var openpgp = require('openpgp');\n-    var key = '-----BEGIN PGP PUBLIC KEY BLOCK ... END PGP PUBLIC KEY BLOCK-----';\n-    var publicKey = openpgp.key.readArmored(key);\n-    var pgpMessage = openpgp.encryptMessage(publicKey.keys, 'Hello, World!');\n-\n-### Browser support\n-\n-Fetch a minified build under [releases](https://github.com/openpgpjs/openpgpjs/releases). The library can be loaded via  AMD/require.js or accessed globally via `window.openpgp`.\n-\n-OpenPGP.js currently only fully supports browsers that implement `window.crypto.getRandomValues`. If you can help us support more browsers and runtimes, please chip in!\n-\n-### Security recommendations\n-\n-It should be noted that js crypto apps deployed via regular web hosting (a.k.a. [**host-based security**](https://www.schneier.com/blog/archives/2012/08/cryptocat.html)) provide users with less security than installable apps with auditable static versions. Installable apps can be deployed as a [Firefox](https://developer.mozilla.org/en-US/Marketplace/Publishing/Packaged_apps) or [Chrome](http://developer.chrome.com/apps/about_apps.html) packaged app. These apps are basically signed zip files and their runtimes typically enforce a strict [Content Security Policy (CSP)](http://www.html5rocks.com/en/tutorials/security/content-security-policy/) to protect users against [XSS](http://en.wikipedia.org/wiki/Cross-site_scripting). This [blogpost](http://tonyarcieri.com/whats-wrong-with-webcrypto) explains the trust model of the web quite well.\n-\n-It is also recommended to set a strong passphrase that protects the user's private key on disk.\n-\n-## Development\n-\n-You can create your own build in `dist/openpgp.min.js` to use in your project.\n+### Prebuilt minified release\n+You can download a prebuilt minified version of the library under [releases](https://github.com/openpgpjs/openpgpjs/releases).\n \n+### Build the library yourself\n     npm install && grunt\n \n-### Run tests\n+Then take `dist/openpgp.min.js` to use in your project.\n \n-    npm test\n+#Usage\n+It's best the check the documentation for detailed API information. There are also alot of useful examples under 'test/'.\n \n-### Documentation\n-\n-A jsdoc build of our code comments is available at [doc/index.html](http://openpgpjs.org/openpgpjs/doc/index.html). Public calls should generally be made through the OpenPGP object [doc/openpgp.html](http://openpgpjs.org/openpgpjs/doc/module-openpgp.html).\n-\n-### Mailing List\n+## Documentation\n+A jsdoc build of our code comments is available at [doc/index.html](doc/index.html). Public calls should generally be made through the OpenPGP object [doc/openpgp.html](doc/openpgp.html).\n \n+# I need some help\n+## Mailing List\n You can [sign up](http://list.openpgpjs.org/) for our mailing list and ask for help there.  We've recently worked on getting our [archive up and running](http://www.mail-archive.com/list@openpgpjs.org/).\n \n-### How do I get involved?\n-\n-You want to help, great! Go ahead and fork our repo, make your changes and send us a pull request.\n+# How do I get involved?\n+You want to help, great! Go ahead and fork our repo, make your changes\n+and make a pull request.\n \n-### License\n+It is extra awesome if you write tests for the code you change. Our test coverage is relatively weak, so if you can add cases that is great.\n \n+# What License do you use?\n GNU Lesser General Public License (2.1). Please take a look at the [LICENSE](LICENSE) file for more information.\n \n-### Resources\n+# What are the requirements to use it?\n+OpenPGP.js currently only fully supports Chrome. Firefox support should be coming soon with the advent of Firefox 23 with native javascript support for `window.crypto.getRandomValues`. If you can help us support more browsers and situations, please chip in!\n \n+# Resources\n Below is a collection of resources, many of these were projects that were in someway a precursor to the current OpenPGP.js project. If you'd like to add your link here, please do so in a pull request or email to the list.\n \n * [http://www.hanewin.net/encrypt/](http://www.hanewin.net/encrypt/)\n",
+					"match": false,
+					"packageHash": "1ca3796702c9b440a5af9b943fbca8a8da6495239f7ae5016d2524ada7c3195e",
+					"size": 3746,
+					"sourceHash": "f10677e2d2317871a538014893019ecde6722d97417586aabdfdcd5bc10a5d0f",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,12 +1,9 @@\n {\n   \"name\": \"openpgp\",\n-  \"description\":  \"OpenPGP.js is a Javascript implementation of the OpenPGP protocol. This is defined in RFC 4880.\",\n   \"version\": \"0.2.0\",\n-  \"homepage\": \"http://openpgpjs.org/\",\n   \"engines\": {\n     \"node\": \">=0.8\"\n   },\n-  \"keywords\": [\"crypto\", \"pgp\", \"gpg\", \"openpgp\"],\n   \"main\": \"src/index.js\",\n   \"directories\": {\n     \"lib\": \"src\"\n@@ -40,6 +37,6 @@\n   },\n   \"repository\": {\n     \"type\": \"git\",\n-    \"url\": \"https://github.com/openpgpjs/openpgpjs\"\n+    \"url\": \"http://github.com/openpgpjs/openpgpjs\"\n   }\n }\n",
+					"match": false,
+					"packageHash": "11a56372027ea4e45484e99b9708572b8eb8afe588eb252e8b895e2675b9e338",
+					"size": 1109,
+					"sourceHash": "3978b022cfd3357ce54bc543f7288f27382027459b9daec3fcb779a414f52482",
+					"status": "content"
+				},
+				"test/crypto/cipher/aes.js": {
+					"diff": "--- published/test/crypto/cipher/aes.js\n+++ rebuilt/test/crypto/cipher/aes.js\n@@ -1,6 +1,6 @@\n 'use strict';\n \n-var openpgp = typeof window != 'undefined' && window.openpgp ? window.openpgp : require('../../../src/index');\n+var openpgp = typeof window != 'undefined' && window.openpgp ? window.openpgp : require('openpgp');\n \n var util = openpgp.util,\n   chai = require('chai'),\n",
+					"match": false,
+					"packageHash": "c7fcf09187654c4f7d6b0eb6b66f744002af33e2768bfcbd151783588fbe2755",
+					"size": 15756,
+					"sourceHash": "2e615cddc58517de945b75cfe466653369ed007064f50437970d3fa76b2eba4d",
+					"status": "content"
+				},
+				"test/crypto/cipher/blowfish.js": {
+					"diff": "--- published/test/crypto/cipher/blowfish.js\n+++ rebuilt/test/crypto/cipher/blowfish.js\n@@ -1,6 +1,6 @@\n 'use strict';\n \n-var openpgp = typeof window != 'undefined' && window.openpgp ? window.openpgp : require('../../../src/index');\n+var openpgp = typeof window != 'undefined' && window.openpgp ? window.openpgp : require('openpgp');\n \n var util = openpgp.util,\n   BFencrypt = openpgp.crypto.cipher.blowfish,\n",
+					"match": false,
+					"packageHash": "ae1889980149ae13b443bd84ace3e2fea0b77179ea22706595e6d3999022101f",
+					"size": 6082,
+					"sourceHash": "fde5742553d358ee2b6392d2c16c311654f2da7c52924e2b7dab6c14403698c3",
+					"status": "content"
+				},
+				"test/crypto/cipher/cast5.js": {
+					"diff": "--- published/test/crypto/cipher/cast5.js\n+++ rebuilt/test/crypto/cipher/cast5.js\n@@ -1,6 +1,6 @@\n 'use strict';\n \n-var openpgp = typeof window != 'undefined' && window.openpgp ? window.openpgp : require('../../../src/index');\n+var openpgp = typeof window != 'undefined' && window.openpgp ? window.openpgp : require('openpgp');\n \n var util = openpgp.util,\n   chai = require('chai'),\n",
+					"match": false,
+					"packageHash": "673735fb826458d7122efff6842ce33defbd23cc80756ed687c6dd3a17a5f272",
+					"size": 1070,
+					"sourceHash": "43b0f3bcfea5fe4394dc29c61859135c7dd6da1869ef481777ff8efe864f1e73",
+					"status": "content"
+				},
+				"test/crypto/cipher/des.js": {
+					"diff": "--- published/test/crypto/cipher/des.js\n+++ rebuilt/test/crypto/cipher/des.js\n@@ -1,6 +1,6 @@\n 'use strict';\r\n \r\n-var openpgp = typeof window != 'undefined' && window.openpgp ? window.openpgp : require('../../../src/index');\r\n+var openpgp = typeof window != 'undefined' && window.openpgp ? window.openpgp : require('openpgp');\r\n \r\n var util = openpgp.util,\r\n   chai = require('chai'),\r\n",
+					"match": false,
+					"packageHash": "4702edc06635a17fdcc008b238a9d13bcf8f0a3289cdd5079380ee68a72ab2b3",
+					"size": 11766,
+					"sourceHash": "d22118e8c603306045a1f001b052476af176482fc039aa76aa1fc566e19397bd",
+					"status": "content"
+				},
+				"test/crypto/cipher/twofish.js": {
+					"diff": "--- published/test/crypto/cipher/twofish.js\n+++ rebuilt/test/crypto/cipher/twofish.js\n@@ -1,6 +1,6 @@\n 'use strict';\n \n-var openpgp = typeof window != 'undefined' && window.openpgp ? window.openpgp : require('../../../src/index');\n+var openpgp = typeof window != 'undefined' && window.openpgp ? window.openpgp : require('openpgp');\n \n var util = openpgp.util,\n   chai = require('chai'),\n",
+					"match": false,
+					"packageHash": "290ff4b16e9564888c4240969b74cf3f6618ae5d3c005fefbc833a4133a06c0b",
+					"size": 3029,
+					"sourceHash": "b856193c808d53858ca0f70d79db806f22c2f4176bf2918561e2d22e889ff4f3",
+					"status": "content"
+				},
+				"test/crypto/crypto.js": {
+					"diff": "--- published/test/crypto/crypto.js\n+++ rebuilt/test/crypto/crypto.js\n@@ -1,6 +1,6 @@\n 'use strict';\n \n-var openpgp = typeof window != 'undefined' && window.openpgp ? window.openpgp : require('../../src/index');\n+var openpgp = typeof window != 'undefined' && window.openpgp ? window.openpgp : require('openpgp');\n \n var chai = require('chai'),\n \texpect = chai.expect;\n",
+					"match": false,
+					"packageHash": "358ccc0038b5f65b7a2fb7b669cce7c2f5c5d5ce0ef10382dea899d93c925e8f",
+					"size": 19419,
+					"sourceHash": "2c3c2c4708d5f3fbc92038a8a8070e0f0c2ee69770513ae1cea2f076cb33cb0b",
+					"status": "content"
+				},
+				"test/crypto/hash/md5.js": {
+					"diff": "--- published/test/crypto/hash/md5.js\n+++ rebuilt/test/crypto/hash/md5.js\n@@ -1,6 +1,6 @@\n 'use strict';\n \n-var openpgp = typeof window != 'undefined' && window.openpgp ? window.openpgp : require('../../../src/index');\n+var openpgp = typeof window != 'undefined' && window.openpgp ? window.openpgp : require('openpgp');\n \n var util = openpgp.util,\n   MD5 = openpgp.crypto.hash.md5,\n",
+					"match": false,
+					"packageHash": "9389ac1a60576c55f8af5f465884d982307743f85a5ac200ad74534b26394dad",
+					"size": 1433,
+					"sourceHash": "1793ada88e483c26843387ee77d1fa160a23b56be17a6b4848c249f9c7c7cc95",
+					"status": "content"
+				},
+				"test/crypto/hash/ripemd.js": {
+					"diff": "--- published/test/crypto/hash/ripemd.js\n+++ rebuilt/test/crypto/hash/ripemd.js\n@@ -1,6 +1,6 @@\n 'use strict';\n \n-var openpgp = typeof window != 'undefined' && window.openpgp ? window.openpgp : require('../../../src/index');\n+var openpgp = typeof window != 'undefined' && window.openpgp ? window.openpgp : require('openpgp');\n \n var util = openpgp.util,\n   RMDstring = openpgp.crypto.hash.ripemd,\n",
+					"match": false,
+					"packageHash": "a6c92e6a7119abca4b712c0d2ed2548fe1c6c3b84ee4d7d3bc084f63ce95861d",
+					"size": 1031,
+					"sourceHash": "e0a422e52bc9bcc8318a64509b8013a5c60f4a1d317d19b60445b72dfc1f84c9",
+					"status": "content"
+				},
+				"test/crypto/hash/sha.js": {
+					"diff": "--- published/test/crypto/hash/sha.js\n+++ rebuilt/test/crypto/hash/sha.js\n@@ -1,6 +1,6 @@\n 'use strict';\n \n-var openpgp = typeof window != 'undefined' && window.openpgp ? window.openpgp : require('../../../src/index');\n+var openpgp = typeof window != 'undefined' && window.openpgp ? window.openpgp : require('openpgp');\n \n var util = openpgp.util,\n   hash = openpgp.crypto.hash,\n",
+					"match": false,
+					"packageHash": "cca268be5cf799da4477c8394dfe95590500a5441f1acdd44e151cd981470fb8",
+					"size": 3220,
+					"sourceHash": "e220845cc5c41f85f87153dbabf878a6054d3fd76333a88b8496cc0da5e9cad3",
+					"status": "content"
+				},
+				"test/general/basic.js": {
+					"diff": "--- published/test/general/basic.js\n+++ rebuilt/test/general/basic.js\n@@ -1,6 +1,6 @@\n 'use strict';\n \n-var openpgp = typeof window != 'undefined' && window.openpgp ? window.openpgp : require('../../src/index');\n+var openpgp = typeof window != 'undefined' && window.openpgp ? window.openpgp : require('openpgp');\n \n var chai = require('chai'),\n   expect = chai.expect;\n",
+					"match": false,
+					"packageHash": "054a83bd9ae0ccf4dc337cbd23709f05446a770503270b031c290ea1aea98468",
+					"size": 8188,
+					"sourceHash": "5893435842077825a2aaa1eafbf492ef241982f874b5cc297e923209957ffd42",
+					"status": "content"
+				},
+				"test/general/key.js": {
+					"diff": "--- published/test/general/key.js\n+++ rebuilt/test/general/key.js\n@@ -1,6 +1,6 @@\n 'use strict';\n \n-var openpgp = typeof window != 'undefined' && window.openpgp ? window.openpgp : require('../../src/index');\n+var openpgp = typeof window != 'undefined' && window.openpgp ? window.openpgp : require('openpgp');\n \n var chai = require('chai'),\n \texpect = chai.expect;\n",
+					"match": false,
+					"packageHash": "fcca9020ac8227f557a7f26f6ffaf12a610828c5b93e5c12f21c26784ae25991",
+					"size": 17383,
+					"sourceHash": "9cdd1c016515da6946545e8a8fadf5d8b222f1705f3d87e0cc540cb98bb80a28",
+					"status": "content"
+				},
+				"test/general/keyring.js": {
+					"diff": "--- published/test/general/keyring.js\n+++ rebuilt/test/general/keyring.js\n@@ -1,6 +1,6 @@\n 'use strict';\n \n-var openpgp = typeof window != 'undefined' && window.openpgp ? window.openpgp : require('../../src/index');\n+var openpgp = typeof window != 'undefined' && window.openpgp ? window.openpgp : require('openpgp');\n \n var keyring = new openpgp.Keyring(),\n   chai = require('chai'),\n",
+					"match": false,
+					"packageHash": "0a0a596975d97f46b0de6a6873e923cf3fbb76876ed3224b5c0c8a65059db072",
+					"size": 3081,
+					"sourceHash": "1b023afc058487cfe60b9f8326e993936ba666e2b2ff35ab4b8bf11770366cb7",
+					"status": "content"
+				},
+				"test/general/packet.js": {
+					"diff": "--- published/test/general/packet.js\n+++ rebuilt/test/general/packet.js\n@@ -1,6 +1,6 @@\n 'use strict';\n \n-var openpgp = typeof window != 'undefined' && window.openpgp ? window.openpgp : require('../../src/index');\n+var openpgp = typeof window != 'undefined' && window.openpgp ? window.openpgp : require('openpgp');\n \n var chai = require('chai'),\n   expect = chai.expect;\n",
+					"match": false,
+					"packageHash": "8532c49c70e3963ef47a38c0845b6bab7f1d60bdbc4880ec627510179f93f81a",
+					"size": 15421,
+					"sourceHash": "a79a61b380e99226dee3762bab12c23fb9d4d54c8463718967be1481fd32b5c8",
+					"status": "content"
+				},
+				"test/general/signature.js": {
+					"diff": "--- published/test/general/signature.js\n+++ rebuilt/test/general/signature.js\n@@ -1,6 +1,6 @@\n 'use strict';\n \n-var openpgp = typeof window != 'undefined' && window.openpgp ? window.openpgp : require('../../src/index');\n+var openpgp = typeof window != 'undefined' && window.openpgp ? window.openpgp : require('openpgp');\n \n var chai = require('chai'),\n \texpect = chai.expect;\n",
+					"match": false,
+					"packageHash": "8a61a4173ef9252c496458478191099c5ad34630ad1e412ee3248f1d0d459b21",
+					"size": 29533,
+					"sourceHash": "396f27b7a9255b16cc4cf8dbcc1309428ffa6053701d5b153fd9ce87ede3fe29",
+					"status": "content"
+				},
+				"LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 16,
+				"matchingFiles": 65,
+				"missingInPackage": 1,
+				"missingInSource": 0,
+				"score": 0.7926829268292683,
+				"totalFiles": 82
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "node-localstorage",
+				"version": "0.3.6"
+			}
+		]
+	}
+]
