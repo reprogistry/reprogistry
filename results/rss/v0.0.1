@@ -1,0 +1,151 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-21T12:47:45.349Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:2.15.11",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "rss@0.0.1",
+			"name": "rss",
+			"version": "0.0.1",
+			"location": "https://registry.npmjs.org/rss/-/rss-0.0.1.tgz",
+			"integrity": "sha512-pgvhaXny3wmkgbndNTrWg4NwwQyeMNewNfexLNjGkwLIJIpH5LP50j1p5mql25dhTEy7Mu+yNYaYqDr5TxQmCA==",
+			"publishedAt": "2011-04-15T04:53:13.421Z",
+			"publishedWith": {
+				"node": "v0.4.2",
+				"npm": "0.3.18"
+			},
+			"dependencies": {
+				"xml": ">= 0.0.4",
+				"logging": ">= 2.0.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git://github.com/dylang/node-rss.git",
+			"spec": "github:dylang/node-rss#0.0.1"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".idea/.name": {
+					"match": false,
+					"packageHash": "da5b84a2b37b15a73354c642865e6089cc3ae69b9798b4a48e3b0b1adbd8230a",
+					"size": 8,
+					"status": "missing-in-source"
+				},
+				".idea/dictionaries/dylan.xml": {
+					"match": false,
+					"packageHash": "6f62e16b654d4b39859e49d50b464fdff960f9365e6ec8953eef9e7b64874b58",
+					"size": 84,
+					"status": "missing-in-source"
+				},
+				".idea/encodings.xml": {
+					"match": false,
+					"packageHash": "0234e0fa9139efc865c3e6b2099a91944493dd7867b5e883ae5e10511cc239e9",
+					"size": 166,
+					"status": "missing-in-source"
+				},
+				".idea/misc.xml": {
+					"match": false,
+					"packageHash": "559050f8f8f404efb595dc46f5c6aa2d54b330908feb5308f0e134534b578a71",
+					"size": 381,
+					"status": "missing-in-source"
+				},
+				".idea/modules.xml": {
+					"match": false,
+					"packageHash": "f44dfbe452750b767b6838c07e9eb8301f97ccc1d5bd7b03de9f2883814a6da9",
+					"size": 270,
+					"status": "missing-in-source"
+				},
+				".idea/node-rss.iml": {
+					"match": false,
+					"packageHash": "c1274ebfefd9b3af0c027b8053a601987e579048c720e49921b89a3452b3bb0b",
+					"size": 283,
+					"status": "missing-in-source"
+				},
+				".idea/vcs.xml": {
+					"match": false,
+					"packageHash": "dcc3db1a3d33d4bb15c58e03ce582efd5343b39c04c0f6652e9a62bf6a799527",
+					"size": 169,
+					"status": "missing-in-source"
+				},
+				".idea/workspace.xml": {
+					"match": false,
+					"packageHash": "ac8e535b99a8895248e097452f757506a3570380acb7936b33975c07585f3bd1",
+					"size": 19941,
+					"status": "missing-in-source"
+				},
+				"lib/rss.js": {
+					"diff": "--- published/lib/rss.js\n+++ rebuilt/lib/rss.js\n@@ -5,71 +5,102 @@\n var XML        = require('xml'),\n     log        = require('logging').from(__filename);\n \n-function RSS (options, items) {\n-    options = options || {};\n+function RSS () {\n \n-    this.title          = options.title || 'Untitled RSS Feed';\n-    this.description    = options.description || '';\n-    this.feed_url       = options.feed_url;\n-    this.site_url       = options.site_url;\n-    this.image_url      = options.image_url;\n-    this.author         = options.author;\n-    this.items          = items || [];\n-\n-    this.item = function (options) {\n-        options = options || {};\n-        var item = {\n-            title:          options.title || 'No title',\n-            description:    options.description || '',\n-            url:            options.url,\n-            guid:           options.guid,\n-            categories:     options.categories || [],\n-            author:         options.author,\n-            date:           options.date\n+    var site = {\n+        title: '',\n+        url: '',\n+        description: ''\n+    };\n+\n+    var feed = {\n+        url: ''\n+    };\n+\n+    var author = {\n+\n+    };\n+\n+\n+    var rss = {\n+        title:          '',\n+        description:    '',\n+        link:           '',\n+        author: {\n+            name:       'string',\n+            uri:        'uri',\n+            email:      'email'\n+        },\n+        image: {\n+            url:        'url',\n+            title:      'text',\n+            link:       'url'\n+        },\n+        items:           []\n+        };\n+\n+    Object.defineProperty(this, \"items\", {\n+                get : function(){ return rss.items; },\n+                set : function(new_items){ rss.items = new_items; },\n+                enumerable : true\n+            });\n+\n+\n+\n+    this.item = function (item) {\n+\n+        item = item || {\n+            title:          'cdata',\n+            link:           'url',\n+            source:         'source',\n+            description:    'cdata',\n+            categories:     ['category'],\n+            guid:           { permaLink: true, guid: 'guid'},\n+            comments:       'comments',\n+            author:         'author',\n+            date:           new Date()\n         };\n \n-        this.items.push(item);\n-        return this;\n+        rss.items.push(item);\n     };\n \n     this.xml = function(indent) {\n-        return '<?xml version=\"1.0\" encoding=\"UTF-8\"?>\\n'\n-                + XML(generateXML(this), indent);\n+        return '<?xml version=\"1.0\" encoding=\"UTF-8\"?>\\n' + XML(generateXML(rss), indent);\n     }\n \n }\n \n-function ifTruePush(bool, array, data) {\n-    if (bool) {\n-        array.push(data);\n-    }\n-}\n",
+					"match": false,
+					"packageHash": "02c2d358318b2473a5ae13092b5fc007e498a8831b9bebe4be77fbd2bc82eea7",
+					"size": 3046,
+					"sourceHash": "5b3c378d978d4a46a28b9e7204442286b39b559ea6043df7d40fe0b9ed603fd6",
+					"status": "content"
+				},
+				"readme.md": {
+					"diff": "--- published/readme.md\n+++ rebuilt/readme.md\n@@ -1,119 +1,3 @@\n-# RSS for Node\n+# Node.js library for generating RSS and Atom feeds.\n \n-  Fast and simple Javascript-based RSS generator/builder for Node projects.\n-\n-## Install\n-\n-    $ npm install rss\n-\n-## Tests\n-\n- Use [nodeunit](https://github.com/caolan/nodeunit) to run the tests.\n-\n-    $ npm install nodeunit\n-    $ nodeunit test\n-\n-## Usage\n-\n-    var RSS = require('rss');\n-\n-    /* lets create an rss feed */\n-    var feed = new RSS({\n-            title: 'title',\n-            description: 'description',\n-            feed_url: 'http://example.com/rss.xml',\n-            site_url: 'http://example.com',\n-            image_url: 'http://example.com/icon.png',\n-            author: 'Dylan Greene'\n-        });\n-\n-    /* loop over data and add to feed */\n-    feed.item({\n-        title:  'item title',\n-        description: 'use this for the content. It can include html.',\n-        url: 'http://example.com/article4?this&that', // link to the item\n-        guid: '1123', // optional - defaults to url\n-        author: 'Guest Author', // optional - defaults to feed author property\n-        date: 'May 27, 2012' // any format that js Date can parse.\n-    });\n-\n-    // cache the xml\n-    var xml = feed.xml();\n-\n-### Feed Options\n-\n- * _title_ <string> Title of your site or feed\n- * _description_ <string> Optional. Short description of the feed.\n- * _feed_url_ <url> Url to the rss feed.\n- * _site_url_ <url> Url to the site that the feed is for.\n- * _image_url_ <url> Optional. Small image for feed readers to use.\n- * _author_ <string> Who owns this feed.\n-\n-### Item Options\n-\n-In RSS an item can be used for a blog entry, project update, log entry, etc.  Your rss feed\n-an have any number of items. Ten to tenty is usually good.\n-\n- * _title_ <string> Title of this particular item.\n- * _description_ <string> Content for the item.  Can contain html but link and image urls must include the server name.\n- (Note: I might change this to content in the next release.)\n- * _url_ <url> Url to the item. This could be a blog entry.\n- * _guid_ <unique string> A unique string feed readers use to know if an item is new or has already been seen.\n- If you use a guid never change it.  If you don't provide a guid then your item urls must\n- be unique.\n- * _author_ <string> Optional.  If included it is the name of the item's creator.\n- If not provided the item author will be the same as the feed author.  This is typical\n- except on multi-author blogs.\n- * _date_ <Date object or date string> The date and time of when the intem was created.  Feed\n- readers use this to determin the sort order. Some readers will also use it to determin\n- if the content should be presented as unread.\n-\n-### Methods\n-\n- * _item(item_options)_ - add an rss item, article, entry etc.\n- * _xml([indent])_ - return the xml.  If you pass in true it will use four spaces for indenting. If you prefer\n- tabs use \\t instead of true.\n-\n-## Notes\n- * You do not need to escape anything. This module will escape characters when necessary.\n- * This module is very fast but you might as well cache the output of xml() and serve\n- it until something changes.\n-\n-## Upcoming features\n-\n- * Atom support\n- * Feed validation\n- * Feedburner integration\n- * More customization\n- * Express middleware for serving feeds\n- * What else?\n-\n-# Contributing\n-\n-Contributions to the project are welcome. Feel free to fork and improve. I accept pull requests and issues,\n-especially when tests are included.\n-\n-# License\n",
+					"match": false,
+					"packageHash": "8ce7efe7924fd5707ac4df365e316a77f4a82804a409ee0b33cc20a384c41314",
+					"size": 4414,
+					"sourceHash": "bd944306e6de75f4736aedd9015f8aab2e96d2a49c6980679225572f7de31353",
+					"status": "content"
+				},
+				"test/test.js": {
+					"diff": "--- published/test/test.js\n+++ rebuilt/test/test.js\n@@ -4,57 +4,10 @@\n \n var RSS = require('../index');\n \n+var feed = new RSS();\n \n-module.exports = {\n-\n-    'empty feed': function(test) {\n-        var feed = new RSS();\n-        test.equal(feed.xml(), '<?xml version=\"1.0\" encoding=\"UTF-8\"?>\\n<rss xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:content=\"http://purl.org/rss/1.0/modules/content/\" xmlns:atom=\"http://www.w3.org/2005/Atom\" version=\"2.0\"><channel><title><![CDATA[Untitled RSS Feed]]></title><description><![CDATA[Untitled RSS Feed]]></description><link>http://github.com/dylan/node-rss</link><generator>NodeJS RSS Module</generator><lastBuildDate>' + new Date().toUTCString() +'</lastBuildDate></channel></rss>');\n-        feed.item();\n-        test.equal(feed.xml(), '<?xml version=\"1.0\" encoding=\"UTF-8\"?>\\n<rss xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:content=\"http://purl.org/rss/1.0/modules/content/\" xmlns:atom=\"http://www.w3.org/2005/Atom\" version=\"2.0\"><channel><title><![CDATA[Untitled RSS Feed]]></title><description><![CDATA[Untitled RSS Feed]]></description><link>http://github.com/dylan/node-rss</link><generator>NodeJS RSS Module</generator><lastBuildDate>' + new Date().toUTCString() +'</lastBuildDate><item><title><![CDATA[No title]]></title><guid isPermaLink=\"false\">No title</guid></item></channel></rss>');\n-        test.done();\n-    },\n-\n-    'easy test': function(test) {\n-        var feed = new RSS({\n-                    title: 'title',\n-                    description: 'description',\n-                    feed_url: 'http://example.com/rss.xml',\n-                    site_url: 'http://example.com',\n-                    image_url: 'http://example.com/icon.png',\n-                    author: 'Dylan Greene'\n-                });\n-\n-        feed.item({\n-                    title:  'item 1',\n-                    description: 'description 1',\n-                    url: 'http://example.com/article1',\n-                    date: 'May 24, 2012'\n-                })\n-            .item({\n-                    title:  'item 2',\n-                    description: 'description 2',\n-                    url: 'http://example.com/article2',\n-                    date: 'May 25, 2012'\n-                })\n-            .item({\n-                    title:  'item 3',\n-                    description: 'description 3',\n-                    url: 'http://example.com/article3',\n-                    guid: 'item3',\n-                    date: 'May 26, 2012'\n-                })\n-            .item({\n-                    title:  'item 4 & html test with <strong>',\n-                    description: 'description 4 uses some <strong>html</strong>',\n-                    url: 'http://example.com/article4?this&that',\n-                    author: 'Guest Author',\n-                    date: 'May 27, 2012'\n-                });\n-\n-        console.log(feed.xml(true));\n-        test.equal(feed.xml(), '<?xml version=\"1.0\" encoding=\"UTF-8\"?>\\n<rss xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:content=\"http://purl.org/rss/1.0/modules/content/\" xmlns:atom=\"http://www.w3.org/2005/Atom\" version=\"2.0\"><channel><title><![CDATA[title]]></title><description><![CDATA[description]]></description><link>http://example.com</link><generator>NodeJS RSS Module</generator><lastBuildDate>' + new Date().toUTCString() +'</lastBuildDate><atom:link href=\"http://example.com/rss.xml\" rel=\"self\" type=\"application/rss+xml\"/><item><title><![CDATA[item 1]]></title><description><![CDATA[description 1]]></description><guid isPermaLink=\"true\">http://example.com/article1</guid><dc:creator><![CDATA[Dylan Greene]]></dc:creator><pubDate>Thu, 24 May 2012 04:00:00 GMT</pubDate></item><item><title><![CDATA[item 2]]></title><description><![CDATA[description 2]]></description><guid isPermaLink=\"true\">http://example.com/article2</guid><dc:creator><![CDATA[Dylan Greene]]></dc:creator><pubDate>Fri, 25 May 2012 04:00:00 GMT</pubDate></item><item><title><![CDATA[item 3]]></title><description><![CDATA[description 3]]></description><guid isPermaLink=\"false\">item3</guid><dc:creator><![CDATA[Dylan Greene]]></dc:creator><pubDate>Sat, 26 May 2012 04:00:00 GMT</pubDate></item><item><title><![CDATA[item 4 & html test with <strong>]]></title><description><![CDATA[description 4 uses some <strong>html</strong>]]></description><guid isPermaLink=\"true\">http://example.com/article4?this&amp;that</guid><dc:creator><![CDATA[Guest Author]]></dc:creator><pubDate>Sun, 27 May 2012 04:00:00 GMT</pubDate></item></channel></rss>');\n-        test.done();\n-    }\n-};\n+feed.item();\n+feed.item();\n+feed.item();\n \n+console.log(feed.xml(true));\n",
+					"match": false,
+					"packageHash": "a18d8d80a2c940926c70a84e0f56745428db2d27dfd437766bcd9d5ce5638377",
+					"size": 4439,
+					"sourceHash": "c7962952ee63ccb04ccdf9d5d6a21ffc99f46ea2a441dd9888e6a4cb3a14e2a6",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 3,
+				"matchingFiles": 4,
+				"missingInPackage": 0,
+				"missingInSource": 8,
+				"score": 0.26666666666666666,
+				"totalFiles": 15
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "ansi-styles",
+				"version": "2.2.1"
+			},
+			{
+				"name": "chalk",
+				"version": "5.6.2"
+			},
+			{
+				"name": "debug",
+				"version": "4.4.3"
+			},
+			{
+				"name": "esutils",
+				"version": "2.0.3"
+			},
+			{
+				"name": "logging",
+				"version": "4.2.0"
+			},
+			{
+				"name": "ms",
+				"version": "2.1.3"
+			},
+			{
+				"name": "nicely-format",
+				"version": "1.1.0"
+			},
+			{
+				"name": "xml",
+				"version": "1.0.1"
+			}
+		]
+	}
+]
