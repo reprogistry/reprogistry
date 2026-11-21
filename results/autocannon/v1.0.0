@@ -1,0 +1,804 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-21T14:06:13.474Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:5.6.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "autocannon@1.0.0",
+			"name": "autocannon",
+			"version": "1.0.0",
+			"location": "https://registry.npmjs.org/autocannon/-/autocannon-1.0.0.tgz",
+			"integrity": "sha512-BqeSWsOjbXt9xvNhvL/ugxsmbUC77a+ZZGhtJ+ie3YvIZb4iOnYb2hYymeCVtoSyzFBZT+6NdsYHOXn8oUtogw==",
+			"publishedAt": "2018-01-30T17:54:46.706Z",
+			"publishedWith": {
+				"node": "8.9.4",
+				"npm": "5.6.0"
+			},
+			"dependencies": {
+				"chalk": "^2.0.0",
+				"table": "^4.0.1",
+				"xtend": "^4.0.1",
+				"hyperid": "^1.1.0",
+				"retimer": "^1.0.1",
+				"minimist": "^1.2.0",
+				"progress": "^2.0.0",
+				"reinterval": "^1.1.0",
+				"timestring": "^5.0.0",
+				"deep-extend": "^0.5.0",
+				"pretty-bytes": "^4.0.2",
+				"color-support": "^1.1.1",
+				"http-parser-js": "^0.4.2",
+				"hdr-histogram-js": "^1.0.0",
+				"hdr-histogram-percentiles-obj": "^1.2.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/mcollina/autocannon.git",
+			"spec": "github:mcollina/autocannon#f3562fcf04063aeb2f5aad84761be92c83478be2"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".travis.yml": {
+					"match": false,
+					"packageHash": "ddcd6ff7049d488d1fc92a826f49596efe109bb847475150782803a977077ade",
+					"size": 79,
+					"status": "missing-in-source"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -2,16 +2,13 @@\n \n # autocannon\n \n-[![Join the chat at https://gitter.im/mcollina/autocannon](https://badges.gitter.im/mcollina/autocannon.svg)](https://gitter.im/mcollina/autocannon?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)\n-[![Travis Build Status](https://travis-ci.org/mcollina/autocannon.svg?branch=master)](https://travis-ci.org/mcollina/autocannon)\n-[![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/github/mcollina/autocannon?svg=true)](https://ci.appveyor.com/project/mcollina/autocannon)\n-\n+![Node.js CI](https://github.com/mcollina/autocannon/workflows/Node.js%20CI/badge.svg)\n \n ![demo](https://raw.githubusercontent.com/mcollina/autocannon/master/demo.gif)\n \n-A HTTP/1.1 benchmarking tool written in node, greatly inspired by [wrk][wrk]\n+An HTTP/1.1 benchmarking tool written in node, greatly inspired by [wrk][wrk]\n and [wrk2][wrk2], with support for HTTP pipelining and HTTPS.\n-On _my_ box, *autocannon* can produce more load than `wrk` and `wrk2`.\n+On _my_ box, *autocannon* can produce more load than `wrk` and `wrk2`, see [limitations](#limitations) for more details.\n \n * [Installation](#install)\n * [Usage](#usage)\n@@ -38,10 +35,8 @@\n ```\n Usage: autocannon [opts] URL\n \n-URL is any valid http or https url.\n-\n-For IPC, the url can be substituted by a path to a Unix Domain Socket or\n-a Windows Named Pipe.\n+URL is any valid HTTP or HTTPS URL.\n+If the PORT environment variable is set, the URL can be a path. In that case 'http://localhost:$PORT/path' will be used as the URL.\n \n Available options:\n \n@@ -50,21 +45,49 @@\n   -p/--pipelining NUM\n         The number of pipelined requests to use. default: 1.\n   -d/--duration SEC\n-        The number of seconds to run the autocannnon. default: 10.\n+        The number of seconds to run the autocannon. default: 10.\n   -a/--amount NUM\n-        The amount of requests to make before exiting the benchmark. If set, duration is ignored.\n+        The number of requests to make before exiting the benchmark. If set, duration is ignored.\n+  -L NUM\n+        The number of milliseconds to elapse between taking samples. This controls the sample interval, & therefore the total number of samples, which affects statistical analyses. default: 1.\n+  -S/--socketPath\n+        A path to a Unix Domain Socket or a Windows Named Pipe. A URL is still required to send the correct Host header and path.\n+  -w/--workers\n+        Number of worker threads to use to fire requests.\n+  -W/--warmup\n+       Use a warm up interval before starting sampling.\n+       This enables startup processes to finish and traffic to normalize before sampling begins\n+       use -c and -d sub args e.g. `--warmup [ -c 1 -d 3 ]`\n+  --on-port\n+        Start the command listed after -- on the command line. When it starts listening on a port,\n+        start sending requests to that port. A URL is still required to send requests to\n+        the correct path. The hostname can be omitted, `localhost` will be used by default.\n+        If the command after -- is `node <script>`, this flag is optional and assumed to be `true`.\n   -m/--method METHOD\n-        The http method to use. default: 'GET'.\n+        The HTTP method to use. default: 'GET'.\n   -t/--timeout NUM\n         The number of seconds before timing out and resetting a connection. default: 10\n   -T/--title TITLE\n         The title to place in the results for identification.\n   -b/--body BODY\n         The body of the request.\n+        NOTE: This option needs to be used with the '-H/--headers' option in some frameworks\n+  -F/--form FORM\n+        Upload a form (multipart/form-data). The form options can be a JSON string like\n+        '{ \"field 1\": { \"type\": \"text\", \"value\": \"a text value\"}, \"field 2\": { \"type\": \"file\", \"path\": \"path to the file\" } }'\n+        or a path to a JSON file containing the form options.\n+        When uploading a file the default filename value can be overridden by using the corresponding option:\n+        '{ \"field name\": { \"type\": \"file\", \"path\": \"path to the file\", \"options\": { \"filename\": \"myfilename\" } } }'\n+        Passing the filepath to the form can be done by using the corresponding option:\n+        '{ \"field name\": { \"type\": \"file\", \"path\": \"path to the file\", \"options\": { \"filepath\": \"/some/path/myfilename\" } } }'\n   -i/--input FILE\n-        The body of the request.\n+        The body of the request. See '-b/body' for more details.\n   -H/--headers K=V\n         The request headers.\n+  --har FILE\n+        When provided, Autocannon will use requests from the HAR file.\n+        CAUTION: you have to specify one or more domains using URL option: only the HAR requests to the same domains will be considered.\n+        NOTE: you can still add extra headers with -H/--headers but -m/--method, -F/--form, -i/--input -b/--body will be ignored.\n   -B/--bailout NUM\n         The number of failures before initiating a bailout.\n   -M/--maxConnectionRequests NUM\n@@ -74,29 +97,123 @@\n   -r/--connectionRate NUM\n         The max number of requests to make per second from an individual connection.\n   -R/--overallRate NUM\n-        The max number of requests to make per second from an all connections.\n+        The max number of requests to make per second from all connections.\n         connection rate will take precedence if both are set.\n-        NOTE: if using rate limiting and a very large rate is entered which cannot be met,\n-              Autocannon will do as many requests as possible per second.\n+        NOTE: if using rate limiting and a very large rate is entered which cannot be met, Autocannon will do as many requests as possible per second.\n+        Also, latency data will be corrected to compensate for the effects of the coordinated omission issue.\n",
+					"match": false,
+					"packageHash": "d5108fe1b8979fd569c778ac69512480a598e08976ef6a6f6ed8465de24c6ef5",
+					"size": 14919,
+					"sourceHash": "bdf068406fa21399aea940d3a12243cf8b7d98df368101529092075561fde237",
+					"status": "content"
+				},
+				"appveyor.yml": {
+					"match": false,
+					"packageHash": "3283c4642095ec2a2f9ed62f302b23ba0461b9adc4777462d72c5be86cee0630",
+					"size": 992,
+					"status": "missing-in-source"
+				},
+				"autocannon-banner.png": {
+					"match": false,
+					"packageHash": "ef8584871b24c54109b82d6ab0ea4254ddbae2f8df8830d080cdf654d6e8d56b",
+					"size": 33276,
+					"status": "missing-in-source"
+				},
+				"autocannon-logo-hire.png": {
+					"match": false,
+					"packageHash": "698e3fdd9a6bfb707831d003c553ee5c61422f64dafde4cba9f97ff411535c77",
+					"size": 32905,
+					"status": "missing-in-source"
+				},
+				"autocannon.js": {
+					"diff": "--- published/autocannon.js\n+++ rebuilt/autocannon.js\n@@ -2,72 +2,133 @@\n \n 'use strict'\n \n-const minimist = require('minimist')\n+const crossArgv = require('cross-argv')\n const fs = require('fs')\n+const os = require('os')\n+const net = require('net')\n const path = require('path')\n-const help = fs.readFileSync(path.join(__dirname, 'help.txt'), 'utf8')\n-const run = require('./lib/run')\n+const URL = require('url').URL\n+const spawn = require('child_process').spawn\n+const managePath = require('manage-path')\n+const hasAsyncHooks = require('has-async-hooks')\n+const subarg = require('@minimistjs/subarg')\n+const printResult = require('./lib/printResult')\n+const initJob = require('./lib/init')\n const track = require('./lib/progressTracker')\n+const generateSubArgAliases = require('./lib/subargAliases')\n+const { checkURL, ofURL } = require('./lib/url')\n+const { parseHAR } = require('./lib/parseHAR')\n+const _aggregateResult = require('./lib/aggregateResult')\n+const validateOpts = require('./lib/validate')\n+\n+if (typeof URL !== 'function') {\n+  console.error('autocannon requires the WHATWG URL API, but it is not available. Please upgrade to Node 6.13+.')\n+  process.exit(1)\n+}\n \n-module.exports = run\n+module.exports = initJob\n module.exports.track = track\n \n module.exports.start = start\n+module.exports.printResult = printResult\n module.exports.parseArguments = parseArguments\n+module.exports.aggregateResult = function aggregateResult (results, opts = {}) {\n+  if (!Array.isArray(results)) {\n+    throw new Error('\"results\" must be an array of results')\n+  }\n+\n+  opts = validateOpts(opts, false)\n+\n+  if (opts instanceof Error) {\n+    throw opts\n+  }\n+\n+  return _aggregateResult(results, opts)\n+}\n+const alias = {\n+  connections: 'c',\n+  pipelining: 'p',\n+  timeout: 't',\n+  duration: 'd',\n+  sampleInt: 'L',\n+  amount: 'a',\n+  json: 'j',\n+  renderLatencyTable: ['l', 'latency'],\n+  onPort: 'on-port',\n+  method: 'm',\n+  headers: ['H', 'header'],\n+  body: 'b',\n+  form: 'F',\n+  servername: 's',\n+  bailout: 'B',\n+  input: 'i',\n+  maxConnectionRequests: 'M',\n+  maxOverallRequests: 'O',\n+  connectionRate: 'r',\n+  overallRate: 'R',\n+  ignoreCoordinatedOmission: 'C',\n+  reconnectRate: 'D',\n+  renderProgressBar: 'progress',\n+  renderStatusCodes: 'statusCodes',\n+  title: 'T',\n+  verbose: 'V',\n+  version: 'v',\n+  forever: 'f',\n+  idReplacement: 'I',\n+  socketPath: 'S',\n+  excludeErrorStats: 'x',\n+  expectBody: 'E',\n+  workers: 'w',\n+  warmup: 'W',\n+  help: 'h'\n+}\n+\n+const defaults = {\n+  connections: 10,\n+  timeout: 10,\n+  pipelining: 1,\n+  duration: 10,\n+  sampleInt: 1000,\n+  reconnectRate: 0,\n+  renderLatencyTable: false,\n+  renderProgressBar: true,\n",
+					"match": false,
+					"packageHash": "fd6da71b8107a09b751979c48ffde4a88275e72745e7f0c46284a8bd3741af17",
+					"size": 3001,
+					"sourceHash": "6109569cdbef8f751cccec24651a88472ed7306fb2886918edf8e0de5ac63923",
+					"status": "content"
+				},
+				"demo.gif": {
+					"match": false,
+					"packageHash": "339b2fb00e122c5aa765f0f8a970cad2296e9d55c6fc60fb239ea41523144eb8",
+					"size": 107925,
+					"status": "missing-in-source"
+				},
+				"help.txt": {
+					"diff": "--- published/help.txt\n+++ rebuilt/help.txt\n@@ -1,8 +1,7 @@\n Usage: autocannon [opts] URL\n \n-URL is any valid http or https url.\n-\n-For IPC, the url can be substituted by a path to a Unix Domain Socket or a Windows Named Pipe.\n+URL is any valid HTTP or HTTPS URL.\n+If the PORT environment variable is set, the URL can be a path. In that case 'http://localhost:$PORT/path' will be used as the URL.\n \n Available options:\n \n@@ -11,21 +10,48 @@\n   -p/--pipelining NUM\n         The number of pipelined requests to use. default: 1.\n   -d/--duration SEC\n-        The number of seconds to run the autocannnon. default: 10.\n+        The number of seconds to run the autocannon. default: 10.\n   -a/--amount NUM\n-        The amount of requests to make before exiting the benchmark. If set, duration is ignored.\n+        The number of requests to make before exiting the benchmark. If set, duration is ignored.\n+  -L NUM\n+        The number of milliseconds to elapse between taking samples. This controls the sample interval, & therefore the total number of samples, which affects statistical analyses. default: 1.\n+  -S/--socketPath\n+        A path to a Unix Domain Socket or a Windows Named Pipe. A URL is still required to send the correct Host header and path.\n+  -w/--workers\n+        Number of worker threads to use to fire requests.\n+  -W/--warmup\n+       Use a warm up interval before starting sampling.\n+       This enables startup processes to finish and traffic to normalize before sampling begins\n+       use -c and -d sub args e.g. `--warmup [ -c 1 -d 3 ]`\n+  --on-port\n+        Start the command listed after -- on the command line. When it starts listening on a port,\n+        start sending requests to that port. A URL is still required to send requests to\n+        the correct path. The hostname can be omitted, `localhost` will be used by default.\n   -m/--method METHOD\n-        The http method to use. default: 'GET'.\n+        The HTTP method to use. default: 'GET'.\n   -t/--timeout NUM\n         The number of seconds before timing out and resetting a connection. default: 10\n   -T/--title TITLE\n         The title to place in the results for identification.\n   -b/--body BODY\n         The body of the request.\n+        NOTE: This option needs to be used with the '-H/--headers' option in some frameworks\n+  -F/--form FORM\n+        Upload a form (multipart/form-data). The form options can be a JSON string like\n+        '{ \"field 1\": { \"type\": \"text\", \"value\": \"a text value\"}, \"field 2\": { \"type\": \"file\", \"path\": \"path to the file\" } }'\n+        or a path to a JSON file containing the form options.\n+        When uploading a file the default filename value can be overridden by using the corresponding option:\n+        '{ \"field name\": { \"type\": \"file\", \"path\": \"path to the file\", \"options\": { \"filename\": \"myfilename\" } } }'\n+        Passing the filepath to the form can be done by using the corresponding option:\n+        '{ \"field name\": { \"type\": \"file\", \"path\": \"path to the file\", \"options\": { \"filepath\": \"/some/path/myfilename\" } } }'\n   -i/--input FILE\n-        The body of the request.\n+        The body of the request. See '-b/body' for more details.\n   -H/--headers K=V\n         The request headers.\n+  --har FILE\n+        When provided, Autocannon will use requests from the HAR file.\n+        CAUTION: you have to specify one or more domains using URL option: only the HAR requests to the same domains will be considered.\n+        NOTE: you can still add extra headers with -H/--headers but -m/--method, -F/--form, -i/--input -b/--body will be ignored.\n   -B/--bailout NUM\n         The number of failures before initiating a bailout.\n   -M/--maxConnectionRequests NUM\n@@ -35,21 +61,44 @@\n   -r/--connectionRate NUM\n         The max number of requests to make per second from an individual connection.\n   -R/--overallRate NUM\n-        The max number of requests to make per second from an all connections.\n+        The max number of requests to make per second from all connections.\n         connection rate will take precedence if both are set.\n         NOTE: if using rate limiting and a very large rate is entered which cannot be met,\n-              Autocannon will do as many requests as possible per second.\n+              Autocannon will do as many requests as possible per second. Also, latency data will be corrected to compensate for the effects of the coordinated omission issue. If you are not familiar with the coordinated omission issue, you should probably read [this article](http://highscalability.com/blog/2015/10/5/your-load-generator-is-probably-lying-to-you-take-the-red-pi.html) or watch this [Gil Tene's talk](https://www.youtube.com/watch?v=lJ8ydIuPFeU) on the topic.\n+  -C/--ignoreCoordinatedOmission\n+        Ignore the coordinated omission issue when requests should be sent at a fixed rate using 'connectionRate' or 'overallRate'.\n+        NOTE: it is not recommended to enable this option.\n+              When the request rate cannot be met because the server is too slow, many request latencies might be missing and Autocannon might report a misleading latency distribution.\n   -D/--reconnectRate NUM\n-        Some number of requests to make before resetting a connections connection to the\n+        The number of requests to make before resetting a connections connection to the\n         server.\n   -n/--no-progress\n         Don't render the progress bar. default: false.\n   -l/--latency\n         Print all the latency data. default: false.\n+  -I/--idReplacement\n+        Enable replacement of [<id>] with a randomly generated ID within the request body. default: false.\n   -j/--json\n-        Print the output as newline delimited json. This will cause the progress bar and results not to be rendered. default: false.\n+        Print the output as newline delimited JSON. This will cause the progress bar and results not to be rendered. default: false.\n   -f/--forever\n         Run the benchmark forever. Efficiently restarts the benchmark on completion. default: false.\n+  -s/--servername\n+        Server name for the SNI (Server Name Indication) TLS extension. Defaults to the hostname of the URL when it is not an IP address.\n+  -x/--excludeErrorStats\n+        Exclude error statistics (non-2xx HTTP responses) from the final latency and bytes per second averages. default: false.\n+  -E/--expectBody EXPECTED\n",
+					"match": false,
+					"packageHash": "7a5f2fbe992c8dfd3ccd39dbe7b2b83dda5f010c01bc82009e0c67d5be520e94",
+					"size": 2303,
+					"sourceHash": "b6c545fed6f451b450bc0ec64f02c6cbc5fd65141f1d4c9755dea44905aedc82",
+					"status": "content"
+				},
+				"lib/httpClient.js": {
+					"diff": "--- published/lib/httpClient.js\n+++ rebuilt/lib/httpClient.js\n@@ -7,60 +7,61 @@\n const retimer = require('retimer')\n const HTTPParser = require('http-parser-js').HTTPParser\n const RequestIterator = require('./requestIterator')\n+const noop = require('./noop')\n+const clone = require('lodash.clonedeep')\n+const PipelinedRequestsQueue = require('./pipelinedRequestsQueue')\n \n function Client (opts) {\n   if (!(this instanceof Client)) {\n     return new Client(opts)\n   }\n-  opts.setupClient = opts.setupClient || noop\n-  opts.pipelining = opts.pipelining || 1\n-  opts.port = opts.port || 80\n-\n-  this.opts = opts\n-  this.timeout = (opts.timeout || 10) * 1000\n-  this.ipc = !!opts.socketPath\n-  this.secure = opts.protocol === 'https:'\n-  if (this.secure && this.opts.port === 80) this.opts.port = 443\n+\n+  this.opts = clone(opts)\n+\n+  this.opts.setupClient = this.opts.setupClient || noop\n+  this.opts.pipelining = this.opts.pipelining || 1\n+  this.opts.port = this.opts.port || 80\n+  this.opts.expectBody = this.opts.expectBody || null\n+  this.opts.tlsOptions = this.opts.tlsOptions || {}\n+  this.timeout = (this.opts.timeout || 10) * 1000\n+  this.ipc = !!this.opts.socketPath\n+  this.secure = this.opts.protocol === 'https:'\n+  this.auth = this.opts.auth || null\n+\n+  if (this.secure && this.opts.port === 80) {\n+    this.opts.port = 443\n+  }\n+\n   this.parser = new HTTPParser(HTTPParser.RESPONSE)\n-  this.requestIterator = new RequestIterator(opts.requests, opts)\n+  this.requestIterator = new RequestIterator(this.opts)\n \n   this.reqsMade = 0\n \n   // used for request limiting\n-  this.responseMax = opts.responseMax\n+  this.responseMax = this.opts.responseMax\n \n   // used for rate limiting\n   this.reqsMadeThisSecond = 0\n-  this.rate = opts.rate\n+  this.rate = this.opts.rate\n \n   // used for forcing reconnects\n-  this.reconnectRate = opts.reconnectRate\n+  this.reconnectRate = this.opts.reconnectRate\n \n-  this.resData = new Array(opts.pipelining)\n-  for (var i = 0; i < this.resData.length; i++) {\n-    this.resData[i] = {\n-      bytes: 0,\n-      headers: {},\n-      startTime: [0, 0]\n-    }\n-  }\n-\n-  // cer = current expected response\n-  this.cer = 0\n+  this.pipelinedRequests = new PipelinedRequestsQueue()\n   this.destroyed = false\n \n-  opts.setupClient(this)\n+  this.opts.setupClient(this)\n \n   const handleTimeout = () => {\n-    // all pipelined requests have timed out here\n-    this.resData.forEach(() => this.emit('timeout'))\n-    this.cer = 0\n     this._destroyConnection()\n \n-    // timeout has already occured, need to set a new timeoutTicker\n-    this.timeoutTicker = retimer(handleTimeout, this.timeout)\n+    this.timeoutTicker.reschedule(this.timeout)\n \n     this._connect()\n+\n+    for (let i = 0; i < this.opts.pipelining; i++) {\n+      this.emit('timeout')\n+    }\n   }\n \n   if (this.rate) {\n@@ -72,28 +73,39 @@\n   }\n \n   this.timeoutTicker = retimer(handleTimeout, this.timeout)\n-  this.parser[HTTPParser.kOnHeaders] = () => {}\n+  this.parser[HTTPParser.kOnHeaders] = (rawTrailers) => {\n",
+					"match": false,
+					"packageHash": "926903e0461768b1f68e8be653d73dbd7bd4cccf76af9830a06a64df469f6b58",
+					"size": 5739,
+					"sourceHash": "31516446d4c26de938a92f2871ad71241fb1dacbeb5aea2418ac00ba6368a3d5",
+					"status": "content"
+				},
+				"lib/httpRequestBuilder.js": {
+					"diff": "--- published/lib/httpRequestBuilder.js\n+++ rebuilt/lib/httpRequestBuilder.js\n@@ -1,8 +1,7 @@\n 'use strict'\n \n-const xtend = require('xtend')\n const methods = require('./httpMethods')\n-const ending = Buffer.from('\\r\\n')\n+const { getPropertyCaseInsensitive } = require('./util')\n \n // this is a build request factory, that curries the build request function\n // and sets the default for it\n@@ -15,20 +14,29 @@\n     headers: {},\n     body: Buffer.alloc(0),\n     hostname: 'localhost',\n+    setupRequest: reqData => reqData,\n     port: 80\n   }\n \n-  defaults = xtend(builderDefaults, defaults)\n+  defaults = Object.assign(builderDefaults, defaults)\n \n   // buildRequest takes an object, and turns it into a buffer representing the\n-  // http request\n-  return function buildRequest (reqData) {\n+  // http request.\n+  // second parameter is passed to setupRequest, when relevant\n+  // will return null if setupRequest returns falsey result\n+  return function buildRequest (reqData, context) {\n     // below is a hack to enable deep extending of the headers so the default\n     // headers object isn't overwritten by accident\n     reqData = reqData || {}\n-    reqData.headers = xtend(defaults.headers, reqData.headers)\n+    reqData.headers = Object.assign({}, defaults.headers, reqData.headers)\n+\n+    reqData = Object.assign({}, defaults, reqData)\n+\n+    reqData = reqData.setupRequest(reqData, context)\n+    if (!reqData) {\n+      return null\n+    }\n \n-    reqData = xtend(defaults, reqData)\n     // for some reason some tests fail with method === undefined\n     // the reqData.method should be set to SOMETHING in this case\n     // cannot find reason for failure if `|| 'GET'` is taken out\n@@ -37,25 +45,43 @@\n     const headers = reqData.headers\n     const body = reqData.body\n \n-    let host = reqData.host\n+    const headersDefinedHost = getPropertyCaseInsensitive(reqData.headers, 'host')\n+    let host = headersDefinedHost || reqData.host\n+\n     if (!host) {\n       const hostname = reqData.hostname\n       const port = reqData.port\n       host = hostname + ':' + port\n     }\n+    const baseReq = [\n+      `${method} ${path} HTTP/1.1`\n+    ]\n+    if (!headersDefinedHost) {\n+      baseReq.push(`Host: ${host}`)\n+    }\n+    baseReq.push('Connection: keep-alive')\n+    if (reqData.auth) {\n+      const encodedAuth = Buffer.from(reqData.auth).toString('base64')\n+      headers.Authorization = `Basic ${encodedAuth}`\n+    }\n \n     if (methods.indexOf(method) < 0) {\n       throw new Error(`${method} HTTP method is not supported`)\n     }\n \n-    const baseReq = `${method} ${path} HTTP/1.1\\r\\nHost: ${host}\\r\\nConnection: keep-alive\\r\\n`\n-\n     let bodyBuf\n \n     if (typeof body === 'string') {\n       bodyBuf = Buffer.from(body)\n+    } else if (typeof body === 'number') {\n+      bodyBuf = Buffer.from(body + '')\n     } else if (Buffer.isBuffer(body)) {\n       bodyBuf = body\n+    } else if (body && Array.isArray(body._)) {\n+      // when the request body passed on the CLI includes brackets like for\n+      // a JSON array, the subarg parser will oddly provide the contents as\n+      // `body._`. Work around this specific issue.\n+      bodyBuf = Buffer.from(`[${body._}]`)\n     } else if (body) {\n       throw new Error('body must be either a string or a buffer')\n     }\n@@ -67,14 +93,14 @@\n       headers['Content-Length'] = `${bodyBuf.length + (idCount * 27)}`\n     }\n \n-    let req = Object.keys(headers)\n-      .map((key) => `${key}: ${headers[key]}\\r\\n`)\n",
+					"match": false,
+					"packageHash": "2ec34a2bf778e24c23a850b037d40f570d4088489e3a923b7155be9e875c3ef4",
+					"size": 2486,
+					"sourceHash": "4d274084ba91c136438b83c9f7850eed02f6fb77f08f8ca05de15045aa1c0580",
+					"status": "content"
+				},
+				"lib/progressTracker.js": {
+					"diff": "--- published/lib/progressTracker.js\n+++ rebuilt/lib/progressTracker.js\n@@ -1,14 +1,16 @@\n+/**\n+ * Prints out the test result details. It doesn't have not much business logic.\n+ * We skip test coverage for this file\n+ */\n+/* istanbul ignore file */\n 'use strict'\n \n const ProgressBar = require('progress')\n-const table = require('table').table\n-const getBorderCharacters = require('table').getBorderCharacters\n const Chalk = require('chalk')\n const testColorSupport = require('color-support')\n-const prettyBytes = require('pretty-bytes')\n-const xtend = require('xtend')\n-const format = require('./format')\n-const percentiles = require('hdr-histogram-percentiles-obj').percentiles\n+const charSpinner = require('char-spinner')\n+const printResult = require('./printResult')\n+const { isMainThread } = require('./worker_threads')\n const defaults = {\n   // use stderr as its progressBar's default\n   outputStream: process.stderr,\n@@ -22,105 +24,112 @@\n     throw new Error('instance required for tracking')\n   }\n \n-  opts = xtend(defaults, opts)\n+  opts = Object.assign({}, defaults, opts)\n \n-  const chalk = new Chalk.constructor({ enabled: testColorSupport({ stream: opts.outputStream }) })\n+  const chalk = new Chalk.Instance(testColorSupport({ stream: opts.outputStream, alwaysReturn: true }))\n   // this default needs to be set after chalk is setup, because chalk is now local to this func\n-  opts.progressBarString = opts.progressBarString || `${chalk.green('running')} [:bar] :percent`\n+  const runningDescription = opts.warmupRunning ? 'warmup' : 'running'\n+  opts.progressBarString = opts.progressBarString || `${chalk.green(runningDescription)} [:bar] :percent`\n \n   const iOpts = instance.opts\n   let durationProgressBar\n   let amountProgressBar\n+  let addedListeners = false\n+  let spinner\n \n   instance.on('start', () => {\n-    if (opts.renderProgressBar) {\n+    if (opts.renderProgressBar && isMainThread) {\n+      const socketPath = iOpts.socketPath ? ` (${iOpts.socketPath})` : ''\n       let msg = `${iOpts.connections} connections`\n \n       if (iOpts.pipelining > 1) {\n         msg += ` with ${iOpts.pipelining} pipelining factor`\n       }\n \n-      if (!iOpts.amount) {\n-        logToStream(`Running ${iOpts.duration}s test @ ${iOpts.url}\\n${msg}\\n`)\n+      if (iOpts.workers) {\n+        msg += `\\n${iOpts.workers} workers`\n+      }\n \n-        durationProgressBar = trackDuration(instance, opts, iOpts)\n-      } else {\n-        logToStream(`Running ${iOpts.amount} requests test @ ${iOpts.url}\\n${msg}\\n`)\n+      const runningType = opts.warmupRunning ? 'warmup' : 'test'\n+      const message = iOpts.amount\n+        ? `Running ${iOpts.amount} requests ${runningType} @ ${iOpts.url}${socketPath}\\n${msg}\\n`\n+        : `Running ${iOpts.duration}s ${runningType} @ ${iOpts.url}${socketPath}\\n${msg}\\n`\n \n-        amountProgressBar = trackAmount(instance, opts, iOpts)\n+      logToStream(message)\n+\n+      if (iOpts.workers) {\n+        showSpinner()\n+      } else {\n+        if (iOpts.amount) {\n+          amountProgressBar = trackAmount(instance, opts, iOpts)\n+        } else {\n+          durationProgressBar = trackDuration(instance, opts, iOpts)\n+        }\n       }\n-    }\n-  })\n \n-  // add listeners for progress bar to instance here so they aren't\n-  // added on restarting, causing listener leaks\n-  // note: Attempted to curry the functions below, but that breaks the functionality\n-  // as they use the scope/closure of the progress bar variables to allow them to be reset\n-  if (opts.renderProgressBar && opts.outputStream.isTTY) {\n-    if (!iOpts.amount) { // duration progress bar\n-      instance.on('tick', () => { durationProgressBar.tick() })\n-      instance.on('done', () => { durationProgressBar.tick(iOpts.duration - 1) })\n-      process.once('SIGINT', () => { durationProgressBar.tick(iOpts.duration - 1) })\n-    } else { // amount progress bar\n-      instance.on('response', () => { amountProgressBar.tick() })\n-      instance.on('reqError', () => { amountProgressBar.tick() })\n-      instance.on('done', () => { amountProgressBar.tick(iOpts.amount - 1) })\n-      process.once('SIGINT', () => { amountProgressBar.tick(iOpts.amount - 1) })\n+      addListener()\n     }\n",
+					"match": false,
+					"packageHash": "571c038200260e5fcc7e7acbc7dd423fd0c61e2d54fde559c92dbdd121f30705",
+					"size": 5679,
+					"sourceHash": "3e2bfd729c0b16816b5e4a1d3bbb7dd327fa36b02ba755829983e910d6b95153",
+					"status": "content"
+				},
+				"lib/requestIterator.js": {
+					"diff": "--- published/lib/requestIterator.js\n+++ rebuilt/lib/requestIterator.js\n@@ -1,25 +1,60 @@\n 'use strict'\n \n-const hyperid = require('hyperid')(true)\n+const hyperid = require('hyperid')\n const inherits = require('util').inherits\n const requestBuilder = require('./httpRequestBuilder')\n+const clone = require('lodash.clonedeep')\n+const chunk = require('lodash.chunk')\n+const flatten = require('lodash.flatten')\n+\n+const toHeaderKeyValue = (rawHeaders) => {\n+  const tupleHeaders = chunk(rawHeaders, 2)\n+  const headers = {}\n+  tupleHeaders.forEach((val) => {\n+    const currentValue = headers[val[0]]\n+    if (!currentValue) {\n+      headers[val[0]] = val[1]\n+    } else {\n+      headers[val[0]] = flatten([currentValue, val[1]])\n+    }\n+  })\n+  return headers\n+}\n \n-function RequestIterator (requests, defaults) {\n+function RequestIterator (opts) {\n   if (!(this instanceof RequestIterator)) {\n-    return new RequestIterator(requests, defaults)\n+    return new RequestIterator(opts)\n   }\n \n-  this.reqDefaults = defaults\n-  this.requestBuilder = requestBuilder(defaults)\n-  this.setRequests(requests)\n+  this.hyperid = hyperid({ urlSafe: true, fixedLength: true })\n+  this.resetted = false\n+  this.headers = {}\n+  this.initialContext = opts.initialContext || {}\n+  this.resetContext()\n+  this.reqDefaults = opts\n+  this.requestBuilder = requestBuilder(opts)\n+  this.setRequests(opts.requests)\n }\n \n inherits(RequestIterator, Object)\n \n+RequestIterator.prototype.resetContext = function () {\n+  this.context = clone(this.initialContext)\n+}\n+\n RequestIterator.prototype.nextRequest = function () {\n+  this.resetted = false\n   ++this.currentRequestIndex\n-  this.currentRequestIndex = this.currentRequestIndex < this.requests.length ? this.currentRequestIndex : 0\n+  // when looping over available request, clear context for a fresh start\n+  if (this.currentRequestIndex === this.requests.length) {\n+    this.resetContext()\n+    this.currentRequestIndex = 0\n+  }\n   this.currentRequest = this.requests[this.currentRequestIndex]\n+  // only builds if it has dynamic setup\n+  if (this.reqDefaults.idReplacement || typeof this.currentRequest.setupRequest === 'function') {\n+    this.rebuildRequest()\n+  }\n   return this.currentRequest\n }\n \n@@ -29,30 +64,23 @@\n   return this.currentRequest.requestBuffer\n }\n \n-RequestIterator.prototype.move = function () {\n-  // get the current buffer and proceed to next request\n-  let ret = this.currentRequest.requestBuffer\n-  this.nextRequest()\n-  return this.reqDefaults.idReplacement\n-    ? Buffer.from(ret.toString().replace(/\\[<id>\\]/g, hyperid()))\n-    : ret\n-}\n-\n RequestIterator.prototype.setRequests = function (newRequests) {\n+  this.resetted = false\n   this.requests = newRequests || [{}]\n   this.currentRequestIndex = 0\n-  this.currentRequest = this.requests[0]\n-  this.rebuildRequests()\n-}\n-\n-RequestIterator.prototype.rebuildRequests = function () {\n-  this.requests.forEach((request) => {\n-    request.requestBuffer = this.requestBuilder(request)\n+  // build all request which don't have dynamic setup, except if it's the first one\n+  this.requests.forEach((request, i) => {\n+    this.currentRequest = request\n+    if (i === 0 || typeof request.setupRequest !== 'function') {\n+      this.rebuildRequest()\n+    }\n",
+					"match": false,
+					"packageHash": "38479c461c3e9c2bf4321da8ffa520689bd8c4623bdda05f2ada03dba19387bf",
+					"size": 2394,
+					"sourceHash": "0957063fa3e84d4fbfc0610f76da1433c1740547714cb8410e013c264f6e8a5c",
+					"status": "content"
+				},
+				"lib/run.js": {
+					"diff": "--- published/lib/run.js\n+++ rebuilt/lib/run.js\n@@ -1,213 +1,219 @@\n 'use strict'\n \n+const { URL, urlToHttpOptions } = require('url')\n+const reInterval = require('reinterval')\n const EE = require('events').EventEmitter\n-const URL = require('url')\n-const hdr = require('hdr-histogram-js')\n-const timestring = require('timestring')\n const Client = require('./httpClient')\n-const xtend = require('xtend')\n-const histUtil = require('hdr-histogram-percentiles-obj')\n-const reInterval = require('reinterval')\n-const histAsObj = histUtil.histAsObj\n-const addPercentiles = histUtil.addPercentiles\n+const { isMainThread } = require('./worker_threads')\n+const { ofURL } = require('./url')\n+const aggregateResult = require('./aggregateResult')\n+const { getHistograms, encodeHist } = require('./histUtil')\n \n-const defaultOptions = {\n-  headers: {},\n-  body: Buffer.alloc(0),\n-  method: 'GET',\n-  duration: 10,\n-  connections: 10,\n-  pipelining: 1,\n-  timeout: 10,\n-  maxConnectionRequests: 0,\n-  maxOverallRequests: 0,\n-  connectionRate: 0,\n-  overallRate: 0,\n-  amount: 0,\n-  reconnectRate: 0,\n-  forever: false,\n-  idReplacement: false,\n-  requests: [{}]\n+const defaults = {\n+  harRequests: new Map()\n }\n \n-function run (opts, cb) {\n-  const cbPassedIn = (typeof cb === 'function')\n-\n-  cb = cb || noop\n+function run (opts, tracker, cb) {\n+  opts = Object.assign({}, defaults, opts)\n+  tracker = tracker || new EE()\n \n-  const tracker = new EE()\n-\n-  const latencies = hdr.build({\n-    bitBucketSize: 64,\n-    autoResize: true,\n-    lowestDiscernibleValue: 1,\n-    highestTrackableValue: 10000,\n-    numberOfSignificantValueDigits: 5\n-  })\n-\n-  const requests = hdr.build({\n-    bitBucketSize: 64,\n-    autoResize: true,\n-    lowestDiscernibleValue: 1,\n-    highestTrackableValue: 1000000,\n-    numberOfSignificantValueDigits: 3\n-  })\n-\n-  const throughput = hdr.build({\n-    bitBucketSize: 64,\n-    autoResize: true,\n-    lowestDiscernibleValue: 1,\n-    highestTrackableValue: 100000000000,\n-    numberOfSignificantValueDigits: 1\n-  })\n+  const histograms = getHistograms(opts.histograms)\n+  const { latencies, requests, throughput } = histograms\n \n   const statusCodes = [\n     0, // 1xx\n     0, // 2xx\n     0, // 3xx\n     0, // 4xx\n-    0  // 5xx\n+    0 // 5xx\n   ]\n \n-  opts = xtend(defaultOptions, opts)\n+  const statusCodeStats = {}\n \n-  // do error checking, if error, return\n-  if (checkOptsForErrors()) return\n-\n-  // set tracker.opts here, so throwing over invalid opts and setting defaults etc.\n-  // is done\n-  tracker.opts = opts\n-\n-  const ipc = !!opts.socketPath\n-\n",
+					"match": false,
+					"packageHash": "1b1011d1ff32fdf90da9fd7bd2c60414ca37655da70a181d22920992ebeb7619",
+					"size": 9567,
+					"sourceHash": "27b96df6d628224b889d9feafb7066fde21366e412ac073c6cfeb2d080475882",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,13 +1,15 @@\n {\n   \"name\": \"autocannon\",\n-  \"version\": \"1.0.0\",\n+  \"version\": \"9.0.0\",\n   \"description\": \"Fast HTTP benchmarking tool written in Node.js\",\n   \"main\": \"autocannon.js\",\n   \"bin\": {\n     \"autocannon\": \"autocannon.js\"\n   },\n   \"scripts\": {\n-    \"test\": \"standard && tap test/*.test.js\"\n+    \"test\": \"npm run lint && borp --no-timeout --concurrency 4\",\n+    \"lint\": \"eslint .\",\n+    \"lint:fix\": \"eslint . --fix\"\n   },\n   \"pre-commit\": [\n     \"test\"\n@@ -27,8 +29,9 @@\n   ],\n   \"author\": \"Matteo Collina <hello@matteocollina.com>\",\n   \"contributors\": [\n-    \"Glen Keane <glenkeane.94@gmail.com> (http://glenkeane.me/)\",\n-    \"Donald Robertson <donaldarobertson89@gmail.com\"\n+    \"Glen Keane <glenkeane.94@gmail.com>\",\n+    \"Donald Robertson <donaldarobertson89@gmail.com\",\n+    \"Salman Mitha <SalmanMitha@gmail.com>\"\n   ],\n   \"license\": \"MIT\",\n   \"bugs\": {\n@@ -36,27 +39,40 @@\n   },\n   \"homepage\": \"https://github.com/mcollina/autocannon#readme\",\n   \"devDependencies\": {\n-    \"bl\": \"^1.1.2\",\n+    \"ansi-regex\": \"^5.0.1\",\n+    \"bl\": \"^6.0.0\",\n+    \"borp\": \"^1.0.0\",\n+    \"busboy\": \"^0.3.1\",\n+    \"eslint\": \"^10.14.0\",\n+    \"neostandard\": \"^0.14.1\",\n     \"pre-commit\": \"^1.1.2\",\n-    \"split2\": \"^2.1.0\",\n-    \"standard\": \"^10.0.0\",\n-    \"tap\": \"^11.0.0\"\n+    \"proxyquire\": \"^2.1.3\",\n+    \"split2\": \"^4.0.0\",\n+    \"why-is-node-running\": \"^2.3.0\"\n   },\n   \"dependencies\": {\n-    \"chalk\": \"^2.0.0\",\n+    \"@minimistjs/subarg\": \"^1.0.0\",\n+    \"chalk\": \"^4.1.0\",\n+    \"char-spinner\": \"^1.0.1\",\n+    \"cli-table3\": \"^0.6.0\",\n     \"color-support\": \"^1.1.1\",\n-    \"deep-extend\": \"^0.5.0\",\n-    \"hdr-histogram-js\": \"^1.0.0\",\n-    \"hdr-histogram-percentiles-obj\": \"^1.2.0\",\n-    \"http-parser-js\": \"^0.4.2\",\n-    \"hyperid\": \"^1.1.0\",\n-    \"minimist\": \"^1.2.0\",\n-    \"pretty-bytes\": \"^4.0.2\",\n-    \"progress\": \"^2.0.0\",\n+    \"cross-argv\": \"^2.0.0\",\n+    \"form-data\": \"^4.0.0\",\n+    \"has-async-hooks\": \"^1.0.0\",\n+    \"hdr-histogram-js\": \"^3.0.0\",\n+    \"hdr-histogram-percentiles-obj\": \"^3.0.0\",\n+    \"http-parser-js\": \"^0.5.2\",\n+    \"hyperid\": \"^4.0.0\",\n+    \"lodash.chunk\": \"^4.2.0\",\n+    \"lodash.clonedeep\": \"^4.5.0\",\n+    \"lodash.flatten\": \"^4.4.0\",\n+    \"manage-path\": \"^2.0.0\",\n+    \"on-net-listen\": \"^1.1.1\",\n+    \"pretty-bytes\": \"^5.4.1\",\n+    \"progress\": \"^2.0.3\",\n     \"reinterval\": \"^1.1.0\",\n-    \"retimer\": \"^1.0.1\",\n-    \"table\": \"^4.0.1\",\n-    \"timestring\": \"^5.0.0\",\n-    \"xtend\": \"^4.0.1\"\n+    \"retimer\": \"^3.0.0\",\n+    \"semver\": \"^7.3.2\",\n+    \"timestring\": \"^6.0.0\"\n   }\n }\n",
+					"match": false,
+					"packageHash": "0bebd77fc9c9a2f46747fde80d9727e9f9a893e7798b7521655140554c40ea9f",
+					"size": 1456,
+					"sourceHash": "d9f3e7378def0a473f733a6902ee6619e9a98b4313b14d8770fb0d4b304d42a5",
+					"status": "content"
+				},
+				"samples/customise-individual-connection.js": {
+					"diff": "--- published/samples/customise-individual-connection.js\n+++ rebuilt/samples/customise-individual-connection.js\n@@ -1,12 +1,14 @@\n 'use strict'\n \n const http = require('http')\n-const autocannon = require('autocannon')\n+const autocannon = require('../autocannon')\n \n const server = http.createServer(handle)\n \n server.listen(0, startBench)\n \n+let connection = 0\n+\n function handle (req, res) {\n   res.end('hello world')\n }\n@@ -15,14 +17,12 @@\n   const url = 'http://localhost:' + server.address().port\n \n   autocannon({\n-    url: url,\n+    url,\n     connections: 1000,\n     duration: 10,\n-    setupClient: setupClient\n+    setupClient\n   }, finishedBench)\n \n-  let connection = 0\n-\n   function setupClient (client) {\n     client.setBody('connection number', connection++)\n   }\n",
+					"match": false,
+					"packageHash": "1445b91e15a88581e17c0e8bafba06142d7021b123a5251a9a56766d9d0799be",
+					"size": 621,
+					"sourceHash": "ff4e21bb53f51492597eba6d92128b5599ead7169a2b0b874e7bfb39dde6d414",
+					"status": "content"
+				},
+				"samples/modifying-request.js": {
+					"diff": "--- published/samples/modifying-request.js\n+++ rebuilt/samples/modifying-request.js\n@@ -1,7 +1,7 @@\n 'use strict'\n \n const http = require('http')\n-const autocannon = require('autocannon')\n+const autocannon = require('../autocannon')\n \n const server = http.createServer(handle)\n \n@@ -15,7 +15,7 @@\n   const url = 'http://localhost:' + server.address().port\n \n   const instance = autocannon({\n-    url: url,\n+    url,\n     connections: 1000,\n     duration: 10\n   }, finishedBench)\n@@ -30,7 +30,7 @@\n   // modify the headers on future requests\n   // this wipes any existing headers out with the new ones\n   instance.on('response', function (client, statusCode, returnBytes, responseTime) {\n-    var newHeaders = {}\n+    const newHeaders = {}\n     newHeaders[`header${headers++}`] = `headerValue${headers++}`\n     client.setHeaders(newHeaders)\n   })\n",
+					"match": false,
+					"packageHash": "d85c4be50e6074e2d02433a171b7d6b650e800266a402c4ba1958c4387d64132",
+					"size": 1019,
+					"sourceHash": "7b1979349d345f6c3215634e2aec13f372f998821bdda58ea413a304ac0c04ae",
+					"status": "content"
+				},
+				"samples/requests-sample.js": {
+					"diff": "--- published/samples/requests-sample.js\n+++ rebuilt/samples/requests-sample.js\n@@ -1,7 +1,7 @@\n 'use strict'\n \n const http = require('http')\n-const autocannon = require('autocannon')\n+const autocannon = require('../autocannon')\n \n const server = http.createServer(handle)\n \n@@ -15,7 +15,7 @@\n   const url = 'http://localhost:' + server.address().port\n \n   autocannon({\n-    url: url,\n+    url,\n     connections: 1000,\n     duration: 10,\n     headers: {\n@@ -37,7 +37,7 @@\n         // this will automatically add the pregenerated auth token\n       },\n       {\n-        method: 'PUT', // this should be a put for modifying secret details\n+        method: 'GET', // this should be a put for modifying secret details\n         path: '/mySecretDetails',\n         headers: { // let submit some json?\n           'Content-type': 'application/json; charset=utf-8'\n@@ -45,7 +45,11 @@\n         // we need to stringify the json first\n         body: JSON.stringify({\n           name: 'my new name'\n-        })\n+        }),\n+        setupRequest: reqData => {\n+          reqData.method = 'PUT' // we are overriding the method 'GET' to 'PUT' here\n+          return reqData\n+        }\n       }\n     ]\n   }, finishedBench)\n",
+					"match": false,
+					"packageHash": "96a4bc1c7882dc36594c8279ff084d09b16e6b6d19f7633a21c6fe3f111f6419",
+					"size": 1368,
+					"sourceHash": "42f28b8c52478dad1430bf417e06f2d187e8384e9bbf2de15ff30fc312306192",
+					"status": "content"
+				},
+				"samples/track-run.js": {
+					"diff": "--- published/samples/track-run.js\n+++ rebuilt/samples/track-run.js\n@@ -1,7 +1,7 @@\n 'use strict'\n \n const http = require('http')\n-const autocannon = require('autocannon')\n+const autocannon = require('../autocannon')\n \n const server = http.createServer(handle)\n \n",
+					"match": false,
+					"packageHash": "abbbb5b5e715efbb7599ef6e23edaf74657165b3fe4d87c7a7573ed0126b8a49",
+					"size": 571,
+					"sourceHash": "9142fd8657dd720c1e2998e4b3dcb5ef96148203abf54a7b0bf3ab3c3497f041",
+					"status": "content"
+				},
+				"samples/using-id-replacement.js": {
+					"diff": "--- published/samples/using-id-replacement.js\n+++ rebuilt/samples/using-id-replacement.js\n@@ -1,7 +1,7 @@\n 'use strict'\n \n const http = require('http')\n-const autocannon = require('autocannon')\n+const autocannon = require('../autocannon')\n \n const server = http.createServer(handle)\n \n@@ -15,7 +15,7 @@\n   const url = 'http://localhost:' + server.address().port\n \n   autocannon({\n-    url: url,\n+    url,\n     connections: 1000,\n     duration: 10,\n     requests: [\n",
+					"match": false,
+					"packageHash": "32382355660b12f049cddcee246f4d21dcf2f6fd1a926dab888f37a39efbbab2",
+					"size": 852,
+					"sourceHash": "d7dfc6bbd9234b30a86f17d6eca3f2791a8a4f8e7aa849ce5febd4286bfb9407",
+					"status": "content"
+				},
+				"server.js": {
+					"match": false,
+					"packageHash": "5c746cd79c3aee6a13205f481189f98cb51349f049bcbddfaf824d23b9237a1e",
+					"size": 496,
+					"status": "missing-in-source"
+				},
+				"test/argumentParsing.test.js": {
+					"diff": "--- published/test/argumentParsing.test.js\n+++ rebuilt/test/argumentParsing.test.js\n@@ -1,28 +1,29 @@\n 'use strict'\n \n-const test = require('tap').test\n+const { test } = require('node:test')\n const Autocannon = require('../autocannon')\n+const fs = require('fs')\n \n test('parse argument', (t) => {\n-  t.plan(4)\n+  t.plan(4, { wait: true })\n \n-  var args = Autocannon.parseArguments([\n+  const args = Autocannon.parseArguments([\n     '-H', 'X-Http-Method-Override=GET',\n     '-m', 'POST',\n     '-b', 'the body',\n     'http://localhost/foo/bar'\n   ])\n \n-  t.equal(args.url, 'http://localhost/foo/bar')\n-  t.strictSame(args.headers, { 'X-Http-Method-Override': 'GET' })\n-  t.equal(args.method, 'POST')\n-  t.equal(args.body, 'the body')\n+  t.assert.strictEqual(args.url, 'http://localhost/foo/bar')\n+  t.assert.deepStrictEqual(args.headers, { 'X-Http-Method-Override': 'GET' })\n+  t.assert.strictEqual(args.method, 'POST')\n+  t.assert.strictEqual(args.body, 'the body')\n })\n \n test('parse argument with multiple headers', (t) => {\n-  t.plan(3)\n+  t.plan(3, { wait: true })\n \n-  var args = Autocannon.parseArguments([\n+  const args = Autocannon.parseArguments([\n     '-H', 'header1=value1',\n     '-H', 'header2=value2',\n     '-H', 'header3=value3',\n@@ -31,26 +32,204 @@\n     'http://localhost/foo/bar'\n   ])\n \n-  t.equal(args.url, 'http://localhost/foo/bar')\n-  t.strictSame(args.headers, {\n-    'header1': 'value1',\n-    'header2': 'value2',\n-    'header3': 'value3',\n-    'header4': 'value4',\n-    'header5': 'value5'\n+  t.assert.strictEqual(args.url, 'http://localhost/foo/bar')\n+  t.assert.deepStrictEqual(args.headers, {\n+    header1: 'value1',\n+    header2: 'value2',\n+    header3: 'value3',\n+    header4: 'value4',\n+    header5: 'value5'\n   })\n-  t.equal(args.method, 'GET')\n+  t.assert.strictEqual(args.method, 'GET')\n+})\n+\n+test('parse argument with multiple complex headers', (t) => {\n+  t.plan(3, { wait: true })\n+\n+  const args = Autocannon.parseArguments([\n+    '-H', 'header1=value1;data=asd',\n+    '-H', 'header2=value2;data=asd',\n+    '-H', 'header3=value3;data=asd',\n+    '-H', 'header4=value4;data=asd',\n+    '-H', 'header5=value5;data=asd',\n+    'http://localhost/foo/bar'\n+  ])\n+\n+  t.assert.strictEqual(args.url, 'http://localhost/foo/bar')\n+  t.assert.deepStrictEqual(args.headers, {\n+    header1: 'value1;data=asd',\n+    header2: 'value2;data=asd',\n+    header3: 'value3;data=asd',\n+    header4: 'value4;data=asd',\n+    header5: 'value5;data=asd'\n+  })\n+  t.assert.strictEqual(args.method, 'GET')\n+})\n+\n+test('parse argument with multiple headers in standard notation', (t) => {\n+  t.plan(3, { wait: true })\n+\n+  const args = Autocannon.parseArguments([\n+    '-H', 'header1: value1',\n+    '-H', 'header2: value2',\n+    '-H', 'header3: value3',\n+    '-H', 'header4: value4',\n+    '-H', 'header5: value5',\n+    'http://localhost/foo/bar'\n+  ])\n+\n+  t.assert.strictEqual(args.url, 'http://localhost/foo/bar')\n",
+					"match": false,
+					"packageHash": "3048fb196ed005b8d263875cc9b9ff0f691598253511a337cdb72ad9ce3c88c4",
+					"size": 1245,
+					"sourceHash": "07d853b42e1971d54c5c2452111f15026bba6e60fc90710a70f79ad3a2ab5a7a",
+					"status": "content"
+				},
+				"test/cli-ipc.test.js": {
+					"diff": "--- published/test/cli-ipc.test.js\n+++ rebuilt/test/cli-ipc.test.js\n@@ -1,6 +1,7 @@\n 'use strict'\n \n-const t = require('tap')\n+const { test } = require('node:test')\n+const { once } = require('node:events')\n const split = require('split2')\n const os = require('os')\n const path = require('path')\n@@ -10,77 +11,64 @@\n const win = process.platform === 'win32'\n \n const lines = [\n-  /Running 1s test @ .*$/,\n+  /Running 1s test @ http:\\/\\/example.com\\/foo \\([^)]*\\)$/,\n   /10 connections.*$/,\n   /$/,\n-  /Stat.*Avg.*Stdev.*Max.*$/,\n-  /Latency \\(ms\\).*$/,\n+  /.*/,\n+  /$/,\n+  /Stat.*2\\.5%.*50%.*97\\.5%.*99%.*Avg.*Stdev.*Max.*$/,\n+  /.*/,\n+  /Latency.*$/,\n+  /$/,\n+  /.*/,\n+  /Stat.*1%.*2\\.5%.*50%.*97\\.5%.*Avg.*Stdev.*Min.*$/,\n+  /.*/,\n   /Req\\/Sec.*$/,\n+  /.*/,\n   /Bytes\\/Sec.*$/,\n+  /.*/,\n+  /$/,\n+  /Req\\/Bytes counts sampled once per second.*$/,\n+  /# of samples: 10*$/,\n   /$/,\n-  /.* requests in \\d+s, .* read/\n+  /.* requests in ([0-9]|\\.)+s, .* read/\n ]\n \n-if (!win) {\n-  // If not Windows we can predict exactly how many lines there will be. On\n-  // Windows we rely on t.end() being called.\n-  t.plan(lines.length)\n-  t.tearDown(teardown)\n-}\n-\n-const socketPath = win\n-  ? path.join('\\\\\\\\?\\\\pipe', process.cwd(), 'autocannon-' + Date.now())\n-  : path.join(os.tmpdir(), 'autocannon-' + Date.now() + '.sock')\n-\n-helper.startServer({socketPath})\n-\n-const child = childProcess.spawn(process.execPath, [path.join(__dirname, '..'), '-d', '1', socketPath], {\n-  cwd: __dirname,\n-  env: process.env,\n-  stdio: ['ignore', 'pipe', 'pipe'],\n-  detached: false\n-})\n-\n-// For handling the last line on Windows\n-let errorLine = false\n-let failsafeTimer\n-\n-child\n-  .stderr\n-  .pipe(split())\n-  .on('data', (line) => {\n-    let regexp = lines.shift()\n-    const lastLine = lines.length === 0\n+test('CLI benchmarks a Unix socket or Windows pipe', async t => {\n+  const socketPath = win\n+    ? path.join('\\\\\\\\?\\\\pipe', process.cwd(), 'autocannon-' + Date.now())\n+    : path.join(os.tmpdir(), 'autocannon-' + Date.now() + '.sock')\n+\n+  const server = helper.startServer({ socketPath })\n+  t.after(() => server.close())\n+\n+  const child = childProcess.spawn(process.execPath, [path.join(__dirname, '..'), '-d', '1', '-S', socketPath, 'example.com/foo'], {\n+    cwd: __dirname,\n+    env: process.env,\n+    stdio: ['ignore', 'pipe', 'pipe'],\n+    detached: false\n+  })\n+  t.after(() => child.kill())\n+  const closed = once(child, 'close')\n \n+  let errorLine = false\n+  for await (const line of child.stderr.pipe(split())) {\n+    const regexp = lines.shift()\n     if (regexp) {\n-      t.ok(regexp.test(line), 'line matches ' + regexp)\n-\n-      if (lastLine && win) {\n-        // We can't be sure the error line is outputted on Windows, so in case\n-        // this really is the last line, we'll set a timer to auto-end the test\n-        // in case there are no more lines.\n-        failsafeTimer = setTimeout(function () {\n",
+					"match": false,
+					"packageHash": "9ee7983e1b591133585e151ccd7b538cdcb644e3cc65c411173d44511cbf9a20",
+					"size": 2292,
+					"sourceHash": "a809c646e701c363b8a52151257ff1d9f76bec5f6c81ecc2bb03c298e950f72a",
+					"status": "content"
+				},
+				"test/cli.test.js": {
+					"diff": "--- published/test/cli.test.js\n+++ rebuilt/test/cli.test.js\n@@ -1,44 +1,364 @@\n 'use strict'\n \n-const t = require('tap')\n+const { test } = require('node:test')\n const split = require('split2')\n const path = require('path')\n+const fs = require('fs')\n+const os = require('os')\n const childProcess = require('child_process')\n const helper = require('./helper')\n+const { hasWorkerSupport } = require('../lib/util')\n \n-const lines = [\n-  /Running 1s test @ .*$/,\n-  /10 connections.*$/,\n-  /$/,\n-  /Stat.*Avg.*Stdev.*Max.*$/,\n-  /Latency \\(ms\\).*$/,\n-  /Req\\/Sec.*$/,\n-  /Bytes\\/Sec.*$/,\n-  /$/,\n-  /.* requests in \\d+s, .* read/\n-]\n-\n-t.plan(lines.length * 2)\n-\n-const server = helper.startServer()\n-const url = 'http://localhost:' + server.address().port\n-\n-const child = childProcess.spawn(process.execPath, [path.join(__dirname, '..'), '-d', '1', url], {\n-  cwd: __dirname,\n-  env: process.env,\n-  stdio: ['ignore', 'pipe', 'pipe'],\n-  detached: false\n-})\n-\n-t.tearDown(() => {\n-  child.kill()\n-})\n-\n-child\n-  .stderr\n-  .pipe(split())\n-  .on('data', (line) => {\n-    const regexp = lines.shift()\n-    t.ok(regexp, 'we are expecting this line')\n-    t.ok(regexp.test(line), 'line matches ' + regexp)\n+test('should run benchmark against server', (t, done) => {\n+  const lines = [\n+    /Running 1s test @ .*$/,\n+    /10 connections.*$/,\n+    /$/,\n+    /.*/,\n+    /$/,\n+    /Stat.*2\\.5%.*50%.*97\\.5%.*99%.*Avg.*Stdev.*Max.*$/,\n+    /.*/,\n+    /Latency.*$/,\n+    /$/,\n+    /.*/,\n+    /Stat.*1%.*2\\.5%.*50%.*97\\.5%.*Avg.*Stdev.*Min.*$/,\n+    /.*/,\n+    /Req\\/Sec.*$/,\n+    /.*/,\n+    /Bytes\\/Sec.*$/,\n+    /.*/,\n+    /$/,\n+    /Req\\/Bytes counts sampled once per second.*$/,\n+    /# of samples: 1.*$/,\n+    /$/,\n+    /.* requests in ([0-9]|\\.)+s, .* read/\n+  ]\n+\n+  t.plan(lines.length * 2)\n+\n+  const server = helper.startServer()\n+  const url = 'http://localhost:' + server.address().port\n+\n+  const child = childProcess.spawn(process.execPath, [path.join(__dirname, '..'), '-d', '1', url], {\n+    cwd: __dirname,\n+    env: process.env,\n+    stdio: ['ignore', 'pipe', 'pipe'],\n+    detached: false\n+  })\n+\n+  t.after(() => {\n+    try {\n+      child.kill()\n+    } catch {}\n+  })\n+\n+  child\n+    .stderr\n+    .pipe(split())\n+    .on('data', (line) => {\n+      const regexp = lines.shift()\n+      t.assert.ok(regexp, 'we are expecting this line')\n+      t.assert.ok(regexp.test(line), 'line matches ' + regexp)\n",
+					"match": false,
+					"packageHash": "8ab930e7b6727e530fa06801c9e6bb0da5d30154606162b0908611845fbec970",
+					"size": 938,
+					"sourceHash": "baff937b0ccaf95ecc087290aaa7380f5a9d7c907299add59a1890be38bcf395",
+					"status": "content"
+				},
+				"test/forever.test.js": {
+					"diff": "--- published/test/forever.test.js\n+++ rebuilt/test/forever.test.js\n@@ -1,40 +1,40 @@\n 'use strict'\n \n-const test = require('tap').test\n-const run = require('../lib/run')\n+const { test } = require('node:test')\n+const initJob = require('../lib/init')\n const helper = require('./helper')\n const server = helper.startServer()\n \n-test('running with forever set to true and passing in a callback should cause an error to be returned in the callback', (t) => {\n+test('running with forever set to true and passing in a callback should cause an error to be returned in the callback', (t, done) => {\n   t.plan(2)\n \n-  run({\n+  initJob({\n     url: `http://localhost:${server.address().port}`,\n     forever: true\n   }, (err, res) => {\n-    t.ok(err, 'should be error when callback passed to run')\n-    t.notOk(res, 'should not exist')\n-    t.end()\n+    t.assert.ok(err, 'should be error when callback passed to run')\n+    t.assert.ok(!res, 'should not exist')\n+    done()\n   })\n })\n \n-test('run forever should run until .stop() is called', (t) => {\n+test('run forever should run until .stop() is called', (t, done) => {\n   t.plan(3)\n   let numRuns = 0\n \n-  let instance = run({\n+  const instance = initJob({\n     url: `http://localhost:${server.address().port}`,\n     duration: 0.5,\n     forever: true\n   })\n \n   instance.on('done', (results) => {\n-    t.ok(results, 'should have gotten results')\n+    t.assert.ok(results, 'should have gotten results')\n     if (++numRuns === 2) {\n       instance.stop()\n       setTimeout(() => {\n-        t.ok(true, 'should have reached here without the callback being called again')\n-        t.end()\n+        t.assert.ok(true, 'should have reached here without the callback being called again')\n+        done()\n       }, 1000)\n     }\n   })\n",
+					"match": false,
+					"packageHash": "4ed0224d2621078f82b042c7b5bea2d11b7af1d5f0f957ad3ab71418a5dd40f4",
+					"size": 1021,
+					"sourceHash": "a60e69695eb5d807ff6d79444d0c8f3cfbfd1d56226235177479bee2a92df838",
+					"status": "content"
+				},
+				"test/format.test.js": {
+					"diff": "--- published/test/format.test.js\n+++ rebuilt/test/format.test.js\n@@ -1,10 +1,10 @@\n 'use strict'\n \n-const test = require('tap').test\n+const { test } = require('node:test')\n const format = require('../lib/format')\n \n const pairs = {\n-  '2': 2,\n+  2: 2,\n   '2k': 2000,\n   '4k': 4042,\n   '2300k': 2300000\n@@ -13,7 +13,6 @@\n Object.keys(pairs).forEach((expected) => {\n   const original = pairs[expected]\n   test(`format ${original} into ${expected}`, (t) => {\n-    t.equal(expected, format(original))\n-    t.end()\n+    t.assert.strictEqual(expected, format(original))\n   })\n })\n",
+					"match": false,
+					"packageHash": "2ffc51bc2abb72a69635b8783075f60e628bb16e5efcbf4d1b282bf67ce7ad94",
+					"size": 357,
+					"sourceHash": "c4e59d14d52beadae09af8bc3fd6d519752bf6644411e090959fec147e324f1d",
+					"status": "content"
+				},
+				"test/helper.js": {
+					"diff": "--- published/test/helper.js\n+++ rebuilt/test/helper.js\n@@ -2,23 +2,55 @@\n \n const http = require('http')\n const https = require('https')\n+const tls = require('tls')\n const fs = require('fs')\n const path = require('path')\n+const BusBoy = require('busboy')\n \n function startServer (opts) {\n   opts = opts || {}\n \n-  const statusCode = opts.statusCode || 200\n+  if (!Array.isArray(opts.responses)) {\n+    opts.responses = []\n+  }\n+\n+  const fixedStatusCode = opts.statusCode || 200\n   const server = http.createServer(handle)\n   server.autocannonConnects = 0\n+  server.autocannonRequests = 0\n \n   server.on('connection', () => { server.autocannonConnects++ })\n \n   server.listen(opts.socketPath || 0)\n \n   function handle (req, res) {\n+    let { statusCode, body, headers } = opts.responses[server.autocannonRequests] || {}\n+\n+    server.autocannonRequests++\n+\n+    if (!statusCode) {\n+      statusCode = fixedStatusCode\n+    }\n+\n+    if (!body) {\n+      body = opts.body || 'hello world'\n+    }\n+\n     res.statusCode = statusCode\n-    res.end('hello world')\n+    const reply = () => {\n+      const bodyToWrite = typeof body === 'function' ? body(req) : body\n+\n+      if (headers) {\n+        res.writeHead(statusCode, headers)\n+      }\n+      res.end(statusCode < 200 ? undefined : bodyToWrite)\n+    }\n+\n+    if (opts.delayResponse) {\n+      setTimeout(reply, opts.delayResponse)\n+    } else {\n+      reply()\n+    }\n   }\n \n   server.unref()\n@@ -30,9 +62,9 @@\n   const server = http.createServer(handle)\n \n   function handle (req, res) {\n-    res.writeHead(200, { 'Content-Type': 'text/plain', 'Trailer': 'Content-MD5' })\n+    res.writeHead(200, { 'Content-Type': 'text/plain', Trailer: 'Content-MD5' })\n     res.write('hello ')\n-    res.addTrailers({'Content-MD5': '7895bf4b8828b55ceaf47747b4bca667'})\n+    res.addTrailers({ 'Content-MD5': '7895bf4b8828b55ceaf47747b4bca667' })\n     res.end('world')\n   }\n \n@@ -53,8 +85,23 @@\n   return server\n }\n \n+// this server destroys the socket on connection, should result in ECONNRESET\n+function startSocketDestroyingServer () {\n+  const server = http.createServer(handle)\n+\n+  function handle (req, res) {\n+    res.destroy()\n+    server.close()\n+  }\n+\n+  server.listen(0)\n+  server.unref()\n+\n+  return server\n+}\n+\n // this server won't reply to requests\n-function startHttpsServer () {\n+function startHttpsServer (opts = {}) {\n   const options = {\n     key: fs.readFileSync(path.join(__dirname, '/key.pem')),\n     cert: fs.readFileSync(path.join(__dirname, '/cert.pem')),\n@@ -63,18 +110,132 @@\n \n   const server = https.createServer(options, handle)\n",
+					"match": false,
+					"packageHash": "fed99f62af64121e3b3c4c9d6c77fd943a717d326cbfce68edd06ad5741d4a11",
+					"size": 1698,
+					"sourceHash": "57ee861a27ea1a3b76ad2b62824150187371902dbb11e78c4cca956186a209ef",
+					"status": "content"
+				},
+				"test/httpClient.test.js": {
+					"diff": "--- published/test/httpClient.test.js\n+++ rebuilt/test/httpClient.test.js\n@@ -1,23 +1,46 @@\n 'use strict'\n \n-const test = require('tap').test\n+const os = require('os')\n+const http = require('http')\n+const path = require('path')\n+const { test } = require('node:test')\n const Client = require('../lib/httpClient')\n const helper = require('./helper')\n const server = helper.startServer()\n const timeoutServer = helper.startTimeoutServer()\n const httpsServer = helper.startHttpsServer()\n+const tlsServer = helper.startTlsServer()\n const trailerServer = helper.startTrailerServer()\n const bl = require('bl')\n+const fs = require('fs')\n+\n+const makeResponseFromBody = ({ server, method, body, headers = {} }) => {\n+  const sentHeaders = {\n+    Connection: 'keep-alive',\n+    ...headers\n+  }\n+  if (!sentHeaders['Content-Length'] && body) {\n+    sentHeaders['Content-Length'] = body.length\n+  }\n+  return `${method} / HTTP/1.1\\r\\nHost: localhost:${\n+    server.address().port\n+  }\\r\\n${\n+    Object.keys(sentHeaders).map(name => `${name}: ${sentHeaders[name]}`).join('\\r\\n')\n+  }\\r\\n${\n+    body ? `\\r\\n${body}` : '\\r\\n'\n+  }`\n+}\n \n test('client calls a server twice', (t) => {\n-  t.plan(4)\n+  t.plan(4, { wait: true })\n \n   const client = new Client(server.address())\n+  t.after(() => client.destroy())\n   let count = 0\n \n   client.on('response', (statusCode, length) => {\n-    t.equal(statusCode, 200, 'status code matches')\n-    t.ok(length > 'hello world'.length, 'length includes the headers')\n+    t.assert.strictEqual(statusCode, 200, 'status code matches')\n+    t.assert.ok(length > 'hello world'.length, 'length includes the headers')\n     if (count++ > 0) {\n       client.destroy()\n     }\n@@ -25,16 +48,180 @@\n })\n \n test('client calls a https server twice', (t) => {\n-  t.plan(4)\n+  t.plan(4, { wait: true })\n \n-  var opts = httpsServer.address()\n+  const opts = httpsServer.address()\n   opts.protocol = 'https:'\n   const client = new Client(opts)\n+  t.after(() => client.destroy())\n   let count = 0\n \n   client.on('response', (statusCode, length) => {\n-    t.equal(statusCode, 200, 'status code matches')\n-    t.ok(length > 'hello world'.length, 'length includes the headers')\n+    t.assert.strictEqual(statusCode, 200, 'status code matches')\n+    t.assert.ok(length > 'hello world'.length, 'length includes the headers')\n+    if (count++ > 0) {\n+      client.destroy()\n+    }\n+  })\n+})\n+\n+test('client calculates correct duration when using pipelining', (t) => {\n+  t.plan(6, { wait: true })\n+\n+  const delayResponse = 500\n+  const lazyServer = helper.startServer({ delayResponse })\n+  const opts = lazyServer.address()\n+  opts.pipelining = 2\n+  const startTime = process.hrtime()\n+  const client = new Client(opts)\n+  t.after(() => client.destroy())\n+  let count = 0\n+\n+  client.on('response', (statusCode, length, duration) => {\n+    t.assert.strictEqual(statusCode, 200, 'status code matches')\n+    t.assert.ok(duration > delayResponse, `Expected response delay > ${delayResponse}ms but got ${duration}ms`)\n+\n+    const hrduration = process.hrtime(startTime)\n+    const maxExpectedDuration = hrduration[0] * 1e3 + hrduration[1] / 1e6\n+    t.assert.ok(duration < maxExpectedDuration, `Expected response delay < ${maxExpectedDuration}ms but got ${duration}ms`)\n+\n+    if (++count === 2) {\n+      client.destroy()\n",
+					"match": false,
+					"packageHash": "e080128672bc65819962e1975f74c7443f0361f2146d5ff0674fb7359bca3c01",
+					"size": 10661,
+					"sourceHash": "e32df718c156ae39db475544b5b16d3db4cdb9aa1c16f0f3a072efaf945e1607",
+					"status": "content"
+				},
+				"test/httpRequestBuilder.test.js": {
+					"diff": "--- published/test/httpRequestBuilder.test.js\n+++ rebuilt/test/httpRequestBuilder.test.js\n@@ -1,26 +1,26 @@\n 'use strict'\n \n-const test = require('tap').test\n+const { test } = require('node:test')\n const helper = require('./helper')\n const server = helper.startServer()\n const RequestBuilder = require('../lib/httpRequestBuilder')\n const httpMethods = require('../lib/httpMethods')\n \n test('request builder should create a request with sensible defaults', (t) => {\n-  t.plan(1)\n+  t.plan(1, { wait: true })\n \n   const opts = server.address()\n \n   const build = RequestBuilder(opts)\n \n   const result = build()\n-  t.same(result,\n+  t.assert.deepStrictEqual(result,\n     Buffer.from(`GET / HTTP/1.1\\r\\nHost: localhost:${server.address().port}\\r\\nConnection: keep-alive\\r\\n\\r\\n`),\n     'request is okay')\n })\n \n test('request builder should allow default overwriting', (t) => {\n-  t.plan(1)\n+  t.plan(1, { wait: true })\n \n   const opts = server.address()\n   opts.method = 'POST'\n@@ -28,34 +28,34 @@\n   const build = RequestBuilder(opts)\n \n   const result = build()\n-  t.same(result,\n+  t.assert.deepStrictEqual(result,\n     Buffer.from(`POST / HTTP/1.1\\r\\nHost: localhost:${server.address().port}\\r\\nConnection: keep-alive\\r\\n\\r\\n`),\n     'request is okay')\n })\n \n test('request builder should allow per build overwriting', (t) => {\n-  t.plan(1)\n+  t.plan(1, { wait: true })\n \n   const opts = server.address()\n   opts.method = 'POST'\n \n   const build = RequestBuilder(opts)\n \n-  const result = build({method: 'GET'})\n+  const result = build({ method: 'GET' })\n \n-  t.same(result,\n+  t.assert.deepStrictEqual(result,\n     Buffer.from(`GET / HTTP/1.1\\r\\nHost: localhost:${server.address().port}\\r\\nConnection: keep-alive\\r\\n\\r\\n`),\n     'request is okay')\n })\n \n test('request builder should throw on unknown http method', (t) => {\n-  t.plan(1)\n+  t.plan(1, { wait: true })\n \n   const opts = server.address()\n \n   const build = RequestBuilder(opts)\n \n-  t.throws(() => build({method: 'UNKNOWN'}))\n+  t.assert.throws(() => build({ method: 'UNKNOWN' }))\n })\n \n test('request builder should accept all valid standard http methods', (t) => {\n@@ -65,13 +65,12 @@\n \n     const build = RequestBuilder(opts)\n \n-    t.doesNotThrow(() => build({method: method}), `${method} should be usable by the request builded`)\n+    t.assert.doesNotThrow(() => build({ method }), `${method} should be usable by the request builded`)\n   })\n-  t.end()\n })\n \n test('request builder should add a Content-Length header when the body buffer exists as a default override', (t) => {\n-  t.plan(1)\n+  t.plan(1, { wait: true })\n \n   const opts = server.address()\n   opts.method = 'POST'\n@@ -80,13 +79,13 @@\n   const build = RequestBuilder(opts)\n \n   const result = build()\n-  t.same(result,\n-    Buffer.from(`POST / HTTP/1.1\\r\\nHost: localhost:${server.address().port}\\r\\nConnection: keep-alive\\r\\nContent-Length: 4\\r\\n\\r\\nbody\\r\\n`),\n+  t.assert.deepStrictEqual(result,\n+    Buffer.from(`POST / HTTP/1.1\\r\\nHost: localhost:${server.address().port}\\r\\nConnection: keep-alive\\r\\nContent-Length: 4\\r\\n\\r\\nbody`),\n     'request is okay')\n })\n",
+					"match": false,
+					"packageHash": "b99849dd355d1b25a3bb8f0fae23b52418c58c09a692c9e82d90861f1e039bcd",
+					"size": 3855,
+					"sourceHash": "345d6874a551593cc408381cf438687597030258d2f9a800ffd4198bb9b6436e",
+					"status": "content"
+				},
+				"test/requestIterator.test.js": {
+					"diff": "--- published/test/requestIterator.test.js\n+++ rebuilt/test/requestIterator.test.js\n@@ -1,47 +1,80 @@\n 'use strict'\n \n-const test = require('tap').test\n+const { test } = require('node:test')\n const helper = require('./helper')\n const server = helper.startServer()\n const RequestIterator = require('../lib/requestIterator')\n \n test('request iterator should create requests with sensible defaults', (t) => {\n-  t.plan(3)\n+  t.plan(3, { wait: true })\n \n   const opts = server.address()\n \n-  let iterator = new RequestIterator(undefined, opts)\n+  let iterator = new RequestIterator(opts)\n \n-  t.same(iterator.currentRequest.requestBuffer,\n+  t.assert.deepStrictEqual(iterator.currentRequest.requestBuffer,\n     Buffer.from(`GET / HTTP/1.1\\r\\nHost: localhost:${server.address().port}\\r\\nConnection: keep-alive\\r\\n\\r\\n`),\n     'request is okay')\n \n-  iterator = new RequestIterator([{}], opts)\n+  opts.requests = [{}]\n+\n+  iterator = new RequestIterator(opts)\n \n-  t.same(iterator.currentRequest.requestBuffer,\n+  t.assert.deepStrictEqual(iterator.currentRequest.requestBuffer,\n     Buffer.from(`GET / HTTP/1.1\\r\\nHost: localhost:${server.address().port}\\r\\nConnection: keep-alive\\r\\n\\r\\n`),\n     'request is okay')\n \n-  iterator = new RequestIterator([], opts)\n+  opts.requests = []\n+\n+  iterator = new RequestIterator(opts)\n \n-  t.notOk(iterator.currentRequest, 'request doesn\\'t exist')\n+  t.assert.ok(!iterator.currentRequest, 'request doesn\\'t exist')\n })\n \n test('request iterator should create requests with overwritten defaults', (t) => {\n-  t.plan(1)\n+  t.plan(1, { wait: true })\n \n   const opts = server.address()\n   opts.method = 'POST'\n \n-  let iterator = new RequestIterator(undefined, opts)\n+  const iterator = new RequestIterator(opts)\n \n-  t.same(iterator.currentRequest.requestBuffer,\n+  t.assert.deepStrictEqual(iterator.currentRequest.requestBuffer,\n     Buffer.from(`POST / HTTP/1.1\\r\\nHost: localhost:${server.address().port}\\r\\nConnection: keep-alive\\r\\n\\r\\n`),\n     'request is okay')\n })\n \n+test('request iterator should use headers from requests', (t) => {\n+  t.plan(2, { wait: true })\n+\n+  const opts = server.address()\n+  opts.requests = [\n+    {\n+      path: '/',\n+      method: 'POST',\n+      headers: {\n+        'content-type': 'application/json'\n+      },\n+      body: JSON.stringify({ foo: 'bar' })\n+    },\n+    {\n+      path: '/2',\n+      method: 'POST',\n+      headers: {\n+        'content-type': 'text/html'\n+      },\n+      body: JSON.stringify({ foo: 'bar' })\n+    }\n+  ]\n+  const iterator = new RequestIterator(opts)\n+\n+  t.assert.deepStrictEqual(iterator.currentRequest.headers['content-type'], 'application/json')\n+  iterator.nextRequest()\n+  t.assert.deepStrictEqual(iterator.currentRequest.headers['content-type'], 'text/html')\n+})\n+\n test('request iterator should create requests with overwritten defaults', (t) => {\n-  t.plan(3)\n+  t.plan(3, { wait: true })\n \n   const opts = server.address()\n   opts.method = 'POST'\n@@ -56,20 +89,22 @@\n     }\n   ]\n \n-  const request1Res = Buffer.from(`POST / HTTP/1.1\\r\\nHost: localhost:${server.address().port}\\r\\nConnection: keep-alive\\r\\nContent-Length: 11\\r\\n\\r\\nhello world\\r\\n`)\n",
+					"match": false,
+					"packageHash": "f0849c4e3c26b2deb26af2c5f8f3c15a49ce5a3e1cd1f3b4b46d0a5d70c22e30",
+					"size": 6735,
+					"sourceHash": "17d69499b550f6b217f73dfb42214a93e333bc29eec1a19954975b4dad45a9c1",
+					"status": "content"
+				},
+				"test/run.test.js": {
+					"diff": "--- published/test/run.test.js\n+++ rebuilt/test/run.test.js\n@@ -2,279 +2,1018 @@\n \n const os = require('os')\n const path = require('path')\n-const test = require('tap').test\n-const run = require('../lib/run')\n+const { test } = require('node:test')\n+const initJob = require('../lib/init')\n+const defaultOptions = require('../lib/defaultOptions')\n const helper = require('./helper')\n const server = helper.startServer()\n \n-test('run', (t) => {\n-  run({\n+test('init', (t, done) => {\n+  initJob({\n     url: 'http://localhost:' + server.address().port,\n     connections: 2,\n     duration: 2,\n     title: 'title321'\n   }, function (err, result) {\n-    t.error(err)\n+    t.assert.ifError(err)\n \n-    t.ok(result.duration >= 2, 'duration is at least 2s')\n-    t.equal(result.title, 'title321', 'title should be what was passed in')\n-    t.equal(result.connections, 2, 'connections is the same')\n-    t.equal(result.pipelining, 1, 'pipelining is the default')\n-\n-    t.ok(result.latency, 'latency exists')\n-    t.ok(result.latency.average, 'latency.average exists')\n-    t.ok(result.latency.stddev, 'latency.stddev exists')\n-    t.ok(result.latency.min >= 0, 'latency.min exists')\n-    t.ok(result.latency.max, 'latency.max exists')\n-\n-    t.ok(result.requests, 'requests exists')\n-    t.ok(result.requests.average, 'requests.average exists')\n-    t.ok(result.requests.stddev, 'requests.stddev exists')\n-    t.ok(result.requests.min, 'requests.min exists')\n-    t.ok(result.requests.max, 'requests.max exists')\n-    t.ok(result.requests.total >= result.requests.average * 2 / 100 * 95, 'requests.total exists')\n-    t.ok(result.requests.sent, 'sent exists')\n-    t.ok(result.requests.sent >= result.requests.total, 'total requests made should be more than or equal to completed requests total')\n-\n-    t.ok(result.throughput, 'throughput exists')\n-    t.ok(result.throughput.average, 'throughput.average exists')\n-    t.type(result.throughput.stddev, 'number', 'throughput.stddev exists')\n-    t.ok(result.throughput.min, 'throughput.min exists')\n-    t.ok(result.throughput.max, 'throughput.max exists')\n-    t.ok(result.throughput.total >= result.throughput.average * 2 / 100 * 95, 'throughput.total exists')\n-\n-    t.ok(result.start, 'start time exists')\n-    t.ok(result.finish, 'finish time exists')\n-\n-    t.equal(result.errors, 0, 'no errors')\n-\n-    t.equal(result['1xx'], 0, '1xx codes')\n-    t.equal(result['2xx'], result.requests.total, '2xx codes')\n-    t.equal(result['3xx'], 0, '3xx codes')\n-    t.equal(result['4xx'], 0, '4xx codes')\n-    t.equal(result['5xx'], 0, '5xx codes')\n-    t.equal(result.non2xx, 0, 'non 2xx codes')\n+    t.assert.ok(result.duration >= 2, 'duration is at least 2s')\n+    t.assert.strictEqual(result.title, 'title321', 'title should be what was passed in')\n+    t.assert.strictEqual(result.connections, 2, 'connections is the same')\n+    t.assert.strictEqual(result.pipelining, 1, 'pipelining is the default')\n+\n+    t.assert.ok(result.latency, 'latency exists')\n+    t.assert.strictEqual(typeof result.latency.average, 'number', 'latency.average exists')\n+    t.assert.strictEqual(typeof result.latency.stddev, 'number', 'latency.stddev exists')\n+    t.assert.ok(result.latency.min >= 0, 'latency.min exists')\n+    t.assert.strictEqual(typeof result.latency.max, 'number', 'latency.max exists')\n+    t.assert.strictEqual(typeof result.latency.p2_5, 'number', 'latency.p2_5 (2.5%) exists')\n+    t.assert.strictEqual(typeof result.latency.p50, 'number', 'latency.p50 (50%) exists')\n+    t.assert.strictEqual(typeof result.latency.p97_5, 'number', 'latency.p97_5 (97.5%) exists')\n+    t.assert.strictEqual(typeof result.latency.p99, 'number', 'latency.p99 (99%) exists')\n+\n+    t.assert.ok(result.requests, 'requests exists')\n+    t.assert.strictEqual(typeof result.requests.average, 'number', 'requests.average exists')\n+    t.assert.strictEqual(typeof result.requests.stddev, 'number', 'requests.stddev exists')\n+    t.assert.strictEqual(typeof result.requests.min, 'number', 'requests.min exists')\n+    t.assert.strictEqual(typeof result.requests.max, 'number', 'requests.max exists')\n+    t.assert.ok(result.requests.total >= result.requests.average * 2 / 100 * 95, 'requests.total exists')\n+    t.assert.strictEqual(typeof result.requests.sent, 'number', 'sent exists')\n+    t.assert.ok(result.requests.sent >= result.requests.total, 'total requests made should be more than or equal to completed requests total')\n+    t.assert.strictEqual(typeof result.requests.p1, 'number', 'requests.p1 (1%) exists')\n+    t.assert.strictEqual(typeof result.requests.p2_5, 'number', 'requests.p2_5 (2.5%) exists')\n+    t.assert.strictEqual(typeof result.requests.p50, 'number', 'requests.p50 (50%) exists')\n+    t.assert.strictEqual(typeof result.requests.p97_5, 'number', 'requests.p97_5 (97.5%) exists')\n+\n+    t.assert.ok(result.throughput, 'throughput exists')\n+    t.assert.strictEqual(typeof result.throughput.average, 'number', 'throughput.average exists')\n+    t.assert.strictEqual(typeof result.throughput.stddev, 'number', 'throughput.stddev exists')\n+    t.assert.strictEqual(typeof result.throughput.min, 'number', 'throughput.min exists')\n+    t.assert.strictEqual(typeof result.throughput.max, 'number', 'throughput.max exists')\n+    t.assert.ok(result.throughput.total >= result.throughput.average * 2 / 100 * 95, 'throughput.total exists')\n+    t.assert.strictEqual(typeof result.throughput.p1, 'number', 'throughput.p1 (1%) exists')\n+    t.assert.strictEqual(typeof result.throughput.p2_5, 'number', 'throughput.p2_5 (2.5%) exists')\n",
+					"match": false,
+					"packageHash": "68cfaac7a3badcabce7687a1ccb741ff96c587caa20949ddf39326e5b5d4ff55",
+					"size": 8942,
+					"sourceHash": "13c1c1a72394e3591fb025c3777cceacdde68f526cbf3da63d2affa1db4c6a39",
+					"status": "content"
+				},
+				"test/runAmount.test.js": {
+					"diff": "--- published/test/runAmount.test.js\n+++ rebuilt/test/runAmount.test.js\n@@ -1,83 +1,83 @@\n 'use strict'\n \n-const test = require('tap').test\n-const run = require('../lib/run')\n+const { test } = require('node:test')\n+const initJob = require('../lib/init')\n const helper = require('./helper')\n const timeoutServer = helper.startTimeoutServer()\n const server = helper.startServer()\n \n test('run should only send the expected number of requests', (t) => {\n-  t.plan(10)\n+  t.plan(10, { wait: true })\n \n   let done = false\n \n-  run({\n+  initJob({\n     url: `http://localhost:${server.address().port}`,\n     duration: 1,\n     connections: 100,\n     amount: 50146\n   }, (err, res) => {\n-    t.error(err)\n-    t.equal(res.requests.total + res.timeouts, 50146, 'results should match the amount')\n-    t.equal(res.requests.sent, 50146, 'totalRequests should match the amount')\n+    t.assert.ifError(err)\n+    t.assert.strictEqual(res.requests.total + res.timeouts, 50146, 'results should match the amount')\n+    t.assert.strictEqual(res.requests.sent, 50146, 'totalRequests should match the amount')\n     done = true\n   })\n \n   setTimeout(() => {\n-    t.notOk(done)\n+    t.assert.ok(!done)\n   }, 1000)\n \n-  run({\n+  initJob({\n     url: `http://localhost:${server.address().port}`,\n     connections: 2,\n     maxConnectionRequests: 10\n   }, (err, res) => {\n-    t.error(err)\n-    t.equal(res.requests.total, 20, 'results should match max connection requests * connections')\n-    t.equal(res.requests.sent, 20, 'totalRequests should match the expected amount')\n+    t.assert.ifError(err)\n+    t.assert.strictEqual(res.requests.total, 20, 'results should match max connection requests * connections')\n+    t.assert.strictEqual(res.requests.sent, 20, 'totalRequests should match the expected amount')\n   })\n \n-  run({\n+  initJob({\n     url: `http://localhost:${server.address().port}`,\n     connections: 2,\n     maxOverallRequests: 10\n   }, (err, res) => {\n-    t.error(err)\n-    t.equal(res.requests.total, 10, 'results should match max overall requests')\n-    t.equal(res.requests.sent, 10, 'totalRequests should match the expected amount')\n+    t.assert.ifError(err)\n+    t.assert.strictEqual(res.requests.total, 10, 'results should match max overall requests')\n+    t.assert.strictEqual(res.requests.sent, 10, 'totalRequests should match the expected amount')\n   })\n })\n \n test('should shutdown after all amounts timeout', (t) => {\n-  t.plan(5)\n+  t.plan(5, { wait: true })\n \n-  run({\n+  initJob({\n     url: `http://localhost:${timeoutServer.address().port}`,\n     amount: 10,\n     timeout: 2,\n     connections: 10\n   }, (err, res) => {\n-    t.error(err)\n-    t.equal(res.errors, 10)\n-    t.equal(res.timeouts, 10)\n-    t.equal(res.requests.sent, 10, 'totalRequests should match the expected amount')\n-    t.equal(res.requests.total, 0, 'total completed requests should be 0')\n+    t.assert.ifError(err)\n+    t.assert.strictEqual(res.errors, 10)\n+    t.assert.strictEqual(res.timeouts, 10)\n+    t.assert.strictEqual(res.requests.sent, 10, 'totalRequests should match the expected amount')\n+    t.assert.strictEqual(res.requests.total, 0, 'total completed requests should be 0')\n   })\n })\n \n-test('should reconnect twice to the server with a reset rate of 10 for 20 connections', (t) => {\n+test('should reconnect twice to the server with a reset rate of 10 for 20 connections', (t, done) => {\n   t.plan(3)\n   const testServer = helper.startServer()\n \n-  run({\n+  initJob({\n",
+					"match": false,
+					"packageHash": "8c9ab71067c0f34c80c02c358c6aef0b0b0a5dd646c0b17e5bdd7c0e46bbc40d",
+					"size": 2381,
+					"sourceHash": "291d0574e4d9583f60bfacab56bec15c177554f4317f99b894efcb39ce1de992",
+					"status": "content"
+				},
+				"test/runRate.test.js": {
+					"diff": "--- published/test/runRate.test.js\n+++ rebuilt/test/runRate.test.js\n@@ -1,32 +1,84 @@\n 'use strict'\n \n-const test = require('tap').test\n-const run = require('../lib/run')\n+const { test } = require('node:test')\n+const initJob = require('../lib/init')\n const helper = require('./helper')\n const server = helper.startServer()\n \n-test('run should only send the expected number of requests per second', (t) => {\n-  t.plan(6)\n+test('run should only send the expected number of requests per second - scenario 1', (t) => {\n+  t.plan(3, { wait: true })\n \n-  run({\n+  initJob({\n     url: `http://localhost:${server.address().port}`,\n     connections: 2,\n     overallRate: 10,\n-    amount: 40\n+    amount: 40,\n+    sampleInt: 1000\n   }, (err, res) => {\n-    t.error(err)\n-    t.equal(res.duration, 4, 'should have take 4 seconds to send 10 requests per seconds')\n-    t.equal(res.requests.average, 10, 'should have sent 10 requests per second on average')\n+    t.assert.ifError(err)\n+\n+    t.assert.strictEqual(Math.floor(res.duration), 4, 'should have take 4 seconds to send 10 requests per seconds')\n+    t.assert.strictEqual(res.requests.average, 10, 'should have sent 10 requests per second on average')\n   })\n+})\n+\n+test('run should only send the expected number of requests per second - scenario 2', (t) => {\n+  t.plan(3, { wait: true })\n \n-  run({\n+  initJob({\n     url: `http://localhost:${server.address().port}`,\n     connections: 2,\n     connectionRate: 10,\n-    amount: 40\n+    amount: 40,\n+    sampleInt: 1000\n+  }, (err, res) => {\n+    t.assert.ifError(err)\n+    t.assert.strictEqual(Math.floor(res.duration), 2, 'should have taken 2 seconds to send 10 requests per connection with 2 connections')\n+    t.assert.strictEqual(res.requests.average, 20, 'should have sent 20 requests per second on average with two connections')\n+  })\n+})\n+\n+test('run should only send the expected number of requests per second - scenario 3', (t) => {\n+  t.plan(3, { wait: true })\n+\n+  initJob({\n+    url: `http://localhost:${server.address().port}`,\n+    connections: 15,\n+    overallRate: 10,\n+    amount: 40,\n+    sampleInt: 1000\n+  }, (err, res) => {\n+    t.assert.ifError(err)\n+    t.assert.strictEqual(Math.floor(res.duration), 4, 'should have take 4 seconds to send 10 requests per seconds')\n+    t.assert.strictEqual(res.requests.average, 10, 'should have sent 10 requests per second on average')\n+  })\n+})\n+\n+test('run should compensate for coordinated omission when the expected number of requests per second is too high', (t) => {\n+  t.plan(2, { wait: true })\n+\n+  initJob({\n+    url: `http://localhost:${server.address().port}`,\n+    connections: 100,\n+    connectionRate: 1000,\n+    duration: 1\n+  }, (err, res) => {\n+    t.assert.ifError(err)\n+    t.assert.notStrictEqual(res.latency.totalCount, res.requests.total, 'should have recorded additionnal latencies')\n+  })\n+})\n+\n+test('run should not compensate for coordinated omission when this feature is disabled', (t) => {\n+  t.plan(2, { wait: true })\n+\n+  initJob({\n+    url: `http://localhost:${server.address().port}`,\n+    connections: 100,\n+    connectionRate: 1000,\n+    ignoreCoordinatedOmission: true,\n+    duration: 1\n   }, (err, res) => {\n-    t.error(err)\n-    t.equal(res.duration, 2, 'should have taken 2 seconds to send 10 requests per connection with 2 connections')\n-    t.equal(res.requests.average, 20, 'should have sent 20 requests per second on average with two connections')\n+    t.assert.ifError(err)\n+    t.assert.strictEqual(res.latency.totalCount, res.requests.total, 'should not have recorded additionnal latencies')\n   })\n",
+					"match": false,
+					"packageHash": "e387836d0d7c0974afe992c6935b8d4050d7b4cd23c29240a8de1c8de124e2ff",
+					"size": 986,
+					"sourceHash": "b8424b158d0d7cb0dfaa655ffb83cae0a619f0633a0ea260fea83148b8646ba3",
+					"status": "content"
+				},
+				".borp.yaml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"cluster.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"eslint.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/aggregateResult.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/defaultOptions.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/histUtil.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/init.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/manager.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/multipart.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/noop.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/parseHAR.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/pipelinedRequestsQueue.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/preload/autocannonDetectPort.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/printResult.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/runTracker.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/subargAliases.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/url.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/util.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/validate.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/worker.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/worker_threads.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"samples/bench-multi-url.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"samples/customise-verifyBody-workers.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"samples/customise-verifyBody.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"samples/helpers/on-response.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"samples/helpers/setup-request.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"samples/helpers/verify-body.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"samples/init-context.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"samples/request-context-workers.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"samples/request-context.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"samples/track-run-workers.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/aggregateResult.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/basic-auth.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/debug.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/envPort.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/fixtures/example-result.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/fixtures/httpbin-get.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/fixtures/httpbin-post.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/fixtures/httpbin-simple-get.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/fixtures/multi-domains.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/j5.jpeg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/keystore.pkcs12": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/onPort.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/parseHAR.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/pipelinedRequestsQueue.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/printResult-process.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/printResult-renderStatusCodes.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/printResult.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/progressTracker.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/progressTracker.test.stub.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/runMultiServer.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/runMultipart.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/sampleInt.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/serial/autocannon.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/serial/run.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/serial/wasm.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/subargAliases.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/targetProcess.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/url.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/utils/has-worker-support.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/utils/on-response.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/utils/setup-client.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/utils/setup-request.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/utils/verify-body.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/validate.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/workers.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 26,
+				"matchingFiles": 6,
+				"missingInPackage": 66,
+				"missingInSource": 6,
+				"score": 0.057692307692307696,
+				"totalFiles": 104
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "@assemblyscript/loader",
+				"version": "0.19.23"
+			},
+			{
+				"name": "@colors/colors",
+				"version": "1.5.0"
+			},
+			{
+				"name": "@minimistjs/subarg",
+				"version": "1.0.0"
+			},
+			{
+				"name": "ansi-regex",
+				"version": "5.0.1"
+			},
+			{
+				"name": "ansi-styles",
+				"version": "4.3.0"
+			},
+			{
+				"name": "asynckit",
+				"version": "0.4.0"
+			},
+			{
+				"name": "base64-js",
+				"version": "1.5.1"
+			},
+			{
+				"name": "buffer",
+				"version": "6.0.3"
+			},
+			{
+				"name": "call-bind-apply-helpers",
+				"version": "1.0.2"
+			},
+			{
+				"name": "chalk",
+				"version": "4.1.2"
+			},
+			{
+				"name": "char-spinner",
+				"version": "1.0.1"
+			},
+			{
+				"name": "cli-table3",
+				"version": "0.6.5"
+			},
+			{
+				"name": "color-convert",
+				"version": "2.0.1"
+			},
+			{
+				"name": "color-name",
+				"version": "1.1.4"
+			},
+			{
+				"name": "color-support",
+				"version": "1.1.3"
+			},
+			{
+				"name": "combined-stream",
+				"version": "1.0.8"
+			},
+			{
+				"name": "cross-argv",
+				"version": "2.0.0"
+			},
+			{
+				"name": "delayed-stream",
+				"version": "1.0.0"
+			},
+			{
+				"name": "dunder-proto",
+				"version": "1.0.1"
+			},
+			{
+				"name": "emoji-regex",
+				"version": "8.0.0"
+			},
+			{
+				"name": "es-define-property",
+				"version": "1.0.1"
+			},
+			{
+				"name": "es-errors",
+				"version": "1.3.0"
+			},
+			{
+				"name": "es-object-atoms",
+				"version": "1.1.2"
+			},
+			{
+				"name": "es-set-tostringtag",
+				"version": "2.1.0"
+			},
+			{
+				"name": "form-data",
+				"version": "4.0.6"
+			},
+			{
+				"name": "function-bind",
+				"version": "1.1.2"
+			},
+			{
+				"name": "get-intrinsic",
+				"version": "1.3.0"
+			},
+			{
+				"name": "get-proto",
+				"version": "1.0.1"
+			},
+			{
+				"name": "gopd",
+				"version": "1.2.0"
+			},
+			{
+				"name": "has-async-hooks",
+				"version": "1.0.0"
+			},
+			{
+				"name": "has-flag",
+				"version": "4.0.0"
+			},
+			{
+				"name": "has-symbols",
+				"version": "1.1.0"
+			},
+			{
+				"name": "has-tostringtag",
+				"version": "1.0.2"
+			},
+			{
+				"name": "hasown",
+				"version": "2.0.4"
+			},
+			{
+				"name": "hdr-histogram-js",
+				"version": "3.0.1"
+			},
+			{
+				"name": "hdr-histogram-percentiles-obj",
+				"version": "3.0.0"
+			},
+			{
+				"name": "http-parser-js",
+				"version": "0.5.10"
+			},
+			{
+				"name": "hyperid",
+				"version": "4.0.0"
+			},
+			{
+				"name": "ieee754",
+				"version": "1.2.1"
+			},
+			{
+				"name": "is-fullwidth-code-point",
+				"version": "3.0.0"
+			},
+			{
+				"name": "lodash.chunk",
+				"version": "4.2.0"
+			},
+			{
+				"name": "lodash.clonedeep",
+				"version": "4.5.0"
+			},
+			{
+				"name": "lodash.flatten",
+				"version": "4.4.0"
+			},
+			{
+				"name": "manage-path",
+				"version": "2.0.0"
+			},
+			{
+				"name": "math-intrinsics",
+				"version": "1.1.0"
+			},
+			{
+				"name": "mime-db",
+				"version": "1.52.0"
+			},
+			{
+				"name": "mime-types",
+				"version": "2.1.35"
+			},
+			{
+				"name": "minimist",
+				"version": "1.2.8"
+			},
+			{
+				"name": "on-net-listen",
+				"version": "1.1.2"
+			},
+			{
+				"name": "pako",
+				"version": "1.0.11"
+			},
+			{
+				"name": "pretty-bytes",
+				"version": "5.6.0"
+			},
+			{
+				"name": "progress",
+				"version": "2.0.3"
+			},
+			{
+				"name": "reinterval",
+				"version": "1.1.0"
+			},
+			{
+				"name": "retimer",
+				"version": "3.0.0"
+			},
+			{
+				"name": "semver",
+				"version": "7.8.6"
+			},
+			{
+				"name": "string-width",
+				"version": "4.2.3"
+			},
+			{
+				"name": "strip-ansi",
+				"version": "6.0.1"
+			},
+			{
+				"name": "supports-color",
+				"version": "7.2.0"
+			},
+			{
+				"name": "timestring",
+				"version": "6.0.0"
+			}
+		]
+	}
+]
