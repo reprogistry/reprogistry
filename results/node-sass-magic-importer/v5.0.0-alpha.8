@@ -1,0 +1,1176 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-21T20:28:03.471Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:5.3.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "node-sass-magic-importer@5.0.0-alpha.8",
+			"name": "node-sass-magic-importer",
+			"version": "5.0.0-alpha.8",
+			"location": "https://registry.npmjs.org/node-sass-magic-importer/-/node-sass-magic-importer-5.0.0-alpha.8.tgz",
+			"integrity": "sha512-gR9/wKAPc7DHSJrUFI98Zigw3AkEbBqEUzMIGguBeJ6JKkpP6N81CG61PBVE+5skwlHLw4eUCkC4vX3RlCokZQ==",
+			"publishedAt": "2017-09-12T08:48:32.510Z",
+			"publishedWith": {
+				"node": "8.4.0",
+				"npm": "5.4.1"
+			},
+			"dependencies": {
+				"css-node-extract": "^1.1.0",
+				"css-selector-extract": "^3.1.3",
+				"get-installed-path": "^3.0.1",
+				"object-hash": "^1.1.8",
+				"postcss-scss": "^1.0.2",
+				"resolve": "^1.4.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/maoberlehner/node-sass-magic-importer.git",
+			"spec": "github:maoberlehner/node-sass-magic-importer#v5.0.0-alpha.8"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -2,274 +2,33 @@\n [![Build Status](https://travis-ci.org/maoberlehner/node-sass-magic-importer.svg?branch=master)](https://travis-ci.org/maoberlehner/node-sass-magic-importer)\n [![GitHub stars](https://img.shields.io/github/stars/maoberlehner/node-sass-magic-importer.svg?style=social&label=Star)](https://github.com/maoberlehner/node-sass-magic-importer)\n \n-Custom node-sass importer for selector specific imports, node importing, module importing, globbing support and importing files only once.\n+node-sass-magic-importer is a tool to enhance Sass `@import` statements.\n \n-## Install\n-```bash\n-npm install node-sass-magic-importer --save-dev\n-```\n-\n-## Features\n-This importer enables several comfort functions for importing SASS files more easily.\n-- [Selector filtering](#selector-filtering): import only specific selectors from a file.  \n-  (Uses the [node-sass-selector-importer](https://github.com/maoberlehner/node-sass-selector-importer) module.)\n-- [Node filtering](#node-filtering): import only specific nodes from a file.  \n-  (Uses the [node-sass-filter-importer](https://github.com/maoberlehner/node-sass-filter-importer) module.)\n-- [Module importing](#module-importing): import modules from `node_modules` without specifying the full path.  \n-  (Uses the [node-sass-package-importer](https://github.com/maoberlehner/node-sass-package-importer) module.)\n-- [Globbing](#globbing): use globbing (e.g. `@import: 'scss/**/*.scss'`) to import multiple files at once.  \n-  (Uses the [node-sass-glob-importer](https://github.com/maoberlehner/node-sass-glob-importer) module.)\n-\n-By default every file is only imported once even if you `@import` the same file multiple times in your code (except if you are using filters).\n-\n-### Selector filtering\n-With selector filtering, it is possible to import only certain CSS selectors form a file. This is especially useful if you want to import only a few CSS classes from a huge library or framework.\n-\n-```scss\n-// Example:\n-@import '{ .btn, .btn-alert } from style.scss';\n-```\n-```scss\n-// Result:\n-.btn { }\n-.btn-alert { }\n-```\n-\n-#### Transform imported selectors\n-```scss\n-// Example:\n-@import '{ .btn as .button, .btn-alert as .button--alert } from style.scss';\n-```\n-```scss\n-// Result:\n-.button { }\n-.button--alert { } // Transformed to match BEM syntax.\n-```\n-\n-#### RegEx\n-```scss\n-// Example:\n-@import '{ /^\\..+-alert/ } from style.scss';\n-```\n-```scss\n-// Result:\n-.box-alert { }\n-.btn-alert { }\n-```\n-\n-```scss\n-// Example:\n-@import '{ /^\\.btn(.*)/ as .button$1 } from style.scss';\n-```\n-```scss\n-// Result:\n-.button { }\n-.button-alert { }\n-```\n-\n-#### Usage with Bootstrap\n-Bootstrap is a mighty and robust framework but most of the time you use only certain parts of it. There is the possibility to [customize](http://getbootstrap.com/customize/) Bootstrap to your needs but this can be annoying and you still end up with more code than you need. Also you might want to use just some specific parts of Bootstrap but your project uses the BEM syntax for writing class names.\n-\n-```scss\n-// This example uses the v4 dev version of the Bootstrap `alert` component:\n-// https://github.com/twbs/bootstrap/blob/v4-dev/scss/_alert.scss\n-@import 'bootstrap/scss/variables';\n-@import 'bootstrap/scss/mixins/border-radius';\n-@import 'bootstrap/scss/mixins/alert';\n-@import '{\n-  .alert,\n-  .alert-dismissible as .alert--dismissible,\n-  .close as .alert__close\n-} from bootstrap/scss/alert';\n-```\n-```scss\n-// Result:\n-.alert {\n-  padding: 15px;\n-  margin-bottom: 1rem;\n-  border: 1px solid transparent;\n-  border-radius: 0.25rem;\n-}\n-\n-.alert--dismissible {\n-  padding-right: 35px;\n-}\n-\n",
+					"match": false,
+					"packageHash": "619ca59748aad96c6cf2fea71348ff55d058fc6dbdb25ce50166e65d11de67cb",
+					"size": 9569,
+					"sourceHash": "f65f9004ed9c574ff9c2cbcd8c299f449fcb2aab1dc7bab8182cdb79182fdf42",
+					"status": "content"
+				},
+				"dist/cli.d.ts": {
+					"match": false,
+					"packageHash": "299175c418434642e5ce0fb6d5a8cc70d3c3ad24eae8695e37b6657b34a309ce",
+					"size": 185,
+					"status": "missing-in-source"
+				},
+				"dist/cli.js": {
+					"match": false,
+					"packageHash": "f903514b657f4622f4c960867f295695da8109578e8cd21d7e36f06df789e7d8",
+					"size": 121,
+					"status": "missing-in-source"
+				},
+				"dist/cli.js.map": {
+					"match": false,
+					"packageHash": "f5516ab5df1a0cb50f90c31104ad24907f0ac36c068197afba251d2f6b3ae460",
+					"size": 137,
+					"status": "missing-in-source"
+				},
+				"dist/default-options.d.ts": {
+					"match": false,
+					"packageHash": "5d5632f07c8e6234990392d9147213dedeb3d4d9b9c1beecd150b87ebe641764",
+					"size": 171,
+					"status": "missing-in-source"
+				},
+				"dist/default-options.js": {
+					"match": false,
+					"packageHash": "c5e11929ca61cb005f08b1b871fbc61b71640bf4d00d721a9ed99ca2166cfb89",
+					"size": 477,
+					"status": "missing-in-source"
+				},
+				"dist/default-options.js.map": {
+					"match": false,
+					"packageHash": "abd3e332dd0327a0ffc8f6eae574222b965f8c1ae5e575d2e1e571fdc3522bdd",
+					"size": 384,
+					"status": "missing-in-source"
+				},
+				"dist/functions/build-include-paths.d.ts": {
+					"match": false,
+					"packageHash": "9372d3f7a8f63bde3cf262b683dc0766de1da8f9a9d2eb2ec21b5e5270dfd480",
+					"size": 199,
+					"status": "missing-in-source"
+				},
+				"dist/functions/build-include-paths.js": {
+					"match": false,
+					"packageHash": "851179fec13aa2ffb6f748ce0292d27d59f4ab8edbd45d00c687307b30c809b2",
+					"size": 557,
+					"status": "missing-in-source"
+				},
+				"dist/functions/build-include-paths.js.map": {
+					"match": false,
+					"packageHash": "c39622263fcbc48fbe2838c1e4874602784809f4f511de6e9d40558b8522e12d",
+					"size": 511,
+					"status": "missing-in-source"
+				},
+				"dist/functions/build-include-paths.spec.d.ts": {
+					"match": false,
+					"packageHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+					"size": 0,
+					"status": "missing-in-source"
+				},
+				"dist/functions/build-include-paths.spec.js": {
+					"match": false,
+					"packageHash": "12bbc8805f291b1add5eaa483398a581543bede6cab366f2a0071f9250c22b3f",
+					"size": 1506,
+					"status": "missing-in-source"
+				},
+				"dist/functions/build-include-paths.spec.js.map": {
+					"match": false,
+					"packageHash": "6c3317bbe262d379a357c9b89ef8df3c977bbaa3e3f102c12a553b07b41fcfcc",
+					"size": 1050,
+					"status": "missing-in-source"
+				},
+				"dist/functions/clean-import-url.d.ts": {
+					"match": false,
+					"packageHash": "32a869533b31131d702f5ea5a85b95532b225c049201f81a504e475673a1019f",
+					"size": 131,
+					"status": "missing-in-source"
+				},
+				"dist/functions/clean-import-url.js": {
+					"match": false,
+					"packageHash": "b426806a6954cabda406a3acc284302cb8b6af6e81ea70d1e535782e1ae27e3a",
+					"size": 334,
+					"status": "missing-in-source"
+				},
+				"dist/functions/clean-import-url.js.map": {
+					"match": false,
+					"packageHash": "b03851c1a64746ab62c74cdbac4be97467bcab2c3060214cf3a3d7b41eca218a",
+					"size": 327,
+					"status": "missing-in-source"
+				},
+				"dist/functions/clean-import-url.spec.d.ts": {
+					"match": false,
+					"packageHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+					"size": 0,
+					"status": "missing-in-source"
+				},
+				"dist/functions/clean-import-url.spec.js": {
+					"match": false,
+					"packageHash": "6bc467f278296936a1a4b6156ca8917fa5e3f4f26d5f5fa4b4bf1e5bf5083964",
+					"size": 1241,
+					"status": "missing-in-source"
+				},
+				"dist/functions/clean-import-url.spec.js.map": {
+					"match": false,
+					"packageHash": "6d855073769ddc93a3f2fa8f0bd007d3cbc4012dba638763516789e358a89a84",
+					"size": 964,
+					"status": "missing-in-source"
+				},
+				"dist/functions/escape-selector.d.ts": {
+					"match": false,
+					"packageHash": "97ed2e04007a92b1993c84ebb7bc8667fb049e5aa06ba58932a3945187077ed4",
+					"size": 131,
+					"status": "missing-in-source"
+				},
+				"dist/functions/escape-selector.js": {
+					"match": false,
+					"packageHash": "c4bf6b68241b060870973317e37e07031d59b80d6097f77f1b8af9a929b13079",
+					"size": 608,
+					"status": "missing-in-source"
+				},
+				"dist/functions/escape-selector.js.map": {
+					"match": false,
+					"packageHash": "fcc30207d33c69db8231261ffe10bd98f3c82b25733e4db2fdafd5b26b063571",
+					"size": 598,
+					"status": "missing-in-source"
+				},
+				"dist/functions/escape-selector.spec.d.ts": {
+					"match": false,
+					"packageHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+					"size": 0,
+					"status": "missing-in-source"
+				},
+				"dist/functions/escape-selector.spec.js": {
+					"match": false,
+					"packageHash": "d0b0946a99e11d5900325b8cb763b0db8179457ab2f3da052c4ae0b91118090e",
+					"size": 566,
+					"status": "missing-in-source"
+				},
+				"dist/functions/escape-selector.spec.js.map": {
+					"match": false,
+					"packageHash": "0e2e519597d33ae2e71f65a32d81e9a3f506920be7c9e2b073af0605b5e09cc8",
+					"size": 486,
+					"status": "missing-in-source"
+				},
+				"dist/functions/parse-node-filters.d.ts": {
+					"match": false,
+					"packageHash": "df14b163b5717eca394889ed26bd0dd220802d434609e969301789400054457f",
+					"size": 127,
+					"status": "missing-in-source"
+				},
+				"dist/functions/parse-node-filters.js": {
+					"match": false,
+					"packageHash": "9f4f700b51f153993a2195e9b1146839053a8d42564eeb989c0bf0d7b1e5e1a2",
+					"size": 458,
+					"status": "missing-in-source"
+				},
+				"dist/functions/parse-node-filters.js.map": {
+					"match": false,
+					"packageHash": "6f4889136509e234a408d566bcfd2b7f3262b73d96d267a510ab26e8738328d8",
+					"size": 474,
+					"status": "missing-in-source"
+				},
+				"dist/functions/parse-node-filters.spec.d.ts": {
+					"match": false,
+					"packageHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+					"size": 0,
+					"status": "missing-in-source"
+				},
+				"dist/functions/parse-node-filters.spec.js": {
+					"match": false,
+					"packageHash": "597a5599997b26cc54481aea5bdfd632cc2a2ef7dedb0a115dff3b8ec4506e79",
+					"size": 1127,
+					"status": "missing-in-source"
+				},
+				"dist/functions/parse-node-filters.spec.js.map": {
+					"match": false,
+					"packageHash": "35c07390ee79830dce9744272895e3a9e941d1b9a722e0dfc9a82eafde5e1e9e",
+					"size": 878,
+					"status": "missing-in-source"
+				},
+				"dist/functions/parse-selector-filters.d.ts": {
+					"match": false,
+					"packageHash": "43b8eaa29a9d01cf41594aa70b695df67aa923a7bcf11a1dc1971615bf8e113f",
+					"size": 413,
+					"status": "missing-in-source"
+				},
+				"dist/functions/parse-selector-filters.js": {
+					"match": false,
+					"packageHash": "9a7ef8ba932c349996b2f5414494dce7c683e47d79295562e74b39a399a22597",
+					"size": 633,
+					"status": "missing-in-source"
+				},
+				"dist/functions/parse-selector-filters.js.map": {
+					"match": false,
+					"packageHash": "fec4d7c92704e2851941d07db26bfd4e3a201a92093fb2d411329773726c3425",
+					"size": 580,
+					"status": "missing-in-source"
+				},
+				"dist/functions/parse-selector-filters.spec.d.ts": {
+					"match": false,
+					"packageHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+					"size": 0,
+					"status": "missing-in-source"
+				},
+				"dist/functions/parse-selector-filters.spec.js": {
+					"match": false,
+					"packageHash": "9c4d5c89cbdc0148dbe0947d9376bf461a85442f2528b78d47ae33770e151033",
+					"size": 3967,
+					"status": "missing-in-source"
+				},
+				"dist/functions/parse-selector-filters.spec.js.map": {
+					"match": false,
+					"packageHash": "64b5115947bf5df1e3df48b700eff0850f841d684cefde0606610008bc595587",
+					"size": 2771,
+					"status": "missing-in-source"
+				},
+				"dist/functions/process-raw-selector-filters.d.ts": {
+					"match": false,
+					"packageHash": "035afcc469d63f188584ebc6fcce2bff14545a6ae86dad953e14d2c915a1eb0e",
+					"size": 271,
+					"status": "missing-in-source"
+				},
+				"dist/functions/process-raw-selector-filters.js": {
+					"match": false,
+					"packageHash": "f9763e5e3709f48b8a037616c2240817117a9ea5048d831250aa01d57b49cb89",
+					"size": 1063,
+					"status": "missing-in-source"
+				},
+				"dist/functions/process-raw-selector-filters.js.map": {
+					"match": false,
+					"packageHash": "10a94e35a5ad78ecb8fe60d588eacffa00bfca1ffabb842c0d6bd8e1bf1e0471",
+					"size": 886,
+					"status": "missing-in-source"
+				},
+				"dist/functions/process-raw-selector-filters.spec.d.ts": {
+					"match": false,
+					"packageHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+					"size": 0,
+					"status": "missing-in-source"
+				},
+				"dist/functions/process-raw-selector-filters.spec.js": {
+					"match": false,
+					"packageHash": "fc6fff0454bcf5abaf29c81400df8ee0f7442eda3d72434945067e4b4a09ba07",
+					"size": 1677,
+					"status": "missing-in-source"
+				},
+				"dist/functions/process-raw-selector-filters.spec.js.map": {
+					"match": false,
+					"packageHash": "b5701c71a7e48fb06b779818b360199e39e0028523e517b3d6c2129b80598ac3",
+					"size": 1350,
+					"status": "missing-in-source"
+				},
+				"dist/functions/resolve-glob-url.d.ts": {
+					"match": false,
+					"packageHash": "076efca336cf4051b6863d5b4eae03dd074ad7744b9efb44ed9d1c06841251d3",
+					"size": 245,
+					"status": "missing-in-source"
+				},
+				"dist/functions/resolve-glob-url.js": {
+					"match": false,
+					"packageHash": "6209c05b8aec422d76a3ea97059f6286e4714d81ba9519f12c6c42c1142147f8",
+					"size": 720,
+					"status": "missing-in-source"
+				},
+				"dist/functions/resolve-glob-url.js.map": {
+					"match": false,
+					"packageHash": "d7a512fb8d47022a69f9a58c6570bc2e0dda2816cff5b589567721d06c924ee9",
+					"size": 732,
+					"status": "missing-in-source"
+				},
+				"dist/functions/resolve-glob-url.spec.d.ts": {
+					"match": false,
+					"packageHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+					"size": 0,
+					"status": "missing-in-source"
+				},
+				"dist/functions/resolve-glob-url.spec.js": {
+					"match": false,
+					"packageHash": "23c118c4b00f9ef404bd22d0a4918b4ce92593cca55f4539ff0f8694f7d10dc8",
+					"size": 1547,
+					"status": "missing-in-source"
+				},
+				"dist/functions/resolve-glob-url.spec.js.map": {
+					"match": false,
+					"packageHash": "ff417d97eea8b6080f55418e75b94d1123d1212b28832f532a25c66b46370904",
+					"size": 1457,
+					"status": "missing-in-source"
+				},
+				"dist/functions/resolve-package-key.d.ts": {
+					"match": false,
+					"packageHash": "f9a94520354a755bf0eefc28f30907e0e9a023e1dc2d9673e7964a3769f77f49",
+					"size": 143,
+					"status": "missing-in-source"
+				},
+				"dist/functions/resolve-package-key.js": {
+					"match": false,
+					"packageHash": "d699b4f4235187c1c36918970d989b52c5608f6d755732dee5b034f42bcb9733",
+					"size": 493,
+					"status": "missing-in-source"
+				},
+				"dist/functions/resolve-package-key.js.map": {
+					"match": false,
+					"packageHash": "e68f517ab37242659681c8790f69bba225a1c37702ac7b1f55c20d05e7e9e66a",
+					"size": 491,
+					"status": "missing-in-source"
+				},
+				"dist/functions/resolve-package-key.spec.d.ts": {
+					"match": false,
+					"packageHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+					"size": 0,
+					"status": "missing-in-source"
+				},
+				"dist/functions/resolve-package-key.spec.js": {
+					"match": false,
+					"packageHash": "88be07379df4fa9988520b7bb5b48d3e4c599713df68fae81a82e100cf34f18d",
+					"size": 965,
+					"status": "missing-in-source"
+				},
+				"dist/functions/resolve-package-key.spec.js.map": {
+					"match": false,
+					"packageHash": "39c64ff60c0e6aa745a49a75c1a8e89d6448f444fbbbe6e461a809b8796fdcd4",
+					"size": 746,
+					"status": "missing-in-source"
+				},
+				"dist/functions/resolve-package-url.d.ts": {
+					"match": false,
+					"packageHash": "ce5cbdae0bf0d6342cbb76e5c0fa88f2a33646281cf0c5e1ec004835d9540704",
+					"size": 423,
+					"status": "missing-in-source"
+				},
+				"dist/functions/resolve-package-url.js": {
+					"match": false,
+					"packageHash": "2b3a99319ad2074fc5077bc8f668d5060ec42e42d6baac8280b66ed0ee5599f4",
+					"size": 1045,
+					"status": "missing-in-source"
+				},
+				"dist/functions/resolve-package-url.js.map": {
+					"match": false,
+					"packageHash": "d89e7eadd62724170768e2d8f8180b6f56fc8fba655b48c0caf2dd61c942812f",
+					"size": 819,
+					"status": "missing-in-source"
+				},
+				"dist/functions/resolve-package-url.spec.d.ts": {
+					"match": false,
+					"packageHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+					"size": 0,
+					"status": "missing-in-source"
+				},
+				"dist/functions/resolve-package-url.spec.js": {
+					"match": false,
+					"packageHash": "e28f6f32aea9fbc726cac9c25dc1fc6b08f6c52f8d60ef456a0b4fa51d8526c9",
+					"size": 1805,
+					"status": "missing-in-source"
+				},
+				"dist/functions/resolve-package-url.spec.js.map": {
+					"match": false,
+					"packageHash": "58042be24fc293e63fb7a7944ad40d9a5ab23ca88ab2df2ea38e6d8da5d5a5ca",
+					"size": 1670,
+					"status": "missing-in-source"
+				},
+				"dist/functions/resolve-url.d.ts": {
+					"match": false,
+					"packageHash": "622b9a1c9d7714c76a9fbb7cb78a8f479cf61097861b10a4103bb5b2f1c1d18b",
+					"size": 331,
+					"status": "missing-in-source"
+				},
+				"dist/functions/resolve-url.js": {
+					"match": false,
+					"packageHash": "f76bc66964b915ef64773d34232f4d85d7c6f3d97b735cf0268ab604122e7167",
+					"size": 640,
+					"status": "missing-in-source"
+				},
+				"dist/functions/resolve-url.js.map": {
+					"match": false,
+					"packageHash": "8e2d2a3fb184ce312a3c7918fc151743a713266cb97ca923a6bd82007f409ba4",
+					"size": 659,
+					"status": "missing-in-source"
+				},
+				"dist/functions/resolve-url.spec.d.ts": {
+					"match": false,
+					"packageHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+					"size": 0,
+					"status": "missing-in-source"
+				},
+				"dist/functions/resolve-url.spec.js": {
+					"match": false,
+					"packageHash": "2eaa70acfa3bf1de93179acd52e3bcbaaf8bfc3785787370eaf01b147262684c",
+					"size": 2138,
+					"status": "missing-in-source"
+				},
+				"dist/functions/resolve-url.spec.js.map": {
+					"match": false,
+					"packageHash": "9905ae6f8d05e0f014ec04df829de76c0bf8efd864360fb3805d2b4a72efbf23",
+					"size": 2092,
+					"status": "missing-in-source"
+				},
+				"dist/functions/sass-glob-pattern.d.ts": {
+					"match": false,
+					"packageHash": "b4d81c541aeed91abd68615c33804efe42eaae6bd9d1110b61f0433acb1635ae",
+					"size": 191,
+					"status": "missing-in-source"
+				},
+				"dist/functions/sass-glob-pattern.js": {
+					"match": false,
+					"packageHash": "8b55935af5cd6a4b849401c4a5d68109204928309ce4ee72bf6338c90649b4c5",
+					"size": 361,
+					"status": "missing-in-source"
+				},
+				"dist/functions/sass-glob-pattern.js.map": {
+					"match": false,
+					"packageHash": "5eda4bfbc417d93ed7566c14905a103dfb0b7f9897bee5fe17fda8e4805da944",
+					"size": 354,
+					"status": "missing-in-source"
+				},
+				"dist/functions/sass-glob-pattern.spec.d.ts": {
+					"match": false,
+					"packageHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+					"size": 0,
+					"status": "missing-in-source"
+				},
+				"dist/functions/sass-glob-pattern.spec.js": {
+					"match": false,
+					"packageHash": "18aa69de4dcda85a09f7a4fe78a39c787429139582c5a578cde148819180f73a",
+					"size": 946,
+					"status": "missing-in-source"
+				},
+				"dist/functions/sass-glob-pattern.spec.js.map": {
+					"match": false,
+					"packageHash": "ad6466ec164746f43d44f4b3aea7b6c0d86a04908eaaeeafe6125354f2edecdb",
+					"size": 763,
+					"status": "missing-in-source"
+				},
+				"dist/functions/sass-url-variants.d.ts": {
+					"match": false,
+					"packageHash": "92c478eb700c0cf8f38a679719f247409395d958dd1155908361f02d765f98f0",
+					"size": 191,
+					"status": "missing-in-source"
+				},
+				"dist/functions/sass-url-variants.js": {
+					"match": false,
+					"packageHash": "6c1ab5595e372d5e20d1e5e778ad8f6a86d951cfefd5b922b4827659f0092776",
+					"size": 681,
+					"status": "missing-in-source"
+				},
+				"dist/functions/sass-url-variants.js.map": {
+					"match": false,
+					"packageHash": "4d66b8b074a295d7064a27f0fe498de9cca85d0dc08b91982671be7d71c13e51",
+					"size": 735,
+					"status": "missing-in-source"
+				},
+				"dist/functions/sass-url-variants.spec.d.ts": {
+					"match": false,
+					"packageHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+					"size": 0,
+					"status": "missing-in-source"
+				},
+				"dist/functions/sass-url-variants.spec.js": {
+					"match": false,
+					"packageHash": "f97044aaed678cf2e342453eb840115c2a6c355f994555b21d8800142a23efef",
+					"size": 1322,
+					"status": "missing-in-source"
+				},
+				"dist/functions/sass-url-variants.spec.js.map": {
+					"match": false,
+					"packageHash": "31afab6cf7abf73e6f090988fb4eecfbe56d3783514793c765403c1f049dbbd8",
+					"size": 1168,
+					"status": "missing-in-source"
+				},
+				"dist/functions/split-selector-filter.d.ts": {
+					"match": false,
+					"packageHash": "7171b2d179e48bd9e6363cb77652979287ca310a035ebb394c3f88a6a09bf2af",
+					"size": 151,
+					"status": "missing-in-source"
+				},
+				"dist/functions/split-selector-filter.js": {
+					"match": false,
+					"packageHash": "5cd3c6d50a0d7de56224c2f51a5bc2c96ae66265392a91c93349d96a01743a2a",
+					"size": 452,
+					"status": "missing-in-source"
+				},
+				"dist/functions/split-selector-filter.js.map": {
+					"match": false,
+					"packageHash": "c120cfffd58643b8335f62bb18fef936727f10a912576d0e94071595310d003d",
+					"size": 393,
+					"status": "missing-in-source"
+				},
+				"dist/functions/split-selector-filter.spec.d.ts": {
+					"match": false,
+					"packageHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+					"size": 0,
+					"status": "missing-in-source"
+				},
+				"dist/functions/split-selector-filter.spec.js": {
+					"match": false,
+					"packageHash": "37a7657cc1773b04e99e6486f160c6b6ee47f643cd50fae57f91e28880c342ab",
+					"size": 804,
+					"status": "missing-in-source"
+				},
+				"dist/functions/split-selector-filter.spec.js.map": {
+					"match": false,
+					"packageHash": "31567c5359f38124b9211c959f9ce34be3214837f1ff024029d7d8c26ab18afd",
+					"size": 589,
+					"status": "missing-in-source"
+				},
+				"dist/index.d.ts": {
+					"match": false,
+					"packageHash": "6a5d28e622c8ee73462d6a8f1f18f556fbf2cb55c784fd68c69e1df24d6c4109",
+					"size": 309,
+					"status": "missing-in-source"
+				},
+				"dist/index.js": {
+					"match": false,
+					"packageHash": "d0e9b9d416702f34a8457c418e4393d7a2365ca695f396a8d161cd3eb0024bbf",
+					"size": 4897,
+					"status": "missing-in-source"
+				},
+				"dist/index.js.map": {
+					"match": false,
+					"packageHash": "583ef6f3f282d88703632707a2064448fb0b6fa67a89ccfae468ec568bb4f898",
+					"size": 3906,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IBuildIncludePaths.d.ts": {
+					"match": false,
+					"packageHash": "988ed0ce25efa3d63fdfe77e050beed159c99c24255e034ecddac4223c8736ae",
+					"size": 117,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IBuildIncludePaths.js": {
+					"match": false,
+					"packageHash": "5c17f5d1b5ae6e21650350a68f02fad79e34f7735474c1e2883227df1eb92619",
+					"size": 123,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IBuildIncludePaths.js.map": {
+					"match": false,
+					"packageHash": "1fe5614de9c85010dee606d20e426902363f1f968f8b88117cd9e50a88968441",
+					"size": 142,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/ICleanImportUrl.d.ts": {
+					"match": false,
+					"packageHash": "fd66c1b0b00f3f5fdeca49800125e9ad16110a1af8d5d889e2e63f5fda763a62",
+					"size": 63,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/ICleanImportUrl.js": {
+					"match": false,
+					"packageHash": "33f815b9dc07f6108f3af90e7814ee3efd4acde3e8e5e60b36c726878df6d38b",
+					"size": 120,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/ICleanImportUrl.js.map": {
+					"match": false,
+					"packageHash": "08ea9096b28fd32a0b9bd8b24ecea0d9f7f43f2f104e613d307ae6a50dda687c",
+					"size": 136,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IEscapeSelector.d.ts": {
+					"match": false,
+					"packageHash": "eed07b08cb999d0e2078bb03140862a2fd75d86f74b197f5b42cd82608731dc7",
+					"size": 93,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IEscapeSelector.js": {
+					"match": false,
+					"packageHash": "ddf78857486510291f75a7df1c7dad9ad7505e9bba218f682ce55f0898f1ad22",
+					"size": 120,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IEscapeSelector.js.map": {
+					"match": false,
+					"packageHash": "a8dc84293e76495372e62d559df9d92d6a7a8423fc4b24eb46992b8c2fd76ff8",
+					"size": 136,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IFilterParser.d.ts": {
+					"match": false,
+					"packageHash": "11c3526cc4df47883de43e911ab577a94e061c4988dd2f61e28edc28ef542373",
+					"size": 63,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IFilterParser.js": {
+					"match": false,
+					"packageHash": "db836044917fde2d582620f6e989e57972596dd57f9e1a98dc80ab2c89665f2a",
+					"size": 118,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IFilterParser.js.map": {
+					"match": false,
+					"packageHash": "fde98b0f5409dd318cfe9dbed035759e72f458073656428bbc098b8beec0160f",
+					"size": 132,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IGlob.d.ts": {
+					"match": false,
+					"packageHash": "a9a2aef7dc895c5f6aebfb6d280bdde4af796f32e2641251864355dfc17309f7",
+					"size": 102,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IGlob.js": {
+					"match": false,
+					"packageHash": "76abc28338c49f53137b4a18dd79054e2480d47c4c226ceb8556b9ae83f6613f",
+					"size": 110,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IGlob.js.map": {
+					"match": false,
+					"packageHash": "3804f1c385812674304fb6c31c4f9810e353b0b6113567867d4c20bd2faac98a",
+					"size": 116,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IImporter.d.ts": {
+					"match": false,
+					"packageHash": "0871fa71b436031fe378e81eb416ba1425e29710c36c226031079afe8d58c28e",
+					"size": 150,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IImporter.js": {
+					"match": false,
+					"packageHash": "18eac896a07bbe8d6c081b76f0b557c3a4369541ffa059f9367ea5768fa04f29",
+					"size": 114,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IImporter.js.map": {
+					"match": false,
+					"packageHash": "02cbf26f2a64f7fd08dc2f1ce994549d0623bece5f16cdaf66158e8b590ec01f",
+					"size": 124,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IImporterOptions.d.ts": {
+					"match": false,
+					"packageHash": "5d0edad977025691dd9d9e23d36574160298363d15ad37b8eca49755da0e2b2f",
+					"size": 254,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IImporterOptions.js": {
+					"match": false,
+					"packageHash": "9f8efb06470dab4690447d364134eed271a4993c312375dded8b552efa499add",
+					"size": 121,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IImporterOptions.js.map": {
+					"match": false,
+					"packageHash": "6098471f5be0b7eae7676a32b01cf36b29b3e323872d84d135e12005a70c821e",
+					"size": 138,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IParseSelectorFilters.d.ts": {
+					"match": false,
+					"packageHash": "f080d463ebae4a9c65494a563e380909b1aa05b36550e7a7f4aae9be178a1125",
+					"size": 133,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IParseSelectorFilters.js": {
+					"match": false,
+					"packageHash": "cc74eb88398728a32541e676bc5b93a19d603c22190c8cf583306efc9a4cb781",
+					"size": 126,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IParseSelectorFilters.js.map": {
+					"match": false,
+					"packageHash": "dde6bd3525f156b722323ce0950e80b6d3815b97798db57c122b9efeac47983d",
+					"size": 148,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IPath.d.ts": {
+					"match": false,
+					"packageHash": "bb48ffa7175dbf4ee94c8ae540f9cb72ef78b498f3749a0d4550de9a0ac7a516",
+					"size": 102,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IPath.js": {
+					"match": false,
+					"packageHash": "b515a7f889256f6e91ed3651a3a4fa25e8508b5f8622c173df61118befec8677",
+					"size": 110,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IPath.js.map": {
+					"match": false,
+					"packageHash": "ec0bd7819f39b75d5ecd74b8e24b2244b04042912595a04b31f9d1899cc3414e",
+					"size": 116,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IProcessRawSelectorFilters.d.ts": {
+					"match": false,
+					"packageHash": "ccdb6f9f9bca4bcd8df5d082b2daf7011548165adb368fa7022c4ad2f1a94664",
+					"size": 187,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IProcessRawSelectorFilters.js": {
+					"match": false,
+					"packageHash": "68cb3852271e8d227c44eced9b76005a60e735846bcf87caa806ee96b4ed9bdb",
+					"size": 131,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IProcessRawSelectorFilters.js.map": {
+					"match": false,
+					"packageHash": "a1529b5232c0a7ef1c11d4013b43a227a211ec901f3488113e1aa1092a9be2a4",
+					"size": 158,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IResolve.d.ts": {
+					"match": false,
+					"packageHash": "742bf19a33d34241e5038aa3283a8cc3f5f210ee8f82749002b3918bdb64313b",
+					"size": 117,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IResolve.js": {
+					"match": false,
+					"packageHash": "7dc576efdee4c0946b3b34c78a97df52044a4dbe0f7e1ffa4a430283a32060a7",
+					"size": 113,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IResolve.js.map": {
+					"match": false,
+					"packageHash": "b7a8a68465bc32662fab17a39ebdb93af016249c204f7f72b985f0afd3ec7522",
+					"size": 122,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IResolveGlobUrl.d.ts": {
+					"match": false,
+					"packageHash": "30e3ad732728864d7a6ef9ee0bd69c49786fac4845f003d448e39c72191dbf9a",
+					"size": 90,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IResolveGlobUrl.js": {
+					"match": false,
+					"packageHash": "e8ca4912f27a9e851f8416cd802984beeb13bd352b4b3bf9155187f76897ba80",
+					"size": 120,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IResolveGlobUrl.js.map": {
+					"match": false,
+					"packageHash": "06807283976e05c1b697dd45913b5b4f6a7f52d0d3fc62f402cce3adbe06e328",
+					"size": 136,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IResolvePackageKey.d.ts": {
+					"match": false,
+					"packageHash": "64ff9a201bcfa8261b3404c38538d65f931d244c5e0828aa7d50d9fab1aa8360",
+					"size": 97,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IResolvePackageKey.js": {
+					"match": false,
+					"packageHash": "16e873985cf6a5cb927babb20b1c20115ffbadd2079f2c874acd83a550d6fb08",
+					"size": 123,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IResolvePackageKey.js.map": {
+					"match": false,
+					"packageHash": "35b3d3b22a324d4943d479bdc4b69ef2a8c7ca0b7bfbdee0c4a0075df94c00d4",
+					"size": 142,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IResolvePackageUrl.d.ts": {
+					"match": false,
+					"packageHash": "b22e41ca8283ae0329b305f66f6520360d5a47512252629c741485210af3f20c",
+					"size": 126,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IResolvePackageUrl.js": {
+					"match": false,
+					"packageHash": "6e7c0a215f509e725afd938f821dd98717d98afdc9381ca26d4c34e387f63877",
+					"size": 123,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IResolvePackageUrl.js.map": {
+					"match": false,
+					"packageHash": "32b74de6f2005b7c71bddae49b425e7fb9fcaa11c3f209380c3739b681229d97",
+					"size": 142,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IResolveUrl.d.ts": {
+					"match": false,
+					"packageHash": "43171c2bda249504c831c0238159b1068e223b3c9caf3393b58bf6ce58a1a9e8",
+					"size": 84,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IResolveUrl.js": {
+					"match": false,
+					"packageHash": "d8103223e43f27c6bc9f91ad3ad35827e54b64246d4fb059885b0b31217eced6",
+					"size": 116,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/IResolveUrl.js.map": {
+					"match": false,
+					"packageHash": "70ba0369689b239177b3e7f15343bfe1d95fdeac170565849f5fe74df0cde1dd",
+					"size": 128,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/ISassGlobPattern.d.ts": {
+					"match": false,
+					"packageHash": "d71be3a482a2d8db3ad2b092dc5944d580f2764991a068570189fa52e2fdeb68",
+					"size": 65,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/ISassGlobPattern.js": {
+					"match": false,
+					"packageHash": "e36ea9b9e93e1a55911c993ca729fa7f73554b28b60a37317a4a150fef101585",
+					"size": 121,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/ISassGlobPattern.js.map": {
+					"match": false,
+					"packageHash": "8be1f7fc61a68a4db73a3d64b6057ed81f1ec86c4b8bd99718602feb0a6cd2e1",
+					"size": 138,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/ISassUrlVariants.d.ts": {
+					"match": false,
+					"packageHash": "708497ecc34e8a1d197852e6a8f8cea98160b2f6addb7ff0c83fc99e72dd63cc",
+					"size": 88,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/ISassUrlVariants.js": {
+					"match": false,
+					"packageHash": "40a101d11f299405614eaf534d35aae9a0264872b9960522d59b4110e5068154",
+					"size": 121,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/ISassUrlVariants.js.map": {
+					"match": false,
+					"packageHash": "25f4da53d28185e759a73e794f5040ad8b40f615a596ad6ebc0866e7c6a09f0d",
+					"size": 138,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/ISelectorFilter.d.ts": {
+					"match": false,
+					"packageHash": "e4c2de04ca08a30bd93f276410460dfae676ac65f6c7b9468e9dc94fd42b8c16",
+					"size": 176,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/ISelectorFilter.js": {
+					"match": false,
+					"packageHash": "cbeeb614122b82f4bce094d682ce1e48aa9842c83c995ede236a725dec9d6a24",
+					"size": 120,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/ISelectorFilter.js.map": {
+					"match": false,
+					"packageHash": "7d7be1dcad317853720df58c0833c9e9a5a090643d113776efb4e07363db831e",
+					"size": 136,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/ISplitSelectorFilter.d.ts": {
+					"match": false,
+					"packageHash": "76bee534c181bfa45d1e95010715dadbe7a15288d46516ae2d99a166b982b247",
+					"size": 147,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/ISplitSelectorFilter.js": {
+					"match": false,
+					"packageHash": "eb3b44168f597d2bdb8adaf97d425416c13f3b89b0a0bf3132ba83d2d39b6183",
+					"size": 125,
+					"status": "missing-in-source"
+				},
+				"dist/interfaces/ISplitSelectorFilter.js.map": {
+					"match": false,
+					"packageHash": "a3e4ce1ae3551a35816594842ca3262948995e3bf917cdd33b115374e15366d9",
+					"size": 146,
+					"status": "missing-in-source"
+				},
+				"dist/toolbox.d.ts": {
+					"match": false,
+					"packageHash": "f23741ebbfa38128c405da4dab97a1f272b60cf5ac2acf5cb28a34445aea3b20",
+					"size": 1282,
+					"status": "missing-in-source"
+				},
+				"dist/toolbox.js": {
+					"match": false,
+					"packageHash": "7b25765666e3046c2352a8aee231d11bfc41cb65258f0dc7ee4360642c7f0951",
+					"size": 2341,
+					"status": "missing-in-source"
+				},
+				"dist/toolbox.js.map": {
+					"match": false,
+					"packageHash": "3aa03c259188d4ab1657bec9e3aa87134e17ad90308ffe1d37a50d2ad563870c",
+					"size": 974,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,18 +1,8 @@\n {\n-  \"name\": \"node-sass-magic-importer\",\n-  \"description\": \"Custom node-sass importer for selector specific imports, node importing, module importing, globbing support and importing files only once\",\n-  \"keywords\": [\n-    \"glob-importer\",\n-    \"importer\",\n-    \"module-importer\",\n-    \"node-sass\",\n-    \"package-importer\",\n-    \"sass\",\n-    \"selector-importer\"\n-  ],\n-  \"version\": \"5.0.0-alpha.8\",\n+  \"name\": \"node-sass-magic-importer-monorepo\",\n+  \"version\": \"5.0.0\",\n   \"author\": \"Markus Oberlehner\",\n-  \"homepage\": \"https://github.com/maoberlehner/node-sass-magic-importer/tree/master/packages/node-sass-magic-importer\",\n+  \"homepage\": \"https://github.com/maoberlehner/node-sass-magic-importer\",\n   \"license\": \"MIT\",\n   \"repository\": {\n     \"type\": \"git\",\n@@ -21,35 +11,23 @@\n   \"bugs\": {\n     \"url\": \"https://github.com/maoberlehner/node-sass-magic-importer/issues\"\n   },\n-  \"dependencies\": {\n-    \"css-node-extract\": \"^1.1.0\",\n-    \"css-selector-extract\": \"^3.1.3\",\n-    \"get-installed-path\": \"^3.0.1\",\n-    \"object-hash\": \"^1.1.8\",\n-    \"postcss-scss\": \"^1.0.2\",\n-    \"resolve\": \"^1.4.0\"\n-  },\n   \"devDependencies\": {\n-    \"@types/glob\": \"^5.0.32\",\n-    \"@types/node\": \"^8.0.27\",\n-    \"@types/resolve\": \"0.0.4\",\n-    \"@types/sinon\": \"^2.3.3\",\n-    \"ava\": \"^0.22.0\",\n-    \"rimraf\": \"^2.6.1\",\n-    \"sinon\": \"^3.2.1\",\n-    \"typescript\": \"^2.5.2\"\n-  },\n-  \"main\": \"dist/index.js\",\n-  \"types\": \"dist/index.d.ts\",\n-  \"engines\": {\n-    \"node\": \">=6.11.1\",\n-    \"npm\": \">=3.0.0\"\n+    \"@avalanche/component-button\": \"^4.0.0-alpha.6\",\n+    \"@avalanche/object-grid\": \"^4.0.0-alpha.13\",\n+    \"ava\": \"^0.21.0\",\n+    \"bootstrap\": \"^4.0.0-beta\",\n+    \"lerna\": \"^2.0.0\",\n+    \"node-sass\": \"^4.5.3\",\n+    \"tslint\": \"^5.5.0\",\n+    \"typescript\": \"^2.4.2\"\n   },\n   \"scripts\": {\n-    \"build\": \"npm run clean && tsc\",\n-    \"watch\": \"npm run clean && tsc -w\",\n-    \"clean\": \"rimraf dist\",\n-    \"test\": \"npm run build && ava dist/**/*.spec.js\",\n-    \"prepublishOnly\": \"npm run build\"\n+    \"bootstrap\": \"lerna bootstrap\",\n+    \"start\": \"npm run watch\",\n+    \"watch\": \"lerna run watch\",\n+    \"build\": \"lerna run build\",\n+    \"clean\": \"lerna run clean\",\n+    \"lint\": \"tslint packages/**/*.ts -e **/node_modules/** -e **/dist/**\",\n+    \"test\": \"lerna run test && ava test/**/*.test.js\"\n   }\n }\n",
+					"match": false,
+					"packageHash": "a4d8e8251bd55809d1349ea0a087b714be8a2c2a0a977bc50988bbeae304647a",
+					"size": 1566,
+					"sourceHash": "a4d6e501200cf426c9ed5f22618b72a557e8680056375373261de17bd5b8d317",
+					"status": "content"
+				},
+				".editorconfig": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".travis.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"CODE_OF_CONDUCT.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"CONTRIBUTING.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"config/tsconfig.base.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lerna.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node-sass-filter-importer/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node-sass-filter-importer/package-lock.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node-sass-filter-importer/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node-sass-glob-importer/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node-sass-glob-importer/package-lock.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node-sass-glob-importer/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node-sass-magic-importer/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node-sass-magic-importer/package-lock.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node-sass-magic-importer/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node-sass-once-importer/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node-sass-once-importer/package-lock.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node-sass-once-importer/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node-sass-package-importer/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node-sass-package-importer/package-lock.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node-sass-package-importer/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node-sass-selector-importer/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node-sass-selector-importer/package-lock.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/node-sass-selector-importer/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/files/filter-import.css": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/files/filter-import.scss": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/files/glob-combined-import.css": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/files/glob-combined-import.scss": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/files/glob-import.css": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/files/glob-import.scss": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/files/node_modules/test-package-main/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/files/node_modules/test-package-main/scss/main.scss": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/files/once-import.css": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/files/once-import.scss": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/files/package-combined-import.css": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/files/package-combined-import.scss": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/files/package-import.css": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/files/package-import.scss": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/files/partials/_import-partials.scss": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/files/partials/_partial-1.scss": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/files/partials/_partial-2.scss": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/files/partials/_partial-3.scss": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/files/selector-import.css": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/files/selector-import.scss": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/files/test-dir/empty-import.scss": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/files/test-dir/sass-features.scss": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/files/test-dir/special-characters.scss": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/files/test-dir/variable-import.scss": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/filter-importer.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/glob-importer.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/magic-importer.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/once-importer.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/package-importer.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/selector-importer.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tslint.json": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 0,
+				"missingInPackage": 57,
+				"missingInSource": 147,
+				"score": 0,
+				"totalFiles": 206
+			}
+		},
+		"prodDependencies": []
+	}
+]
