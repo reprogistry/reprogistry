@@ -1,0 +1,580 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-21T06:49:10.797Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:3.3.12",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "lodash.zip@4.0.0",
+			"name": "lodash.zip",
+			"version": "4.0.0",
+			"location": "https://registry.npmjs.org/lodash.zip/-/lodash.zip-4.0.0.tgz",
+			"integrity": "sha512-1L1GamWNq9OPT4vnxa3lqYbV7h+IHf3tqL61UHA6m39qM/SAuBpQeTG0GrJTnAE8miE3GAZGzHE4w3B9Bxb/mg==",
+			"publishedAt": "2016-01-13T11:20:11.242Z",
+			"publishedWith": {
+				"node": "5.4.0",
+				"npm": "2.14.15"
+			},
+			"dependencies": {
+				"lodash.rest": "^4.0.0",
+				"lodash.unzip": "^3.0.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/lodash/lodash.git",
+			"spec": "github:lodash/lodash#4.0.0"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,18 +1,30 @@\n-# lodash.zip v4.0.0\n+# lodash v4.0.0\n \n-The [lodash](https://lodash.com/) method `_.zip` exported as a [Node.js](https://nodejs.org/) module.\n+The [lodash](https://lodash.com/) library exported as a [UMD](https://github.com/umdjs/umd) module.\n \n-## Installation\n-\n-Using npm:\n+Generated using [lodash-cli](https://www.npmjs.com/package/lodash-cli):\n ```bash\n-$ {sudo -H} npm i -g npm\n-$ npm i --save lodash.zip\n+$ npm run build\n+$ lodash -o ./dist/lodash.js\n+$ lodash core -o ./dist/lodash.core.js\n ```\n \n-In Node.js:\n-```js\n-var zip = require('lodash.zip');\n-```\n+## Community\n+\n+[![Join the chat at https://gitter.im/lodash/lodash](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/lodash/lodash)\n+\n+## Module formats\n+\n+lodash is also available in a variety of other builds & module formats.\n+\n+ * [lodash](https://www.npmjs.com/package/lodash) & [per method](https://www.npmjs.com/browse/keyword/lodash-modularized) packages\n+ * [lodash-amd](https://github.com/lodash/lodash/tree/4.0.0-amd)\n+ * [lodash-es](https://github.com/lodash/lodash/tree/4.0.0-es)\n+\n+## Further Reading\n \n-See the [documentation](https://lodash.com/docs#zip) or [package source](https://github.com/lodash/lodash/blob/4.0.0-npm-packages/lodash.zip) for more details.\n+  * [API Documentation](https://lodash.com/docs)\n+  * [Build Differences](https://github.com/lodash/lodash/wiki/Build-Differences)\n+  * [Changelog](https://github.com/lodash/lodash/wiki/Changelog)\n+  * [Roadmap](https://github.com/lodash/lodash/wiki/Roadmap)\n+  * [More Resources](https://github.com/lodash/lodash/wiki/Resources)\n",
+					"match": false,
+					"packageHash": "0b5d6c513302e7699179c5a50281a979a6aa65b42a08089bcf6b637fb43e526c",
+					"size": 432,
+					"sourceHash": "45571e51f4aff19d0f70b4d64e56fc1ebbc9f4a7c88d86a86a0065219947f407",
+					"status": "content"
+				},
+				"index.js": {
+					"match": false,
+					"packageHash": "ee05da76cfc5ed85b6c224027fd08b666b5ab2c1ad76798c689a88e2c466ba8c",
+					"size": 1011,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,21 +1,34 @@\n {\n-  \"name\": \"lodash.zip\",\n+  \"name\": \"lodash\",\n   \"version\": \"4.0.0\",\n-  \"description\": \"The lodash method `_.zip` exported as a module.\",\n-  \"homepage\": \"https://lodash.com/\",\n-  \"icon\": \"https://lodash.com/icon.svg\",\n-  \"license\": \"MIT\",\n-  \"keywords\": \"lodash, lodash-modularized, stdlib, util, zip\",\n-  \"author\": \"John-David Dalton <john.david.dalton@gmail.com> (http://allyoucanleet.com/)\",\n-  \"contributors\": [\n-    \"John-David Dalton <john.david.dalton@gmail.com> (http://allyoucanleet.com/)\",\n-    \"Blaine Bublitz <blaine@iceddev.com> (https://github.com/phated)\",\n-    \"Mathias Bynens <mathias@qiwi.be> (https://mathiasbynens.be/)\"\n-  ],\n-  \"repository\": \"lodash/lodash\",\n-  \"scripts\": { \"test\": \"echo \\\"See https://travis-ci.org/lodash/lodash-cli for testing details.\\\"\" },\n-  \"dependencies\": {\n-    \"lodash.rest\": \"^4.0.0\",\n-    \"lodash.unzip\": \"^3.0.0\"\n+  \"main\": \"lodash.js\",\n+  \"private\": true,\n+  \"devDependencies\": {\n+    \"async\": \"^1.5.2\",\n+    \"chalk\": \"^1.1.1\",\n+    \"codecov.io\": \"~0.1.6\",\n+    \"coveralls\": \"^2.11.6\",\n+    \"curl-amd\": \"~0.8.12\",\n+    \"docdown\": \"~0.3.0\",\n+    \"dojo\": \"^1.10.4\",\n+    \"ecstatic\": \"^1.4.0\",\n+    \"fs-extra\": \"~0.26.4\",\n+    \"istanbul\": \"0.4.2\",\n+    \"jquery\": \"^2.2.0\",\n+    \"jscs\": \"^2.8.0\",\n+    \"lodash\": \"^3.10.1\",\n+    \"platform\": \"^1.3.1\",\n+    \"qunit-extras\": \"^1.4.5\",\n+    \"qunitjs\": \"~1.20.0\",\n+    \"request\": \"^2.67.0\",\n+    \"requirejs\": \"^2.1.22\",\n+    \"sauce-tunnel\": \"2.3.0\",\n+    \"uglify-js\": \"2.6.1\",\n+    \"webpack\": \"^1.12.11\"\n+  },\n+  \"scripts\": {\n+    \"build\": \"node lib/main/build.js && node lib/fp/build.js\",\n+    \"style\": \"jscs lodash.js lib/**/*.js\",\n+    \"test\": \"node test/test\"\n   }\n }\n",
+					"match": false,
+					"packageHash": "37d423376944eb7520f31b58d51cc990a6fba75523da1c96f22a48dac4926258",
+					"size": 833,
+					"sourceHash": "bf535b6b28c3ebe0585fccf6f42c74af996dfd49f76ddfe2da29bd9fa91c51e1",
+					"status": "content"
+				},
+				".editorconfig": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".gitattributes": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".jscsrc": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".travis.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"CODE_OF_CONDUCT.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"CONTRIBUTING.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/lodash.core.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/lodash.core.min.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/lodash.fp.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/lodash.fp.min.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/lodash.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/lodash.min.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/mapping.fp.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"doc/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/common/minify.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/common/uglify.options.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/fp/baseConvert.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/fp/build.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/fp/convert.browser.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/fp/convert.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/fp/convert.node.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/fp/mapping.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/fp/util.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/main/build.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lodash.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"perf/asset/perf-ui.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"perf/index.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"perf/perf.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/asset/test-ui.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/asset/worker.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/backbone.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/fp.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/index.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/remove.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/saucelabs.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/test-fp.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/underscore.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/backbone/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/backbone/backbone.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/backbone/test/collection.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/backbone/test/events.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/backbone/test/model.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/backbone/test/noconflict.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/backbone/test/router.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/backbone/test/setup/dom-setup.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/backbone/test/setup/environment.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/backbone/test/sync.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/backbone/test/view.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/benchmark.js/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/benchmark.js/benchmark.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/license.txt": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/blank.gif": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/buttonBg.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/buttonBgHover.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/debugger.css": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/detach.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/detachHover.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/disable.gif": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/disable.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/disableHover.gif": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/disableHover.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/down.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/downActive.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/downHover.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/errorIcon-sm.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/errorIcon.gif": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/errorIcon.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/firebug-1.3a2.css": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/firebug.IE6.css": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/firebug.css": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/firebug.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/firebug.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/group.gif": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/html.css": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/infoIcon.gif": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/infoIcon.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/loading_16.gif": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/min.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/minHover.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/off.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/offHover.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/pixel_transparent.gif": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/roundCorner.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/search.gif": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/search.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/shadow.gif": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/shadow2.gif": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/shadowAlpha.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/sprite.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/tabHoverLeft.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/tabHoverMid.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/tabHoverRight.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/tabLeft.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/tabMenuCheckbox.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/tabMenuPin.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/tabMenuRadio.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/tabMenuTarget.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/tabMenuTargetHover.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/tabMid.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/tabRight.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/textEditorBorders.gif": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/textEditorBorders.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/textEditorCorners.gif": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/textEditorCorners.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/titlebarMid.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/toolbarMid.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/tree_close.gif": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/tree_open.gif": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/twistyClosed.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/twistyOpen.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/up.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/upActive.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/upHover.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/warningIcon.gif": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/skin/xp/warningIcon.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/firebug-lite/src/firebug-lite-debug.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/json-js/json2.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/underscore/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/underscore/test/arrays.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/underscore/test/chaining.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/underscore/test/collections.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/underscore/test/cross-document.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/underscore/test/functions.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/underscore/test/objects.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/underscore/test/utility.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/underscore/underscore-min.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vendor/underscore/underscore.js": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 1,
+				"missingInPackage": 128,
+				"missingInSource": 1,
+				"score": 0.007575757575757576,
+				"totalFiles": 132
+			}
+		},
+		"prodDependencies": []
+	}
+]
