@@ -1,0 +1,1033 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-22T17:10:22.268Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:12.2.3",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "waterline@0.1.3",
+			"name": "waterline",
+			"version": "0.1.3",
+			"location": "https://registry.npmjs.org/waterline/-/waterline-0.1.03.tgz",
+			"integrity": "sha512-6h2lYoDGAxIGkjk2+EX1GJFPZnFwB5hTiAzgDyRMaMaZJLrO+Q9MJdBtKRY9Gmxnuc+5iz1g/vGZYuFVavbSTw==",
+			"publishedAt": "2016-06-10T16:34:54.215Z",
+			"publishedWith": {
+				"node": null,
+				"npm": "1.1.69"
+			},
+			"dependencies": {
+				"async": "~0.1.22",
+				"dirty": "~0.9.6",
+				"mysql": "~2.0.0-alpha4",
+				"parley": "0.0.2",
+				"fs-extra": "~0.3.2",
+				"microtime": "~0.3.3",
+				"node-uuid": "~1.4.0",
+				"sails-util": "0.1.0",
+				"underscore": "=1.4.3",
+				"require-all": "0.0.5",
+				"waterline-dirty": "~0.1.2",
+				"waterline-mysql": "0.1.0",
+				"underscore.string": "~2.3.1",
+				"sails-moduleloader": "~1.1.5"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git://github.com/balderdashy/waterline.git",
+			"spec": "github:balderdashy/waterline#HEAD"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".npmignore": {
+					"match": false,
+					"packageHash": "84550669b86dd26dfa29050531927ddc47969ccc29a75889c1d28c98d2734538",
+					"size": 78,
+					"status": "missing-in-source"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,48 +1,71 @@\n-# Waterline\n+# [<img title=\"waterline-logo\" src=\"http://i.imgur.com/3Xqh6Mz.png\" width=\"610px\" alt=\"Waterline logo\"/>](http://waterlinejs.org)\n \n-Waterline is a brand new kind of storage and retrieval engine.  \n+[![Master Branch Build Status](https://travis-ci.org/balderdashy/waterline.svg?branch=master)](https://travis-ci.org/balderdashy/waterline)\n+[![Master Branch Build Status (Windows)](https://ci.appveyor.com/api/projects/status/tdu70ax32iymvyq3?svg=true)](https://ci.appveyor.com/project/mikermcneil/waterline)\n+[![StackOverflow (waterline)](https://img.shields.io/badge/stackoverflow-waterline-blue.svg)]( http://stackoverflow.com/questions/tagged/waterline)\n+[![StackOverflow (sails)](https://img.shields.io/badge/stackoverflow-sails.js-blue.svg)]( http://stackoverflow.com/questions/tagged/sails.js)\n \n-It provides a uniform API for accessing stuff from different kinds of databases, protocols, and 3rd party APIs.  That means you write the same code to get users, whether they live in mySQL, LDAP, MongoDB, or Facebook.\n+Waterline is a next-generation storage and retrieval engine, and the default ORM used in the [Sails framework](https://sailsjs.com).\n \n-At the same time, Waterline aims to learn lessons and maintain the best features from  both Rails' ActiveRecord and Grails' Hibernate ORMs.\n-Waterline also comes with built-in transaction support which takes advantage of any API the datstore you're using offers, but falls back to maintaining a separate atomic commit log (i.e. the same way Mongo does transactions).\n+It provides a uniform API for accessing stuff from different kinds of [databases and protocols](https://sailsjs.com/documentation/concepts/extending-sails/adapters/available-adapters). That means you write the same code to get and store things like users, whether they live in MySQL, MongoDB, neDB, or Postgres.\n \n+Waterline strives to inherit the best parts of ORMs like ActiveRecord, Hibernate, and Mongoose, but with a fresh perspective and emphasis on modularity, testability, and consistency across adapters.\n \n-## Adapters currently supported\n+## No more callbacks\n \n-* Dirty (in memory and simple disk JSON store)\n-* mySQL\n+Starting with v0.13, Waterline takes full advantage of ECMAScript & Node 8's `await` keyword.\n \n-## In development\n-* mongoDB (Jan)\n-* redis (March)\n-* OpenStack (Feb)\n-* Amazon S3 (Feb)\n+**In other words, [no more callbacks](https://gist.github.com/mikermcneil/c1028d000cc0cc8bce995a2a82b29245).**\n \n+```js\n+var newOrg = await Organization.create({\n+  slug: 'foo'\n+})\n+.fetch();\n+```\n \n-## Roadmap\n+> Looking for the version of Waterline used in Sails v0.12?  See the [0.11.x branch](https://github.com/balderdashy/waterline/tree/0.11.x) of this repo.  If you're upgrading to v0.13 from a previous release of Waterline _standalone_, take a look at the [upgrading guide](http://sailsjs.com/documentation/upgrading/to-v-1-0).\n \n-### SQL Datastores\n-* postgres\n-* oracle\n-* db2\n-* mssql\n+## Installation\n+Install from NPM.\n \n-### NoSQL Datastores\n-* Cassandra\n-* Neo4J\n-* CouchDB\n+```bash\n+  $ npm install waterline\n+```\n \n-### Misc\n-* LDAP\n-* Active Directory\n-* \n-* \n+## Overview\n+Waterline uses the concept of an adapter to translate a predefined set of methods into a query that can be understood by your data store. Adapters allow you to use various datastores such as MySQL, PostgreSQL, MongoDB, Redis, etc. and have a clear API for working with your model data.\n \n-## Writing adapters\n+Waterline supports [a wide variety of adapters](http://sailsjs.com/documentation/concepts/extending-sails/adapters/available-adapters), both core and community maintained.\n \n-It's easy to add your own adapters for integrating with proprietary systems or existing open APIs.  For most things, it's as easy as `require('some-module')` and mapping the appropriate methods to match waterline semantics.\n+## Usage\n \n+The up-to-date documentation for Waterline is maintained on the [Sails framework website](http://sailsjs.com).\n+You can find detailed API reference docs under [Reference > Waterline ORM](http://sailsjs.com/documentation/reference/waterline-orm).  For conceptual info (including Waterline standalone usage), and answers to common questions, see [Concepts > Models & ORM](https://sailsjs.com/documentation/concepts/models-and-orm).\n \n+#### Help\n \n-[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/a22d3919de208c90c898986619efaa85 \"githalytics.com\")](http://githalytics.com/mikermcneil/waterline)\n+Check out the recommended [community support options](http://sailsjs.com/support) for tutorials and other resources.  If you have a specific question, or just need to clarify [how something works](https://docs.google.com/drawings/d/1u7xb5jDY5i2oeVRP2-iOGGVsFbosqTMWh9wfmY3BTfw/edit), ask [for help](https://gitter.im/balderdashy/sails) or reach out to the [core team](http://sailsjs.com/about) [directly](http://sailsjs.com/flagship).\n+\n+You can keep up to date with security patches, the Waterline release schedule, new database adapters, and events in your area by following us ([@sailsjs](https://twitter.com/sailsjs)) on Twitter.\n+\n+## Bugs &nbsp; [![NPM version](https://badge.fury.io/js/waterline.svg)](http://npmjs.com/package/waterline)\n+To report a bug, [click here](http://sailsjs.com/bugs).\n+\n+## Contribute\n+Please observe the guidelines and conventions laid out in our [contribution guide](http://sailsjs.com/documentation/contributing) when opening issues or submitting pull requests.\n+\n+#### Tests\n+All tests are written with [mocha](https://mochajs.org/) and should be run with [npm](https://www.npmjs.com/):\n+\n+``` bash\n+  $ npm test\n+```\n+\n+\n+## License\n",
+					"match": false,
+					"packageHash": "eb75d3b16467919369d91bb8caeaaf97fa6bb9b3a6816fc5a9763d5d35ac9e0e",
+					"size": 1412,
+					"sourceHash": "3dc0a0b9fbde3585bdcf64caa1f7bf7142335ce4660176ad5a026f564362a5de",
+					"status": "content"
+				},
+				"adapter.js": {
+					"match": false,
+					"packageHash": "6dd9264ffe6b4b8fcb500e8dcb46cd36a29a27a485c46d6a61174a1e95a0d313",
+					"size": 16483,
+					"status": "missing-in-source"
+				},
+				"adapters/readme.md": {
+					"match": false,
+					"packageHash": "7681e415e8b8709bce63ff8eb8633747512356b66d90b037b505f16999bdfaf7",
+					"size": 13,
+					"status": "missing-in-source"
+				},
+				"augmentAttributes.js": {
+					"match": false,
+					"packageHash": "5279dc892e0940c6361413dfba3b73d0b95d84ec508a0cab62cd833105a65063",
+					"size": 1168,
+					"status": "missing-in-source"
+				},
+				"collection.js": {
+					"match": false,
+					"packageHash": "76d721c8e8b7f6adb3838c15373cb622e02eb587dcf16359dd37a9e5b3aaf8e4",
+					"size": 14484,
+					"status": "missing-in-source"
+				},
+				"collections/Transaction.js": {
+					"match": false,
+					"packageHash": "e39b0d86feeee9032822f6718cc45c67c062bd5fc49d303eb8c771f26154db15",
+					"size": 720,
+					"status": "missing-in-source"
+				},
+				"config.js": {
+					"match": false,
+					"packageHash": "854938d0e3d9ae1cc655ad22c6fc397df075c82ff89871f7f51bec704f316034",
+					"size": 1295,
+					"status": "missing-in-source"
+				},
+				"deferredObject.js": {
+					"match": false,
+					"packageHash": "2f20fd0df4c071dfee893d6934dfd79a0eaf7e3a1a503cf3385d11bc53b8d1da",
+					"size": 4956,
+					"status": "missing-in-source"
+				},
+				"model.js": {
+					"match": false,
+					"packageHash": "34506d2432718604f82ff84ef66e3bde90803d4620d7fc412fdccec9015bf07b",
+					"size": 220,
+					"status": "missing-in-source"
+				},
+				"normalize.js": {
+					"match": false,
+					"packageHash": "c2427de4fcb2e4b63521dd5802f8cf06aa29a055be0077ba38e15f812adfc5c0",
+					"size": 2874,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,46 +1,55 @@\n {\n   \"name\": \"waterline\",\n-  \"version\": \"0.1.03\",\n-  \"description\": \"Adaptable data access layer for Node.js\",\n-  \"main\": \"waterline.js\",\n-  \"directories\": {\n-    \"test\": \"test\"\n-  },\n-  \"scripts\": {\n-    \"test\": \"mocha --globals ___transaction --globals User -b -R landing -t 8000\"\n+  \"description\": \"An ORM for Node.js and the Sails framework\",\n+  \"version\": \"0.15.2\",\n+  \"homepage\": \"http://waterlinejs.org\",\n+  \"contributors\": [\n+    {\n+      \"name\": \"seerepo\",\n+      \"github\": \"https://github.com/balderdashy/waterline/graphs/contributors\"\n+    }\n+  ],\n+  \"dependencies\": {\n+    \"@sailshq/lodash\": \"^3.10.2\",\n+    \"anchor\": \"^1.2.0\",\n+    \"async\": \"2.6.4\",\n+    \"encrypted-attr\": \"1.0.6\",\n+    \"flaverr\": \"^1.9.2\",\n+    \"lodash.issafeinteger\": \"4.0.4\",\n+    \"parley\": \"^3.3.2\",\n+    \"rttc\": \"^10.0.0-1\",\n+    \"waterline-schema\": \"^1.0.0-20\",\n+    \"waterline-utils\": \"^1.3.7\"\n   },\n-  \"repository\": {\n-    \"type\": \"git\",\n-    \"url\": \"git://github.com/balderdashy/waterline.git\"\n+  \"devDependencies\": {\n+    \"eslint\": \"4.11.0\",\n+    \"mocha\": \"3.0.2\"\n   },\n   \"keywords\": [\n+    \"mvc\",\n     \"orm\",\n     \"mysql\",\n-    \"mongo\",\n+    \"postgresql\",\n+    \"redis\",\n     \"mongodb\",\n-    \"neo4j\",\n-    \"postgres\",\n-    \"sqlite\",\n-    \"adapter\",\n+    \"active-record\",\n     \"waterline\",\n-    \"sails\"\n+    \"sails\",\n+    \"sails.js\"\n   ],\n-  \"author\": \"Mike McNeil\",\n-  \"license\": \"MIT\",\n-  \"dependencies\": {\n-    \"dirty\": \"~0.9.6\",\n-    \"underscore\": \"=1.4.3\",\n-    \"mysql\": \"~2.0.0-alpha4\",\n-    \"node-uuid\": \"~1.4.0\",\n-    \"require-all\": \"0.0.5\",\n-    \"fs-extra\": \"~0.3.2\",\n-    \"sails-util\": \"0.1.0\",\n-    \"parley\": \"0.0.2\",\n-    \"microtime\": \"~0.3.3\",\n-    \"waterline-dirty\": \"~0.1.2\",\n-    \"waterline-mysql\": \"0.1.0\",\n-    \"sails-moduleloader\": \"~1.1.5\",\n-    \"async\": \"~0.1.22\",\n-    \"underscore.string\": \"~2.3.1\"\n-  }\n+  \"repository\": \"git://github.com/balderdashy/waterline.git\",\n+  \"main\": \"./lib/waterline\",\n+  \"scripts\": {\n+    \"test\": \"nodever=`node -e \\\"console.log('\\\\`node -v\\\\`'[1]);\\\"` && if [ $nodever != \\\"0\\\" ]; then npm run lint; fi && npm run custom-tests\",\n+    \"custom-tests\": \"node ./node_modules/mocha/bin/mocha test --recursive\",\n+    \"lint\": \"node ./node_modules/eslint/bin/eslint . --max-warnings=0 --ignore-pattern 'test/'\",\n+    \"browserify\": \"rm -rf .dist && mkdir .dist && browserify lib/waterline.js -s Waterline | uglifyjs > .dist/waterline.min.js\"\n+  },\n+  \"engines\": {\n+    \"node\": \">=4\"\n+  },\n+  \"bugs\": {\n+    \"url\": \"https://sailsjs.com/bugs\"\n+  },\n+  \"license\": \"MIT\"\n }\n",
+					"match": false,
+					"packageHash": "1b005090faacf597872a1b7627c24b15ada7ef71f809fe428a942e0bc17315d7",
+					"size": 1008,
+					"sourceHash": "8f2b1bd8ae37035d29827bdf5fa32c11ba23314fbd2b0a097c210045783e605c",
+					"status": "content"
+				},
+				"test/aggregateQueries.test.js": {
+					"match": false,
+					"packageHash": "8dd2abf25639714a08893d98f4f3a06f1f62eb16c7ca936d3126102d91cf890a",
+					"size": 3103,
+					"status": "missing-in-source"
+				},
+				"test/bootstrap.test.js": {
+					"match": false,
+					"packageHash": "c4e5a884e0966ff29beee9a1d6d38503c1ae48fb065592e7a7a7b7fc39741b6f",
+					"size": 1804,
+					"status": "missing-in-source"
+				},
+				"test/collections/User.js": {
+					"match": false,
+					"packageHash": "06d36aec4e9434978ee3aff302f2ad99fc51c6618bee62bf9526027bcdfb1475",
+					"size": 1905,
+					"status": "missing-in-source"
+				},
+				"test/count.test.js": {
+					"match": false,
+					"packageHash": "72812966819ad6e04ab0703f7b5d22347d75318a49b9e1677436d642bc4b8970",
+					"size": 865,
+					"status": "missing-in-source"
+				},
+				"test/crud.test.js": {
+					"match": false,
+					"packageHash": "acd119a711cb08e6b07028212d98071688c24d104c216b3d53f18d808c8c4f1e",
+					"size": 3919,
+					"status": "missing-in-source"
+				},
+				"test/crud.transactions.test.js": {
+					"match": false,
+					"packageHash": "0edd07748707a90bb02cc579d83b9a20dfb5c4a264668ceec4d3a87acc971c5c",
+					"size": 4163,
+					"status": "missing-in-source"
+				},
+				"test/deferred.test.js": {
+					"match": false,
+					"packageHash": "c52e5c859af5e93034669a961f46077f80bcfd1bc397861acd90111ec7d71c7e",
+					"size": 1147,
+					"status": "missing-in-source"
+				},
+				"test/definitions.test.js": {
+					"match": false,
+					"packageHash": "d7c9bdde58b2303391cbaad62637568a944df41e54e9ea087b182d46bb90fb90",
+					"size": 2343,
+					"status": "missing-in-source"
+				},
+				"test/dynamicFinders.test.js": {
+					"match": false,
+					"packageHash": "67a826e15c767d8e64dd2a61d0b3a58e2e18e589767297e3d1bba77752ce1054",
+					"size": 4961,
+					"status": "missing-in-source"
+				},
+				"test/inQuery.test.js": {
+					"match": false,
+					"packageHash": "00bb1bad03b468b1a4c3771d29c81e4cc8a3a6f58860d0ea6249b21172d1dadf",
+					"size": 1437,
+					"status": "missing-in-source"
+				},
+				"test/init.test.js": {
+					"match": false,
+					"packageHash": "1fdfc9640b87064dc8c38fe1758b6c1eb246e08970af2ec950bad1f9cf51d7b1",
+					"size": 728,
+					"status": "missing-in-source"
+				},
+				"test/likeQueries.test.js": {
+					"match": false,
+					"packageHash": "91e43c2e429a0432c7024971ba05889f831f8f6e647e88a2aa28837d633ce8fa",
+					"size": 3041,
+					"status": "missing-in-source"
+				},
+				"test/limit.test.js": {
+					"match": false,
+					"packageHash": "28c352ff3391b2c8b19e83afc101a128baf8a8d05cc387b6cf7ad0ef557661d8",
+					"size": 1869,
+					"status": "missing-in-source"
+				},
+				"test/nullValues.test.js": {
+					"match": false,
+					"packageHash": "be0c12f924650cd6863e3df1709e13dcd9cf2c03268b662b392c702323da110b",
+					"size": 1182,
+					"status": "missing-in-source"
+				},
+				"test/queryEdgeCases.test.js": {
+					"match": false,
+					"packageHash": "2d1476a809a667068811ffc5305cb7da2e24bcbb78560fe83451b22215f5ba18",
+					"size": 1054,
+					"status": "missing-in-source"
+				},
+				"test/skip.test.js": {
+					"match": false,
+					"packageHash": "884269de1129b9573dcffb12368f968a9ff22bb9676054929bbcbd670f4e1494",
+					"size": 2285,
+					"status": "missing-in-source"
+				},
+				"test/sort.test.js": {
+					"match": false,
+					"packageHash": "759aa887dae4867822758213e9614f47030499ca05707457de87f213b90449e3",
+					"size": 4431,
+					"status": "missing-in-source"
+				},
+				"test/transactions.test.js": {
+					"match": false,
+					"packageHash": "44cb5e8f134dc47d15b76cf6161b9d3743ed89d2c48775ad50b1c7dce305fb31",
+					"size": 3614,
+					"status": "missing-in-source"
+				},
+				"waterline.js": {
+					"match": false,
+					"packageHash": "fe9df3fc0ab623fb3463c82714b1ad9881f2ba8dc38dc0854dc05d564ed30d12",
+					"size": 7374,
+					"status": "missing-in-source"
+				},
+				"wiki/Abstract-Join.md": {
+					"match": false,
+					"packageHash": "9d2ee66209707ea12cc89b399f6c688c17d25015ff142ea47e22c68cc66c8955",
+					"size": 1902,
+					"status": "missing-in-source"
+				},
+				"wiki/Defining-a-Collection.md": {
+					"match": false,
+					"packageHash": "bceb09bd23f6f1f2b6d9aae2f2d2a4f68997bbea79904aae6d63b84dd701a9ac",
+					"size": 1035,
+					"status": "missing-in-source"
+				},
+				"wiki/Dynamic-Finders.md": {
+					"match": false,
+					"packageHash": "c84a56e919ec7e2aed7b0004255afce45b84ca4eea3c8e592493660aab24710e",
+					"size": 903,
+					"status": "missing-in-source"
+				},
+				"wiki/Home.md": {
+					"match": false,
+					"packageHash": "a04dbf1a19f0a35cb912a18bc0a807af01d15f8b99b6b8e0d154bdf2e524d7fe",
+					"size": 30,
+					"status": "missing-in-source"
+				},
+				"wiki/IN-queries.md": {
+					"match": false,
+					"packageHash": "39b7c4f8dfea6d09bbae2f960f08941847742032bbeb18705db273fa6f44c287",
+					"size": 935,
+					"status": "missing-in-source"
+				},
+				"wiki/Limit,-Skip,-and-Sort.md": {
+					"match": false,
+					"packageHash": "377528f5cd990806a3ef81e991c5f0ddb3198d3d16ebeda055ed799f48c42a89",
+					"size": 758,
+					"status": "missing-in-source"
+				},
+				".editorconfig": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".eslintrc": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".jshintrc": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".travis.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"ARCHITECTURE.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"CODE-OF-CONDUCT.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"CONTRIBUTING.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"LICENSE.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"ROADMAP.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"accessible/allowed-validations.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"accessible/valid-attribute-properties.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"appveyor.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bower.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"example/express/express-example.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"example/raw/raw-example.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/MetaModel.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/methods/add-to-collection.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/methods/archive-one.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/methods/archive.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/methods/avg.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/methods/count.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/methods/create-each.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/methods/create.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/methods/destroy-one.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/methods/destroy.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/methods/find-one.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/methods/find-or-create.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/methods/find.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/methods/remove-from-collection.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/methods/replace-collection.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/methods/stream.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/methods/sum.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/methods/update-one.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/methods/update.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/methods/validate.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/utils/ontology/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/utils/ontology/get-attribute.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/utils/ontology/get-model.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/utils/ontology/is-capable-of-optimized-populate.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/utils/ontology/is-exclusive.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/utils/query/build-omen.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/utils/query/forge-adapter-error.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/utils/query/forge-stage-three-query.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/utils/query/forge-stage-two-query.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/utils/query/get-query-modifier-methods.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/utils/query/help-find.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/utils/query/private/GENERIC_HELP_SUFFIX.string.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/utils/query/private/build-usage-error.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/utils/query/private/expand-where-shorthand.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/utils/query/private/is-safe-natural-number.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/utils/query/private/is-valid-attribute-name.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/utils/query/private/normalize-comparison-value.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/utils/query/private/normalize-constraint.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/utils/query/private/normalize-criteria.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/utils/query/private/normalize-new-record.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/utils/query/private/normalize-pk-value-or-values.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/utils/query/private/normalize-pk-value.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/utils/query/private/normalize-sort-clause.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/utils/query/private/normalize-value-to-set.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/utils/query/private/normalize-where-clause.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/utils/query/process-all-records.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/utils/query/verify-model-method-context.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/utils/system/collection-builder.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/utils/system/datastore-builder.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/utils/system/has-schema-check.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/utils/system/lifecycle-callback-builder.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/utils/system/reserved-property-names.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/utils/system/reserved-validation-names.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/utils/system/transformer-builder.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/utils/system/types.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline/utils/system/validate-datastore-connectivity.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/waterline.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/.eslintrc": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/alter-migrations/strategy.alter.buffers.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/alter-migrations/strategy.alter.schema.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/alter-migrations/strategy.alter.schemaless.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/support/fixtures/associations/customer.fixture.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/support/fixtures/associations/payment.fixture.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/support/fixtures/integrator/cache.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/support/fixtures/integrator/finalResults.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/support/fixtures/integrator/joinResults.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/support/fixtures/integrator/multiple.joins.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/support/fixtures/integrator/n..1.joins.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/support/fixtures/integrator/n..m.joins.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/support/fixtures/integrator/populateResults.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/support/fixtures/integrator/schema.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/support/fixtures/integrator/tables.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/support/fixtures/model/context.belongsTo.fixture.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/support/fixtures/model/context.fixture.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/support/fixtures/model/context.manyToMany.fixture.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/support/fixtures/model/context.simple.fixture.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/support/migrate.helper.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/callbacks/afterCreate.create.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/callbacks/afterCreate.createEach.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/callbacks/afterCreate.findOrCreate.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/callbacks/afterDestroy.destroy.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/callbacks/beforeCreate.create.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/callbacks/beforeCreate.createEach.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/callbacks/beforeCreate.findOrCreate.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/callbacks/beforeDestroy.destroy.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/collection/transformations/transformations.initialize.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/collection/transformations/transformations.serialize.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/collection/transformations/transformations.unserialize.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/collection/type-cast/cast.boolean.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/collection/type-cast/cast.json.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/collection/type-cast/cast.number.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/collection/type-cast/cast.ref.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/collection/type-cast/cast.string.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/collection/validations.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/query/associations/belongsTo.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/query/associations/hasMany.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/query/associations/manyToMany.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/query/associations/populateArray.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/query/associations/transformedPopulations.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/query/query.autocreatedat.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/query/query.autoupdatedat.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/query/query.avg.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/query/query.count.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/query/query.count.transform.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/query/query.create.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/query/query.create.ref.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/query/query.create.transform.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/query/query.createEach.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/query/query.createEach.transform.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/query/query.destroy.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/query/query.destroy.transform.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/query/query.exec.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/query/query.find.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/query/query.find.transform.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/query/query.findOne.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/query/query.findOne.transform.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/query/query.findOrCreate.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/query/query.findOrCreate.transform.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/query/query.promises.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/query/query.stream.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/query/query.sum.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/query/query.update.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/unit/query/query.update.transform.js": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 0,
+				"missingInPackage": 139,
+				"missingInSource": 35,
+				"score": 0,
+				"totalFiles": 176
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "@sailshq/lodash",
+				"version": "3.10.7"
+			},
+			{
+				"name": "anchor",
+				"version": "1.4.2"
+			},
+			{
+				"name": "async",
+				"version": "2.6.4"
+			},
+			{
+				"name": "balanced-match",
+				"version": "1.0.2"
+			},
+			{
+				"name": "bluebird",
+				"version": "3.2.1"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "1.1.22"
+			},
+			{
+				"name": "call-bind-apply-helpers",
+				"version": "1.0.2"
+			},
+			{
+				"name": "call-bound",
+				"version": "1.0.4"
+			},
+			{
+				"name": "concat-map",
+				"version": "0.0.1"
+			},
+			{
+				"name": "dunder-proto",
+				"version": "1.0.1"
+			},
+			{
+				"name": "encrypted-attr",
+				"version": "1.0.6"
+			},
+			{
+				"name": "es-define-property",
+				"version": "1.0.1"
+			},
+			{
+				"name": "es-errors",
+				"version": "1.3.0"
+			},
+			{
+				"name": "es-object-atoms",
+				"version": "1.1.2"
+			},
+			{
+				"name": "flaverr",
+				"version": "1.10.0"
+			},
+			{
+				"name": "fs-extra",
+				"version": "0.30.0"
+			},
+			{
+				"name": "fs.realpath",
+				"version": "1.0.0"
+			},
+			{
+				"name": "function-bind",
+				"version": "1.1.2"
+			},
+			{
+				"name": "get-intrinsic",
+				"version": "1.3.0"
+			},
+			{
+				"name": "get-proto",
+				"version": "1.0.1"
+			},
+			{
+				"name": "glob",
+				"version": "7.2.3"
+			},
+			{
+				"name": "gopd",
+				"version": "1.2.0"
+			},
+			{
+				"name": "graceful-fs",
+				"version": "4.2.12"
+			},
+			{
+				"name": "has-symbols",
+				"version": "1.1.0"
+			},
+			{
+				"name": "hasown",
+				"version": "2.0.4"
+			},
+			{
+				"name": "inflight",
+				"version": "1.0.6"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.4"
+			},
+			{
+				"name": "jsonfile",
+				"version": "2.4.0"
+			},
+			{
+				"name": "klaw",
+				"version": "1.3.1"
+			},
+			{
+				"name": "lodash",
+				"version": "4.18.1"
+			},
+			{
+				"name": "lodash.issafeinteger",
+				"version": "4.0.4"
+			},
+			{
+				"name": "math-intrinsics",
+				"version": "1.1.0"
+			},
+			{
+				"name": "minimatch",
+				"version": "3.1.5"
+			},
+			{
+				"name": "object-inspect",
+				"version": "1.14.0"
+			},
+			{
+				"name": "once",
+				"version": "1.4.0"
+			},
+			{
+				"name": "parley",
+				"version": "3.8.3"
+			},
+			{
+				"name": "path-is-absolute",
+				"version": "1.0.1"
+			},
+			{
+				"name": "qs",
+				"version": "6.15.2"
+			},
+			{
+				"name": "rimraf",
+				"version": "2.6.3"
+			},
+			{
+				"name": "rttc",
+				"version": "10.0.1"
+			},
+			{
+				"name": "side-channel",
+				"version": "1.1.1"
+			},
+			{
+				"name": "side-channel-list",
+				"version": "1.0.1"
+			},
+			{
+				"name": "side-channel-map",
+				"version": "1.0.1"
+			},
+			{
+				"name": "side-channel-weakmap",
+				"version": "1.0.2"
+			},
+			{
+				"name": "validator",
+				"version": "13.15.23"
+			},
+			{
+				"name": "waterline-schema",
+				"version": "1.0.0"
+			},
+			{
+				"name": "waterline-utils",
+				"version": "1.4.8"
+			},
+			{
+				"name": "wrappy",
+				"version": "1.0.2"
+			}
+		]
+	}
+]
