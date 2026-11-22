@@ -1,0 +1,3256 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-22T19:48:49.963Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:6.13.4",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "maplibre-gl@0.0.0",
+			"name": "maplibre-gl",
+			"version": "0.0.0",
+			"location": "https://registry.npmjs.org/maplibre-gl/-/maplibre-gl-0.0.0.tgz",
+			"integrity": "sha512-vMHIlElhGpmInmOmgnNbYQYltfbPx7m5Gfj32HzacyvLY2Iko+FReaPF/UhjFG1d5BWOjfK/L1URwijssQz8WA==",
+			"publishedAt": "2020-12-09T18:26:00.864Z",
+			"publishedWith": {
+				"node": "10.19.0",
+				"npm": "6.14.4"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git://github.com/MapLibre/maplibre-gl-js.git",
+			"spec": "github:MapLibre/maplibre-gl-js#HEAD"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1 +1,155 @@\n-This is a placeholder for the https://github.com/MapLibre/maplibre-gl-js\n+<p align=\"center\">\n+  <picture>\n+    <source media=\"(prefers-color-scheme: dark)\" srcset=\"https://maplibre.org/img/maplibre-logos/maplibre-logo-for-dark-bg.svg\">\n+    <source media=\"(prefers-color-scheme: light)\" srcset=\"https://maplibre.org/img/maplibre-logos/maplibre-logo-for-light-bg.svg\">\n+    <img alt=\"MapLibre Logo\" src=\"https://maplibre.org/img/maplibre-logos/maplibre-logo-for-light-bg.svg\" width=\"200\">\n+  </picture>\n+</p>\n+\n+# MapLibre GL JS\n+\n+[![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg?style=flat)](LICENSE.txt) [![Version](https://img.shields.io/npm/v/maplibre-gl?style=flat)](https://www.npmjs.com/package/maplibre-gl) [![CI](https://github.com/maplibre/maplibre-gl-js/actions/workflows/test-all.yml/badge.svg)](https://github.com/maplibre/maplibre-gl-js/actions/workflows/test-all.yml) [![PRs](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](https://opensource.org/licenses/BSD-3-Clause) [![codecov](https://codecov.io/gh/maplibre/maplibre-gl-js/branch/main/graph/badge.svg)](https://codecov.io/gh/maplibre/maplibre-gl-js)\n+\n+**[MapLibre GL JS](https://maplibre.org/maplibre-gl-js/docs/API/)** is an open-source library for publishing maps on your websites or webview based apps. Fast displaying of maps is possible thanks to GPU-accelerated vector tile rendering.\n+\n+It originated as an open-source fork of [mapbox-gl-js](https://github.com/mapbox/mapbox-gl-js), before their switch to a non-OSS license in December 2020. The library's initial versions (1.x) were intended to be a drop-in replacement for the Mapbox’s OSS version (1.x) with additional functionality, but have evolved a lot since then.\n+\n+## Getting Started\n+\n+Include the CSS file in the `<head>` of your HTML file.\n+\n+```html\n+<link href='https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.css' rel='stylesheet' />\n+```\n+\n+Include the following code in the `<body>` of your HTML file.\n+\n+```html\n+<div id='map' style='width: 400px; height: 300px;'></div>\n+<script type='module'>\n+import * as maplibregl from 'https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.mjs';\n+\n+const map = new maplibregl.Map({\n+  container: 'map',\n+  style: 'https://demotiles.maplibre.org/style.json', // stylesheet location\n+  center: [-74.5, 40], // starting position [lng, lat]\n+  zoom: 9 // starting zoom\n+});\n+</script>\n+```\n+\n+Enjoy the map!\n+\n+<br />\n+\n+## Documentation\n+\n+Full documentation for this library [is available here](https://maplibre.org/maplibre-gl-js/docs/API/).\n+\n+Check out the features through [examples](https://maplibre.org/maplibre-gl-js/docs/examples/).\n+\n+| Showcases                                                                                                              |                                                                                                                            |\n+| ---------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |\n+| ![Display a map](https://maplibre.org/maplibre-gl-js/docs/assets/examples/display-a-map.png)                           | ![Third party vector tile source](https://maplibre.org/maplibre-gl-js/docs/assets/examples/3d-terrain.png)                 |\n+| ![Animate a series of images](https://maplibre.org/maplibre-gl-js/docs/assets/examples/animate-a-series-of-images.png) | ![Create a heatmap layer](https://maplibre.org/maplibre-gl-js/docs/assets/examples/create-a-heatmap-layer.png)             |\n+| ![3D buildings](https://maplibre.org/maplibre-gl-js/docs/assets/examples/display-buildings-in-3d.png)                  | ![Visualize population density](https://maplibre.org/maplibre-gl-js/docs/assets/examples/visualize-population-density.png) |\n+\n+<br />\n+\n+Want an example? Have a look at the official [MapLibre GL JS Documentation](https://maplibre.org/maplibre-gl-js/docs/examples/).\n+\n+Use MapLibre GL JS bindings for [React](https://visgl.github.io/react-map-gl/docs/get-started) and [Angular](https://github.com/maplibre/ngx-maplibre-gl). Find more at [awesome-maplibre](https://github.com/maplibre/awesome-maplibre).\n+\n+<br />\n+\n+## Contribution\n+\n+### Getting Involved\n+\n+Join the #maplibre slack channel at OSMUS: get an invite at https://slack.openstreetmap.us/\n+Read the [CONTRIBUTING.md](CONTRIBUTING.md) guide in order to get familiar with how we do things around here.\n+\n+### Avoid Fragmentation\n+\n+If you depend on a free software alternative to `mapbox-gl-js`, please consider joining our effort! Anyone with a stake in a healthy community-led fork is welcome to help us figure out our next steps. We welcome contributors and leaders! MapLibre GL JS already represents the combined efforts of a few early fork efforts, and we all benefit from \"one project\" rather than \"our way\". If you know of other forks, please reach out to them and direct them here.\n+\n+> **MapLibre GL JS** is developed following [Semantic Versioning (2.0.0)](https://semver.org/spec/v2.0.0.html).\n+\n+## Sponsors\n+\n+We thank everyone who supported us financially in the past and special thanks to the people and organizations who support us with recurring donations!\n+\n+Read more about the MapLibre Sponsorship Program at [https://maplibre.org/sponsors/](https://maplibre.org/sponsors/).\n+\n+Gold:\n+\n+<a href=\"https://aws.amazon.com/location\"><img src=\"https://maplibre.org/img/aws-logo.svg\" alt=\"Logo AWS\" width=\"25%\"/></a>\n+\n+\n+Silver:\n+\n+<a href=\"https://www.microsoft.com/\"><img src=\"https://maplibre.org/img/msft-logo.svg\" alt=\"Logo MSFT\" width=\"25%\"/></a>\n+\n+<a href=\"https://www.mierune.co.jp/?lang=en\"><img src=\"https://maplibre.org/img/mierune-logo.svg\" alt=\"Logo MIERUNE\" width=\"25%\"/></a>\n+\n+<a href=\"https://komoot.com/\"><img src=\"https://maplibre.org/img/komoot-logo.svg\" alt=\"Logo komoot\" width=\"25%\"/></a>\n+\n",
+					"match": false,
+					"packageHash": "0f25edd9f61aa643329c143a884b1068aa6a741db00c88ee4d708278f05d70c1",
+					"size": 73,
+					"sourceHash": "f293e4b84fcabba75a923fe54ff861b6bd4e7f2cddaf09082bcee97f57c0847b",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,10 +1,177 @@\n {\n   \"name\": \"maplibre-gl\",\n-  \"description\": \"A WebGL interactive maps library\",\n-  \"version\": \"0.0.0\",\n-  \"license\": \"BSD-3\",\n+  \"description\": \"BSD licensed community fork of mapbox-gl, a WebGL interactive maps library\",\n+  \"version\": \"6.19.0\",\n+  \"module\": \"dist/maplibre-gl.mjs\",\n+  \"style\": \"dist/maplibre-gl.css\",\n+  \"license\": \"BSD-3-Clause\",\n+  \"homepage\": \"https://maplibre.org/\",\n+  \"funding\": \"https://github.com/maplibre/maplibre-gl-js?sponsor=1\",\n+  \"bugs\": {\n+    \"url\": \"https://github.com/maplibre/maplibre-gl-js/issues/\"\n+  },\n   \"repository\": {\n     \"type\": \"git\",\n-    \"url\": \"git://github.com/MapLibre/maplibre-gl-js.git\"\n+    \"url\": \"https://github.com/maplibre/maplibre-gl-js\"\n+  },\n+  \"types\": \"dist/maplibre-gl.d.ts\",\n+  \"type\": \"module\",\n+  \"exports\": {\n+    \".\": {\n+      \"types\": \"./dist/maplibre-gl.d.ts\",\n+      \"import\": \"./dist/maplibre-gl.mjs\"\n+    },\n+    \"./dist/*\": \"./dist/*\",\n+    \"./package.json\": \"./package.json\"\n+  },\n+  \"sideEffects\": [\n+    \"*.css\",\n+    \"src/**/*.ts\"\n+  ],\n+  \"dependencies\": {\n+    \"@mapbox/point-geometry\": \"^1.1.0\",\n+    \"@mapbox/tiny-sdf\": \"^2.3.0\",\n+    \"@mapbox/unitbezier\": \"^1.0.0\",\n+    \"@mapbox/vector-tile\": \"^3.0.0\",\n+    \"@maplibre/geojson-vt\": \"^7.0.1\",\n+    \"@maplibre/maplibre-gl-style-spec\": \"^26.8.0\",\n+    \"@maplibre/mlt\": \"^1.3.0\",\n+    \"@maplibre/vt-pbf\": \"^4.3.3\",\n+    \"@types/geojson\": \"^7946.0.16\",\n+    \"bidi-js\": \"^1.1.0\",\n+    \"earcut\": \"^3.2.4\",\n+    \"gl-matrix\": \"^3.4.4\",\n+    \"kdbush\": \"^4.1.0\",\n+    \"murmurhash-js\": \"^1.0.0\",\n+    \"pbf\": \"^5.1.2\",\n+    \"potpack\": \"^2.1.0\",\n+    \"quickselect\": \"^3.0.0\",\n+    \"tinyqueue\": \"^3.0.0\",\n+    \"zustand\": \"^5.1.0\"\n+  },\n+  \"devDependencies\": {\n+    \"@fontsource/noto-sans-devanagari\": \"^5.3.0\",\n+    \"@fontsource/noto-sans-hebrew\": \"^5.3.0\",\n+    \"@fontsource/noto-sans-khmer\": \"^5.3.0\",\n+    \"@fontsource/noto-sans-myanmar\": \"^5.3.0\",\n+    \"@fontsource/noto-sans-thai\": \"^5.3.0\",\n+    \"@mapbox/mvt-fixtures\": \"^4.0.0\",\n+    \"@stylistic/eslint-plugin\": \"^6.0.1\",\n+    \"@types/d3\": \"^7.4.3\",\n+    \"@types/earcut\": \"^3.2.4\",\n+    \"@types/eslint\": \"^9.6.1\",\n+    \"@types/gl\": \"^6.0.5\",\n+    \"@types/jsdom\": \"^30.0.0\",\n+    \"@types/minimist\": \"^1.2.5\",\n+    \"@types/murmurhash-js\": \"^1.0.7\",\n+    \"@types/nise\": \"^1.4.5\",\n+    \"@types/node\": \"^26.6.6\",\n+    \"@types/offscreencanvas\": \"^2019.7.3\",\n+    \"@types/pngjs\": \"^6.0.5\",\n+    \"@types/request\": \"^2.48.13\",\n+    \"@types/shuffle-seed\": \"^1.1.3\",\n+    \"@types/window-or-global\": \"^1.0.6\",\n+    \"@typescript-eslint/eslint-plugin\": \"^8.73.0\",\n+    \"@typescript-eslint/parser\": \"^8.59.3\",\n+    \"@typescript/native-preview\": \"beta\",\n+    \"@unicode/unicode-17.0.0\": \"^2.1.0\",\n+    \"@vitest/coverage-v8\": \"5.1.0\",\n+    \"@vitest/eslint-plugin\": \"^1.6.28\",\n+    \"@vitest/ui\": \"5.1.0\",\n+    \"address\": \"^2.0.3\",\n+    \"autoprefixer\": \"^10.6.2\",\n+    \"canvas\": \"^3.2.3\",\n+    \"cross-env\": \"^10.1.0\",\n+    \"cspell\": \"^10.5.1\",\n+    \"cssnano\": \"^9.9.0\",\n+    \"d3\": \"^7.9.2\",\n+    \"d3-queue\": \"^3.0.7\",\n+    \"devtools-protocol\": \"^0.0.1746437\",\n+    \"diff\": \"^9.0.0\",\n+    \"eslint\": \"^10.15.0\",\n+    \"eslint-plugin-html\": \"^8.2.1\",\n+    \"eslint-plugin-import-x\": \"^4.18.1\",\n",
+					"match": false,
+					"packageHash": "4af688676360b9ebcf66d86f769ce0cf6812c8252afc65178dfc7055c89bbfe3",
+					"size": 225,
+					"sourceHash": "c8436c1ca4b4862acc9fdfc2bc412a4697f26d3e8b7cbbf264ee1b4289b817f4",
+					"status": "content"
+				},
+				"LICENSE.txt": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"build/banner.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"build/check-bundle-size.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"build/eslint-rules/prefer-type-for-data-shapes.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"build/generate-doc-images.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"build/generate-docs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"build/generate-shaders.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"build/generate-struct-arrays.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"build/generate-style-code.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"build/generate-unicode-data.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"build/readme.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/maplibre-gl.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/camera/camera_constrain.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/camera/camera_context.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/camera/camera_hot_paths.bench.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/camera/camera_math.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/camera/camera_math_factory.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/camera/camera_motions.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/camera/camera_motions_factory.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/camera/camera_solver.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/camera/camera_solver_factory.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/camera/camera_state.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/camera/camera_state.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/camera/camera_types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/camera/camera_updates.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/camera/camera_updates.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/camera/camera_view_state.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/camera/center_elevation.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/camera/globe_camera_math.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/camera/globe_camera_math.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/camera/mercator_camera_math.bench.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/camera/mercator_camera_math.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/camera/mercator_camera_math.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/camera/mercator_camera_motions.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/camera/mercator_camera_solver.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/camera/project_camera.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/camera/projected_camera.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/camera/projected_camera.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/camera/vertical_perspective_camera_math.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/camera/vertical_perspective_camera_math.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/camera/vertical_perspective_camera_motions.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/camera/vertical_perspective_camera_motions.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/camera/vertical_perspective_camera_solver.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/css/maplibre-gl.css": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/css/svg/maplibregl-ctrl-attrib.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/css/svg/maplibregl-ctrl-compass.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/css/svg/maplibregl-ctrl-fullscreen.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/css/svg/maplibregl-ctrl-geolocate.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/css/svg/maplibregl-ctrl-globe.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/css/svg/maplibregl-ctrl-logo.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/css/svg/maplibregl-ctrl-shrink.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/css/svg/maplibregl-ctrl-terrain.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/css/svg/maplibregl-ctrl-zoom-in.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/css/svg/maplibregl-ctrl-zoom-out.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/array_types.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/bucket/circle_attributes.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/bucket/circle_bucket.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/bucket/dash_attributes.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/bucket/fill_attributes.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/bucket/fill_bucket.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/bucket/fill_bucket.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/bucket/fill_extrusion_attributes.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/bucket/fill_extrusion_bucket.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/bucket/fill_extrusion_bucket.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/bucket/heatmap_bucket.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/bucket/line_attributes.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/bucket/line_attributes_ext.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/bucket/line_attributes_offset.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/bucket/line_bucket.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/bucket/line_bucket.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/bucket/pattern_attributes.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/bucket/pattern_bucket_features.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/bucket/round_polygon_corners.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/bucket/round_polygon_corners.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/bucket/symbol_attributes.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/bucket/symbol_bucket.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/bucket/symbol_bucket.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/bucket.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/dem_data.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/dem_data.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/evaluation_feature.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/extent.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/extent_bounds.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/feature_index.bench.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/feature_index.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/feature_index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/feature_position_map.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/feature_position_map.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/index_array_type.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/load_geometry.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/load_geometry.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/pos3d_attributes.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/pos_attributes.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/program_configuration.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/raster_bounds_attributes.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/segment.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/data/segment.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/geo/bounds.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/geo/bounds.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/geo/edge_insets.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/geo/edge_insets.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/geo/lng_lat.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/geo/lng_lat.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/geo/lng_lat_bounds.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/geo/lng_lat_bounds.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/geo/mercator_coordinate.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/geo/mercator_coordinate.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/geo/projection/covering_tiles.bench.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/geo/projection/covering_tiles.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/geo/projection/covering_tiles.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/geo/projection/covering_tiles_details_provider.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/geo/projection/covering_tiles_details_provider_factory.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/geo/projection/crs.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/geo/projection/crs.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/geo/projection/globe_covering_tiles.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/geo/projection/globe_covering_tiles_details_provider.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/geo/projection/globe_projection.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/geo/projection/globe_projection.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/geo/projection/globe_utils.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/geo/projection/globe_utils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/geo/projection/mercator_covering_tiles_details_provider.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/geo/projection/mercator_projection.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/geo/projection/mercator_utils.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/geo/projection/mercator_utils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/geo/projection/projection.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/geo/projection/projection_crud.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/geo/projection/projection_crud.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/geo/projection/projection_data.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/geo/projection/projection_factory.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/geo/projection/projection_factory.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/geo/projection/tile_matrix_set.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/geo/projection/vertical_perspective_projection.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/geo/world_types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/index.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/render/fill_large_mesh_arrays.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/render/fill_large_mesh_arrays.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/render/font_face_manager.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/render/font_face_manager.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/render/frame_render_context.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/render/frame_render_context.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/render/glyph_atlas.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/render/glyph_atlas.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/render/glyph_manager.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/render/glyph_manager.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/render/image_atlas.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/render/image_atlas.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/render/image_manager.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/render/image_manager.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/render/line_atlas.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/render/line_atlas.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/render/mesh.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/render/painter.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/render/painter.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/render/pattern_atlas.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/render/pattern_atlas.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/render/render_to_texture_interface.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/render/subdivision.bench.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/render/subdivision.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/render/subdivision.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/render/subdivision_granularity_settings.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/render/terrain.bench.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/render/terrain.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/render/terrain.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/render/terrain_coverage.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/render/update_pattern_positions_in_program.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/render/update_pattern_positions_in_program.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/encode_attribute.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/encode_attribute.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/_prelude.fragment.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/_prelude.fragment.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/_prelude.vertex.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/_prelude.vertex.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/_projection_globe.fragment.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/_projection_globe.fragment.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/_projection_globe.vertex.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/_projection_globe.vertex.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/_projection_mercator.fragment.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/_projection_mercator.fragment.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/_projection_mercator.vertex.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/_projection_mercator.vertex.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/atmosphere.fragment.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/atmosphere.fragment.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/atmosphere.vertex.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/atmosphere.vertex.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/background.fragment.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/background.fragment.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/background.vertex.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/background.vertex.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/background_pattern.fragment.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/background_pattern.fragment.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/background_pattern.vertex.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/background_pattern.vertex.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/circle.fragment.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/circle.fragment.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/circle.vertex.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/circle.vertex.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/clipping_mask.fragment.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/clipping_mask.fragment.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/clipping_mask.vertex.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/clipping_mask.vertex.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/collision_box.fragment.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/collision_box.fragment.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/collision_box.vertex.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/collision_box.vertex.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/collision_circle.fragment.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/collision_circle.fragment.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/collision_circle.vertex.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/collision_circle.vertex.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/color_relief.fragment.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/color_relief.fragment.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/color_relief.vertex.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/color_relief.vertex.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/debug.fragment.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/debug.fragment.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/debug.vertex.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/debug.vertex.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/depth.vertex.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/depth.vertex.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/fill.fragment.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/fill.fragment.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/fill.vertex.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/fill.vertex.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/fill_extrusion.fragment.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/fill_extrusion.fragment.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/fill_extrusion.vertex.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/fill_extrusion.vertex.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/fill_extrusion_pattern.fragment.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/fill_extrusion_pattern.fragment.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/fill_extrusion_pattern.vertex.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/fill_extrusion_pattern.vertex.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/fill_outline.fragment.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/fill_outline.fragment.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/fill_outline.vertex.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/fill_outline.vertex.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/fill_outline_pattern.fragment.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/fill_outline_pattern.fragment.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/fill_outline_pattern.vertex.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/fill_outline_pattern.vertex.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/fill_pattern.fragment.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/fill_pattern.fragment.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/fill_pattern.vertex.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/fill_pattern.vertex.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/heatmap.fragment.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/heatmap.fragment.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/heatmap.vertex.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/heatmap.vertex.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/heatmap_texture.fragment.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/heatmap_texture.fragment.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/heatmap_texture.vertex.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/heatmap_texture.vertex.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/hillshade.fragment.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/hillshade.fragment.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/hillshade.vertex.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/hillshade.vertex.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/hillshade_prepare.fragment.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/hillshade_prepare.fragment.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/hillshade_prepare.vertex.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/hillshade_prepare.vertex.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/layer_composite.fragment.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/layer_composite.fragment.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/layer_composite.vertex.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/layer_composite.vertex.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/line.fragment.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/line.fragment.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/line.vertex.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/line.vertex.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/line_gradient.fragment.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/line_gradient.fragment.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/line_gradient.vertex.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/line_gradient.vertex.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/line_gradient_sdf.fragment.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/line_gradient_sdf.fragment.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/line_gradient_sdf.vertex.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/line_gradient_sdf.vertex.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/line_pattern.fragment.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/line_pattern.fragment.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/line_pattern.vertex.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/line_pattern.vertex.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/line_sdf.fragment.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/line_sdf.fragment.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/line_sdf.vertex.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/line_sdf.vertex.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/raster.fragment.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/raster.fragment.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/raster.vertex.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/raster.vertex.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/sky.fragment.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/sky.fragment.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/sky.vertex.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/sky.vertex.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/symbol_icon.fragment.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/symbol_icon.fragment.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/symbol_icon.vertex.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/symbol_icon.vertex.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/symbol_sdf.fragment.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/symbol_sdf.fragment.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/symbol_sdf.vertex.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/symbol_sdf.vertex.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/symbol_text_and_icon.fragment.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/symbol_text_and_icon.fragment.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/symbol_text_and_icon.vertex.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/symbol_text_and_icon.vertex.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/terrain.fragment.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/terrain.fragment.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/terrain.vertex.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/terrain.vertex.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/terrain_depth.fragment.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/terrain_depth.fragment.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/terrain_depth.vertex.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/terrain_depth.vertex.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/terrain_height.fragment.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/terrain_height.fragment.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/terrain_height.vertex.glsl": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/glsl/terrain_height.vertex.glsl.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/shaders.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shaders/shaders.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/canvas_source.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/canvas_source.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/geojson_source.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/geojson_source.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/geojson_source_diff.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/geojson_source_diff.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/geojson_worker_source.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/geojson_worker_source.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/image_source.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/image_source.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/load_tilejson.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/load_tilejson.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/pixels_to_tile_units.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/projection_handler_worker.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/protocol_crud.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/query_features.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/query_features.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/raster_dem_tile_source.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/raster_dem_tile_source.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/raster_dem_tile_worker_source.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/raster_dem_tile_worker_source.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/raster_tile_source.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/raster_tile_source.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/rtl_text_plugin_main_thread.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/rtl_text_plugin_main_thread.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/rtl_text_plugin_status.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/rtl_text_plugin_worker.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/rtl_text_plugin_worker.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/source.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/source.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/source_state.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/source_state.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/vector_tile_mlt.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/vector_tile_overzoomed.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/vector_tile_source.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/vector_tile_source.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/vector_tile_worker_source.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/vector_tile_worker_source.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/video_source.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/video_source.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/worker.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/worker.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/worker_source.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/worker_tile.bench.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/worker_tile.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/worker_tile.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/worker_tile_mlt.bench.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/source/worker_tile_state.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/create_style_layer.bench.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/create_style_layer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/evaluation_parameters.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/format_section_override.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/format_section_override.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/light.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/light.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/light_properties.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/load_sprite.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/load_sprite.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/parse_glyph_pbf.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/pauseable_placement.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/pauseable_placement.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/projection_properties.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/properties.bench.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/properties.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/properties.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/query_utils.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/query_utils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/sky.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/sky.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/sky_properties.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_glyph.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_image.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_layer/background_style_layer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_layer/background_style_layer_properties.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_layer/circle_style_layer.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_layer/circle_style_layer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_layer/circle_style_layer_properties.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_layer/color_relief_style_layer.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_layer/color_relief_style_layer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_layer/color_relief_style_layer_properties.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_layer/custom_style_layer.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_layer/custom_style_layer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_layer/fill_extrusion_style_layer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_layer/fill_extrusion_style_layer_properties.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_layer/fill_style_layer.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_layer/fill_style_layer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_layer/fill_style_layer_properties.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_layer/heatmap_style_layer.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_layer/heatmap_style_layer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_layer/heatmap_style_layer_properties.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_layer/hillshade_style_layer.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_layer/hillshade_style_layer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_layer/hillshade_style_layer_properties.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_layer/line_style_layer.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_layer/line_style_layer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_layer/line_style_layer_properties.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_layer/overlap_mode.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_layer/overlap_mode.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_layer/raster_style_layer.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_layer/raster_style_layer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_layer/raster_style_layer_properties.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_layer/symbol_style_layer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_layer/symbol_style_layer_properties.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_layer/typed_style_layer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_layer/variable_text_anchor.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_layer/variable_text_anchor.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_layer.bench.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_layer.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_layer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_layer_index.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/style_layer_index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/validate_style.bench.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/validate_style.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/validate_style.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/style/zoom_history.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/anchor.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/anchor.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/arabic_shaping.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/arabic_shaping.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/bidi.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/bidi.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/check_max_angle.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/check_max_angle.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/clip_line.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/clip_line.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/collision_feature.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/collision_feature.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/collision_index.bench.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/collision_index.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/collision_index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/cross_tile_symbol_index.bench.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/cross_tile_symbol_index.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/cross_tile_symbol_index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/get_anchors.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/get_anchors.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/grid_index.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/grid_index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/merge_lines.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/merge_lines.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/one_em.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/opacity_state.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/path_interpolator.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/path_interpolator.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/placement.bench.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/placement.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/placement.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/projection.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/projection.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/quads.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/quads.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/shaping.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/shaping.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/symbol_elevation.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/symbol_layout.bench.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/symbol_layout.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/symbol_size.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/symbol_size.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/symbol_style_layer.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/tagged_string.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/tagged_string.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/transform_text.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/symbol/transform_text.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/tile/terrain_tile_manager.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/tile/terrain_tile_manager.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/tile/tile.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/tile/tile.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/tile/tile_bounds.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/tile/tile_bounds.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/tile/tile_cache.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/tile/tile_cache.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/tile/tile_id.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/tile/tile_id.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/tile/tile_id_to_lng_lat_bounds.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/tile/tile_id_to_lng_lat_bounds.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/tile/tile_manager.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/tile/tile_manager.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/tile/tile_manager_in_view_tiles.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/tile/tile_manager_in_view_tiles.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/tile/tile_manager_raster.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/tile/tile_manager_raster_dem.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/tile/tile_manager_raster_dem.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/anchor.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/camera.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/camera.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/camera_movement_scheduler.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/camera_movement_scheduler.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/control/attribution_control.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/control/attribution_control.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/control/control.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/control/fullscreen_control.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/control/fullscreen_control.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/control/geolocate_control.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/control/geolocate_control.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/control/globe_control.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/control/globe_control.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/control/logo_control.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/control/logo_control.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/control/navigation_control.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/control/navigation_control.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/control/scale_control.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/control/scale_control.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/control/terrain_control.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/control/terrain_control.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/default_locale.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/events.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/handler/box_zoom.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/handler/box_zoom.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/handler/click_zoom.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/handler/cooperative_gestures.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/handler/cooperative_gestures.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/handler/create_map_handlers.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/handler/dblclick_zoom.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/handler/drag_handler.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/handler/drag_move_state_manager.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/handler/drag_pan.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/handler/drag_rotate.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/handler/handler_util.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/handler/keyboard.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/handler/keyboard.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/handler/map_event.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/handler/map_event.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/handler/mouse.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/handler/mouse_handler_interface.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/handler/mouse_rotate.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/handler/scroll_zoom.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/handler/scroll_zoom.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/handler/shim/dblclick_zoom.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/handler/shim/drag_pan.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/handler/shim/drag_rotate.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/handler/shim/two_fingers_touch.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/handler/tap_drag_zoom.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/handler/tap_drag_zoom.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/handler/tap_recognizer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/handler/tap_zoom.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/handler/touch_pan.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/handler/two_fingers_touch.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/handler/two_fingers_touch.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/handler_inertia.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/handler_inertia.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/handler_manager.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/handler_manager.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/hash.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/hash.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/map.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/map_event_factory.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/map_state.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/map_state.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/map_tests/map_animation.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/map_tests/map_basic.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/map_tests/map_bounds.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/map_tests/map_calculate_camera_options.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/map_tests/map_canvas.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/map_tests/map_control.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/map_tests/map_covering_tiles.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/map_tests/map_cross_window.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/map_tests/map_disable_handlers.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/map_tests/map_events.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/map_tests/map_feature_state.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/map_tests/map_global_state.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/map_tests/map_images.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/map_tests/map_is_moving.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/map_tests/map_is_rotating.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/map_tests/map_is_zooming.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/map_tests/map_layer.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/map_tests/map_options.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/map_tests/map_pitch.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/map_tests/map_pixel_ratio.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/map_tests/map_projection.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/map_tests/map_query_rendered_features.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/map_tests/map_refresh_tiles.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/map_tests/map_render.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/map_tests/map_request_render_frame.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/map_tests/map_resize.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/map_tests/map_set_lod_params.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/map_tests/map_sky.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/map_tests/map_style.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/map_tests/map_terrain.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/map_tests/map_transform_constrains.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/map_tests/map_webgl.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/map_tests/map_world_copies.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/map_tests/map_zoom.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/marker.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/marker.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/popup.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/ui/popup.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/abort_error.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/actor.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/actor.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/actor_messages.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/ajax.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/ajax.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/browser.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/browser.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/color_ramp.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/color_ramp.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/create_tile_mesh.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/create_tile_mesh.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/dictionary_coder.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/dispatcher.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/dispatcher.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/dom.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/dom.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/evented.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/evented.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/fast_maths.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/fast_maths.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/find_pole_of_inaccessibility.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/find_pole_of_inaccessibility.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/geojson_bounds.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/geojson_bounds.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/geojson_reproject.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/geojson_reproject.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/geolocation_support.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/geolocation_support.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/global_dispatcher.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/global_dispatcher.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/global_worker_pool.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/gpu_initialization_error.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/graphemes.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/graphemes.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/image.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/image_request.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/image_request.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/intersection_tests.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/offscreen_canvas_distorted.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/offscreen_canvas_distorted.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/offscreen_canvas_supported.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/offscreen_canvas_supported.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/primitives/aabb.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/primitives/aabb.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/primitives/bounding_volume.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/primitives/bounding_volume_cache.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/primitives/bounding_volume_cache.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/primitives/convex_volume.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/primitives/convex_volume.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/primitives/frustum.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/primitives/frustum.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/ref_properties.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/request_manager.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/request_performance.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/request_performance.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/resolve_tokens.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/resolve_tokens.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/script_detection.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/script_detection.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/smart_wrap.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/smart_wrap.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/struct_array.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/struct_array.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/style.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/style.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/task_queue.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/task_queue.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/test/null_gl.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/test/util.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/throttle.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/throttle.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/throttled_invoker.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/throttled_invoker.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/time_control.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/time_control.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/transferable_grid_index.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/transferable_grid_index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/trusted_types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/unicode_properties.g.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/update_queue.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/update_queue.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/util.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/util.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/vectortile_to_geojson.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/vectortile_to_geojson.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/verticalize_punctuation.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/verticalize_punctuation.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/web_worker.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/web_worker.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/web_worker_transfer.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/web_worker_transfer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/worker_pool.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/worker_pool.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/world_bounds.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/util/world_bounds.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/color_mode.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/context.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/cull_face_mode.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/depth_mode.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/draw/draw_background.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/draw/draw_circle.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/draw/draw_collision_debug.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/draw/draw_color_relief.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/draw/draw_custom.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/draw/draw_custom.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/draw/draw_debug.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/draw/draw_debug.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/draw/draw_fill.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/draw/draw_fill.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/draw/draw_fill_extrusion.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/draw/draw_heatmap.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/draw/draw_hillshade.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/draw/draw_layer_composite.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/draw/draw_line.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/draw/draw_raster.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/draw/draw_sky.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/draw/draw_symbol.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/draw/draw_symbol.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/draw/draw_terrain.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/draw/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/frame_uniform_buffer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/framebuffer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/index_buffer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/program/atmosphere_program.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/program/background_program.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/program/circle_program.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/program/color_relief_program.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/program/debug_program.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/program/fill_extrusion_program.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/program/fill_program.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/program/heatmap_program.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/program/hillshade_program.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/program/hillshade_program.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/program/layer_composite_program.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/program/line_program.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/program/pattern.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/program/program_uniforms.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/program/raster_program.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/program/sky_program.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/program/symbol_program.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/program/terrain_program.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/program/terrain_program.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/program.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/program.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/program_cache.bench.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/program_cache.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/program_cache.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/projection_uniform_buffer.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/projection_uniform_buffer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/render_to_texture.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/render_to_texture.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/rtt_fingerprint.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/rtt_fingerprint.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/state.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/stencil_mode.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/terrain_uniform_buffer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/texture.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/texture.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/uniform_binding.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/uniform_binding.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/uniform_buffer.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/uniform_buffer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/value.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/vertex_array_object.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/vertex_buffer.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/webgl/vertex_buffer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 0,
+				"missingInPackage": 774,
+				"missingInSource": 0,
+				"score": 0,
+				"totalFiles": 776
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "@mapbox/jsonlint-lines-primitives",
+				"version": "2.0.3"
+			},
+			{
+				"name": "@mapbox/point-geometry",
+				"version": "1.1.0"
+			},
+			{
+				"name": "@mapbox/tiny-sdf",
+				"version": "2.3.0"
+			},
+			{
+				"name": "@mapbox/unitbezier",
+				"version": "1.0.0"
+			},
+			{
+				"name": "@mapbox/vector-tile",
+				"version": "3.0.0"
+			},
+			{
+				"name": "@maplibre/geojson-vt",
+				"version": "7.0.1"
+			},
+			{
+				"name": "@maplibre/maplibre-gl-style-spec",
+				"version": "26.8.0"
+			},
+			{
+				"name": "@maplibre/mlt",
+				"version": "1.3.0"
+			},
+			{
+				"name": "@maplibre/vt-pbf",
+				"version": "4.3.3"
+			},
+			{
+				"name": "@types/geojson",
+				"version": "7946.0.16"
+			},
+			{
+				"name": "bidi-js",
+				"version": "1.1.0"
+			},
+			{
+				"name": "earcut",
+				"version": "3.2.4"
+			},
+			{
+				"name": "gl-matrix",
+				"version": "3.4.4"
+			},
+			{
+				"name": "json-stringify-pretty-compact",
+				"version": "4.0.0"
+			},
+			{
+				"name": "kdbush",
+				"version": "4.1.0"
+			},
+			{
+				"name": "minimist",
+				"version": "1.2.8"
+			},
+			{
+				"name": "murmurhash-js",
+				"version": "1.0.0"
+			},
+			{
+				"name": "pbf",
+				"version": "5.1.2"
+			},
+			{
+				"name": "potpack",
+				"version": "2.1.0"
+			},
+			{
+				"name": "protocol-buffers-schema",
+				"version": "3.6.1"
+			},
+			{
+				"name": "quickselect",
+				"version": "3.0.0"
+			},
+			{
+				"name": "require-from-string",
+				"version": "2.0.2"
+			},
+			{
+				"name": "resolve-protobuf-schema",
+				"version": "2.1.0"
+			},
+			{
+				"name": "tinyqueue",
+				"version": "3.0.0"
+			},
+			{
+				"name": "zustand",
+				"version": "5.1.0"
+			}
+		]
+	}
+]
