@@ -1,0 +1,696 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-22T19:09:46.696Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:5.5.1",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "mixpanel-browser@2.23.0-beta",
+			"name": "mixpanel-browser",
+			"version": "2.23.0-beta",
+			"location": "https://registry.npmjs.org/mixpanel-browser/-/mixpanel-browser-2.23.0-beta.tgz",
+			"integrity": "sha512-jEEbRdQL5DRDQboTIlz+STnwP+PQ6xleMtNbJ3SrTIJQbv0utpkjrJo12qye9tSj0VgZNHxMuj2PzyoYO5oPCg==",
+			"publishedAt": "2018-09-11T21:03:16.337Z",
+			"publishedWith": {
+				"node": "8.9.1",
+				"npm": "5.5.1"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/mixpanel/mixpanel-js.git",
+			"spec": "github:mixpanel/mixpanel-js#283378250cb43d8f7d889413db5a365f9ca32335"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".babelrc": {
+					"match": false,
+					"packageHash": "33d79d8c4144e12a1fe1212bbe1c68929da0fa34b89819f30adfb65226b03249",
+					"size": 115,
+					"status": "missing-in-source"
+				},
+				".eslintrc.json": {
+					"match": false,
+					"packageHash": "616d302a5b998713632b01b857bd7779307ce068a631c1ff0aa4613f9a0d9f33",
+					"size": 622,
+					"status": "missing-in-source"
+				},
+				".travis.yml": {
+					"match": false,
+					"packageHash": "9506cd447a7e22d1197cb0e6eaf67f1b29e5c63e2c59b46a6e6a59c06921e127",
+					"size": 87,
+					"status": "missing-in-source"
+				},
+				"CHANGELOG.md": {
+					"diff": "--- published/CHANGELOG.md\n+++ rebuilt/CHANGELOG.md\n@@ -1,3 +1,371 @@\n+**2.86.0** (13 Nov 2026)\n+\n+- Adds beta support for no-code visual experiments, behind a new `visual_experiments` init option (default `false`). With `flags` also enabled, the SDK applies a variant's visual changes when the variant's authored page matches the current page by origin and pathname, including after SPA navigations, and re-applies them as the page re-renders. Supported changes are `setAttribute`, `setText`, `setStyle`, `setClasses`, `setAttributes` and `hide`; other types are ignored, as is any variant whose changes exceed 32K characters.\n+- With `visual_experiments` enabled, the page is hidden (`opacity: 0` on `<html>`) during flag delivery to prevent flicker, and revealed once delivery finishes or fails. The new `visual_experiments_hide_timeout_ms` option (default `2000`) sets how long the page can stay hidden at most.\n+- Tracks `$experiment_started` with `$experiment_type: 'visual'` the first time a visual variant's changes actually modify the page, or as soon as the page matches for a control variant with no changes. Preview variants never send exposures.\n+- Adds the `mixpanel.experiments` API (`applyVisualChanges`, `revertVisualChanges`, `startEditorSession`, `endEditorSession`), present only when `visual_experiments` is enabled. The Mixpanel browser extension uses it for live preview while authoring; an experiment being authored stops applying its delivered changes on that page while other experiments keep running.\n+- Adds shared preview links: when the page URL has `mp_preview_token`, the flags request sends it and the server picks the previewed variant. Preview variants are flagged `is_preview`, skip cached assignments and first-time-event targeting, and are never persisted. Session recording does not start or resume on preview pages.\n+- Redacts `mp_preview_token` values from `$current_url`, `$referrer`, the `current_url_search` people property, session replay page URLs and network telemetry, and SDK log messages.\n+- Adds a read-only `mixpanel.SDK_VERSION` property.\n+- Moves SPA location-change detection (the `pushState`/`replaceState` patch and `popstate`/`hashchange` listeners) into a shared module so the History API is patched only once, even when autocapture and visual experiments both use it.\n+\n+**2.85.0** (5 Nov 2026)\n+\n+- Adds a `consent_mode` config. With `consent_mode: 'require_consent'`, the SDK stores and sends nothing (no events, people/group updates, flag fetches, remote settings or session recording) until `opt_in_tracking()` is called. An `identify()` made before consent is held and applied on opt-in. `opt_out_tracking()` (or Do Not Track, unless `ignore_dnt` is set) stops everything on the page at once and deletes stored identifiers, queued batches and persisted flag variants; unsent session replay data stays on the device and is only uploaded after consent is given again. The decision is stored with the identity persistence, so subdomains that share the cookie also share the decision. `opt_out_tracking_by_default`, `opt_out_tracking_persistence_type`, `opt_out_persistence_by_default` and the `opt_in_tracking()`/`opt_out_tracking()` persistence and `delete_user` options are ignored in this mode. If `consent_mode` is unset, opt-out works as before; `opt_out_tracking_by_default` applies only when `consent_mode` is unset. An unrecognized `consent_mode` value is treated as `'require_consent'`.\n+- Fixes persistence being written again after an opt-out: any `set_config()` call after `opt_out_tracking()` re-enabled saving super properties to cookie/localStorage.\n+- Fixes spaces between inline elements disappearing from session replays: the mask function dropped whitespace-only text nodes, so adjacent words were joined.\n+- Fixes session replay events being left in IndexedDB with nothing to upload them when a recording stopped under `disable_persistence`. The registry entry is now kept, and the events are uploaded on a later page load.\n+- Stops `init()` from creating an empty `mixpanelFlagsDb` IndexedDB database when no flag variants have been saved.\n+- Moves all opt-out/consent logic into one internal `ConsentManager` that the request queue, flags, session recording and core consult before storing, sending or fetching. Splits `gdpr-utils.js` into `opt-out-flag.js` and the consent modules, and splits `init()` setup into helpers. No public API changes besides `consent_mode`.\n+- Ports the GDPR and `disable_persistence` QUnit tests to the browser test suite.\n+\n+**2.84.0** (5 Oct 2026)\n+\n+- Adds an `on_track` hook (under `hooks` config) that is called for every tracked event with the event name and its merged properties. It can return a modified event name/properties or `null` to drop the event, and is not bypassed by `skip_hooks`.\n+- Fixes `people.set` (and other people calls) mutating the object passed in: Date values were being converted to strings in place. Dates are now encoded on a copy, so the caller's object is left untouched.\n+- Fixes `$browser_version` being `null` for Android Mobile browsers, caused by a lower-case `android` in the version regex.\n+- Fixes opt-out checks when `localStorage` is unusable: `opt_out_tracking()` falls back to saving the flag in a cookie, but the opt-out check only read `localStorage`, so the opt-out was not honored. The check now reads whichever store the flag was written to.\n+- Fixes session recording to send a batch uncompressed (and report the error) when gzip compression fails, instead of silently dropping it.\n+- Fixes request queue `clear()` so a failure to clear persisted storage is reported rather than leaving the returned promise rejected.\n+- Replaces the `dox`/`rdme` API docs tooling with TypeDoc and regenerates the API reference; the TypeScript definitions and JSDoc were updated to match.\n+\n+**2.83.0** (8 Sep 2026)\n+\n+- Adds `semver` and `date` custom operators for Feature Flags runtime targeting (first-time-event) rules, alongside the existing operators.\n+- Fixes session recording network telemetry: passing a `Request` object directly to `fetch()` no longer marks its body as consumed, which previously made the application's own `fetch()` call fail with \"Cannot construct a Request with a Request object that has already been used\".\n+- Fixes autocapture link tracking to skip the delayed navigation when a tracked `<a>` element has no `href`, instead of navigating to `undefined`.\n+- Fixes a CodeQL-flagged incomplete sanitization in `_.getQueryParam`: the URL param name is now fully escaped (including backslashes) before being interpolated into the lookup regex.\n+- Removes the internal `_.trim` polyfill in favor of native `String.prototype.trim`, addressing a CodeQL alert.\n+- Updates `@mixpanel/rrweb` to `2.0.0-alpha.18.6`.\n+- Publishes the CycloneDX SBOM as part of the `dist` build rather than as a separate CI job.\n+- Trims the published npm package down to `CHANGELOG.md`, `dist`, `doc`, `LICENSE`, `logo.svg`, `package.json`, `README.md`, and `src`, so dev/build/test tooling is no longer shipped.\n+\n+**2.82.1** (19 Aug 2026)\n+\n+- Publishes a CycloneDX Software Bill of Materials (SBOM) as a release asset.\n+- Bumps the transitive `postcss` and `nanoid` dependencies to patched versions. The published bundle is unchanged — a fresh install already resolved to the patched versions.\n+\n+**2.82.0** (10 Aug 2026)\n+\n+- Fixes empty response bodies in session recording network telemetry. Fetch events were emitted before the response body finished being read; they now wait for it. The application's own `fetch()` is not delayed.\n+- Adds `fallback_reason` (`FLAG_NOT_FOUND`, `NOT_READY`, or `BACKEND_ERROR`) to feature flag variants when `variant_source` is `'fallback'`. `@mixpanel/openfeature-web-provider` uses it to report the specific cause instead of always reporting `FLAG_NOT_FOUND`.\n+\n+**2.81.0** (9 Jul 2026)\n+\n+- `@mixpanel/openfeature-web-provider`: fixes fallback detection so `FLAG_NOT_FOUND` is reported correctly. The provider previously compared the returned variant against the fallback by reference, but mixpanel-browser wraps fallbacks in a new object, so the check never matched. It now detects fallbacks via the `variant_source` marker.\n+- Removes the `engines` field from `package.json` so npm no longer prints an engine warning on newer Node.js versions. CI now runs on current Node.js LTS versions.\n+\n+**2.80.0** (28 May 2026)\n+\n+- Fixes a session recording bug where `record_min_ms` could be bypassed after a page navigation or an idle period, causing short recordings to be uploaded. Elapsed time is now measured from the first rrweb event timestamp rather than wall-clock time, so the minimum-duration check stays accurate across navigations.\n+- Fixes a malformed first-time-events request URL that contained a double slash (`//`) before the flag ID. The URL is now built cleanly regardless of whether the base ends in `/`.\n+- Registers autocapture click/change/submit listeners in the capture phase, so events are reliably observed even when downstream handlers call `stopPropagation()`.\n+\n+**2.79.0** (14 May 2026)\n+\n+- Adds support for feature flag variant persistence: variants can now be cached in IndexedDB with a configurable TTL so flag values stay stable across page loads and remain available before the next fetch completes.\n+- Enables pageview events for free during session recording when record_heatmap_data is enabled, so heatmaps get accompanying pageview context without separately enabling pageview autocapture.\n+- Event-triggered session recordings now wait for remote settings to finish loading (or fail) before deciding whether to start, preventing missed recordings when a triggering event fires during init.\n+- Hardens all window.localStorage and window.sessionStorage access with exhaustive try/catch guards, so SDK initialization no longer throws in environments where storage access raises (e.g., strict privacy modes, sandboxed iframes).\n+\n+**2.78.0** (8 Apr 2026)\n+- Adds `loadFlags` method to the `mixpanel.flags` to manually refresh feature flags.\n+- Adds `whenReady` method to the `mixpanel.flags`, which returns a Promise that resolves when feature flags are done fetching.\n+\n+**2.77.0** (24 Mar 2026)\n+- Session recording now supports cross origin iframe recording by specifying allowed domains via `record_allowed_iframe_origins`.\n+- Added type dependency @types/json-logic-js for the RulesLogic type introduced in 2.76.0\n+\n+**2.76.0** (18 Mar 2026)\n+- Added a new network plugin that captures network telemetry during session recordings.\n+- Added recording_event_triggers configuration option that allows starting a session recording when targeted events that meet specified property filters occur. Property filters are optional and use json-logic syntax, but this option is mainly intended to be used by remote settings (closed beta). Allows session replays to start on a trigger if a session replay is not already in progress. Does not affect any active recording sessions.\n+- Added mixpanel.enable() public method, complementing the existing disable() method. Re-enables tracking for some or all events after disable() has been called.\n+- Changed async bundles (e.g., mixpanel-recorder, mixpanel-targeting) loaded via CDN or loader-module-with-async-modules entry points to use hash-based file names for consistent versioning with the main SDK (e.g. mixpanel-recorder.min.js => mixpanel-recorder-bIS4LMGd.min.js). For customers who already proxy these files individually from the CDN, we recommend proxying everything under cdn.mxpnl.com/libs/* for reliability.\n+- Fixed event property matching in targeting to respect case sensitivity, consistent with how Mixpanel handles property names.\n+- Added dependency declaration for @mixpanel/rrweb-utils, a peer dependency of @mixpanel/rrweb-plugin-console-record. This was causing errors for users with strict peer dependencies enabled.\n+- Fixed an error thrown when disabling recording from remote settings and AbortController is not supported in the browser.\n+- Stabilized Safari simulator tests and ported remote settings tests to new test infrastructure.\n+\n+**2.75.0** (24 Feb 2026)\n+- Adds support for Feature Flags targeting based on events tracked during the current session (Runtime Targeting)\n+- Fixes memory leaks in Session Recording on sites which create/destroy iframes\n+- Fixes usage of arrow functions in `hooks` config\n+\n+**2.74.0** (27 Jan 2026)\n+- New session recording masking configuration options, including the ability to unmask inputs and allowlist-based selector masking.\n+- Adds initial support for the remote settings API, allowing remote configuration of SDK config options.\n+- Adds new automated browser test suite that runs in CI and locally in chrome headless. See tests/browser/README.html for more information.\n",
+					"match": false,
+					"packageHash": "9ea31cf668bb61344bfb69a656af26b97b6b5b653fbe246ffe5a6fd47c156cc7",
+					"size": 6513,
+					"sourceHash": "b34561b20061cbae5481dd0499323ea447e60882d607ddb9b206c8482435a90f",
+					"status": "content"
+				},
+				"LICENSE": {
+					"diff": "--- published/LICENSE\n+++ rebuilt/LICENSE\n@@ -1,17 +1,3 @@\n-Copyright 2015 Mixpanel, Inc.\n-\n-Licensed under the Apache License, Version 2.0 (the \"License\");\n-you may not use this work except in compliance with the License.\n-You may obtain a copy of the License below, or at:\n-\n-   http://www.apache.org/licenses/LICENSE-2.0\n-\n-Unless required by applicable law or agreed to in writing, software\n-distributed under the License is distributed on an \"AS IS\" BASIS,\n-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n-See the License for the specific language governing permissions and\n-limitations under the License.\n-\n                                  Apache License\n                            Version 2.0, January 2004\n                         http://www.apache.org/licenses/\n@@ -200,7 +186,7 @@\n       same \"printed page\" as the copyright notice for easier\n       identification within third-party archives.\n \n-   Copyright [yyyy] [name of copyright owner]\n+   Copyright 2015 Mixpanel, Inc.\n \n    Licensed under the Apache License, Version 2.0 (the \"License\");\n    you may not use this file except in compliance with the License.\n",
+					"match": false,
+					"packageHash": "d664baa3566c9bb1f47e8e93d464b8088c7c457bb133774cdf1bcda6596bafb9",
+					"size": 11923,
+					"sourceHash": "b281f95ea5aa1d61610bed17ca26faf497da692b1881b572576a4701eaaaa5fe",
+					"status": "content"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,71 +1,99 @@\n+\n # Mixpanel JavaScript Library\n-[![Build Status](https://travis-ci.org/mixpanel/mixpanel-js.svg?branch=master)](https://travis-ci.org/mixpanel/mixpanel-js)\n+![Build Status](https://github.com/mixpanel/mixpanel-js/actions/workflows/tests.yml/badge.svg)\n+[![](http://img.badgesize.io/https://unpkg.com/mixpanel-browser/dist/mixpanel.min.js?compression=gzip)](https://unpkg.com/mixpanel-browser/dist/mixpanel.min.js)\n \n The Mixpanel JavaScript Library is a set of methods attached to a global `mixpanel` object\n intended to be used by websites wishing to send data to Mixpanel projects. A full reference\n-is available [here](https://mixpanel.com/help/reference/javascript).\n+is available [here](https://developer.mixpanel.com/docs/javascript-full-api-reference).\n \n ## Alternative installation via NPM\n-This library is available as a [package on NPM](https://www.npmjs.com/package/mixpanel-browser) (named `mixpanel-browser` to distinguish it from Mixpanel's server-side Node.js library, available on NPM as `mixpanel`). To install into a project using NPM with a front-end packager such as [Browserify](http://browserify.org/) or [Webpack](https://webpack.github.io/):\n+This library is available as a [package on NPM](https://www.npmjs.com/package/mixpanel-browser) (named `mixpanel-browser` to distinguish it from Mixpanel's server-side Node.js library, available on NPM as `mixpanel`). To install into a project using NPM with a front-end packager such as [Vite](https://vitejs.dev/) or [Webpack](https://webpack.github.io/):\n \n ```sh\n npm install --save mixpanel-browser\n ```\n \n-You can then require the lib like a standard Node.js module:\n+You can then import the lib:\n \n ```javascript\n-var mixpanel = require('mixpanel-browser');\n+import mixpanel from 'mixpanel-browser';\n \n-mixpanel.init(\"YOUR_TOKEN\");\n+mixpanel.init(\"YOUR_TOKEN\", {autocapture: true});\n mixpanel.track(\"An event\");\n ```\n \n-## Alternative installation via Bower\n-`mixpanel-js` is also available via front-end package manager [Bower](http://bower.io/). After installing Bower, fetch into your project's `bower_components` dir with:\n-```sh\n-bower install mixpanel\n+NOTE: the default `mixpanel-browser` bundle includes a bundled `mixpanel-recorder` SDK. We provide the following options to exclude `mixpanel-recorder` if you do not intend to use session replay or want to reduce bundle size:\n+\n+To load the core SDK with no option of session recording:\n+```javascript\n+import mixpanel from 'mixpanel-browser/src/loaders/loader-module-core';\n ```\n \n-### Using Bower to load the snippet\n-You can then load the lib via the embed code (snippet) with a script reference:\n-```html\n-<script src=\"bower_components/mixpanel/mixpanel-jslib-snippet.min.js\"></script>\n+To load the core SDK and optionally load session recording and targeting bundles asynchronously (via script tag):\n+```javascript\n+import mixpanel from 'mixpanel-browser/src/loaders/loader-module-with-async-modules';\n ```\n-which loads the _latest_ library version from the Mixpanel CDN ([http://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js](http://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js)).\n \n-### Using Bower to load the entire library\n-If you wish to load the specific version downloaded in your Bower package, there are two options.\n+## Use as a browser JavaScript module\n+\n+If you are leveraging [browser JavaScript modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), you can use [`importmap`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type/importmap) to pull in this library.\n \n-1) Override the CDN library location with the global `MIXPANEL_CUSTOM_LIB_URL` var:\n ```html\n-<script>\n-  window.MIXPANEL_CUSTOM_LIB_URL = 'bower_components/mixpanel/mixpanel.js';\n+<script type=\"importmap\">\n+{\n+  \"imports\": {\n+    \"mixpanel-browser\": \"https://cdn.mxpnl.com/libs/mixpanel-js/dist/mixpanel.module.js\"\n+  }\n+}\n </script>\n-<script src=\"bower_components/mixpanel/mixpanel-jslib-snippet.min.js\"></script>\n+<script type=\"module\" src=\"main.js\"></script>\n ```\n-or\n \n-2) Recompile the snippet with a custom `MIXPANEL_LIB_URL` using [Closure Compiler](https://developers.google.com/closure/compiler/):\n-```sh\n-java -jar compiler.jar --js mixpanel-jslib-snippet.js --js_output_file mixpanel-jslib-snippet.min.js --compilation_level ADVANCED_OPTIMIZATIONS --define='MIXPANEL_LIB_URL=\"bower_components/mixpanel/mixpanel.js\"'\n+Then you are free to import `mixpanel-browser` in your javascript modules.\n+\n+```js\n+// main.js\n+import mixpanel from 'mixpanel-browser';\n+\n+mixpanel.init('YOUR_TOKEN', {autocapture: true, debug: true, persistence: 'localStorage'});\n+```\n+\n+## Visual experiments\n+\n+Enable both flag delivery and visual experiments to load production variants or shared preview links:\n+\n+```js\n+mixpanel.init('YOUR_TOKEN', {\n+  flags: true,\n+  visual_experiments: true,\n+});\n ```\n \n",
+					"match": false,
+					"packageHash": "7fc0b5432761f6e3e0a121376637f11436ca32c6c39560fa7c53e564686b1c8b",
+					"size": 3847,
+					"sourceHash": "8fe904d574ba52feb231989b75b7afb61d761e4978945b2804b5f0ddc6a3b9d2",
+					"status": "content"
+				},
+				"bower.json": {
+					"match": false,
+					"packageHash": "929f8cf03768f34db601ac7afe7f2572232b6cc9fea6b6557fc75b203cf0cd21",
+					"size": 409,
+					"status": "missing-in-source"
+				},
+				"build/mixpanel.amd.js": {
+					"match": false,
+					"packageHash": "f5ad2bb188105c36ec67b9129cfcfc78c21ab315714233b9f4a388c606d72006",
+					"size": 236738,
+					"status": "missing-in-source"
+				},
+				"build/mixpanel.cjs.js": {
+					"match": false,
+					"packageHash": "92a24d7c48f3467fecc292119ddc34c40299eb3c9ff94b5e47e4534ebd361bf1",
+					"size": 214726,
+					"status": "missing-in-source"
+				},
+				"build/mixpanel.globals.js": {
+					"match": false,
+					"packageHash": "48a3fef6b16f3200e845de065fafb78f6d73fd3e22f34b3f7daf097d6b08258f",
+					"size": 238150,
+					"status": "missing-in-source"
+				},
+				"build/mixpanel.umd.js": {
+					"match": false,
+					"packageHash": "f12d18ca4bad85e420677907bfae7246f136dd859799821cdd676f4d4437dd93",
+					"size": 236968,
+					"status": "missing-in-source"
+				},
+				"build.sh": {
+					"match": false,
+					"packageHash": "92599722cc22971d34a6c6d16384da944160d4a074fff21669ecd7c644f74a50",
+					"size": 1621,
+					"status": "missing-in-source"
+				},
+				"mixpanel-jslib-snippet.js": {
+					"match": false,
+					"packageHash": "e6f90721bc8ead704ec73a147614f691acedd84f2dc753a5d86a5bdd0dc9048a",
+					"size": 4362,
+					"status": "missing-in-source"
+				},
+				"mixpanel-jslib-snippet.min.js": {
+					"match": false,
+					"packageHash": "4f47195ad2c54fb4040a8e8edc9a4bff87c3d310ae2d88277d2a6e0226d61c5c",
+					"size": 1698,
+					"status": "missing-in-source"
+				},
+				"mixpanel-jslib-snippet.min.test.js": {
+					"match": false,
+					"packageHash": "f7f1be31c7e007b3a3f6cbccd52f6c1cfc8fe021088ce9fa522eb231b7df85ac",
+					"size": 1617,
+					"status": "missing-in-source"
+				},
+				"mixpanel.min.js": {
+					"match": false,
+					"packageHash": "b349861c7fd75987a2995685af37bab09833ff127cbbd0797d89866d0fd89b7c",
+					"size": 61631,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,20 +1,50 @@\n {\n   \"name\": \"mixpanel-browser\",\n-  \"version\": \"2.23.0-beta\",\n+  \"version\": \"2.86.0\",\n+  \"files\": [\n+    \"CHANGELOG.md\",\n+    \"dist\",\n+    \"doc\",\n+    \"LICENSE\",\n+    \"logo.svg\",\n+    \"package.json\",\n+    \"README.md\",\n+    \"src\"\n+  ],\n   \"description\": \"The official Mixpanel JavaScript browser client library\",\n-  \"main\": \"build/mixpanel.cjs.js\",\n+  \"main\": \"dist/mixpanel.cjs.js\",\n+  \"module\": \"dist/mixpanel.module.js\",\n   \"directories\": {\n     \"test\": \"tests\"\n   },\n   \"scripts\": {\n     \"build\": \"./build.sh\",\n-    \"integration_test\": \"echo 'Browse to localhost:3000/tests' && node testServer.js\",\n-    \"lint\": \"./node_modules/eslint/bin/eslint.js ./src\",\n+    \"build-watch\": \"npx rollup -c rollup.config.mjs -w\",\n+    \"build-watch:full\": \"FULL=1 npx rollup -c rollup.config.mjs -w\",\n+    \"build-dist\": \"DIST=1 ./build.sh\",\n+    \"build-full\": \"FULL=1 ./build.sh\",\n+    \"build-test-polyfill\": \"webpack tests/vendor/core-js-polyfills.src.js  tests/vendor/core-js-polyfills.js\",\n+    \"sbom\": \"cyclonedx-npm --omit dev --mc-type library --validate --output-reproducible --output-format JSON --output-file dist/mixpanel-browser.cdx.json\",\n+    \"build-browser-tests\": \"npx rollup -c tests/browser/client/rollup.config.mjs -w\",\n+    \"build-docs\": \"typedoc --options doc/typedoc.json\",\n+    \"test-server\": \"echo 'Browse to localhost:3001/tests' && node testServer.js\",\n+    \"test-server:background\": \"screen -S testServer -X stuff $^C; screen -X -S testServer quit; screen -d -m -S testServer bash -c 'npm run test-server; exec bash' && wait-on --timeout 10000 http://localhost:3001/tests\",\n+    \"lint\": \"eslint ./src\",\n+    \"lint-fix\": \"eslint --fix ./src && eslint --fix ./tests/browser\",\n+    \"prepublishOnly\": \"npm run build-dist\",\n     \"start\": \"pushd examples; python -m SimpleHTTPServer; popd\",\n     \"test\": \"npm run lint && npm run unit-test\",\n-    \"unit-test\": \"BABEL_ENV=test ./node_modules/mocha/bin/mocha --compilers js:babel-core/register tests/unit/*.js\",\n+    \"test:ci\": \"npm run lint && npm run unit-test:ci\",\n+    \"unit-test\": \"BABEL_ENV=test mocha --require babel-core/register tests/unit/*.js\",\n+    \"unit-test:ci\": \"BABEL_ENV=test mocha --require babel-core/register tests/unit/*.js --reporter json --reporter-option output=tests/unit/results/results.json\",\n+    \"integration-test:local\": \"wdio run tests/browser/wdio.local.mjs\",\n+    \"integration-test:local:watch\": \"wdio run tests/browser/wdio.local.mjs --watch\",\n+    \"integration-test:sauce\": \"wdio run tests/browser/wdio.sauce.mjs\",\n+    \"integration-test\": \"DEV=1 npm run integration-test:local:watch\",\n+    \"integration-test:full\": \"npm run integration-test:local:watch\",\n     \"validate\": \"npm ls\"\n   },\n+  \"types\": \"./src/index.d.ts\",\n   \"repository\": {\n     \"type\": \"git\",\n     \"url\": \"https://github.com/mixpanel/mixpanel-js.git\"\n@@ -26,29 +56,56 @@\n   },\n   \"homepage\": \"https://github.com/mixpanel/mixpanel-js\",\n   \"devDependencies\": {\n-    \"babel\": \"6.5.2\",\n+    \"@ampproject/rollup-plugin-closure-compiler\": \"0.27.0\",\n+    \"@cyclonedx/cyclonedx-npm\": \"6.0.1\",\n+    \"@rollup/plugin-alias\": \"5.1.1\",\n+    \"@rollup/plugin-commonjs\": \"28.0.3\",\n+    \"@rollup/plugin-node-resolve\": \"15.2.3\",\n+    \"@rollup/plugin-swc\": \"0.4.0\",\n+    \"@swc/core\": \"1.11.7\",\n+    \"@wdio/cli\": \"9.12.0\",\n+    \"@wdio/junit-reporter\": \"9.12.2\",\n+    \"@wdio/local-runner\": \"9.12.0\",\n+    \"@wdio/mocha-framework\": \"9.11.0\",\n+    \"@wdio/sauce-service\": \"9.21.0\",\n+    \"@wdio/spec-reporter\": \"9.11.0\",\n     \"babel-core\": \"6.7.2\",\n     \"babel-preset-es2015\": \"6.6.0\",\n     \"babelify\": \"6.1.2\",\n     \"browserify\": \"10.2.4\",\n-    \"chai\": \"3.5.0\",\n+    \"chai\": \"4.0.0\",\n+    \"chromedriver\": \"134.0.3\",\n     \"cookie-parser\": \"1.3.4\",\n-    \"eslint\": \"2.4.0\",\n-    \"express\": \"4.12.2\",\n-    \"jsdom\": \"11.12.0\",\n+    \"core-js\": \"3.6.5\",\n+    \"eslint\": \"4.18.2\",\n+    \"express\": \"5.2.1\",\n+    \"fake-indexeddb\": \"6.0.0\",\n+    \"jsdom\": \"16.5.0\",\n     \"jsdom-global\": \"3.0.2\",\n-    \"mocha\": \"2.4.5\",\n-    \"morgan\": \"1.5.2\",\n-    \"precommit-hook\": \"3.0.0\",\n+    \"localStorage\": \"1.0.4\",\n+    \"lodash\": \"4.17.21\",\n+    \"mocha\": \"11.1.0\",\n+    \"morgan\": \"1.9.1\",\n",
+					"match": false,
+					"packageHash": "3f6877467060790f0209af37a82357aecf7d5d021215c307997610443fd444bb",
+					"size": 1524,
+					"sourceHash": "3c57c7a910338661a745c8202185ce29a8b51facdf89a2a3c24fa4ac89963212",
+					"status": "content"
+				},
+				"rollup.config.js": {
+					"match": false,
+					"packageHash": "6395ea7c65dcf1fda8d00765f4548ccd746c465e8b287cc62434fc4d8c7cc5ac",
+					"size": 180,
+					"status": "missing-in-source"
+				},
+				"src/autotrack-utils.js": {
+					"match": false,
+					"packageHash": "c9f6af869593c37fbca174002e674221b213aad8ff9b610f324b87fd1c3cfa72",
+					"size": 7036,
+					"status": "missing-in-source"
+				},
+				"src/autotrack.js": {
+					"match": false,
+					"packageHash": "74510c3649c2f11a65bc355d9c9e59f32629fa1bc65e4e5751eafd81cab9d9f9",
+					"size": 13498,
+					"status": "missing-in-source"
+				},
+				"src/config.js": {
+					"diff": "--- published/src/config.js\n+++ rebuilt/src/config.js\n@@ -1,6 +1,12 @@\n-var Config = {\n+export var Config = {\n     DEBUG: false,\n-    LIB_VERSION: '2.23.0-beta'\n+    LIB_VERSION: '2.86.0'\n };\n \n-export default Config;\n+// Window global names for async modules\n+export var TARGETING_GLOBAL_NAME = '__mp_targeting';\n+export var RECORDER_GLOBAL_NAME = '__mp_recorder';\n+\n+// Constants that are injected at build-time for the names of async modules.\n+export var RECORDER_FILENAME = '__MP_RECORDER_FILENAME__';\n+export var TARGETING_FILENAME = '__MP_TARGETING_FILENAME__';\n",
+					"match": false,
+					"packageHash": "2054305ce14ef8aade7b25b10143cc787740a587532fd2e20341d766fc052d4a",
+					"size": 91,
+					"sourceHash": "779b8cf841008826489a773b113acc94c088c03a3cc863d8f5f5edc6049fca64",
+					"status": "content"
+				},
+				"src/gdpr-utils.js": {
+					"match": false,
+					"packageHash": "5c9d19c359784c34d607e50b6c6f75b3627399feafaacbede19042458ec9f09c",
+					"size": 11541,
+					"status": "missing-in-source"
+				},
+				"src/loader-globals.js": {
+					"match": false,
+					"packageHash": "a17874185b11d5dabc4f72edba4ad2753bdde4ee6f768f888d83a08f5e1c6f64",
+					"size": 105,
+					"status": "missing-in-source"
+				},
+				"src/loader-module.js": {
+					"match": false,
+					"packageHash": "20e1d99b776c8ff637347c9f6f8289fdcedf92d1ef328a831ab1f069ffec4d14",
+					"size": 140,
+					"status": "missing-in-source"
+				},
+				"src/mixpanel-core.js": {
+					"diff": "--- published/src/mixpanel-core.js\n+++ rebuilt/src/mixpanel-core.js\n@@ -1,16 +1,21 @@\n /* eslint camelcase: \"off\" */\n-import Config from './config';\n-import { _, console, userAgent, window, document } from './utils';\n-import { autotrack } from './autotrack';\n+import {Config, TARGETING_FILENAME} from './config';\n+import { MAX_RECORDING_MS, _, console, userAgent, document, navigator, slice, NOOP_FUNC, JSONStringify, safewrap } from './utils';\n+import { window } from './window';\n+import { Autocapture } from './autocapture';\n+import { FeatureFlagManager } from './flags';\n+import { VisualExperimentsManager } from './visual-experiments';\n+import { RecorderManager } from './recorder-manager';\n+import { FormTracker, LinkTracker } from './dom-trackers';\n+import { RequestBatcher } from './request-batcher';\n+import { MixpanelGroup } from './mixpanel-group';\n+import { MixpanelPeople } from './mixpanel-people';\n import {\n-    optIn,\n-    optOut,\n-    hasOptedIn,\n-    hasOptedOut,\n-    clearOptInOut,\n-    addOptOutCheckMixpanelLib,\n-    addOptOutCheckMixpanelPeople\n-} from './gdpr-utils';\n+    MixpanelPersistence,\n+    PEOPLE_DISTINCT_ID_KEY,\n+    ALIAS_ID_KEY\n+} from './mixpanel-persistence';\n+import { ConsentManager } from './consent-manager';\n \n /*\n  * Mixpanel JS Library\n@@ -24,11 +29,6 @@\n  * Released under the MIT License.\n  */\n \n-// ==ClosureCompiler==\n-// @compilation_level ADVANCED_OPTIMIZATIONS\n-// @output_file_name mixpanel-2.8.min.js\n-// ==/ClosureCompiler==\n-\n /*\n SIMPLE STYLE GUIDE:\n \n@@ -40,74 +40,89 @@\n */\n \n var init_type;       // MODULE or SNIPPET loader\n+// allow bundlers to specify how extra code (recorder bundle) should be loaded\n+// eslint-disable-next-line no-unused-vars\n+var load_extra_bundle = function(src, _onload) {\n+    throw new Error(src + ' not available in this build.');\n+};\n+\n var mixpanel_master; // main mixpanel instance / object\n var INIT_MODULE  = 0;\n var INIT_SNIPPET = 1;\n \n-/*\n- * Constants\n- */\n-/** @const */   var PRIMARY_INSTANCE_NAME     = 'mixpanel';\n-/** @const */   var SET_QUEUE_KEY             = '__mps';\n-/** @const */   var SET_ONCE_QUEUE_KEY        = '__mpso';\n-/** @const */   var UNSET_QUEUE_KEY           = '__mpus';\n-/** @const */   var ADD_QUEUE_KEY             = '__mpa';\n-/** @const */   var APPEND_QUEUE_KEY          = '__mpap';\n-/** @const */   var UNION_QUEUE_KEY           = '__mpu';\n-/** @const */   var SET_ACTION                = '$set';\n-/** @const */   var SET_ONCE_ACTION           = '$set_once';\n-/** @const */   var UNSET_ACTION              = '$unset';\n-/** @const */   var ADD_ACTION                = '$add';\n-/** @const */   var APPEND_ACTION             = '$append';\n-/** @const */   var UNION_ACTION              = '$union';\n-// This key is deprecated, but we want to check for it to see whether aliasing is allowed.\n-/** @const */   var PEOPLE_DISTINCT_ID_KEY    = '$people_distinct_id';\n-/** @const */   var ALIAS_ID_KEY              = '__alias';\n-/** @const */   var CAMPAIGN_IDS_KEY          = '__cmpns';\n-/** @const */   var EVENT_TIMERS_KEY          = '__timers';\n-/** @const */   var RESERVED_PROPERTIES       = [\n-    SET_QUEUE_KEY,\n-    SET_ONCE_QUEUE_KEY,\n-    UNSET_QUEUE_KEY,\n-    ADD_QUEUE_KEY,\n-    APPEND_QUEUE_KEY,\n-    UNION_QUEUE_KEY,\n-    PEOPLE_DISTINCT_ID_KEY,\n-    ALIAS_ID_KEY,\n-    CAMPAIGN_IDS_KEY,\n-    EVENT_TIMERS_KEY\n-];\n+/** @const */ var PRIMARY_INSTANCE_NAME = 'mixpanel';\n+/** @const */ var PAYLOAD_TYPE_BASE64   = 'base64';\n+/** @const */ var PAYLOAD_TYPE_JSON     = 'json';\n+/** @const */ var DEVICE_ID_PREFIX      = '$device:';\n+/** @const */ var SETTING_STRICT        = 'strict';\n+/** @const */ var SETTING_FALLBACK      = 'fallback';\n",
+					"match": false,
+					"packageHash": "ac4698d418823dfa4fbab3d39c8896668c88d418d8e7d6af065f90f0b0171048",
+					"size": 134882,
+					"sourceHash": "ef5e0bcda0bb2eb2afb81ea3f758fa966aa46bbda4d5209ffa33af91ce975a78",
+					"status": "content"
+				},
+				"src/utils.js": {
+					"diff": "--- published/src/utils.js\n+++ rebuilt/src/utils.js\n@@ -1,26 +1,16 @@\n /* eslint camelcase: \"off\", eqeqeq: \"off\" */\n-import Config from './config';\n-\n-// since es6 imports are static and we run unit tests from the console, window won't be defined when importing this file\n-var win;\n-if (typeof(window) === 'undefined') {\n-    var loc = {\n-        hostname: ''\n-    };\n-    win = {\n-        navigator: { userAgent: '' },\n-        document: {\n-            location: loc,\n-            referrer: ''\n-        },\n-        screen: { width: 0, height: 0 },\n-        location: loc\n-    };\n-} else {\n-    win = window;\n-}\n-\n-\n+import { Config } from './config';\n+import { NpoPromise, Promise } from './promise-polyfill';\n+import { window } from './window';\n+\n+// Maximum allowed session recording length\n+var MAX_RECORDING_MS = 24 * 60 * 60 * 1000; // 24 hours\n+// Maximum allowed value for minimum session recording length\n+var MAX_VALUE_FOR_MIN_RECORDING_MS = 8 * 1000; // 8 seconds\n+\n+var EV_HASHCHANGE = 'hashchange';\n+var EV_MP_LOCATION_CHANGE = 'mp_locationchange';\n+var EV_POPSTATE = 'popstate';\n \n /*\n  * Saved references to long variable names, so that closure compiler can\n@@ -33,29 +23,25 @@\n     slice = ArrayProto.slice,\n     toString = ObjProto.toString,\n     hasOwnProperty = ObjProto.hasOwnProperty,\n-    windowConsole = win.console,\n-    navigator = win.navigator,\n-    document = win.document,\n-    windowOpera = win.opera,\n-    screen = win.screen,\n+    windowConsole = window.console,\n+    navigator = window.navigator,\n+    document = window.document,\n+    windowOpera = window.opera,\n+    screen = window.screen,\n     userAgent = navigator.userAgent;\n \n var nativeBind = FuncProto.bind,\n     nativeForEach = ArrayProto.forEach,\n     nativeIndexOf = ArrayProto.indexOf,\n+    nativeMap = ArrayProto.map,\n     nativeIsArray = Array.isArray,\n     breaker = {};\n \n-var _ = {\n-    trim: function(str) {\n-        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim#Polyfill\n-        return str.replace(/^[\\s\\uFEFF\\xA0]+|[\\s\\uFEFF\\xA0]+$/g, '');\n-    }\n-};\n+var _ = {};\n \n // Console override\n var console = {\n-    /** @type {function(...[*])} */\n+    /** @type {function(...*)} */\n     log: function() {\n         if (Config.DEBUG && !_.isUndefined(windowConsole) && windowConsole) {\n             try {\n@@ -67,7 +53,20 @@\n             }\n         }\n     },\n-    /** @type {function(...[*])} */\n+    /** @type {function(...*)} */\n+    warn: function() {\n+        if (Config.DEBUG && !_.isUndefined(windowConsole) && windowConsole) {\n+            var args = ['Mixpanel warning:'].concat(_.toArray(arguments));\n+            try {\n+                windowConsole.warn.apply(windowConsole, args);\n+            } catch (err) {\n+                _.each(args, function(arg) {\n+                    windowConsole.warn(arg);\n+                });\n+            }\n+        }\n+    },\n+    /** @type {function(...*)} */\n     error: function() {\n         if (Config.DEBUG && !_.isUndefined(windowConsole) && windowConsole) {\n",
+					"match": false,
+					"packageHash": "15207da839a8b36b09aa9703dae6d4f8d2fd5bdd3a28bddb6e063deb7565a4a5",
+					"size": 50475,
+					"sourceHash": "f6a85d8cebe5383af43fb9878f1cafc13e30c5db04821c0a77fc0c51ad33184e",
+					"status": "content"
+				},
+				"testServer.js": {
+					"match": false,
+					"packageHash": "e0e51c04e5a2a909c7a1fdc2c9843466e9e5bf22f4c6cd8ae12bfcd439e75886",
+					"size": 697,
+					"status": "missing-in-source"
+				},
+				"dist/async-modules/mixpanel-recorder-DFwi_jd3.min.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/async-modules/mixpanel-recorder-DFwi_jd3.min.js.map": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/async-modules/mixpanel-recorder-DcVGzPDw.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/async-modules/mixpanel-targeting-Df1HAI3P.min.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/async-modules/mixpanel-targeting-Df1HAI3P.min.js.map": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/async-modules/mixpanel-targeting-ihPaPy9a.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/mixpanel-browser.cdx.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/mixpanel-core.cjs.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/mixpanel-core.cjs.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/mixpanel-js-wrapper.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/mixpanel-js-wrapper.min.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/mixpanel-jslib-snippet.min.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/mixpanel-jslib-snippet.min.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/mixpanel-recorder.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/mixpanel-recorder.min.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/mixpanel-recorder.min.js.map": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/mixpanel-targeting.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/mixpanel-targeting.min.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/mixpanel-targeting.min.js.map": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/mixpanel-with-async-modules.cjs.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/mixpanel-with-async-modules.cjs.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/mixpanel-with-async-recorder.cjs.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/mixpanel-with-async-recorder.cjs.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/mixpanel-with-recorder.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/mixpanel-with-recorder.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/mixpanel-with-recorder.min.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/mixpanel-with-recorder.min.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/mixpanel.amd.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/mixpanel.amd.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/mixpanel.cjs.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/mixpanel.cjs.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/mixpanel.globals.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/mixpanel.min.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/mixpanel.module.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/mixpanel.module.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/mixpanel.umd.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/mixpanel.umd.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/rrweb-bundled.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"dist/rrweb-compiled.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"doc/readme.io/javascript-full-api-reference.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"doc/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"doc/typedoc-plugin.mjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"doc/typedoc.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"logo.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/api-actions.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/autocapture/deadclick.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/autocapture/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/autocapture/rageclick.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/autocapture/shadow-dom-observer.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/autocapture/utils.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/consent-decisions.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/consent-gate.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/consent-manager.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/consent-modes.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/dom-trackers.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/externs.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/flags/CLAUDE.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/flags/flags-persistence.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/flags/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/index.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/loaders/bundle-loaders.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/loaders/loader-globals-with-recorder.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/loaders/loader-globals.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/loaders/loader-module-core.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/loaders/loader-module-core.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/loaders/loader-module-with-async-modules.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/loaders/loader-module-with-async-modules.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/loaders/loader-module.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/loaders/loader-module.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/loaders/mixpanel-js-wrapper.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/loaders/mixpanel-js-wrapper.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/loaders/mixpanel-jslib-snippet.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/mixpanel-group.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/mixpanel-people.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/mixpanel-persistence.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/navigation.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/opt-out-flag-decisions.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/opt-out-flag.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/promise-polyfill.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/recorder/idb-config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/recorder/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/recorder/masking.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/recorder/recorder.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/recorder/recording-registry.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/recorder/rrweb-entrypoint.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/recorder/rrweb-network-plugin.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/recorder/session-recording.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/recorder/utils.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/recorder-manager.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/request-batcher.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/request-queue.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/shared-lock.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/storage/indexed-db.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/storage/local-storage.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/storage/wrapper.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/targeting/custom-operators.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/targeting/event-matcher.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/targeting/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/targeting/loader.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/visual-experiments/anti-flicker.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/visual-experiments/engine.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/visual-experiments/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/window.js": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 7,
+				"matchingFiles": 0,
+				"missingInPackage": 103,
+				"missingInSource": 20,
+				"score": 0,
+				"totalFiles": 130
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "@mixpanel/rrdom",
+				"version": "2.0.0-alpha.18"
+			},
+			{
+				"name": "@mixpanel/rrweb",
+				"version": "2.0.0-alpha.18.6"
+			},
+			{
+				"name": "@mixpanel/rrweb-plugin-console-record",
+				"version": "2.0.0-alpha.18.6"
+			},
+			{
+				"name": "@mixpanel/rrweb-snapshot",
+				"version": "2.0.0-alpha.18"
+			},
+			{
+				"name": "@mixpanel/rrweb-types",
+				"version": "2.0.0-alpha.18"
+			},
+			{
+				"name": "@mixpanel/rrweb-utils",
+				"version": "2.0.0-alpha.18.6"
+			},
+			{
+				"name": "@types/css-font-loading-module",
+				"version": "0.0.7"
+			},
+			{
+				"name": "@types/json-logic-js",
+				"version": "2.0.5"
+			},
+			{
+				"name": "@xstate/fsm",
+				"version": "1.6.5"
+			},
+			{
+				"name": "base64-arraybuffer",
+				"version": "1.0.2"
+			},
+			{
+				"name": "json-logic-js",
+				"version": "2.0.5"
+			},
+			{
+				"name": "mitt",
+				"version": "3.0.1"
+			},
+			{
+				"name": "nanoid",
+				"version": "3.3.18"
+			},
+			{
+				"name": "picocolors",
+				"version": "1.1.1"
+			},
+			{
+				"name": "postcss",
+				"version": "8.5.26"
+			},
+			{
+				"name": "source-map-js",
+				"version": "1.2.1"
+			}
+		]
+	}
+]
