@@ -1,0 +1,117 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-22T02:11:37.801Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:12.2.3",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "di@0.0.0",
+			"name": "di",
+			"version": "0.0.0",
+			"location": "https://registry.npmjs.org/di/-/di-0.0.0.tgz",
+			"integrity": "sha512-GXADrA3vrNSXbuKvAPyKp+9e/IMxnXd7eJlp99uoOHPbyYeSnxMkQJpyJX5uSNnkLhHXZChA52SawD+emSD4iw==",
+			"publishedAt": "2013-01-24T17:46:06.848Z",
+			"publishedWith": {
+				"node": null,
+				"npm": "1.1.63"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git://github.com/vojtajina/node-di.git",
+			"spec": "github:vojtajina/node-di#HEAD"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".npmignore": {
+					"match": false,
+					"packageHash": "16d30e4462189fb14dd611bdb708c510630c576a1f35b9383e89a4352da36c97",
+					"size": 13,
+					"status": "missing-in-source"
+				},
+				".travis.yml": {
+					"match": false,
+					"packageHash": "dd4ea4ffdb74a2b8a30f5400050c63dd63af59484899e4f3458e8ca34805e95a",
+					"size": 57,
+					"status": "missing-in-source"
+				},
+				"di.sublime-project": {
+					"match": false,
+					"packageHash": "82bad998ced233986b3e245f206c2ddaedab793b499499423a27e01305e2d3c5",
+					"size": 287,
+					"status": "missing-in-source"
+				},
+				"di.sublime-workspace": {
+					"match": false,
+					"packageHash": "5979a35580ea826e0495e5c3421372ac6e00092ecab5681b46555d1b21c73170",
+					"size": 33085,
+					"status": "missing-in-source"
+				},
+				"lib/index.js": {
+					"diff": "--- published/lib/index.js\n+++ rebuilt/lib/index.js\n@@ -1,4 +1,5 @@\n module.exports = {\n+  annotate: require('./annotation').annotate,\n   Module: require('./module'),\n   Injector: require('./injector')\n };\n",
+					"match": false,
+					"packageHash": "93d4cba98e99ab2e130a8431f6ec1826b3c7d55d6939d4d839ddd8c8fa82b0ed",
+					"size": 87,
+					"sourceHash": "af4b64e27ed8676c281d6b456abc9499ea1364e33e149b369e6738be4e19e311",
+					"status": "content"
+				},
+				"lib/injector.js": {
+					"diff": "--- published/lib/injector.js\n+++ rebuilt/lib/injector.js\n@@ -1,13 +1,58 @@\n-var Injector = function(module) {\n-  var providers = {};\n-  var instances = {};\n+var Module = require('./module');\n+var autoAnnotate = require('./annotation').parse;\n+var annotate = require('./annotation').annotate;\n+\n+\n+var Injector = function(modules, parent) {\n+  parent = parent || {\n+    get: function(name) {\n+      currentlyResolving.push(name);\n+      throw error('No provider for \"' + name + '\"!');\n+    }\n+  };\n+\n+  var currentlyResolving = [];\n+  var providers = this._providers = Object.create(parent._providers || null);\n+  var instances = this._instances = Object.create(null);\n+\n+  var self = instances.injector = this;\n+\n+  var error = function(msg) {\n+    var stack = currentlyResolving.join(' -> ');\n+    currentlyResolving.length = 0;\n+    return new Error(stack ? msg + ' (Resolving: ' + stack + ')' : msg);\n+  };\n \n   var get = function(name) {\n-    if (!instances.hasOwnProperty(name)) {\n+    if (!providers[name] && name.indexOf('.') !== -1) {\n+      var parts = name.split('.');\n+      var pivot = get(parts.shift());\n+\n+      while(parts.length) {\n+        pivot = pivot[parts.shift()];\n+      }\n+\n+      return pivot;\n+    }\n+\n+    if (Object.hasOwnProperty.call(instances, name)) {\n+      return instances[name];\n+    }\n+\n+    if (Object.hasOwnProperty.call(providers, name)) {\n+      if (currentlyResolving.indexOf(name) !== -1) {\n+        currentlyResolving.push(name);\n+        throw error('Can not resolve circular dependency!');\n+      }\n+\n+      currentlyResolving.push(name);\n       instances[name] = providers[name][0](providers[name][1]);\n+      currentlyResolving.pop();\n+\n+      return instances[name];\n     }\n \n-    return instances[name];\n+    return parent.get(name);\n   };\n \n   var instantiate = function(Type) {\n@@ -18,14 +63,87 @@\n   };\n \n   var invoke = function(fn, context) {\n-    var dependencies = fn.$inject && fn.$inject.map(function(dep) {\n+    if (typeof fn !== 'function') {\n+      throw error('Can not invoke \"' + fn + '\". Expected a function!');\n+    }\n+\n+    var inject = fn.$inject || autoAnnotate(fn);\n+    var dependencies = inject.map(function(dep) {\n       return get(dep);\n-    }) || [];\n+    });\n \n     // TODO(vojta): optimize without apply\n     return fn.apply(context, dependencies);\n   };\n \n+\n+  var createPrivateInjectorFactory = function(privateChildInjector) {\n+    return annotate(function(key) {\n+      return privateChildInjector.get(key);\n+    });\n+  };\n+\n+  var createChild = function(modules, forceNewInstances) {\n+    if (forceNewInstances && forceNewInstances.length) {\n+      var fromParentModule = Object.create(null);\n+      var matchedScopes = Object.create(null);\n+\n+      var privateInjectorsCache = [];\n+      var privateChildInjectors = [];\n+      var privateChildFactories = [];\n",
+					"match": false,
+					"packageHash": "a21fefb5b986128e722e51724f4c288c7ced01005ab3aea761cca5194c53491e",
+					"size": 1123,
+					"sourceHash": "9d5539bbfadd59bdf037c31a0742634a3fbe5327d774dcc30153f9084d804832",
+					"status": "content"
+				},
+				"lib/module.js": {
+					"diff": "--- published/lib/module.js\n+++ rebuilt/lib/module.js\n@@ -3,14 +3,17 @@\n \n   this.factory = function(name, factory) {\n     providers.push([name, 'factory', factory]);\n+    return this;\n   };\n \n   this.value = function(name, value) {\n     providers.push([name, 'value', value]);\n+    return this;\n   };\n \n   this.type = function(name, type) {\n     providers.push([name, 'type', type]);\n+    return this;\n   };\n \n   this.forEach = function(iterator) {\n",
+					"match": false,
+					"packageHash": "164e04e52dbbb76b3dd0abd164b4203872a2ea539e2679a65d933854dfbc86ab",
+					"size": 425,
+					"sourceHash": "6e0220f34f2e8c9abefaef254a548b6d0623fdfc0ec737e897cda6508afde652",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,6 +1,6 @@\n {\n   \"name\": \"di\",\n-  \"version\": \"0.0.0\",\n+  \"version\": \"0.0.1\",\n   \"description\": \"Dependency Injection for Node.js. Heavily inspired by AngularJS.\",\n   \"main\": \"lib/index.js\",\n   \"scripts\": {\n@@ -17,9 +17,12 @@\n     \"injector\"\n   ],\n   \"devDependencies\": {\n-    \"mocha\": \"1.8.1\",\n-    \"chai\": \"1.4.2\",\n-    \"coffee-script\": \"1.4.0\"\n+    \"grunt\": \"~0.4\",\n+    \"grunt-simple-mocha\": \"~0.4\",\n+    \"grunt-contrib-jshint\": \"~0.6\",\n+    \"mocha\": \"~1.12\",\n+    \"chai\": \"~1.7\",\n+    \"coffee-script\": \"~1.6\"\n   },\n   \"author\": \"Vojta Jina <vojta.jina@gmail.com>\",\n   \"license\": \"MIT\"\n",
+					"match": false,
+					"packageHash": "2c8d25e797b6bd17d8aa2e4ec3f9efe14015af41129736f1aa81196b772086f3",
+					"size": 576,
+					"sourceHash": "1b779d244692d0d366f5756b8c71d7831d5f4c7dbf0224347b08459417144646",
+					"status": "content"
+				},
+				"test/injector.spec.coffee": {
+					"match": false,
+					"packageHash": "850491848256b6b8f4736f0fa64a525ae9c81fe62eb6f02132c53f83ee9291c5",
+					"size": 3742,
+					"status": "missing-in-source"
+				},
+				"LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/annotation.js": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 4,
+				"matchingFiles": 0,
+				"missingInPackage": 3,
+				"missingInSource": 5,
+				"score": 0,
+				"totalFiles": 12
+			}
+		},
+		"prodDependencies": []
+	}
+]
