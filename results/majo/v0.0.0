@@ -1,0 +1,186 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-22T18:43:33.577Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:3.10.8",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "majo@0.0.0",
+			"name": "majo",
+			"version": "0.0.0",
+			"location": "https://registry.npmjs.org/majo/-/majo-0.0.0.tgz",
+			"integrity": "sha512-esszb/nBIJ9jf7mocgfqvzWi4IR8sRVYfqiKmW4sJB1W3KNT12WwYK2Y0qKphd+YQUT2stqII9yt1y72XMXxsw==",
+			"publishedAt": "2017-02-22T13:28:30.676Z",
+			"publishedWith": {
+				"node": "7.0.0",
+				"npm": "3.10.8"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/egoist/majo.git",
+			"spec": "github:egoist/majo#HEAD"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,6 +1,16 @@\n # majo\n \n-[![NPM version](https://img.shields.io/npm/v/majo.svg?style=flat)](https://npmjs.com/package/majo) [![NPM downloads](https://img.shields.io/npm/dm/majo.svg?style=flat)](https://npmjs.com/package/majo) [![Build Status](https://img.shields.io/circleci/project/egoist/majo/master.svg?style=flat)](https://circleci.com/gh/egoist/majo) [![donate](https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&style=flat)](https://github.com/egoist/donate)\n+<a href=\"https://www.pixiv.net/member_illust.php?mode=medium&illust_id=62542828\">\n+<img src=\"https://ooo.0o0.ooo/2017/04/27/59016709425c9.jpg\" width=\"300\" />\n+</a>\n+\n+_Art by [でんでん COMIC1・こ 24b](https://www.pixiv.net/member.php?id=12192)_\n+\n+[![NPM version](https://img.shields.io/npm/v/majo.svg?style=flat)](https://npmjs.com/package/majo) [![NPM downloads](https://img.shields.io/npm/dm/majo.svg?style=flat)](https://npmjs.com/package/majo) [![CircleCI](https://circleci.com/gh/egoist/majo/tree/master.svg?style=shield&circle-token=560404744e167900959a512d617a05ec5240616f)](https://circleci.com/gh/egoist/majo/tree/master) [![donate](https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&style=flat)](https://github.com/egoist/donate)\n+\n+## Introduction\n+\n+You can use _majo_ to manipulate files like a pro, with a simple API whose core is only ≈ 150 SLOC.\n \n ## Install\n \n@@ -11,12 +21,38 @@\n ## Usage\n \n ```js\n-const majo = require('majo')\n+const { majo } = require('majo')\n+\n+const stream = majo()\n \n-majo()\n-//=> foo\n+// Given that you have js/app.js js/index.js\n+stream\n+  .source('js/**')\n+  .use(ignoreSomeFiles)\n+  .dest('dist')\n+  .then(() => {\n+    // Now you got filtered files\n+  })\n+\n+function ignoreSomeFiles(stream) {\n+  for (const filename in stream.files) {\n+    const content = stream.fileContents(filename)\n+    // Remove it if content has specific string\n+    if (/some-string/.test(content)) {\n+      delete stream.files[filename]\n+    }\n+  }\n+}\n ```\n \n+## Documentation\n+\n+https://majo.egoist.sh\n+\n+## Used By\n+\n+- [SAO](https://github.com/egoist/sao): ⚔️ Futuristic scaffolding tool.\n+\n ## Contributing\n \n 1. Fork it!\n@@ -25,10 +61,9 @@\n 4. Push to the branch: `git push origin my-new-feature`\n 5. Submit a pull request :D\n \n-\n ## Author\n \n **majo** © [egoist](https://github.com/egoist), Released under the [MIT](./LICENSE) License.<br>\n Authored and maintained by egoist with help from contributors ([list](https://github.com/egoist/majo/contributors)).\n \n-> [egoistian.com](https://egoistian.com) · GitHub [@egoist](https://github.com/egoist) · Twitter [@rem_rin_rin](https://twitter.com/rem_rin_rin)\n+> [egoist.moe](https://egoist.moe) · GitHub [@egoist](https://github.com/egoist) · Twitter [@\\_egoistlily](https://twitter.com/_egoistlily)\n",
+					"match": false,
+					"packageHash": "66bffeae102a5e0e0eea1291aa5ceadc6a624d0df4d3c64587a28a3a541b008c",
+					"size": 1181,
+					"sourceHash": "04b7e86b66443d67b644d4bb33649f3d0a03ef0f3ab645cec5f50e273b5416ca",
+					"status": "content"
+				},
+				"index.js": {
+					"match": false,
+					"packageHash": "d8ee12c6d4f2bcb6e7555a2a772b843d8aee8d930a7f77794e65148f874557d3",
+					"size": 197,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,33 +1,55 @@\n {\n   \"name\": \"majo\",\n-  \"version\": \"0.0.0\",\n-  \"description\": \"Magical JavaScript Bundler.\",\n+  \"version\": \"0.0.0-semantic-release\",\n+  \"description\": \"A minimal module to manipulate files.\",\n   \"repository\": {\n     \"url\": \"egoist/majo\",\n     \"type\": \"git\"\n   },\n-  \"main\": \"index.js\",\n+  \"main\": \"dist/index.js\",\n+  \"types\": \"dist/index.d.ts\",\n   \"files\": [\n-    \"index.js\"\n+    \"dist\"\n   ],\n   \"scripts\": {\n-    \"test\": \"jest && npm run lint\",\n-    \"lint\": \"xo\"\n+    \"test\": \"jest\",\n+    \"prepublishOnly\": \"npm run build\",\n+    \"build\": \"rollup -c\",\n+    \"format\": \"prettier *.{js,md,json,ts} --write\",\n+    \"typedoc\": \"typedoc src --out typedoc --theme minimal --mode file --excludeExternals --excludePrivate --excludeProtected\"\n   },\n   \"author\": \"egoist <0x142857@gmail.com>\",\n   \"license\": \"MIT\",\n-  \"jest\": {\n-    \"testEnvironment\": \"node\"\n+  \"lint-staged\": {\n+    \"*.{js,md,json,ts}\": [\n+      \"prettier --write\",\n+      \"git add\"\n+    ]\n+  },\n+  \"husky\": {\n+    \"hooks\": {\n+      \"pre-commit\": \"lint-staged\"\n+    }\n   },\n   \"devDependencies\": {\n-    \"jest-cli\": \"^18.1.0\",\n-    \"xo\": \"^0.17.1\"\n+    \"@types/fs-extra\": \"^8.0.1\",\n+    \"@types/jest\": \"^24.0.23\",\n+    \"@types/mkdirp\": \"^1.0.0\",\n+    \"@types/node\": \"^12.12.7\",\n+    \"@types/rimraf\": \"^3.0.0\",\n+    \"husky\": \"^3.0.9\",\n+    \"jest\": \"^24.9.0\",\n+    \"lint-staged\": \"^9.4.3\",\n+    \"prettier\": \"^1.19.1\",\n+    \"rollup\": \"^1.27.0\",\n+    \"rollup-plugin-typescript2\": \"^0.25.2\",\n+    \"ts-jest\": \"^24.1.0\",\n+    \"typedoc\": \"^0.15.1\",\n+    \"typescript\": \"^3.7.2\"\n   },\n-  \"xo\": {\n-    \"space\": 2,\n-    \"semicolon\": false,\n-    \"envs\": [\n-      \"jest\"\n-    ]\n+  \"dependencies\": {\n+    \"fast-glob\": \"^3.1.0\",\n+    \"mkdirp\": \"^1.0.4\",\n+    \"rimraf\": \"^3.0.2\"\n   }\n }\n",
+					"match": false,
+					"packageHash": "10343e54a55388e3c6970d4dcf87e5785831a36c636bdf54f9b0ecbf9a7e3eca",
+					"size": 559,
+					"sourceHash": "1e7cf890b8184650468d39a1ccc0b8ecbab0589a8ca58e7d830eb61cb346696b",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 1,
+				"missingInPackage": 0,
+				"missingInSource": 1,
+				"score": 0.25,
+				"totalFiles": 4
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "@nodelib/fs.scandir",
+				"version": "2.1.3"
+			},
+			{
+				"name": "@nodelib/fs.stat",
+				"version": "2.0.3"
+			},
+			{
+				"name": "@nodelib/fs.walk",
+				"version": "1.2.4"
+			},
+			{
+				"name": "balanced-match",
+				"version": "1.0.0"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "1.1.11"
+			},
+			{
+				"name": "braces",
+				"version": "3.0.2"
+			},
+			{
+				"name": "concat-map",
+				"version": "0.0.1"
+			},
+			{
+				"name": "fast-glob",
+				"version": "3.1.0"
+			},
+			{
+				"name": "fastq",
+				"version": "1.6.0"
+			},
+			{
+				"name": "fill-range",
+				"version": "7.0.1"
+			},
+			{
+				"name": "fs.realpath",
+				"version": "1.0.0"
+			},
+			{
+				"name": "glob",
+				"version": "7.1.3"
+			},
+			{
+				"name": "glob-parent",
+				"version": "5.1.0"
+			},
+			{
+				"name": "inflight",
+				"version": "1.0.6"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.3"
+			},
+			{
+				"name": "is-extglob",
+				"version": "2.1.1"
+			},
+			{
+				"name": "is-glob",
+				"version": "4.0.1"
+			},
+			{
+				"name": "is-number",
+				"version": "7.0.0"
+			},
+			{
+				"name": "merge2",
+				"version": "1.3.0"
+			},
+			{
+				"name": "micromatch",
+				"version": "4.0.2"
+			},
+			{
+				"name": "minimatch",
+				"version": "3.0.4"
+			},
+			{
+				"name": "mkdirp",
+				"version": "1.0.4"
+			},
+			{
+				"name": "once",
+				"version": "1.4.0"
+			},
+			{
+				"name": "path-is-absolute",
+				"version": "1.0.1"
+			},
+			{
+				"name": "picomatch",
+				"version": "2.1.1"
+			},
+			{
+				"name": "reusify",
+				"version": "1.0.4"
+			},
+			{
+				"name": "rimraf",
+				"version": "3.0.2"
+			},
+			{
+				"name": "run-parallel",
+				"version": "1.1.9"
+			},
+			{
+				"name": "to-regex-range",
+				"version": "5.0.1"
+			},
+			{
+				"name": "wrappy",
+				"version": "1.0.2"
+			}
+		]
+	}
+]
