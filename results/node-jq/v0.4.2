@@ -1,0 +1,367 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-23T20:46:00.370Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:3.10.8",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "node-jq@0.4.2",
+			"name": "node-jq",
+			"version": "0.4.2",
+			"location": "https://registry.npmjs.org/node-jq/-/node-jq-0.4.2.tgz",
+			"integrity": "sha512-zn7tXhKu5gfekDkY2y1stf6MM5Q3AYcSGDJHDvabp0g3X4D4W0e6nLQNsFI6Bj5HW7g02XcxEi4vMBed5c3F0Q==",
+			"publishedAt": "2016-11-30T17:27:23.312Z",
+			"publishedWith": {
+				"node": "6.9.1",
+				"npm": "3.10.8"
+			},
+			"dependencies": {
+				"tempfile": "^1.1.1",
+				"bin-build": "^2.2.0",
+				"strip-eof": "^1.0.0",
+				"is-valid-path": "^0.1.1"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/sanack/node-jq.git",
+			"spec": "github:sanack/node-jq#ff00920acb69df259cfb2760f779c6d285969463"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"LICENSE.md": {
+					"diff": "--- published/LICENSE.md\n+++ rebuilt/LICENSE.md\n@@ -1,4 +1,4 @@\n-The MIT License (MIT)\n+# The MIT License (MIT)\n \n Copyright (c) David Sancho <dsnxmoreno@gmail.com>\n \n",
+					"match": false,
+					"packageHash": "6663109575afec556cbd1f5cd2c3fd335f9eae2bb4b8835a9bdf88cf30d31002",
+					"size": 1097,
+					"sourceHash": "316c7ea9a7631dc69aac5b556aef69408ff5152bbf332851a711f89cf5639bce",
+					"status": "content"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,64 +1,365 @@\n-<p align=\"center\">\n-  <img width=\"300\" alt=\"node-jq logo\" src=\"docs/assets/logo-with-margin.png\" />\n-</p>\n-\n-<p align=\"center\">\n-    <a href=\"https://github.com/sanack/node-jq\">node-jq</a> is a wrapper for <a href=\"https://stedolan.github.io/jq/\">jq</a> - a lightweight and flexible command-line JSON processor.\n-</p>\n-\n-<p align=\"center\">\n-  <a href=\"http://standardjs.com/\"><img src=\"https://img.shields.io/badge/code%20style-standard-brightgreen.svg?maxAge=3600\"></a>\n-  <a href=\"https://www.npmjs.com/package/node-jq\"><img src=\"https://img.shields.io/npm/v/node-jq.svg?maxAge=3600\"></a>\n-  <a href=\"https://circleci.com/gh/sanack/node-jq\"><img src=\"https://img.shields.io/circleci/project/sanack/node-jq.svg?maxAge=3600\"></a>\n-  <a href=\"https://coveralls.io/github/sanack/node-jq?branch=master\"><img src=\"https://coveralls.io/repos/github/sanack/node-jq/badge.svg?branch=master\"></a>\n-  <a href=\"https://gitter.im/davesnx/node-jq?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge\"><img src=\"https://badges.gitter.im/davesnx/node-jq.svg\"></a>\n-  <a href=\"https://www.npmjs.com/package/node-jq\"><img src=\"https://img.shields.io/npm/dm/node-jq.svg?maxAge=3600\"></a>\n-  <a href=\"https://github.com/semantic-release/semantic-release\"><img src=\"https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg\"></a>\n-</p>\n+<br/>\n+<img width=\"300\" alt=\"node-jq logo\" src=\"docs/assets/logo-with-margin.png\" />\n+\n+![https://www.npmjs.com/package/node-jq](https://img.shields.io/npm/dm/node-jq.svg?maxAge=3600)\n+![https://www.npmjs.com/package/node-jq](https://img.shields.io/npm/v/node-jq.svg?maxAge=3600)\n+![https://codeclimate.com/github/sanack/node-jq/coverage](https://codeclimate.com/github/sanack/node-jq/badges/coverage.svg)\n+![https://github.com/sanack/node-jq/actions/workflows/ci.yml](https://github.com/sanack/node-jq/actions/workflows/ci.yml/badge.svg)\n+\n+[node-jq](https://github.com/sanack/node-jq) is a Node.js wrapper for [jq](https://jqlang.github.io/jq/) - a lightweight and flexible command-line JSON processor\n \n ---\n \n ## Installation\n \n ```bash\n-npm install node-jq --save\n+$ npm install node-jq --save\n+# or\n+$ yarn add node-jq\n+# or\n+$ pnpm install node-jq\n+```\n+\n+## Fast\n+\n+You can use `jq` directly with `npx`:\n+\n+```bash\n+npx node-jq '.foo' package.json\n ```\n \n+## Advanced installation\n+\n+By default, `node-jq` downloads `jq` during the installation process with a post-install script. Depending on your OS it downloads from [https://github.com/jqlang/jq/releases] into `./node_modules/node-jq/bin/jq` to avoid colisions with any global installation. Check #161 #167 #171 for more information. You can safely rely on this location for your installed `jq`, we won't change this path without a major version upgrade.\n+\n+### Skipping binary installation and use your local jq\n+\n+If you want to skip the installation step of `jq`, you can do it with different mechanisms. `node-jq` will assume `jq` is in `$PATH` when skipping the installation.\n+\n+Choose the one that fits best your needs:\n+\n+- Ignore the installation by not running it with: `npm install node-jq --ignore-scripts`\n+  ```bash\n+  npm install node-jq --ignore-scripts\n+  ```\n+- Set `NODE_JQ_SKIP_INSTALL_BINARY` environment variable to `true`.\n+  ```bash\n+  export NODE_JQ_SKIP_INSTALL_BINARY=\"true\"\n+  npm install node-jq\n+  ```\n+- Set `JQ_PATH` environment variable\n+  ```bash\n+  export JQ_PATH=\"../../jq\"\n+  npm install node-jq\n+  ```\n+- Set `jq_path` in `.npmrc` (npm config files https://docs.npmjs.com/cli/v8/configuring-npm/npmrc)\n+  ```t\n+  # .npmrc\n+  jq_path=/usr/local/bin/jq\n+  ```\n+  ```bash\n+  npm install node-jq\n+  ```\n \n ## Usage\n \n+### jq example\n+\n+Usually in your CLI using `jq`:\n+\n+```bash\n+jq \".abilities[].moves\" bulbasaur.json\n+```\n+\n+and you get\n+\n+```bash\n+{\n+  \"name\": \"heartgold-soulsilver\",\n+  \"power\": \"10\"\n",
+					"match": false,
+					"packageHash": "c5d6c921ee6baa3e848ea7f614b0a82a3689513ae2d1b05a7c0ae28f1fd0557d",
+					"size": 2399,
+					"sourceHash": "afe895d5936ac075b54aff81d2e6fd9d47aa27bb05b27a0d0c497639de156a86",
+					"status": "content"
+				},
+				"lib/exec.js": {
+					"match": false,
+					"packageHash": "e9a29bcebc7526e4c78b25e295ddc100e24f1dd3330de0ba3149e8843b8b0533",
+					"size": 1321,
+					"status": "missing-in-source"
+				},
+				"lib/jq.js": {
+					"match": false,
+					"packageHash": "468006cf965d52804e03a7338bca29c5adc525a3e5682c8d1edd03ca0836cdb3",
+					"size": 1297,
+					"status": "missing-in-source"
+				},
+				"lib/options.js": {
+					"match": false,
+					"packageHash": "9ee67c48e683df4922d98fb341a727d88268a5d66b6e8a91140d856c8c5f15ee",
+					"size": 1605,
+					"status": "missing-in-source"
+				},
+				"lib/utils.js": {
+					"match": false,
+					"packageHash": "7734b50ac942d41b39431952ed2d492a9093b5f420261cde9aa1d3b0727fcfec",
+					"size": 1049,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,24 +1,31 @@\n {\n   \"name\": \"node-jq\",\n-  \"version\": \"0.4.2\",\n+  \"version\": \"0.0.0-semantic-release\",\n   \"description\": \"Run jq in node\",\n   \"main\": \"lib/jq.js\",\n   \"repository\": {\n     \"type\": \"git\",\n-    \"url\": \"https://github.com/sanack/node-jq\"\n+    \"url\": \"git+https://github.com/sanack/node-jq.git\"\n+  },\n+  \"bin\": {\n+    \"node-jq\": \"node-jq\"\n   },\n   \"scripts\": {\n-    \"install-binary\": \"node scripts/install-binary.js\",\n-    \"test\": \"mocha --compilers js:babel-register\",\n-    \"test:watch\": \"npm test -- --watch\",\n-    \"lint\": \"standard --verbose | snazzy\",\n-    \"build\": \"babel src -d lib\",\n     \"pretest\": \"npm run install-binary\",\n-    \"postinstall\": \"npm run install-binary\",\n-    \"precoverage\": \"npm run install-binary\",\n-    \"coverage\": \"babel-node ./node_modules/.bin/isparta cover _mocha\",\n-    \"precoveralls\": \"npm run coverage\",\n-    \"coveralls\": \"coveralls < coverage/lcov.info\"\n+    \"install-binary\": \"node scripts/install-binary.mjs\",\n+    \"test\": \"nyc mocha src/*.test.ts -r @swc-node/register\",\n+    \"test:watch\": \"npm test -- --watch\",\n+    \"lint\": \"eslint .\",\n+    \"build\": \"swc ./src --delete-dir-on-start -d lib --strip-leading-paths && tsc\",\n+    \"preinstall\": \"npm run install-binary\",\n+    \"coverage\": \"nyc report --reporter=lcov\",\n+    \"precodeclimate\": \"npm run coverage\",\n+    \"codeclimate\": \"codeclimate-test-reporter < coverage/lcov.info\",\n+    \"semantic-release\": \"semantic-release\",\n+    \"typecheck\": \"tsc --noEmit\"\n+  },\n+  \"engines\": {\n+    \"node\": \">= 18\"\n   },\n   \"keywords\": [\n     \"jq\",\n@@ -37,49 +44,50 @@\n   ],\n   \"license\": \"MIT\",\n   \"files\": [\n-    \"src\",\n+    \"scripts\",\n+    \"docs\",\n     \"lib\",\n-    \"scripts\"\n+    \"node-jq\"\n   ],\n   \"dependencies\": {\n-    \"bin-build\": \"^2.2.0\",\n     \"is-valid-path\": \"^0.1.1\",\n-    \"strip-eof\": \"^1.0.0\",\n-    \"tempfile\": \"^1.1.1\"\n+    \"strip-final-newline\": \"^2.0.0\",\n+    \"tar\": \"^7.4.0\",\n+    \"tempy\": \"^3.1.0\",\n+    \"zod\": \"^3.23.8\"\n   },\n   \"devDependencies\": {\n-    \"babel-cli\": \"^6.10.1\",\n-    \"babel-preset-es2015\": \"^6.9.0\",\n-    \"babel-preset-stage-1\": \"^6.5.0\",\n-    \"babel-register\": \"^6.9.0\",\n-    \"chai\": \"^3.5.0\",\n-    \"chai-as-promised\": \"^6.0.0\",\n-    \"coveralls\": \"^2.11.9\",\n-    \"ghooks\": \"^1.2.3\",\n-    \"isparta\": \"^4.0.0\",\n-    \"mocha\": \"^3.2.0\",\n-    \"snazzy\": \"^5.0.0\",\n-    \"standard\": \"^8.6.0\",\n-    \"tap-diff\": \"^0.1.1\",\n-    \"validate-commit-msg\": \"^2.8.2\"\n-  },\n-  \"babel\": {\n-    \"presets\": [\n-      \"es2015\",\n-      \"stage-1\"\n-    ]\n-  },\n-  \"standard\": {\n-    \"global\": [\n-      \"describe\",\n-      \"it\"\n-    ]\n-  },\n-  \"config\": {\n-    \"ghooks\": {\n-      \"commit-msg\": \"validate-commit-msg\",\n-      \"pre-commit\": \"npm run lint\",\n-      \"pre-push\": \"npm test\"\n",
+					"match": false,
+					"packageHash": "8dc8000b08a5bc80d724e4ce7f8608d0a070aed7cdfa65e396bf369dce9d32f1",
+					"size": 1913,
+					"sourceHash": "4163c7ee09106858027fb4ab71a5c317e083350e440b30a9b3d6441a708dbb79",
+					"status": "content"
+				},
+				"scripts/install-binary.js": {
+					"match": false,
+					"packageHash": "006e7d77787d40ca2c0e1df7fa20a94440cb572dc432caa09b985333dcc0acb1",
+					"size": 916,
+					"status": "missing-in-source"
+				},
+				"src/exec.js": {
+					"match": false,
+					"packageHash": "0efd492754e63765f9cde3f49dbc6676eb01f52ff31dead9649bf4194d684d8f",
+					"size": 953,
+					"status": "missing-in-source"
+				},
+				"src/jq.js": {
+					"match": false,
+					"packageHash": "b8804c46b9d1e69dad23273e29ba798edbd59c54f11ae8d06e17ebe391715ddb",
+					"size": 687,
+					"status": "missing-in-source"
+				},
+				"src/options.js": {
+					"match": false,
+					"packageHash": "e0d176911cb0d8f44ea54dbc85036dfd2b63cd197d82975013573d8bbd550ad4",
+					"size": 1203,
+					"status": "missing-in-source"
+				},
+				"src/utils.js": {
+					"match": false,
+					"packageHash": "01697adc79a3536746c3e12b78ec56bcbbe6a0db261d1af08a5128a06e38f117",
+					"size": 615,
+					"status": "missing-in-source"
+				},
+				"docs/assets/logo-with-margin.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"node-jq": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/install-binary.mjs": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 3,
+				"matchingFiles": 0,
+				"missingInPackage": 3,
+				"missingInSource": 9,
+				"score": 0,
+				"totalFiles": 15
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "@isaacs/cliui",
+				"version": "8.0.2"
+			},
+			{
+				"name": "ansi-regex",
+				"version": "6.0.1"
+			},
+			{
+				"name": "ansi-styles",
+				"version": "6.2.1"
+			},
+			{
+				"name": "emoji-regex",
+				"version": "9.2.2"
+			},
+			{
+				"name": "string-width",
+				"version": "5.1.2"
+			},
+			{
+				"name": "strip-ansi",
+				"version": "7.1.0"
+			},
+			{
+				"name": "wrap-ansi",
+				"version": "8.1.0"
+			},
+			{
+				"name": "@isaacs/fs-minipass",
+				"version": "4.0.1"
+			},
+			{
+				"name": "@pkgjs/parseargs",
+				"version": "0.11.0"
+			},
+			{
+				"name": "ansi-regex",
+				"version": "5.0.1"
+			},
+			{
+				"name": "ansi-styles",
+				"version": "4.3.0"
+			},
+			{
+				"name": "balanced-match",
+				"version": "1.0.2"
+			},
+			{
+				"name": "chownr",
+				"version": "3.0.0"
+			},
+			{
+				"name": "color-convert",
+				"version": "2.0.1"
+			},
+			{
+				"name": "color-name",
+				"version": "1.1.4"
+			},
+			{
+				"name": "cross-spawn",
+				"version": "7.0.3"
+			},
+			{
+				"name": "crypto-random-string",
+				"version": "4.0.0"
+			},
+			{
+				"name": "type-fest",
+				"version": "1.4.0"
+			},
+			{
+				"name": "eastasianwidth",
+				"version": "0.2.0"
+			},
+			{
+				"name": "emoji-regex",
+				"version": "8.0.0"
+			},
+			{
+				"name": "is-fullwidth-code-point",
+				"version": "3.0.0"
+			},
+			{
+				"name": "is-invalid-path",
+				"version": "0.1.0"
+			},
+			{
+				"name": "is-extglob",
+				"version": "1.0.0"
+			},
+			{
+				"name": "is-glob",
+				"version": "2.0.1"
+			},
+			{
+				"name": "is-valid-path",
+				"version": "0.1.1"
+			},
+			{
+				"name": "isexe",
+				"version": "2.0.0"
+			},
+			{
+				"name": "jackspeak",
+				"version": "3.4.1"
+			},
+			{
+				"name": "minipass",
+				"version": "7.1.2"
+			},
+			{
+				"name": "minizlib",
+				"version": "3.0.1"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "2.0.1"
+			},
+			{
+				"name": "foreground-child",
+				"version": "3.2.1"
+			},
+			{
+				"name": "glob",
+				"version": "10.4.3"
+			},
+			{
+				"name": "minimatch",
+				"version": "9.0.5"
+			},
+			{
+				"name": "rimraf",
+				"version": "5.0.8"
+			},
+			{
+				"name": "signal-exit",
+				"version": "4.1.0"
+			},
+			{
+				"name": "package-json-from-dist",
+				"version": "1.0.0"
+			},
+			{
+				"name": "path-key",
+				"version": "3.1.1"
+			},
+			{
+				"name": "path-scurry",
+				"version": "1.11.1"
+			},
+			{
+				"name": "lru-cache",
+				"version": "10.3.1"
+			},
+			{
+				"name": "shebang-command",
+				"version": "2.0.0"
+			},
+			{
+				"name": "shebang-regex",
+				"version": "3.0.0"
+			},
+			{
+				"name": "string-width",
+				"version": "4.2.3"
+			},
+			{
+				"name": "string-width-cjs",
+				"version": "4.2.3"
+			},
+			{
+				"name": "strip-ansi",
+				"version": "6.0.1"
+			},
+			{
+				"name": "strip-ansi-cjs",
+				"version": "6.0.1"
+			},
+			{
+				"name": "strip-final-newline",
+				"version": "2.0.0"
+			},
+			{
+				"name": "tar",
+				"version": "7.4.0"
+			},
+			{
+				"name": "mkdirp",
+				"version": "3.0.1"
+			},
+			{
+				"name": "yallist",
+				"version": "5.0.0"
+			},
+			{
+				"name": "tempy",
+				"version": "3.1.0"
+			},
+			{
+				"name": "is-stream",
+				"version": "3.0.0"
+			},
+			{
+				"name": "temp-dir",
+				"version": "3.0.0"
+			},
+			{
+				"name": "type-fest",
+				"version": "2.19.0"
+			},
+			{
+				"name": "unique-string",
+				"version": "3.0.0"
+			},
+			{
+				"name": "which",
+				"version": "2.0.2"
+			},
+			{
+				"name": "wrap-ansi-cjs",
+				"version": "7.0.0"
+			},
+			{
+				"name": "zod",
+				"version": "3.23.8"
+			}
+		]
+	}
+]
