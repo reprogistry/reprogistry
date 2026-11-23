@@ -1,0 +1,210 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-23T20:13:59.305Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:2.15.11",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "watchr@1.1.0",
+			"name": "watchr",
+			"version": "1.1.0",
+			"location": "https://registry.npmjs.org/watchr/-/watchr-1.1.0.tgz",
+			"integrity": "sha512-rPXVwNQmaeemTq716LWcyPECMDsNQ4BtMUMn3S3sQznmdpzEGU2rPH7WmAaiHG/2DbS91usRwRJEIw2R4sbjlA==",
+			"publishedAt": "2012-04-18T22:36:29.326Z",
+			"publishedWith": {
+				"node": "v0.6.14",
+				"npm": "1.1.12"
+			},
+			"dependencies": {
+				"coffee-script": "1.3.x"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git://github.com/bevry/watchr.git",
+			"spec": "github:bevry/watchr#HEAD"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".npmignore": {
+					"match": false,
+					"packageHash": "6f66bd73387d0357af252efff0e20aca60a30218634ebb250fbe5f2ebb406dc1",
+					"size": 23,
+					"status": "missing-in-source"
+				},
+				"History.md": {
+					"match": false,
+					"packageHash": "a7f13460c70d051a1d3c4d8bd272343f9654345ccc9f0866169a055131905267",
+					"size": 341,
+					"status": "missing-in-source"
+				},
+				"LICENSE.txt": {
+					"match": false,
+					"packageHash": "9c4d99b3271bf6d1712980ee7c17468390007dd28e4c0bdc34061881b99fad40",
+					"size": 1097,
+					"status": "missing-in-source"
+				},
+				"Makefile": {
+					"match": false,
+					"packageHash": "bba8f68ac9d7ce62d8c8e577be758974b1282cfdd916fa09a92fbf430da22e1f",
+					"size": 278,
+					"status": "missing-in-source"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,52 +1,221 @@\n-## Watchr. Node.js file watching that doesn't suck.\n+<!-- TITLE/ -->\n \n-Watchr normalises the node.js watching functionality between 0.4's `fs.watchFile`, and 0.6's `fs.watch`, and adds support for watching entire directories including their far descendants (some call this recursive directory watching)\n+<h1>watchr</h1>\n \n+<!-- /TITLE -->\n \n-### Using\n \n-- JavaScript\n+<!-- BADGES/ -->\n \n-\t``` javascript\n-\t// Requires\n-\tvar watchr = require('watchr');\n+<span class=\"badge-githubworkflow\"><a href=\"https://github.com/bevry/watchr/actions?query=workflow%3Abevry\" title=\"View the status of this project's GitHub Workflow: bevry\"><img src=\"https://github.com/bevry/watchr/workflows/bevry/badge.svg\" alt=\"Status of the GitHub Workflow: bevry\" /></a></span>\n+<span class=\"badge-npmversion\"><a href=\"https://npmjs.org/package/watchr\" title=\"View this project on NPM\"><img src=\"https://img.shields.io/npm/v/watchr.svg\" alt=\"NPM version\" /></a></span>\n+<span class=\"badge-npmdownloads\"><a href=\"https://npmjs.org/package/watchr\" title=\"View this project on NPM\"><img src=\"https://img.shields.io/npm/dm/watchr.svg\" alt=\"NPM downloads\" /></a></span>\n+<span class=\"badge-daviddm\"><a href=\"https://david-dm.org/bevry/watchr\" title=\"View the status of this project's dependencies on DavidDM\"><img src=\"https://img.shields.io/david/bevry/watchr.svg\" alt=\"Dependency Status\" /></a></span>\n+<span class=\"badge-daviddmdev\"><a href=\"https://david-dm.org/bevry/watchr#info=devDependencies\" title=\"View the status of this project's development dependencies on DavidDM\"><img src=\"https://img.shields.io/david/dev/bevry/watchr.svg\" alt=\"Dev Dependency Status\" /></a></span>\n+<br class=\"badge-separator\" />\n+<span class=\"badge-githubsponsors\"><a href=\"https://github.com/sponsors/balupton\" title=\"Donate to this project using GitHub Sponsors\"><img src=\"https://img.shields.io/badge/github-donate-yellow.svg\" alt=\"GitHub Sponsors donate button\" /></a></span>\n+<span class=\"badge-patreon\"><a href=\"https://patreon.com/bevry\" title=\"Donate to this project using Patreon\"><img src=\"https://img.shields.io/badge/patreon-donate-yellow.svg\" alt=\"Patreon donate button\" /></a></span>\n+<span class=\"badge-flattr\"><a href=\"https://flattr.com/profile/balupton\" title=\"Donate to this project using Flattr\"><img src=\"https://img.shields.io/badge/flattr-donate-yellow.svg\" alt=\"Flattr donate button\" /></a></span>\n+<span class=\"badge-liberapay\"><a href=\"https://liberapay.com/bevry\" title=\"Donate to this project using Liberapay\"><img src=\"https://img.shields.io/badge/liberapay-donate-yellow.svg\" alt=\"Liberapay donate button\" /></a></span>\n+<span class=\"badge-buymeacoffee\"><a href=\"https://buymeacoffee.com/balupton\" title=\"Donate to this project using Buy Me A Coffee\"><img src=\"https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg\" alt=\"Buy Me A Coffee donate button\" /></a></span>\n+<span class=\"badge-opencollective\"><a href=\"https://opencollective.com/bevry\" title=\"Donate to this project using Open Collective\"><img src=\"https://img.shields.io/badge/open%20collective-donate-yellow.svg\" alt=\"Open Collective donate button\" /></a></span>\n+<span class=\"badge-crypto\"><a href=\"https://bevry.me/crypto\" title=\"Donate to this project using Cryptocurrency\"><img src=\"https://img.shields.io/badge/crypto-donate-yellow.svg\" alt=\"crypto donate button\" /></a></span>\n+<span class=\"badge-paypal\"><a href=\"https://bevry.me/paypal\" title=\"Donate to this project using Paypal\"><img src=\"https://img.shields.io/badge/paypal-donate-yellow.svg\" alt=\"PayPal donate button\" /></a></span>\n+<span class=\"badge-wishlist\"><a href=\"https://bevry.me/wishlist\" title=\"Buy an item on our wishlist for us\"><img src=\"https://img.shields.io/badge/wishlist-donate-yellow.svg\" alt=\"Wishlist browse button\" /></a></span>\n+\n+<!-- /BADGES -->\n+\n+\n+Watchr provides a normalised API the file watching APIs of different node versions, nested/recursive file and directory watching, and accurate detailed events for file/directory creations, updates, and deletions.\n+\n+## Usage\n+\n+[Complete API Documentation.](http://master.watchr.bevry.surge.sh/docs/)\n+\n+There are two concepts in watchr, they are:\n+\n+-   Watcher - this wraps the native file system watching, makes it reliable, and supports deep watching\n+-   Stalker - this wraps the watcher, such that for any given path, there can be many stalkers, but only one watcher\n+\n+The simplest usage is:\n+\n+```javascript\n+// Import the watching library\n+var watchr = require('watchr')\n+\n+// Define our watching parameters\n+var path = process.cwd()\n+function listener(changeType, fullPath, currentStat, previousStat) {\n+    switch (changeType) {\n+        case 'update':\n+            console.log(\n+                'the file',\n+                fullPath,\n+                'was updated',\n+                currentStat,\n+                previousStat\n+            )\n+            break\n+        case 'create':\n+            console.log('the file', fullPath, 'was created', currentStat)\n+            break\n+        case 'delete':\n+            console.log('the file', fullPath, 'was deleted', previousStat)\n+            break\n+    }\n+}\n+function next(err) {\n+    if (err) return console.log('watch failed on', path, 'with error', err)\n+    console.log('watch successful on', path)\n+}\n \n-\t// Watch\n-\twatchr.watch(path,function(){\n-\t\tconsole.log('something changed inside the directory');\n-\t});\n-\t```\n+// Watch the path with the change listener and completion callback\n+var stalker = watchr.open(path, listener, next)\n \n-- CoffeeScript\n+// Close the stalker of the watcher\n+stalker.close()\n+```\n+\n+More advanced usage is:\n+\n+```javascript\n+// Create the stalker for the path\n+var stalker = watchr.create(path)\n+\n",
+					"match": false,
+					"packageHash": "e8f3a25d26852c0a2164b246917bcc44587e5bd7383191eb390dbe8e77c3a37a",
+					"size": 1110,
+					"sourceHash": "9ecebc8cd3b49d47a399f91fbdd9b33e7e99959cd6a9b7b343ee9a82c08f34d5",
+					"status": "content"
+				},
+				"bin/watchr": {
+					"match": false,
+					"packageHash": "2be879d8740c46a1f963a33b1d20306f72b5409393b1e83ef7a2e3c6da295693",
+					"size": 79,
+					"status": "missing-in-source"
+				},
+				"bin/watchr.coffee": {
+					"match": false,
+					"packageHash": "f5411723259b7753434bfa7f08aa6852e50eced885a2bc26320807a837d67209",
+					"size": 131,
+					"status": "missing-in-source"
+				},
+				"docs/docco.css": {
+					"match": false,
+					"packageHash": "75f8cb448d0ab1d6b9d0fb9b430860387b3caf593ffdddcf313a95be97e454fd",
+					"size": 7101,
+					"status": "missing-in-source"
+				},
+				"docs/watchr.html": {
+					"match": false,
+					"packageHash": "f8e343ecf562283aefa775db518b1de3739a6954d39bc726b580ae722d094fb6",
+					"size": 43462,
+					"status": "missing-in-source"
+				},
+				"lib/watchr.coffee": {
+					"match": false,
+					"packageHash": "966ee402c96e23d4ac10d879079ba758816351e5c72d81d80d65025acdbfbf36",
+					"size": 8759,
+					"status": "missing-in-source"
+				},
+				"main.js": {
+					"match": false,
+					"packageHash": "6e11a09498d75a280d5acb140318919d4ca2c9bd7d69cb84574f406931e95bd8",
+					"size": 76,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,47 +1,155 @@\n {\n-\t\"name\": \"watchr\",\n-\t\"version\": \"1.1.0\",\n-\t\"description\": \"Provides a better and normalised API between Node's 0.4 watchFile and 0.6's fsWatcher\",\n-\t\"homepage\": \"https://github.com/bevry/watchr\",\n-\t\"keywords\": [\n-\t\t\"watching\",\n-\t\t\"watch\",\n-\t\t\"fswatcher\",\n-\t\t\"watchfile\"\n-\t],\n-\t\"author\": \"Bevry Pty Ltd <us@bevry.me> (http://bevry.me)\",\n-\t\"maintainers\": [\n-\t\t\"Benjamin Lupton <b@lupton.cc> (http://balupton.com)\"\n-\t],\n-\t\"contributors\": [\n-\t\t\"Benjamin Lupton <b@lupton.cc> (http://balupton.com)\"\n-\t],\n-\t\"bugs\": {\n-\t\t\"url\": \"https://github.com/bevry/watchr/issues\"\n-\t},\n-\t\"repository\" : {\n-\t\t\"type\": \"git\",\n-\t\t\"url\": \"http://github.com/bevry/watchr.git\"\n-\t},\n-\t\"engines\" : {\n-\t\t\"node\": \">=0.4.0\"\n-\t},\n-\t\"dependencies\": {\n-\t\t\"coffee-script\": \"1.3.x\"\n-\t},\n-\t\"devDependencies\": {\n-\t\t\"bal-util\": \"1.5.x\",\n-\t\t\"docco\": \"0.3.x\",\n-\t\t\"mocha\": \"1.0.x\"\n-\t},\n-\t\"bin\": {\n-\t\t\"watchr\": \"./bin/watchr\"\n-\t},\n-\t\"directories\": {\n-\t\t\"lib\": \"lib\"\n-\t},\n-\t\"scripts\": {\n-\t\t\"test\": \"node ./node_modules/mocha/bin/mocha\"\n-\t},\n-\t\"main\": \"./main.js\"\n+  \"name\": \"watchr\",\n+  \"version\": \"6.11.0\",\n+  \"description\": \"Better file system watching for Node.js\",\n+  \"homepage\": \"https://github.com/bevry/watchr\",\n+  \"license\": \"MIT\",\n+  \"keywords\": [\n+    \"esnext\",\n+    \"fs\",\n+    \"fswatcher\",\n+    \"node\",\n+    \"typed\",\n+    \"types\",\n+    \"watch\",\n+    \"watchfile\",\n+    \"watching\"\n+  ],\n+  \"badges\": {\n+    \"list\": [\n+      \"githubworkflow\",\n+      \"npmversion\",\n+      \"npmdownloads\",\n+      \"daviddm\",\n+      \"daviddmdev\",\n+      \"---\",\n+      \"githubsponsors\",\n+      \"patreon\",\n+      \"flattr\",\n+      \"liberapay\",\n+      \"buymeacoffee\",\n+      \"opencollective\",\n+      \"crypto\",\n+      \"paypal\",\n+      \"wishlist\"\n+    ],\n+    \"config\": {\n+      \"githubWorkflow\": \"bevry\",\n+      \"githubSponsorsUsername\": \"balupton\",\n+      \"buymeacoffeeUsername\": \"balupton\",\n+      \"cryptoURL\": \"https://bevry.me/crypto\",\n+      \"flattrUsername\": \"balupton\",\n+      \"liberapayUsername\": \"bevry\",\n+      \"opencollectiveUsername\": \"bevry\",\n+      \"patreonUsername\": \"bevry\",\n+      \"paypalURL\": \"https://bevry.me/paypal\",\n+      \"wishlistURL\": \"https://bevry.me/wishlist\",\n+      \"githubUsername\": \"bevry\",\n+      \"githubRepository\": \"watchr\",\n+      \"githubSlug\": \"bevry/watchr\",\n+      \"npmPackageName\": \"watchr\"\n+    }\n+  },\n",
+					"match": false,
+					"packageHash": "de8f0aaf47cbaa8c0d269b4ff0badf572694744aaca224bdc3f2ce2424bb44da",
+					"size": 978,
+					"sourceHash": "bf90e1d21923e08d6e6adc9da4661f345700214018e030fe862ce8d120f73bbf",
+					"status": "content"
+				},
+				"test/mocha.opts": {
+					"match": false,
+					"packageHash": "45fdb2b4dda277578c41601b692a615a38b6b71559ed7ae209932ae541c74c81",
+					"size": 96,
+					"status": "missing-in-source"
+				},
+				"test/watchr.test.coffee": {
+					"match": false,
+					"packageHash": "e5dc4f01a7b483f015b12ad25a43d3c3f09e450019a91d2276ff85f32624ffb6",
+					"size": 1493,
+					"status": "missing-in-source"
+				},
+				"LICENSE.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"source/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 0,
+				"missingInPackage": 2,
+				"missingInSource": 12,
+				"score": 0,
+				"totalFiles": 16
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "eachr",
+				"version": "4.5.0"
+			},
+			{
+				"name": "typechecker",
+				"version": "6.4.0"
+			},
+			{
+				"name": "extendr",
+				"version": "5.19.0"
+			},
+			{
+				"name": "typechecker",
+				"version": "7.17.0"
+			},
+			{
+				"name": "graceful-fs",
+				"version": "4.2.6"
+			},
+			{
+				"name": "ignorefs",
+				"version": "3.17.0"
+			},
+			{
+				"name": "ignorepatterns",
+				"version": "4.17.0"
+			},
+			{
+				"name": "readdir-cluster",
+				"version": "3.17.0"
+			},
+			{
+				"name": "safefs",
+				"version": "6.16.0"
+			},
+			{
+				"name": "scandirectory",
+				"version": "6.16.0"
+			},
+			{
+				"name": "taskgroup",
+				"version": "7.19.0"
+			},
+			{
+				"name": "ambi",
+				"version": "3.2.0"
+			},
+			{
+				"name": "editions",
+				"version": "2.3.1"
+			},
+			{
+				"name": "errlop",
+				"version": "2.2.0"
+			},
+			{
+				"name": "semver",
+				"version": "6.3.0"
+			},
+			{
+				"name": "typechecker",
+				"version": "4.11.0"
+			},
+			{
+				"name": "unbounded",
+				"version": "3.15.0"
+			}
+		]
+	}
+]
