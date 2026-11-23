@@ -1,0 +1,73 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-23T20:45:57.181Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:12.2.3",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "mersenne-twister@1.0.0",
+			"name": "mersenne-twister",
+			"version": "1.0.0",
+			"location": "https://registry.npmjs.org/mersenne-twister/-/mersenne-twister-1.0.0.tgz",
+			"integrity": "sha512-ngHd3rxI/Gl6m2IjFrvQwlaThvivq38iE/fXkcBiKH0eNChml6xMBN2JFq1f8qV9yhkQt6gLCTXUAz57BsHBdw==",
+			"publishedAt": "2014-02-02T12:53:53.735Z",
+			"publishedWith": {
+				"node": null,
+				"npm": "1.3.25"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git://github.com/boo1ean/mersenne-twister.git",
+			"spec": "github:boo1ean/mersenne-twister#HEAD"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,5 +1,4 @@\n-Mersenne Twister\n-================\n+## Pseudorandom number generator [![Build Status](https://travis-ci.org/boo1ean/mersenne-twister.png?branch=master)](https://travis-ci.org/boo1ean/mersenne-twister)\n \n Mersenne Twister pseudorandom number generator.\n \n",
+					"match": false,
+					"packageHash": "f1f0b463d64034c1d55cb43bc662e34dd26ea8d4e1d45e39c12811397477b42a",
+					"size": 1099,
+					"sourceHash": "fd369fd1aaa79322df4485c24ee7885c79eb80b0f54a04e34503d8d6a4d5072d",
+					"status": "content"
+				},
+				"index.js": {
+					"match": false,
+					"packageHash": "7117e14c55c650ef7af595293cba42866c4f2b431ce2df446c71e0fdb6b2341d",
+					"size": 695,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,6 +1,6 @@\n {\n   \"name\": \"mersenne-twister\",\n-  \"version\": \"1.0.0\",\n+  \"version\": \"1.1.0\",\n   \"description\": \"Mersenne twister pseudorandom number generator\",\n   \"main\": \"src/mersenne-twister.js\",\n   \"scripts\": {\n@@ -10,6 +10,7 @@\n     \"type\": \"git\",\n     \"url\": \"git://github.com/boo1ean/mersenne-twister.git\"\n   },\n+  \"files\": [\"src\"],\n   \"keywords\": [\n     \"random\",\n     \"mersenne\",\n@@ -23,5 +24,9 @@\n   \"bugs\": {\n     \"url\": \"https://github.com/boo1ean/mersenne-twister/issues\"\n   },\n-  \"homepage\": \"https://github.com/boo1ean/mersenne-twister\"\n+  \"homepage\": \"https://github.com/boo1ean/mersenne-twister\",\n+  \"devDependencies\": {\n+    \"should\": \"~3.1.2\",\n+    \"mocha\": \"~1.17.1\"\n+  }\n }\n",
+					"match": false,
+					"packageHash": "cc44c7f1206355d9fca91bce909dcb0d03452e4b40d28c9108bf8d82804bd7bc",
+					"size": 636,
+					"sourceHash": "91c439bbe8973f29493d227c7258e95ecc274d778c9c107a9ff9bbac0f0bf2a6",
+					"status": "content"
+				},
+				"src/mersenne-twister.js": {
+					"diff": "--- published/src/mersenne-twister.js\n+++ rebuilt/src/mersenne-twister.js\n@@ -2,50 +2,50 @@\n   https://github.com/banksean wrapped Makoto Matsumoto and Takuji Nishimura's code in a namespace\n   so it's better encapsulated. Now you can have multiple random number generators\n   and they won't stomp all over eachother's state.\n-  \n+\n   If you want to use this as a substitute for Math.random(), use the random()\n   method like so:\n-  \n+\n   var m = new MersenneTwister();\n   var randomNumber = m.random();\n-  \n+\n   You can also call the other genrand_{foo}() methods on the instance.\n- \n+\n   If you want to use a specific seed in order to get a repeatable random\n   sequence, pass an integer into the constructor:\n- \n+\n   var m = new MersenneTwister(123);\n- \n+\n   and that will always produce the same random sequence.\n- \n+\n   Sean McCullough (banksean@gmail.com)\n */\n- \n-/* \n+\n+/*\n    A C-program for MT19937, with initialization improved 2002/1/26.\n    Coded by Takuji Nishimura and Makoto Matsumoto.\n- \n-   Before using, initialize the state by using init_seed(seed)  \n+\n+   Before using, initialize the state by using init_seed(seed)\n    or init_by_array(init_key, key_length).\n- \n+\n    Copyright (C) 1997 - 2002, Makoto Matsumoto and Takuji Nishimura,\n-   All rights reserved.                          \n- \n+   All rights reserved.\n+\n    Redistribution and use in source and binary forms, with or without\n    modification, are permitted provided that the following conditions\n    are met:\n- \n+\n      1. Redistributions of source code must retain the above copyright\n         notice, this list of conditions and the following disclaimer.\n- \n+\n      2. Redistributions in binary form must reproduce the above copyright\n         notice, this list of conditions and the following disclaimer in the\n         documentation and/or other materials provided with the distribution.\n- \n-     3. The names of its contributors may not be used to endorse or promote \n-        products derived from this software without specific prior written \n+\n+     3. The names of its contributors may not be used to endorse or promote\n+        products derived from this software without specific prior written\n         permission.\n- \n+\n    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n    \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\n    LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\n@@ -57,19 +57,19 @@\n    LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING\n    NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS\n    SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n- \n- \n+\n+\n    Any feedback is very welcome.\n    http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html\n    email: m-mat @ math.sci.hiroshima-u.ac.jp (remove space)\n */\n- \n+\n var MersenneTwister = function(seed) {\n \tif (seed == undefined) {\n \t\tseed = new Date().getTime();\n-\t} \n+\t}\n \n-\t/* Period parameters */  \n+\t/* Period parameters */\n \tthis.N = 624;\n \tthis.M = 397;\n \tthis.MATRIX_A = 0x9908b0df;   /* constant vector a */\n@@ -79,8 +79,13 @@\n \tthis.mt = new Array(this.N); /* the array for the state vector */\n",
+					"match": false,
+					"packageHash": "51a47c5c17767075c166ced4e31a605e493ad7ed610281e4265053f77fea15f3",
+					"size": 7327,
+					"sourceHash": "b197b673a9e8add2068c9062e5f9222f73ae46ff03634909db28a924fdcad0eb",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 3,
+				"matchingFiles": 0,
+				"missingInPackage": 0,
+				"missingInSource": 1,
+				"score": 0,
+				"totalFiles": 4
+			}
+		},
+		"prodDependencies": []
+	}
+]
