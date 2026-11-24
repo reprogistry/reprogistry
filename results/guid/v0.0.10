@@ -1,0 +1,71 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T14:46:11.698Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:2.15.11",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "guid@0.0.10",
+			"name": "guid",
+			"version": "0.0.10",
+			"location": "https://registry.npmjs.org/guid/-/guid-0.0.10.tgz",
+			"integrity": "sha512-0oMxNIYtV5/MPVXxp/G5czqbRxwT2GdOzNj4OLdLRBvHwH8Tyvu7rLFLtZe1bps+uZO5pZ3QkFlreaUwOOk7FA==",
+			"publishedAt": "2011-07-13T06:31:43.011Z",
+			"publishedWith": {
+				"node": "v0.4.5",
+				"npm": "1.0.15"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git://github.com/dandean/guid.git",
+			"spec": "github:dandean/guid#HEAD"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,5 +1,9 @@\n+**NOTE:** This creates GUID-like strings and not GUIDs. @broofa's [node-uuid](https://github.com/broofa/node-uuid) module is **much** better than this implementation.\n+\n # Guid lets you generate and validate unique identifiers.\n \n+[![browser support](https://ci.testling.com/tommydudebreaux/guid.png)](https://ci.testling.com/tommydudebreaux/guid)\n+\n In its simplest form, Guid lets you generate raw GUID formatted strings:\n \n     Guid.raw();\n",
+					"match": false,
+					"packageHash": "0cdc77854c594240071d032ca27d0bf1ef22a5a9b8352c145601b4357cf0d0a3",
+					"size": 1900,
+					"sourceHash": "058fa2b64fa21a68b4dacfa2649dbe511d4fee5d2111baca3b2bb6ebbb12ce98",
+					"status": "content"
+				},
+				"guid.js": {
+					"diff": "--- published/guid.js\n+++ rebuilt/guid.js\n@@ -1,63 +1,63 @@\n-var validator = new RegExp(\"^[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$\", \"i\");\n+(function () {\n+  var validator = new RegExp(\"^[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$\", \"i\");\n \n-function gen(count) {\n-  var out = \"\";\n-  for (var i=0; i<count; i++) {\n-    out += (((1+Math.random())*0x10000)|0).toString(16).substring(1);\n+  function gen(count) {\n+    var out = \"\";\n+    for (var i=0; i<count; i++) {\n+      out += (((1+Math.random())*0x10000)|0).toString(16).substring(1);\n+    }\n+    return out;\n   }\n-  return out;\n-}\n \n-function Guid(guid) {\n-  if (!guid) throw new TypeError(\"Invalid argument; `value` has no value.\");\n+  function Guid(guid) {\n+    if (!guid) throw new TypeError(\"Invalid argument; `value` has no value.\");\n+      \n+    this.value = Guid.EMPTY;\n     \n-  var value = Guid.EMPTY;\n-  \n-  if (guid && guid instanceof Guid) {\n-    value = Guid.toString();\n+    if (guid && guid instanceof Guid) {\n+      this.value = guid.toString();\n \n-  } else if (guid && Object.prototype.toString.call(guid) === \"[object String]\" && Guid.isGuid(guid)) {\n-    value = guid;\n-  }\n-  \n-  this.equals = function(other) {\n-    // Comparing string `value` against provided `guid` will auto-call\n-    // toString on `guid` for comparison\n-    return Guid.isGuid(other) && value == other;\n+    } else if (guid && Object.prototype.toString.call(guid) === \"[object String]\" && Guid.isGuid(guid)) {\n+      this.value = guid;\n+    }\n+    \n+    this.equals = function(other) {\n+      // Comparing string `value` against provided `guid` will auto-call\n+      // toString on `guid` for comparison\n+      return Guid.isGuid(other) && this.value == other;\n+    };\n+\n+    this.isEmpty = function() {\n+      return this.value === Guid.EMPTY;\n+    };\n+    \n+    this.toString = function() {\n+      return this.value;\n+    };\n+    \n+    this.toJSON = function() {\n+      return this.value;\n+    };\n   };\n \n-  this.isEmpty = function() {\n-    return value === Guid.EMPTY;\n+  Guid.EMPTY = \"00000000-0000-0000-0000-000000000000\";\n+\n+  Guid.isGuid = function(value) {\n+    return value && (value instanceof Guid || validator.test(value.toString()));\n   };\n-  \n-  this.toString = function() {\n-    return value;\n+\n+  Guid.create = function() {\n+    return new Guid([gen(2), gen(1), gen(1), gen(1), gen(3)].join(\"-\"));\n   };\n-  \n-  this.toJSON = function() {\n-    return value;\n+\n+  Guid.raw = function() {\n+    return [gen(2), gen(1), gen(1), gen(1), gen(3)].join(\"-\");\n   };\n-  \n-  Object.defineProperty(this, \"value\", {\n-    get: function() { return value; },\n-    enumerable: true\n-  });\n-};\n-\n-Object.defineProperty(Guid, \"EMPTY\", {\n-  value: \"00000000-0000-0000-0000-000000000000\"\n-});\n-\n-Guid.isGuid = function(value) {\n-  return value && (value instanceof Guid || validator.test(value.toString()));\n",
+					"match": false,
+					"packageHash": "cf00b1d89e8a3c38bc1a16687b950f2415ce776298b8a779de8e06c0696dd30f",
+					"size": 1507,
+					"sourceHash": "1d71db6690021895fa38f54f7c2268c016a5731e9f3a37dcc0edceb63643d79a",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -2,16 +2,41 @@\n   \"author\": \"Dan Dean <@dandean> (http://dandean.com)\",\n   \"name\": \"guid\",\n   \"description\": \"A Guid generator and validator.\",\n-  \"version\": \"0.0.10\",\n+  \"version\": \"0.0.12\",\n   \"homepage\": \"https://github.com/dandean/guid\",\n   \"repository\": {\n     \"type\": \"git\",\n     \"url\": \"git://github.com/dandean/guid.git\"\n   },\n-  \"main\": \"./guid\",\n-  \"licenses\" :[{\n-    \"type\" : \"MIT\",\n-    \"url\" : \"https://github.com/dandean/guid/raw/master/LICENSE\"\n+  \"scripts\": {\n+    \"test\": \"mocha -R spec -u tdd tests/*.js\"\n+  },\n+  \"contributors\": [{\n+      \"name\": \"Tommy Messbauer\"\n   }],\n-  \"ender\": \"./ender.js\"\n-}\n\\ No newline at end of file\n+  \"main\": \"./guid\",\n+  \"licenses\": [\n+    {\n+      \"type\": \"MIT\",\n+      \"url\": \"https://github.com/dandean/guid/raw/master/LICENSE\"\n+    }\n+  ],\n+  \"ender\": \"./ender.js\",\n+  \"devDependencies\": {\n+    \"mocha\": \"~1.14.0\"\n+  },\n+  \"testling\": {\n+    \"browsers\": {\n+      \"ie\": [ 6, 7, 8, 9, 10 ],\n+      \"ff\": [ 24, 25, \"nightly\" ],\n+      \"chrome\": [ 28, 29, 30, 31, \"canary\" ],\n+      \"safari\": [ \"5.0.5\", 5.1 ],\n+      \"android-browser\": [ 4.2 ],\n+      \"opera\": [ 17, \"next\" ],\n+      \"iphone\": [ 6 ],\n+      \"ipad\": [ 6 ]\n+    },\n+    \"harness\" : \"mocha-tdd\",\n+    \"files\": \"tests/*.js\"\n+  }\n+}\n",
+					"match": false,
+					"packageHash": "f39efa3da2779e15da07b142d92b16b0ac6ae343378128f0cd0db0c2daf0ee02",
+					"size": 442,
+					"sourceHash": "71eda20e24c5cf805131974cb8b3861df0971c0a2c08a565abac7dbffa07591c",
+					"status": "content"
+				},
+				"tests/guid.js": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 3,
+				"matchingFiles": 2,
+				"missingInPackage": 1,
+				"missingInSource": 0,
+				"score": 0.3333333333333333,
+				"totalFiles": 6
+			}
+		},
+		"prodDependencies": []
+	}
+]

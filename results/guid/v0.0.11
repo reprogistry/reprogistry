@@ -1,0 +1,67 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T14:46:27.838Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:12.2.3",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "guid@0.0.11",
+			"name": "guid",
+			"version": "0.0.11",
+			"location": "https://registry.npmjs.org/guid/-/guid-0.0.11.tgz",
+			"integrity": "sha512-BIljBcO78VYlpQc+RFoNFJE2nBsfOrZO5mgAuBcXjhEuei/4AJdtFopBMS+VmlN3mgmK/m4lqvl43YXUnGz1/Q==",
+			"publishedAt": "2013-11-20T05:38:07.251Z",
+			"publishedWith": {
+				"node": null,
+				"npm": "1.3.8"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git://github.com/dandean/guid.git",
+			"spec": "github:dandean/guid#HEAD"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,3 +1,5 @@\n+**NOTE:** This creates GUID-like strings and not GUIDs. @broofa's [node-uuid](https://github.com/broofa/node-uuid) module is **much** better than this implementation.\n+\n # Guid lets you generate and validate unique identifiers.\n \n [![browser support](https://ci.testling.com/tommydudebreaux/guid.png)](https://ci.testling.com/tommydudebreaux/guid)\n",
+					"match": false,
+					"packageHash": "9deaef58315a0e9e093c1b34b15301b7357f08198fb055a405a5a095fe76d2dc",
+					"size": 2018,
+					"sourceHash": "058fa2b64fa21a68b4dacfa2649dbe511d4fee5d2111baca3b2bb6ebbb12ce98",
+					"status": "content"
+				},
+				"guid.js": {
+					"diff": "--- published/guid.js\n+++ rebuilt/guid.js\n@@ -1,58 +1,63 @@\n-var validator = new RegExp(\"^[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$\", \"i\");\n+(function () {\n+  var validator = new RegExp(\"^[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$\", \"i\");\n \n-function gen(count) {\n-  var out = \"\";\n-  for (var i=0; i<count; i++) {\n-    out += (((1+Math.random())*0x10000)|0).toString(16).substring(1);\n+  function gen(count) {\n+    var out = \"\";\n+    for (var i=0; i<count; i++) {\n+      out += (((1+Math.random())*0x10000)|0).toString(16).substring(1);\n+    }\n+    return out;\n   }\n-  return out;\n-}\n \n-function Guid(guid) {\n-  if (!guid) throw new TypeError(\"Invalid argument; `value` has no value.\");\n+  function Guid(guid) {\n+    if (!guid) throw new TypeError(\"Invalid argument; `value` has no value.\");\n+      \n+    this.value = Guid.EMPTY;\n     \n-  this.value = Guid.EMPTY;\n-  \n-  if (guid && guid instanceof Guid) {\n-    this.value = guid.toString();\n+    if (guid && guid instanceof Guid) {\n+      this.value = guid.toString();\n \n-  } else if (guid && Object.prototype.toString.call(guid) === \"[object String]\" && Guid.isGuid(guid)) {\n-    this.value = guid;\n-  }\n-  \n-  this.equals = function(other) {\n-    // Comparing string `value` against provided `guid` will auto-call\n-    // toString on `guid` for comparison\n-    return Guid.isGuid(other) && this.value == other;\n-  };\n-\n-  this.isEmpty = function() {\n-    return this.value === Guid.EMPTY;\n-  };\n-  \n-  this.toString = function() {\n-    return this.value;\n-  };\n-  \n-  this.toJSON = function() {\n-    return this.value;\n+    } else if (guid && Object.prototype.toString.call(guid) === \"[object String]\" && Guid.isGuid(guid)) {\n+      this.value = guid;\n+    }\n+    \n+    this.equals = function(other) {\n+      // Comparing string `value` against provided `guid` will auto-call\n+      // toString on `guid` for comparison\n+      return Guid.isGuid(other) && this.value == other;\n+    };\n+\n+    this.isEmpty = function() {\n+      return this.value === Guid.EMPTY;\n+    };\n+    \n+    this.toString = function() {\n+      return this.value;\n+    };\n+    \n+    this.toJSON = function() {\n+      return this.value;\n+    };\n   };\n-};\n \n-Guid.EMPTY = \"00000000-0000-0000-0000-000000000000\";\n+  Guid.EMPTY = \"00000000-0000-0000-0000-000000000000\";\n \n-Guid.isGuid = function(value) {\n-  return value && (value instanceof Guid || validator.test(value.toString()));\n-};\n+  Guid.isGuid = function(value) {\n+    return value && (value instanceof Guid || validator.test(value.toString()));\n+  };\n \n-Guid.create = function() {\n-  return new Guid([gen(2), gen(1), gen(1), gen(1), gen(3)].join(\"-\"));\n-};\n+  Guid.create = function() {\n+    return new Guid([gen(2), gen(1), gen(1), gen(1), gen(3)].join(\"-\"));\n+  };\n \n-Guid.raw = function() {\n-  return [gen(2), gen(1), gen(1), gen(1), gen(3)].join(\"-\");\n-};\n+  Guid.raw = function() {\n",
+					"match": false,
+					"packageHash": "2c11680eccde0796d492d5cc6c19b2dbb6593b30986971a1b9ffd41608b7627e",
+					"size": 1447,
+					"sourceHash": "1d71db6690021895fa38f54f7c2268c016a5731e9f3a37dcc0edceb63643d79a",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -2,7 +2,7 @@\n   \"author\": \"Dan Dean <@dandean> (http://dandean.com)\",\n   \"name\": \"guid\",\n   \"description\": \"A Guid generator and validator.\",\n-  \"version\": \"0.0.11\",\n+  \"version\": \"0.0.12\",\n   \"homepage\": \"https://github.com/dandean/guid\",\n   \"repository\": {\n     \"type\": \"git\",\n",
+					"match": false,
+					"packageHash": "c0ca5d82805769ba399c0e8320bcea1c9c791b109f3ae79bc81a430b9cdb3f5b",
+					"size": 987,
+					"sourceHash": "71eda20e24c5cf805131974cb8b3861df0971c0a2c08a565abac7dbffa07591c",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 3,
+				"matchingFiles": 3,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.5,
+				"totalFiles": 6
+			}
+		},
+		"prodDependencies": []
+	}
+]

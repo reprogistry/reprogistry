@@ -1,0 +1,93 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T14:46:47.034Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:2.15.11",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "guid@0.0.5",
+			"name": "guid",
+			"version": "0.0.5",
+			"location": "https://registry.npmjs.org/guid/-/guid-0.0.5.tgz",
+			"integrity": "sha512-uDjDnyBEojPuEUigXRYr47zYZaeo8kQOavhUqKEToCkCMPKXcSmvaTENc/vM44cHogcWlaxwT2dj2gMwYSF1eQ==",
+			"publishedAt": "2011-07-13T06:18:20.454Z",
+			"publishedWith": {
+				"node": "v0.3.1-pre",
+				"npm": "0.2.7-2"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "http://github.com/dandean/guid.git",
+			"spec": "github:dandean/guid#HEAD"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"._LICENSE": {
+					"match": false,
+					"packageHash": "1d8f658976eb08c0f20362235e3f6f5d2bae7584b674432dff357476e3d047bf",
+					"size": 187,
+					"status": "missing-in-source"
+				},
+				"._guid.js": {
+					"match": false,
+					"packageHash": "6c0c863f904adfeb25057969c863b36dd8649b270c4819a3abb2561061cc3464",
+					"size": 186,
+					"status": "missing-in-source"
+				},
+				"._package.json": {
+					"match": false,
+					"packageHash": "fc84bf348dff2e60b74515194ad3957f2da2385ec70b8962737df3fbc9c249e8",
+					"size": 187,
+					"status": "missing-in-source"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -0,0 +1,70 @@\n+**NOTE:** This creates GUID-like strings and not GUIDs. @broofa's [node-uuid](https://github.com/broofa/node-uuid) module is **much** better than this implementation.\n+\n+# Guid lets you generate and validate unique identifiers.\n+\n+[![browser support](https://ci.testling.com/tommydudebreaux/guid.png)](https://ci.testling.com/tommydudebreaux/guid)\n+\n+In its simplest form, Guid lets you generate raw GUID formatted strings:\n+\n+    Guid.raw();\n+    // -> '6fdf6ffc-ed77-94fa-407e-a7b86ed9e59d'\n+\n+Let's generate a new Guid instance.\n+\n+    var guid = Guid.create();\n+\n+We've now got an object which we can work with programmatically. Lets check the\n+validity of our Guid using the built-in validator:\n+\n+    Guid.isGuid(guid);\n+    // -> true\n+    \n+    Guid.value;\n+    // -> '6fdf6ffc-ed77-94fa-407e-a7b86ed9e59d'\n+\n+A handy bit of functionality is that its `toString` method returns the string\n+value, so you can do handy things like this:\n+\n+    var itemUrl = \"http://whatever.com/items/\" + guid;\n+    // -> 'http://whatever.com/items/6fdf6ffc-ed77-94fa-407e-a7b86ed9e59d'\n+    \n+If you need a placeholder Guid, or a value to represent a non-GUID, use the\n+static `EMPTY` property:\n+\n+    Guid.EMPTY;\n+    // -> '00000000-0000-0000-0000-000000000000'\n+\n+Once you have a `Guid` object, you can't change its value (thanks ES5!):\n+\n+    guid.value = \"go suck it, guid!\"\n+    guid.value;\n+    // -> '6fdf6ffc-ed77-94fa-407e-a7b86ed9e59d'\n+\n+To instantiate an Guid object using an existing GUID string, use the constructor:\n+\n+    var guid = new Guid('6fdf6ffc-ed77-94fa-407e-a7b86ed9e59d');\n+\n+You can check the equality of two different Guid objects using the `equals`\n+instance method.\n+\n+Compare a Guid object to a GUID string:\n+\n+    guid.equals('6fdf6ffc-ed77-94fa-407e-a7b86ed9e59d');\n+    // -> true\n+\n+Compare two Guid objects:\n+    \n+    guid.equals(new Guid('6fdf6ffc-ed77-94fa-407e-a7b86ed9e59d'));\n+    // -> true\n+\n+## Installation\n+\n+You can use npm to install guid: `npm install guid`\n+\n+\n+## But what if I need a UUID, not a GUID?\n+\n+There's also a [Uuid](https://github.com/dandean/uuid-lib) library which has the\n+**exact** same functionality, but for UUID's:\n+[https://github.com/dandean/uuid-lib](https://github.com/dandean/uuid-lib)\n+\n",
+					"match": false,
+					"packageHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+					"size": 0,
+					"sourceHash": "058fa2b64fa21a68b4dacfa2649dbe511d4fee5d2111baca3b2bb6ebbb12ce98",
+					"status": "content"
+				},
+				"guid.js": {
+					"diff": "--- published/guid.js\n+++ rebuilt/guid.js\n@@ -1,59 +1,63 @@\n-var validator = new RegExp(\"^[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$\", \"i\");\n+(function () {\n+  var validator = new RegExp(\"^[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$\", \"i\");\n \n-function gen(count) {\n-  var out = \"\";\n-  for (var i=0; i<count; i++) {\n-    out += (((1+Math.random())*0x10000)|0).toString(16).substring(1);\n+  function gen(count) {\n+    var out = \"\";\n+    for (var i=0; i<count; i++) {\n+      out += (((1+Math.random())*0x10000)|0).toString(16).substring(1);\n+    }\n+    return out;\n   }\n-  return out;\n-}\n \n-function Guid(guid) {\n-  if (!guid) throw new TypeError(\"Invalid argument; `value` has no value.\");\n+  function Guid(guid) {\n+    if (!guid) throw new TypeError(\"Invalid argument; `value` has no value.\");\n+      \n+    this.value = Guid.EMPTY;\n     \n-  var value = Guid.EMPTY;\n-  \n-  if (guid && guid instanceof Guid) {\n-    value = Guid.toString();\n+    if (guid && guid instanceof Guid) {\n+      this.value = guid.toString();\n \n-  } else if (guid && Object.prototype.toString.call(guid) === \"[object String]\" && Guid.isGuid(guid)) {\n-    value = guid;\n-  }\n-  \n-  this.equals = function(other) {\n-    // Comparing string `value` against provided `guid` will auto-call\n-    // toString on `guid` for comparison\n-    return Guid.isGuid(other) && value == other;\n+    } else if (guid && Object.prototype.toString.call(guid) === \"[object String]\" && Guid.isGuid(guid)) {\n+      this.value = guid;\n+    }\n+    \n+    this.equals = function(other) {\n+      // Comparing string `value` against provided `guid` will auto-call\n+      // toString on `guid` for comparison\n+      return Guid.isGuid(other) && this.value == other;\n+    };\n+\n+    this.isEmpty = function() {\n+      return this.value === Guid.EMPTY;\n+    };\n+    \n+    this.toString = function() {\n+      return this.value;\n+    };\n+    \n+    this.toJSON = function() {\n+      return this.value;\n+    };\n   };\n \n-  this.isEmpty = function() {\n-    return value === Guid.EMPTY;\n+  Guid.EMPTY = \"00000000-0000-0000-0000-000000000000\";\n+\n+  Guid.isGuid = function(value) {\n+    return value && (value instanceof Guid || validator.test(value.toString()));\n   };\n-  \n-  this.toString = function() {\n-    return value;\n+\n+  Guid.create = function() {\n+    return new Guid([gen(2), gen(1), gen(1), gen(1), gen(3)].join(\"-\"));\n   };\n-  \n-  this.toJSON = function() {\n-    return value;\n+\n+  Guid.raw = function() {\n+    return [gen(2), gen(1), gen(1), gen(1), gen(3)].join(\"-\");\n   };\n-  \n-  Object.defineProperty(this, \"value\", {\n-    get: function() { return value; },\n-    enumerable: true\n-  });\n-};\n-\n-Object.defineProperty(Guid, \"EMPTY\", {\n-  value: \"00000000-0000-0000-0000-000000000000\"\n-});\n-\n-Guid.isGuid = function(value) {\n-  return value && (value instanceof Guid || validator.test(value.toString()));\n",
+					"match": false,
+					"packageHash": "b8c02586c73c246039aa022b7ba955023c80595b706672147788ac1600bca063",
+					"size": 1418,
+					"sourceHash": "1d71db6690021895fa38f54f7c2268c016a5731e9f3a37dcc0edceb63643d79a",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,22 +1,42 @@\n-{ \"name\" : \"guid\"\n-, \"description\" : \"A Guid generator and validator.\"\n-, \"version\" : \"0.0.5\"\n-, \"homepage\" : \"http://github.com/dandean/guid\"\n-, \"author\" : \"Dan Dean <me@dandean.com> (http://dandean.com)\"\n-, \"contributors\" : []\n-, \"repository\" :\n-  { \"type\" : \"git\"\n-  , \"url\" : \"http://github.com/dandean/guid.git\"\n-  }\n-, \"bugs\" :\n-  { \"mail\" : \"me@dandean.com\"\n-  , \"web\" : \"http://github.com/dandean/guid/issues\"\n-  }\n-, \"main\" : \"guid\"\n-, \"engines\" : { \"node\" : \">=0.2.0\" }\n-, \"licenses\" :\n-  [ { \"type\" : \"MIT\"\n-    , \"url\" : \"http://github.com/dandean/guid/raw/master/LICENSE\"\n+{\n+  \"author\": \"Dan Dean <@dandean> (http://dandean.com)\",\n+  \"name\": \"guid\",\n+  \"description\": \"A Guid generator and validator.\",\n+  \"version\": \"0.0.12\",\n+  \"homepage\": \"https://github.com/dandean/guid\",\n+  \"repository\": {\n+    \"type\": \"git\",\n+    \"url\": \"git://github.com/dandean/guid.git\"\n+  },\n+  \"scripts\": {\n+    \"test\": \"mocha -R spec -u tdd tests/*.js\"\n+  },\n+  \"contributors\": [{\n+      \"name\": \"Tommy Messbauer\"\n+  }],\n+  \"main\": \"./guid\",\n+  \"licenses\": [\n+    {\n+      \"type\": \"MIT\",\n+      \"url\": \"https://github.com/dandean/guid/raw/master/LICENSE\"\n     }\n-  ]\n-}\n\\ No newline at end of file\n+  ],\n+  \"ender\": \"./ender.js\",\n+  \"devDependencies\": {\n+    \"mocha\": \"~1.14.0\"\n+  },\n+  \"testling\": {\n+    \"browsers\": {\n+      \"ie\": [ 6, 7, 8, 9, 10 ],\n+      \"ff\": [ 24, 25, \"nightly\" ],\n+      \"chrome\": [ 28, 29, 30, 31, \"canary\" ],\n+      \"safari\": [ \"5.0.5\", 5.1 ],\n+      \"android-browser\": [ 4.2 ],\n+      \"opera\": [ 17, \"next\" ],\n+      \"iphone\": [ 6 ],\n+      \"ipad\": [ 6 ]\n+    },\n+    \"harness\" : \"mocha-tdd\",\n+    \"files\": \"tests/*.js\"\n+  }\n+}\n",
+					"match": false,
+					"packageHash": "cfdede4ac8c768a3f0bfa9451d5f45b8bdaa080b3f0b99af041587c5665a0d60",
+					"size": 578,
+					"sourceHash": "71eda20e24c5cf805131974cb8b3861df0971c0a2c08a565abac7dbffa07591c",
+					"status": "content"
+				},
+				"ender.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tests/guid.js": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 3,
+				"matchingFiles": 1,
+				"missingInPackage": 2,
+				"missingInSource": 3,
+				"score": 0.1111111111111111,
+				"totalFiles": 9
+			}
+		},
+		"prodDependencies": []
+	}
+]
