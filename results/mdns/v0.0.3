@@ -1,0 +1,422 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T00:55:01.285Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:2.15.11",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "mdns@0.0.3",
+			"name": "mdns",
+			"version": "0.0.3",
+			"location": "https://registry.npmjs.org/mdns/-/mdns-0.0.3.tgz",
+			"integrity": "sha512-iHdZlOsYDkRszxwCaCIgJE3Cz8q9/CUm2BsK2+iagcvZubfeMajEXeB7g1GSFpWlcgqVp20UiuY7YohnyKqePw==",
+			"publishedAt": "2011-03-31T08:03:55.358Z",
+			"publishedWith": {
+				"node": "v0.3.1-pre",
+				"npm": "0.2.7-2"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "http://github.com/agnat/node_mdns.git",
+			"spec": "github:agnat/node_mdns#HEAD"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".gitignore": {
+					"match": false,
+					"packageHash": "78225afec4e559476fdbdb79fc3579bab3dc03e3fd312b71105da0f12a73eda3",
+					"size": 33,
+					"status": "missing-in-source"
+				},
+				"README.textile": {
+					"match": false,
+					"packageHash": "7323b0100dfe308761a14de76b5e541b0a7c37d888dc512d30d918fc11e2787d",
+					"size": 2134,
+					"status": "missing-in-source"
+				},
+				"examples/acshell_library.js": {
+					"match": false,
+					"packageHash": "9aaa53c26aa319bf2b6fc43f9123ddb68c36ce987819092319e2e4a3862d8af3",
+					"size": 695,
+					"status": "missing-in-source"
+				},
+				"examples/express_app.js": {
+					"diff": "--- published/examples/express_app.js\n+++ rebuilt/examples/express_app.js\n@@ -1,13 +1,14 @@\n #!/usr/bin/env node\n-var express = require('express'),\n-    mdns    = require('../lib/mdns'),\n-    sys     = require('sys');\n+var mdns    = require('../lib/mdns')\n+    ,express = require('express');\n \n-get('/', function() {\n-  return \"Hello World\";\n+var app = express();\n+app.get('/', function(req, res){\n+  res.send('Hello World');\n });\n \n-var server = run();\n-server.addListener('listening', function() {\n-  mdns.createAdvertisement('http', Express.server.port, 'tcp').start();\n+var listener = app.listen(4321, function() {\n+    var port = listener.address().port;\n+    mdns.createAdvertisement(mdns.tcp('http') , port).start();\n+    console.log('Listening on port', port);\n });\n",
+					"match": false,
+					"packageHash": "7e9ae8a179835aed4170ea18b4dbf9ad45b75659273b6fee442ff0da403702c5",
+					"size": 315,
+					"sourceHash": "81ccbbc4c726e44f5141a33485adef7e449af3631426cbae11ed2018cd607492",
+					"status": "content"
+				},
+				"lib/mdns.js": {
+					"diff": "--- published/lib/mdns.js\n+++ rebuilt/lib/mdns.js\n@@ -1,112 +1,32 @@\n-var binding = require('./binding'),\n-    sys = require('sys');\n+var dns_sd  = require('./dns_sd')\n+  , ad      = require('./advertisement')\n+  , browser = require('./browser')\n+  , st      = require('./service_type')\n+  , nif     = require('./network_interface')\n+  ;\n \n-function regtype(service_type, protocol) {\n-  var subtypes = [];\n-  if (Array.isArray(service_type)) {\n-    subtypes = service_type;\n-    service_type = subtypes.shift();\n-  }\n-  if (service_type.length > 14) {\n-    throw Error(\"service_type is longer than 14 characters\");\n-  }\n-  subtypes.unshift('_' + service_type + '._' + protocol);\n-  return subtypes.join(',_');\n-}\n-\n-//=== Advertisement ============================================================\n-var Advertisement = binding.Advertisement;\n-Advertisement.prototype.start = function() {\n-  return this.doStart(\n-    this.options.flags,\n-    this.options.interface_index,\n-    this.options.name,\n-    regtype(this.service_type, this.protocol),\n-    this.options.domain,\n-    this.options.host,\n-    this.port,\n-    this.options.txt_record,\n-    this.options.ready_callback);\n-};\n-\n-exports.createAdvertisement = function(service_type, port, protocol,\n-    flags, interface_index, name, domain, host, txt_record, ready_callback)\n-{\n-  if ( undefined == service_type ) {\n-    throw TypeError(\"required argument 'service_type' is missing\");\n-  }\n-  if ( undefined == port || typeof(port) == 'function') {\n-    throw TypeError(\"required argument 'port' is missing\");\n-  }\n-  if (typeof(arguments[arguments.length - 1]) == 'function') {\n-    ready_callback = arguments[arguments.length - 1];\n-  } else {\n-    ready_callback = function() {}\n-  }\n-  var ad = new Advertisement();\n-  ad.service_type = service_type;\n-  ad.port = port;\n-  if (protocol && typeof(protocol) != 'function') {\n-    ad.protocol = protocol;\n-  } else {\n-    ad.protocol = 'tcp';\n-  }\n-  ad.options = {\n-    flags: typeof(flags) == 'function' ? 0 : flags,\n-    interface_index: typeof(interface_index) == 'function' ? 0 : interface_index,\n-    name: typeof(name) == 'function' ? null : name,\n-    domain: typeof(domain) == 'function' ? null : domain,\n-    host: typeof(host) == 'function' ? null : host,\n-    txt_record: typeof(txt_record) == 'function' ? null : txt_record,\n-    ready_callback: ready_callback\n-  };\n-  return ad;\n-};\n-\n-//=== Service Browser ==========================================================\n-\n-function resolve(service_info, handler) {\n-  var resolver = new Resolver();\n-  resolver.addListener('resolved', function(error, resolver_info) {\n-    for (var property in resolver_info) {\n-      service_info[property] = resolver_info[property];\n-    }\n-    handler(service_info);\n-    resolver.stop();\n-  });\n-  resolver.start(service_info)\n-}\n-\n-var Browser = binding.Browser;\n-Browser.prototype.start = function() {\n-  return this.doStart(regtype(this.service_type, this.protocol));\n-}\n-\n-exports.createBrowser = function(service_type, protocol) {\n-  var browser = new Browser();\n-  browser.service_type = service_type;\n-  browser.protocol = protocol;\n-  browser.addListener('changed', function(err, info, flags) {\n-    if (flags & binding.kDNSServiceFlagsAdd) {\n-      resolve(info, function(resolver_info) {\n",
+					"match": false,
+					"packageHash": "0a6e00d2fd6bbd339c577b03cf84728dcd2590b1b77aa988050202eda684349a",
+					"size": 3440,
+					"sourceHash": "25fffdba40603703b0b98b1135e80b39914f6ab8d5908106ef716fbe66a96dfc",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,19 +1,85 @@\n-{ \"name\" : \"mdns\"\n-, \"version\" : \"0.0.3\"\n-, \"description\" : \"mdns/zeroconf/bonjour service discovery add-on\"\n-, \"author\": \"David Siegel <david@artcom.de>\"\n-, \"contributors\": [\"Orlando Vazquez\", \"Ryan Dahl\"]\n-, \"main\": \"./lib/mdns\"\n-, \"scripts\": { \"install\": \"node-waf configure build\"}\n-, \"licenses\": [\n-    { \"type\": \"MIT\"\n-    , \"url\": \"http://github.com/agnat/node_mdns/raw/master/LICENSE\"\n+{\n+  \"name\": \"mdns\",\n+  \"version\": \"2.7.2\",\n+  \"description\": \"multicast DNS service discovery\",\n+  \"main\": \"./lib/mdns.js\",\n+  \"scripts\": {\n+    \"test\": \"node utils/testrun\"\n+  },\n+  \"keywords\": [\n+    \"zeroconf\",\n+    \"bonjour\",\n+    \"dns_sd\",\n+    \"mDNSResponder\"\n+  ],\n+  \"devDependencies\": {\n+    \"ejs\": \"*\",\n+    \"glob\": \"*\",\n+    \"less\": \"*\",\n+    \"minimatch\": \"*\",\n+    \"mkdirp\": \"*\",\n+    \"ncp\": \"*\",\n+    \"nopt\": \"*\",\n+    \"proxyquire\": \"^2.0.0\",\n+    \"slide\": \"*\"\n+  },\n+  \"repository\": {\n+    \"type\": \"git\",\n+    \"url\": \"http://github.com/agnat/node_mdns.git\"\n+  },\n+  \"homepage\": \"http://agnat.github.io/node_mdns\",\n+  \"bugs\": {\n+    \"url\": \"http://github.com/agnat/node_mdns/issues\"\n+  },\n+  \"licenses\": [\n+    {\n+      \"type\": \"MIT\",\n+      \"url\": \"http://github.com/agnat/node_mdns/raw/master/LICENSE\"\n     }\n-  ]\n-, \"bugs\": { \"web\": \"http://github.com/agnat/node_mdns/issues\" }\n-, \"repository\":\n-  { \"type\": \"git\"\n-  , \"url\":  \"http://github.com/agnat/node_mdns.git\"\n-  }\n+  ],\n+  \"author\": {\n+    \"name\": \"David Siegel\",\n+    \"email\": \"agnat@me.com\",\n+    \"github\": \"agnat\"\n+  },\n+  \"contributors\": [\n+    {\n+      \"name\": \"Orlando Vazquez\",\n+      \"email\": \"ovazquez@gmail.com\",\n+      \"url\": \"http://or.lan.do/\",\n+      \"github\": \"orlandov\"\n+    },\n+    {\n+      \"name\": \"Ryan Dahl\",\n+      \"email\": \"ry at tiny clouds dot org\",\n+      \"url\": \"http://four.livejournal.com/\",\n+      \"github\": \"ry\"\n+    },\n+    {\n+      \"name\": \"Dominic Tarr\",\n+      \"url\": \"http://twitter.com/dominictarr\",\n+      \"github\": \"dominictarr\"\n+    },\n+    {\n+      \"name\": \"Emil Stenqvist\",\n+      \"github\": \"emilisto\"\n+    },\n+    {\n+      \"name\": \"Toby Ealden\",\n+      \"github\": \"TobyEalden\"\n+    },\n+    {\n+      \"name\": \"Cong Liu\",\n+      \"github\": \"ghostoy\"\n+    },\n+    {\n+      \"name\": \"Tian Zhang\",\n+      \"github\": \"KhaosT\"\n+    }\n+  ],\n+  \"dependencies\": {\n+    \"bindings\": \"~1.2.1\",\n",
+					"match": false,
+					"packageHash": "89d34f10d6f26a06e0eaf0b7a005286207d60bd474536ab1088fbb7271a44a5d",
+					"size": 551,
+					"sourceHash": "d653e52821c44008b5258a6bbc50b9057716afbf372b6e7e3c825dcde9592710",
+					"status": "content"
+				},
+				"src/advertisement.cpp": {
+					"match": false,
+					"packageHash": "8dd3b7704ffe35ea56dd1ca3ac48a941ffacc5b0d1d3cbceb557aaee1224afd2",
+					"size": 8054,
+					"status": "missing-in-source"
+				},
+				"src/advertisement.hpp": {
+					"match": false,
+					"packageHash": "0ecb83ab3b0e5d6530dc9b1abd52aa420337efc8d9a67d2b285b3c5c274b8dfb",
+					"size": 1677,
+					"status": "missing-in-source"
+				},
+				"src/binding.cpp": {
+					"match": false,
+					"packageHash": "05bb4b7c465fc7cda3a519114edfcfe0070b2119c1229f16dde4ce5a5f336a85",
+					"size": 8131,
+					"status": "missing-in-source"
+				},
+				"src/browser.cpp": {
+					"match": false,
+					"packageHash": "f8086d0ccc572e58d160a2e2812f2eff91a5945c85681a2cbfc3ec30a0b92f98",
+					"size": 3538,
+					"status": "missing-in-source"
+				},
+				"src/browser.hpp": {
+					"match": false,
+					"packageHash": "924925a5a781ca3f10206d25ff62d9e51476b5f94ddf4cd061d806566345b7de",
+					"size": 1428,
+					"status": "missing-in-source"
+				},
+				"src/mdns_base.cpp": {
+					"match": false,
+					"packageHash": "e7f1ec8ce0b870e830e5970eab7a8abceebbe730623dd5e89ce2ab2ff6a4ff49",
+					"size": 1882,
+					"status": "missing-in-source"
+				},
+				"src/mdns_base.hpp": {
+					"match": false,
+					"packageHash": "7870181db0d8f0b8a37652538866246a1a8e61c35b31a8c2702e73d731b73b23",
+					"size": 840,
+					"status": "missing-in-source"
+				},
+				"src/mdns_utils.cpp": {
+					"diff": "--- published/src/mdns_utils.cpp\n+++ rebuilt/src/mdns_utils.cpp\n@@ -1,3 +1,5 @@\n+#include \"mdns.hpp\"\n+\n #include \"mdns_utils.hpp\"\n \n #include <string>\n@@ -6,90 +8,109 @@\n \n using namespace v8;\n \n-inline\n+Local<Value>\n+buildException(DNSServiceErrorType error_code) {\n+    if (error_code == kDNSServiceErr_NoError) {\n+        return Nan::Undefined();\n+    }\n+\n+    std::string error_str(\"dns service error: \");\n+    error_str += errorString(error_code);\n+    Local<String> error_msg = Nan::New(error_str.c_str()).ToLocalChecked();\n+    Local<Value> error_v = Exception::Error(error_msg);\n+    Local<Object> error = ToObject(error_v);\n+    Nan::Set(error, Nan::New(\"errorCode\").ToLocalChecked(), Nan::New<Integer>(error_code));\n+    return error_v;\n+}\n+\n const char *\n errorString(DNSServiceErrorType error) {\n     switch (error) {\n         case kDNSServiceErr_NoError:\n-            return \"NoError\";\n+            return \"no error\";\n         case kDNSServiceErr_Unknown:\n-            return \"Unknown\";\n+            return \"unknown\";\n         case kDNSServiceErr_NoSuchName:\n-            return \"NoSuchName\";\n+            return \"no such name\";\n         case kDNSServiceErr_NoMemory:\n-            return \"NoMemory\";\n+            return \"no memory\";\n         case kDNSServiceErr_BadParam:\n-            return \"BadParam\";\n+            return \"bad param\";\n         case kDNSServiceErr_BadReference:\n-            return \"BadReference\";\n+            return \"bad reference\";\n         case kDNSServiceErr_BadState:\n-            return \"BadState\";\n+            return \"bad state\";\n         case kDNSServiceErr_BadFlags:\n-            return \"BadFlags\";\n+            return \"bad flags\";\n         case kDNSServiceErr_Unsupported:\n-            return \"Unsupported\";\n+            return \"unsupported\";\n         case kDNSServiceErr_NotInitialized:\n-            return \"NotInitialized\";\n+            return \"not initialized\";\n         case kDNSServiceErr_AlreadyRegistered:\n-            return \"AlreadyRegistered\";\n+            return \"already registered\";\n         case kDNSServiceErr_NameConflict:\n-            return \"NameConflict\";\n+            return \"name conflict\";\n         case kDNSServiceErr_Invalid:\n-            return \"Invalid\";\n+            return \"invalid\";\n         case kDNSServiceErr_Firewall:\n-            return \"Firewall\";\n+            return \"firewall\";\n         case kDNSServiceErr_Incompatible:\n-            return \"Incompatible\";\n+            return \"incompatible\";\n         case kDNSServiceErr_BadInterfaceIndex:\n-            return \"BadInterfaceIndex\";\n+            return \"bad interface index\";\n         case kDNSServiceErr_Refused:\n-            return \"Refused\";\n+            return \"refused\";\n         case kDNSServiceErr_NoSuchRecord:\n-            return \"NoSuchRecord\";\n+            return \"no such record\";\n         case kDNSServiceErr_NoAuth:\n-            return \"NoAuth\";\n+            return \"no auth\";\n         case kDNSServiceErr_NoSuchKey:\n-            return \"NoSuchKey\";\n+            return \"no such key\";\n         case kDNSServiceErr_NATTraversal:\n-            return \"NATTraversal\";\n+            return \"NAT traversal\";\n         case kDNSServiceErr_DoubleNAT:\n-            return \"DoubleNAT\";\n+            return \"double NAT\";\n         case kDNSServiceErr_BadTime:\n-            return \"BadTime\";\n-#if 0 // missing on linux ...\n",
+					"match": false,
+					"packageHash": "234ea42c144bdf8da3da6bd069e5e5c96bf9005fb14af7091ed1d5f06cc6b492",
+					"size": 2985,
+					"sourceHash": "847ebd45b0bd5c261c8bbc1c677d1211a3faaf7cd4dc7c38b621f34d93213e72",
+					"status": "content"
+				},
+				"src/mdns_utils.hpp": {
+					"diff": "--- published/src/mdns_utils.hpp\n+++ rebuilt/src/mdns_utils.hpp\n@@ -1,17 +1,97 @@\n-#ifndef NODE_JS_MDNS_UTILS_INCLUDED\n-#define NODE_JS_MDNS_UTILS_INCLUDED\n+#ifndef NODE_MDNS_UTILS_INCLUDED\n+#define NODE_MDNS_UTILS_INCLUDED\n \n-#include <dns_sd.h>\n+#include <sstream>\n #include <errno.h>\n #include <fcntl.h>\n-#include <node.h>\n-#include <node_events.h>\n \n namespace node_mdns {\n \n const char * errorString(DNSServiceErrorType error);\n v8::Local<v8::Value> buildException(DNSServiceErrorType error_code);\n \n+inline\n+void\n+throwError(const char * message) {\n+    Nan::ThrowError( Nan::Error(message) );\n+}\n+\n+inline\n+void\n+throwTypeError(const char * message) {\n+    Nan::ThrowTypeError( message );\n+}\n+\n+inline\n+void\n+throwMdnsError(DNSServiceErrorType error_code) {\n+    Nan::ThrowError( buildException(error_code) );\n+}\n+\n+inline\n+bool\n+argumentCountMismatch(Nan::NAN_METHOD_ARGS_TYPE info, int expectedCount) {\n+    return info.Length() != expectedCount;\n+}\n+\n+inline\n+void\n+throwArgumentCountMismatchException(Nan::NAN_METHOD_ARGS_TYPE info, size_t expectedCount) {\n+    std::ostringstream msg;\n+    msg << \"argument count mismatch: expected \" << expectedCount \n+        << \", but got \" <<  info.Length() << \" arguments.\";\n+    return throwError(msg.str().c_str());\n+}\n+\n+inline\n+v8::Local<v8::Value>\n+stringOrUndefined(const char * str) {\n+    if (str) {\n+        return Nan::New<v8::String>(str).ToLocalChecked();\n+    } else {\n+        return Nan::Undefined();\n+    }\n+}\n+\n+inline\n+v8::Local<v8::Object>\n+ToObject(v8::Local<v8::Value> v) {\n+  return v->ToObject(v8::Isolate::GetCurrent()->GetCurrentContext()).ToLocalChecked();\n+}\n+\n+inline\n+int32_t\n+ToInt32(v8::Local<v8::Value> v) {\n+  v8::Local<v8::Context> ctx = v8::Isolate::GetCurrent()->GetCurrentContext();\n+  return v->ToInt32(ctx).ToLocalChecked()->Value();\n+}\n+\n+inline\n+uint32_t\n+ToUint32(v8::Local<v8::Value> v) {\n+  v8::Local<v8::Context> ctx = v8::Isolate::GetCurrent()->GetCurrentContext();\n+  return v->ToUint32(ctx).ToLocalChecked()->Value();\n+}\n+\n+inline\n+v8::Local<v8::String>\n+ToString(v8::Local<v8::Value> v) {\n+  v8::Local<v8::Context> ctx = v8::Isolate::GetCurrent()->GetCurrentContext();\n+  return v->ToString(ctx).ToLocalChecked();\n+}\n+\n+inline\n+int\n+Utf8Length(v8::Local<v8::Value> v) {\n+#if (NODE_MODULE_VERSION >= NODE_11_0_MODULE_VERSION)\n+  return ToString(v)->Utf8Length(v8::Isolate::GetCurrent());\n+#else\n+  return ToString(v)->Utf8Length();\n+#endif\n+}\n+\n",
+					"match": false,
+					"packageHash": "58f92d48ea29e1cf9b71e6a9ce5d9f5d7e3d963ad77810ba451a2c7a249181fc",
+					"size": 392,
+					"sourceHash": "aa5d8d8c632bb51526bbb3e455c41b1f2c1ee6663db18161676f876fac2a4992",
+					"status": "content"
+				},
+				"src/resolver.cpp": {
+					"match": false,
+					"packageHash": "66c462111eb26dc8a2ebe11fffba383263b45075d7e8846d5b4e45fadc99771f",
+					"size": 4577,
+					"status": "missing-in-source"
+				},
+				"src/resolver.hpp": {
+					"match": false,
+					"packageHash": "23dddc10a9c9322b9b84766f1bfb364891b954d3ebc85ab84e21fd059a96ab1e",
+					"size": 1557,
+					"status": "missing-in-source"
+				},
+				"test.js": {
+					"match": false,
+					"packageHash": "3f0378188dd5e68e70adc96f5abfa2fae6ed94194bcae147c9ccca499e934997",
+					"size": 1471,
+					"status": "missing-in-source"
+				},
+				"wscript": {
+					"diff": "--- published/wscript\n+++ rebuilt/wscript\n@@ -1,38 +1,101 @@\n-import sys\n-import Options\n-from os import unlink, link\n-from os.path import exists \n-\n-# nice, but requires python 2.6 ... \n-import json\n-package = json.load(open('package.json'))\n-APPNAME = 'node_' + package['name'] # used by 'node-waf dist'\n-VERSION = package['version']        # dito\n+import os, shutil, subprocess, Scripting, Options\n \n-#APPNAME = 'node_mdns'\n-#VERSION = '0.0.2'\n+out  = 'build'\n+name = 'dns_sd_bindings'\n \n def set_options(opt):\n   opt.tool_options('compiler_cxx')\n+  opt.tool_options('node_addon')\n \n def configure(conf):\n   conf.check_tool('compiler_cxx')\n   conf.check_tool('node_addon')\n-  if sys.platform != 'darwin':\n-    conf.env.LIB_DNSSD = 'dns_sd'\n+\n+  # HACK: The current node master builds a i386 binary while older releases used\n+  # the compilers default x86_64. node-waf still targets x86_64 resulting in an\n+  # incompatible binary. Building the add-on as a universal binary for both\n+  # architectures solves this for now ...\n+  if conf.env.DEST_OS == 'darwin':\n+    universal_flags = ['-arch', 'i386', '-arch', 'x86_64']\n+    conf.env.append_value('CXXFLAGS', universal_flags)\n+    conf.env.append_value('LINKFLAGS_MACBUNDLE', universal_flags)\n+\n+  includes = ['/usr/local/include'] # help freebsd\n+  libpath = ['/usr/local/lib']      # help freebsd\n+  if conf.check( header_name='dns_sd.h'\n+               , includes=includes\n+               , uselib_store='DNS_SD'\n+               , mandatory=True):\n+    conf.check(lib='dns_sd', libpath=libpath, uselib_store='DNS_SD')\n+ \n+    conf.check(function_name='DNSServiceGetAddrInfo',\n+               header_name=\"dns_sd.h\",\n+               uselib='DNS_SD')\n+\n \n def build(bld):\n   obj = bld.new_task_gen('cxx', 'shlib', 'node_addon')\n-  obj.target = 'binding'\n-  obj.source = bld.path.ant_glob('src/*.cpp')\n-  obj.uselib = \"DNSSD\"\n-                \n-\n-def shutdown():\n-  # HACK to get binding.node out of build directory.\n-  # better way to do this?\n-  if exists('lib/binding.node'): unlink('lib/binding.node')\n-  if Options.commands['build']:\n-    link('build/default/binding.node', 'lib/binding.node')\n+  obj.target = name\n+  obj.uselib = 'DNS_SD'\n+  if bld.env.HAVE_DNSSERVICEGETADDRINFO:\n+    obj.defines = ['HAVE_DNSSERVICEGETADDRINFO']\n+  obj.includes = ['..']\n+  obj.cxxflags = ['-Wall']\n+  obj.source = [ 'src/dns_sd.cpp'\n+               , 'src/dns_service_browse.cpp'\n+               , 'src/dns_service_enumerate_domains.cpp'\n+               , 'src/dns_service_process_result.cpp'\n+               , 'src/dns_service_ref.cpp'\n+               , 'src/dns_service_ref_deallocate.cpp'\n+               , 'src/dns_service_ref_sock_fd.cpp'\n+               , 'src/dns_service_register.cpp'\n+               , 'src/dns_service_resolve.cpp'\n+               , 'src/dns_service_get_addr_info.cpp'\n+               , 'src/dns_service_update_record.cpp'\n+               , 'src/mdns_utils.cpp'\n+               , 'src/network_interface.cpp'\n+               , 'src/txt_record_ref.cpp'\n+               , 'src/txt_record_create.cpp'\n+               , 'src/txt_record_deallocate.cpp'\n+               , 'src/txt_record_set_value.cpp'\n+               , 'src/txt_record_get_length.cpp'\n+               , 'src/txt_record_buffer_to_object.cpp'\n+               ]\n+\n+  obj = bld.new_task_gen('cxx', 'shlib', 'node_addon')\n+  obj.target = 'demangle'\n+  obj.cxxflags = ['-Wall']\n+  obj.source = [ 'src/demangle.cpp' ]\n+\n+  #bld.add_post_fun(post_build)\n+\n+\n",
+					"match": false,
+					"packageHash": "ff4175ffdad0d7abfa72f8404557d8bd2df7c4bd6977deacfa5d990616be244d",
+					"size": 994,
+					"sourceHash": "86e074f7df7ea490aecc41e5f75404558c89ff78bf9b090c64a1b37adeb1586d",
+					"status": "content"
+				},
+				"CHANGES": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"Makefile": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"binding.gyp": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/osc_devices.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/advertisement.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/avahi.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/browser.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/dns_sd.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/io_watcher.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/mdns_service.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/network_interface.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/resolver_sequence_tasks.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/service_type.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"node-waf.bat": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/demangle.cpp": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/dns_sd.cpp": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/dns_service_browse.cpp": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/dns_service_enumerate_domains.cpp": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/dns_service_get_addr_info.cpp": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/dns_service_process_result.cpp": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/dns_service_ref.cpp": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/dns_service_ref.hpp": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/dns_service_ref_deallocate.cpp": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/dns_service_ref_sock_fd.cpp": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/dns_service_register.cpp": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/dns_service_resolve.cpp": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/dns_service_update_record.cpp": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/mdns.hpp": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/mdns_settings.hpp": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/network_interface.cpp": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/skeleton.cpp_": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/socket_watcher.cpp": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/socket_watcher.hpp": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/txt_record_buffer_to_object.cpp": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/txt_record_create.cpp": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/txt_record_deallocate.cpp": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/txt_record_get_length.cpp": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/txt_record_ref.cpp": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/txt_record_ref.hpp": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/txt_record_set_value.cpp": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tests/test_browser.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tests/test_dns_sd.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tests/test_functional.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tests/test_mdns_service.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tests/test_network_interface.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tests/test_odd_ends.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tests/test_service_type.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"utils/coverage": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"utils/docpack": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"utils/jsf": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"utils/lib/actors.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"utils/lib/bunch.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"utils/lib/compiler.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"utils/lib/lcov.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"utils/lib/mdns_test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"utils/lib/ncov.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"utils/lib/obj.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"utils/lib/view.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"utils/render_report": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"utils/testrun": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 6,
+				"matchingFiles": 1,
+				"missingInPackage": 61,
+				"missingInSource": 13,
+				"score": 0.012345679012345678,
+				"totalFiles": 81
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "bindings",
+				"version": "1.2.1"
+			},
+			{
+				"name": "nan",
+				"version": "2.14.0"
+			}
+		]
+	}
+]

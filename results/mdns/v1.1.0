@@ -1,0 +1,69 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T00:53:20.572Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:2.15.11",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "mdns@1.1.0",
+			"name": "mdns",
+			"version": "1.1.0",
+			"location": "https://registry.npmjs.org/mdns/-/mdns-1.1.0.tgz",
+			"integrity": "sha512-W594MRGkpo0N248UqZnTBsKYmZNyZJohK6jhE5NhkvvN8u7RLzVt41ZCaf7D3ZPBPIw7KurTEt0FBsxawwoPEg==",
+			"publishedAt": "2012-12-29T21:59:22.771Z",
+			"publishedWith": {
+				"node": "v0.6.12",
+				"npm": "1.1.4"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git://github.com/agnat/node_mdns.git",
+			"spec": "github:agnat/node_mdns#v1.1.0"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".npmignore": {
+					"match": false,
+					"packageHash": "30a4ab973ef8fd561d930d55502df855108ca0b081454b0e761d5141f3778780",
+					"size": 4,
+					"status": "missing-in-source"
+				},
+				"examples/simple_ad.js": {
+					"match": false,
+					"packageHash": "043278cf2c32987e0d1842897aaefacb8e9809afcc21bb725a45083af81e2ce0",
+					"size": 274,
+					"status": "missing-in-source"
+				},
+				"examples/simple_browser.js": {
+					"match": false,
+					"packageHash": "882db29240a03344e5792ca1c9f10e26df433159b3914083cf38f66d946a1f3d",
+					"size": 330,
+					"status": "missing-in-source"
+				},
+				"lib/service_type.js": {
+					"diff": "--- published/lib/service_type.js\n+++ rebuilt/lib/service_type.js\n@@ -39,7 +39,6 @@\n     type_string += '.'\n   }\n   if (this.subtypes.length > 0) {\n-    // XXX subtypes do not have to start with an underscore, but escaping must happen here\n     var subtypes = this.subtypes.map(function(t) { return _u(t) });\n     subtypes.unshift(type_string);\n     type_string = subtypes.join(',');\n@@ -49,7 +48,7 @@\n \n ServiceType.prototype.fromString = function fromString(string) {\n   var is_wildcard = string === ServiceType.wildcard\n-    , subtypes = string.split(',') // XXX this will break with escaped commas...\n+    , subtypes = string.split(',')\n     , primary_string = subtypes.shift()\n     , service_tokens = primary_string.split('.')\n     , service_type = service_tokens.shift()\n@@ -64,7 +63,6 @@\n   if ( ! is_wildcard) {\n     checkFormat(service_type);\n   }\n-  // XXX subtypes have different format rules ... fix this\n   subtypes.forEach(function(t) { checkFormat(t) });\n   if (service_tokens.length === 1 && service_tokens[0] === '') {\n     // trailing dot\n@@ -76,7 +74,6 @@\n \n   this.name = service_type.substr(1);\n   this.protocol = protocol.substr(1);\n-  // XXX subtypes do not have to start with an underscore, but unescaping is needed here\n   this.subtypes = subtypes.map(function(t) { return t.substr(1) });\n }\n \n@@ -147,55 +144,6 @@\n   }\n }\n \n-var escapeSubtype = exports.escapeSubtype = function escapeSubtype(str) {\n-}\n-\n-var extractSubtypes = exports.extractSubtypes = function extractSubtypes(str) {\n-  var i = str.indexOf(',')\n-    , subtypes = []\n-    ;\n-  if (i === -1) {\n-    return subtypes;\n-  }\n-  var subtype_string = str.substr(i+1)\n-    , subtype = ''\n-    , preceededByBackslash = false\n-    ;\n-  for (i = 0; i < subtype_string.length; ++i) {\n-    if (preceededByBackslash) {\n-      switch (subtype_string[i]) {\n-        case '\\\\':\n-        case ',':\n-          subtype += subtype_string[i]\n-          break;\n-      }\n-      preceededByBackslash = false;\n-    } else {\n-      switch (subtype_string[i]) {\n-        case ',':\n-          if (subtype.length > 63) {\n-            throw new Error(\"subtype '\" + subtype + \"' is longer than 63 bytes\");\n-          }\n-          subtypes.push(subtype);\n-          subtype = '';\n-          break;\n-        case '\\\\':\n-          preceededByBackslash = true;\n-          break;\n-        case '.':\n-          throw new Error('dots must be escaped by a backslash in subtypes');\n-          break;\n-        // TODO zero bytes\n-        default:\n-          subtype += subtype_string[i];\n-          break;\n-      }\n-    }\n-  }\n-  subtypes.push(subtype);\n-  return subtypes;\n-}\n-\n function isProtocol(str) {\n   return str === 'tcp' || str === '_tcp' || str === 'udp' || str === '_udp';\n }\n",
+					"match": false,
+					"packageHash": "1f1d40c64a9cc6725a3f16b6d4b610b18b4c1e8d585aefec34414398e1026d0c",
+					"size": 7383,
+					"sourceHash": "6f7e67ba06c02454b6da0a09e831403bd5125bfce174f0d4250ed7e06ea8fefe",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 1,
+				"matchingFiles": 63,
+				"missingInPackage": 0,
+				"missingInSource": 3,
+				"score": 0.9402985074626866,
+				"totalFiles": 67
+			}
+		},
+		"prodDependencies": []
+	}
+]
