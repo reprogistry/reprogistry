@@ -1,0 +1,3919 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T21:24:39.199Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:6.14.4",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "@react-pdf/renderer@2.0.17",
+			"name": "@react-pdf/renderer",
+			"version": "2.0.17",
+			"location": "https://registry.npmjs.org/@react-pdf/renderer/-/renderer-2.0.17.tgz",
+			"integrity": "sha512-4p/S1UtGN/Wx8WtDpk4BCex+JWPNEOvUV6GoLNiuJr9w8QHFPWRT9OnMLnZsN2z8CjCqNHpTIn9fUV6HyYiIfA==",
+			"publishedAt": "2021-07-25T20:55:49.375Z",
+			"publishedWith": {
+				"node": "12.16.3",
+				"npm": "lerna/3.22.1/node@v12.16.3+x64 (darwin)"
+			},
+			"dependencies": {
+				"queue": "^6.0.1",
+				"ramda": "^0.26.1",
+				"scheduler": "^0.15.0",
+				"blob-stream": "^0.1.3",
+				"@babel/runtime": "^7.6.2",
+				"@react-pdf/font": "^2.0.11",
+				"@react-pdf/types": "^2.0.4",
+				"react-reconciler": "^0.23.0",
+				"@react-pdf/layout": "^2.0.17",
+				"@react-pdf/pdfkit": "^2.0.11",
+				"@react-pdf/render": "^2.0.11",
+				"@react-pdf/primitives": "^2.0.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+ssh://git@github.com/diegomura/react-pdf.git",
+			"spec": "github:diegomura/react-pdf#c436c93efd06c9c6dc815a2e951a411d085bf27f"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -11,16 +11,19 @@\n     <a href=\"https://github.com/diegomura/react-pdf/blob/master/LICENSE\">\n       <img src=\"https://img.shields.io/github/license/diegomura/react-pdf.svg\" />\n     </a>\n-    <a href=\"https://spectrum.chat/react-pdf\">\n-      <img src=\"https://withspectrum.github.io/badge/badge.svg\" />\n-    </a>\n     <a href=\"https://github.com/prettier/prettier\">\n       <img src=\"https://img.shields.io/badge/styled_with-prettier-ff69b4.svg\" />\n     </a>\n-    <a href=\"https://app.fossa.com/projects/git%2Bgithub.com%2Ftaylorudell%2Freact-pdf?ref=badge_shield\" alt=\"FOSSA Status\"><img src=\"https://app.fossa.com/api/projects/git%2Bgithub.com%2Ftaylorudell%2Freact-pdf.svg?type=shield\"/></a>\n+    <a href=\"https://app.fossa.com/projects/git%2Bgithub.com%2Fdiegomura%2Freact-pdf?ref=badge_shield\" alt=\"FOSSA Status\"><img src=\"https://app.fossa.com/api/projects/git%2Bgithub.com%2Fdiegomura%2Freact-pdf.svg?type=shield\"/></a>\n   </p>\n </p>\n \n+> New react-pdf 2.0 was released. [Read about the announcement](http://react-pdf.org/blog/announcing-react-pdf-v2)\n+\n+## Lost?\n+\n+This package is used to _create_ PDFs using React. If you wish to _display_ existing PDFs, you may be looking for [react-pdf](https://github.com/wojtekmaj/react-pdf).\n+\n ## How to install\n ```sh\n yarn add @react-pdf/renderer\n@@ -83,61 +86,11 @@\n ReactPDF.render(<MyDocument />, `${__dirname}/example.pdf`);\n ```\n \n-## Examples\n-For each example, try opening `output.pdf` to see the result.\n-\n-<table>\n-\t<tbody>\n-\t\t<tr>\n-\t\t\t<td align=\"center\" valign=\"top\">\n-\t\t\t\t<a href=\"https://github.com/diegomura/react-pdf/tree/master/packages/examples/src/text/\">\n-\t\t\t\t\t<img width=\"150\" height=\"150\" src=\"https://github.com/diegomura/react-pdf/blob/master/packages/examples/src/text/thumb.png?raw=true\">\n-\t\t\t\t</a>\n-\t\t\t\t<br>\n-\t\t\t\t<a href=\"https://github.com/diegomura/react-pdf/tree/master/packages/examples/src/text/\">Text</a>\n-\t\t\t</td>\n-\t\t\t<td align=\"center\" valign=\"top\">\n-\t\t\t\t<a href=\"https://github.com/diegomura/react-pdf/tree/master/packages/examples/src/resume/\">\n-\t\t\t\t\t<img width=\"150\" height=\"150\" src=\"https://github.com/diegomura/react-pdf/blob/master/packages/examples/src/resume/thumb.png?raw=true\">\n-\t\t\t\t</a>\n-\t\t\t\t<br>\n-\t\t\t\t<a href=\"https://github.com/diegomura/react-pdf/tree/master/packages/examples/src/resume/\">Resume</a>\n-\t\t\t</td>\n-\t\t\t<td align=\"center\" valign=\"top\">\n-\t\t\t\t<a href=\"https://github.com/diegomura/react-pdf/tree/master/packages/examples/src/fractals/\">\n-\t\t\t\t\t<img width=\"150\" height=\"150\" src=\"https://github.com/diegomura/react-pdf/blob/master/packages/examples/src/fractals/thumb.png?raw=true\">\n-\t\t\t\t</a>\n-\t\t\t\t<br>\n-\t\t\t\t<a href=\"https://github.com/diegomura/react-pdf/tree/master/packages/examples/src/fractals/\">Fractals</a>\n-\t\t\t</td>\n-\t\t</tr>\n-\t</tbody>\n-</table>\n-<table>\n-\t<tbody>\n-\t\t<tr>\n-\t\t\t<td align=\"center\" valign=\"top\">\n-\t\t\t\t<a href=\"https://github.com/diegomura/react-pdf/tree/master/packages/examples/src/knobs/\">\n-\t\t\t\t\t<img width=\"150\" height=\"150\" src=\"https://github.com/diegomura/react-pdf/blob/master/packages/examples/src/knobs/thumb.png?raw=true\">\n-\t\t\t\t</a>\n-\t\t\t\t<br>\n-\t\t\t\t<a href=\"https://github.com/diegomura/react-pdf/tree/master/packages/examples/src/knobs/\">Knobs</a>\n-\t\t\t</td>\n-\t\t\t<td align=\"center\" valign=\"top\">\n-\t\t\t\t<a href=\"https://github.com/diegomura/react-pdf/tree/master/packages/examples/src/pageWrap/\">\n-\t\t\t\t\t<img width=\"150\" height=\"150\" src=\"https://github.com/diegomura/react-pdf/blob/master/packages/examples/src/pageWrap/thumb.png?raw=true\">\n-\t\t\t\t</a>\n-\t\t\t\t<br>\n-\t\t\t\t<a href=\"https://github.com/diegomura/react-pdf/tree/master/packages/examples/src/pageWrap/\">Page wrap</a>\n-\t\t\t</td>\n-\t\t</tr>\n-\t</tbody>\n-</table>\n-\n ## Contributors\n \n-This project exists thanks to all the people who contribute. [[Contribute]](CONTRIBUTING.md).\n-<a href=\"https://github.com/diegomura/react-pdf/graphs/contributors\"><img src=\"https://opencollective.com/react-pdf/contributors.svg?width=890\" /></a>\n+This project exists thanks to all the people who contribute. Looking to contribute? Please check our [[contribute]](https://github.com/diegomura/react-pdf/blob/master/.github/CONTRIBUTING.md) document for more details about how to setup a development environment and submitting code.\n+\n+<a href=\"https://github.com/diegomura/react-pdf/blob/master/.github/CONTRIBUTING.md\"><img src=\"https://opencollective.com/react-pdf/contributors.svg?width=890\" /></a>\n \n ## Sponsors\n \n@@ -155,7 +108,7 @@\n \n MIT © [Diego Muracciole](http://github.com/diegomura)\n \n-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ftaylorudell%2Freact-pdf.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Ftaylorudell%2Freact-pdf?ref=badge_large)\n+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fdiegomura%2Freact-pdf.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fdiegomura%2Freact-pdf?ref=badge_large)\n \n ---\n ![](https://img.shields.io/npm/dt/@react-pdf/renderer.svg?style=flat)\n",
+					"match": false,
+					"packageHash": "78c097f16a0cdaab0e70e9bbc86bf5696d9c8f531667d3bab9666834663a1547",
+					"size": 5703,
+					"sourceHash": "4216c79d30b84de2f249760eb34b7e547561eab17858fdbc60f39d39da988e95",
+					"status": "content"
+				},
+				"index.d.ts": {
+					"match": false,
+					"packageHash": "a16a32790b5b0585aeb02a4ae5fff632ea88c53a1624bff772ae484e73cdca75",
+					"size": 17717,
+					"status": "missing-in-source"
+				},
+				"lib/react-pdf.browser.cjs.js": {
+					"match": false,
+					"packageHash": "ad862621e3f6da6501d71881614ee36efa3284ee244f3ee593e34767e776bc09",
+					"size": 19779,
+					"status": "missing-in-source"
+				},
+				"lib/react-pdf.browser.cjs.js.map": {
+					"match": false,
+					"packageHash": "f32066b9aa1fd749e1861ce37c958349840e2e318af33f473ba82772302c484a",
+					"size": 27135,
+					"status": "missing-in-source"
+				},
+				"lib/react-pdf.browser.cjs.min.js": {
+					"match": false,
+					"packageHash": "51cf19572086be3bcebf5a58080cebd3f12a1c8a53b4b9f29e7265da6e072921",
+					"size": 10111,
+					"status": "missing-in-source"
+				},
+				"lib/react-pdf.browser.cjs.min.js.map": {
+					"match": false,
+					"packageHash": "08121969c0471c7e0ec648403f54973e7f2bca7f77719a51caf0bb44152b4776",
+					"size": 19056,
+					"status": "missing-in-source"
+				},
+				"lib/react-pdf.browser.es.js": {
+					"match": false,
+					"packageHash": "a41d410378f23bd4fb044ae9f00cc69760734026b03522b7d2ed752751b3bd90",
+					"size": 17050,
+					"status": "missing-in-source"
+				},
+				"lib/react-pdf.browser.es.js.map": {
+					"match": false,
+					"packageHash": "2f91ace44e81c7325b0210c7e8cba1e5f2e8a2f3e0e5bd6666b00a3c436bc58f",
+					"size": 27058,
+					"status": "missing-in-source"
+				},
+				"lib/react-pdf.browser.es.min.js": {
+					"match": false,
+					"packageHash": "f9c4b4bc3772bffcb9119c4283757dc28c3b0d603d51817475a2c67008fcfcab",
+					"size": 7026,
+					"status": "missing-in-source"
+				},
+				"lib/react-pdf.browser.es.min.js.map": {
+					"match": false,
+					"packageHash": "a3377e63f326cb0f364299a2fe177324f5922ee5f3d736b83b7811884a25d10d",
+					"size": 19012,
+					"status": "missing-in-source"
+				},
+				"lib/react-pdf.cjs.js": {
+					"match": false,
+					"packageHash": "0ad3da9371d491c877a555a9701b8cabfd29e8e6e9fb2372b5c6e55483f7c1c7",
+					"size": 11042,
+					"status": "missing-in-source"
+				},
+				"lib/react-pdf.cjs.js.map": {
+					"match": false,
+					"packageHash": "4bece1551ae95cda3efbdd289ce70d2144d8be44dbee926830d27a3261ddf923",
+					"size": 19951,
+					"status": "missing-in-source"
+				},
+				"lib/react-pdf.cjs.min.js": {
+					"match": false,
+					"packageHash": "1aedeab7a3cd0eba5512ac5d295394d191f1c446818324ce084e11a90555bf00",
+					"size": 5993,
+					"status": "missing-in-source"
+				},
+				"lib/react-pdf.cjs.min.js.map": {
+					"match": false,
+					"packageHash": "3dbfed78f703b7763e060d1ba7fd855a7f8696d09f3ef3eb99c1976bd283bb75",
+					"size": 14863,
+					"status": "missing-in-source"
+				},
+				"lib/react-pdf.es.js": {
+					"match": false,
+					"packageHash": "f996f89282c7027b430f01a3f51cf4b9967ec67c899e5e7a2ef4c5fc9260fff3",
+					"size": 9189,
+					"status": "missing-in-source"
+				},
+				"lib/react-pdf.es.js.map": {
+					"match": false,
+					"packageHash": "b8110f11b10dcf2b9266056460fec16c82c6b67b3bbe087539c8fd5d71c315bf",
+					"size": 19890,
+					"status": "missing-in-source"
+				},
+				"lib/react-pdf.es.min.js": {
+					"match": false,
+					"packageHash": "d4ee936fece3f95493dc03bac16639c0932c48d972d46cc432bb66ec57acee9c",
+					"size": 4028,
+					"status": "missing-in-source"
+				},
+				"lib/react-pdf.es.min.js.map": {
+					"match": false,
+					"packageHash": "228b545a4a0389fe6015a936c84f5fec22390485517243b3a490b89ca85c8d5f",
+					"size": 14842,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,52 +1,78 @@\n {\n-  \"name\": \"@react-pdf/renderer\",\n-  \"version\": \"2.0.17\",\n+  \"private\": true,\n+  \"name\": \"@react-pdf/root\",\n+  \"version\": \"2.0.0\",\n   \"license\": \"MIT\",\n-  \"typings\": \"index.d.ts\",\n   \"author\": \"Diego Muracciole <diegomuracciole@gmail.com>\",\n   \"homepage\": \"https://github.com/diegomura/react-pdf#readme\",\n   \"repository\": \"git@github.com:diegomura/react-pdf.git\",\n-  \"main\": \"lib/react-pdf.cjs.js\",\n-  \"module\": \"lib/react-pdf.es.js\",\n-  \"browser\": {\n-    \"./lib/react-pdf.es.js\": \"./lib/react-pdf.browser.es.js\",\n-    \"./lib/react-pdf.cjs.js\": \"./lib/react-pdf.browser.cjs.js\"\n-  },\n+  \"workspaces\": [\n+    \"packages/*\"\n+  ],\n   \"scripts\": {\n-    \"build\": \"rimraf ./lib && rollup -c\",\n-    \"watch\": \"rimraf ./lib && rollup -c -w\",\n-    \"precommit\": \"git add . && lint-staged\",\n-    \"lint\": \"eslint src\",\n-    \"test\": \"jest\"\n-  },\n-  \"dependencies\": {\n-    \"@babel/runtime\": \"^7.6.2\",\n-    \"@react-pdf/font\": \"^2.0.11\",\n-    \"@react-pdf/layout\": \"^2.0.17\",\n-    \"@react-pdf/pdfkit\": \"^2.0.11\",\n-    \"@react-pdf/primitives\": \"^2.0.0\",\n-    \"@react-pdf/render\": \"^2.0.11\",\n-    \"@react-pdf/types\": \"^2.0.4\",\n-    \"blob-stream\": \"^0.1.3\",\n-    \"queue\": \"^6.0.1\",\n-    \"ramda\": \"^0.26.1\",\n-    \"react-reconciler\": \"^0.23.0\",\n-    \"scheduler\": \"^0.15.0\"\n-  },\n-  \"peerDependencies\": {\n-    \"react\": \"^16.8.6 || ^17.0.0\"\n+    \"build\": \"lerna run build --ignore @react-pdf/yoga\",\n+    \"watch\": \"lerna run watch --parallel\",\n+    \"bootstrap\": \"lerna bootstrap\",\n+    \"prepublish\": \"lerna run build --ignore @react-pdf/yoga\",\n+    \"lint\": \"eslint packages\",\n+    \"test\": \"jest\",\n+    \"examples\": \"lerna run start --scope @react-pdf/examples\"\n+  },\n+  \"devDependencies\": {\n+    \"@babel/cli\": \"^7.2.3\",\n+    \"@babel/core\": \"^7.9.6\",\n+    \"@babel/node\": \"^7.2.2\",\n+    \"@babel/plugin-proposal-class-properties\": \"^7.13.0\",\n+    \"@babel/plugin-proposal-decorators\": \"^7.13.15\",\n+    \"@babel/plugin-proposal-optional-chaining\": \"^7.9.0\",\n+    \"@babel/plugin-transform-runtime\": \"^7.2.0\",\n+    \"@babel/preset-env\": \"^7.9.6\",\n+    \"@babel/preset-react\": \"^7.0.0\",\n+    \"@rollup/plugin-commonjs\": \"^18.0.0\",\n+    \"babel-eslint\": \"^10.0.1\",\n+    \"babel-jest\": \"^24.1.0\",\n+    \"babel-plugin-add-module-exports\": \"^1.0.0\",\n+    \"canvas\": \"^2.8.0\",\n+    \"chalk\": \"^2.4.2\",\n+    \"pdfjs-dist\": \"2.8.335\",\n+    \"eslint\": \"^6.8.0\",\n+    \"eslint-config-airbnb\": \"^18.1.0\",\n+    \"eslint-config-prettier\": \"^4.0.0\",\n+    \"eslint-plugin-import\": \"^2.20.2\",\n+    \"eslint-plugin-jest\": \"^22.3.0\",\n+    \"eslint-plugin-jsx-a11y\": \"^6.2.3\",\n+    \"eslint-plugin-promise\": \"^4.0.1\",\n+    \"eslint-plugin-react\": \"^7.20.0\",\n+    \"eslint-plugin-react-hooks\": \"^2.5.1\",\n+    \"husky\": \"^1.3.1\",\n+    \"jest\": \"^24.5.0\",\n+    \"jest-image-snapshot\": \"^4.5.0\",\n+    \"lerna\": \"^3.21.0\",\n+    \"lint-staged\": \"^8.1.4\",\n+    \"mock-fs\": \"^4.8.0\",\n+    \"mockdate\": \"^2.0.2\",\n+    \"prettier\": \"^1.16.4\",\n+    \"react\": \"^16.8.6\",\n+    \"react-dom\": \"^16.8.6\",\n+    \"rimraf\": \"^2.6.3\",\n+    \"rollup\": \"^2.3.4\",\n+    \"rollup-plugin-babel\": \"^4.3.2\",\n+    \"rollup-plugin-bundle-size\": \"^1.0.3\",\n+    \"rollup-plugin-ignore\": \"^1.0.5\",\n+    \"rollup-plugin-json\": \"^3.1.0\",\n+    \"rollup-plugin-local-resolve\": \"^1.0.7\",\n+    \"rollup-plugin-node-resolve\": \"^4.0.1\",\n+    \"rollup-plugin-replace\": \"^2.1.0\",\n+    \"rollup-plugin-sourcemaps\": \"^0.4.2\",\n",
+					"match": false,
+					"packageHash": "eadabaff0fb04a3771ea95e35fa5ab0971eca5891d65bea75aa43824051b837b",
+					"size": 1638,
+					"sourceHash": "4d469d6fd3db6b84580a7493a1ac2990098e6928fb23a39e4013563beea376d8",
+					"status": "content"
+				},
+				".eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".gitattributes": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/CODE_OF_CONDUCT.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/CONTRIBUTING.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/FUNDING.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/ISSUE_TEMPLATE/bug_report.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/ISSUE_TEMPLATE/feature_request.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/no-response.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".nvmrc": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".prettierignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".prettierrc": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".travis.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"babel.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"jest.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lerna.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/babel.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/public/NotoSans-Regular.ttf": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/public/Roboto-Black.ttf": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/public/Roboto-BlackItalic.ttf": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/public/Roboto-Bold.ttf": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/public/Roboto-BoldItalic.ttf": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/public/Roboto-Italic.ttf": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/public/Roboto-Light.ttf": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/public/Roboto-LightItalic.ttf": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/public/Roboto-Medium.ttf": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/public/Roboto-MediumItalic.ttf": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/public/Roboto-Regular.ttf": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/public/Roboto-Thin.ttf": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/public/Roboto-ThinItalic.ttf": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/public/chart.svg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/public/font.ttc": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/public/keifont.ttf": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/public/miller-banner.ttf": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/public/quijote1.jpg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/public/quijote2.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/public/test.jpg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/public/test2.jpg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/src/fractals/Fractal.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/src/fractals/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/src/fractals/output.pdf": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/src/fractals/thumb.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/src/goTo/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/src/goTo/output.pdf": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/src/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/src/knobs/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/src/knobs/output.pdf": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/src/knobs/thumb.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/src/mediaQueries/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/src/mediaQueries/output.pdf": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/src/mediaQueries/thumb.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/src/pageWrap/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/src/pageWrap/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/src/pageWrap/output.pdf": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/src/pageWrap/thumb.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/src/resume/Education.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/src/resume/Experience.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/src/resume/Header.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/src/resume/List.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/src/resume/Skills.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/src/resume/Title.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/src/resume/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/src/resume/output.pdf": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/src/resume/thumb.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/src/svg/Heart.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/src/svg/Svg1.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/src/svg/Svg2.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/src/svg/Svg4.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/src/svg/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/src/svg/svg.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/src/text/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/src/text/output.pdf": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/examples/src/text/thumb.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/font/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/font/babel.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/font/jest.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/font/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/font/rollup.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/font/src/font.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/font/src/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/font/src/standard.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/babel.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/rollup.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/CmapProcessor.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/DFont.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/TTFFont.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/TrueTypeCollection.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/WOFF2Font.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/WOFFFont.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/aat/AATFeatureMap.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/aat/AATLayoutEngine.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/aat/AATLookupTable.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/aat/AATMorxProcessor.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/aat/AATStateMachine.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/base.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/cff/CFFCharsets.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/cff/CFFDict.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/cff/CFFEncodings.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/cff/CFFFont.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/cff/CFFIndex.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/cff/CFFOperand.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/cff/CFFPointer.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/cff/CFFPrivateDict.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/cff/CFFStandardStrings.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/cff/CFFTop.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/decorators.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/encodings.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/glyph/BBox.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/glyph/CFFGlyph.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/glyph/COLRGlyph.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/glyph/Glyph.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/glyph/GlyphVariationProcessor.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/glyph/Path.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/glyph/SBIXGlyph.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/glyph/StandardNames.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/glyph/TTFGlyph.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/glyph/TTFGlyphEncoder.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/glyph/WOFF2Glyph.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/layout/GlyphPosition.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/layout/GlyphRun.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/layout/KernProcessor.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/layout/LayoutEngine.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/layout/Script.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/layout/UnicodeLayoutEngine.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/opentype/GPOSProcessor.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/opentype/GSUBProcessor.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/opentype/GlyphInfo.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/opentype/GlyphIterator.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/opentype/OTLayoutEngine.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/opentype/OTProcessor.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/opentype/ShapingPlan.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/opentype/shapers/ArabicShaper.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/opentype/shapers/DefaultShaper.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/opentype/shapers/HangulShaper.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/opentype/shapers/IndicShaper.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/opentype/shapers/UniversalShaper.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/opentype/shapers/gen-indic.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/opentype/shapers/gen-use.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/opentype/shapers/generate-data.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/opentype/shapers/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/opentype/shapers/indic-data.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/opentype/shapers/indic.machine": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/opentype/shapers/use.machine": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/subset/CFFSubset.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/subset/Subset.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/subset/TTFSubset.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/BASE.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/COLR.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/CPAL.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/DSIG.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/EBDT.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/EBLC.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/GDEF.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/GPOS.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/GSUB.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/HVAR.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/JSTF.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/LTSH.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/OS2.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/PCLT.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/VDMX.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/VORG.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/WOFF2Directory.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/WOFFDirectory.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/aat.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/avar.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/bsln.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/cmap.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/cvt.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/directory.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/feat.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/fpgm.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/fvar.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/gasp.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/glyf.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/gvar.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/hdmx.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/head.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/hhea.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/hmtx.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/just.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/kern.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/loca.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/maxp.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/morx.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/name.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/opbd.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/opentype.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/post.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/prep.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/sbix.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/variations.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/vhea.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/tables/vmtx.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/fontkit/src/utils.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/image/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/image/babel.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/image/jest.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/image/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/image/rollup.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/image/setupTests.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/image/src/cache.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/image/src/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/image/src/jpeg.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/image/src/png.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/image/src/resolve.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/image/tests/assets/test.jpg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/image/tests/assets/test.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/image/tests/cache.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/image/tests/resolve.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/babel.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/jest.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/setupTests.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/canvas/measureCanvas.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/image/fetchImage.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/image/getRatio.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/image/getSource.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/image/measureImage.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/image/resolveSource.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/node/createInstance.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/node/getBorderWidth.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/node/getDimension.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/node/getMargin.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/node/getNodesHeight.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/node/getOrigin.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/node/getPadding.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/node/getPosition.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/node/getWrap.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/node/isFixed.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/node/removePaddings.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/node/setAlign.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/node/setAlignContent.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/node/setAlignItems.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/node/setAlignSelf.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/node/setAspectRatio.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/node/setBorderWidth.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/node/setDimension.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/node/setDisplay.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/node/setFlexBasis.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/node/setFlexDirection.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/node/setFlexGrow.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/node/setFlexShrink.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/node/setFlexWrap.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/node/setJustifyContent.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/node/setMargin.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/node/setOverflow.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/node/setPadding.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/node/setPosition.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/node/setPositionType.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/node/setYogaValue.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/node/shouldBreak.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/node/splitNode.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/page/getContentArea.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/page/getOrientation.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/page/getSize.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/page/getWrapArea.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/page/isHeightAuto.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/page/isLandscape.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/page/isPortrait.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/steps/resolveAssets.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/steps/resolveDimensions.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/steps/resolveInheritance.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/steps/resolveLinkSubstitution.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/steps/resolveOrigins.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/steps/resolvePagePaddings.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/steps/resolvePageSizes.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/steps/resolvePagination.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/steps/resolvePercentHeight.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/steps/resolvePercentRadius.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/steps/resolveStyles.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/steps/resolveSvg.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/steps/resolveTextLayout.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/steps/resolveZIndex.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/svg/getContainer.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/svg/getDefs.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/svg/inheritProps.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/svg/layoutText.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/svg/measureSvg.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/svg/parseAspectRatio.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/svg/parseViewbox.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/svg/replaceDefs.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/text/emoji.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/text/fontSubstitution.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/text/getAttributedString.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/text/heightAtLineIndex.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/text/ignoreChars.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/text/layoutText.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/text/lineIndexAtHeight.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/text/linesHeight.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/text/linesWidth.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/text/measureText.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/text/splitText.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/text/standardFont.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/text/transformText.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/utils/asyncCompose.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/utils/capitalize.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/utils/castArray.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/utils/matchPercent.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/src/utils/upperFirst.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/assets/font.ttf": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/assets/test.jpg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/assets/test.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/image/getSource.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/image/resolveSource.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/node/getBorderWidth.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/node/getDimension.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/node/getMargin.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/node/getOrigin.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/node/getPadding.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/node/getPosition.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/node/removePaddings.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/node/setAlignContent.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/node/setAlignItems.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/node/setAlignSelf.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/node/setAspectRatio.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/node/setBorderWidth.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/node/setDimension.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/node/setDisplay.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/node/setFlexBasis.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/node/setFlexDirection.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/node/setFlexGrow.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/node/setFlexShrink.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/node/setFlexWrap.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/node/setJustifyContent.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/node/setMargin.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/node/setOverflow.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/node/setPadding.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/node/setPosition.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/node/setPositionType.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/page/getOrientation.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/page/getSize.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/page/isHeightAuto.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/page/isLandscape.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/page/isPortrait.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/steps/__snapshots__/resolveLinkSubstitution.test.js.snap": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/steps/__snapshots__/resolvePagePaddings.test.js.snap": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/steps/__snapshots__/resolvePercentHeight.test.js.snap": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/steps/__snapshots__/resolveStyles.test.js.snap": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/steps/resolveInhritance.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/steps/resolveLinkSubstitution.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/steps/resolvePagePaddings.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/steps/resolvePageSizes.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/steps/resolvePercentHeight.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/steps/resolveStyles.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/text/heightAtLineIndex.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/text/layoutText.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/text/lineIndexAtHeight.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/utils/capitalize.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/utils/matchPercent.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/layout/tests/utils/upperFirst.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/.babelrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/.prettierrc": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/rollup.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/data.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/document.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/font/afm.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/font/data/Courier-Bold.afm": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/font/data/Courier-Bold.b64.afm": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/font/data/Courier-BoldOblique.afm": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/font/data/Courier-BoldOblique.b64.afm": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/font/data/Courier-Oblique.afm": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/font/data/Courier-Oblique.b64.afm": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/font/data/Courier.afm": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/font/data/Courier.b64.afm": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/font/data/Helvetica-Bold.afm": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/font/data/Helvetica-Bold.b64.afm": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/font/data/Helvetica-BoldOblique.afm": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/font/data/Helvetica-BoldOblique.b64.afm": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/font/data/Helvetica-Oblique.afm": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/font/data/Helvetica-Oblique.b64.afm": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/font/data/Helvetica.afm": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/font/data/Helvetica.b64.afm": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/font/data/Times-Bold.afm": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/font/data/Times-Bold.b64.afm": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/font/data/Times-BoldItalic.afm": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/font/data/Times-BoldItalic.b64.afm": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/font/data/Times-Italic.afm": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/font/data/Times-Italic.b64.afm": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/font/data/Times-Roman.afm": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/font/data/Times-Roman.b64.afm": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/font/data/Zap.afm": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/font/data/Zap.b64.afm": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/font/data/compressData.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/font/embedded.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/font/standard.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/font.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/gradient.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/image/jpeg.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/image/png.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/image.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/mixins/acroform.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/mixins/annotations.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/mixins/attachments.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/mixins/color.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/mixins/fonts.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/mixins/images.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/mixins/text.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/mixins/vector.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/name_tree.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/object.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/page.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/path.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/reference.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/pdfkit/src/utils/range.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/png-js/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/png-js/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/png-js/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/png-js/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/png-js/rollup.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/png-js/src/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/primitives/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/primitives/jest.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/primitives/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/primitives/src/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/primitives/tests/index.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/babel.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/jest.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/operations/addMetadata.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/operations/clipNode.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/operations/restore.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/operations/save.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/operations/setDestination.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/operations/setLink.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/operations/transform.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/primitives/renderBackground.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/primitives/renderBorders.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/primitives/renderCanvas.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/primitives/renderCircle.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/primitives/renderDebug.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/primitives/renderEllipse.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/primitives/renderGlyphs.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/primitives/renderGroup.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/primitives/renderImage.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/primitives/renderLine.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/primitives/renderNode.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/primitives/renderNote.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/primitives/renderPage.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/primitives/renderPath.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/primitives/renderPolygon.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/primitives/renderPolyline.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/primitives/renderRect.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/primitives/renderSvg.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/primitives/renderSvgImage.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/primitives/renderSvgText.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/primitives/renderText.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/svg/getBoundingBox.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/svg/parsePoints.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/utils/isCanvas.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/utils/isCircle.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/utils/isEllipse.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/utils/isGroup.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/utils/isImage.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/utils/isLine.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/utils/isLink.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/utils/isNote.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/utils/isPage.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/utils/isPath.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/utils/isPolygon.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/utils/isPolyline.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/utils/isRadialGradient.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/utils/isRect.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/utils/isSvg.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/utils/isText.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/utils/isTextInstance.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/utils/isTspan.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/utils/matchPercent.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/utils/parseColor.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/src/utils/resolveObjectFit.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/tests/ctx.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/tests/operations/addMetadata.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/tests/operations/restore.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/tests/operations/save.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/tests/operations/setDestination.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/tests/primitives/renderBackground.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/tests/primitives/renderCanvas.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/tests/primitives/renderCircle.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/tests/primitives/renderEllipse.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/tests/svg/getBoundingBox.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/tests/svg/parsePoints.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/tests/utils/isCanvas.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/tests/utils/isCircle.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/tests/utils/isEllipse.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/tests/utils/isGroup.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/tests/utils/isImage.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/tests/utils/isLine.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/tests/utils/isLink.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/tests/utils/isNote.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/tests/utils/isPage.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/tests/utils/isPath.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/tests/utils/isPolygon.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/tests/utils/isPolyline.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/tests/utils/isReadialGradient.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/tests/utils/isRect.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/tests/utils/isSvg.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/tests/utils/isText.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/tests/utils/isTextInstance.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/tests/utils/isTspan.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/tests/utils/matchPercent.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/tests/utils/objectFit.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/render/tests/utils/parseColor.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/renderer/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/renderer/babel.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/renderer/index.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/renderer/jest.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/renderer/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/renderer/rollup.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/renderer/setup.jest.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/renderer/src/dom.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/renderer/src/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/renderer/src/node.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/renderer/src/propsEqual.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/renderer/src/renderer.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/renderer/tests/debug.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/renderer/tests/dom.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/renderer/tests/node.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/renderer/tests/propsEqual.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/renderer/tests/renderComponent.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/renderer/tests/snapshots/debug-test-js-debug-should-show-origin-pointer-1-snap.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/renderer/tests/snapshots/debug-test-js-debug-should-show-paddings-and-margins-1-snap.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/renderer/tests/snapshots/debug-test-js-debug-should-show-size-of-text-component-1-snap.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/renderer/tests/snapshots/transform-test-js-transform-should-rotate-1-snap.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/renderer/tests/snapshots/transform-test-js-transform-should-scale-on-x-axis-1-snap.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/renderer/tests/snapshots/transform-test-js-transform-should-scale-on-y-axis-1-snap.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/renderer/tests/snapshots/transform-test-js-transform-should-scale-with-one-arg-1-snap.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/renderer/tests/snapshots/transform-test-js-transform-should-scale-with-two-args-1-snap.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/renderer/tests/snapshots/transform-test-js-transform-should-translate-on-both-axis-1-snap.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/renderer/tests/snapshots/transform-test-js-transform-should-translate-on-x-axis-1-snap.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/renderer/tests/snapshots/transform-test-js-transform-should-translate-on-y-axis-1-snap.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/renderer/tests/snapshots/transform-test-js-transform-should-translate-to-zero-px-1-snap.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/renderer/tests/transform.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/stylesheet/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/stylesheet/babel.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/stylesheet/jest.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/stylesheet/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/stylesheet/src/borders.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/stylesheet/src/boxModel.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/stylesheet/src/colors.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/stylesheet/src/expand.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/stylesheet/src/flatten.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/stylesheet/src/flex.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/stylesheet/src/fontWeight.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/stylesheet/src/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/stylesheet/src/margins.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/stylesheet/src/mediaQueries.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/stylesheet/src/objectPosition.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/stylesheet/src/paddings.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/stylesheet/src/resolve.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/stylesheet/src/transform.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/stylesheet/src/transformOrigin.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/stylesheet/src/units.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/stylesheet/src/utils.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/stylesheet/tests/borders.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/stylesheet/tests/colors.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/stylesheet/tests/expand.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/stylesheet/tests/flatten.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/stylesheet/tests/flex.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/stylesheet/tests/fontWeight.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/stylesheet/tests/margins.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/stylesheet/tests/mediaQueries.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/stylesheet/tests/objectPosition.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/stylesheet/tests/padings.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/stylesheet/tests/resolve.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/stylesheet/tests/transform.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/stylesheet/tests/transformOrigin.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/stylesheet/tests/units.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/babel.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/attributedString/advanceWidth.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/attributedString/advanceWidthBetween.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/attributedString/append.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/attributedString/ascent.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/attributedString/copy.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/attributedString/descent.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/attributedString/dropLast.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/attributedString/empty.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/attributedString/end.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/attributedString/fromFragments.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/attributedString/glyphWidthAt.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/attributedString/height.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/attributedString/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/attributedString/indexAtOffset.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/attributedString/insertGlyph.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/attributedString/leadingOffset.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/attributedString/length.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/attributedString/prepend.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/attributedString/reduce.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/attributedString/runAt.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/attributedString/runIndexAt.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/attributedString/slice.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/attributedString/sliceAtOffset.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/attributedString/start.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/attributedString/trailingOffset.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/attributedString/trim.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/block/height.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/block/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/block/slice.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/block/sliceAtHeight.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/block/truncate.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/engines/fontSubstitution/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/engines/justification/getDistances.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/engines/justification/getFactors.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/engines/justification/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/engines/linebreaker/bestFit.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/engines/linebreaker/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/engines/linebreaker/linebreak.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/engines/linebreaker/linkedList.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/engines/scriptItemizer/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/engines/textDecoration/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/engines/wordHyphenation/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/glyph/fromCodePoint.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/glyph/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/glyph/isWhiteSpace.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/glyph/slice.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/indices/append.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/indices/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/indices/normalize.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/indices/prepend.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/indices/resolve.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/layout/applyDefaultStyles.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/layout/finalizeFragments.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/layout/generateGlyphs.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/layout/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/layout/layoutParagraph.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/layout/preprocessRuns.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/layout/resolveAttachments.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/layout/resolveYOffset.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/layout/splitParagraphs.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/layout/typesetter.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/layout/wrapWords.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/rect/area.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/rect/bottomLeft.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/rect/bottomRight.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/rect/containsPoint.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/rect/containsRect.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/rect/copy.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/rect/crop.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/rect/empty.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/rect/equals.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/rect/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/rect/intersects.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/rect/maxX.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/rect/maxY.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/rect/topLeft.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/rect/topRight.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/run/add.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/run/advanceWidth.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/run/advanceWidthBetween.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/run/append.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/run/appendCode.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/run/ascent.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/run/concat.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/run/contains.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/run/copy.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/run/descent.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/run/dropLast.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/run/empty.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/run/equal.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/run/extend.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/run/filter.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/run/flatten.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/run/getFont.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/run/glyphAt.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/run/glyphIndexAt.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/run/height.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/run/includes.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/run/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/run/indexAtOffset.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/run/insert.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/run/isEmpty.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/run/leadingOffset.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/run/length.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/run/lineGap.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/run/offset.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/run/omit.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/run/prepend.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/run/remove.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/run/runIndexAt.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/run/scale.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/run/slice.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/run/sort.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/run/subtract.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/run/trailingOffset.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/utils/count.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/utils/isBetween.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/utils/isFirstItem.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/utils/isLastItem.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/utils/isNumber.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/utils/mapIndexed.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/src/utils/stringFromCodePoints.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/attributedString/advanceWidth.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/attributedString/advanceWidthBetween.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/attributedString/append.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/attributedString/ascent.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/attributedString/descent.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/attributedString/dropLast.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/attributedString/empty.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/attributedString/end.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/attributedString/fromFragments.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/attributedString/height.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/attributedString/indexAtOffset.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/attributedString/insertGlyph.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/attributedString/leadingOffset.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/attributedString/length.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/attributedString/prepend.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/attributedString/runAt.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/attributedString/runIndexAt.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/attributedString/slice.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/attributedString/sliceAtOffset.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/attributedString/start.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/attributedString/trailingOffset.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/attributedString/trim.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/engines/fontSubstitution.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/engines/scriptItemizer.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/engines/wordHyphenation.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/glyph/fromCodePoint.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/glyph/isWhiteSpace.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/glyph/slice.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/indices/append.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/indices/normalize.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/indices/prepend.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/indices/resolve.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/internal/font.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/internal/fontSubstitutionEngine.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/internal/scriptItemizer.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/layout/applyDefaultStyles.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/layout/generateGlyphs.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/layout/preprocessRuns.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/layout/resolveAttachments.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/layout/resolveYOffset.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/layout/splitParagraphs.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/layout/wrapWords.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/rect/area.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/rect/bottomLeft.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/rect/bottomRight.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/rect/containsPoint.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/rect/containsRect.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/rect/copy.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/rect/empty.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/rect/equals.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/rect/intersects.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/rect/maxX.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/rect/maxY.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/rect/topLeft.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/rect/topRight.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/run/add.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/run/advanceWidth.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/run/advanceWidthBetween.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/run/append.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/run/ascent.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/run/concat.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/run/contains.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/run/copy.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/run/descent.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/run/dropLast.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/run/empty.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/run/equal.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/run/extend.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/run/filter.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/run/flatten.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/run/getFont.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/run/glyphAt.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/run/glyphIndexAt.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/run/height.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/run/includes.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/run/indexAtOffset.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/run/insert.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/run/isEmpty.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/run/leadingOffset.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/run/length.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/run/lineGap.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/run/offset.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/run/omit.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/run/prepend.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/run/remove.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/run/runIndexAt.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/run/scale.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/run/slice.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/run/sort.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/run/subtract.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/run/trailingOffset.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/utils/count.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/utils/isBetween.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/utils/isFirstItem.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/utils/isLastItem.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/utils/isNumber.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/utils/mapIndexed.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/textkit/tests/utils/stringFromCodePoints.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/types/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/types/context.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/types/font.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/types/image.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/types/index.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/types/node.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/types/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/types/page.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/types/pdf.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/types/primitive.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/types/style.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/types/svg.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/unicode-properties/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/unicode-properties/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/unicode-properties/babel.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/unicode-properties/generate.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/unicode-properties/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/unicode-properties/jest.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/unicode-properties/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/unicode-properties/rollup.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/unicode-properties/test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/yoga/.eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/yoga/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/yoga/build.sh": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/yoga/index.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/yoga/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/yoga/postbuild.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/yoga/src/build/Release/nbind.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/yoga/tests/absolutePosition.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/yoga/tests/alignContent.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/yoga/tests/alignItems.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/yoga/tests/alignSelf.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/yoga/tests/aspectRatio.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/yoga/tests/border.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/yoga/tests/computedMargin.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/yoga/tests/computedPadding.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/yoga/tests/defaultValues.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/yoga/tests/dimention.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/yoga/tests/display.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/yoga/tests/edge.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/yoga/tests/flexDirection.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/yoga/tests/flexSpec.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/yoga/tests/flexWrap.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/yoga/tests/flexbox.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/yoga/tests/index.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/yoga/tests/infiniteHeight.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/yoga/tests/justifyContent.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/yoga/tests/margin.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/yoga/tests/minMaxDimension.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/yoga/tests/misc.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/yoga/tests/nodeChild.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/yoga/tests/padding.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/yoga/tests/percentage.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/yoga/tests/position.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/yoga/tests/rounding.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/yoga/tests/sizeOverflow.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/yoga/tests/zeroOutLayoutRecursivly.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"polyfills.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"setupTests.js": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 1,
+				"missingInPackage": 865,
+				"missingInSource": 17,
+				"score": 0.0011299435028248588,
+				"totalFiles": 885
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "@babel/runtime",
+				"version": "7.13.10"
+			},
+			{
+				"name": "@types/yoga-layout",
+				"version": "1.9.3"
+			},
+			{
+				"name": "abs-svg-path",
+				"version": "0.1.1"
+			},
+			{
+				"name": "amdefine",
+				"version": "1.0.1"
+			},
+			{
+				"name": "ast-transform",
+				"version": "0.0.0"
+			},
+			{
+				"name": "escodegen",
+				"version": "1.2.0"
+			},
+			{
+				"name": "esprima",
+				"version": "1.0.4"
+			},
+			{
+				"name": "estraverse",
+				"version": "1.5.1"
+			},
+			{
+				"name": "esutils",
+				"version": "1.0.0"
+			},
+			{
+				"name": "source-map",
+				"version": "0.1.43"
+			},
+			{
+				"name": "ast-types",
+				"version": "0.7.8"
+			},
+			{
+				"name": "babel-runtime",
+				"version": "6.26.0"
+			},
+			{
+				"name": "core-js",
+				"version": "2.6.12"
+			},
+			{
+				"name": "regenerator-runtime",
+				"version": "0.11.1"
+			},
+			{
+				"name": "base64-js",
+				"version": "1.5.1"
+			},
+			{
+				"name": "blob",
+				"version": "0.0.4"
+			},
+			{
+				"name": "blob-stream",
+				"version": "0.1.3"
+			},
+			{
+				"name": "brotli",
+				"version": "1.3.2"
+			},
+			{
+				"name": "browser-resolve",
+				"version": "1.11.3"
+			},
+			{
+				"name": "resolve",
+				"version": "1.1.7"
+			},
+			{
+				"name": "browserify-optional",
+				"version": "1.0.1"
+			},
+			{
+				"name": "call-bind",
+				"version": "1.0.2"
+			},
+			{
+				"name": "camelcase",
+				"version": "6.2.0"
+			},
+			{
+				"name": "clone",
+				"version": "1.0.4"
+			},
+			{
+				"name": "color-name",
+				"version": "1.1.3"
+			},
+			{
+				"name": "color-string",
+				"version": "1.5.5"
+			},
+			{
+				"name": "cross-fetch",
+				"version": "3.1.4"
+			},
+			{
+				"name": "crypto-js",
+				"version": "4.0.0"
+			},
+			{
+				"name": "deep-equal",
+				"version": "1.1.1"
+			},
+			{
+				"name": "define-properties",
+				"version": "1.1.3"
+			},
+			{
+				"name": "dfa",
+				"version": "1.1.0"
+			},
+			{
+				"name": "function-bind",
+				"version": "1.1.1"
+			},
+			{
+				"name": "get-intrinsic",
+				"version": "1.1.1"
+			},
+			{
+				"name": "has",
+				"version": "1.0.3"
+			},
+			{
+				"name": "has-symbols",
+				"version": "1.0.2"
+			},
+			{
+				"name": "hsl-to-hex",
+				"version": "1.0.0"
+			},
+			{
+				"name": "hsl-to-rgb-for-reals",
+				"version": "1.1.1"
+			},
+			{
+				"name": "hyphen",
+				"version": "1.6.4"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.4"
+			},
+			{
+				"name": "is-arguments",
+				"version": "1.1.0"
+			},
+			{
+				"name": "is-date-object",
+				"version": "1.0.2"
+			},
+			{
+				"name": "is-regex",
+				"version": "1.1.2"
+			},
+			{
+				"name": "is-url",
+				"version": "1.2.4"
+			},
+			{
+				"name": "js-tokens",
+				"version": "4.0.0"
+			},
+			{
+				"name": "loose-envify",
+				"version": "1.4.0"
+			},
+			{
+				"name": "media-engine",
+				"version": "1.0.3"
+			},
+			{
+				"name": "node-fetch",
+				"version": "2.6.1"
+			},
+			{
+				"name": "normalize-svg-path",
+				"version": "1.1.0"
+			},
+			{
+				"name": "object-assign",
+				"version": "4.1.1"
+			},
+			{
+				"name": "object-is",
+				"version": "1.1.5"
+			},
+			{
+				"name": "object-keys",
+				"version": "1.1.1"
+			},
+			{
+				"name": "pako",
+				"version": "0.2.9"
+			},
+			{
+				"name": "parse-svg-path",
+				"version": "0.1.2"
+			},
+			{
+				"name": "prop-types",
+				"version": "15.7.2"
+			},
+			{
+				"name": "queue",
+				"version": "6.0.2"
+			},
+			{
+				"name": "ramda",
+				"version": "0.26.1"
+			},
+			{
+				"name": "react-is",
+				"version": "16.13.1"
+			},
+			{
+				"name": "react-reconciler",
+				"version": "0.23.0"
+			},
+			{
+				"name": "scheduler",
+				"version": "0.17.0"
+			},
+			{
+				"name": "regenerator-runtime",
+				"version": "0.13.7"
+			},
+			{
+				"name": "regexp.prototype.flags",
+				"version": "1.3.1"
+			},
+			{
+				"name": "restructure",
+				"version": "0.5.4"
+			},
+			{
+				"name": "simple-swizzle",
+				"version": "0.2.2"
+			},
+			{
+				"name": "is-arrayish",
+				"version": "0.3.2"
+			},
+			{
+				"name": "svg-arc-to-cubic-bezier",
+				"version": "3.2.0"
+			},
+			{
+				"name": "through",
+				"version": "2.3.8"
+			},
+			{
+				"name": "tiny-inflate",
+				"version": "1.0.3"
+			},
+			{
+				"name": "unicode-trie",
+				"version": "0.3.1"
+			},
+			{
+				"name": "ramda",
+				"version": "0.27.1"
+			},
+			{
+				"name": "emoji-regex",
+				"version": "8.0.0"
+			},
+			{
+				"name": "scheduler",
+				"version": "0.15.0"
+			}
+		]
+	}
+]
