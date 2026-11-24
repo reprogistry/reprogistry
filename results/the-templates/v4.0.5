@@ -1,0 +1,345 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T15:36:21.440Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:5.6.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "the-templates@4.0.5",
+			"name": "the-templates",
+			"version": "4.0.5",
+			"location": "https://registry.npmjs.org/the-templates/-/the-templates-4.0.5.tgz",
+			"integrity": "sha512-6T7MdlBH9WBid7RMlJ2kEO+bu+lYFxSBXotOkvkIdtq2hOwr/iHUsbWUPEKlzxbn8UJxrQ2GlW1fy/A2aIGPhQ==",
+			"publishedAt": "2018-06-20T00:33:24.049Z",
+			"publishedWith": {
+				"node": "10.0.0",
+				"npm": "6.1.0"
+			},
+			"dependencies": {
+				"aglob": "^3.0.1",
+				"markdown-toc": "^1.2.0",
+				"selfsigned": "^1.10.3",
+				"stringcase": "^4.2.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/the-labo/the-templates.git",
+			"spec": "github:the-labo/the-templates#034a8a05babf850593942dd72d80c9f65c7155cc"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"asset/templates/cjs_dir.hbs": {
+					"diff": "--- published/asset/templates/cjs_dir.hbs\n+++ rebuilt/asset/templates/cjs_dir.hbs\n@@ -12,11 +12,10 @@\n const {{varName}} = _d(require('./{{path}}'))\n {{/each}}\n \n-\n {{#each modules}}\n exports.{{name}} = {{varName}}\n {{/each}}\n \n-{{#if defaultModule}}\n-module.exports = {{defaultModule.varName}}\n+{{#if defaultExport}}\n+module.exports = {{defaultExport}}\n {{/if}}\n",
+					"match": false,
+					"packageHash": "5bfc571c89b39e3c7248781ac4ca03bb4dbb3abb1b8b68c8148702a60dad6fd6",
+					"size": 447,
+					"sourceHash": "7df27e719c25f46280db23ec315fe227b290b9f31f6f3c13adb937a043ba92f7",
+					"status": "content"
+				},
+				"asset/templates/dir.hbs": {
+					"diff": "--- published/asset/templates/dir.hbs\n+++ rebuilt/asset/templates/dir.hbs\n@@ -14,3 +14,7 @@\n {{#if varNameChanged}} {{varName}} as{{/if}} {{name}},\n {{/each}}\n }\n+\n+{{#if defaultExport}}\n+export default {{defaultExport}}\n+{{/if}}\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "5f80bd89a13885c280efb577d3e6694a1812daa1b0affeffac3a603eafdd6ca6",
+					"size": 257,
+					"sourceHash": "1fe3e1e1d605b1a0730d1618824f068edd95c2a643a5a2e1a2ae996aa0e23416",
+					"status": "content"
+				},
+				"lib/dir.js": {
+					"diff": "--- published/lib/dir.js\n+++ rebuilt/lib/dir.js\n@@ -16,13 +16,6 @@\n     ['.jsx', '.js', '.json', '.mjs', ''].includes(path.extname(name))\n }\n \n-const handleRestConfig = (rest) => {\n-  const restKeys = Object.keys(rest)\n-  if (restKeys.length > 0) {\n-    console.warn(`[the-templates][dir] Unknown configs: ${restKeys}`)\n-  }\n-}\n-\n const isModule = (filename) => {\n   try {\n     return !!require.resolve(filename)\n@@ -39,9 +32,8 @@\n     cjs = config.node,\n     ext,\n     dirname,\n-    ...rest\n+    default: defaultExport = false,\n   } = config\n-  handleRestConfig(rest)\n   const TMPL_PATH = cjs ? _tmpl('cjs_dir.hbs') : _tmpl('dir.hbs')\n   const modules = fs.readdirSync(dirname)\n     .filter((name) => shouldRequire(name))\n@@ -67,8 +59,9 @@\n     data: {\n       name,\n       description,\n-      defaultModule: modules.find(({name}) => name === 'default'),\n-      modules: modules\n+      defaultExport,\n+      defaultModule: modules.find(({name}) => name === defaultExport),\n+      modules\n     }\n   }\n }\n@@ -82,9 +75,8 @@\n       dirname,\n       ext,\n       ignore = [],\n-      ...rest\n+      default: defaultExport = false,\n     } = config\n-    handleRestConfig(rest)\n     const TMPL_PATH = cjs ? _tmpl('cjs_dir.hbs') : _tmpl('dir.hbs')\n     const modules = aglob.sync('**/*.*', {cwd: dirname, ignore: [].concat(ignore)})\n       .filter((name) => shouldRequire(path.basename(name)))\n@@ -109,8 +101,9 @@\n       data: {\n         name,\n         description,\n-        defaultModule: modules.find(({name}) => name === 'default'),\n-        modules: modules\n+        defaultExport,\n+        defaultModule: modules.find(({name}) => name === defaultExport),\n+        modules\n       }\n     }\n   }\n",
+					"match": false,
+					"packageHash": "bf2e245f08c8a1309b186e6cdda8a7d127a177f6c74f6413174f8ca7c8b62397",
+					"size": 2964,
+					"sourceHash": "8d88d43adf96e4da6439e8016f3112b416929dd59904aa7957e136d531516749",
+					"status": "content"
+				},
+				"lib/index.js": {
+					"diff": "--- published/lib/index.js\n+++ rebuilt/lib/index.js\n@@ -33,7 +33,6 @@\n const toc = _d(require('./toc'))\n const vhost = _d(require('./vhost'))\n \n-\n exports.Ctrl = Ctrl\n exports.Dialogs = Dialogs\n exports.Hook = Hook\n",
+					"match": false,
+					"packageHash": "bd19749616b4964c7f468766212b54d1f49ecc254ebcae77b580543512a4b94b",
+					"size": 1757,
+					"sourceHash": "6c891492f68b2a77f6f3348ea30fa52d50209802a25380bccb555d7f7e3f3869",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 4,
+				"matchingFiles": 100,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.9615384615384616,
+				"totalFiles": 104
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "aglob",
+				"version": "3.0.1"
+			},
+			{
+				"name": "ansi-red",
+				"version": "0.1.1"
+			},
+			{
+				"name": "ansi-wrap",
+				"version": "0.1.0"
+			},
+			{
+				"name": "argparse",
+				"version": "1.0.9"
+			},
+			{
+				"name": "autolinker",
+				"version": "0.15.3"
+			},
+			{
+				"name": "balanced-match",
+				"version": "1.0.0"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "1.1.8"
+			},
+			{
+				"name": "coffee-script",
+				"version": "1.12.7"
+			},
+			{
+				"name": "concat-map",
+				"version": "0.0.1"
+			},
+			{
+				"name": "concat-stream",
+				"version": "1.6.0"
+			},
+			{
+				"name": "core-util-is",
+				"version": "1.0.2"
+			},
+			{
+				"name": "diacritics-map",
+				"version": "0.1.0"
+			},
+			{
+				"name": "expand-range",
+				"version": "1.8.2"
+			},
+			{
+				"name": "extend-shallow",
+				"version": "2.0.1"
+			},
+			{
+				"name": "fill-range",
+				"version": "2.2.3"
+			},
+			{
+				"name": "for-in",
+				"version": "1.0.2"
+			},
+			{
+				"name": "fs.realpath",
+				"version": "1.0.0"
+			},
+			{
+				"name": "glob",
+				"version": "7.1.2"
+			},
+			{
+				"name": "gray-matter",
+				"version": "2.1.1"
+			},
+			{
+				"name": "inflight",
+				"version": "1.0.6"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.3"
+			},
+			{
+				"name": "is-buffer",
+				"version": "1.1.5"
+			},
+			{
+				"name": "is-extendable",
+				"version": "0.1.1"
+			},
+			{
+				"name": "is-number",
+				"version": "2.1.0"
+			},
+			{
+				"name": "is-plain-object",
+				"version": "2.0.4"
+			},
+			{
+				"name": "isobject",
+				"version": "3.0.1"
+			},
+			{
+				"name": "isarray",
+				"version": "1.0.0"
+			},
+			{
+				"name": "isobject",
+				"version": "2.1.0"
+			},
+			{
+				"name": "js-yaml",
+				"version": "3.10.0"
+			},
+			{
+				"name": "esprima",
+				"version": "4.0.0"
+			},
+			{
+				"name": "kind-of",
+				"version": "3.2.2"
+			},
+			{
+				"name": "list-item",
+				"version": "1.1.1"
+			},
+			{
+				"name": "markdown-link",
+				"version": "0.1.1"
+			},
+			{
+				"name": "markdown-toc",
+				"version": "1.2.0"
+			},
+			{
+				"name": "lazy-cache",
+				"version": "2.0.2"
+			},
+			{
+				"name": "minimist",
+				"version": "1.2.0"
+			},
+			{
+				"name": "minimatch",
+				"version": "3.0.4"
+			},
+			{
+				"name": "mixin-deep",
+				"version": "1.3.0"
+			},
+			{
+				"name": "is-extendable",
+				"version": "1.0.1"
+			},
+			{
+				"name": "node-forge",
+				"version": "0.7.5"
+			},
+			{
+				"name": "object.pick",
+				"version": "1.3.0"
+			},
+			{
+				"name": "once",
+				"version": "1.4.0"
+			},
+			{
+				"name": "path-is-absolute",
+				"version": "1.0.1"
+			},
+			{
+				"name": "process-nextick-args",
+				"version": "1.0.7"
+			},
+			{
+				"name": "randomatic",
+				"version": "1.1.7"
+			},
+			{
+				"name": "is-number",
+				"version": "3.0.0"
+			},
+			{
+				"name": "kind-of",
+				"version": "4.0.0"
+			},
+			{
+				"name": "readable-stream",
+				"version": "2.3.3"
+			},
+			{
+				"name": "remarkable",
+				"version": "1.7.1"
+			},
+			{
+				"name": "argparse",
+				"version": "0.1.16"
+			},
+			{
+				"name": "repeat-element",
+				"version": "1.1.2"
+			},
+			{
+				"name": "repeat-string",
+				"version": "1.6.1"
+			},
+			{
+				"name": "safe-buffer",
+				"version": "5.1.1"
+			},
+			{
+				"name": "selfsigned",
+				"version": "1.10.3"
+			},
+			{
+				"name": "set-getter",
+				"version": "0.1.0"
+			},
+			{
+				"name": "sprintf-js",
+				"version": "1.0.3"
+			},
+			{
+				"name": "string_decoder",
+				"version": "1.0.3"
+			},
+			{
+				"name": "stringcase",
+				"version": "4.2.0"
+			},
+			{
+				"name": "strip-color",
+				"version": "0.1.0"
+			},
+			{
+				"name": "to-object-path",
+				"version": "0.3.0"
+			},
+			{
+				"name": "toml",
+				"version": "2.3.3"
+			},
+			{
+				"name": "typedarray",
+				"version": "0.0.6"
+			},
+			{
+				"name": "underscore",
+				"version": "1.7.0"
+			},
+			{
+				"name": "underscore.string",
+				"version": "2.4.0"
+			},
+			{
+				"name": "util-deprecate",
+				"version": "1.0.2"
+			},
+			{
+				"name": "wrappy",
+				"version": "1.0.2"
+			}
+		]
+	}
+]

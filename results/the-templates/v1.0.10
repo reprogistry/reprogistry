@@ -1,0 +1,119 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T14:20:23.957Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:4.2.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "the-templates@1.0.10",
+			"name": "the-templates",
+			"version": "1.0.10",
+			"location": "https://registry.npmjs.org/the-templates/-/the-templates-1.0.10.tgz",
+			"integrity": "sha512-BdkKlnafwa0/3mRlbk1ZljfWNdi6/lMCwI9WkguKCgQHJR81j6JEsf9pPUprOapRtE+L5FuF+uDaW0IZ4MRWbw==",
+			"publishedAt": "2017-05-02T12:40:15.907Z",
+			"publishedWith": {
+				"node": "7.9.0",
+				"npm": "4.2.0"
+			},
+			"dependencies": {
+				"aglob": "^2.0.1",
+				"ape-tmpl": "^5.0.20",
+				"co": "^4.6.0",
+				"stringcase": "^3.2.1"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/the-labo/the-templates.git",
+			"spec": "github:the-labo/the-templates#6f0989faf6a4db09f78435797e7592053d0b84c0"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".npmignore": {
+					"match": false,
+					"packageHash": "6f179c6006bf3ff3f0b1b57a1a247c97edbee11a33374f53849829aed6261ffe",
+					"size": 605,
+					"status": "missing-in-source"
+				},
+				"lib/dir.js": {
+					"diff": "--- published/lib/dir.js\n+++ rebuilt/lib/dir.js\n@@ -6,7 +6,7 @@\n 'use strict'\n \n const _tmpl = require('./_tmpl')\n-const fs = require('fs')\n+const aglob = require('aglob')\n const path = require('path')\n \n /** @lends dir */\n@@ -25,17 +25,8 @@\n     data: {\n       name,\n       description,\n-      modules: fs.readdirSync(dirname)\n-        .filter((name) => !/^[\\._]/.test(name))\n-        .filter((name) => ![ 'index.js', 'package.json' ].includes(name))\n-        .map((name) => path.join(dirname, name))\n-        .filter((name) => {\n-          try {\n-            return !!require.resolve(name)\n-          } catch (e) {\n-            return false\n-          }\n-        })\n+      modules: aglob\n+        .sync([ '*.js', '*.jsx' ], { cwd: dirname })\n         .map((filename) => path.basename(filename, path.extname(filename)))\n         .filter((name) => name !== 'index')\n     }\n",
+					"match": false,
+					"packageHash": "db0c699c7f821e8bc2cc1ac4fd54767e20e3e7463d3ee23947b91d9e6034160f",
+					"size": 986,
+					"sourceHash": "e235f3e17eda68fbbf0db5b7968074eb2cd8160740d4a5d1fe3244e5d1811d6e",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 1,
+				"matchingFiles": 37,
+				"missingInPackage": 0,
+				"missingInSource": 1,
+				"score": 0.9487179487179487,
+				"totalFiles": 39
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "aglob",
+				"version": "2.0.1"
+			},
+			{
+				"name": "balanced-match",
+				"version": "1.0.2"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "1.1.22"
+			},
+			{
+				"name": "co",
+				"version": "4.6.0"
+			},
+			{
+				"name": "concat-map",
+				"version": "0.0.1"
+			},
+			{
+				"name": "fs.realpath",
+				"version": "1.0.0"
+			},
+			{
+				"name": "glob",
+				"version": "7.2.3"
+			},
+			{
+				"name": "inflight",
+				"version": "1.0.6"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.4"
+			},
+			{
+				"name": "minimatch",
+				"version": "3.1.5"
+			},
+			{
+				"name": "once",
+				"version": "1.4.0"
+			},
+			{
+				"name": "path-is-absolute",
+				"version": "1.0.1"
+			},
+			{
+				"name": "stringcase",
+				"version": "3.2.1"
+			},
+			{
+				"name": "wrappy",
+				"version": "1.0.2"
+			}
+		]
+	}
+]

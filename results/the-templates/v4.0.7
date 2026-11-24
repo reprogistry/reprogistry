@@ -1,0 +1,361 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T15:34:58.167Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:5.6.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "the-templates@4.0.7",
+			"name": "the-templates",
+			"version": "4.0.7",
+			"location": "https://registry.npmjs.org/the-templates/-/the-templates-4.0.7.tgz",
+			"integrity": "sha512-g+bPTQMfTrcHeXKULvoX4q7DbOXZaL0m98K8CYk567lNJlQ7cxOjPKqBfXvYk4HpUAGFEOJJF0H/aJivQEvsug==",
+			"publishedAt": "2018-06-20T00:51:54.937Z",
+			"publishedWith": {
+				"node": "10.0.0",
+				"npm": "6.1.0"
+			},
+			"dependencies": {
+				"aglob": "^3.0.1",
+				"markdown-toc": "^1.2.0",
+				"selfsigned": "^1.10.3",
+				"stringcase": "^4.2.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/the-labo/the-templates.git",
+			"spec": "github:the-labo/the-templates#6f2045a762873a92a6b622f3abe6ec0dcee29fa8"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"asset/templates/cjs_dir.hbs": {
+					"diff": "--- published/asset/templates/cjs_dir.hbs\n+++ rebuilt/asset/templates/cjs_dir.hbs\n@@ -5,14 +5,16 @@\n  */\n 'use strict'\n \n-const _d = (m) => (m && m.__esModule) ? (m.default || m) : m\n+const _interopRequireDefault = (obj) => obj && obj.__esModule ? obj : {default: obj}\n+const _d = (m) => _interopRequireDefault(m).default\n \n {{#each modules}}\n const {{varName}} = _d(require('./{{path}}'))\n {{/each}}\n \n-{{#if defaultModule}}{{#if modules}}// `module.exports` overrides these `exports.*`, but still needs them for lebab (https://github.com/lebab/lebab){{/if}}{{/if}}\n {{#each modules}}\n+{{#if defaultModule}}// `module.exports` overrides these `exports.*`, but still needs them for lebab (https://github.com/lebab/lebab)\n+{{/if}}\n exports.{{name}} = {{varName}}\n {{/each}}\n \n",
+					"match": false,
+					"packageHash": "56271978492dd46868bc0da8a0e66330d25af48a0173d366c1075f03b206ddeb",
+					"size": 533,
+					"sourceHash": "e5da0ce7dd338a73f4ccedec802bc21156960d39db91b78983be47349ba321b6",
+					"status": "content"
+				},
+				"asset/templates/cjs_test.hbs": {
+					"diff": "--- published/asset/templates/cjs_test.hbs\n+++ rebuilt/asset/templates/cjs_test.hbs\n@@ -4,7 +4,7 @@\n  */\n 'use strict'\n \n-const {{varName}} = require('{{{relative}}}')\n+const {{name}} = require('{{{relative}}}')\n const { ok, equal } = require('assert')\n \n describe('{{spinalcase name}}', () => {\n",
+					"match": false,
+					"packageHash": "8bfc1de95f6658243e7d000e1d368cce695b58d812acb6f2a2996508079faf66",
+					"size": 311,
+					"sourceHash": "034aa88d5dd68897c9393244e1e35325a23cc460a9a913f68ce6f708d5346447",
+					"status": "content"
+				},
+				"asset/templates/test.hbs": {
+					"diff": "--- published/asset/templates/test.hbs\n+++ rebuilt/asset/templates/test.hbs\n@@ -4,7 +4,7 @@\n  */\n 'use strict'\n \n-import {{name}} from '{{{relative}}}'\n+import {{basename name}} from '{{{relative}}}'\n import React from 'react'\n import { ok, equal } from 'assert'\n import { render } from 'the-script-test'\n",
+					"match": false,
+					"packageHash": "293baecee0accd5abd21d5bb5e34dffd7a40f8b1cd4a70dc36fa0834815f5361",
+					"size": 454,
+					"sourceHash": "f86b4ffd6bb07f07359810bd1bfd62cf05f7c432dbabbcf0687b262a0ecf7717",
+					"status": "content"
+				},
+				"ci/test.js": {
+					"diff": "--- published/ci/test.js\n+++ rebuilt/ci/test.js\n@@ -8,7 +8,7 @@\n \n process.chdir(`${__dirname}/..`)\n \n-const {runTasks} = require('ape-tasking')\n+const { runTasks } = require('ape-tasking')\n const amocha = require('amocha')\n \n runTasks('test', [\n",
+					"match": false,
+					"packageHash": "42bb3cf5b4dc81a1502c3ef942a0a13d65c87be58438c727dd54d7f5e7082805",
+					"size": 254,
+					"sourceHash": "871e34bb78eb02bc1451600e8a85e07dff82791fd49a3837e685aa8e92f02234",
+					"status": "content"
+				},
+				"lib/index.js": {
+					"diff": "--- published/lib/index.js\n+++ rebuilt/lib/index.js\n@@ -5,7 +5,8 @@\n  */\n 'use strict'\n \n-const _d = (m) => (m && m.__esModule) ? (m.default || m) : m\n+const _interopRequireDefault = (obj) => obj && obj.__esModule ? obj : {default: obj}\n+const _d = (m) => _interopRequireDefault(m).default\n \n const Ctrl = _d(require('./Ctrl'))\n const Dialogs = _d(require('./Dialogs'))\n@@ -32,7 +33,6 @@\n const toc = _d(require('./toc'))\n const vhost = _d(require('./vhost'))\n \n-\n exports.Ctrl = Ctrl\n exports.Dialogs = Dialogs\n exports.Hook = Hook\n",
+					"match": false,
+					"packageHash": "563be201fca7ec0e71bc2d62b34506776363ee56d3f24fcd83175d6fb082e330",
+					"size": 1681,
+					"sourceHash": "6c891492f68b2a77f6f3348ea30fa52d50209802a25380bccb555d7f7e3f3869",
+					"status": "content"
+				},
+				"lib/test.js": {
+					"diff": "--- published/lib/test.js\n+++ rebuilt/lib/test.js\n@@ -35,8 +35,6 @@\n       const extname = path.extname(src)\n       const basename = path.basename(src, extname)\n       const suffix = 'Test'\n-      const name = String(basename)\n-      const varNameChanged = ['default'].includes(name)\n       return {\n         force: false,\n         mode: '644',\n@@ -44,9 +42,7 @@\n         tmpl: TMPL_PATH,\n         path: path.resolve(dest, basename + suffix + extname),\n         data: {\n-          name,\n-          varName: varNameChanged ? name + '_' : name,\n-          varNameChanged,\n+          name: basename,\n           relative: path.relative(dest, src).replace(extname, '')\n         }\n       }\n",
+					"match": false,
+					"packageHash": "ae4fc5056d691325a58b12f7d93d9ed33ffb7048a4335ced131b6fb8edd7c46a",
+					"size": 1999,
+					"sourceHash": "b46361110a4c4ed60066bc9936b10e14c984eb4c79338da67bbfdae0d304abb0",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 6,
+				"matchingFiles": 98,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.9423076923076923,
+				"totalFiles": 104
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "aglob",
+				"version": "3.0.1"
+			},
+			{
+				"name": "ansi-red",
+				"version": "0.1.1"
+			},
+			{
+				"name": "ansi-wrap",
+				"version": "0.1.0"
+			},
+			{
+				"name": "argparse",
+				"version": "1.0.9"
+			},
+			{
+				"name": "autolinker",
+				"version": "0.15.3"
+			},
+			{
+				"name": "balanced-match",
+				"version": "1.0.0"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "1.1.8"
+			},
+			{
+				"name": "coffee-script",
+				"version": "1.12.7"
+			},
+			{
+				"name": "concat-map",
+				"version": "0.0.1"
+			},
+			{
+				"name": "concat-stream",
+				"version": "1.6.0"
+			},
+			{
+				"name": "core-util-is",
+				"version": "1.0.2"
+			},
+			{
+				"name": "diacritics-map",
+				"version": "0.1.0"
+			},
+			{
+				"name": "expand-range",
+				"version": "1.8.2"
+			},
+			{
+				"name": "extend-shallow",
+				"version": "2.0.1"
+			},
+			{
+				"name": "fill-range",
+				"version": "2.2.3"
+			},
+			{
+				"name": "for-in",
+				"version": "1.0.2"
+			},
+			{
+				"name": "fs.realpath",
+				"version": "1.0.0"
+			},
+			{
+				"name": "glob",
+				"version": "7.1.2"
+			},
+			{
+				"name": "gray-matter",
+				"version": "2.1.1"
+			},
+			{
+				"name": "inflight",
+				"version": "1.0.6"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.3"
+			},
+			{
+				"name": "is-buffer",
+				"version": "1.1.5"
+			},
+			{
+				"name": "is-extendable",
+				"version": "0.1.1"
+			},
+			{
+				"name": "is-number",
+				"version": "2.1.0"
+			},
+			{
+				"name": "is-plain-object",
+				"version": "2.0.4"
+			},
+			{
+				"name": "isobject",
+				"version": "3.0.1"
+			},
+			{
+				"name": "isarray",
+				"version": "1.0.0"
+			},
+			{
+				"name": "isobject",
+				"version": "2.1.0"
+			},
+			{
+				"name": "js-yaml",
+				"version": "3.10.0"
+			},
+			{
+				"name": "esprima",
+				"version": "4.0.0"
+			},
+			{
+				"name": "kind-of",
+				"version": "3.2.2"
+			},
+			{
+				"name": "list-item",
+				"version": "1.1.1"
+			},
+			{
+				"name": "markdown-link",
+				"version": "0.1.1"
+			},
+			{
+				"name": "markdown-toc",
+				"version": "1.2.0"
+			},
+			{
+				"name": "lazy-cache",
+				"version": "2.0.2"
+			},
+			{
+				"name": "minimist",
+				"version": "1.2.0"
+			},
+			{
+				"name": "minimatch",
+				"version": "3.0.4"
+			},
+			{
+				"name": "mixin-deep",
+				"version": "1.3.0"
+			},
+			{
+				"name": "is-extendable",
+				"version": "1.0.1"
+			},
+			{
+				"name": "node-forge",
+				"version": "0.7.5"
+			},
+			{
+				"name": "object.pick",
+				"version": "1.3.0"
+			},
+			{
+				"name": "once",
+				"version": "1.4.0"
+			},
+			{
+				"name": "path-is-absolute",
+				"version": "1.0.1"
+			},
+			{
+				"name": "process-nextick-args",
+				"version": "1.0.7"
+			},
+			{
+				"name": "randomatic",
+				"version": "1.1.7"
+			},
+			{
+				"name": "is-number",
+				"version": "3.0.0"
+			},
+			{
+				"name": "kind-of",
+				"version": "4.0.0"
+			},
+			{
+				"name": "readable-stream",
+				"version": "2.3.3"
+			},
+			{
+				"name": "remarkable",
+				"version": "1.7.1"
+			},
+			{
+				"name": "argparse",
+				"version": "0.1.16"
+			},
+			{
+				"name": "repeat-element",
+				"version": "1.1.2"
+			},
+			{
+				"name": "repeat-string",
+				"version": "1.6.1"
+			},
+			{
+				"name": "safe-buffer",
+				"version": "5.1.1"
+			},
+			{
+				"name": "selfsigned",
+				"version": "1.10.3"
+			},
+			{
+				"name": "set-getter",
+				"version": "0.1.0"
+			},
+			{
+				"name": "sprintf-js",
+				"version": "1.0.3"
+			},
+			{
+				"name": "string_decoder",
+				"version": "1.0.3"
+			},
+			{
+				"name": "stringcase",
+				"version": "4.2.0"
+			},
+			{
+				"name": "strip-color",
+				"version": "0.1.0"
+			},
+			{
+				"name": "to-object-path",
+				"version": "0.3.0"
+			},
+			{
+				"name": "toml",
+				"version": "2.3.3"
+			},
+			{
+				"name": "typedarray",
+				"version": "0.0.6"
+			},
+			{
+				"name": "underscore",
+				"version": "1.7.0"
+			},
+			{
+				"name": "underscore.string",
+				"version": "2.4.0"
+			},
+			{
+				"name": "util-deprecate",
+				"version": "1.0.2"
+			},
+			{
+				"name": "wrappy",
+				"version": "1.0.2"
+			}
+		]
+	}
+]

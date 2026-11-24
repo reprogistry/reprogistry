@@ -1,0 +1,135 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T14:23:43.769Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:4.2.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "the-templates@1.0.17",
+			"name": "the-templates",
+			"version": "1.0.17",
+			"location": "https://registry.npmjs.org/the-templates/-/the-templates-1.0.17.tgz",
+			"integrity": "sha512-Z2ZvDzYeNyTVkW3id4ejcgLS4fhSh4qLRvE3VeHqNAG8LFyGfwqK60bGItgzwDYf3wfV9UH3N989bmukn0FSWQ==",
+			"publishedAt": "2017-05-22T04:22:30.261Z",
+			"publishedWith": {
+				"node": "7.10.0",
+				"npm": "4.2.0"
+			},
+			"dependencies": {
+				"aglob": "^2.0.1",
+				"ape-tmpl": "^5.0.20",
+				"co": "^4.6.0",
+				"stringcase": "^3.2.1"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/the-labo/the-templates.git",
+			"spec": "github:the-labo/the-templates#130f6c6a43e40133ed961d5045f11c8b39171014"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".npmignore": {
+					"match": false,
+					"packageHash": "6f179c6006bf3ff3f0b1b57a1a247c97edbee11a33374f53849829aed6261ffe",
+					"size": 605,
+					"status": "missing-in-source"
+				},
+				"asset/templates/dir.hbs": {
+					"diff": "--- published/asset/templates/dir.hbs\n+++ rebuilt/asset/templates/dir.hbs\n@@ -5,12 +5,12 @@\n 'use strict'\n \n {{#each modules}}\n-import {{name}} from './{{path}}'\n+import {{this}} from './{{this}}'\n {{/each}}\n \n export {\n {{#each modules}}\n-  {{name}}{{#if @last}}{{else}},\n+  {{this}}{{#if @last}}{{else}},\n {{/if}}\n {{/each}}\n \n",
+					"match": false,
+					"packageHash": "585e6537b10dbdf01f4d0487eb585557eea9f4f11e3acc62ccd33437282736f4",
+					"size": 205,
+					"sourceHash": "6e820344cb7cae11a350b1721b110cb5fb58dd196716c1f6ae65910ece137c28",
+					"status": "content"
+				},
+				"asset/templates/node_dir.hbs": {
+					"diff": "--- published/asset/templates/node_dir.hbs\n+++ rebuilt/asset/templates/node_dir.hbs\n@@ -5,12 +5,12 @@\n 'use strict'\n \n {{#each modules}}\n-const {{name}} = require('./{{path}}')\n+const {{this}} = require('./{{this}}')\n {{/each}}\n \n module.exports = {\n {{#each modules}}\n-  {{name}}{{#if @last}}{{else}},\n+  {{this}}{{#if @last}}{{else}},\n {{/if}}\n {{/each}}\n \n",
+					"match": false,
+					"packageHash": "0bc1587e8f79fa7a2452f02961ae15a60877dd4eafe46c95b87dc7aa05a6e01d",
+					"size": 220,
+					"sourceHash": "b920a6d968c271bb8d6d281ef9dd5cf943b3b6869e41bfbe19e60277d4a5fe4f",
+					"status": "content"
+				},
+				"lib/dir.js": {
+					"diff": "--- published/lib/dir.js\n+++ rebuilt/lib/dir.js\n@@ -7,23 +7,8 @@\n \n const _tmpl = require('./_tmpl')\n const fs = require('fs')\n-const aglob = require('aglob')\n const path = require('path')\n \n-const shouldRequire = (name) => {\n-  return !/^[._]/.test(name) &&\n-    ![ 'index.jsx', 'index.js', 'package.json' ].includes(name) &&\n-    [ '.jsx', '.js', '.json', '' ].includes(path.extname(name))\n-}\n-\n-const isModule = (filename) => {\n-  try {\n-    return !!require.resolve(filename)\n-  } catch (e) {\n-    return false\n-  }\n-}\n-\n /** @lends dir */\n function dir (config) {\n   let {\n@@ -41,52 +26,21 @@\n       name,\n       description,\n       modules: fs.readdirSync(dirname)\n-        .filter((name) => shouldRequire(name))\n+        .filter((name) => !/^[._]/.test(name))\n+        .filter((name) => ![ 'index.js', 'package.json' ].includes(name))\n+        .filter((name) => [ '.jsx', '.js', '.json', '' ].includes(path.extname(name)))\n         .map((name) => path.join(dirname, name))\n-        .filter((filename) => isModule(filename))\n-        .map((filename) => ({\n-          path: path.basename(filename, path.extname(filename)),\n-          name: path.basename(filename, path.extname(filename))\n-        }))\n+        .filter((name) => {\n+          try {\n+            return !!require.resolve(name)\n+          } catch (e) {\n+            return false\n+          }\n+        })\n+        .map((filename) => path.basename(filename, path.extname(filename)))\n         .filter((name) => name !== 'index')\n     }\n   }\n }\n \n-Object.assign(dir, {\n-  recursive (config) {\n-    let {\n-      name,\n-      description,\n-      node,\n-      dirname\n-    } = config\n-    const TMPL_PATH = node ? _tmpl('node_dir.hbs') : _tmpl('dir.hbs')\n-    return {\n-      force: true,\n-      mode: '444',\n-      tmpl: TMPL_PATH,\n-      data: {\n-        name,\n-        description,\n-        modules: aglob.sync('**/*.*', { cwd: dirname })\n-          .filter((name) => shouldRequire(name))\n-          .map((name) => path.join(dirname, name))\n-          .filter((filename) => isModule(filename))\n-          .map((filename) => {\n-            let basename = path.basename(filename, path.extname(filename))\n-            return {\n-              path: path.join(\n-                path.relative(dirname, path.dirname(filename)),\n-                basename\n-              ),\n-              name: basename\n-            }\n-          })\n-          .filter((name) => name !== 'index')\n-      }\n-    }\n-  }\n-})\n-\n module.exports = dir\n",
+					"match": false,
+					"packageHash": "e3755926979c052f5e11ba84d8df4b919020d82e3eb0d44724961382b875febd",
+					"size": 2163,
+					"sourceHash": "186ea5106fe26d4f4c6259548b5a3dce5a576cf845f808bb5fcc37484f32e9e6",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 3,
+				"matchingFiles": 41,
+				"missingInPackage": 0,
+				"missingInSource": 1,
+				"score": 0.9111111111111111,
+				"totalFiles": 45
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "aglob",
+				"version": "2.0.1"
+			},
+			{
+				"name": "balanced-match",
+				"version": "1.0.2"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "1.1.22"
+			},
+			{
+				"name": "co",
+				"version": "4.6.0"
+			},
+			{
+				"name": "concat-map",
+				"version": "0.0.1"
+			},
+			{
+				"name": "fs.realpath",
+				"version": "1.0.0"
+			},
+			{
+				"name": "glob",
+				"version": "7.2.3"
+			},
+			{
+				"name": "inflight",
+				"version": "1.0.6"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.4"
+			},
+			{
+				"name": "minimatch",
+				"version": "3.1.5"
+			},
+			{
+				"name": "once",
+				"version": "1.4.0"
+			},
+			{
+				"name": "path-is-absolute",
+				"version": "1.0.1"
+			},
+			{
+				"name": "stringcase",
+				"version": "3.2.1"
+			},
+			{
+				"name": "wrappy",
+				"version": "1.0.2"
+			}
+		]
+	}
+]

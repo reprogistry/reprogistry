@@ -1,0 +1,201 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T14:25:57.328Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:5.5.1",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "the-templates@2.1.3",
+			"name": "the-templates",
+			"version": "2.1.3",
+			"location": "https://registry.npmjs.org/the-templates/-/the-templates-2.1.3.tgz",
+			"integrity": "sha512-fiaTr+OyO9bSs1gUZUbc1umGOjmrxq63UZrPtzAQYT3B1sHxjhAtIX8A+H60QgxLZzgOp8xrKBQ1AP2eXCBXkQ==",
+			"publishedAt": "2018-01-05T05:52:52.955Z",
+			"publishedWith": {
+				"node": "8.9.3",
+				"npm": "5.6.0"
+			},
+			"dependencies": {
+				"aglob": "^3.0.0",
+				"ape-tmpl": "^6.0.2",
+				"selfsigned": "^1.9.1",
+				"stringcase": "^4.0.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/the-labo/the-templates.git",
+			"spec": "github:the-labo/the-templates#a30d32965fa170a7d1763729788061de0187cf83"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"asset/templates/cjs_dir.hbs": {
+					"diff": "--- published/asset/templates/cjs_dir.hbs\n+++ rebuilt/asset/templates/cjs_dir.hbs\n@@ -15,7 +15,3 @@\n {{/each}}\n \n }\n-\n-{{#each modules}}\n-exports.{{name}} = {{name}}\n-{{/each}}\n",
+					"match": false,
+					"packageHash": "b9cc1bc26e69d5363cddacb919c3bed476c902b51be3114422a36c76bc1b1d68",
+					"size": 277,
+					"sourceHash": "0bc1587e8f79fa7a2452f02961ae15a60877dd4eafe46c95b87dc7aa05a6e01d",
+					"status": "content"
+				},
+				"asset/templates/mapping.hbs": {
+					"diff": "--- published/asset/templates/mapping.hbs\n+++ rebuilt/asset/templates/mapping.hbs\n@@ -7,11 +7,11 @@\n import {{requireAs}} from '{{requirePath}}'\n \n {{#each mapping}}\n-export const {{instanceName}} = {{../requireAs}}.{{className}}\n+export const '{{instanceName}}' = {{../requireAs}}.{{className}},\n {{/each}}\n \n export default = Object.freeze({\n {{#each mapping}}\n-  {{instanceName}},\n+    '{{instanceName}}',\n {{/each}}\n })\n",
+					"match": false,
+					"packageHash": "e4d8a72d7f83649e2f9f0de9b9f476bf18de8e8d5a8d17ed01b9ba53b2316e45",
+					"size": 291,
+					"sourceHash": "288c0cf0072b5ea70deb80311bf4570c1086c705ef8d00cab0f1a58eedaa55ad",
+					"status": "content"
+				},
+				"lib/index.js": {
+					"diff": "--- published/lib/index.js\n+++ rebuilt/lib/index.js\n@@ -29,15 +29,3 @@\n   templates,\n   test\n }\n-\n-exports.api = api\n-exports.dir = dir\n-exports.lib = lib\n-exports.mapping = mapping\n-exports.markdowns = markdowns\n-exports.nginx = nginx\n-exports.pcssVars = pcssVars\n-exports.readme = readme\n-exports.selfSigned = selfSigned\n-exports.templates = templates\n-exports.test = test\n",
+					"match": false,
+					"packageHash": "9f1bdb1809c513460135c743a285ee1469938b45d7e8bbc1c6a6f5af97c8ef75",
+					"size": 863,
+					"sourceHash": "cc20235d6eefda126f79f7016be74755444ac815c7ad6118e04c5d2daff73fbe",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -43,4 +43,4 @@\n     \"node\": \">=7.6\",\n     \"npm\": \">=4\"\n   }\n-}\n+}\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "75700a796a7d1abd031ad7957e23578c479b463f3c0ae02599fb0d4f7b20ba5c",
+					"size": 1063,
+					"sourceHash": "367ddbfe650c26cb9514aad976600aeec7da6518df9e957e499b5d47baee2412",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 4,
+				"matchingFiles": 55,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.9322033898305084,
+				"totalFiles": 59
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "abind",
+				"version": "1.0.3"
+			},
+			{
+				"name": "aglob",
+				"version": "3.0.0"
+			},
+			{
+				"name": "ape-tmpl",
+				"version": "6.0.2"
+			},
+			{
+				"name": "argx",
+				"version": "3.0.2"
+			},
+			{
+				"name": "arrayfilter",
+				"version": "1.1.2"
+			},
+			{
+				"name": "arraysort",
+				"version": "2.0.0"
+			},
+			{
+				"name": "asobj",
+				"version": "2.0.1"
+			},
+			{
+				"name": "babel-runtime",
+				"version": "6.26.0"
+			},
+			{
+				"name": "balanced-match",
+				"version": "1.0.0"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "1.1.8"
+			},
+			{
+				"name": "concat-map",
+				"version": "0.0.1"
+			},
+			{
+				"name": "core-js",
+				"version": "2.5.0"
+			},
+			{
+				"name": "deep-equal",
+				"version": "1.0.1"
+			},
+			{
+				"name": "evaljson",
+				"version": "5.1.0"
+			},
+			{
+				"name": "objnest",
+				"version": "4.0.0"
+			},
+			{
+				"name": "extend",
+				"version": "3.0.1"
+			},
+			{
+				"name": "fs.realpath",
+				"version": "1.0.0"
+			},
+			{
+				"name": "glob",
+				"version": "7.1.2"
+			},
+			{
+				"name": "iftype",
+				"version": "3.0.2"
+			},
+			{
+				"name": "inflight",
+				"version": "1.0.6"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.3"
+			},
+			{
+				"name": "minimatch",
+				"version": "3.0.4"
+			},
+			{
+				"name": "node-forge",
+				"version": "0.6.33"
+			},
+			{
+				"name": "objnest",
+				"version": "3.0.9"
+			},
+			{
+				"name": "once",
+				"version": "1.4.0"
+			},
+			{
+				"name": "path-is-absolute",
+				"version": "1.0.1"
+			},
+			{
+				"name": "regenerator-runtime",
+				"version": "0.11.0"
+			},
+			{
+				"name": "selfsigned",
+				"version": "1.10.1"
+			},
+			{
+				"name": "stringcase",
+				"version": "4.0.0"
+			},
+			{
+				"name": "wrappy",
+				"version": "1.0.2"
+			}
+		]
+	}
+]

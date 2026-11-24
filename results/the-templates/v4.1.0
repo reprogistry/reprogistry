@@ -1,0 +1,374 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T15:46:15.997Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:6.2.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "the-templates@4.1.0",
+			"name": "the-templates",
+			"version": "4.1.0",
+			"location": "https://registry.npmjs.org/the-templates/-/the-templates-4.1.0.tgz",
+			"integrity": "sha512-58n2UeR8yDbCwdDiAix2fRl66+0Zf5WGOqh2QC8E6N/l2zKG+9BhaxNWaO8xulo0s7RZcuuu1h/GNdVmq1KXUA==",
+			"publishedAt": "2018-09-21T12:40:46.936Z",
+			"publishedWith": {
+				"node": "10.8.0",
+				"npm": "6.3.0"
+			},
+			"dependencies": {
+				"aglob": "^3.0.1",
+				"evaljson": "^6.0.2",
+				"markdown-toc": "^1.2.0",
+				"objnest": "^5.0.3",
+				"reserved": "^0.1.2",
+				"selfsigned": "^1.10.3",
+				"stringcase": "^4.2.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/the-labo/the-templates.git",
+			"spec": "github:the-labo/the-templates#edb23434945f5fdeb7c45465eecb401bf57e8370"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"asset/templates/Wrap.hbs": {
+					"diff": "--- published/asset/templates/Wrap.hbs\n+++ rebuilt/asset/templates/Wrap.hbs\n@@ -7,7 +7,7 @@\n 'use strict'\n \n import React from 'react'\n-import { wrapStack } from 'the-component-util'\n+import { wrapStack } from 'the-component-mixins/helpers'\n \n /** @lends {{camelcase name}} */\n function {{camelcase name}} (Component) {\n",
+					"match": false,
+					"packageHash": "511fc7690e5d545ceb6bef34618a3476cb10a5c1c3f2c9916e58e7df4d6febf5",
+					"size": 601,
+					"sourceHash": "e7de0db4fb04c4bea108bd1f607bb7fbfffc56eea4282c32ec61d6bb89ddae55",
+					"status": "content"
+				},
+				"asset/templates/bin.hbs": {
+					"match": false,
+					"packageHash": "f800cddf25f8fbc406b73f12f71f67e31259abda2af6fdca3e7246ccb1a91a15",
+					"size": 2522,
+					"status": "missing-in-source"
+				},
+				"lib/bin.js": {
+					"match": false,
+					"packageHash": "f127a9a9d777cce9d07249baa139f3cd5004e3dcdd13abf4f7d3eedd967d9025",
+					"size": 806,
+					"status": "missing-in-source"
+				},
+				"lib/index.js": {
+					"diff": "--- published/lib/index.js\n+++ rebuilt/lib/index.js\n@@ -20,7 +20,6 @@\n const View_ = require('./View')\n const Wrap_ = require('./Wrap')\n const api_ = require('./api')\n-const bin_ = require('./bin')\n const dir_ = require('./dir')\n const errorPage_ = require('./errorPage')\n const lib_ = require('./lib')\n@@ -48,7 +47,6 @@\n exports.View = _d(View_)\n exports.Wrap = _d(Wrap_)\n exports.api = _d(api_)\n-exports.bin = _d(bin_)\n exports.dir = _d(dir_)\n exports.errorPage = _d(errorPage_)\n exports.lib = _d(lib_)\n@@ -76,7 +74,6 @@\n   View: _d(View_),\n   Wrap: _d(Wrap_),\n   api: _d(api_),\n-  bin: _d(bin_),\n   dir: _d(dir_),\n   errorPage: _d(errorPage_),\n   lib: _d(lib_),\n",
+					"match": false,
+					"packageHash": "a3f6611486bc8d7cca74c5a3cfaea69644e33d9a08e74026c4b7d7da670d77ce",
+					"size": 2561,
+					"sourceHash": "6a5bb385065ce05588d4bfdbdde46d7dad0422c2e72de35a2a6a36422e597832",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,6 +1,6 @@\n {\n   \"name\": \"the-templates\",\n-  \"version\": \"4.1.0\",\n+  \"version\": \"4.0.25\",\n   \"description\": \"Templates for the-projects\",\n   \"main\": \"lib\",\n   \"scripts\": {\n@@ -26,9 +26,8 @@\n   \"homepage\": \"https://github.com/the-labo/the-templates#readme\",\n   \"dependencies\": {\n     \"aglob\": \"^3.0.1\",\n-    \"evaljson\": \"^6.0.2\",\n     \"markdown-toc\": \"^1.2.0\",\n-    \"objnest\": \"^5.0.3\",\n+    \"objnest\": \"^5.0.1\",\n     \"reserved\": \"^0.1.2\",\n     \"selfsigned\": \"^1.10.3\",\n     \"stringcase\": \"^4.2.0\"\n@@ -38,13 +37,13 @@\n     \"ape-formatting\": \"^1.0.2\",\n     \"ape-releasing\": \"^4.0.4\",\n     \"ape-tasking\": \"^4.0.9\",\n-    \"ape-tmpl\": \"^6.0.11\",\n+    \"ape-tmpl\": \"^6.0.10\",\n     \"ape-updating\": \"^5.0.1\",\n     \"coz\": \"^7.0.2\",\n     \"injectmock\": \"^2.0.0\",\n-    \"react\": \"^16.5.2\",\n-    \"react-dom\": \"^16.5.2\",\n-    \"the-script-test\": \"^2.1.6\"\n+    \"react\": \"^16.4.2\",\n+    \"react-dom\": \"^16.4.2\",\n+    \"the-script-test\": \"^2.1.2\"\n   },\n   \"engines\": {\n     \"node\": \">=8\",\n",
+					"match": false,
+					"packageHash": "c43123c84374b37514c80a4780ff9961f9d6ef9a72db2a827036b82d9bc47fc7",
+					"size": 1279,
+					"sourceHash": "81ae3aea535069d4bd86df1a66df1559b222405b2137017849ed1a7d9bc7e52e",
+					"status": "content"
+				},
+				"test/bin_test.js": {
+					"match": false,
+					"packageHash": "63d35da0113463da14741fe227e761ab6e45d2c39992336cd1a35f2b34861933",
+					"size": 323,
+					"status": "missing-in-source"
+				}
+			},
+			"summary": {
+				"differentFiles": 3,
+				"matchingFiles": 107,
+				"missingInPackage": 0,
+				"missingInSource": 3,
+				"score": 0.9469026548672567,
+				"totalFiles": 113
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "abind",
+				"version": "1.0.3"
+			},
+			{
+				"name": "aglob",
+				"version": "3.0.1"
+			},
+			{
+				"name": "ansi-red",
+				"version": "0.1.1"
+			},
+			{
+				"name": "ansi-wrap",
+				"version": "0.1.0"
+			},
+			{
+				"name": "argparse",
+				"version": "1.0.9"
+			},
+			{
+				"name": "autolinker",
+				"version": "0.15.3"
+			},
+			{
+				"name": "balanced-match",
+				"version": "1.0.0"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "1.1.8"
+			},
+			{
+				"name": "coffee-script",
+				"version": "1.12.7"
+			},
+			{
+				"name": "concat-map",
+				"version": "0.0.1"
+			},
+			{
+				"name": "concat-stream",
+				"version": "1.6.0"
+			},
+			{
+				"name": "core-util-is",
+				"version": "1.0.2"
+			},
+			{
+				"name": "diacritics-map",
+				"version": "0.1.0"
+			},
+			{
+				"name": "expand-range",
+				"version": "1.8.2"
+			},
+			{
+				"name": "extend",
+				"version": "3.0.2"
+			},
+			{
+				"name": "extend-shallow",
+				"version": "2.0.1"
+			},
+			{
+				"name": "fill-range",
+				"version": "2.2.3"
+			},
+			{
+				"name": "for-in",
+				"version": "1.0.2"
+			},
+			{
+				"name": "fs.realpath",
+				"version": "1.0.0"
+			},
+			{
+				"name": "glob",
+				"version": "7.1.2"
+			},
+			{
+				"name": "gray-matter",
+				"version": "2.1.1"
+			},
+			{
+				"name": "inflight",
+				"version": "1.0.6"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.3"
+			},
+			{
+				"name": "is-buffer",
+				"version": "1.1.5"
+			},
+			{
+				"name": "is-extendable",
+				"version": "0.1.1"
+			},
+			{
+				"name": "is-number",
+				"version": "2.1.0"
+			},
+			{
+				"name": "is-plain-object",
+				"version": "2.0.4"
+			},
+			{
+				"name": "isobject",
+				"version": "3.0.1"
+			},
+			{
+				"name": "isarray",
+				"version": "1.0.0"
+			},
+			{
+				"name": "isobject",
+				"version": "2.1.0"
+			},
+			{
+				"name": "js-yaml",
+				"version": "3.10.0"
+			},
+			{
+				"name": "esprima",
+				"version": "4.0.0"
+			},
+			{
+				"name": "kind-of",
+				"version": "3.2.2"
+			},
+			{
+				"name": "list-item",
+				"version": "1.1.1"
+			},
+			{
+				"name": "markdown-link",
+				"version": "0.1.1"
+			},
+			{
+				"name": "markdown-toc",
+				"version": "1.2.0"
+			},
+			{
+				"name": "lazy-cache",
+				"version": "2.0.2"
+			},
+			{
+				"name": "minimist",
+				"version": "1.2.0"
+			},
+			{
+				"name": "minimatch",
+				"version": "3.0.4"
+			},
+			{
+				"name": "mixin-deep",
+				"version": "1.3.0"
+			},
+			{
+				"name": "is-extendable",
+				"version": "1.0.1"
+			},
+			{
+				"name": "node-forge",
+				"version": "0.7.5"
+			},
+			{
+				"name": "object.pick",
+				"version": "1.3.0"
+			},
+			{
+				"name": "objnest",
+				"version": "5.0.1"
+			},
+			{
+				"name": "once",
+				"version": "1.4.0"
+			},
+			{
+				"name": "path-is-absolute",
+				"version": "1.0.1"
+			},
+			{
+				"name": "process-nextick-args",
+				"version": "1.0.7"
+			},
+			{
+				"name": "randomatic",
+				"version": "1.1.7"
+			},
+			{
+				"name": "is-number",
+				"version": "3.0.0"
+			},
+			{
+				"name": "kind-of",
+				"version": "4.0.0"
+			},
+			{
+				"name": "readable-stream",
+				"version": "2.3.3"
+			},
+			{
+				"name": "remarkable",
+				"version": "1.7.1"
+			},
+			{
+				"name": "argparse",
+				"version": "0.1.16"
+			},
+			{
+				"name": "repeat-element",
+				"version": "1.1.2"
+			},
+			{
+				"name": "repeat-string",
+				"version": "1.6.1"
+			},
+			{
+				"name": "reserved",
+				"version": "0.1.2"
+			},
+			{
+				"name": "safe-buffer",
+				"version": "5.1.1"
+			},
+			{
+				"name": "selfsigned",
+				"version": "1.10.3"
+			},
+			{
+				"name": "set-getter",
+				"version": "0.1.0"
+			},
+			{
+				"name": "sprintf-js",
+				"version": "1.0.3"
+			},
+			{
+				"name": "string_decoder",
+				"version": "1.0.3"
+			},
+			{
+				"name": "stringcase",
+				"version": "4.2.0"
+			},
+			{
+				"name": "strip-color",
+				"version": "0.1.0"
+			},
+			{
+				"name": "to-object-path",
+				"version": "0.3.0"
+			},
+			{
+				"name": "toml",
+				"version": "2.3.3"
+			},
+			{
+				"name": "typedarray",
+				"version": "0.0.6"
+			},
+			{
+				"name": "underscore",
+				"version": "1.7.0"
+			},
+			{
+				"name": "underscore.string",
+				"version": "2.4.0"
+			},
+			{
+				"name": "util-deprecate",
+				"version": "1.0.2"
+			},
+			{
+				"name": "wrappy",
+				"version": "1.0.2"
+			}
+		]
+	}
+]

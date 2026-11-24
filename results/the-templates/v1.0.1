@@ -1,0 +1,127 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T14:22:00.118Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:3.10.3",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "the-templates@1.0.1",
+			"name": "the-templates",
+			"version": "1.0.1",
+			"location": "https://registry.npmjs.org/the-templates/-/the-templates-1.0.1.tgz",
+			"integrity": "sha512-YfT5QWzxOV5NPuam3pI/7l8s2B/y0wqwvesvJmYQgJgqf84SwZdBBNH6RT+xzeA3e3p7UQbQfgNgKsEwpHBmJA==",
+			"publishedAt": "2017-04-22T23:00:26.951Z",
+			"publishedWith": {
+				"node": "6.5.0",
+				"npm": "4.1.1"
+			},
+			"dependencies": {
+				"aglob": "^2.0.1",
+				"ape-tmpl": "^5.0.20",
+				"co": "^4.6.0",
+				"stringcase": "^3.2.1"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/the-labo/the-templates.git",
+			"spec": "github:the-labo/the-templates#04c78e7e1538a55ba686135565dd270e8d1a4a03"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".npmignore": {
+					"match": false,
+					"packageHash": "6f179c6006bf3ff3f0b1b57a1a247c97edbee11a33374f53849829aed6261ffe",
+					"size": 605,
+					"status": "missing-in-source"
+				},
+				"asset/templates/test_jsx.hbs": {
+					"diff": "--- published/asset/templates/test_jsx.hbs\n+++ rebuilt/asset/templates/test_jsx.hbs\n@@ -1,10 +1,10 @@\n /**\n- * Test for {{name}}.\n+ * Test case for {{spinalcase name}}.\n  * Runs with mocha.\n  */\n 'use strict'\n \n-import {{pascalcase name}} from '{{{relative}}}'\n+import {{pascalcase name}} from '../lib/{{snakecase name}}'\n import React from 'react'\n import { ok, equal } from 'assert'\n import { shallow } from 'enzyme'\n@@ -18,7 +18,7 @@\n \n   it('Render a component', () => {\n     let element = shallow(\n-       <{{pascalcase name}} />\n+       <{{pascalcase name}}/>\n     )\n     ok(element)\n   })\n",
+					"match": false,
+					"packageHash": "f9fc737c2e088e5ab997e41bd4594ad23f0c6814913f910644c040fc0306eec1",
+					"size": 458,
+					"sourceHash": "a06dab390caacef6ec5a4d3437d764f32e686062e4e419c0cde81ff77b0f971e",
+					"status": "content"
+				},
+				"lib/test.js": {
+					"diff": "--- published/lib/test.js\n+++ rebuilt/lib/test.js\n@@ -33,16 +33,15 @@\n     .map((src) => {\n       let extname = path.extname(src)\n       let basename = path.basename(src, extname)\n-      let suffix = basename[ 0 ] === basename[ 0 ].toUpperCase() ? 'Test' : '_test'\n       return {\n         force: false,\n         mode: '644',\n         mkdirp: true,\n         tmpl: TMPL_PATH,\n-        path: path.resolve(dest, basename + suffix + extname),\n+        path: path.resolve(dest, basename + '_test' + extname),\n         data: {\n           name: basename,\n-          relative: path.relative(dest, src).replace(extname,'')\n+          relative: path.relative(dest, src)\n         }\n       }\n     })\n",
+					"match": false,
+					"packageHash": "b4400c6dea57fb497a1f4e84cb99b85cfc216a7940a2cb2c95ce65d12c752843",
+					"size": 1222,
+					"sourceHash": "4b83b4d68f8692333c42492180d8f4cc5361da9547355714885554f22e74feeb",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 25,
+				"missingInPackage": 0,
+				"missingInSource": 1,
+				"score": 0.8928571428571429,
+				"totalFiles": 28
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "aglob",
+				"version": "2.0.1"
+			},
+			{
+				"name": "balanced-match",
+				"version": "1.0.2"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "1.1.22"
+			},
+			{
+				"name": "co",
+				"version": "4.6.0"
+			},
+			{
+				"name": "concat-map",
+				"version": "0.0.1"
+			},
+			{
+				"name": "fs.realpath",
+				"version": "1.0.0"
+			},
+			{
+				"name": "glob",
+				"version": "7.2.3"
+			},
+			{
+				"name": "inflight",
+				"version": "1.0.6"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.4"
+			},
+			{
+				"name": "minimatch",
+				"version": "3.1.5"
+			},
+			{
+				"name": "once",
+				"version": "1.4.0"
+			},
+			{
+				"name": "path-is-absolute",
+				"version": "1.0.1"
+			},
+			{
+				"name": "stringcase",
+				"version": "3.2.1"
+			},
+			{
+				"name": "wrappy",
+				"version": "1.0.2"
+			}
+		]
+	}
+]

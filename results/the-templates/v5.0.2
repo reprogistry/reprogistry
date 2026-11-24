@@ -1,0 +1,388 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T15:45:41.392Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:6.2.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "the-templates@5.0.2",
+			"name": "the-templates",
+			"version": "5.0.2",
+			"location": "https://registry.npmjs.org/the-templates/-/the-templates-5.0.2.tgz",
+			"integrity": "sha512-bfilxjjIewjGifoFOO2RZ51omMMR/DVssj9vCuFvaJWFhAkKXwJMVfEuRhRNR99Io1TGTiDAG7Y/la6++Qd1nA==",
+			"publishedAt": "2018-11-13T02:14:39.980Z",
+			"publishedWith": {
+				"node": "10.8.0",
+				"npm": "6.4.1"
+			},
+			"dependencies": {
+				"aglob": "^3.0.1",
+				"evaljson": "^6.0.2",
+				"markdown-toc": "^1.2.0",
+				"objnest": "^5.0.3",
+				"reserved": "^0.1.2",
+				"selfsigned": "^1.10.4",
+				"stringcase": "^4.3.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/the-labo/the-templates.git",
+			"spec": "github:the-labo/the-templates#b637285230facd4b3fa67320f5424c0b7d2ac4ae"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"asset/templates/bin.hbs": {
+					"diff": "--- published/asset/templates/bin.hbs\n+++ rebuilt/asset/templates/bin.hbs\n@@ -51,7 +51,7 @@\n \n // Run main command\n {{camelcase signature.name}}.apply({{camelcase signature.name}}, program.args.concat({\n-{{#each signature.options}}  {{camelcase name}}: program['{{name}}']{{#if @last}}{{else}},\n+{{#each signature.options}}  {{name}}: program.{{name}}{{#if @last}}{{else}},\n {{/if}}\n {{/each}}\n })\n",
+					"match": false,
+					"packageHash": "0d89406e78ddb6cc714abaaf29c10c31172c2b4dce48f1aff14d221af4fdb468",
+					"size": 2535,
+					"sourceHash": "f800cddf25f8fbc406b73f12f71f67e31259abda2af6fdca3e7246ccb1a91a15",
+					"status": "content"
+				},
+				"asset/templates/cjs_test.hbs": {
+					"diff": "--- published/asset/templates/cjs_test.hbs\n+++ rebuilt/asset/templates/cjs_test.hbs\n@@ -5,7 +5,7 @@\n 'use strict'\n \n const {{varName}} = require('{{{relative}}}')\n-const { ok, strictEqual: equal, deepStrictEqual: deepEqual } = require('assert')\n+const { ok, equal } = require('assert')\n \n describe('{{spinalcase name}}', () => {\n   before(() => {\n",
+					"match": false,
+					"packageHash": "72898ac782bbc05aee2932300c63ccfa550c5e605c4990a9a5e7fa43bbccf363",
+					"size": 352,
+					"sourceHash": "8bfc1de95f6658243e7d000e1d368cce695b58d812acb6f2a2996508079faf66",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -30,24 +30,24 @@\n     \"markdown-toc\": \"^1.2.0\",\n     \"objnest\": \"^5.0.3\",\n     \"reserved\": \"^0.1.2\",\n-    \"selfsigned\": \"^1.10.4\",\n-    \"stringcase\": \"^4.3.0\"\n+    \"selfsigned\": \"^1.10.3\",\n+    \"stringcase\": \"^4.2.0\"\n   },\n   \"devDependencies\": {\n     \"amocha\": \"^5.0.0\",\n     \"ape-formatting\": \"^1.0.2\",\n-    \"ape-releasing\": \"^5.0.0\",\n+    \"ape-releasing\": \"^4.0.4\",\n     \"ape-tasking\": \"^4.0.9\",\n     \"ape-tmpl\": \"^6.0.11\",\n     \"ape-updating\": \"^5.0.1\",\n     \"coz\": \"^7.0.2\",\n     \"injectmock\": \"^2.0.0\",\n-    \"react\": \"^16.6.1\",\n-    \"react-dom\": \"^16.6.1\",\n+    \"react\": \"^16.5.2\",\n+    \"react-dom\": \"^16.5.2\",\n     \"the-script-test\": \"^2.1.6\"\n   },\n   \"engines\": {\n     \"node\": \">=8\",\n     \"npm\": \">=5\"\n   }\n-}\n+}\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "77cbb391859cce18bad18e4c50db00d08e07ed51595722642146be784f7a160f",
+					"size": 1280,
+					"sourceHash": "4d68bd972c927113e1d3c6ff9942549451c13b1c7109a8dd0896d20f229dd352",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 3,
+				"matchingFiles": 114,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.9743589743589743,
+				"totalFiles": 117
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "abind",
+				"version": "1.0.3"
+			},
+			{
+				"name": "aglob",
+				"version": "3.0.1"
+			},
+			{
+				"name": "ansi-red",
+				"version": "0.1.1"
+			},
+			{
+				"name": "ansi-wrap",
+				"version": "0.1.0"
+			},
+			{
+				"name": "argparse",
+				"version": "1.0.9"
+			},
+			{
+				"name": "argx",
+				"version": "3.0.2"
+			},
+			{
+				"name": "asobj",
+				"version": "3.0.0"
+			},
+			{
+				"name": "autolinker",
+				"version": "0.15.3"
+			},
+			{
+				"name": "babel-runtime",
+				"version": "6.26.0"
+			},
+			{
+				"name": "balanced-match",
+				"version": "1.0.0"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "1.1.8"
+			},
+			{
+				"name": "coffee-script",
+				"version": "1.12.7"
+			},
+			{
+				"name": "concat-map",
+				"version": "0.0.1"
+			},
+			{
+				"name": "concat-stream",
+				"version": "1.6.0"
+			},
+			{
+				"name": "core-js",
+				"version": "2.5.0"
+			},
+			{
+				"name": "core-util-is",
+				"version": "1.0.2"
+			},
+			{
+				"name": "deep-equal",
+				"version": "1.0.1"
+			},
+			{
+				"name": "diacritics-map",
+				"version": "0.1.0"
+			},
+			{
+				"name": "evaljson",
+				"version": "6.0.2"
+			},
+			{
+				"name": "expand-range",
+				"version": "1.8.2"
+			},
+			{
+				"name": "extend",
+				"version": "3.0.2"
+			},
+			{
+				"name": "extend-shallow",
+				"version": "2.0.1"
+			},
+			{
+				"name": "fill-range",
+				"version": "2.2.3"
+			},
+			{
+				"name": "for-in",
+				"version": "1.0.2"
+			},
+			{
+				"name": "fs.realpath",
+				"version": "1.0.0"
+			},
+			{
+				"name": "glob",
+				"version": "7.1.2"
+			},
+			{
+				"name": "gray-matter",
+				"version": "2.1.1"
+			},
+			{
+				"name": "iftype",
+				"version": "3.0.2"
+			},
+			{
+				"name": "inflight",
+				"version": "1.0.6"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.3"
+			},
+			{
+				"name": "is-buffer",
+				"version": "1.1.5"
+			},
+			{
+				"name": "is-extendable",
+				"version": "0.1.1"
+			},
+			{
+				"name": "is-number",
+				"version": "2.1.0"
+			},
+			{
+				"name": "is-plain-object",
+				"version": "2.0.4"
+			},
+			{
+				"name": "isobject",
+				"version": "3.0.1"
+			},
+			{
+				"name": "isarray",
+				"version": "1.0.0"
+			},
+			{
+				"name": "isobject",
+				"version": "2.1.0"
+			},
+			{
+				"name": "js-yaml",
+				"version": "3.10.0"
+			},
+			{
+				"name": "esprima",
+				"version": "4.0.0"
+			},
+			{
+				"name": "kind-of",
+				"version": "3.2.2"
+			},
+			{
+				"name": "list-item",
+				"version": "1.1.1"
+			},
+			{
+				"name": "markdown-link",
+				"version": "0.1.1"
+			},
+			{
+				"name": "markdown-toc",
+				"version": "1.2.0"
+			},
+			{
+				"name": "lazy-cache",
+				"version": "2.0.2"
+			},
+			{
+				"name": "minimist",
+				"version": "1.2.0"
+			},
+			{
+				"name": "minimatch",
+				"version": "3.0.4"
+			},
+			{
+				"name": "mixin-deep",
+				"version": "1.3.0"
+			},
+			{
+				"name": "is-extendable",
+				"version": "1.0.1"
+			},
+			{
+				"name": "node-forge",
+				"version": "0.7.5"
+			},
+			{
+				"name": "object.pick",
+				"version": "1.3.0"
+			},
+			{
+				"name": "objnest",
+				"version": "5.0.3"
+			},
+			{
+				"name": "once",
+				"version": "1.4.0"
+			},
+			{
+				"name": "path-is-absolute",
+				"version": "1.0.1"
+			},
+			{
+				"name": "process-nextick-args",
+				"version": "1.0.7"
+			},
+			{
+				"name": "randomatic",
+				"version": "1.1.7"
+			},
+			{
+				"name": "is-number",
+				"version": "3.0.0"
+			},
+			{
+				"name": "kind-of",
+				"version": "4.0.0"
+			},
+			{
+				"name": "readable-stream",
+				"version": "2.3.3"
+			},
+			{
+				"name": "regenerator-runtime",
+				"version": "0.11.0"
+			},
+			{
+				"name": "remarkable",
+				"version": "1.7.1"
+			},
+			{
+				"name": "argparse",
+				"version": "0.1.16"
+			},
+			{
+				"name": "repeat-element",
+				"version": "1.1.2"
+			},
+			{
+				"name": "repeat-string",
+				"version": "1.6.1"
+			},
+			{
+				"name": "reserved",
+				"version": "0.1.2"
+			},
+			{
+				"name": "safe-buffer",
+				"version": "5.1.1"
+			},
+			{
+				"name": "selfsigned",
+				"version": "1.10.3"
+			},
+			{
+				"name": "set-getter",
+				"version": "0.1.0"
+			},
+			{
+				"name": "sprintf-js",
+				"version": "1.0.3"
+			},
+			{
+				"name": "string_decoder",
+				"version": "1.0.3"
+			},
+			{
+				"name": "stringcase",
+				"version": "4.2.0"
+			},
+			{
+				"name": "strip-color",
+				"version": "0.1.0"
+			},
+			{
+				"name": "to-object-path",
+				"version": "0.3.0"
+			},
+			{
+				"name": "toml",
+				"version": "2.3.3"
+			},
+			{
+				"name": "typedarray",
+				"version": "0.0.6"
+			},
+			{
+				"name": "underscore",
+				"version": "1.7.0"
+			},
+			{
+				"name": "underscore.string",
+				"version": "2.4.0"
+			},
+			{
+				"name": "util-deprecate",
+				"version": "1.0.2"
+			},
+			{
+				"name": "wrappy",
+				"version": "1.0.2"
+			}
+		]
+	}
+]

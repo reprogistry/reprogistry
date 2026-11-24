@@ -1,0 +1,396 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T15:49:21.664Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:6.5.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "the-templates@6.0.9",
+			"name": "the-templates",
+			"version": "6.0.9",
+			"location": "https://registry.npmjs.org/the-templates/-/the-templates-6.0.9.tgz",
+			"integrity": "sha512-BOizYqJwC7Dw6ORqDHUJT/Rt8bc/rqbdb8n/rQT3ZONzOmJ5hGjpIWUuqY3fniMQP7lf2EfoSbDYb9TXqNjm1w==",
+			"publishedAt": "2019-02-28T03:15:42.824Z",
+			"publishedWith": {
+				"node": "11.8.0",
+				"npm": "6.8.0"
+			},
+			"dependencies": {
+				"aglob": "^3.0.1",
+				"evaljson": "^6.0.4",
+				"markdown-toc": "^1.2.0",
+				"objnest": "^5.0.5",
+				"reserved": "^0.1.2",
+				"selfsigned": "^1.10.4",
+				"stringcase": "^4.3.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/the-labo/the-templates.git",
+			"spec": "github:the-labo/the-templates#280baf242da45867bedc2d42eb2e855783b410ce"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -108,8 +108,8 @@\n Links\n ------\n \n-+ [THE Labo][the_labo_url]\n++ [THE Labo][t_h_e_labo_url]\n \n-[the_labo_url]: https://github.com/the-labo\n+[t_h_e_labo_url]: https://github.com/the-labo\n \n <!-- Links End -->\n",
+					"match": false,
+					"packageHash": "43cae1671434a14f0edbe17873c4b0c00860a061edbd35c58c80c7392bcaa884",
+					"size": 2706,
+					"sourceHash": "d240be74d6e2c7b03d93803ded3070361786235f0b6899a8ccb281a965cf50b4",
+					"status": "content"
+				},
+				"asset/templates/README.hbs": {
+					"diff": "--- published/asset/templates/README.hbs\n+++ rebuilt/asset/templates/README.hbs\n@@ -71,13 +71,13 @@\n <!-- Sections Start -->\n \n \n-{{#if license}}\n+{{#if pkg.license}}\n <!-- LICENSE Start -->\n <a name=\"license\"></a>\n \n License\n -------\n-This software is released under the [{{license}} License](https://github.com/{{repo}}/blob/master/LICENSE).\n+This software is released under the [{{pkg.license}} License](https://github.com/{{repo}}/blob/master/LICENSE).\n \n <!-- LICENSE End -->\n {{/if}}\n",
+					"match": false,
+					"packageHash": "13155f7617a05b0f87b14b774f54a4b5fe8a9ba1b3fe75a38b783017cc1fa575",
+					"size": 2273,
+					"sourceHash": "3a00b53b444c6f735128ecb480839de7b6924485fdd754d79fdf317ede9b1793",
+					"status": "content"
+				},
+				"lib/Readme.js": {
+					"diff": "--- published/lib/Readme.js\n+++ rebuilt/lib/Readme.js\n@@ -26,8 +26,8 @@\n const assert = require('assert')\n \n /** @lends readmeBud */\n-function readmeBud(config = {}) {\n-  const { pkg, sections, repo } = config\n+function readmeBud (config = {}) {\n+  let {pkg, sections, repo} = config\n   assert.ok(pkg, 'config.pkg is required.')\n   assert.ok(sections, 'config.sections is required.')\n   assert.ok(repo, 'config.repo is required.')\n@@ -40,7 +40,6 @@\n     data: {\n       pkg,\n       repo,\n-      license: pkg.license === 'UNLICENSED' ? null : pkg.license,\n       banner: config.banner,\n       bannerSize: config.bannerSize || 148,\n       sections: aglob.sync(sections).map((filename) => {\n",
+					"match": false,
+					"packageHash": "4fadd928b60bcb5975f839ad4b08628fbb107f66da15d0b01d13dab516b00073",
+					"size": 2151,
+					"sourceHash": "d11767621858c7a53c67f82b12fd2cdfd538a7104543d30562293287f5f33d6d",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -26,28 +26,28 @@\n   \"homepage\": \"https://github.com/the-labo/the-templates#readme\",\n   \"dependencies\": {\n     \"aglob\": \"^3.0.1\",\n-    \"evaljson\": \"^6.0.4\",\n+    \"evaljson\": \"^6.0.3\",\n     \"markdown-toc\": \"^1.2.0\",\n-    \"objnest\": \"^5.0.5\",\n+    \"objnest\": \"^5.0.4\",\n     \"reserved\": \"^0.1.2\",\n     \"selfsigned\": \"^1.10.4\",\n     \"stringcase\": \"^4.3.0\"\n   },\n   \"devDependencies\": {\n-    \"amocha\": \"^5.0.1\",\n-    \"ape-formatting\": \"^2.0.1\",\n-    \"ape-releasing\": \"^5.0.7\",\n-    \"ape-tasking\": \"^4.0.12\",\n-    \"ape-tmpl\": \"^6.0.14\",\n-    \"ape-updating\": \"^5.0.3\",\n-    \"coz\": \"^7.0.16\",\n+    \"amocha\": \"^5.0.0\",\n+    \"ape-formatting\": \"^1.0.2\",\n+    \"ape-releasing\": \"^5.0.0\",\n+    \"ape-tasking\": \"^4.0.9\",\n+    \"ape-tmpl\": \"^6.0.12\",\n+    \"ape-updating\": \"^5.0.1\",\n+    \"coz\": \"^7.0.7\",\n     \"injectmock\": \"^2.0.0\",\n-    \"react\": \"^16.8.3\",\n-    \"react-dom\": \"^16.8.3\",\n+    \"react\": \"^16.8.2\",\n+    \"react-dom\": \"^16.8.2\",\n     \"the-script-test\": \"^2.1.6\"\n   },\n   \"engines\": {\n     \"node\": \">=8\",\n     \"npm\": \">=5\"\n   }\n-}\n+}\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "d02542361cf5c8dece3f98cf768c414d0045bc1e3909a5aeb872dbcbb26d446d",
+					"size": 1282,
+					"sourceHash": "51447e84ae5061a92b6d529a5e09e7058ad8d618b058bc5a518406caab252c7b",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 4,
+				"matchingFiles": 122,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.9682539682539683,
+				"totalFiles": 126
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "abind",
+				"version": "1.0.3"
+			},
+			{
+				"name": "aglob",
+				"version": "3.0.1"
+			},
+			{
+				"name": "ansi-red",
+				"version": "0.1.1"
+			},
+			{
+				"name": "ansi-wrap",
+				"version": "0.1.0"
+			},
+			{
+				"name": "argparse",
+				"version": "1.0.9"
+			},
+			{
+				"name": "argx",
+				"version": "3.0.2"
+			},
+			{
+				"name": "asobj",
+				"version": "3.0.0"
+			},
+			{
+				"name": "autolinker",
+				"version": "0.15.3"
+			},
+			{
+				"name": "babel-runtime",
+				"version": "6.26.0"
+			},
+			{
+				"name": "balanced-match",
+				"version": "1.0.0"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "1.1.8"
+			},
+			{
+				"name": "coffee-script",
+				"version": "1.12.7"
+			},
+			{
+				"name": "concat-map",
+				"version": "0.0.1"
+			},
+			{
+				"name": "concat-stream",
+				"version": "1.6.0"
+			},
+			{
+				"name": "core-js",
+				"version": "2.5.0"
+			},
+			{
+				"name": "core-util-is",
+				"version": "1.0.2"
+			},
+			{
+				"name": "deep-equal",
+				"version": "1.0.1"
+			},
+			{
+				"name": "diacritics-map",
+				"version": "0.1.0"
+			},
+			{
+				"name": "evaljson",
+				"version": "6.0.3"
+			},
+			{
+				"name": "expand-range",
+				"version": "1.8.2"
+			},
+			{
+				"name": "extend",
+				"version": "3.0.2"
+			},
+			{
+				"name": "extend-shallow",
+				"version": "2.0.1"
+			},
+			{
+				"name": "fill-range",
+				"version": "2.2.3"
+			},
+			{
+				"name": "for-in",
+				"version": "1.0.2"
+			},
+			{
+				"name": "fs.realpath",
+				"version": "1.0.0"
+			},
+			{
+				"name": "glob",
+				"version": "7.1.2"
+			},
+			{
+				"name": "gray-matter",
+				"version": "2.1.1"
+			},
+			{
+				"name": "iftype",
+				"version": "3.0.2"
+			},
+			{
+				"name": "inflight",
+				"version": "1.0.6"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.3"
+			},
+			{
+				"name": "is-buffer",
+				"version": "1.1.5"
+			},
+			{
+				"name": "is-extendable",
+				"version": "0.1.1"
+			},
+			{
+				"name": "is-number",
+				"version": "2.1.0"
+			},
+			{
+				"name": "is-plain-object",
+				"version": "2.0.4"
+			},
+			{
+				"name": "isobject",
+				"version": "3.0.1"
+			},
+			{
+				"name": "isarray",
+				"version": "1.0.0"
+			},
+			{
+				"name": "isobject",
+				"version": "2.1.0"
+			},
+			{
+				"name": "js-yaml",
+				"version": "3.10.0"
+			},
+			{
+				"name": "esprima",
+				"version": "4.0.0"
+			},
+			{
+				"name": "kind-of",
+				"version": "3.2.2"
+			},
+			{
+				"name": "list-item",
+				"version": "1.1.1"
+			},
+			{
+				"name": "markdown-link",
+				"version": "0.1.1"
+			},
+			{
+				"name": "markdown-toc",
+				"version": "1.2.0"
+			},
+			{
+				"name": "lazy-cache",
+				"version": "2.0.2"
+			},
+			{
+				"name": "minimist",
+				"version": "1.2.0"
+			},
+			{
+				"name": "minimatch",
+				"version": "3.0.4"
+			},
+			{
+				"name": "mixin-deep",
+				"version": "1.3.0"
+			},
+			{
+				"name": "is-extendable",
+				"version": "1.0.1"
+			},
+			{
+				"name": "node-forge",
+				"version": "0.7.5"
+			},
+			{
+				"name": "object.pick",
+				"version": "1.3.0"
+			},
+			{
+				"name": "objnest",
+				"version": "5.0.4"
+			},
+			{
+				"name": "once",
+				"version": "1.4.0"
+			},
+			{
+				"name": "path-is-absolute",
+				"version": "1.0.1"
+			},
+			{
+				"name": "process-nextick-args",
+				"version": "1.0.7"
+			},
+			{
+				"name": "randomatic",
+				"version": "1.1.7"
+			},
+			{
+				"name": "is-number",
+				"version": "3.0.0"
+			},
+			{
+				"name": "kind-of",
+				"version": "4.0.0"
+			},
+			{
+				"name": "readable-stream",
+				"version": "2.3.3"
+			},
+			{
+				"name": "regenerator-runtime",
+				"version": "0.11.0"
+			},
+			{
+				"name": "remarkable",
+				"version": "1.7.1"
+			},
+			{
+				"name": "argparse",
+				"version": "0.1.16"
+			},
+			{
+				"name": "repeat-element",
+				"version": "1.1.2"
+			},
+			{
+				"name": "repeat-string",
+				"version": "1.6.1"
+			},
+			{
+				"name": "reserved",
+				"version": "0.1.2"
+			},
+			{
+				"name": "safe-buffer",
+				"version": "5.1.1"
+			},
+			{
+				"name": "selfsigned",
+				"version": "1.10.4"
+			},
+			{
+				"name": "set-getter",
+				"version": "0.1.0"
+			},
+			{
+				"name": "sprintf-js",
+				"version": "1.0.3"
+			},
+			{
+				"name": "string_decoder",
+				"version": "1.0.3"
+			},
+			{
+				"name": "stringcase",
+				"version": "4.3.0"
+			},
+			{
+				"name": "strip-color",
+				"version": "0.1.0"
+			},
+			{
+				"name": "to-object-path",
+				"version": "0.3.0"
+			},
+			{
+				"name": "toml",
+				"version": "2.3.3"
+			},
+			{
+				"name": "typedarray",
+				"version": "0.0.6"
+			},
+			{
+				"name": "underscore",
+				"version": "1.7.0"
+			},
+			{
+				"name": "underscore.string",
+				"version": "2.4.0"
+			},
+			{
+				"name": "util-deprecate",
+				"version": "1.0.2"
+			},
+			{
+				"name": "wrappy",
+				"version": "1.0.2"
+			}
+		]
+	}
+]

@@ -1,0 +1,127 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T14:25:03.425Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:4.2.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "the-templates@1.0.12",
+			"name": "the-templates",
+			"version": "1.0.12",
+			"location": "https://registry.npmjs.org/the-templates/-/the-templates-1.0.12.tgz",
+			"integrity": "sha512-ni8XaaaVdNCkmD5TENvMd6rzmKxrEyuB4RRJ0Wj+AXmYa3aaUqT3w1V6tbqSyP+3wLPu1ML2z30trMd8opQtaA==",
+			"publishedAt": "2017-05-11T14:03:02.233Z",
+			"publishedWith": {
+				"node": "7.10.0",
+				"npm": "4.2.0"
+			},
+			"dependencies": {
+				"aglob": "^2.0.1",
+				"ape-tmpl": "^5.0.20",
+				"co": "^4.6.0",
+				"stringcase": "^3.2.1"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/the-labo/the-templates.git",
+			"spec": "github:the-labo/the-templates#f410b9244be2b5f80e557e13027f681e9e2a2508"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".npmignore": {
+					"match": false,
+					"packageHash": "6f179c6006bf3ff3f0b1b57a1a247c97edbee11a33374f53849829aed6261ffe",
+					"size": 605,
+					"status": "missing-in-source"
+				},
+				"lib/test.js": {
+					"diff": "--- published/lib/test.js\n+++ rebuilt/lib/test.js\n@@ -49,27 +49,4 @@\n     })\n }\n \n-test.dir = function testDir (config) {\n-  let {\n-    src,\n-    dest = process.cwd(),\n-    node = false,\n-    extname = '.js'\n-  } = config\n-  const TMPL_PATH = node ? _tmpl('node_test.hbs') : _tmpl('test.hbs')\n-  ok(!!src, 'config.src is required.')\n-  let suffix = 'Test'\n-  return [].concat(src).map((src) => ({\n-    force: false,\n-    mode: '644',\n-    mkdirp: true,\n-    tmpl: TMPL_PATH,\n-    path: path.resolve(dest, path.basename(src) + suffix) + extname,\n-    data: {\n-      name: path.basename(src),\n-      relative: path.relative(dest, src)\n-    }\n-  }))\n-}\n-\n module.exports = test\n",
+					"match": false,
+					"packageHash": "56e19ca16cfdff455503fec9c7ac3730026224992728299fb1a2427c0f520b8b",
+					"size": 1816,
+					"sourceHash": "ee2335a430f5b2e184e61d6ff9cf7dbc85c7558bf143966d661404312e29d5fd",
+					"status": "content"
+				},
+				"test/test_test.js": {
+					"diff": "--- published/test/test_test.js\n+++ rebuilt/test/test_test.js\n@@ -29,17 +29,6 @@\n       bud\n     )\n   }))\n-\n-  it('TestDir', () => co(function * () {\n-    let bud = test.dir({\n-      src: `${__dirname}/../misc/mocks`,\n-      dest: `${__dirname}/../tmp/foo/test/`,\n-      node: true\n-    })\n-    yield coz.render(\n-      bud\n-    )\n-  }))\n })\n \n /* global describe, before, after, it */\n",
+					"match": false,
+					"packageHash": "2aff7c4b02c47b66b9a7d2e4ed621d6ab1337ecedd500bb24c2f39aa4f6efdbc",
+					"size": 792,
+					"sourceHash": "1e2e51e906371b1de01cbd9a25548d170e36768607b226dbf00db8c2d058dc92",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 36,
+				"missingInPackage": 0,
+				"missingInSource": 1,
+				"score": 0.9230769230769231,
+				"totalFiles": 39
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "aglob",
+				"version": "2.0.1"
+			},
+			{
+				"name": "balanced-match",
+				"version": "1.0.2"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "1.1.22"
+			},
+			{
+				"name": "co",
+				"version": "4.6.0"
+			},
+			{
+				"name": "concat-map",
+				"version": "0.0.1"
+			},
+			{
+				"name": "fs.realpath",
+				"version": "1.0.0"
+			},
+			{
+				"name": "glob",
+				"version": "7.2.3"
+			},
+			{
+				"name": "inflight",
+				"version": "1.0.6"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.4"
+			},
+			{
+				"name": "minimatch",
+				"version": "3.1.5"
+			},
+			{
+				"name": "once",
+				"version": "1.4.0"
+			},
+			{
+				"name": "path-is-absolute",
+				"version": "1.0.1"
+			},
+			{
+				"name": "stringcase",
+				"version": "3.2.1"
+			},
+			{
+				"name": "wrappy",
+				"version": "1.0.2"
+			}
+		]
+	}
+]

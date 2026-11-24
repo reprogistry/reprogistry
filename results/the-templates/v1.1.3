@@ -1,0 +1,136 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T14:21:58.322Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:4.2.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "the-templates@1.1.3",
+			"name": "the-templates",
+			"version": "1.1.3",
+			"location": "https://registry.npmjs.org/the-templates/-/the-templates-1.1.3.tgz",
+			"integrity": "sha512-OXyKISQEE5cGAG/cbSzC/YdDspYr/zORom3SLC0mh+PLpQ9QO0Y8ujyXUcwIQFu2gAvRMr66Wsg/C9Syq+q8/Q==",
+			"publishedAt": "2017-05-27T11:33:13.598Z",
+			"publishedWith": {
+				"node": "7.10.0",
+				"npm": "4.2.0"
+			},
+			"dependencies": {
+				"aglob": "^2.0.1",
+				"ape-tmpl": "^5.0.20",
+				"co": "^4.6.0",
+				"selfsigned": "^1.9.1",
+				"stringcase": "^3.2.1"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/the-labo/the-templates.git",
+			"spec": "github:the-labo/the-templates#92f1483e588da0fd4b46bdaec32ec543ece9a444"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".npmignore": {
+					"match": false,
+					"packageHash": "6f179c6006bf3ff3f0b1b57a1a247c97edbee11a33374f53849829aed6261ffe",
+					"size": 605,
+					"status": "missing-in-source"
+				},
+				"lib/.index.js.bud": {
+					"diff": "--- published/lib/.index.js.bud\n+++ rebuilt/lib/.index.js.bud\n@@ -4,14 +4,13 @@\n \n 'use strict'\n \n-const dir = require('./dir')\n+const { indexJsBud } = require('ape-tmpl')\n const { description, name } = require('../package.json')\n \n-module.exports = dir({\n-  name,\n-  description: description,\n-  dirname: __dirname,\n-  node: true\n+module.exports = indexJsBud({\n+  desc: description,\n+  module: name,\n+  dirname: __dirname\n })\n \n if (!module.parent) {\n",
+					"match": false,
+					"packageHash": "4b319b7b32badf389ccaae3cf6b0e31dc284f87ad1051ff900f1c2694c1e8460",
+					"size": 293,
+					"sourceHash": "f4f4b3a1ac8b9829311c2ecff903fcbf69caf0b7b9805b0594eb09013c7df9e5",
+					"status": "content"
+				},
+				"lib/index.js": {
+					"diff": "--- published/lib/index.js\n+++ rebuilt/lib/index.js\n@@ -2,26 +2,19 @@\n  * Templates for the-projects\n  * @module the-templates\n  */\n+\n 'use strict'\n \n-const api = require('./api')\n-const dir = require('./dir')\n-const lib = require('./lib')\n-const markdowns = require('./markdowns')\n-const nginx = require('./nginx')\n-const readme = require('./readme')\n-const selfSigned = require('./selfSigned')\n-const templates = require('./templates')\n-const test = require('./test')\n+let d = (module) => module && module.default || module\n \n module.exports = {\n-  api,\n-  dir,\n-  lib,\n-  markdowns,\n-  nginx,\n-  readme,\n-  selfSigned,\n-  templates,\n-  test\n+  get api () { return d(require('./api')) },\n+  get dir () { return d(require('./dir')) },\n+  get lib () { return d(require('./lib')) },\n+  get markdowns () { return d(require('./markdowns')) },\n+  get nginx () { return d(require('./nginx')) },\n+  get readme () { return d(require('./readme')) },\n+  get selfSigned () { return d(require('./self_signed')) },\n+  get templates () { return d(require('./templates')) },\n+  get test () { return d(require('./test')) }\n }\n",
+					"match": false,
+					"packageHash": "80de805497d893edf56003aff175c6531c0fe237e617cc934a1e61e97da1869f",
+					"size": 497,
+					"sourceHash": "2d5686f35e5692dc3e84e024edddcd6897afb8fae525c98da760f35a03ddde8e",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 49,
+				"missingInPackage": 0,
+				"missingInSource": 1,
+				"score": 0.9423076923076923,
+				"totalFiles": 52
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "aglob",
+				"version": "2.0.1"
+			},
+			{
+				"name": "balanced-match",
+				"version": "1.0.2"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "1.1.22"
+			},
+			{
+				"name": "co",
+				"version": "4.6.0"
+			},
+			{
+				"name": "concat-map",
+				"version": "0.0.1"
+			},
+			{
+				"name": "fs.realpath",
+				"version": "1.0.0"
+			},
+			{
+				"name": "glob",
+				"version": "7.2.3"
+			},
+			{
+				"name": "inflight",
+				"version": "1.0.6"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.4"
+			},
+			{
+				"name": "minimatch",
+				"version": "3.1.5"
+			},
+			{
+				"name": "node-forge",
+				"version": "0.10.0"
+			},
+			{
+				"name": "once",
+				"version": "1.4.0"
+			},
+			{
+				"name": "path-is-absolute",
+				"version": "1.0.1"
+			},
+			{
+				"name": "selfsigned",
+				"version": "1.10.14"
+			},
+			{
+				"name": "stringcase",
+				"version": "3.2.1"
+			},
+			{
+				"name": "wrappy",
+				"version": "1.0.2"
+			}
+		]
+	}
+]

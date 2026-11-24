@@ -1,0 +1,388 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T15:45:39.726Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:6.4.1",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "the-templates@5.0.3",
+			"name": "the-templates",
+			"version": "5.0.3",
+			"location": "https://registry.npmjs.org/the-templates/-/the-templates-5.0.3.tgz",
+			"integrity": "sha512-yKcYaTK2bH5G7W+NQWxh3nCp7ZjN1QSYwFnR6kAS8O8qwR2wFokYEqWt90fKQGRiQMPG7zXCUCu1HCA2cAInAA==",
+			"publishedAt": "2019-01-06T04:09:35.766Z",
+			"publishedWith": {
+				"node": "11.4.0",
+				"npm": "6.4.1"
+			},
+			"dependencies": {
+				"aglob": "^3.0.1",
+				"evaljson": "^6.0.3",
+				"markdown-toc": "^1.2.0",
+				"objnest": "^5.0.4",
+				"reserved": "^0.1.2",
+				"selfsigned": "^1.10.4",
+				"stringcase": "^4.3.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/the-labo/the-templates.git",
+			"spec": "github:the-labo/the-templates#03522a1a4f9c1621de0966eb9c88c3f331fa2b7d"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"asset/templates/Dialogs.hbs": {
+					"diff": "--- published/asset/templates/Dialogs.hbs\n+++ rebuilt/asset/templates/Dialogs.hbs\n@@ -5,6 +5,7 @@\n 'use strict'\n \n import React from 'react'\n+import { stateful } from 'the-component-mixins'\n import {\n {{#each components}}  {{this}},\n {{/each}}\n",
+					"match": false,
+					"packageHash": "1d7c5e6fbc6f799f9806dc7a6fa1792a34648de242dc69c7d8f4b16d6c9dcb2a",
+					"size": 352,
+					"sourceHash": "9a42880db48419792adbd1f8afc9829920409be7f188e85e1924825de6ef9044",
+					"status": "content"
+				},
+				"asset/templates/View.hbs": {
+					"diff": "--- published/asset/templates/View.hbs\n+++ rebuilt/asset/templates/View.hbs\n@@ -4,37 +4,32 @@\n 'use strict'\n \n import React from 'react'\n-import { TheMeta, TheView } from 'the-components'\n+import { TheView } from 'the-components'\n+import { cycled, localized, stateful, titled } from 'the-component-mixins'\n import styles from './{{pascalcase name}}.pcss'\n-import context from '../context'\n \n-class {{pascalcase name}} extends React.Component {\n-  #stateful = context.stateful(\n-    (state) => ({\n-    }),\n-    ({}) => ({\n-    })\n-  )\n+@stateful(\n+  (state) => ({\n \n+  }),\n+  ({}) => ({\n+  }),\n+)\n+@cycled\n+@localized\n+@titled(({l}) => null)\n+class {{pascalcase name}} extends React.Component {\n   render () {\n-    return this.#stateful(\n-      ({\n-        l,\n-      }) => {\n-        const title = null\n-        return (\n-          <TheMeta title={title}>\n-            <TheView className={styles.self}>\n-              <TheView.Header icon={null}\n-                              text={title}\n-              />\n-              <TheView.Body>\n-                This is {{pascalcase name}}!\n-              </TheView.Body>\n-            </TheView>\n-          </TheMeta>\n-        )\n-      }\n+    const {l, title} = this.props\n+    return (\n+      <TheView className={styles.self}>\n+        <TheView.Header icon={null}\n+                        text={title}\n+        />\n+        <TheView.Body>\n+          This is {{pascalcase name}}!\n+        </TheView.Body>\n+      </TheView>\n     )\n   }\n }\n",
+					"match": false,
+					"packageHash": "521137fbd86295dfc25802f47c3ab275d4e7c609e72f5c8d425f5a80e84ed121",
+					"size": 865,
+					"sourceHash": "94de72f2d44411e7a97c8d8e0d573a10ba296100c6dd15c776548238d870bff7",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -26,9 +26,9 @@\n   \"homepage\": \"https://github.com/the-labo/the-templates#readme\",\n   \"dependencies\": {\n     \"aglob\": \"^3.0.1\",\n-    \"evaljson\": \"^6.0.3\",\n+    \"evaljson\": \"^6.0.2\",\n     \"markdown-toc\": \"^1.2.0\",\n-    \"objnest\": \"^5.0.4\",\n+    \"objnest\": \"^5.0.3\",\n     \"reserved\": \"^0.1.2\",\n     \"selfsigned\": \"^1.10.4\",\n     \"stringcase\": \"^4.3.0\"\n@@ -42,12 +42,12 @@\n     \"ape-updating\": \"^5.0.1\",\n     \"coz\": \"^7.0.2\",\n     \"injectmock\": \"^2.0.0\",\n-    \"react\": \"^16.7.0\",\n-    \"react-dom\": \"^16.7.0\",\n+    \"react\": \"^16.6.1\",\n+    \"react-dom\": \"^16.6.1\",\n     \"the-script-test\": \"^2.1.6\"\n   },\n   \"engines\": {\n     \"node\": \">=8\",\n     \"npm\": \">=5\"\n   }\n-}\n+}\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "f4aceed860e21999519ed89dd00283bfc91fa9db497919c693b855bbd4f47240",
+					"size": 1280,
+					"sourceHash": "0a6cf5572d775f84d868f30bf745cc2cacd8790ccb5667218b9d88b1f83ac151",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 3,
+				"matchingFiles": 114,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.9743589743589743,
+				"totalFiles": 117
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "abind",
+				"version": "1.0.3"
+			},
+			{
+				"name": "aglob",
+				"version": "3.0.1"
+			},
+			{
+				"name": "ansi-red",
+				"version": "0.1.1"
+			},
+			{
+				"name": "ansi-wrap",
+				"version": "0.1.0"
+			},
+			{
+				"name": "argparse",
+				"version": "1.0.9"
+			},
+			{
+				"name": "argx",
+				"version": "3.0.2"
+			},
+			{
+				"name": "asobj",
+				"version": "3.0.0"
+			},
+			{
+				"name": "autolinker",
+				"version": "0.15.3"
+			},
+			{
+				"name": "babel-runtime",
+				"version": "6.26.0"
+			},
+			{
+				"name": "balanced-match",
+				"version": "1.0.0"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "1.1.8"
+			},
+			{
+				"name": "coffee-script",
+				"version": "1.12.7"
+			},
+			{
+				"name": "concat-map",
+				"version": "0.0.1"
+			},
+			{
+				"name": "concat-stream",
+				"version": "1.6.0"
+			},
+			{
+				"name": "core-js",
+				"version": "2.5.0"
+			},
+			{
+				"name": "core-util-is",
+				"version": "1.0.2"
+			},
+			{
+				"name": "deep-equal",
+				"version": "1.0.1"
+			},
+			{
+				"name": "diacritics-map",
+				"version": "0.1.0"
+			},
+			{
+				"name": "evaljson",
+				"version": "6.0.2"
+			},
+			{
+				"name": "expand-range",
+				"version": "1.8.2"
+			},
+			{
+				"name": "extend",
+				"version": "3.0.2"
+			},
+			{
+				"name": "extend-shallow",
+				"version": "2.0.1"
+			},
+			{
+				"name": "fill-range",
+				"version": "2.2.3"
+			},
+			{
+				"name": "for-in",
+				"version": "1.0.2"
+			},
+			{
+				"name": "fs.realpath",
+				"version": "1.0.0"
+			},
+			{
+				"name": "glob",
+				"version": "7.1.2"
+			},
+			{
+				"name": "gray-matter",
+				"version": "2.1.1"
+			},
+			{
+				"name": "iftype",
+				"version": "3.0.2"
+			},
+			{
+				"name": "inflight",
+				"version": "1.0.6"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.3"
+			},
+			{
+				"name": "is-buffer",
+				"version": "1.1.5"
+			},
+			{
+				"name": "is-extendable",
+				"version": "0.1.1"
+			},
+			{
+				"name": "is-number",
+				"version": "2.1.0"
+			},
+			{
+				"name": "is-plain-object",
+				"version": "2.0.4"
+			},
+			{
+				"name": "isobject",
+				"version": "3.0.1"
+			},
+			{
+				"name": "isarray",
+				"version": "1.0.0"
+			},
+			{
+				"name": "isobject",
+				"version": "2.1.0"
+			},
+			{
+				"name": "js-yaml",
+				"version": "3.10.0"
+			},
+			{
+				"name": "esprima",
+				"version": "4.0.0"
+			},
+			{
+				"name": "kind-of",
+				"version": "3.2.2"
+			},
+			{
+				"name": "list-item",
+				"version": "1.1.1"
+			},
+			{
+				"name": "markdown-link",
+				"version": "0.1.1"
+			},
+			{
+				"name": "markdown-toc",
+				"version": "1.2.0"
+			},
+			{
+				"name": "lazy-cache",
+				"version": "2.0.2"
+			},
+			{
+				"name": "minimist",
+				"version": "1.2.0"
+			},
+			{
+				"name": "minimatch",
+				"version": "3.0.4"
+			},
+			{
+				"name": "mixin-deep",
+				"version": "1.3.0"
+			},
+			{
+				"name": "is-extendable",
+				"version": "1.0.1"
+			},
+			{
+				"name": "node-forge",
+				"version": "0.7.5"
+			},
+			{
+				"name": "object.pick",
+				"version": "1.3.0"
+			},
+			{
+				"name": "objnest",
+				"version": "5.0.3"
+			},
+			{
+				"name": "once",
+				"version": "1.4.0"
+			},
+			{
+				"name": "path-is-absolute",
+				"version": "1.0.1"
+			},
+			{
+				"name": "process-nextick-args",
+				"version": "1.0.7"
+			},
+			{
+				"name": "randomatic",
+				"version": "1.1.7"
+			},
+			{
+				"name": "is-number",
+				"version": "3.0.0"
+			},
+			{
+				"name": "kind-of",
+				"version": "4.0.0"
+			},
+			{
+				"name": "readable-stream",
+				"version": "2.3.3"
+			},
+			{
+				"name": "regenerator-runtime",
+				"version": "0.11.0"
+			},
+			{
+				"name": "remarkable",
+				"version": "1.7.1"
+			},
+			{
+				"name": "argparse",
+				"version": "0.1.16"
+			},
+			{
+				"name": "repeat-element",
+				"version": "1.1.2"
+			},
+			{
+				"name": "repeat-string",
+				"version": "1.6.1"
+			},
+			{
+				"name": "reserved",
+				"version": "0.1.2"
+			},
+			{
+				"name": "safe-buffer",
+				"version": "5.1.1"
+			},
+			{
+				"name": "selfsigned",
+				"version": "1.10.4"
+			},
+			{
+				"name": "set-getter",
+				"version": "0.1.0"
+			},
+			{
+				"name": "sprintf-js",
+				"version": "1.0.3"
+			},
+			{
+				"name": "string_decoder",
+				"version": "1.0.3"
+			},
+			{
+				"name": "stringcase",
+				"version": "4.3.0"
+			},
+			{
+				"name": "strip-color",
+				"version": "0.1.0"
+			},
+			{
+				"name": "to-object-path",
+				"version": "0.3.0"
+			},
+			{
+				"name": "toml",
+				"version": "2.3.3"
+			},
+			{
+				"name": "typedarray",
+				"version": "0.0.6"
+			},
+			{
+				"name": "underscore",
+				"version": "1.7.0"
+			},
+			{
+				"name": "underscore.string",
+				"version": "2.4.0"
+			},
+			{
+				"name": "util-deprecate",
+				"version": "1.0.2"
+			},
+			{
+				"name": "wrappy",
+				"version": "1.0.2"
+			}
+		]
+	}
+]

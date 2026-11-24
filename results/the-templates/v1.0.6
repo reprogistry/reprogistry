@@ -1,0 +1,173 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T14:18:44.356Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:4.2.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "the-templates@1.0.6",
+			"name": "the-templates",
+			"version": "1.0.6",
+			"location": "https://registry.npmjs.org/the-templates/-/the-templates-1.0.6.tgz",
+			"integrity": "sha512-qJAz+diZ6tns57T+UuhGxwn20hB9ZoZbten+nokp9P590LmB/JZahQ1Z/d+hMJdLLitKlTvAP8Cv7PMt19B+tw==",
+			"publishedAt": "2017-04-29T12:59:30.594Z",
+			"publishedWith": {
+				"node": "7.9.0",
+				"npm": "4.2.0"
+			},
+			"dependencies": {
+				"aglob": "^2.0.1",
+				"ape-tmpl": "^5.0.20",
+				"co": "^4.6.0",
+				"stringcase": "^3.2.1"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/the-labo/the-templates.git",
+			"spec": "github:the-labo/the-templates#37a0375672cff4556a4c8772cbe56d852f40a77a"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".npmignore": {
+					"match": false,
+					"packageHash": "6f179c6006bf3ff3f0b1b57a1a247c97edbee11a33374f53849829aed6261ffe",
+					"size": 605,
+					"status": "missing-in-source"
+				},
+				"asset/templates/api.hbs": {
+					"match": false,
+					"packageHash": "7b53858aa701df2cb2b0288a302cac5eef0c4142818bbdb15d937bad5a76865f",
+					"size": 2330,
+					"status": "missing-in-source"
+				},
+				"asset/templates/node_test.hbs": {
+					"match": false,
+					"packageHash": "a5e266ff8ec0c081198483a3a93dcfe8efbe4ef00c2ad977efe991c72f637eb0",
+					"size": 318,
+					"status": "missing-in-source"
+				},
+				"asset/templates/test.hbs": {
+					"match": false,
+					"packageHash": "ed028922728d1b055276882364054fce46696b5f485cfa1f93a4d95085b449aa",
+					"size": 465,
+					"status": "missing-in-source"
+				},
+				"lib/api.js": {
+					"match": false,
+					"packageHash": "a81d71293a5ad570926c02bfa58491ed4cf0a6c5047e919cd6101ca88eca2252",
+					"size": 534,
+					"status": "missing-in-source"
+				},
+				"lib/index.js": {
+					"diff": "--- published/lib/index.js\n+++ rebuilt/lib/index.js\n@@ -8,8 +8,6 @@\n let d = (module) => module && module.default || module\n \n module.exports = {\n-  get api () { return d(require('./api')) },\n-  get nodeTest () { return d(require('./node_test')) },\n   get readme () { return d(require('./readme')) },\n   get test () { return d(require('./test')) }\n }\n",
+					"match": false,
+					"packageHash": "093c285edaf643d693f2dda44028617935faade90acc671f9ee4c1f4141e3c8d",
+					"size": 353,
+					"sourceHash": "ca18c0e045b6a83815f75e8961fccbc4b295a9fa1c94ae11ce7adcace8f2904e",
+					"status": "content"
+				},
+				"lib/node_test.js": {
+					"match": false,
+					"packageHash": "7d4eaea44f60bb7930173542aa15853d173d10e84f2d045e84be35e916b727ac",
+					"size": 1224,
+					"status": "missing-in-source"
+				},
+				"lib/test.js": {
+					"diff": "--- published/lib/test.js\n+++ rebuilt/lib/test.js\n@@ -11,14 +11,14 @@\n const path = require('path')\n const { ok } = require('assert')\n \n+const TMPL_PATH = _tmpl('test_jsx.hbs')\n+\n /** @lends test */\n function test (config) {\n   let {\n     src,\n-    dest = process.cwd(),\n-    node = false\n+    dest = process.cwd()\n   } = config\n-  const TMPL_PATH = node ? _tmpl('node_test.hbs') : _tmpl('test.hbs')\n   ok(!!src, 'config.src is required.')\n   return aglob.sync(src)\n     .filter((src) => path.basename(src) !== 'index.js')\n@@ -34,7 +34,7 @@\n     .map((src) => {\n       let extname = path.extname(src)\n       let basename = path.basename(src, extname)\n-      let suffix = node ? '_test' : 'Test'\n+      let suffix = basename.match('_') ? '_test' : 'Test'\n       return {\n         force: false,\n         mode: '644',\n",
+					"match": false,
+					"packageHash": "66852c726aa642135a18f9b35c2319738c761e436a0a546ba0c2bdc0710f2d8a",
+					"size": 1286,
+					"sourceHash": "1fd3ee1a677bf93f44cf1bc51032c77ef1cfb0457651ade8a43c5dc165568810",
+					"status": "content"
+				},
+				"test/api_test.js": {
+					"match": false,
+					"packageHash": "5148ef9f141ccbeea638ec290454a5c0084b3bcd995ca8a7ff82c639cf75d745",
+					"size": 384,
+					"status": "missing-in-source"
+				},
+				"test/node_test_test.js": {
+					"match": false,
+					"packageHash": "27952abf80bd2f188953a40b71d1df65e4a78966c66971f4d32a0a6b966bb4ba",
+					"size": 412,
+					"status": "missing-in-source"
+				},
+				"asset/templates/test_jsx.hbs": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 24,
+				"missingInPackage": 1,
+				"missingInSource": 8,
+				"score": 0.6857142857142857,
+				"totalFiles": 35
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "aglob",
+				"version": "2.0.1"
+			},
+			{
+				"name": "balanced-match",
+				"version": "1.0.2"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "1.1.22"
+			},
+			{
+				"name": "co",
+				"version": "4.6.0"
+			},
+			{
+				"name": "concat-map",
+				"version": "0.0.1"
+			},
+			{
+				"name": "fs.realpath",
+				"version": "1.0.0"
+			},
+			{
+				"name": "glob",
+				"version": "7.2.3"
+			},
+			{
+				"name": "inflight",
+				"version": "1.0.6"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.4"
+			},
+			{
+				"name": "minimatch",
+				"version": "3.1.5"
+			},
+			{
+				"name": "once",
+				"version": "1.4.0"
+			},
+			{
+				"name": "path-is-absolute",
+				"version": "1.0.1"
+			},
+			{
+				"name": "stringcase",
+				"version": "3.2.1"
+			},
+			{
+				"name": "wrappy",
+				"version": "1.0.2"
+			}
+		]
+	}
+]

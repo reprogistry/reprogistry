@@ -1,0 +1,135 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T14:18:19.377Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:4.2.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "the-templates@1.0.7",
+			"name": "the-templates",
+			"version": "1.0.7",
+			"location": "https://registry.npmjs.org/the-templates/-/the-templates-1.0.7.tgz",
+			"integrity": "sha512-5ktQ3XdHRmRCIuFSl3M5ltoEutSzsOXPjNk75Cp9NEeefKfFKGLAqLwNylb29yA/zFnFI7N8yrxqNtr2uKpCgw==",
+			"publishedAt": "2017-04-29T13:11:40.007Z",
+			"publishedWith": {
+				"node": "7.9.0",
+				"npm": "4.2.0"
+			},
+			"dependencies": {
+				"aglob": "^2.0.1",
+				"ape-tmpl": "^5.0.20",
+				"co": "^4.6.0",
+				"stringcase": "^3.2.1"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/the-labo/the-templates.git",
+			"spec": "github:the-labo/the-templates#fbc7493bc63c7acdab25da64f458e35e86b307a7"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".npmignore": {
+					"match": false,
+					"packageHash": "6f179c6006bf3ff3f0b1b57a1a247c97edbee11a33374f53849829aed6261ffe",
+					"size": 605,
+					"status": "missing-in-source"
+				},
+				"lib/index.js": {
+					"diff": "--- published/lib/index.js\n+++ rebuilt/lib/index.js\n@@ -9,6 +9,7 @@\n \n module.exports = {\n   get api () { return d(require('./api')) },\n+  get nodeTest () { return d(require('./node_test')) },\n   get readme () { return d(require('./readme')) },\n   get test () { return d(require('./test')) }\n }\n",
+					"match": false,
+					"packageHash": "f4afe93170b2120e7607bf1d68cbb2d4083e7923dd778019354abd6d695d0f86",
+					"size": 297,
+					"sourceHash": "093c285edaf643d693f2dda44028617935faade90acc671f9ee4c1f4141e3c8d",
+					"status": "content"
+				},
+				"lib/test.js": {
+					"diff": "--- published/lib/test.js\n+++ rebuilt/lib/test.js\n@@ -34,7 +34,7 @@\n     .map((src) => {\n       let extname = path.extname(src)\n       let basename = path.basename(src, extname)\n-      let suffix = 'Test'\n+      let suffix = node ? '_test' : 'Test'\n       return {\n         force: false,\n         mode: '644',\n",
+					"match": false,
+					"packageHash": "ee2335a430f5b2e184e61d6ff9cf7dbc85c7558bf143966d661404312e29d5fd",
+					"size": 1269,
+					"sourceHash": "66852c726aa642135a18f9b35c2319738c761e436a0a546ba0c2bdc0710f2d8a",
+					"status": "content"
+				},
+				"lib/node_test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"test/node_test_test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 29,
+				"missingInPackage": 2,
+				"missingInSource": 1,
+				"score": 0.8529411764705882,
+				"totalFiles": 34
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "aglob",
+				"version": "2.0.1"
+			},
+			{
+				"name": "balanced-match",
+				"version": "1.0.2"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "1.1.22"
+			},
+			{
+				"name": "co",
+				"version": "4.6.0"
+			},
+			{
+				"name": "concat-map",
+				"version": "0.0.1"
+			},
+			{
+				"name": "fs.realpath",
+				"version": "1.0.0"
+			},
+			{
+				"name": "glob",
+				"version": "7.2.3"
+			},
+			{
+				"name": "inflight",
+				"version": "1.0.6"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.4"
+			},
+			{
+				"name": "minimatch",
+				"version": "3.1.5"
+			},
+			{
+				"name": "once",
+				"version": "1.4.0"
+			},
+			{
+				"name": "path-is-absolute",
+				"version": "1.0.1"
+			},
+			{
+				"name": "stringcase",
+				"version": "3.2.1"
+			},
+			{
+				"name": "wrappy",
+				"version": "1.0.2"
+			}
+		]
+	}
+]

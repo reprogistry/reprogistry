@@ -1,0 +1,181 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T14:24:58.260Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:5.6.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "the-templates@2.3.1",
+			"name": "the-templates",
+			"version": "2.3.1",
+			"location": "https://registry.npmjs.org/the-templates/-/the-templates-2.3.1.tgz",
+			"integrity": "sha512-wCcANMR+L5RBFVPnC8VXE4lRoEcs3A2rWhJRZzYmX6nY8NzhvnUu05k7gw7/rjH5ivehUpg0d5nKFGQ7ACPp8Q==",
+			"publishedAt": "2018-01-16T02:35:02.862Z",
+			"publishedWith": {
+				"node": "9.4.0",
+				"npm": "5.6.0"
+			},
+			"dependencies": {
+				"aglob": "^3.0.0",
+				"ape-tmpl": "^6.0.6",
+				"selfsigned": "^1.9.1",
+				"stringcase": "^4.1.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/the-labo/the-templates.git",
+			"spec": "github:the-labo/the-templates#c1159e6d2919f4dec8b6ab62783b71bd07f65b25"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"lib/Scene.js": {
+					"diff": "--- published/lib/Scene.js\n+++ rebuilt/lib/Scene.js\n@@ -8,8 +8,6 @@\n \n const _tmpl = require('./_tmpl')\n const assert = require('assert')\n-const path = require('path')\n-const {pascalcase, camelcase} = require('stringcase')\n \n /** @lends Scene */\n function Scene (config) {\n@@ -24,9 +22,7 @@\n     force: false,\n     mode: '644',\n     data: {\n-      path: `${name}Scene.js`,\n-      name: path.basename(name) + 'Scene',\n-      scopePath: camelcase(name)\n+      name,\n     },\n     tmpl,\n   }\n",
+					"match": false,
+					"packageHash": "5e4d6dccdc31922a5b6dc6ec43a7de4da84529ea68021a14ad582fe437ab0cc0",
+					"size": 649,
+					"sourceHash": "c4bc1b1001766ae1e7b922f8d0517e1bf33954aa9e317d7c7b55af50c6eec31e",
+					"status": "content"
+				},
+				"test/Scene_test.js": {
+					"diff": "--- published/test/Scene_test.js\n+++ rebuilt/test/Scene_test.js\n@@ -6,7 +6,6 @@\n \n const scene = require('../lib/Scene.js')\n const assert = require('assert')\n-const coz = require('coz')\n \n describe('scene', function () {\n   this.timeout(3000)\n@@ -20,10 +19,7 @@\n   })\n \n   it('Scene', async () => {\n-    const bud = scene({name: 'hoge', cjs: true})\n-    bud.path = `${__dirname}/../tmp/HogeScene.js`\n-    bud.mkdirp = true\n-    coz.render(bud)\n+\n   })\n })\n \n",
+					"match": false,
+					"packageHash": "a7cdacab8c9c3284632a4208b3e4ac6088b24bedbc44d6870382c1c4f7d17b2b",
+					"size": 500,
+					"sourceHash": "ae283d2fe76e8fdf30e8a10fe4fe3148f77770f846310399efedb554b36b2101",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 65,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.9701492537313433,
+				"totalFiles": 67
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "abind",
+				"version": "1.0.3"
+			},
+			{
+				"name": "aglob",
+				"version": "3.0.0"
+			},
+			{
+				"name": "ape-tmpl",
+				"version": "6.0.6"
+			},
+			{
+				"name": "argx",
+				"version": "3.0.2"
+			},
+			{
+				"name": "arrayfilter",
+				"version": "1.1.2"
+			},
+			{
+				"name": "arraysort",
+				"version": "2.0.0"
+			},
+			{
+				"name": "asobj",
+				"version": "2.0.2"
+			},
+			{
+				"name": "babel-runtime",
+				"version": "6.26.0"
+			},
+			{
+				"name": "balanced-match",
+				"version": "1.0.0"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "1.1.8"
+			},
+			{
+				"name": "concat-map",
+				"version": "0.0.1"
+			},
+			{
+				"name": "core-js",
+				"version": "2.5.0"
+			},
+			{
+				"name": "deep-equal",
+				"version": "1.0.1"
+			},
+			{
+				"name": "evaljson",
+				"version": "5.1.0"
+			},
+			{
+				"name": "extend",
+				"version": "3.0.1"
+			},
+			{
+				"name": "fs.realpath",
+				"version": "1.0.0"
+			},
+			{
+				"name": "glob",
+				"version": "7.1.2"
+			},
+			{
+				"name": "iftype",
+				"version": "3.0.2"
+			},
+			{
+				"name": "inflight",
+				"version": "1.0.6"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.3"
+			},
+			{
+				"name": "minimatch",
+				"version": "3.0.4"
+			},
+			{
+				"name": "node-forge",
+				"version": "0.6.33"
+			},
+			{
+				"name": "objnest",
+				"version": "4.0.1"
+			},
+			{
+				"name": "once",
+				"version": "1.4.0"
+			},
+			{
+				"name": "path-is-absolute",
+				"version": "1.0.1"
+			},
+			{
+				"name": "regenerator-runtime",
+				"version": "0.11.0"
+			},
+			{
+				"name": "selfsigned",
+				"version": "1.10.1"
+			},
+			{
+				"name": "stringcase",
+				"version": "4.1.0"
+			},
+			{
+				"name": "wrappy",
+				"version": "1.0.2"
+			}
+		]
+	}
+]

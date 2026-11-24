@@ -1,0 +1,241 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T14:25:49.661Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:5.6.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "the-templates@2.1.8",
+			"name": "the-templates",
+			"version": "2.1.8",
+			"location": "https://registry.npmjs.org/the-templates/-/the-templates-2.1.8.tgz",
+			"integrity": "sha512-7iJHGRdaYDlZUeIWOFU8K25vjQRla+FKXcPVdEev6vMzPykyyYMa3DS5N3VhB+EAzGqdonARNZ+rFmNQwAnCNg==",
+			"publishedAt": "2018-01-11T13:57:26.878Z",
+			"publishedWith": {
+				"node": "9.4.0",
+				"npm": "5.6.0"
+			},
+			"dependencies": {
+				"aglob": "^3.0.0",
+				"ape-tmpl": "^6.0.5",
+				"selfsigned": "^1.9.1",
+				"stringcase": "^4.0.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/the-labo/the-templates.git",
+			"spec": "github:the-labo/the-templates#33ceaf5eaa3f0e9c4b1298f57a842461a9b631e9"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"asset/templates/cjs_dir.hbs": {
+					"diff": "--- published/asset/templates/cjs_dir.hbs\n+++ rebuilt/asset/templates/cjs_dir.hbs\n@@ -10,6 +10,12 @@\n \n module.exports = {\n {{#each modules}}\n-  {{name}},\n+  {{name}}{{#if @last}}{{else}},\n+{{/if}}\n {{/each}}\n+\n }\n+\n+{{#each modules}}\n+exports.{{name}} = {{name}}\n+{{/each}}\n",
+					"match": false,
+					"packageHash": "db612476e5d1d2b20f1d76e4c3b73b141dabd452c979c375b5534f8e715197fa",
+					"size": 190,
+					"sourceHash": "b9cc1bc26e69d5363cddacb919c3bed476c902b51be3114422a36c76bc1b1d68",
+					"status": "content"
+				},
+				"asset/templates/dir.hbs": {
+					"diff": "--- published/asset/templates/dir.hbs\n+++ rebuilt/asset/templates/dir.hbs\n@@ -10,10 +10,16 @@\n \n export {\n {{#each modules}}\n-  {{name}},\n+  {{name}}{{#if @last}}{{else}},\n+{{/if}}\n {{/each}}\n+\n }\n \n-{{#if default}}\n-export default {{default}}\n-{{/if}}\n+export default {\n+{{#each modules}}\n+    {{name}}{{#if @last}}{{else}},\n+    {{/if}}\n+{{/each}}\n+\n+}\n",
+					"match": false,
+					"packageHash": "f6eaaaabab2bd6793d29b34fcee003e4a00c82cb62e234f22310447aafab0f79",
+					"size": 227,
+					"sourceHash": "db3e784d136fb65c985b3da3423857d7431cf9403f41936a01a49e07af9f317a",
+					"status": "content"
+				},
+				"lib/.index.bud": {
+					"match": false,
+					"packageHash": "77aafe545625fba975a2860670dc3d3b8ea08fe1f889661e16223843987e9951",
+					"size": 317,
+					"status": "missing-in-source"
+				},
+				"lib/dir.js": {
+					"diff": "--- published/lib/dir.js\n+++ rebuilt/lib/dir.js\n@@ -37,7 +37,6 @@\n     force: true,\n     mode: '444',\n     tmpl: TMPL_PATH,\n-    path: `${__dirname}/index${cjs ? '.js' : '.mjs'}`,\n     data: {\n       name,\n       description,\n@@ -68,7 +67,6 @@\n       force: true,\n       mode: '444',\n       tmpl: TMPL_PATH,\n-      path: `${__dirname}/index${cjs ? '.js' : '.mjs'}`,\n       data: {\n         name,\n         description,\n",
+					"match": false,
+					"packageHash": "0f4066c1b189f4352b2935bb57dd349d2d7c61e71006dfdac9a91b3e67c884ec",
+					"size": 2370,
+					"sourceHash": "db1fa369730cfc064d0baa5f0248517becc58d08ef07ba375fa01586c107d39a",
+					"status": "content"
+				},
+				"lib/index.js": {
+					"diff": "--- published/lib/index.js\n+++ rebuilt/lib/index.js\n@@ -27,5 +27,17 @@\n   readme,\n   selfSigned,\n   templates,\n-  test,\n+  test\n }\n+\n+exports.api = api\n+exports.dir = dir\n+exports.lib = lib\n+exports.mapping = mapping\n+exports.markdowns = markdowns\n+exports.nginx = nginx\n+exports.pcssVars = pcssVars\n+exports.readme = readme\n+exports.selfSigned = selfSigned\n+exports.templates = templates\n+exports.test = test\n",
+					"match": false,
+					"packageHash": "6ad40e1309036373e722fefc9dfb62aac0833332cea1eaa9b0f162c662eab6ad",
+					"size": 597,
+					"sourceHash": "9f1bdb1809c513460135c743a285ee1469938b45d7e8bbc1c6a6f5af97c8ef75",
+					"status": "content"
+				},
+				"lib/index.mjs": {
+					"match": false,
+					"packageHash": "a0a7c1be80aa9d4402033f9b4a7cdf94a509ae2944d4a75dfbb86ab3be664d1c",
+					"size": 533,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -43,4 +43,4 @@\n     \"node\": \">=7.6\",\n     \"npm\": \">=4\"\n   }\n-}\n+}\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "3148a2b1af21c9f23dad7a1db06144bc42b790b44ec75329d85c789156e535e7",
+					"size": 1063,
+					"sourceHash": "2474a1c40b8131d43e84657708b5d2204c1a9407fe6801e481c74fe69510d07c",
+					"status": "content"
+				},
+				"test/dir_test.js": {
+					"diff": "--- published/test/dir_test.js\n+++ rebuilt/test/dir_test.js\n@@ -6,7 +6,7 @@\n \n const dir = require('../lib/dir.js')\n const assert = require('assert')\n-const coz = require('coz')\n+\n \n describe('dir', function () {\n   this.timeout(3000)\n@@ -20,14 +20,7 @@\n   })\n \n   it('Dir', async () => {\n-    const bud = dir({\n-      dirname: __dirname,\n-      name: 'foo',\n-      description: 'hoge'\n-    })\n-    bud.path = `${__dirname}/../tmp/foo/bar/baz.mjs`\n-    bud.mkdirp = true\n-    await coz.render(bud)\n+\n   })\n })\n \n",
+					"match": false,
+					"packageHash": "d6e80db53708b7db102e0f9718caad64f753513909ce8fb96c1146b2cfc944fd",
+					"size": 550,
+					"sourceHash": "406650c940d785ca590f717566a5ae04e14f48fdb8314189b10cf292e0a51d25",
+					"status": "content"
+				},
+				"test/selfSigned_test.js": {
+					"diff": "--- published/test/selfSigned_test.js\n+++ rebuilt/test/selfSigned_test.js\n@@ -8,6 +8,7 @@\n const assert = require('assert')\n const coz = require('coz')\n \n+\n describe('self-signed', function () {\n   this.timeout(3000)\n \n",
+					"match": false,
+					"packageHash": "33448830953e563f793528f7e5a35903d2546254ad3685c60ae2434f776508a1",
+					"size": 531,
+					"sourceHash": "84c1f60e038f5b66e38bf4476f5e8cef0971d058a0bdf8f090c6c81e33c404f6",
+					"status": "content"
+				},
+				"lib/.index.js.bud": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 7,
+				"matchingFiles": 51,
+				"missingInPackage": 1,
+				"missingInSource": 2,
+				"score": 0.8360655737704918,
+				"totalFiles": 61
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "abind",
+				"version": "1.0.3"
+			},
+			{
+				"name": "aglob",
+				"version": "3.0.0"
+			},
+			{
+				"name": "ape-tmpl",
+				"version": "6.0.5"
+			},
+			{
+				"name": "argx",
+				"version": "3.0.2"
+			},
+			{
+				"name": "arrayfilter",
+				"version": "1.1.2"
+			},
+			{
+				"name": "arraysort",
+				"version": "2.0.0"
+			},
+			{
+				"name": "asobj",
+				"version": "2.0.2"
+			},
+			{
+				"name": "babel-runtime",
+				"version": "6.26.0"
+			},
+			{
+				"name": "balanced-match",
+				"version": "1.0.0"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "1.1.8"
+			},
+			{
+				"name": "concat-map",
+				"version": "0.0.1"
+			},
+			{
+				"name": "core-js",
+				"version": "2.5.0"
+			},
+			{
+				"name": "deep-equal",
+				"version": "1.0.1"
+			},
+			{
+				"name": "evaljson",
+				"version": "5.1.0"
+			},
+			{
+				"name": "objnest",
+				"version": "4.0.0"
+			},
+			{
+				"name": "extend",
+				"version": "3.0.1"
+			},
+			{
+				"name": "fs.realpath",
+				"version": "1.0.0"
+			},
+			{
+				"name": "glob",
+				"version": "7.1.2"
+			},
+			{
+				"name": "iftype",
+				"version": "3.0.2"
+			},
+			{
+				"name": "inflight",
+				"version": "1.0.6"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.3"
+			},
+			{
+				"name": "minimatch",
+				"version": "3.0.4"
+			},
+			{
+				"name": "node-forge",
+				"version": "0.6.33"
+			},
+			{
+				"name": "objnest",
+				"version": "3.0.9"
+			},
+			{
+				"name": "once",
+				"version": "1.4.0"
+			},
+			{
+				"name": "path-is-absolute",
+				"version": "1.0.1"
+			},
+			{
+				"name": "regenerator-runtime",
+				"version": "0.11.0"
+			},
+			{
+				"name": "selfsigned",
+				"version": "1.10.1"
+			},
+			{
+				"name": "stringcase",
+				"version": "4.0.0"
+			},
+			{
+				"name": "wrappy",
+				"version": "1.0.2"
+			}
+		]
+	}
+]

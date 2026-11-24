@@ -1,0 +1,181 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T14:25:36.707Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:5.6.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "the-templates@2.2.2",
+			"name": "the-templates",
+			"version": "2.2.2",
+			"location": "https://registry.npmjs.org/the-templates/-/the-templates-2.2.2.tgz",
+			"integrity": "sha512-pmGOZy0k/T+nFXjrh9vQUh7BRDh7+S2x7i/uHW+kaDOTXRLt82d+QBNKW6sV/wtOvCpFLClQrrsyXPNwcB4SMg==",
+			"publishedAt": "2018-01-15T13:10:42.690Z",
+			"publishedWith": {
+				"node": "9.4.0",
+				"npm": "5.6.0"
+			},
+			"dependencies": {
+				"aglob": "^3.0.0",
+				"ape-tmpl": "^6.0.6",
+				"selfsigned": "^1.9.1",
+				"stringcase": "^4.1.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/the-labo/the-templates.git",
+			"spec": "github:the-labo/the-templates#04bff96a145f869498119ffb1fdc4fa4aecf497c"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"lib/test.js": {
+					"diff": "--- published/lib/test.js\n+++ rebuilt/lib/test.js\n@@ -32,9 +32,9 @@\n       }\n     })\n     .map((src) => {\n-      const extname = path.extname(src)\n-      const basename = path.basename(src, extname)\n-      const suffix = 'Test'\n+      let extname = path.extname(src)\n+      let basename = path.basename(src, extname)\n+      let suffix = 'Test'\n       return {\n         force: false,\n         mode: '644',\n@@ -54,7 +54,7 @@\n     src,\n     dest = process.cwd(),\n     cjs = config.node,\n-    ext = cjs ? '.js' : '.mjs',\n+    extname = '.js'\n   } = config\n   const TMPL_PATH = cjs ? _tmpl('cjs_test.hbs') : _tmpl('test.hbs')\n   ok(!!src, 'config.src is required.')\n@@ -64,7 +64,7 @@\n     mode: '644',\n     mkdirp: true,\n     tmpl: TMPL_PATH,\n-    path: path.resolve(dest, path.basename(src) + suffix) + ext,\n+    path: path.resolve(dest, path.basename(src) + suffix) + extname,\n     data: {\n       name: path.basename(src),\n       relative: path.relative(dest, src)\n",
+					"match": false,
+					"packageHash": "b46361110a4c4ed60066bc9936b10e14c984eb4c79338da67bbfdae0d304abb0",
+					"size": 1836,
+					"sourceHash": "b3d13e9b6944ef663c126663bcef93e562c168db155e932bc5d7792b089abe41",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -46,4 +46,4 @@\n     \"node\": \">=7.6\",\n     \"npm\": \">=4\"\n   }\n-}\n+}\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "78616d205b2fb870ea410678b6266bed2a3eaf08c42f47cd4b4072dac584041f",
+					"size": 1174,
+					"sourceHash": "d023473dd6350dcdc2fb8ce4b1fa710b95faace802c7cb894550a62dc7414c8e",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 61,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.9682539682539683,
+				"totalFiles": 63
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "abind",
+				"version": "1.0.3"
+			},
+			{
+				"name": "aglob",
+				"version": "3.0.0"
+			},
+			{
+				"name": "ape-tmpl",
+				"version": "6.0.6"
+			},
+			{
+				"name": "argx",
+				"version": "3.0.2"
+			},
+			{
+				"name": "arrayfilter",
+				"version": "1.1.2"
+			},
+			{
+				"name": "arraysort",
+				"version": "2.0.0"
+			},
+			{
+				"name": "asobj",
+				"version": "2.0.2"
+			},
+			{
+				"name": "babel-runtime",
+				"version": "6.26.0"
+			},
+			{
+				"name": "balanced-match",
+				"version": "1.0.0"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "1.1.8"
+			},
+			{
+				"name": "concat-map",
+				"version": "0.0.1"
+			},
+			{
+				"name": "core-js",
+				"version": "2.5.0"
+			},
+			{
+				"name": "deep-equal",
+				"version": "1.0.1"
+			},
+			{
+				"name": "evaljson",
+				"version": "5.1.0"
+			},
+			{
+				"name": "extend",
+				"version": "3.0.1"
+			},
+			{
+				"name": "fs.realpath",
+				"version": "1.0.0"
+			},
+			{
+				"name": "glob",
+				"version": "7.1.2"
+			},
+			{
+				"name": "iftype",
+				"version": "3.0.2"
+			},
+			{
+				"name": "inflight",
+				"version": "1.0.6"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.3"
+			},
+			{
+				"name": "minimatch",
+				"version": "3.0.4"
+			},
+			{
+				"name": "node-forge",
+				"version": "0.6.33"
+			},
+			{
+				"name": "objnest",
+				"version": "4.0.1"
+			},
+			{
+				"name": "once",
+				"version": "1.4.0"
+			},
+			{
+				"name": "path-is-absolute",
+				"version": "1.0.1"
+			},
+			{
+				"name": "regenerator-runtime",
+				"version": "0.11.0"
+			},
+			{
+				"name": "selfsigned",
+				"version": "1.10.1"
+			},
+			{
+				"name": "stringcase",
+				"version": "4.1.0"
+			},
+			{
+				"name": "wrappy",
+				"version": "1.0.2"
+			}
+		]
+	}
+]

@@ -1,0 +1,334 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T15:35:48.525Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:5.6.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "the-templates@4.0.14",
+			"name": "the-templates",
+			"version": "4.0.14",
+			"location": "https://registry.npmjs.org/the-templates/-/the-templates-4.0.14.tgz",
+			"integrity": "sha512-/0A4HzkVBxyNh9Bgv8CFXlpBDf8l3suF3aauTK5GfU3fcKVVzyA00r+57ZofpECnBgUzMPityJUsLCUacRi8Vg==",
+			"publishedAt": "2018-06-21T02:47:23.413Z",
+			"publishedWith": {
+				"node": "10.0.0",
+				"npm": "6.1.0"
+			},
+			"dependencies": {
+				"aglob": "^3.0.1",
+				"markdown-toc": "^1.2.0",
+				"reserved": "^0.1.2",
+				"selfsigned": "^1.10.3",
+				"stringcase": "^4.2.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/the-labo/the-templates.git",
+			"spec": "github:the-labo/the-templates#f70c2d20402c453dc6ca08ea4ba4cf0b4b61e092"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"asset/templates/cjs_dir.hbs": {
+					"diff": "--- published/asset/templates/cjs_dir.hbs\n+++ rebuilt/asset/templates/cjs_dir.hbs\n@@ -8,17 +8,17 @@\n const _d = (m) => (m && 'default' in m) ? m.default : m\n \n {{#each modules}}\n-const {{varName}} = require('./{{path}}')\n+const {{varName}} = _d(require('./{{path}}'))\n {{/each}}\n {{#if defaultModule}}\n-const {{defaultModule.varName}} = require('./{{defaultModule.path}}')\n+const {{defaultModule.varName}} = _d(require('./{{defaultModule.path}}'))\n {{/if}}\n \n {{#if defaultModule}}{{#if modules}}// `module.exports` overrides these `exports.*`, but still needs them for lebab (https://github.com/lebab/lebab){{/if}}{{/if}}\n {{#each modules}}\n-exports.{{name}} = _d({{varName}})\n+exports.{{name}} = {{varName}}\n {{/each}}\n {{#if defaultModule}}\n \n-module.exports = _d({{defaultModule.varName}})\n+module.exports = {{defaultModule.varName}}\n {{/if}}\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "9d603ae39211b8d109b4fe0560b4f86dc55c4c3522202b5766a538c35392083b",
+					"size": 631,
+					"sourceHash": "aa8fb879cef46d80d1de4f1c468afdd9ad3054ff875a5b333fe176db411b1834",
+					"status": "content"
+				},
+				"lib/index.js": {
+					"diff": "--- published/lib/index.js\n+++ rebuilt/lib/index.js\n@@ -7,53 +7,53 @@\n \n const _d = (m) => (m && 'default' in m) ? m.default : m\n \n-const Ctrl = require('./Ctrl')\n-const Dialogs = require('./Dialogs')\n-const Hook = require('./Hook')\n-const License = require('./License')\n-const Readme = require('./Readme')\n-const Resources = require('./Resources')\n-const Scene = require('./Scene')\n-const Stateful = require('./Stateful')\n-const Stateless = require('./Stateless')\n-const Story = require('./Story')\n-const View = require('./View')\n-const Wrap = require('./Wrap')\n-const api = require('./api')\n-const dir = require('./dir')\n-const errorPage = require('./errorPage')\n-const lib = require('./lib')\n-const mapping = require('./mapping')\n-const nginx = require('./nginx')\n-const pcssVars = require('./pcssVars')\n-const selfSigned = require('./selfSigned')\n-const templates = require('./templates')\n-const test = require('./test')\n-const toc = require('./toc')\n-const vhost = require('./vhost')\n+const Ctrl = _d(require('./Ctrl'))\n+const Dialogs = _d(require('./Dialogs'))\n+const Hook = _d(require('./Hook'))\n+const License = _d(require('./License'))\n+const Readme = _d(require('./Readme'))\n+const Resources = _d(require('./Resources'))\n+const Scene = _d(require('./Scene'))\n+const Stateful = _d(require('./Stateful'))\n+const Stateless = _d(require('./Stateless'))\n+const Story = _d(require('./Story'))\n+const View = _d(require('./View'))\n+const Wrap = _d(require('./Wrap'))\n+const api = _d(require('./api'))\n+const dir = _d(require('./dir'))\n+const errorPage = _d(require('./errorPage'))\n+const lib = _d(require('./lib'))\n+const mapping = _d(require('./mapping'))\n+const nginx = _d(require('./nginx'))\n+const pcssVars = _d(require('./pcssVars'))\n+const selfSigned = _d(require('./selfSigned'))\n+const templates = _d(require('./templates'))\n+const test = _d(require('./test'))\n+const toc = _d(require('./toc'))\n+const vhost = _d(require('./vhost'))\n \n \n-exports.Ctrl = _d(Ctrl)\n-exports.Dialogs = _d(Dialogs)\n-exports.Hook = _d(Hook)\n-exports.License = _d(License)\n-exports.Readme = _d(Readme)\n-exports.Resources = _d(Resources)\n-exports.Scene = _d(Scene)\n-exports.Stateful = _d(Stateful)\n-exports.Stateless = _d(Stateless)\n-exports.Story = _d(Story)\n-exports.View = _d(View)\n-exports.Wrap = _d(Wrap)\n-exports.api = _d(api)\n-exports.dir = _d(dir)\n-exports.errorPage = _d(errorPage)\n-exports.lib = _d(lib)\n-exports.mapping = _d(mapping)\n-exports.nginx = _d(nginx)\n-exports.pcssVars = _d(pcssVars)\n-exports.selfSigned = _d(selfSigned)\n-exports.templates = _d(templates)\n-exports.test = _d(test)\n-exports.toc = _d(toc)\n-exports.vhost = _d(vhost)\n+exports.Ctrl = Ctrl\n+exports.Dialogs = Dialogs\n+exports.Hook = Hook\n+exports.License = License\n+exports.Readme = Readme\n+exports.Resources = Resources\n+exports.Scene = Scene\n+exports.Stateful = Stateful\n+exports.Stateless = Stateless\n+exports.Story = Story\n+exports.View = View\n+exports.Wrap = Wrap\n+exports.api = api\n+exports.dir = dir\n+exports.errorPage = errorPage\n+exports.lib = lib\n+exports.mapping = mapping\n+exports.nginx = nginx\n+exports.pcssVars = pcssVars\n+exports.selfSigned = selfSigned\n",
+					"match": false,
+					"packageHash": "40ac734b8aa6e32b76898c1c2a3f6164c039a5ff4d07820ae5f2d9510a184463",
+					"size": 1675,
+					"sourceHash": "b6e17bb026d969178d4172ed9b4ab69fb2f95fce4a7eb748a302acf4b835dae9",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 102,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.9807692307692307,
+				"totalFiles": 104
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "aglob",
+				"version": "3.0.1"
+			},
+			{
+				"name": "ansi-red",
+				"version": "0.1.1"
+			},
+			{
+				"name": "ansi-wrap",
+				"version": "0.1.0"
+			},
+			{
+				"name": "argparse",
+				"version": "1.0.9"
+			},
+			{
+				"name": "autolinker",
+				"version": "0.15.3"
+			},
+			{
+				"name": "balanced-match",
+				"version": "1.0.0"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "1.1.8"
+			},
+			{
+				"name": "coffee-script",
+				"version": "1.12.7"
+			},
+			{
+				"name": "concat-map",
+				"version": "0.0.1"
+			},
+			{
+				"name": "concat-stream",
+				"version": "1.6.0"
+			},
+			{
+				"name": "core-util-is",
+				"version": "1.0.2"
+			},
+			{
+				"name": "diacritics-map",
+				"version": "0.1.0"
+			},
+			{
+				"name": "expand-range",
+				"version": "1.8.2"
+			},
+			{
+				"name": "extend-shallow",
+				"version": "2.0.1"
+			},
+			{
+				"name": "fill-range",
+				"version": "2.2.3"
+			},
+			{
+				"name": "for-in",
+				"version": "1.0.2"
+			},
+			{
+				"name": "fs.realpath",
+				"version": "1.0.0"
+			},
+			{
+				"name": "glob",
+				"version": "7.1.2"
+			},
+			{
+				"name": "gray-matter",
+				"version": "2.1.1"
+			},
+			{
+				"name": "inflight",
+				"version": "1.0.6"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.3"
+			},
+			{
+				"name": "is-buffer",
+				"version": "1.1.5"
+			},
+			{
+				"name": "is-extendable",
+				"version": "0.1.1"
+			},
+			{
+				"name": "is-number",
+				"version": "2.1.0"
+			},
+			{
+				"name": "is-plain-object",
+				"version": "2.0.4"
+			},
+			{
+				"name": "isobject",
+				"version": "3.0.1"
+			},
+			{
+				"name": "isarray",
+				"version": "1.0.0"
+			},
+			{
+				"name": "isobject",
+				"version": "2.1.0"
+			},
+			{
+				"name": "js-yaml",
+				"version": "3.10.0"
+			},
+			{
+				"name": "esprima",
+				"version": "4.0.0"
+			},
+			{
+				"name": "kind-of",
+				"version": "3.2.2"
+			},
+			{
+				"name": "list-item",
+				"version": "1.1.1"
+			},
+			{
+				"name": "markdown-link",
+				"version": "0.1.1"
+			},
+			{
+				"name": "markdown-toc",
+				"version": "1.2.0"
+			},
+			{
+				"name": "lazy-cache",
+				"version": "2.0.2"
+			},
+			{
+				"name": "minimist",
+				"version": "1.2.0"
+			},
+			{
+				"name": "minimatch",
+				"version": "3.0.4"
+			},
+			{
+				"name": "mixin-deep",
+				"version": "1.3.0"
+			},
+			{
+				"name": "is-extendable",
+				"version": "1.0.1"
+			},
+			{
+				"name": "node-forge",
+				"version": "0.7.5"
+			},
+			{
+				"name": "object.pick",
+				"version": "1.3.0"
+			},
+			{
+				"name": "once",
+				"version": "1.4.0"
+			},
+			{
+				"name": "path-is-absolute",
+				"version": "1.0.1"
+			},
+			{
+				"name": "process-nextick-args",
+				"version": "1.0.7"
+			},
+			{
+				"name": "randomatic",
+				"version": "1.1.7"
+			},
+			{
+				"name": "is-number",
+				"version": "3.0.0"
+			},
+			{
+				"name": "kind-of",
+				"version": "4.0.0"
+			},
+			{
+				"name": "readable-stream",
+				"version": "2.3.3"
+			},
+			{
+				"name": "remarkable",
+				"version": "1.7.1"
+			},
+			{
+				"name": "argparse",
+				"version": "0.1.16"
+			},
+			{
+				"name": "repeat-element",
+				"version": "1.1.2"
+			},
+			{
+				"name": "repeat-string",
+				"version": "1.6.1"
+			},
+			{
+				"name": "reserved",
+				"version": "0.1.2"
+			},
+			{
+				"name": "safe-buffer",
+				"version": "5.1.1"
+			},
+			{
+				"name": "selfsigned",
+				"version": "1.10.3"
+			},
+			{
+				"name": "set-getter",
+				"version": "0.1.0"
+			},
+			{
+				"name": "sprintf-js",
+				"version": "1.0.3"
+			},
+			{
+				"name": "string_decoder",
+				"version": "1.0.3"
+			},
+			{
+				"name": "stringcase",
+				"version": "4.2.0"
+			},
+			{
+				"name": "strip-color",
+				"version": "0.1.0"
+			},
+			{
+				"name": "to-object-path",
+				"version": "0.3.0"
+			},
+			{
+				"name": "toml",
+				"version": "2.3.3"
+			},
+			{
+				"name": "typedarray",
+				"version": "0.0.6"
+			},
+			{
+				"name": "underscore",
+				"version": "1.7.0"
+			},
+			{
+				"name": "underscore.string",
+				"version": "2.4.0"
+			},
+			{
+				"name": "util-deprecate",
+				"version": "1.0.2"
+			},
+			{
+				"name": "wrappy",
+				"version": "1.0.2"
+			}
+		]
+	}
+]

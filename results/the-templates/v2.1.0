@@ -1,0 +1,273 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T14:20:53.365Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:5.3.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "the-templates@2.1.0",
+			"name": "the-templates",
+			"version": "2.1.0",
+			"location": "https://registry.npmjs.org/the-templates/-/the-templates-2.1.0.tgz",
+			"integrity": "sha512-zN4AkGv9fp7HOgR01Sy+TlJ+L96e4E+yCXAHcLko3vseSyWSxdfYwf5IZI7wsLLh7mrZBThx9TrnPB9AUG1oqA==",
+			"publishedAt": "2017-11-14T00:41:43.666Z",
+			"publishedWith": {
+				"node": "8.3.0",
+				"npm": "5.5.1"
+			},
+			"dependencies": {
+				"aglob": "^3.0.0",
+				"ape-tmpl": "^6.0.2",
+				"selfsigned": "^1.9.1",
+				"stringcase": "^4.0.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/the-labo/the-templates.git",
+			"spec": "github:the-labo/the-templates#b35e9b9ef831a1a2cc251742dd169844c3348acf"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"asset/templates/cjs_dir.hbs": {
+					"match": false,
+					"packageHash": "0bc1587e8f79fa7a2452f02961ae15a60877dd4eafe46c95b87dc7aa05a6e01d",
+					"size": 220,
+					"status": "missing-in-source"
+				},
+				"asset/templates/cjs_markdowns.hbs": {
+					"match": false,
+					"packageHash": "d212b6fd0d6137b22cb8303c03b225a6aff0d273d4fd8320cc431724358a20e3",
+					"size": 201,
+					"status": "missing-in-source"
+				},
+				"asset/templates/cjs_templates.hbs": {
+					"match": false,
+					"packageHash": "9cbbbf54e22b504e0035ea59aeba8ea873700b2a2b30794808c4ba1f0ec0c525",
+					"size": 345,
+					"status": "missing-in-source"
+				},
+				"asset/templates/cjs_test.hbs": {
+					"match": false,
+					"packageHash": "034aa88d5dd68897c9393244e1e35325a23cc460a9a913f68ce6f708d5346447",
+					"size": 308,
+					"status": "missing-in-source"
+				},
+				"lib/.index.js.bud": {
+					"diff": "--- published/lib/.index.js.bud\n+++ rebuilt/lib/.index.js.bud\n@@ -5,13 +5,13 @@\n 'use strict'\n \n const dir = require('./dir')\n-const {description, name} = require('../package.json')\n+const { description, name } = require('../package.json')\n \n module.exports = dir({\n   name,\n   description: description,\n   dirname: __dirname,\n-  cjs: true\n+  node: true\n })\n \n if (!module.parent) {\n",
+					"match": false,
+					"packageHash": "f1e0ae25a9846cce07e6430d3129f1898a33e2eae9b4f9d2767708b1dc737c0d",
+					"size": 290,
+					"sourceHash": "4b319b7b32badf389ccaae3cf6b0e31dc284f87ad1051ff900f1c2694c1e8460",
+					"status": "content"
+				},
+				"lib/api.js": {
+					"diff": "--- published/lib/api.js\n+++ rebuilt/lib/api.js\n@@ -6,13 +6,13 @@\n 'use strict'\n \n const _tmpl = require('./_tmpl')\n-const {ok} = require('assert')\n+const { ok } = require('assert')\n \n const TMPL_PATH = _tmpl('api.hbs')\n \n /** @lends api */\n function api (config) {\n-  const {\n+  let {\n     pkg,\n     signature\n   } = config\n",
+					"match": false,
+					"packageHash": "063af453772c11797a6a9741a62f8c1c79ae9e79b18a75d635c25e3cd7b1d1eb",
+					"size": 430,
+					"sourceHash": "84164281f06d235d777f541154c700160998abc9831039ead0aa1e9c72d2b736",
+					"status": "content"
+				},
+				"lib/dir.js": {
+					"diff": "--- published/lib/dir.js\n+++ rebuilt/lib/dir.js\n@@ -26,13 +26,13 @@\n \n /** @lends dir */\n function dir (config) {\n-  const {\n+  let {\n     name,\n     description,\n-    cjs = config.node,\n+    node,\n     dirname\n   } = config\n-  const TMPL_PATH = cjs ? _tmpl('cjs_dir.hbs') : _tmpl('dir.hbs')\n+  const TMPL_PATH = node ? _tmpl('node_dir.hbs') : _tmpl('dir.hbs')\n   return {\n     force: true,\n     mode: '444',\n@@ -55,14 +55,14 @@\n \n Object.assign(dir, {\n   recursive (config) {\n-    const {\n+    let {\n       name,\n       description,\n-      cjs = config.node,\n+      node,\n       dirname,\n       ignore = []\n     } = config\n-    const TMPL_PATH = cjs ? _tmpl('cjs_dir.hbs') : _tmpl('dir.hbs')\n+    const TMPL_PATH = node ? _tmpl('node_dir.hbs') : _tmpl('dir.hbs')\n     return {\n       force: true,\n       mode: '444',\n",
+					"match": false,
+					"packageHash": "8a3f67b99bff249e4d5fe4e4ebac7b70562e7852bef6ff31a0c5dedbf3db87de",
+					"size": 2244,
+					"sourceHash": "deb73e59246e0059b54abba382ec382b0c82c3e63eecf07f612ba30fd5d14482",
+					"status": "content"
+				},
+				"lib/lib.js": {
+					"diff": "--- published/lib/lib.js\n+++ rebuilt/lib/lib.js\n@@ -13,7 +13,7 @@\n \n /** @lends lib */\n function lib (config) {\n-  const {\n+  let {\n     pkg,\n     index,\n     dirname\n@@ -26,7 +26,7 @@\n       pkg,\n       index,\n       modules: aglob\n-        .sync(['*.js', '*.jsx'], {cwd: dirname})\n+        .sync([ '*.js', '*.jsx' ], { cwd: dirname })\n         .map((filename) => path.basename(filename, path.extname(filename)))\n         .filter((name) => name !== 'index')\n     }\n",
+					"match": false,
+					"packageHash": "ab44c4ec91f3ff5263cae3c7d066c6e702be7cf5ddc6730be3d7a5ba24510101",
+					"size": 639,
+					"sourceHash": "d456ef78a9f54dcd09533af758b407b05d8315af6056ccc9c537d02e4c5a236f",
+					"status": "content"
+				},
+				"lib/markdowns.js": {
+					"diff": "--- published/lib/markdowns.js\n+++ rebuilt/lib/markdowns.js\n@@ -13,11 +13,11 @@\n \n /** @lends markdowns */\n function markdowns (config) {\n-  const {\n+  let {\n     dirname,\n-    cjs = config.node\n+    node = false\n   } = config\n-  const TMPL_PATH = cjs ? _tmpl('cjs_markdowns.hbs') : _tmpl('markdowns.hbs')\n+  const TMPL_PATH = node ? _tmpl('node_markdowns.hbs') : _tmpl('markdowns.hbs')\n   ok(!!dirname, 'config.dirname is required')\n   return {\n     force: true,\n",
+					"match": false,
+					"packageHash": "0159490a59647c8c23c4ce3680c3c5887126d68f8e1adcd611dd9e0b67590485",
+					"size": 831,
+					"sourceHash": "c244c09d26393bd5ebd530a0957bb8760c58901da15f0931bf4a1b58d43da2e0",
+					"status": "content"
+				},
+				"lib/templates.js": {
+					"diff": "--- published/lib/templates.js\n+++ rebuilt/lib/templates.js\n@@ -15,9 +15,9 @@\n function templates (config) {\n   let {\n     dirname,\n-    cjs = config.node\n+    node = false\n   } = config\n-  const TMPL_PATH = cjs ? _tmpl('cjs_templates.hbs') : _tmpl('templates.hbs')\n+  const TMPL_PATH = node ? _tmpl('node_templates.hbs') : _tmpl('templates.hbs')\n   ok(!!dirname, 'config.dirname is required')\n   return {\n     force: true,\n",
+					"match": false,
+					"packageHash": "547ef6df18e49ca5971b39fb67645be4e6818da0d2714aca253f6c7f9a00825a",
+					"size": 831,
+					"sourceHash": "bf4510bb96dda2b809d2e19748fd15661e5af816fc8b200816375aa0b562fa6b",
+					"status": "content"
+				},
+				"lib/test.js": {
+					"diff": "--- published/lib/test.js\n+++ rebuilt/lib/test.js\n@@ -9,16 +9,16 @@\n const aglob = require('aglob')\n const stringcase = require('stringcase')\n const path = require('path')\n-const {ok} = require('assert')\n+const { ok } = require('assert')\n \n /** @lends test */\n function test (config) {\n   let {\n     src,\n     dest = process.cwd(),\n-    cjs = config.node\n+    node = false\n   } = config\n-  const TMPL_PATH = cjs ? _tmpl('cjs_test.hbs') : _tmpl('test.hbs')\n+  const TMPL_PATH = node ? _tmpl('node_test.hbs') : _tmpl('test.hbs')\n   ok(!!src, 'config.src is required.')\n   return aglob.sync(src)\n     .filter((src) => path.basename(src) !== 'index.js')\n@@ -50,13 +50,13 @@\n }\n \n test.dir = function testDir (config) {\n-  const {\n+  let {\n     src,\n     dest = process.cwd(),\n-    cjs = config.node,\n+    node = false,\n     extname = '.js'\n   } = config\n-  const TMPL_PATH = cjs ? _tmpl('cjs_test.hbs') : _tmpl('test.hbs')\n+  const TMPL_PATH = node ? _tmpl('node_test.hbs') : _tmpl('test.hbs')\n   ok(!!src, 'config.src is required.')\n   let suffix = 'Test'\n   return [].concat(src).map((src) => ({\n",
+					"match": false,
+					"packageHash": "b3d13e9b6944ef663c126663bcef93e562c168db155e932bc5d7792b089abe41",
+					"size": 1822,
+					"sourceHash": "56e19ca16cfdff455503fec9c7ac3730026224992728299fb1a2427c0f520b8b",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,6 +1,6 @@\n {\n   \"name\": \"the-templates\",\n-  \"version\": \"2.1.0\",\n+  \"version\": \"2.0.2\",\n   \"description\": \"Templates for the-projects\",\n   \"main\": \"lib\",\n   \"scripts\": {\n@@ -35,8 +35,8 @@\n     \"ape-updating\": \"^4.1.1\",\n     \"coz\": \"^6.0.20\",\n     \"injectmock\": \"^2.0.0\",\n-    \"react\": \"^16.1.1\",\n-    \"react-dom\": \"^16.1.1\",\n+    \"react\": \"^16.0.0\",\n+    \"react-dom\": \"^16.0.0\",\n     \"the-script-test\": \"^2.0.1\"\n   },\n   \"engines\": {\n",
+					"match": false,
+					"packageHash": "5934e1336b82016a627e9e35437c60ac89907267028c5bf50f266f7ceb40d2e1",
+					"size": 1062,
+					"sourceHash": "ee84b979b589c8f2321c76304c8cac27b97085b6c8e80e547db7c8b6a30b7568",
+					"status": "content"
+				},
+				"asset/templates/node_dir.hbs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"asset/templates/node_markdowns.hbs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"asset/templates/node_templates.hbs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"asset/templates/node_test.hbs": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 8,
+				"matchingFiles": 43,
+				"missingInPackage": 4,
+				"missingInSource": 4,
+				"score": 0.7288135593220338,
+				"totalFiles": 59
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "abind",
+				"version": "1.0.3"
+			},
+			{
+				"name": "aglob",
+				"version": "3.0.0"
+			},
+			{
+				"name": "ape-tmpl",
+				"version": "6.0.2"
+			},
+			{
+				"name": "argx",
+				"version": "3.0.2"
+			},
+			{
+				"name": "arrayfilter",
+				"version": "1.1.2"
+			},
+			{
+				"name": "arraysort",
+				"version": "2.0.0"
+			},
+			{
+				"name": "asobj",
+				"version": "2.0.1"
+			},
+			{
+				"name": "babel-runtime",
+				"version": "6.26.0"
+			},
+			{
+				"name": "balanced-match",
+				"version": "1.0.0"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "1.1.8"
+			},
+			{
+				"name": "concat-map",
+				"version": "0.0.1"
+			},
+			{
+				"name": "core-js",
+				"version": "2.5.0"
+			},
+			{
+				"name": "deep-equal",
+				"version": "1.0.1"
+			},
+			{
+				"name": "evaljson",
+				"version": "5.1.0"
+			},
+			{
+				"name": "objnest",
+				"version": "4.0.0"
+			},
+			{
+				"name": "extend",
+				"version": "3.0.1"
+			},
+			{
+				"name": "fs.realpath",
+				"version": "1.0.0"
+			},
+			{
+				"name": "glob",
+				"version": "7.1.2"
+			},
+			{
+				"name": "iftype",
+				"version": "3.0.2"
+			},
+			{
+				"name": "inflight",
+				"version": "1.0.6"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.3"
+			},
+			{
+				"name": "minimatch",
+				"version": "3.0.4"
+			},
+			{
+				"name": "node-forge",
+				"version": "0.6.33"
+			},
+			{
+				"name": "objnest",
+				"version": "3.0.9"
+			},
+			{
+				"name": "once",
+				"version": "1.4.0"
+			},
+			{
+				"name": "path-is-absolute",
+				"version": "1.0.1"
+			},
+			{
+				"name": "regenerator-runtime",
+				"version": "0.11.0"
+			},
+			{
+				"name": "selfsigned",
+				"version": "1.10.1"
+			},
+			{
+				"name": "stringcase",
+				"version": "4.0.0"
+			},
+			{
+				"name": "wrappy",
+				"version": "1.0.2"
+			}
+		]
+	}
+]

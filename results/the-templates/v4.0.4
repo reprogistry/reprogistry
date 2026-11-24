@@ -1,0 +1,353 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T15:36:03.900Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:5.6.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "the-templates@4.0.4",
+			"name": "the-templates",
+			"version": "4.0.4",
+			"location": "https://registry.npmjs.org/the-templates/-/the-templates-4.0.4.tgz",
+			"integrity": "sha512-Lqlr6Tk0wlc1f3TbTYPtd302Uj7rNM8FMqEO6mi6pz3rr5JtfNHzeej1IKgu9nC+imYHxaUOAM5SkaNx8sNg7A==",
+			"publishedAt": "2018-06-19T23:57:23.674Z",
+			"publishedWith": {
+				"node": "10.0.0",
+				"npm": "6.1.0"
+			},
+			"dependencies": {
+				"aglob": "^3.0.1",
+				"markdown-toc": "^1.2.0",
+				"selfsigned": "^1.10.3",
+				"stringcase": "^4.2.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/the-labo/the-templates.git",
+			"spec": "github:the-labo/the-templates#012c738ec4b9e9c0b4f01f144e49defd2e62d686"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"asset/templates/cjs_dir.hbs": {
+					"diff": "--- published/asset/templates/cjs_dir.hbs\n+++ rebuilt/asset/templates/cjs_dir.hbs\n@@ -9,13 +9,10 @@\n const _d = (m) => _interopRequireDefault(m).default\n \n {{#each modules}}\n-const {{varName}} = _d(require('./{{path}}'))\n+const {{camelcase name}}_ = _d(require('./{{path}}'))\n {{/each}}\n \n {{#each modules}}\n-exports.{{name}} = {{varName}}\n+exports.{{name}} = {{camelcase name}}_\n {{/each}}\n \n-{{#if defaultExport}}\n-module.exports = {{defaultExport}}\n-{{/if}}\n",
+					"match": false,
+					"packageHash": "7df27e719c25f46280db23ec315fe227b290b9f31f6f3c13adb937a043ba92f7",
+					"size": 438,
+					"sourceHash": "b122c14b0c1a376daf61dc44816325f78386691be1eda60beee53e2ee09b118c",
+					"status": "content"
+				},
+				"asset/templates/dir.hbs": {
+					"diff": "--- published/asset/templates/dir.hbs\n+++ rebuilt/asset/templates/dir.hbs\n@@ -11,7 +11,7 @@\n \n export {\n {{#each modules}}\n-{{#if varNameChanged}} {{varName}} as{{/if}} {{name}},\n+  {{name}},\n {{/each}}\n }\n \n",
+					"match": false,
+					"packageHash": "1fe3e1e1d605b1a0730d1618824f068edd95c2a643a5a2e1a2ae996aa0e23416",
+					"size": 320,
+					"sourceHash": "58064dd7a0215c856e44c129e2d9689c806c63fbdbfaa4c95edb157136c6b868",
+					"status": "content"
+				},
+				"lib/dir.js": {
+					"diff": "--- published/lib/dir.js\n+++ rebuilt/lib/dir.js\n@@ -39,17 +39,10 @@\n     .filter((name) => shouldRequire(name))\n     .map((name) => path.join(dirname, name))\n     .filter((filename) => isModule(filename))\n-    .map((filename) => {\n-      const pathName = path.basename(filename, path.extname(filename))\n-      const name = pathName.replace(/^\\d+\\./, '')\n-      const varNameChanged = ['default'].includes(name)\n-      return {\n-        path: pathName,\n-        name: name,\n-        varName: varNameChanged ? name + '_' : name,\n-        varNameChanged,\n-      }\n-    })\n+    .map((filename) => ({\n+      path: path.basename(filename, path.extname(filename)),\n+      name: path.basename(filename, path.extname(filename)).replace(/^\\d+\\./, ''),\n+    }))\n     .filter(({name}) => name !== 'index')\n   return {\n     force: true,\n",
+					"match": false,
+					"packageHash": "8d88d43adf96e4da6439e8016f3112b416929dd59904aa7957e136d531516749",
+					"size": 2814,
+					"sourceHash": "7e261bf73a35a4e5b1b59b71e4bd9d194cfedb0d932c232d34153204cc2afa2b",
+					"status": "content"
+				},
+				"lib/index.js": {
+					"diff": "--- published/lib/index.js\n+++ rebuilt/lib/index.js\n@@ -8,53 +8,53 @@\n const _interopRequireDefault = (obj) => obj && obj.__esModule ? obj : {default: obj}\n const _d = (m) => _interopRequireDefault(m).default\n \n-const Ctrl = _d(require('./Ctrl'))\n-const Dialogs = _d(require('./Dialogs'))\n-const Hook = _d(require('./Hook'))\n-const License = _d(require('./License'))\n-const Readme = _d(require('./Readme'))\n-const Resources = _d(require('./Resources'))\n-const Scene = _d(require('./Scene'))\n-const Stateful = _d(require('./Stateful'))\n-const Stateless = _d(require('./Stateless'))\n-const Story = _d(require('./Story'))\n-const View = _d(require('./View'))\n-const Wrap = _d(require('./Wrap'))\n-const api = _d(require('./api'))\n-const dir = _d(require('./dir'))\n-const errorPage = _d(require('./errorPage'))\n-const lib = _d(require('./lib'))\n-const mapping = _d(require('./mapping'))\n-const nginx = _d(require('./nginx'))\n-const pcssVars = _d(require('./pcssVars'))\n-const selfSigned = _d(require('./selfSigned'))\n-const templates = _d(require('./templates'))\n-const test = _d(require('./test'))\n-const toc = _d(require('./toc'))\n-const vhost = _d(require('./vhost'))\n+const ctrl_ = _d(require('./Ctrl'))\n+const dialogs_ = _d(require('./Dialogs'))\n+const hook_ = _d(require('./Hook'))\n+const license_ = _d(require('./License'))\n+const readme_ = _d(require('./Readme'))\n+const resources_ = _d(require('./Resources'))\n+const scene_ = _d(require('./Scene'))\n+const stateful_ = _d(require('./Stateful'))\n+const stateless_ = _d(require('./Stateless'))\n+const story_ = _d(require('./Story'))\n+const view_ = _d(require('./View'))\n+const wrap_ = _d(require('./Wrap'))\n+const api_ = _d(require('./api'))\n+const dir_ = _d(require('./dir'))\n+const errorPage_ = _d(require('./errorPage'))\n+const lib_ = _d(require('./lib'))\n+const mapping_ = _d(require('./mapping'))\n+const nginx_ = _d(require('./nginx'))\n+const pcssVars_ = _d(require('./pcssVars'))\n+const selfSigned_ = _d(require('./selfSigned'))\n+const templates_ = _d(require('./templates'))\n+const test_ = _d(require('./test'))\n+const toc_ = _d(require('./toc'))\n+const vhost_ = _d(require('./vhost'))\n \n-exports.Ctrl = Ctrl\n-exports.Dialogs = Dialogs\n-exports.Hook = Hook\n-exports.License = License\n-exports.Readme = Readme\n-exports.Resources = Resources\n-exports.Scene = Scene\n-exports.Stateful = Stateful\n-exports.Stateless = Stateless\n-exports.Story = Story\n-exports.View = View\n-exports.Wrap = Wrap\n-exports.api = api\n-exports.dir = dir\n-exports.errorPage = errorPage\n-exports.lib = lib\n-exports.mapping = mapping\n-exports.nginx = nginx\n-exports.pcssVars = pcssVars\n-exports.selfSigned = selfSigned\n-exports.templates = templates\n-exports.test = test\n-exports.toc = toc\n-exports.vhost = vhost\n+exports.Ctrl = ctrl_\n+exports.Dialogs = dialogs_\n+exports.Hook = hook_\n+exports.License = license_\n+exports.Readme = readme_\n+exports.Resources = resources_\n+exports.Scene = scene_\n+exports.Stateful = stateful_\n+exports.Stateless = stateless_\n+exports.Story = story_\n+exports.View = view_\n+exports.Wrap = wrap_\n+exports.api = api_\n+exports.dir = dir_\n+exports.errorPage = errorPage_\n+exports.lib = lib_\n+exports.mapping = mapping_\n+exports.nginx = nginx_\n+exports.pcssVars = pcssVars_\n+exports.selfSigned = selfSigned_\n+exports.templates = templates_\n",
+					"match": false,
+					"packageHash": "6c891492f68b2a77f6f3348ea30fa52d50209802a25380bccb555d7f7e3f3869",
+					"size": 1756,
+					"sourceHash": "da6275f3d21922d1a5f30d8e43093d24761371391f07aaa98328aac1a04151c1",
+					"status": "content"
+				},
+				"test/dir_test.js": {
+					"diff": "--- published/test/dir_test.js\n+++ rebuilt/test/dir_test.js\n@@ -26,7 +26,7 @@\n       description: 'hoge',\n       default: 'dddd'\n     })\n-    bud.path = `${__dirname}/../tmp/testing-dir/index.mjs`\n+    bud.path = `${__dirname}/../tmp/foo/bar/baz.mjs`\n     bud.mkdirp = true\n     await coz.render(bud)\n   })\n@@ -39,7 +39,7 @@\n       default: 'dir_test',\n       cjs: true\n     })\n-    bud.path = `${__dirname}/../tmp/testing-dir/index.js`\n+    bud.path = `${__dirname}/../tmp/foo/bar/baz.js`\n     bud.mkdirp = true\n     await coz.render(bud)\n   })\n",
+					"match": false,
+					"packageHash": "dc4b74499b757fd96ef3326e799ee33bac0ebbf7aab608eeb989e7ce68ea10ab",
+					"size": 861,
+					"sourceHash": "86f6092546ac41825910c1b9563f57be28c5ab6f083e0457417be973a2d3b06c",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 5,
+				"matchingFiles": 99,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.9519230769230769,
+				"totalFiles": 104
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "aglob",
+				"version": "3.0.1"
+			},
+			{
+				"name": "ansi-red",
+				"version": "0.1.1"
+			},
+			{
+				"name": "ansi-wrap",
+				"version": "0.1.0"
+			},
+			{
+				"name": "argparse",
+				"version": "1.0.9"
+			},
+			{
+				"name": "autolinker",
+				"version": "0.15.3"
+			},
+			{
+				"name": "balanced-match",
+				"version": "1.0.0"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "1.1.8"
+			},
+			{
+				"name": "coffee-script",
+				"version": "1.12.7"
+			},
+			{
+				"name": "concat-map",
+				"version": "0.0.1"
+			},
+			{
+				"name": "concat-stream",
+				"version": "1.6.0"
+			},
+			{
+				"name": "core-util-is",
+				"version": "1.0.2"
+			},
+			{
+				"name": "diacritics-map",
+				"version": "0.1.0"
+			},
+			{
+				"name": "expand-range",
+				"version": "1.8.2"
+			},
+			{
+				"name": "extend-shallow",
+				"version": "2.0.1"
+			},
+			{
+				"name": "fill-range",
+				"version": "2.2.3"
+			},
+			{
+				"name": "for-in",
+				"version": "1.0.2"
+			},
+			{
+				"name": "fs.realpath",
+				"version": "1.0.0"
+			},
+			{
+				"name": "glob",
+				"version": "7.1.2"
+			},
+			{
+				"name": "gray-matter",
+				"version": "2.1.1"
+			},
+			{
+				"name": "inflight",
+				"version": "1.0.6"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.3"
+			},
+			{
+				"name": "is-buffer",
+				"version": "1.1.5"
+			},
+			{
+				"name": "is-extendable",
+				"version": "0.1.1"
+			},
+			{
+				"name": "is-number",
+				"version": "2.1.0"
+			},
+			{
+				"name": "is-plain-object",
+				"version": "2.0.4"
+			},
+			{
+				"name": "isobject",
+				"version": "3.0.1"
+			},
+			{
+				"name": "isarray",
+				"version": "1.0.0"
+			},
+			{
+				"name": "isobject",
+				"version": "2.1.0"
+			},
+			{
+				"name": "js-yaml",
+				"version": "3.10.0"
+			},
+			{
+				"name": "esprima",
+				"version": "4.0.0"
+			},
+			{
+				"name": "kind-of",
+				"version": "3.2.2"
+			},
+			{
+				"name": "list-item",
+				"version": "1.1.1"
+			},
+			{
+				"name": "markdown-link",
+				"version": "0.1.1"
+			},
+			{
+				"name": "markdown-toc",
+				"version": "1.2.0"
+			},
+			{
+				"name": "lazy-cache",
+				"version": "2.0.2"
+			},
+			{
+				"name": "minimist",
+				"version": "1.2.0"
+			},
+			{
+				"name": "minimatch",
+				"version": "3.0.4"
+			},
+			{
+				"name": "mixin-deep",
+				"version": "1.3.0"
+			},
+			{
+				"name": "is-extendable",
+				"version": "1.0.1"
+			},
+			{
+				"name": "node-forge",
+				"version": "0.7.5"
+			},
+			{
+				"name": "object.pick",
+				"version": "1.3.0"
+			},
+			{
+				"name": "once",
+				"version": "1.4.0"
+			},
+			{
+				"name": "path-is-absolute",
+				"version": "1.0.1"
+			},
+			{
+				"name": "process-nextick-args",
+				"version": "1.0.7"
+			},
+			{
+				"name": "randomatic",
+				"version": "1.1.7"
+			},
+			{
+				"name": "is-number",
+				"version": "3.0.0"
+			},
+			{
+				"name": "kind-of",
+				"version": "4.0.0"
+			},
+			{
+				"name": "readable-stream",
+				"version": "2.3.3"
+			},
+			{
+				"name": "remarkable",
+				"version": "1.7.1"
+			},
+			{
+				"name": "argparse",
+				"version": "0.1.16"
+			},
+			{
+				"name": "repeat-element",
+				"version": "1.1.2"
+			},
+			{
+				"name": "repeat-string",
+				"version": "1.6.1"
+			},
+			{
+				"name": "safe-buffer",
+				"version": "5.1.1"
+			},
+			{
+				"name": "selfsigned",
+				"version": "1.10.3"
+			},
+			{
+				"name": "set-getter",
+				"version": "0.1.0"
+			},
+			{
+				"name": "sprintf-js",
+				"version": "1.0.3"
+			},
+			{
+				"name": "string_decoder",
+				"version": "1.0.3"
+			},
+			{
+				"name": "stringcase",
+				"version": "4.2.0"
+			},
+			{
+				"name": "strip-color",
+				"version": "0.1.0"
+			},
+			{
+				"name": "to-object-path",
+				"version": "0.3.0"
+			},
+			{
+				"name": "toml",
+				"version": "2.3.3"
+			},
+			{
+				"name": "typedarray",
+				"version": "0.0.6"
+			},
+			{
+				"name": "underscore",
+				"version": "1.7.0"
+			},
+			{
+				"name": "underscore.string",
+				"version": "2.4.0"
+			},
+			{
+				"name": "util-deprecate",
+				"version": "1.0.2"
+			},
+			{
+				"name": "wrappy",
+				"version": "1.0.2"
+			}
+		]
+	}
+]

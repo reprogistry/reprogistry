@@ -1,0 +1,410 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T15:30:30.829Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:5.6.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "the-templates@2.4.4",
+			"name": "the-templates",
+			"version": "2.4.4",
+			"location": "https://registry.npmjs.org/the-templates/-/the-templates-2.4.4.tgz",
+			"integrity": "sha512-G3QLos314hMyAzwuxRgQl6+TxtZFQghG5DWjsktO0aHr9OCb2VjUmisODfrYtJ3zTz7N+t+RwZpPAL4WGAZXew==",
+			"publishedAt": "2018-01-27T05:48:29.578Z",
+			"publishedWith": {
+				"node": "9.4.0",
+				"npm": "5.6.0"
+			},
+			"dependencies": {
+				"aglob": "^3.0.0",
+				"ape-tmpl": "^6.0.8",
+				"markdown-toc": "^1.2.0",
+				"selfsigned": "^1.9.1",
+				"stringcase": "^4.1.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/the-labo/the-templates.git",
+			"spec": "github:the-labo/the-templates#654c7a9b485ad3038cdb0106471d1123c90c2938"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"asset/templates/cjs_dir.hbs": {
+					"diff": "--- published/asset/templates/cjs_dir.hbs\n+++ rebuilt/asset/templates/cjs_dir.hbs\n@@ -6,11 +6,15 @@\n \n const _d = (m) => 'default' in m ? m.default : m\n \n+{{#each modules}}\n+const {{name}} = _d(require('./{{path}}'))\n+{{/each}}\n+\n module.exports = {\n {{#each modules}}\n-  get {{name}} () { return _d(require('./{{path}}')) },\n+  {{name}},\n {{/each}}\n-{{#if defaultModule}}\n-  get default () { return _d(require('./{{defaultModule.path}}') },\n+{{#if defaultExport}}\n+  default: {{defaultExport}},\n {{/if}}\n }\n",
+					"match": false,
+					"packageHash": "3764939387caa6f4e955b8b458a6d4e13f80553e7116e4f8d7b7f4c1b8350deb",
+					"size": 314,
+					"sourceHash": "4e55549395cb8c712d42deecb0a065f1846a0e089be8310e3e59be4cbdecda89",
+					"status": "content"
+				},
+				"lib/dir.js": {
+					"diff": "--- published/lib/dir.js\n+++ rebuilt/lib/dir.js\n@@ -35,15 +35,6 @@\n     default: defaultExport = false,\n   } = config\n   const TMPL_PATH = cjs ? _tmpl('cjs_dir.hbs') : _tmpl('dir.hbs')\n-  const modules = fs.readdirSync(dirname)\n-    .filter((name) => shouldRequire(name))\n-    .map((name) => path.join(dirname, name))\n-    .filter((filename) => isModule(filename))\n-    .map((filename) => ({\n-      path: path.basename(filename, path.extname(filename)),\n-      name: path.basename(filename, path.extname(filename))\n-    }))\n-    .filter(({name}) => name !== 'index')\n   return {\n     force: true,\n     mode: '444',\n@@ -53,8 +44,15 @@\n       name,\n       description,\n       defaultExport,\n-      defaultModule: modules.find(({name}) => name === defaultExport),\n-      modules\n+      modules: fs.readdirSync(dirname)\n+        .filter((name) => shouldRequire(name))\n+        .map((name) => path.join(dirname, name))\n+        .filter((filename) => isModule(filename))\n+        .map((filename) => ({\n+          path: path.basename(filename, path.extname(filename)),\n+          name: path.basename(filename, path.extname(filename))\n+        }))\n+        .filter(({name}) => name !== 'index')\n     }\n   }\n }\n@@ -71,21 +69,6 @@\n       default: defaultExport = false,\n     } = config\n     const TMPL_PATH = cjs ? _tmpl('cjs_dir.hbs') : _tmpl('dir.hbs')\n-    const modules = aglob.sync('**/*.*', {cwd: dirname, ignore: [].concat(ignore)})\n-      .filter((name) => shouldRequire(path.basename(name)))\n-      .map((name) => path.join(dirname, name))\n-      .filter((filename) => isModule(filename))\n-      .map((filename) => {\n-        const basename = path.basename(filename, path.extname(filename))\n-        return {\n-          path: path.join(\n-            path.relative(dirname, path.dirname(filename)),\n-            basename\n-          ),\n-          name: basename\n-        }\n-      })\n-      .filter(({name}) => name !== 'index')\n     return {\n       force: true,\n       mode: '444',\n@@ -95,8 +78,21 @@\n         name,\n         description,\n         defaultExport,\n-        defaultModule: modules.find(({name}) => name === defaultExport),\n-        modules\n+        modules: aglob.sync('**/*.*', {cwd: dirname, ignore: [].concat(ignore)})\n+          .filter((name) => shouldRequire(path.basename(name)))\n+          .map((name) => path.join(dirname, name))\n+          .filter((filename) => isModule(filename))\n+          .map((filename) => {\n+            const basename = path.basename(filename, path.extname(filename))\n+            return {\n+              path: path.join(\n+                path.relative(dirname, path.dirname(filename)),\n+                basename\n+              ),\n+              name: basename\n+            }\n+          })\n+          .filter(({name}) => name !== 'index')\n       }\n     }\n   }\n",
+					"match": false,
+					"packageHash": "2fb5cadbe617da2e6c986271eca2ee50753939d81470e3c241b82553d9eda813",
+					"size": 2616,
+					"sourceHash": "7cd4aba0012b1624cd17e0681cfd09b708e56d69e41749c0f04075fa0afea37f",
+					"status": "content"
+				},
+				"lib/index.js": {
+					"diff": "--- published/lib/index.js\n+++ rebuilt/lib/index.js\n@@ -6,22 +6,40 @@\n \n const _d = (m) => 'default' in m ? m.default : m\n \n+const Bound = _d(require('./Bound'))\n+const Ctrl = _d(require('./Ctrl'))\n+const Scene = _d(require('./Scene'))\n+const api = _d(require('./api'))\n+const dir = _d(require('./dir'))\n+const errorPage = _d(require('./errorPage'))\n+const lib = _d(require('./lib'))\n+const mapping = _d(require('./mapping'))\n+const markdowns = _d(require('./markdowns'))\n+const nginx = _d(require('./nginx'))\n+const pcssVars = _d(require('./pcssVars'))\n+const readme = _d(require('./readme'))\n+const selfSigned = _d(require('./selfSigned'))\n+const templates = _d(require('./templates'))\n+const test = _d(require('./test'))\n+const toc = _d(require('./toc'))\n+const vhost = _d(require('./vhost'))\n+\n module.exports = {\n-  get Bound () { return _d(require('./Bound')) },\n-  get Ctrl () { return _d(require('./Ctrl')) },\n-  get Scene () { return _d(require('./Scene')) },\n-  get api () { return _d(require('./api')) },\n-  get dir () { return _d(require('./dir')) },\n-  get errorPage () { return _d(require('./errorPage')) },\n-  get lib () { return _d(require('./lib')) },\n-  get mapping () { return _d(require('./mapping')) },\n-  get markdowns () { return _d(require('./markdowns')) },\n-  get nginx () { return _d(require('./nginx')) },\n-  get pcssVars () { return _d(require('./pcssVars')) },\n-  get readme () { return _d(require('./readme')) },\n-  get selfSigned () { return _d(require('./selfSigned')) },\n-  get templates () { return _d(require('./templates')) },\n-  get test () { return _d(require('./test')) },\n-  get toc () { return _d(require('./toc')) },\n-  get vhost () { return _d(require('./vhost')) },\n+  Bound,\n+  Ctrl,\n+  Scene,\n+  api,\n+  dir,\n+  errorPage,\n+  lib,\n+  mapping,\n+  markdowns,\n+  nginx,\n+  pcssVars,\n+  readme,\n+  selfSigned,\n+  templates,\n+  test,\n+  toc,\n+  vhost,\n }\n",
+					"match": false,
+					"packageHash": "d1c823a63840704e50b1d775bfec0c50856ea3bce7ba74e6bc8e4aec9884221e",
+					"size": 1024,
+					"sourceHash": "b40578038698aaa9ef847dcc8279d6b23388e6091e6ba5160de8303106df4897",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -47,4 +47,4 @@\n     \"node\": \">=7.6\",\n     \"npm\": \">=4\"\n   }\n-}\n+}\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "fbdea13c521b85b2823ba324dd4f9599e8676ba6e8330d6af6c01e8d8aed6a87",
+					"size": 1204,
+					"sourceHash": "01274db1b78fad1b06579c9829d75f2dbe191081b9d1bd348ecf5f2c18237cec",
+					"status": "content"
+				},
+				"test/dir_test.js": {
+					"diff": "--- published/test/dir_test.js\n+++ rebuilt/test/dir_test.js\n@@ -36,7 +36,7 @@\n       dirname: __dirname,\n       name: 'foo',\n       description: 'hoge',\n-      default: 'dir_test',\n+      default: 'dddd',\n       cjs: true\n     })\n     bud.path = `${__dirname}/../tmp/foo/bar/baz.js`\n",
+					"match": false,
+					"packageHash": "86f6092546ac41825910c1b9563f57be28c5ab6f083e0457417be973a2d3b06c",
+					"size": 849,
+					"sourceHash": "b5759002c5e59af8f08288be62d22d6336f794df5f47c7a8633d00759d96e38f",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 5,
+				"matchingFiles": 75,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.9375,
+				"totalFiles": 80
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "abind",
+				"version": "1.0.3"
+			},
+			{
+				"name": "aglob",
+				"version": "3.0.0"
+			},
+			{
+				"name": "ansi-red",
+				"version": "0.1.1"
+			},
+			{
+				"name": "ansi-wrap",
+				"version": "0.1.0"
+			},
+			{
+				"name": "ape-tmpl",
+				"version": "6.0.8"
+			},
+			{
+				"name": "argparse",
+				"version": "1.0.9"
+			},
+			{
+				"name": "argx",
+				"version": "3.0.2"
+			},
+			{
+				"name": "arrayfilter",
+				"version": "1.1.2"
+			},
+			{
+				"name": "arraysort",
+				"version": "2.0.0"
+			},
+			{
+				"name": "asobj",
+				"version": "2.0.8"
+			},
+			{
+				"name": "autolinker",
+				"version": "0.15.3"
+			},
+			{
+				"name": "babel-runtime",
+				"version": "6.26.0"
+			},
+			{
+				"name": "balanced-match",
+				"version": "1.0.0"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "1.1.8"
+			},
+			{
+				"name": "coffee-script",
+				"version": "1.12.7"
+			},
+			{
+				"name": "concat-map",
+				"version": "0.0.1"
+			},
+			{
+				"name": "concat-stream",
+				"version": "1.6.0"
+			},
+			{
+				"name": "core-js",
+				"version": "2.5.0"
+			},
+			{
+				"name": "core-util-is",
+				"version": "1.0.2"
+			},
+			{
+				"name": "deep-equal",
+				"version": "1.0.1"
+			},
+			{
+				"name": "diacritics-map",
+				"version": "0.1.0"
+			},
+			{
+				"name": "evaljson",
+				"version": "5.1.0"
+			},
+			{
+				"name": "expand-range",
+				"version": "1.8.2"
+			},
+			{
+				"name": "extend",
+				"version": "3.0.1"
+			},
+			{
+				"name": "extend-shallow",
+				"version": "2.0.1"
+			},
+			{
+				"name": "fill-range",
+				"version": "2.2.3"
+			},
+			{
+				"name": "for-in",
+				"version": "1.0.2"
+			},
+			{
+				"name": "fs.realpath",
+				"version": "1.0.0"
+			},
+			{
+				"name": "glob",
+				"version": "7.1.2"
+			},
+			{
+				"name": "gray-matter",
+				"version": "2.1.1"
+			},
+			{
+				"name": "iftype",
+				"version": "3.0.2"
+			},
+			{
+				"name": "inflight",
+				"version": "1.0.6"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.3"
+			},
+			{
+				"name": "is-buffer",
+				"version": "1.1.5"
+			},
+			{
+				"name": "is-extendable",
+				"version": "0.1.1"
+			},
+			{
+				"name": "is-number",
+				"version": "2.1.0"
+			},
+			{
+				"name": "is-plain-object",
+				"version": "2.0.4"
+			},
+			{
+				"name": "isobject",
+				"version": "3.0.1"
+			},
+			{
+				"name": "isarray",
+				"version": "1.0.0"
+			},
+			{
+				"name": "isobject",
+				"version": "2.1.0"
+			},
+			{
+				"name": "js-yaml",
+				"version": "3.10.0"
+			},
+			{
+				"name": "esprima",
+				"version": "4.0.0"
+			},
+			{
+				"name": "kind-of",
+				"version": "3.2.2"
+			},
+			{
+				"name": "list-item",
+				"version": "1.1.1"
+			},
+			{
+				"name": "markdown-link",
+				"version": "0.1.1"
+			},
+			{
+				"name": "markdown-toc",
+				"version": "1.2.0"
+			},
+			{
+				"name": "lazy-cache",
+				"version": "2.0.2"
+			},
+			{
+				"name": "minimist",
+				"version": "1.2.0"
+			},
+			{
+				"name": "minimatch",
+				"version": "3.0.4"
+			},
+			{
+				"name": "mixin-deep",
+				"version": "1.3.0"
+			},
+			{
+				"name": "is-extendable",
+				"version": "1.0.1"
+			},
+			{
+				"name": "node-forge",
+				"version": "0.6.33"
+			},
+			{
+				"name": "object.pick",
+				"version": "1.3.0"
+			},
+			{
+				"name": "objnest",
+				"version": "4.0.2"
+			},
+			{
+				"name": "once",
+				"version": "1.4.0"
+			},
+			{
+				"name": "path-is-absolute",
+				"version": "1.0.1"
+			},
+			{
+				"name": "process-nextick-args",
+				"version": "1.0.7"
+			},
+			{
+				"name": "randomatic",
+				"version": "1.1.7"
+			},
+			{
+				"name": "is-number",
+				"version": "3.0.0"
+			},
+			{
+				"name": "kind-of",
+				"version": "4.0.0"
+			},
+			{
+				"name": "readable-stream",
+				"version": "2.3.3"
+			},
+			{
+				"name": "regenerator-runtime",
+				"version": "0.11.0"
+			},
+			{
+				"name": "remarkable",
+				"version": "1.7.1"
+			},
+			{
+				"name": "argparse",
+				"version": "0.1.16"
+			},
+			{
+				"name": "repeat-element",
+				"version": "1.1.2"
+			},
+			{
+				"name": "repeat-string",
+				"version": "1.6.1"
+			},
+			{
+				"name": "safe-buffer",
+				"version": "5.1.1"
+			},
+			{
+				"name": "selfsigned",
+				"version": "1.10.1"
+			},
+			{
+				"name": "set-getter",
+				"version": "0.1.0"
+			},
+			{
+				"name": "sprintf-js",
+				"version": "1.0.3"
+			},
+			{
+				"name": "string_decoder",
+				"version": "1.0.3"
+			},
+			{
+				"name": "stringcase",
+				"version": "4.1.0"
+			},
+			{
+				"name": "strip-color",
+				"version": "0.1.0"
+			},
+			{
+				"name": "to-object-path",
+				"version": "0.3.0"
+			},
+			{
+				"name": "toml",
+				"version": "2.3.3"
+			},
+			{
+				"name": "typedarray",
+				"version": "0.0.6"
+			},
+			{
+				"name": "underscore",
+				"version": "1.7.0"
+			},
+			{
+				"name": "underscore.string",
+				"version": "2.4.0"
+			},
+			{
+				"name": "util-deprecate",
+				"version": "1.0.2"
+			},
+			{
+				"name": "wrappy",
+				"version": "1.0.2"
+			}
+		]
+	}
+]

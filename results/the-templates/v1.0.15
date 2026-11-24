@@ -1,0 +1,127 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T14:24:09.231Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:4.2.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "the-templates@1.0.15",
+			"name": "the-templates",
+			"version": "1.0.15",
+			"location": "https://registry.npmjs.org/the-templates/-/the-templates-1.0.15.tgz",
+			"integrity": "sha512-d3zcuZGsZzo0xbOCvgN5D3sSE/DArZtzpgTt6ReMS9isX41C/VMaIGICppbHDbKaTwB4tW3J+YTtP2DCeCGnPQ==",
+			"publishedAt": "2017-05-21T10:42:32.592Z",
+			"publishedWith": {
+				"node": "7.10.0",
+				"npm": "4.2.0"
+			},
+			"dependencies": {
+				"aglob": "^2.0.1",
+				"ape-tmpl": "^5.0.20",
+				"co": "^4.6.0",
+				"stringcase": "^3.2.1"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/the-labo/the-templates.git",
+			"spec": "github:the-labo/the-templates#4eb64e84da1a80500eba64f3ec0ec5b600de365e"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".npmignore": {
+					"match": false,
+					"packageHash": "6f179c6006bf3ff3f0b1b57a1a247c97edbee11a33374f53849829aed6261ffe",
+					"size": 605,
+					"status": "missing-in-source"
+				},
+				"asset/templates/nginx.hbs": {
+					"diff": "--- published/asset/templates/nginx.hbs\n+++ rebuilt/asset/templates/nginx.hbs\n@@ -11,16 +11,16 @@\n \n   server {\n     listen {{httpPort}};\n-{{#if domain}}    server_name {{domain}};{{/if}}\n+    server_name {{domain}};\n     return 301 https://$host$request_uri;\n   }\n   server {\n     listen {{httpsPort}} ssl default_server;\n-{{#if domain}}    server_name {{domain}};{{/if}}\n+    server_name {{domain}};\n+\n+    ssl_certificate     {{cert}};\n+    ssl_certificate_key {{certKey}};\n \n-{{#if cert}}    ssl_certificate     {{cert}};{{/if}}\n-{{#if certKey}}    ssl_certificate_key {{certKey}};{{/if}}\n-{{#if publicDir}}    root {{{publicDir}}};{{/if}}\n     location / {\n       proxy_pass http://{{name}};\n       proxy_http_version 1.1;\n",
+					"match": false,
+					"packageHash": "cb96a2070b164ffef629c963af1f7f73dddfb8334faa5d1d5264b4cbdd998151",
+					"size": 839,
+					"sourceHash": "60d3c35b33bb39c2c4efb8bbe6513c20cf13928a96f09332054c952cc777ef91",
+					"status": "content"
+				},
+				"lib/nginx.js": {
+					"diff": "--- published/lib/nginx.js\n+++ rebuilt/lib/nginx.js\n@@ -20,8 +20,7 @@\n     httpsPort = 443,\n     domain = 'the-app.example.com',\n     cert = '__cert_path__',\n-    certKey = '__cert_key_path__',\n-    publicDir\n+    certKey = '__cert_key_path__'\n   } = config\n   return {\n     force: true,\n@@ -35,8 +34,7 @@\n       httpsPort,\n       domain,\n       cert,\n-      certKey,\n-      publicDir\n+      certKey\n     }\n   }\n }\n",
+					"match": false,
+					"packageHash": "110cd777884e540f27c3eaff5242ed8eb213ed49cb9763500395ba5c4bdec8cb",
+					"size": 726,
+					"sourceHash": "5ead26467da176c9f45f1e1de3a06b0e69bd4915f54b9ff530ab9dc0f1c185c3",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 39,
+				"missingInPackage": 0,
+				"missingInSource": 1,
+				"score": 0.9285714285714286,
+				"totalFiles": 42
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "aglob",
+				"version": "2.0.1"
+			},
+			{
+				"name": "balanced-match",
+				"version": "1.0.2"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "1.1.22"
+			},
+			{
+				"name": "co",
+				"version": "4.6.0"
+			},
+			{
+				"name": "concat-map",
+				"version": "0.0.1"
+			},
+			{
+				"name": "fs.realpath",
+				"version": "1.0.0"
+			},
+			{
+				"name": "glob",
+				"version": "7.2.3"
+			},
+			{
+				"name": "inflight",
+				"version": "1.0.6"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.4"
+			},
+			{
+				"name": "minimatch",
+				"version": "3.1.5"
+			},
+			{
+				"name": "once",
+				"version": "1.4.0"
+			},
+			{
+				"name": "path-is-absolute",
+				"version": "1.0.1"
+			},
+			{
+				"name": "stringcase",
+				"version": "3.2.1"
+			},
+			{
+				"name": "wrappy",
+				"version": "1.0.2"
+			}
+		]
+	}
+]

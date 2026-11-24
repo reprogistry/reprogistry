@@ -1,0 +1,404 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T15:47:15.881Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:6.4.1",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "the-templates@6.0.2",
+			"name": "the-templates",
+			"version": "6.0.2",
+			"location": "https://registry.npmjs.org/the-templates/-/the-templates-6.0.2.tgz",
+			"integrity": "sha512-8pPsfZa3Lc/2cLDdmV0CH4S3heDpRQVPT9ZM6Q0hYoUQuBH9j/EY33eowr9e1nmG7oHYuixlQ0N6NLPUyg+Fyw==",
+			"publishedAt": "2019-01-11T03:22:08.813Z",
+			"publishedWith": {
+				"node": "11.4.0",
+				"npm": "6.5.0"
+			},
+			"dependencies": {
+				"aglob": "^3.0.1",
+				"evaljson": "^6.0.3",
+				"markdown-toc": "^1.2.0",
+				"objnest": "^5.0.4",
+				"reserved": "^0.1.2",
+				"selfsigned": "^1.10.4",
+				"stringcase": "^4.3.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/the-labo/the-templates.git",
+			"spec": "github:the-labo/the-templates#466b6e464aaf213a293588f23ffb405334255430"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"asset/templates/Stateful.hbs": {
+					"diff": "--- published/asset/templates/Stateful.hbs\n+++ rebuilt/asset/templates/Stateful.hbs\n@@ -4,7 +4,7 @@\n 'use strict'\n \n import React from 'react'\n-import context from '{{contextPath}}'\n+import context from '../../context'\n \n class {{pascalcase name}} extends React.Component {\n   #stateful = context.stateful(\n",
+					"match": false,
+					"packageHash": "e89b3dcf829c5dae45263039822e5cf2383b33f5ca4c603060186d68e5ac1c85",
+					"size": 442,
+					"sourceHash": "282d7ce55c8dd5dc48713e40a404206a3bd63d3b9e3ef39d49a1ef3d35980f8b",
+					"status": "content"
+				},
+				"asset/templates/Stateless.hbs": {
+					"diff": "--- published/asset/templates/Stateless.hbs\n+++ rebuilt/asset/templates/Stateless.hbs\n@@ -4,7 +4,7 @@\n 'use strict'\n \n import React from 'react'\n-import context from '{{contextPath}}'\n+import context from '../../context'\n \n class {{pascalcase name}} extends React.Component {\n   #stateless = context.stateless()\n",
+					"match": false,
+					"packageHash": "79fdccc09dc1ed38f3e344a5894bc0514cfdc315b6dda5a3d1975da130b216ba",
+					"size": 374,
+					"sourceHash": "4abbb1cdcb4070b40aa713a21b1da59fb589f86a9c7ab1ad9309b9c6603cd226",
+					"status": "content"
+				},
+				"lib/Stateful.js": {
+					"diff": "--- published/lib/Stateful.js\n+++ rebuilt/lib/Stateful.js\n@@ -26,7 +26,6 @@\n     path: `${name}.jsx`,\n     data: {\n       name: path.basename(name) + '',\n-      contextPath: path.relative(name, 'context'),\n     },\n     tmpl,\n   }\n",
+					"match": false,
+					"packageHash": "396378443a519926bfe966ee6f91d1955ef43ba480e579ad20c22c9c8742f35c",
+					"size": 651,
+					"sourceHash": "2ce0db365cb80975f623c58bc6719d47ca0218f46afcf2108cd64cb1b322ca3f",
+					"status": "content"
+				},
+				"lib/Stateless.js": {
+					"diff": "--- published/lib/Stateless.js\n+++ rebuilt/lib/Stateless.js\n@@ -9,7 +9,7 @@\n const _tmpl = require('./_tmpl')\n const assert = require('assert')\n const path = require('path')\n-const { pascalcase, camelcase } = require('stringcase')\n+const {pascalcase, camelcase} = require('stringcase')\n \n /** @lends Stateless */\n function Stateless (config) {\n@@ -26,7 +26,6 @@\n     path: `${name}.jsx`,\n     data: {\n       name: path.basename(name) + '',\n-      contextPath: path.relative(name, 'context'),\n     },\n     tmpl,\n   }\n",
+					"match": false,
+					"packageHash": "678b8d7e1c180f0a6f46b55fff3f026b64d774acca2468895b6df2518b556ce2",
+					"size": 659,
+					"sourceHash": "293e70c7a4c908fe210d66ecd85691526233ad501baa44ed1120bdbe2722a050",
+					"status": "content"
+				},
+				"test/Stateful_test.js": {
+					"diff": "--- published/test/Stateful_test.js\n+++ rebuilt/test/Stateful_test.js\n@@ -4,9 +4,8 @@\n  */\n 'use strict'\n \n-const Stateful = require('../lib/Stateful.js')\n+const stateful = require('../lib/Stateful.js')\n const assert = require('assert')\n-const coz = require('coz')\n \n describe('stateful', function () {\n   this.timeout(3000)\n@@ -20,11 +19,7 @@\n   })\n \n   it('Stateful', async () => {\n-    const bud = Stateful({\n-      name:'hoge/hoge',\n-    })\n-    bud.path = `${__dirname}/../tmp/testing-Stateful.js`\n-    await coz.render(bud)\n+\n   })\n })\n \n",
+					"match": false,
+					"packageHash": "b8ca48ac14bc025605d8d1fbfa098d4e6b50872879ff207218f2ff78470752ed",
+					"size": 515,
+					"sourceHash": "985c170618ffe079562afe2eb931798f72fbd622c12df83cbe32128fc95c6b7a",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 5,
+				"matchingFiles": 112,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.9572649572649573,
+				"totalFiles": 117
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "abind",
+				"version": "1.0.3"
+			},
+			{
+				"name": "aglob",
+				"version": "3.0.1"
+			},
+			{
+				"name": "ansi-red",
+				"version": "0.1.1"
+			},
+			{
+				"name": "ansi-wrap",
+				"version": "0.1.0"
+			},
+			{
+				"name": "argparse",
+				"version": "1.0.9"
+			},
+			{
+				"name": "argx",
+				"version": "3.0.2"
+			},
+			{
+				"name": "asobj",
+				"version": "3.0.0"
+			},
+			{
+				"name": "autolinker",
+				"version": "0.15.3"
+			},
+			{
+				"name": "babel-runtime",
+				"version": "6.26.0"
+			},
+			{
+				"name": "balanced-match",
+				"version": "1.0.0"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "1.1.8"
+			},
+			{
+				"name": "coffee-script",
+				"version": "1.12.7"
+			},
+			{
+				"name": "concat-map",
+				"version": "0.0.1"
+			},
+			{
+				"name": "concat-stream",
+				"version": "1.6.0"
+			},
+			{
+				"name": "core-js",
+				"version": "2.5.0"
+			},
+			{
+				"name": "core-util-is",
+				"version": "1.0.2"
+			},
+			{
+				"name": "deep-equal",
+				"version": "1.0.1"
+			},
+			{
+				"name": "diacritics-map",
+				"version": "0.1.0"
+			},
+			{
+				"name": "evaljson",
+				"version": "6.0.3"
+			},
+			{
+				"name": "expand-range",
+				"version": "1.8.2"
+			},
+			{
+				"name": "extend",
+				"version": "3.0.2"
+			},
+			{
+				"name": "extend-shallow",
+				"version": "2.0.1"
+			},
+			{
+				"name": "fill-range",
+				"version": "2.2.3"
+			},
+			{
+				"name": "for-in",
+				"version": "1.0.2"
+			},
+			{
+				"name": "fs.realpath",
+				"version": "1.0.0"
+			},
+			{
+				"name": "glob",
+				"version": "7.1.2"
+			},
+			{
+				"name": "gray-matter",
+				"version": "2.1.1"
+			},
+			{
+				"name": "iftype",
+				"version": "3.0.2"
+			},
+			{
+				"name": "inflight",
+				"version": "1.0.6"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.3"
+			},
+			{
+				"name": "is-buffer",
+				"version": "1.1.5"
+			},
+			{
+				"name": "is-extendable",
+				"version": "0.1.1"
+			},
+			{
+				"name": "is-number",
+				"version": "2.1.0"
+			},
+			{
+				"name": "is-plain-object",
+				"version": "2.0.4"
+			},
+			{
+				"name": "isobject",
+				"version": "3.0.1"
+			},
+			{
+				"name": "isarray",
+				"version": "1.0.0"
+			},
+			{
+				"name": "isobject",
+				"version": "2.1.0"
+			},
+			{
+				"name": "js-yaml",
+				"version": "3.10.0"
+			},
+			{
+				"name": "esprima",
+				"version": "4.0.0"
+			},
+			{
+				"name": "kind-of",
+				"version": "3.2.2"
+			},
+			{
+				"name": "list-item",
+				"version": "1.1.1"
+			},
+			{
+				"name": "markdown-link",
+				"version": "0.1.1"
+			},
+			{
+				"name": "markdown-toc",
+				"version": "1.2.0"
+			},
+			{
+				"name": "lazy-cache",
+				"version": "2.0.2"
+			},
+			{
+				"name": "minimist",
+				"version": "1.2.0"
+			},
+			{
+				"name": "minimatch",
+				"version": "3.0.4"
+			},
+			{
+				"name": "mixin-deep",
+				"version": "1.3.0"
+			},
+			{
+				"name": "is-extendable",
+				"version": "1.0.1"
+			},
+			{
+				"name": "node-forge",
+				"version": "0.7.5"
+			},
+			{
+				"name": "object.pick",
+				"version": "1.3.0"
+			},
+			{
+				"name": "objnest",
+				"version": "5.0.4"
+			},
+			{
+				"name": "once",
+				"version": "1.4.0"
+			},
+			{
+				"name": "path-is-absolute",
+				"version": "1.0.1"
+			},
+			{
+				"name": "process-nextick-args",
+				"version": "1.0.7"
+			},
+			{
+				"name": "randomatic",
+				"version": "1.1.7"
+			},
+			{
+				"name": "is-number",
+				"version": "3.0.0"
+			},
+			{
+				"name": "kind-of",
+				"version": "4.0.0"
+			},
+			{
+				"name": "readable-stream",
+				"version": "2.3.3"
+			},
+			{
+				"name": "regenerator-runtime",
+				"version": "0.11.0"
+			},
+			{
+				"name": "remarkable",
+				"version": "1.7.1"
+			},
+			{
+				"name": "argparse",
+				"version": "0.1.16"
+			},
+			{
+				"name": "repeat-element",
+				"version": "1.1.2"
+			},
+			{
+				"name": "repeat-string",
+				"version": "1.6.1"
+			},
+			{
+				"name": "reserved",
+				"version": "0.1.2"
+			},
+			{
+				"name": "safe-buffer",
+				"version": "5.1.1"
+			},
+			{
+				"name": "selfsigned",
+				"version": "1.10.4"
+			},
+			{
+				"name": "set-getter",
+				"version": "0.1.0"
+			},
+			{
+				"name": "sprintf-js",
+				"version": "1.0.3"
+			},
+			{
+				"name": "string_decoder",
+				"version": "1.0.3"
+			},
+			{
+				"name": "stringcase",
+				"version": "4.3.0"
+			},
+			{
+				"name": "strip-color",
+				"version": "0.1.0"
+			},
+			{
+				"name": "to-object-path",
+				"version": "0.3.0"
+			},
+			{
+				"name": "toml",
+				"version": "2.3.3"
+			},
+			{
+				"name": "typedarray",
+				"version": "0.0.6"
+			},
+			{
+				"name": "underscore",
+				"version": "1.7.0"
+			},
+			{
+				"name": "underscore.string",
+				"version": "2.4.0"
+			},
+			{
+				"name": "util-deprecate",
+				"version": "1.0.2"
+			},
+			{
+				"name": "wrappy",
+				"version": "1.0.2"
+			}
+		]
+	}
+]

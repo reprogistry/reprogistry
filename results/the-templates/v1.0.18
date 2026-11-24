@@ -1,0 +1,165 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T14:26:36.883Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:4.1.2",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "the-templates@1.0.18",
+			"name": "the-templates",
+			"version": "1.0.18",
+			"location": "https://registry.npmjs.org/the-templates/-/the-templates-1.0.18.tgz",
+			"integrity": "sha512-8b/FxF60NZlCOfvK0aWDI+yGwMxi+60VqljMIW4/ThxvcMQWQu95+1MgMdVieYMNRUWye+1MnKu7A3qHJ7TfOQ==",
+			"publishedAt": "2017-05-23T07:47:37.629Z",
+			"publishedWith": {
+				"node": "7.7.3",
+				"npm": "4.1.2"
+			},
+			"dependencies": {
+				"aglob": "^2.0.1",
+				"ape-tmpl": "^5.0.20",
+				"co": "^4.6.0",
+				"stringcase": "^3.2.1"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/the-labo/the-templates.git",
+			"spec": "github:the-labo/the-templates#56678f3be4e6c04d8148db5ffb301c1fac8e2096"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".npmignore": {
+					"match": false,
+					"packageHash": "6f179c6006bf3ff3f0b1b57a1a247c97edbee11a33374f53849829aed6261ffe",
+					"size": 605,
+					"status": "missing-in-source"
+				},
+				"asset/templates/markdowns.hbs": {
+					"diff": "--- published/asset/templates/markdowns.hbs\n+++ rebuilt/asset/templates/markdowns.hbs\n@@ -1,18 +1,14 @@\n /**\n  * Markdown contents\n- * @namespace Markdowns\n-{{#each files}}\n- * @property {string} {{{name}}} - Template from {{filename}}\n-{{/each}}\n+ * @module Markdowns\n  */\n 'use strict'\n \n-/** @lends Markdowns */\n const Markdowns = {}\n \n {{#each files}}\n // From {{filename}}\n-Markdowns['{{{name}}}'] = `{{{content}}}`\n+Markdowns['{{{name}}}'] = `{{content}}`\n \n {{/each}}\n export default Markdowns\n",
+					"match": false,
+					"packageHash": "c81bb39a38f22cc4b10c7beaf31cbe8d473c13d2d23a2b69e5a3607c261a6758",
+					"size": 316,
+					"sourceHash": "ccf246863a084e82db9a52b3ac697310437c80e885d699d04c14142c4fb43ad9",
+					"status": "content"
+				},
+				"asset/templates/node_markdowns.hbs": {
+					"match": false,
+					"packageHash": "d212b6fd0d6137b22cb8303c03b225a6aff0d273d4fd8320cc431724358a20e3",
+					"size": 201,
+					"status": "missing-in-source"
+				},
+				"asset/templates/node_templates.hbs": {
+					"match": false,
+					"packageHash": "31b970dfe478861dcfbdf12d530a6df9de773f40dd437e09d2e2e83cad282fc4",
+					"size": 345,
+					"status": "missing-in-source"
+				},
+				"asset/templates/templates.hbs": {
+					"match": false,
+					"packageHash": "1353f3a4cc9c44e43a7f7136d6f95425e79ad7b19fc4a21d7d31ac8ad8e0a611",
+					"size": 363,
+					"status": "missing-in-source"
+				},
+				"lib/index.js": {
+					"diff": "--- published/lib/index.js\n+++ rebuilt/lib/index.js\n@@ -14,6 +14,5 @@\n   get markdowns () { return d(require('./markdowns')) },\n   get nginx () { return d(require('./nginx')) },\n   get readme () { return d(require('./readme')) },\n-  get templates () { return d(require('./templates')) },\n   get test () { return d(require('./test')) }\n }\n",
+					"match": false,
+					"packageHash": "a490e45611d7594bb51a418a535f1e879ee784185989b365dd4777711c2e623d",
+					"size": 550,
+					"sourceHash": "657e829c6b3d98c563c31605c137c1c62a885a5e82b6bc3f1d98a2a0eb6d9eca",
+					"status": "content"
+				},
+				"lib/markdowns.js": {
+					"diff": "--- published/lib/markdowns.js\n+++ rebuilt/lib/markdowns.js\n@@ -11,14 +11,13 @@\n const aglob = require('aglob')\n const path = require('path')\n \n+const TMPL_PATH = _tmpl('markdowns.hbs')\n+\n /** @lends markdowns */\n function markdowns (config) {\n   let {\n-    dirname,\n-    node = false\n+    dirname\n   } = config\n-  const TMPL_PATH = node ? _tmpl('node_markdowns.hbs') : _tmpl('markdowns.hbs')\n-  ok(!!dirname, 'config.dirname is required')\n   return {\n     force: true,\n     mode: '444',\n",
+					"match": false,
+					"packageHash": "c244c09d26393bd5ebd530a0957bb8760c58901da15f0931bf4a1b58d43da2e0",
+					"size": 826,
+					"sourceHash": "e99b3f7ad09e961bdec1307ca7d874e188acaff822e515f2581f6bd9724a79fb",
+					"status": "content"
+				},
+				"lib/templates.js": {
+					"match": false,
+					"packageHash": "bf4510bb96dda2b809d2e19748fd15661e5af816fc8b200816375aa0b562fa6b",
+					"size": 828,
+					"status": "missing-in-source"
+				},
+				"test/templates_test.js": {
+					"match": false,
+					"packageHash": "690d5244dbd5f8dd107074888a2676835a8f293bf7e5b4a2e4eba0acbddc83ee",
+					"size": 414,
+					"status": "missing-in-source"
+				}
+			},
+			"summary": {
+				"differentFiles": 3,
+				"matchingFiles": 41,
+				"missingInPackage": 0,
+				"missingInSource": 6,
+				"score": 0.82,
+				"totalFiles": 50
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "aglob",
+				"version": "2.0.1"
+			},
+			{
+				"name": "balanced-match",
+				"version": "1.0.2"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "1.1.22"
+			},
+			{
+				"name": "co",
+				"version": "4.6.0"
+			},
+			{
+				"name": "concat-map",
+				"version": "0.0.1"
+			},
+			{
+				"name": "fs.realpath",
+				"version": "1.0.0"
+			},
+			{
+				"name": "glob",
+				"version": "7.2.3"
+			},
+			{
+				"name": "inflight",
+				"version": "1.0.6"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.4"
+			},
+			{
+				"name": "minimatch",
+				"version": "3.1.5"
+			},
+			{
+				"name": "once",
+				"version": "1.4.0"
+			},
+			{
+				"name": "path-is-absolute",
+				"version": "1.0.1"
+			},
+			{
+				"name": "stringcase",
+				"version": "3.2.1"
+			},
+			{
+				"name": "wrappy",
+				"version": "1.0.2"
+			}
+		]
+	}
+]

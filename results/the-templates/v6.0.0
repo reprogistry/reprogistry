@@ -1,0 +1,412 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T15:47:06.912Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:6.4.1",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "the-templates@6.0.0",
+			"name": "the-templates",
+			"version": "6.0.0",
+			"location": "https://registry.npmjs.org/the-templates/-/the-templates-6.0.0.tgz",
+			"integrity": "sha512-g3ECN55V6nL0AdHtTJhUxnDoHB5U6Zye3w+OXhiKeZigDD4vzXCwkoY5FaWCgvrX57kz0vWjsKHlJXVk0gBAsw==",
+			"publishedAt": "2019-01-07T08:16:13.211Z",
+			"publishedWith": {
+				"node": "11.4.0",
+				"npm": "6.4.1"
+			},
+			"dependencies": {
+				"aglob": "^3.0.1",
+				"evaljson": "^6.0.3",
+				"markdown-toc": "^1.2.0",
+				"objnest": "^5.0.4",
+				"reserved": "^0.1.2",
+				"selfsigned": "^1.10.4",
+				"stringcase": "^4.3.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/the-labo/the-templates.git",
+			"spec": "github:the-labo/the-templates#dc0cca932b5925aae1f5585d9a1bfabeaf56a9ea"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"asset/templates/Stateful.hbs": {
+					"diff": "--- published/asset/templates/Stateful.hbs\n+++ rebuilt/asset/templates/Stateful.hbs\n@@ -4,26 +4,21 @@\n 'use strict'\n \n import React from 'react'\n-import context from '../../context'\n+import { localized, stateful } from 'the-component-mixins'\n \n+@stateful(\n+  (state) => ({\n+  }),\n+  ({}) => ({\n+  }),\n+)\n+@localized\n class {{pascalcase name}} extends React.Component {\n-  #stateful = context.stateful(\n-    (state) => ({\n-    }),\n-    ({}) => ({\n-    }),\n-  )\n   render () {\n-    return this.#stateful(\n-     ({\n-        l,\n-     }) => {\n-       return (\n-         <div>\n-\n-         </div>\n-       )\n-     }\n+    const {l} = this.props\n+    return (\n+      <div>\n+      </div>\n     )\n   }\n }\n",
+					"match": false,
+					"packageHash": "282d7ce55c8dd5dc48713e40a404206a3bd63d3b9e3ef39d49a1ef3d35980f8b",
+					"size": 440,
+					"sourceHash": "dfbfbdc3f566b898f1e868cd23aff8dce62d4a6741a9938e29ff953ba22f9a5e",
+					"status": "content"
+				},
+				"asset/templates/Stateless.hbs": {
+					"diff": "--- published/asset/templates/Stateless.hbs\n+++ rebuilt/asset/templates/Stateless.hbs\n@@ -4,19 +4,15 @@\n 'use strict'\n \n import React from 'react'\n-import context from '../context'\n+import { localized, stateless } from 'the-component-mixins'\n \n+@stateless()\n+@localized\n class {{pascalcase name}} extends React.Component {\n-  #stateless = context.stateful()\n-\n   render () {\n-    return this.#stateless(\n-      ({ l, }) => {\n-        return (\n-          <div></div>\n-        )\n-      }\n-    )\n+   return (\n+     <div></div>\n+   )\n   }\n }\n \n",
+					"match": false,
+					"packageHash": "fd56112135ec9057445a05da22aeb916b6f3124ce62f8609f3a782d0f463be25",
+					"size": 368,
+					"sourceHash": "82997c10e10c478e2e665ef45efb0b78b0046e43f716fe9e2af39cb961c084b8",
+					"status": "content"
+				},
+				"asset/templates/View.hbs": {
+					"diff": "--- published/asset/templates/View.hbs\n+++ rebuilt/asset/templates/View.hbs\n@@ -8,7 +8,7 @@\n import styles from './{{pascalcase name}}.pcss'\n import context from '../context'\n \n-class {{pascalcase name}} extends React.PureComponent {\n+class {{pascalcase name}} extends React.Component {\n   #stateful = context.stateful(\n     (state) => ({\n     }),\n",
+					"match": false,
+					"packageHash": "342963c187df72e58fd3bbd7e5c490f47dd5b951534d1dc948878770eb1bbe45",
+					"size": 869,
+					"sourceHash": "521137fbd86295dfc25802f47c3ab275d4e7c609e72f5c8d425f5a80e84ed121",
+					"status": "content"
+				},
+				"lib/Story.js": {
+					"diff": "--- published/lib/Story.js\n+++ rebuilt/lib/Story.js\n@@ -1,6 +1,5 @@\n /**\n  * Story\n- * @deprecated\n  * @function Story\n  * @param {Object} config\n  * @returns {Object}\n@@ -16,7 +15,7 @@\n   const {\n     cjs = false,\n   } = config\n-  let { name } = config\n+  let {name} = config\n   assert(name, 'name is required')\n   name = name.replace(/Story$/, '')\n \n",
+					"match": false,
+					"packageHash": "261758524bb832d6659c6f6ee0380b3b3b91d22391af53b43261d1e4277123fe",
+					"size": 648,
+					"sourceHash": "8b83e5f8ec620864f7dbb52ba5cf54a40d71c058104b6f8d87f2fb4ed6d82bdd",
+					"status": "content"
+				},
+				"lib/View.js": {
+					"diff": "--- published/lib/View.js\n+++ rebuilt/lib/View.js\n@@ -9,7 +9,7 @@\n const _tmpl = require('./_tmpl')\n const assert = require('assert')\n const path = require('path')\n-const { pascalcase, camelcase, snakecase } = require('stringcase')\n+const {pascalcase, camelcase, snakecase} = require('stringcase')\n \n /** @lends View */\n function View (config) {\n@@ -23,7 +23,7 @@\n     force: false,\n     mode: '644',\n     path: `${name}.jsx`,\n-    mkdirp: true,\n+    mkdirp:true,\n     data: {\n       name: path.basename(name),\n     },\n",
+					"match": false,
+					"packageHash": "6c328775b5b88928dfdb38f1f25a321a2e5b91730ba5b45d7864001dea6c8d0e",
+					"size": 584,
+					"sourceHash": "9253812f96cc3ca80da5ba52186d6011f8805a119eae2759da22d63608684eb8",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,6 +1,6 @@\n {\n   \"name\": \"the-templates\",\n-  \"version\": \"6.0.0\",\n+  \"version\": \"5.0.4\",\n   \"description\": \"Templates for the-projects\",\n   \"main\": \"lib\",\n   \"scripts\": {\n",
+					"match": false,
+					"packageHash": "902a7570f21715e7d4ea7426495fccf069cdeb212027c3feef00204e2249410e",
+					"size": 1279,
+					"sourceHash": "e32115666fb26e65a72e8867226bedd5234b615abd5e812a6d2b3b5890888f30",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 6,
+				"matchingFiles": 111,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.9487179487179487,
+				"totalFiles": 117
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "abind",
+				"version": "1.0.3"
+			},
+			{
+				"name": "aglob",
+				"version": "3.0.1"
+			},
+			{
+				"name": "ansi-red",
+				"version": "0.1.1"
+			},
+			{
+				"name": "ansi-wrap",
+				"version": "0.1.0"
+			},
+			{
+				"name": "argparse",
+				"version": "1.0.9"
+			},
+			{
+				"name": "argx",
+				"version": "3.0.2"
+			},
+			{
+				"name": "asobj",
+				"version": "3.0.0"
+			},
+			{
+				"name": "autolinker",
+				"version": "0.15.3"
+			},
+			{
+				"name": "babel-runtime",
+				"version": "6.26.0"
+			},
+			{
+				"name": "balanced-match",
+				"version": "1.0.0"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "1.1.8"
+			},
+			{
+				"name": "coffee-script",
+				"version": "1.12.7"
+			},
+			{
+				"name": "concat-map",
+				"version": "0.0.1"
+			},
+			{
+				"name": "concat-stream",
+				"version": "1.6.0"
+			},
+			{
+				"name": "core-js",
+				"version": "2.5.0"
+			},
+			{
+				"name": "core-util-is",
+				"version": "1.0.2"
+			},
+			{
+				"name": "deep-equal",
+				"version": "1.0.1"
+			},
+			{
+				"name": "diacritics-map",
+				"version": "0.1.0"
+			},
+			{
+				"name": "evaljson",
+				"version": "6.0.3"
+			},
+			{
+				"name": "expand-range",
+				"version": "1.8.2"
+			},
+			{
+				"name": "extend",
+				"version": "3.0.2"
+			},
+			{
+				"name": "extend-shallow",
+				"version": "2.0.1"
+			},
+			{
+				"name": "fill-range",
+				"version": "2.2.3"
+			},
+			{
+				"name": "for-in",
+				"version": "1.0.2"
+			},
+			{
+				"name": "fs.realpath",
+				"version": "1.0.0"
+			},
+			{
+				"name": "glob",
+				"version": "7.1.2"
+			},
+			{
+				"name": "gray-matter",
+				"version": "2.1.1"
+			},
+			{
+				"name": "iftype",
+				"version": "3.0.2"
+			},
+			{
+				"name": "inflight",
+				"version": "1.0.6"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.3"
+			},
+			{
+				"name": "is-buffer",
+				"version": "1.1.5"
+			},
+			{
+				"name": "is-extendable",
+				"version": "0.1.1"
+			},
+			{
+				"name": "is-number",
+				"version": "2.1.0"
+			},
+			{
+				"name": "is-plain-object",
+				"version": "2.0.4"
+			},
+			{
+				"name": "isobject",
+				"version": "3.0.1"
+			},
+			{
+				"name": "isarray",
+				"version": "1.0.0"
+			},
+			{
+				"name": "isobject",
+				"version": "2.1.0"
+			},
+			{
+				"name": "js-yaml",
+				"version": "3.10.0"
+			},
+			{
+				"name": "esprima",
+				"version": "4.0.0"
+			},
+			{
+				"name": "kind-of",
+				"version": "3.2.2"
+			},
+			{
+				"name": "list-item",
+				"version": "1.1.1"
+			},
+			{
+				"name": "markdown-link",
+				"version": "0.1.1"
+			},
+			{
+				"name": "markdown-toc",
+				"version": "1.2.0"
+			},
+			{
+				"name": "lazy-cache",
+				"version": "2.0.2"
+			},
+			{
+				"name": "minimist",
+				"version": "1.2.0"
+			},
+			{
+				"name": "minimatch",
+				"version": "3.0.4"
+			},
+			{
+				"name": "mixin-deep",
+				"version": "1.3.0"
+			},
+			{
+				"name": "is-extendable",
+				"version": "1.0.1"
+			},
+			{
+				"name": "node-forge",
+				"version": "0.7.5"
+			},
+			{
+				"name": "object.pick",
+				"version": "1.3.0"
+			},
+			{
+				"name": "objnest",
+				"version": "5.0.4"
+			},
+			{
+				"name": "once",
+				"version": "1.4.0"
+			},
+			{
+				"name": "path-is-absolute",
+				"version": "1.0.1"
+			},
+			{
+				"name": "process-nextick-args",
+				"version": "1.0.7"
+			},
+			{
+				"name": "randomatic",
+				"version": "1.1.7"
+			},
+			{
+				"name": "is-number",
+				"version": "3.0.0"
+			},
+			{
+				"name": "kind-of",
+				"version": "4.0.0"
+			},
+			{
+				"name": "readable-stream",
+				"version": "2.3.3"
+			},
+			{
+				"name": "regenerator-runtime",
+				"version": "0.11.0"
+			},
+			{
+				"name": "remarkable",
+				"version": "1.7.1"
+			},
+			{
+				"name": "argparse",
+				"version": "0.1.16"
+			},
+			{
+				"name": "repeat-element",
+				"version": "1.1.2"
+			},
+			{
+				"name": "repeat-string",
+				"version": "1.6.1"
+			},
+			{
+				"name": "reserved",
+				"version": "0.1.2"
+			},
+			{
+				"name": "safe-buffer",
+				"version": "5.1.1"
+			},
+			{
+				"name": "selfsigned",
+				"version": "1.10.4"
+			},
+			{
+				"name": "set-getter",
+				"version": "0.1.0"
+			},
+			{
+				"name": "sprintf-js",
+				"version": "1.0.3"
+			},
+			{
+				"name": "string_decoder",
+				"version": "1.0.3"
+			},
+			{
+				"name": "stringcase",
+				"version": "4.3.0"
+			},
+			{
+				"name": "strip-color",
+				"version": "0.1.0"
+			},
+			{
+				"name": "to-object-path",
+				"version": "0.3.0"
+			},
+			{
+				"name": "toml",
+				"version": "2.3.3"
+			},
+			{
+				"name": "typedarray",
+				"version": "0.0.6"
+			},
+			{
+				"name": "underscore",
+				"version": "1.7.0"
+			},
+			{
+				"name": "underscore.string",
+				"version": "2.4.0"
+			},
+			{
+				"name": "util-deprecate",
+				"version": "1.0.2"
+			},
+			{
+				"name": "wrappy",
+				"version": "1.0.2"
+			}
+		]
+	}
+]

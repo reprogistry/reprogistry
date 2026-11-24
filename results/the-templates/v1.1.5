@@ -1,0 +1,136 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T14:22:16.103Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:5.0.3",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "the-templates@1.1.5",
+			"name": "the-templates",
+			"version": "1.1.5",
+			"location": "https://registry.npmjs.org/the-templates/-/the-templates-1.1.5.tgz",
+			"integrity": "sha512-SiA5x0JySRzBvlQHxU5t9tNgdblZACVIuLEOk8eS5s4xBwZofpyp7AW5QzkMcKml+QPgaDK3o71wSvJ3koyFCA==",
+			"publishedAt": "2017-07-30T14:18:53.224Z",
+			"publishedWith": {
+				"node": "8.1.4",
+				"npm": "5.3.0"
+			},
+			"dependencies": {
+				"aglob": "^2.0.1",
+				"ape-tmpl": "^5.0.20",
+				"co": "^4.6.0",
+				"selfsigned": "^1.9.1",
+				"stringcase": "^4.0.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/the-labo/the-templates.git",
+			"spec": "github:the-labo/the-templates#ba582c713316ea70e528fdce05ab5e962cd40fee"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".npmignore": {
+					"match": false,
+					"packageHash": "6f179c6006bf3ff3f0b1b57a1a247c97edbee11a33374f53849829aed6261ffe",
+					"size": 605,
+					"status": "missing-in-source"
+				},
+				"lib/dir.js": {
+					"diff": "--- published/lib/dir.js\n+++ rebuilt/lib/dir.js\n@@ -12,8 +12,8 @@\n \n const shouldRequire = (name) => {\n   return !/^[._]/.test(name) &&\n-    !['index.jsx', 'index.js', 'package.json'].includes(name) &&\n-    ['.jsx', '.js', '.json', ''].includes(path.extname(name))\n+    ![ 'index.jsx', 'index.js', 'package.json' ].includes(name) &&\n+    [ '.jsx', '.js', '.json', '' ].includes(path.extname(name))\n }\n \n const isModule = (filename) => {\n@@ -59,8 +59,7 @@\n       name,\n       description,\n       node,\n-      dirname,\n-      ignore = []\n+      dirname\n     } = config\n     const TMPL_PATH = node ? _tmpl('node_dir.hbs') : _tmpl('dir.hbs')\n     return {\n@@ -70,8 +69,8 @@\n       data: {\n         name,\n         description,\n-        modules: aglob.sync('**/*.*', {cwd: dirname, ignore: [].concat(ignore)})\n-          .filter((name) => shouldRequire(path.basename(name)))\n+        modules: aglob.sync('**/*.*', { cwd: dirname })\n+          .filter((name) => shouldRequire(name))\n           .map((name) => path.join(dirname, name))\n           .filter((filename) => isModule(filename))\n           .map((filename) => {\n",
+					"match": false,
+					"packageHash": "deb73e59246e0059b54abba382ec382b0c82c3e63eecf07f612ba30fd5d14482",
+					"size": 2218,
+					"sourceHash": "e3755926979c052f5e11ba84d8df4b919020d82e3eb0d44724961382b875febd",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -26,22 +26,23 @@\n     \"ape-tmpl\": \"^5.0.20\",\n     \"co\": \"^4.6.0\",\n     \"selfsigned\": \"^1.9.1\",\n-    \"stringcase\": \"^4.0.0\"\n+    \"stringcase\": \"^3.2.1\"\n   },\n   \"devDependencies\": {\n     \"amocha\": \"^2.0.0\",\n     \"ape-formatting\": \"^1.0.2\",\n     \"ape-releasing\": \"^4.0.4\",\n     \"ape-tasking\": \"^4.0.9\",\n+    \"ape-tmpl\": \"^5.0.20\",\n     \"ape-updating\": \"^4.1.1\",\n     \"coz\": \"^6.0.20\",\n     \"injectmock\": \"^2.0.0\",\n-    \"react\": \"^15.6.1\",\n-    \"react-dom\": \"^15.6.1\",\n+    \"react\": \"^15.5.4\",\n+    \"react-dom\": \"^15.5.4\",\n     \"the-script-test\": \"^1.1.3\"\n   },\n   \"engines\": {\n     \"node\": \">=6\",\n     \"npm\": \">=4\"\n   }\n-}\n+}\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "a2715d116ab528361024ceb9a3a425cf7c5b2f805c78e2e7e8dfd87469c57cfc",
+					"size": 1082,
+					"sourceHash": "368c38e2182bc4c53c3e5f58b0cf2c911c28e0c80ac136cb43c42ff9fb7dbd6d",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 52,
+				"missingInPackage": 0,
+				"missingInSource": 1,
+				"score": 0.9454545454545454,
+				"totalFiles": 55
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "aglob",
+				"version": "2.0.1"
+			},
+			{
+				"name": "balanced-match",
+				"version": "1.0.2"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "1.1.22"
+			},
+			{
+				"name": "co",
+				"version": "4.6.0"
+			},
+			{
+				"name": "concat-map",
+				"version": "0.0.1"
+			},
+			{
+				"name": "fs.realpath",
+				"version": "1.0.0"
+			},
+			{
+				"name": "glob",
+				"version": "7.2.3"
+			},
+			{
+				"name": "inflight",
+				"version": "1.0.6"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.4"
+			},
+			{
+				"name": "minimatch",
+				"version": "3.1.5"
+			},
+			{
+				"name": "node-forge",
+				"version": "0.10.0"
+			},
+			{
+				"name": "once",
+				"version": "1.4.0"
+			},
+			{
+				"name": "path-is-absolute",
+				"version": "1.0.1"
+			},
+			{
+				"name": "selfsigned",
+				"version": "1.10.14"
+			},
+			{
+				"name": "stringcase",
+				"version": "3.2.1"
+			},
+			{
+				"name": "wrappy",
+				"version": "1.0.2"
+			}
+		]
+	}
+]

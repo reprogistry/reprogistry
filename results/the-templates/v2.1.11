@@ -1,0 +1,205 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T14:27:18.382Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:5.6.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "the-templates@2.1.11",
+			"name": "the-templates",
+			"version": "2.1.11",
+			"location": "https://registry.npmjs.org/the-templates/-/the-templates-2.1.11.tgz",
+			"integrity": "sha512-3TBMJUgpkDExOhrk6ToWrWkxnNWk5Oc40tn1RW8WFxYdWa1y+RF95FR+exbmRr09zA599ng9uJLTtlnqFIsNWA==",
+			"publishedAt": "2018-01-11T14:45:14.653Z",
+			"publishedWith": {
+				"node": "9.4.0",
+				"npm": "5.6.0"
+			},
+			"dependencies": {
+				"aglob": "^3.0.0",
+				"ape-tmpl": "^6.0.6",
+				"selfsigned": "^1.9.1",
+				"stringcase": "^4.1.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/the-labo/the-templates.git",
+			"spec": "github:the-labo/the-templates#6f358bbf8d9df971306d6179ac8a71994363e7f3"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"asset/templates/cjs_dir.hbs": {
+					"diff": "--- published/asset/templates/cjs_dir.hbs\n+++ rebuilt/asset/templates/cjs_dir.hbs\n@@ -12,7 +12,7 @@\n {{#each modules}}\n   {{name}},\n {{/each}}\n-{{#if defaultExport}}\n-  default: {{defaultExport}},\n+{{#if default}}\n+    default: {{defualt}}\n {{/if}}\n }\n",
+					"match": false,
+					"packageHash": "676cd5e0e67f04b0834cee76f5ff2fa298525424035fb2bd0673b4f586602226",
+					"size": 250,
+					"sourceHash": "d99292a00ceacfcc733bfe8dc99b087e947e317700a865b2cc448ecec68ac2f7",
+					"status": "content"
+				},
+				"asset/templates/dir.hbs": {
+					"diff": "--- published/asset/templates/dir.hbs\n+++ rebuilt/asset/templates/dir.hbs\n@@ -14,6 +14,6 @@\n {{/each}}\n }\n \n-{{#if defaultExport}}\n-export default {{defaultExport}}\n+{{#if default}}\n+export default {{default}}\n {{/if}}\n",
+					"match": false,
+					"packageHash": "85461e6d7c209a06680c61c1dd9307f19cf5383074cab952c75b25ac3d6ade3e",
+					"size": 239,
+					"sourceHash": "f6eaaaabab2bd6793d29b34fcee003e4a00c82cb62e234f22310447aafab0f79",
+					"status": "content"
+				},
+				"lib/dir.js": {
+					"diff": "--- published/lib/dir.js\n+++ rebuilt/lib/dir.js\n@@ -42,7 +42,7 @@\n     data: {\n       name,\n       description,\n-      defaultExport,\n+      default: defaultExport,\n       modules: fs.readdirSync(dirname)\n         .filter((name) => shouldRequire(name))\n         .map((name) => path.join(dirname, name))\n@@ -75,7 +75,7 @@\n       data: {\n         name,\n         description,\n-        defaultExport,\n+        default: defaultExport,\n         modules: aglob.sync('**/*.*', {cwd: dirname, ignore: [].concat(ignore)})\n           .filter((name) => shouldRequire(path.basename(name)))\n           .map((name) => path.join(dirname, name))\n",
+					"match": false,
+					"packageHash": "e0357b0dbaa0e4e702e79c3b109a0cce272de15c54215339887b4a9105f58ecb",
+					"size": 2486,
+					"sourceHash": "71b9149b29721da21b16679bc2e281e15394d4cafa4be7f57a2013a16b0fbdb0",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -43,4 +43,4 @@\n     \"node\": \">=7.6\",\n     \"npm\": \">=4\"\n   }\n-}\n+}\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "4353fc758d329f45ba7bff893604ad51d9a95609daad2ed942a34257e185f37b",
+					"size": 1064,
+					"sourceHash": "24d243f8b20737582b02a52d1bfb383ad38ecc81397b7fc0054407b0aa467252",
+					"status": "content"
+				},
+				"test/dir_test.js": {
+					"diff": "--- published/test/dir_test.js\n+++ rebuilt/test/dir_test.js\n@@ -30,19 +30,6 @@\n     bud.mkdirp = true\n     await coz.render(bud)\n   })\n-\n-  it('CJS', async () => {\n-    const bud = dir({\n-      dirname: __dirname,\n-      name: 'foo',\n-      description: 'hoge',\n-      default: 'dddd',\n-      cjs: true\n-    })\n-    bud.path = `${__dirname}/../tmp/foo/bar/baz.js`\n-    bud.mkdirp = true\n-    await coz.render(bud)\n-  })\n })\n \n /* global describe, before, after, it */\n",
+					"match": false,
+					"packageHash": "b5759002c5e59af8f08288be62d22d6336f794df5f47c7a8633d00759d96e38f",
+					"size": 845,
+					"sourceHash": "90af94223a5788607ce0d8009bf48bfe2e593d5fe067864e90b264672919c01c",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 5,
+				"matchingFiles": 55,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.9166666666666666,
+				"totalFiles": 60
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "abind",
+				"version": "1.0.3"
+			},
+			{
+				"name": "aglob",
+				"version": "3.0.0"
+			},
+			{
+				"name": "ape-tmpl",
+				"version": "6.0.6"
+			},
+			{
+				"name": "argx",
+				"version": "3.0.2"
+			},
+			{
+				"name": "arrayfilter",
+				"version": "1.1.2"
+			},
+			{
+				"name": "arraysort",
+				"version": "2.0.0"
+			},
+			{
+				"name": "asobj",
+				"version": "2.0.2"
+			},
+			{
+				"name": "babel-runtime",
+				"version": "6.26.0"
+			},
+			{
+				"name": "balanced-match",
+				"version": "1.0.0"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "1.1.8"
+			},
+			{
+				"name": "concat-map",
+				"version": "0.0.1"
+			},
+			{
+				"name": "core-js",
+				"version": "2.5.0"
+			},
+			{
+				"name": "deep-equal",
+				"version": "1.0.1"
+			},
+			{
+				"name": "evaljson",
+				"version": "5.1.0"
+			},
+			{
+				"name": "extend",
+				"version": "3.0.1"
+			},
+			{
+				"name": "fs.realpath",
+				"version": "1.0.0"
+			},
+			{
+				"name": "glob",
+				"version": "7.1.2"
+			},
+			{
+				"name": "iftype",
+				"version": "3.0.2"
+			},
+			{
+				"name": "inflight",
+				"version": "1.0.6"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.3"
+			},
+			{
+				"name": "minimatch",
+				"version": "3.0.4"
+			},
+			{
+				"name": "node-forge",
+				"version": "0.6.33"
+			},
+			{
+				"name": "objnest",
+				"version": "4.0.1"
+			},
+			{
+				"name": "once",
+				"version": "1.4.0"
+			},
+			{
+				"name": "path-is-absolute",
+				"version": "1.0.1"
+			},
+			{
+				"name": "regenerator-runtime",
+				"version": "0.11.0"
+			},
+			{
+				"name": "selfsigned",
+				"version": "1.10.1"
+			},
+			{
+				"name": "stringcase",
+				"version": "4.1.0"
+			},
+			{
+				"name": "wrappy",
+				"version": "1.0.2"
+			}
+		]
+	}
+]
