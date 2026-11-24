@@ -1,0 +1,568 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T01:01:53.754Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:3.8.3",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "javascript-time-ago@0.4.0",
+			"name": "javascript-time-ago",
+			"version": "0.4.0",
+			"location": "https://registry.npmjs.org/javascript-time-ago/-/javascript-time-ago-0.4.0.tgz",
+			"integrity": "sha512-JlpvSZQgrucfnXCZxkCfphqTf/hsR9vSF68Rw2m27pEkk+9S0rsVZGYjouENMPoY3nekB4bhLWiKTImiF3FBDg==",
+			"publishedAt": "2016-04-17T08:43:45.496Z",
+			"publishedWith": {
+				"node": "5.10.1",
+				"npm": "3.8.3"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/halt-hammerzeit/javascript-time-ago.git",
+			"spec": "github:halt-hammerzeit/javascript-time-ago#14e97e93ca31e02ef12bdc29d08bd994117d9c44"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".npmignore": {
+					"match": false,
+					"packageHash": "21f6c0fd3097b4b3ccda0dcc0623119d73e359a617199c4e98bfac086adca532",
+					"size": 581,
+					"status": "missing-in-source"
+				},
+				"HISTORY.md": {
+					"match": false,
+					"packageHash": "2c8f306b118d67b6c2eb1f03f989f5598581e8a757ef72243b2af0e87f5586e0",
+					"size": 153,
+					"status": "missing-in-source"
+				},
+				"LICENSE": {
+					"diff": "--- published/LICENSE\n+++ rebuilt/LICENSE\n@@ -1,6 +1,6 @@\n (The MIT License)\n \n-Copyright (c) 2016 @halt-hammerzeit <halt.hammerzeit.at@gmail.com>\n+Copyright (c) 2016 @catamphetamine <purecatamphetamine@gmail.com>\n \n Permission is hereby granted, free of charge, to any person obtaining\n a copy of this software and associated documentation files (the\n",
+					"match": false,
+					"packageHash": "5f43730123594caab9cd1e2fe72d459f1413cfef60e7c5fc1c689a5274381507",
+					"size": 1110,
+					"sourceHash": "7ac988c45b6c5aa8b25ef95d928036092e816df62231668e29c354479c42663c",
+					"status": "content"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,388 +1,1082 @@\n-# javascript-time-ago\r\n-\r\n-[![NPM Version][npm-badge]][npm]\r\n-[![Build Status][travis-badge]][travis]\r\n-[![Test Coverage][coveralls-badge]][coveralls]\r\n-\r\n-International higly customizable relative date/time formatter (both for past and future dates).\r\n-\r\n-Formats a date to something like:\r\n-\r\n-  * just now\r\n-  * 5m\r\n-  * 15 min\r\n-  * 25 minutes\r\n-  * half an hour ago\r\n-  * an hour ago\r\n-  * 2h\r\n-  * yesterday\r\n-  * 2d\r\n-  * 1wk\r\n-  * 2 weeks ago\r\n-  * 3 weeks\r\n-  * half a month ago\r\n-  * 1 mo. ago\r\n-  * 2 months\r\n-  * half a year\r\n-  * a year\r\n-  * 2yr\r\n-  * 5 years ago\r\n-  * … or whatever else\r\n-\r\n-## Installation\r\n-\r\n-```\r\n-npm install intl-messageformat@^1.3.0 --save\r\n-npm install javascript-time-ago --save\r\n-```\r\n-\r\n-This package assumes that the [`Intl`][Intl] global object exists in the runtime. `Intl` is present in all modern browsers _except_ Safari (which can be solved with the Intl polyfill).\r\n-\r\n-Node.js 0.12 has the `Intl` APIs built-in, but only includes the English locale data by default. If your app needs to support more locales than English, you'll need to [get Node to load the extra locale data](https://github.com/nodejs/node/wiki/Intl), or (a much simpler approach) just install the Intl polyfill.\r\n-\r\n-If you decide you need the Intl polyfill then [here are some basic installation and configuration instructions](#intl-polyfill-installation)\r\n-\r\n-## Usage\r\n-\r\n-```js\r\n-import javascript_time_ago from 'javascript-time-ago'\r\n-\r\n-// Load locale specific relative date/time messages\r\n-//\r\n-javascript_time_ago.locale(require('javascript-time-ago/locales/en'))\r\n-javascript_time_ago.locale(require('javascript-time-ago/locales/ru'))\r\n-\r\n-// Load number pluralization functions for the locales.\r\n-// (the ones that decide if a number is gonna be \r\n-//  \"zero\", \"one\", \"two\", \"few\", \"many\" or \"other\")\r\n-// http://cldr.unicode.org/index/cldr-spec/plural-rules\r\n-// https://github.com/eemeli/make-plural.js\r\n-// http://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html\r\n-//\r\n-require('javascript-time-ago/intl-messageformat-global')\r\n-require('intl-messageformat/dist/locale-data/en')\r\n-require('intl-messageformat/dist/locale-data/ru')\r\n-\r\n-// Initialization complete.\r\n-// Ready to format relative dates and times.\r\n-\r\n-const time_ago_english = new javascript_time_ago('en-US')\r\n-\r\n-time_ago_english.format(new Date())\r\n-// \"just now\"\r\n-\r\n-time_ago_english.format(new Date(Date.now() - 60 * 1000))\r\n-// \"a minute ago\"\r\n-\r\n-time_ago_english.format(new Date(Date.now() - 2 * 60 * 60 * 1000))\r\n-// \"2 hours ago\"\r\n-\r\n-time_ago_english.format(new Date(Date.now() - 24 * 60 * 60 * 1000))\r\n-// \"a day ago\"\r\n-\r\n-const time_ago_russian = new javascript_time_ago('ru-RU')\r\n-\r\n-time_ago_russian.format(new Date())\r\n-// \"только что\"\r\n-\r\n-time_ago_russian.format(new Date(Date.now() - 60 * 1000)))\r\n-// \"минуту назад\"\r\n-\r\n-time_ago_russian.format(new Date(Date.now() - 2 * 60 * 60 * 1000)))\r\n-// \"2 часа назад\"\r\n-\r\n-time_ago_russian.format(new Date(Date.now() - 24 * 60 * 60 * 1000))\r\n-// \"вчера\"\r\n-```\r\n-\r\n",
+					"match": false,
+					"packageHash": "5420490b3556dbb3da9d502c2509492cdb362dfaaa17de5695a023047f7c3f3f",
+					"size": 11704,
+					"sourceHash": "e3b8bf163241cdfde2bf59b1770aacbc1c878bcba7b1442c97b910796a69608e",
+					"status": "content"
+				},
+				"build/classify elapsed.js": {
+					"match": false,
+					"packageHash": "397cbedc63a1756bb9a8cb88348556b3a41df5a87825f5d13a8015a9559637d3",
+					"size": 6513,
+					"status": "missing-in-source"
+				},
+				"build/classify elapsed.js.map": {
+					"match": false,
+					"packageHash": "db953682d80f454cfc334c04b8ce341f20033ae380361486a01e0a398c8db7db",
+					"size": 10128,
+					"status": "missing-in-source"
+				},
+				"build/style.js": {
+					"match": false,
+					"packageHash": "afedd1e4d3117b1a890631f1cb655d641ee527b1b1155bb64091c0b8895ebeae",
+					"size": 3697,
+					"status": "missing-in-source"
+				},
+				"build/style.js.map": {
+					"match": false,
+					"packageHash": "ae89f54b25328acf175e8489bab8a7845585c66331bfc8bf746d99cb3e7d7e95",
+					"size": 4586,
+					"status": "missing-in-source"
+				},
+				"build/time ago.js": {
+					"match": false,
+					"packageHash": "30136c90119b05d1eceb9a3f7b09cd6d0662daaf53653ae1cb69d697ffc0fd51",
+					"size": 18424,
+					"status": "missing-in-source"
+				},
+				"build/time ago.js.map": {
+					"match": false,
+					"packageHash": "e56c41dd0f53ca0574ef1ec00487eecd6c22886d3ea5452bc0404bbaf5ea0a00",
+					"size": 20548,
+					"status": "missing-in-source"
+				},
+				"global.js": {
+					"match": false,
+					"packageHash": "882289b4bb1c80d368495eff0c9efdeb69a3e6781711b8a47e5b94c3b35608cb",
+					"size": 86,
+					"status": "missing-in-source"
+				},
+				"index.es6.js": {
+					"match": false,
+					"packageHash": "94defdb77cee6564a6e90a5b745c6eccec797582fa0ba4e98203027d1236bf6d",
+					"size": 137,
+					"status": "missing-in-source"
+				},
+				"index.umd.js": {
+					"match": false,
+					"packageHash": "c397ec7246a79f80e6be47ee7affec4594de8a281a04dee30e56a2536fcd6531",
+					"size": 388,
+					"status": "missing-in-source"
+				},
+				"intl-messageformat-global.js": {
+					"match": false,
+					"packageHash": "081ab8f826d09fdd61bd3e7c25e6804f3f72ecce206180351f0744f782b54c54",
+					"size": 83,
+					"status": "missing-in-source"
+				},
+				"load-all-locales.js": {
+					"match": false,
+					"packageHash": "9711c555c2ffd538f0cd005957ecba668d53121dbb8efd2cb7322112fee98498",
+					"size": 377,
+					"status": "missing-in-source"
+				},
+				"locales/en.js": {
+					"match": false,
+					"packageHash": "2896664e174e05cf588450b0f11ba319242a247c74ec91678c9eb7cb9e921117",
+					"size": 8186,
+					"status": "missing-in-source"
+				},
+				"locales/ru.js": {
+					"match": false,
+					"packageHash": "62dd295e197f4767ff40faf9ad303ddd137913bffa0e3ee5c8db62e2866523ec",
+					"size": 13357,
+					"status": "missing-in-source"
+				},
+				"locales.js": {
+					"match": false,
+					"packageHash": "a3a4d8f40d99cacf9eba4507f1c90606f5e1d484c56260a4e3afd1675c6e00de",
+					"size": 89,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,62 +1,3472 @@\n {\n   \"name\": \"javascript-time-ago\",\n-  \"version\": \"0.4.0\",\n-  \"description\": \"International highly customizable relative time formatting\",\n-  \"main\": \"index.umd.js\",\n-  \"jsnext:main\": \"index.es6.js\",\n-  \"peerDependencies\": {\n-    \"intl-messageformat\": \"^1.3.0\"\n+  \"version\": \"2.6.4\",\n+  \"description\": \"Localized relative date/time formatting\",\n+  \"main\": \"index.cjs\",\n+  \"module\": \"index.js\",\n+  \"type\": \"module\",\n+  \"exports\": {\n+    \".\": {\n+      \"types\": \"./index.d.ts\",\n+      \"import\": \"./index.js\",\n+      \"require\": \"./index.cjs\"\n+    },\n+    \"./cache\": {\n+      \"import\": \"./cache/index.js\",\n+      \"require\": \"./cache/index.cjs\"\n+    },\n+    \"./gradation\": {\n+      \"import\": \"./gradation/index.js\",\n+      \"require\": \"./gradation/index.cjs\"\n+    },\n+    \"./steps\": {\n+      \"types\": \"./steps/index.d.ts\",\n+      \"import\": \"./steps/index.js\",\n+      \"require\": \"./steps/index.cjs\"\n+    },\n+    \"./load-all-locales\": {\n+      \"types\": \"./load-all-locales/index.d.ts\",\n+      \"import\": \"./load-all-locales/index.js\",\n+      \"require\": \"./load-all-locales/index.cjs\"\n+    },\n+    \"./prop-types\": {\n+      \"import\": \"./prop-types/index.js\",\n+      \"require\": \"./prop-types/index.cjs\"\n+    },\n+    \"./full-date-formatter\": {\n+      \"types\": \"./full-date-formatter/index.d.ts\",\n+      \"import\": \"./full-date-formatter/index.js\",\n+      \"require\": \"./full-date-formatter/index.cjs\"\n+    },\n+    \"./package.json\": \"./package.json\",\n+    \"./locale/af\": {\n+      \"types\": \"./locale/af.json.d.ts\",\n+      \"import\": \"./locale/af/index.js\",\n+      \"require\": \"./locale/af/index.cjs\"\n+    },\n+    \"./locale/af.json\": {\n+      \"types\": \"./locale/af.json.d.ts\",\n+      \"import\": \"./locale/af.json.js\",\n+      \"require\": \"./locale/af.json\"\n+    },\n+    \"./locale/ak\": {\n+      \"types\": \"./locale/ak.json.d.ts\",\n+      \"import\": \"./locale/ak/index.js\",\n+      \"require\": \"./locale/ak/index.cjs\"\n+    },\n+    \"./locale/ak.json\": {\n+      \"types\": \"./locale/ak.json.d.ts\",\n+      \"import\": \"./locale/ak.json.js\",\n+      \"require\": \"./locale/ak.json\"\n+    },\n+    \"./locale/am\": {\n+      \"types\": \"./locale/am.json.d.ts\",\n+      \"import\": \"./locale/am/index.js\",\n+      \"require\": \"./locale/am/index.cjs\"\n+    },\n+    \"./locale/am.json\": {\n+      \"types\": \"./locale/am.json.d.ts\",\n+      \"import\": \"./locale/am.json.js\",\n+      \"require\": \"./locale/am.json\"\n+    },\n+    \"./locale/ar-AE\": {\n+      \"types\": \"./locale/ar-AE.json.d.ts\",\n+      \"import\": \"./locale/ar-AE/index.js\",\n+      \"require\": \"./locale/ar-AE/index.cjs\"\n+    },\n+    \"./locale/ar-AE.json\": {\n+      \"types\": \"./locale/ar-AE.json.d.ts\",\n+      \"import\": \"./locale/ar-AE.json.js\",\n+      \"require\": \"./locale/ar-AE.json\"\n+    },\n+    \"./locale/ar\": {\n+      \"types\": \"./locale/ar.json.d.ts\",\n+      \"import\": \"./locale/ar/index.js\",\n+      \"require\": \"./locale/ar/index.cjs\"\n+    },\n+    \"./locale/ar.json\": {\n+      \"types\": \"./locale/ar.json.d.ts\",\n+      \"import\": \"./locale/ar.json.js\",\n+      \"require\": \"./locale/ar.json\"\n+    },\n",
+					"match": false,
+					"packageHash": "6d3913301cbb3873d1add57794069238f5cfb680d64cd5a52f123933b795816f",
+					"size": 2390,
+					"sourceHash": "7384e68434bc29abd3d294c4fc3f7bdae4c45657d8b151808a50628b472a590d",
+					"status": "content"
+				},
+				".nycrc": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"CODE_OF_CONDUCT.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"MIGRATION.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"cache/index.cjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"cache/index.cjs.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"cache/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"cache/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"full-date-formatter/index.cjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"full-date-formatter/index.cjs.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"full-date-formatter/index.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"full-date-formatter/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"full-date-formatter/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gradation/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gradation/index.cjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gradation/index.cjs.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gradation/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gradation/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"index.cjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"index.cjs.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"index.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"load-all-locales/index.cjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"load-all-locales/index.cjs.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"load-all-locales/index.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"load-all-locales/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"load-all-locales/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/ckb/long-time.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/ckb/mini.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/ckb/now.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/ckb/short-time.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/da/long-time.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/da/mini.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/da/now.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/de/long-time.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/de/mini.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/de/now.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/el/mini.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/el/now.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/en/long-time.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/en/mini.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/en/now.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/en/short-time.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/eo/long-time.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/eo/mini.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/eo/now.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/eo/short-time.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/es/long-time.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/es/mini.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/es/now.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/fr/long-time.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/fr/mini.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/fr/now.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/hi/mini.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/hi/now.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/id/long-time.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/id/mini.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/id/now.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/id/short-time.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/it/long-time.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/it/mini.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/it/now.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/ko/mini.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/ko/now.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/nl/long-time.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/nl/mini.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/nl/now.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/pl/long-time.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/pl/mini.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/pl/now.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/pl/short-time.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/pt/long-time.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/pt/mini.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/pt/now.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/ro/long-time.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/ro/mini.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/ro/now.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/ru/long-time.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/ru/mini.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/ru/now.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/ru/short-time.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/sv/long-time.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/sv/mini.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/sv/now.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/zh/mini.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/zh/now.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"prop-types/index.cjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"prop-types/index.cjs.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"prop-types/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"prop-types/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"rollup.config.mjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/create-commonjs-package-json.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/generate-load-all-locales.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/generate-locale-messages.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"steps/index.cjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"steps/index.cjs.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"steps/index.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"steps/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"steps/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 3,
+				"matchingFiles": 0,
+				"missingInPackage": 100,
+				"missingInSource": 16,
+				"score": 0,
+				"totalFiles": 119
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "relative-time-format",
+				"version": "1.1.12"
+			}
+		]
+	}
+]

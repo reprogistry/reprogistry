@@ -1,0 +1,2004 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T03:08:17.570Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:6.9.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "javascript-time-ago@2.0.8",
+			"name": "javascript-time-ago",
+			"version": "2.0.8",
+			"location": "https://registry.npmjs.org/javascript-time-ago/-/javascript-time-ago-2.0.8.tgz",
+			"integrity": "sha512-/cQbnAwmF2OgpMCg8r185ZGqkkoHE8paNn9T3S98A6DXFQn4irzMVgMSWnKB4jvcvzTauF3HRi9wZXUdwHyj6Q==",
+			"publishedAt": "2020-06-30T10:17:16.120Z",
+			"publishedWith": {
+				"node": "12.6.0",
+				"npm": "6.10.0"
+			},
+			"dependencies": {
+				"relative-time-format": "^0.1.3"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/catamphetamine/javascript-time-ago.git",
+			"spec": "github:catamphetamine/javascript-time-ago#351bcba80d16c648aeb2508a108c595cd166ee02"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"CHANGELOG.md": {
+					"diff": "--- published/CHANGELOG.md\n+++ rebuilt/CHANGELOG.md\n@@ -1,91 +1,284 @@\n-2.0.0 / 14.01.2018\r\n-==================\r\n-\r\n-  * Moved `RelativeTimeFormat` to a separate `relative-time-format` package.\r\n-\r\n-  * (breaking change) Removed `.locale()` static function. Use `.addLocale()` instead.\r\n-\r\n-  * (breaking change) `flavour` property renamed in non-single-word cases: underscores (`_`) got replaced with dashes (`-`). Examples: `short_convenient` -> `short-convenient`, `long_convenient` -> `long-convenient`, `short_time` -> `short-time`, `long_time` -> `long-time`. The relevant keys in locale `index.js` files got renamed the same way.\r\n-\r\n-  * (breaking change) `RelativeTimeFormat` is no longer exported from this library.\r\n-\r\n-  * (could be a breaking change) Re-did `/prop-types`, `/gradation`, `/cache` exports as sub-packages. This could possibly change their import behavior. Maybe `/prop-types` did change — I changed some export strategies for it.\r\n-\r\n-  * (unlikely a breaking change) `yue-Hant` locale removed (due to its removal from CLDR).\r\n-\r\n-  * (unlikely to be a breaking change) Removed handling for a case when \"now\" unit had \"past\"/\"future\" which is an object of quantifier messages instead of a string. The rationale that having \"now\" unit with \"past\"/\"future\" which are objects of quantifier messages wouldn't make sense because \"now\" is a moment and one can't differentiate between \"past moment\", \"current moment\" and \"next moment\" in real life.\r\n-\r\n-1.0.33 / 29.11.2018\r\n-===================\r\n-\r\n-  * Resolved cyclic dependency between `JavascriptTimeAgo.js` and `RelativeTimeFormat.js`.\r\n-\r\n-  * `JavascriptTimeAgo.default_locale` variable no longer exists (it wasn't public or documented).\r\n-\r\n-1.0.32 / 04.11.2018\r\n-===================\r\n-\r\n-  * Added `.addLocale()` alias for `.locale()` function (better naming). The old `.locale()` function name is now deprecated and will be removed in some next major version release.\r\n-\r\n-  * Added `RelativeTimeFormat.addLocale()` proxy function which simply calls `JavascriptTimeAgo.addLocale()`.\r\n-\r\n-1.0.19 / 12.01.2018\r\n-===================\r\n-\r\n-  * Refactored `twitter` style and styles overall: style can now have `threshold(now)` function and also gradation step can have `format(value, locale)` function instead of `unit`.\r\n-\r\n-1.0.17 / 11.01.2018\r\n-===================\r\n-\r\n-  * Renamed `override` to `custom` for styles\r\n-\r\n-1.0.15 / 11.01.2018\r\n-===================\r\n-\r\n-  * Renamed `fuzzy` style to `time`.\r\n-  * Refactored `gradation`s and `style`s.\r\n-  * `gradation` is now not being exported from `index.js` along with `day`, `month` and `year` (one can still `import` it manually from `gradation.js`).\r\n-  * `es6` folder got renamed to `modules`\r\n-  * `build` folder got renamed to `commonjs`\r\n-\r\n-1.0.11 / 10.01.2018\r\n-===================\r\n-\r\n-  * Renamed `plural` to `quantify` inside locale data.\r\n-  * Implemented `Intl.RelativeTimeFormat` proposal polyfill which is now being exported.\r\n-\r\n-1.0.10 / 09.01.2018\r\n-===================\r\n-\r\n-  * (can be a breaking change for custom styles) Renamed `just-now` unit to `now` and `xxx-concise` flavour to `xxx_time` (+ flavour `.json` files got renamed accordingly).\r\n-\r\n-1.0.8 / 09.01.2018\r\n-===================\r\n-\r\n-  * (breaking change) When defining a custom `style` its `override()` function takes `date` and `time` parameters: now `date` parameter of `override()` is not guaranteed to be set (can be inferred from `time`).\r\n-\r\n-1.0.2 / 08.01.2018\r\n-===================\r\n-\r\n-  * (breaking change) Due to a long-standing engineering flaw in `intl-messageformat` library (the locale data loading process) I dismissed it and this library is now using raw CLDR locale data instead so built-in locale data now holds an extra property: the `plural` function taking a number and returning the pluralization type of that number (\"one\", \"few\", etc). Therefore, if adding raw CLDR locale data for locales which are not built-in this pluralization function must be passed as the second argument to `.locale(localeDataCLDR, pluralsClassifier)`.\r\n-\r\n-  * (breaking change) `javascriptTimeAgo.styles` is no more accesible: pass `style` as a string instead.\r\n-\r\n-  * (breaking change) `locales` folder inside the package renamed to `locale` (e.g. `javascript-time-ago/locales/en` -> `javascript-time-ago/locale/en`).\r\n-\r\n-  * `style.flavour` can now be an array\r\n-\r\n-0.4.4 / 22.12.2016\r\n-===================\r\n-\r\n-  * Changed `yesterday` and `tomorrow` labels for Russian localization\r\n-\r\n-0.2.0 / 13.04.2016\r\n-===================\r\n-\r\n-  * Moved `intl-messageformat` to `peerDependencies`\r\n-\r\n-0.1.0 / 03.04.2016\r\n-===================\r\n-\r\n-  * Initial release\n\\ No newline at end of file\n+<!--\n+TO DO: Maybe change from string style names to configurable style options. Example: twitter-minute-now -> \"twitter\", { startFrom: 'minute', now: true }. twitter-first-minute -> \"twitter\", { startFrom: 'minute', startFromValue: 1 }.\n+\n+TO DO: Maybe require `minTime` on all steps (except the first one).\n+\n",
+					"match": false,
+					"packageHash": "7594e8257c1874ee9837e6ef1c088351f5181ae6bdbf8a1fe01b9e0721437990",
+					"size": 4519,
+					"sourceHash": "8fe76d2b9aee0f1ae4c74b850c99ed9787e7e2b5bef525ef68c79b40ccfc4e9b",
+					"status": "content"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,351 +1,1082 @@\n-# javascript-time-ago\r\n-\r\n-[![npm version](https://img.shields.io/npm/v/javascript-time-ago.svg?style=flat-square)](https://www.npmjs.com/package/javascript-time-ago)\r\n-[![npm downloads](https://img.shields.io/npm/dm/javascript-time-ago.svg?style=flat-square)](https://www.npmjs.com/package/javascript-time-ago)\r\n-[![coverage](https://img.shields.io/coveralls/catamphetamine/javascript-time-ago/master.svg?style=flat-square)](https://coveralls.io/r/catamphetamine/javascript-time-ago?branch=master)\r\n-\r\n-International higly customizable relative date/time formatter (both for past and future dates).\r\n-\r\n-Formats a date/timestamp to:\r\n-\r\n-  * just now\r\n-  * 5m\r\n-  * 15 min\r\n-  * 25 minutes\r\n-  * an hour ago\r\n-  * 1 mo.\r\n-  * 5 years ago\r\n-  * … or whatever else\r\n-\r\n-For React users there's also a [React component](https://github.com/catamphetamine/react-time-ago).\r\n-\r\n-This is a readme for version `2.x`. [See version `1.x` readme](https://github.com/catamphetamine/javascript-time-ago/tree/1.x). See a [migration guide](https://github.com/catamphetamine/javascript-time-ago/blob/master/MIGRATION.md) from version `1.x` to version `2.x`.\r\n-\r\n-## Usage\r\n-\r\n-```\r\n-npm install javascript-time-ago --save\r\n-```\r\n-\r\n-```js\r\n-import TimeAgo from 'javascript-time-ago'\r\n-\r\n-// Load locale-specific relative date/time formatting rules.\r\n-import en from 'javascript-time-ago/locale/en'\r\n-\r\n-// Add locale-specific relative date/time formatting rules.\r\n-TimeAgo.addLocale(en)\r\n-\r\n-// Create relative date/time formatter.\r\n-const timeAgo = new TimeAgo('en-US')\r\n-\r\n-timeAgo.format(new Date())\r\n-// \"just now\"\r\n-\r\n-timeAgo.format(Date.now() - 60 * 1000)\r\n-// \"a minute ago\"\r\n-\r\n-timeAgo.format(Date.now() - 2 * 60 * 60 * 1000)\r\n-// \"2 hours ago\"\r\n-\r\n-timeAgo.format(Date.now() - 24 * 60 * 60 * 1000)\r\n-// \"a day ago\"\r\n-```\r\n-\r\n-Russian\r\n-\r\n-```js\r\n-import TimeAgo from 'javascript-time-ago'\r\n-\r\n-// Load locale-specific relative date/time formatting rules.\r\n-import en from 'javascript-time-ago/locale/en'\r\n-import ru from 'javascript-time-ago/locale/ru'\r\n-\r\n-// Add locale-specific relative date/time formatting rules.\r\n-TimeAgo.addLocale(en)\r\n-TimeAgo.addLocale(ru)\r\n-\r\n-// cyka blyat\r\n-const timeAgo = new TimeAgo('ru-RU')\r\n-\r\n-timeAgo.format(new Date())\r\n-// \"только что\"\r\n-\r\n-timeAgo.format(Date.now() - 60 * 1000)\r\n-// \"1 минуту назад\"\r\n-\r\n-timeAgo.format(Date.now() - 2 * 60 * 60 * 1000)\r\n-// \"2 часа назад\"\r\n-\r\n-timeAgo.format(Date.now() - 24 * 60 * 60 * 1000)\r\n-// \"1 день назад\"\r\n-```\r\n-\r\n-## Twitter style\r\n-\r\n-Mimics Twitter style of time ago (\"1m\", \"2h\", \"Mar 3\", \"Apr 4, 2012\")\r\n-\r\n-```js\r\n-timeAgo.format(new Date(), 'twitter')\r\n-// \"\"\r\n-\r\n-timeAgo.format(Date.now() - 60 * 1000, 'twitter')\r\n-// \"1m\"\r\n-\r\n-timeAgo.format(Date.now() - 2 * 60 * 60 * 1000, 'twitter')\r\n-// \"2h\"\r\n-\r\n",
+					"match": false,
+					"packageHash": "ae45c5df9f6bcef1b3cc74c6bb99421043763e309a183d5232b6510f3b571a1c",
+					"size": 12605,
+					"sourceHash": "e3b8bf163241cdfde2bf59b1770aacbc1c878bcba7b1442c97b910796a69608e",
+					"status": "content"
+				},
+				"bin/generate-load-all-locales.js": {
+					"match": false,
+					"packageHash": "d54b5827e797030194da26bf8b508cf8260b621967023b1ddaa19efedf3826a7",
+					"size": 889,
+					"status": "missing-in-source"
+				},
+				"bin/generate-locale-messages.js": {
+					"match": false,
+					"packageHash": "7161dad9ce0d1ddcc8ac7ae72326c5e3ecd5fe5981a15919335b69f4b5f09ff0",
+					"size": 2460,
+					"status": "missing-in-source"
+				},
+				"bundle/javascript-time-ago.min.js": {
+					"match": false,
+					"packageHash": "e1757f40bb302fb0369bbcb4dbca9b1a15b1595bb15e5c2bed6539b8ec8930d3",
+					"size": 14585,
+					"status": "missing-in-source"
+				},
+				"bundle/javascript-time-ago.min.js.map": {
+					"match": false,
+					"packageHash": "b691bf5eca99e529df9bdc8da1e30d57c6136ea5e4b2082596c838328352d526",
+					"size": 67488,
+					"status": "missing-in-source"
+				},
+				"cache/index.commonjs.js": {
+					"match": false,
+					"packageHash": "e8aa6e7ea39599348b405cbcc2aba9d4307b84c1e228888d5b91680b09687fee",
+					"size": 122,
+					"status": "missing-in-source"
+				},
+				"cache/index.js": {
+					"diff": "--- published/cache/index.js\n+++ rebuilt/cache/index.js\n@@ -1 +1,2 @@\n-export { default } from '../modules/cache'\n\\ No newline at end of file\n+// I guess this export is deprecated.\n+export { default } from '../modules/cache.js'\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "bb49a5a06d13c2bcc41edca1975184acd4c085c0e859509b28b84d1b4004e5f2",
+					"size": 42,
+					"sourceHash": "9b161499906d217fbd98d9fdf7e2eab6cc36901094a4484dc191874c1b4cc4e1",
+					"status": "content"
+				},
+				"cache/package.json": {
+					"diff": "--- published/cache/package.json\n+++ rebuilt/cache/package.json\n@@ -1,8 +1,14 @@\n-{\r\n-  \"private\": true,\r\n-  \"name\": \"javascript-time-ago-cache\",\r\n-  \"version\": \"1.0.0\",\r\n-  \"main\": \"index.commonjs.js\",\r\n-  \"module\": \"index.js\",\r\n-  \"sideEffects\": false\r\n+{\n+  \"private\": true,\n+  \"name\": \"javascript-time-ago/cache\",\n+  \"main\": \"index.cjs\",\n+  \"module\": \"index.js\",\n+  \"type\": \"module\",\n+  \"exports\": {\n+    \".\": {\n+      \"import\": \"./index.js\",\n+      \"require\": \"./index.cjs\"\n+    }\n+  },\n+  \"sideEffects\": false\n }\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "8568a824f80650eefbe77ba767f3f4c1ffbef7e6136836d2a82cdbb87271ec8c",
+					"size": 168,
+					"sourceHash": "b45aa11c008729afe8b0421294e9e66d0279b0c9b9f454e9b0a2ec58198a0ba6",
+					"status": "content"
+				},
+				"commonjs/JavascriptTimeAgo.js": {
+					"match": false,
+					"packageHash": "0ba2230f14f7b5e9d57eb2341ad47f0d0c9496e297b670c2049436d89ca2da91",
+					"size": 17072,
+					"status": "missing-in-source"
+				},
+				"commonjs/JavascriptTimeAgo.js.map": {
+					"match": false,
+					"packageHash": "6225ea1734a92e834208840bcdb4c659c8658f099eece82bdc728e675bbc5c65",
+					"size": 23254,
+					"status": "missing-in-source"
+				},
+				"commonjs/JavascriptTimeAgo.test.js": {
+					"match": false,
+					"packageHash": "6aefc88b842f3c26cdc84b3345245995930331ce6281c576a0c40581cad40315",
+					"size": 15927,
+					"status": "missing-in-source"
+				},
+				"commonjs/JavascriptTimeAgo.test.js.map": {
+					"match": false,
+					"packageHash": "d4f190d6d2a69f76701aa4bc2983416180dc5b7a12c7fc025fc3f7daab77e615",
+					"size": 30225,
+					"status": "missing-in-source"
+				},
+				"commonjs/LocaleDataStore.js": {
+					"match": false,
+					"packageHash": "536a96402a12c56c4f6720a1341fae84a8e5aa6f2afc553638c961de782d1157",
+					"size": 784,
+					"status": "missing-in-source"
+				},
+				"commonjs/LocaleDataStore.js.map": {
+					"match": false,
+					"packageHash": "cefa0fccbf46fdfad8d140343a9939081cb35fe72acc307d5cfe5ec9821c2412",
+					"size": 1220,
+					"status": "missing-in-source"
+				},
+				"commonjs/PropTypes.js": {
+					"match": false,
+					"packageHash": "315b65e710756ed8b228f66237d6d88d083d4159f3645fa11a693f7f3b9b5852",
+					"size": 1162,
+					"status": "missing-in-source"
+				},
+				"commonjs/PropTypes.js.map": {
+					"match": false,
+					"packageHash": "108074eb9dd5fc6651dafa251754784d824aee0bee4bfb090cf680bf9db1b9a3",
+					"size": 1850,
+					"status": "missing-in-source"
+				},
+				"commonjs/cache.js": {
+					"match": false,
+					"packageHash": "a4ce5a3e7809bc19474ed210f91bec92f94d0f878dcc6e14fe02200d25494483",
+					"size": 2814,
+					"status": "missing-in-source"
+				},
+				"commonjs/cache.js.map": {
+					"match": false,
+					"packageHash": "d1aa967ae12a2c4239cf6fd5d18bf5a4708558451a1a5887ec8f5aa904213629",
+					"size": 1738,
+					"status": "missing-in-source"
+				},
+				"commonjs/cache.test.js": {
+					"match": false,
+					"packageHash": "6af935dfb0a2685d091bce4a3136287cc4a25cc1270be539b469b9b793fedb7f",
+					"size": 565,
+					"status": "missing-in-source"
+				},
+				"commonjs/cache.test.js.map": {
+					"match": false,
+					"packageHash": "72739c8bc2bc3e0e9d5371200c805d1cc2c0dbbd64281b723309e56d26d57abc",
+					"size": 1261,
+					"status": "missing-in-source"
+				},
+				"commonjs/gradation/canonical.js": {
+					"match": false,
+					"packageHash": "82f7983bc8034533bab5959f91ccf63288238b7b107df2c9558bb10c27fd1ca4",
+					"size": 1118,
+					"status": "missing-in-source"
+				},
+				"commonjs/gradation/canonical.js.map": {
+					"match": false,
+					"packageHash": "2844b7593e121988e84760abf9ba2e0f459810603866aa9a484ac3d423e25d3c",
+					"size": 2297,
+					"status": "missing-in-source"
+				},
+				"commonjs/gradation/canonical.test.js": {
+					"match": false,
+					"packageHash": "69b9d5e7bbc01900ee96d242c64e5affcafa2c3eb9796beb7604c137ee496b0e",
+					"size": 1134,
+					"status": "missing-in-source"
+				},
+				"commonjs/gradation/canonical.test.js.map": {
+					"match": false,
+					"packageHash": "9e45f9d0f52bf4ff554551bee1f8e8c20bd97c419e85461e741240d3e4012198",
+					"size": 2663,
+					"status": "missing-in-source"
+				},
+				"commonjs/gradation/convenient.js": {
+					"match": false,
+					"packageHash": "f157ed0ba271daf94db94ce8d1befaaa26fd9caeadbba706fb3c2225d60fb2f7",
+					"size": 1297,
+					"status": "missing-in-source"
+				},
+				"commonjs/gradation/convenient.js.map": {
+					"match": false,
+					"packageHash": "cbf54faea7918fa38bf68da9e132a792526c25414318f75080bea12e06191604",
+					"size": 2850,
+					"status": "missing-in-source"
+				},
+				"commonjs/gradation/convenient.test.js": {
+					"match": false,
+					"packageHash": "443b1133175dcaf6fcc6550b6132760c07faccf3f6b32e63502b9ab278c7e747",
+					"size": 1554,
+					"status": "missing-in-source"
+				},
+				"commonjs/gradation/convenient.test.js.map": {
+					"match": false,
+					"packageHash": "3d9841a7de2a0cea9386926dfa9d8b976c63a9a12a896572bbb77be20841f8da",
+					"size": 3984,
+					"status": "missing-in-source"
+				},
+				"commonjs/gradation/helpers.js": {
+					"match": false,
+					"packageHash": "ddd31be0fc8f5b3d049344002616918bcc6408d1ec0f9c80103c0397a99b4175",
+					"size": 1499,
+					"status": "missing-in-source"
+				},
+				"commonjs/gradation/helpers.js.map": {
+					"match": false,
+					"packageHash": "ea695df43cbfee6ae1414eaac17618411cfa97813b39bf53f39a426704bdf67c",
+					"size": 1762,
+					"status": "missing-in-source"
+				},
+				"commonjs/gradation/helpers.test.js": {
+					"match": false,
+					"packageHash": "60524a3ccb2d6e6cd6d6a9fb62a12872e12d9e4d0b20713202b36a523ca4807d",
+					"size": 384,
+					"status": "missing-in-source"
+				},
+				"commonjs/gradation/helpers.test.js.map": {
+					"match": false,
+					"packageHash": "2567f7c1a91c64f926a669b98c940ecf8b96e9f620dc4eedd6254534d00749e0",
+					"size": 843,
+					"status": "missing-in-source"
+				},
+				"commonjs/gradation/index.js": {
+					"match": false,
+					"packageHash": "89c0744781ac5da945a66728ac6049881fec04e3fa972f7a87a76d13024d23f3",
+					"size": 1491,
+					"status": "missing-in-source"
+				},
+				"commonjs/gradation/index.js.map": {
+					"match": false,
+					"packageHash": "62f42ea47b16fd5c2cc51f8f95cb0e2b00c66378a4d676f0ec66592e9ebd2dd7",
+					"size": 1800,
+					"status": "missing-in-source"
+				},
+				"commonjs/grade.js": {
+					"match": false,
+					"packageHash": "570d29136353a6328396cc858e40cb36eafe5d785d58f84edaf83c61f9592710",
+					"size": 5522,
+					"status": "missing-in-source"
+				},
+				"commonjs/grade.js.map": {
+					"match": false,
+					"packageHash": "be810648ec2723dfb0808ab6765e48709430ec904d0e98e5e402a8900124cadc",
+					"size": 7971,
+					"status": "missing-in-source"
+				},
+				"commonjs/grade.test.js": {
+					"match": false,
+					"packageHash": "cf3b6c77ca2788c9321970f91e3019c6f12235a26ef69c3edec8ad3212a63956",
+					"size": 1516,
+					"status": "missing-in-source"
+				},
+				"commonjs/grade.test.js.map": {
+					"match": false,
+					"packageHash": "0fa7ebcd49586d7087b5d826e91683b0c10e356107120294c1d1b85a50d2e53b",
+					"size": 2812,
+					"status": "missing-in-source"
+				},
+				"commonjs/locale.js": {
+					"match": false,
+					"packageHash": "fe8793d0ed30a6eaf74ff1caeeedb21158cb00d410061e641281862cbd71ccc6",
+					"size": 2933,
+					"status": "missing-in-source"
+				},
+				"commonjs/locale.js.map": {
+					"match": false,
+					"packageHash": "a5720df9bb249831a8b1f356d273729413c69e1b060775fbd8e515f2f40b5712",
+					"size": 3377,
+					"status": "missing-in-source"
+				},
+				"commonjs/locale.test.js": {
+					"match": false,
+					"packageHash": "d9b55c66f473b494e784c261221a1e6edaffc1b288e3d180627c621f35d74d01",
+					"size": 2138,
+					"status": "missing-in-source"
+				},
+				"commonjs/locale.test.js.map": {
+					"match": false,
+					"packageHash": "9c7c117c08a25880c574432ac58864727a1f1235b2dd9a57923a8bed30b69399",
+					"size": 3604,
+					"status": "missing-in-source"
+				},
+				"commonjs/style/default.js": {
+					"match": false,
+					"packageHash": "ea22380a6195a940309707158838dff37832291b1d8e28d6706ba02590f1a1ad",
+					"size": 376,
+					"status": "missing-in-source"
+				},
+				"commonjs/style/default.js.map": {
+					"match": false,
+					"packageHash": "cba38100c7c9fcda73c63fb5bfe079429ae767d99f6ed531b204f6541b45ab03",
+					"size": 636,
+					"status": "missing-in-source"
+				},
+				"commonjs/style/index.js": {
+					"match": false,
+					"packageHash": "57a27dc645687ee6d44244f012d0d8336c64abd50b3be450d88b21a605cc7565",
+					"size": 774,
+					"status": "missing-in-source"
+				},
+				"commonjs/style/index.js.map": {
+					"match": false,
+					"packageHash": "a666fd39f3fe7baa1a6ff6853594187fa88bf0da0292c9f4a939ffaa8a98e262",
+					"size": 557,
+					"status": "missing-in-source"
+				},
+				"commonjs/style/time.js": {
+					"match": false,
+					"packageHash": "96abcff58dc928654514317c8e6400cc3320308978f6040ecd21788be8b82aaf",
+					"size": 646,
+					"status": "missing-in-source"
+				},
+				"commonjs/style/time.js.map": {
+					"match": false,
+					"packageHash": "0a8046b2b7706da327d34bfde8914572f552621fea75056d1ef1abd3721d78d0",
+					"size": 1066,
+					"status": "missing-in-source"
+				},
+				"commonjs/style/time.test.js": {
+					"match": false,
+					"packageHash": "854c6cd6256159a60fe90f364597890ca29622abb6aaacecc25c90cf80460a6e",
+					"size": 2224,
+					"status": "missing-in-source"
+				},
+				"commonjs/style/time.test.js.map": {
+					"match": false,
+					"packageHash": "62e552abce0e89bb14c0a9c06e85e0c4cac634c94f8937d6eec0164e71ef20f4",
+					"size": 5011,
+					"status": "missing-in-source"
+				},
+				"commonjs/style/twitter.js": {
+					"match": false,
+					"packageHash": "ea405a3002685a34ea3802d53632839eb80f3572b11c3996d3faa55592a26463",
+					"size": 3945,
+					"status": "missing-in-source"
+				},
+				"commonjs/style/twitter.js.map": {
+					"match": false,
+					"packageHash": "1eae2886c9692ade299cdc65fe42f6b86a4f92b2dd810a343b518de4c4c03a28",
+					"size": 5747,
+					"status": "missing-in-source"
+				},
+				"commonjs/style/twitter.test.js": {
+					"match": false,
+					"packageHash": "0104243b4afbdf161c853dcc386a46384a373ca4a4b61d603e1ae9f041fbb455",
+					"size": 3918,
+					"status": "missing-in-source"
+				},
+				"commonjs/style/twitter.test.js.map": {
+					"match": false,
+					"packageHash": "17a670d5d82b231a58948a3f2e3f0d69e4192666ef3ee6845f173a712e0ec406",
+					"size": 6727,
+					"status": "missing-in-source"
+				},
+				"gradation/index.commonjs.js": {
+					"match": false,
+					"packageHash": "c5b82b1c3a3349c0ab8f37783df67dea945b43260cc77253597cfba63ee84c82",
+					"size": 114,
+					"status": "missing-in-source"
+				},
+				"gradation/index.js": {
+					"diff": "--- published/gradation/index.js\n+++ rebuilt/gradation/index.js\n@@ -1 +1 @@\n-export * from '../modules/gradation'\n\\ No newline at end of file\n+export * from '../modules/steps/index.js'\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "5f7b3e6f5c5859db7932682c724384ff041e5a1f2cede1e717cf5e0f8d9254ae",
+					"size": 36,
+					"sourceHash": "ebf9beecf09a76d3f457b30986e229c8c66120ac48b97dfab17077cea4c8d03b",
+					"status": "content"
+				},
+				"gradation/package.json": {
+					"diff": "--- published/gradation/package.json\n+++ rebuilt/gradation/package.json\n@@ -1,8 +1,14 @@\n-{\r\n-  \"private\": true,\r\n-  \"name\": \"javascript-time-ago-gradation\",\r\n-  \"version\": \"1.0.0\",\r\n-  \"main\": \"index.commonjs.js\",\r\n-  \"module\": \"index.js\",\r\n-  \"sideEffects\": false\r\n+{\n+  \"private\": true,\n+  \"name\": \"javascript-time-ago/gradation\",\n+  \"main\": \"index.cjs\",\n+  \"module\": \"index.js\",\n+  \"type\": \"module\",\n+  \"exports\": {\n+    \".\": {\n+      \"import\": \"./index.js\",\n+      \"require\": \"./index.cjs\"\n+    }\n+  },\n+  \"sideEffects\": false\n }\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "2e9f26725d07d28f9d363608011a60442538873de5c8671bd41d3bcf43a406d6",
+					"size": 172,
+					"sourceHash": "2b7e5f2a9f5d0a99001e9ab69d0a84a17a8c31b5c0e71ae9a03481e7e827992b",
+					"status": "content"
+				},
+				"index.commonjs.js": {
+					"match": false,
+					"packageHash": "8584a0c18fe81404a2b6f21f2f43d98eb396a9d90ea57f815be19e9359af5a40",
+					"size": 373,
+					"status": "missing-in-source"
+				},
+				"index.js": {
+					"diff": "--- published/index.js\n+++ rebuilt/index.js\n@@ -1,6 +1,9 @@\n-export { default } from './modules/JavascriptTimeAgo'\r\n-\r\n-export {\r\n-\tintlDateTimeFormatSupported as intlDateTimeFormatSupported,\r\n-\tintlDateTimeFormatSupportedLocale as intlDateTimeFormatSupportedLocale\r\n-} from './modules/locale'\n\\ No newline at end of file\n+export { default } from './modules/TimeAgo.js'\n+\n+export { default as FullDateFormatter } from './modules/FullDateFormatter.js'\n+\n+// These two legacy exports are deprecated.\n+export {\n+\tintlDateTimeFormatSupported as intlDateTimeFormatSupported,\n+\tintlDateTimeFormatSupportedLocale as intlDateTimeFormatSupportedLocale\n+} from './modules/locale.js'\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "b357385ebdc88863a0cf9482ce5ddc1c6c256abc296027e1143df680ed30ffaf",
+					"size": 227,
+					"sourceHash": "c8188eb4accf1fb27ec2d8b9c653634ed4216d56ec1f2bdd054d5ad75cacf4c8",
+					"status": "content"
+				},
+				"load-all-locales.js": {
+					"match": false,
+					"packageHash": "6e77310f3df4b153c0e6f224b0378ec066554c64ae72b36e75edbf51912cb151",
+					"size": 8193,
+					"status": "missing-in-source"
+				},
+				"locale/af/index.js": {
+					"match": false,
+					"packageHash": "151b8e37d171394e307262df64e19dd6a5806881b445a1960089cbfac4cec70b",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/am/index.js": {
+					"match": false,
+					"packageHash": "59910a4b1c89572b6a266a712bbc54bcd094ddb8231a6e46c0fb30c200d1f773",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/ar/index.js": {
+					"match": false,
+					"packageHash": "4d77a88c0eec832cf660737e76453934bd59a6d46263f9b928241442a40f171e",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/ar-AE/index.js": {
+					"match": false,
+					"packageHash": "40e876cac945d56a2c7fb4efc2eb22a5ce436e46490e98b11d0c121be30b0117",
+					"size": 233,
+					"status": "missing-in-source"
+				},
+				"locale/as/index.js": {
+					"match": false,
+					"packageHash": "bab1442b50ccb863cc033dadcfd072946abad311df6b0516058d9c28d191f7f6",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/ast/index.js": {
+					"match": false,
+					"packageHash": "0509115afb22856a26757e5dca2cba95db8231438ec48e04e23e131d6c8464e0",
+					"size": 231,
+					"status": "missing-in-source"
+				},
+				"locale/az/index.js": {
+					"match": false,
+					"packageHash": "8ff3b2840b166617b9aa0b824a1adad7a730bfb46d49e4c8c46d25c17de0c358",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/be/index.js": {
+					"match": false,
+					"packageHash": "79da747397be772d268df53f832932b32ad8b9c18459a3c8d5454ea31969393b",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/bg/index.js": {
+					"match": false,
+					"packageHash": "5ed028eae7154c319e4912c505c03572f2d76d747b674ece0f0e01053f81f693",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/bn/index.js": {
+					"match": false,
+					"packageHash": "2da088e9e0ee06f2e56ebfacaefc47e9732836fef7e671e61883753cca1b5ab1",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/br/index.js": {
+					"match": false,
+					"packageHash": "965c23a7114736626c7cc5974001d73696f1632fcd1b7eb5f928d84dc6fc5e81",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/bs/index.js": {
+					"match": false,
+					"packageHash": "ac6fbbe2345a7bfb65f3e6731a860b40d8391b30d4efa2885f0e02d59407d20d",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/bs-Cyrl/index.js": {
+					"match": false,
+					"packageHash": "1d7e15d9a95a517830c359d4f7251556789742493d10c96c1b5592d6839c21f6",
+					"size": 235,
+					"status": "missing-in-source"
+				},
+				"locale/ca/index.js": {
+					"match": false,
+					"packageHash": "1bf977b8bd00688dca75dd9f4a9dccde507761be4188b4a51b805fb2eec45165",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/ccp/index.js": {
+					"match": false,
+					"packageHash": "a8144cfc7d3a4a74090c51ebf9688420df9e89c4d6be2f4cedde4d5e857555c9",
+					"size": 187,
+					"status": "missing-in-source"
+				},
+				"locale/ce/index.js": {
+					"match": false,
+					"packageHash": "4d80f199071a5b43db362d9fdad07bf9cf283366f061ba230b78bc13245ebff6",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/chr/index.js": {
+					"match": false,
+					"packageHash": "aef209a0207b96c5508e18dc11aea5992bb64abbf4409cf46839472a6f209280",
+					"size": 231,
+					"status": "missing-in-source"
+				},
+				"locale/cs/index.js": {
+					"match": false,
+					"packageHash": "df86e6c02ce78408d7351fc013412c7bcb3c6227b73018118308e7cc717d6aba",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/cy/index.js": {
+					"match": false,
+					"packageHash": "7a8fc15262d04d5d1ed1424fe06e3ebef0839dba93e2336d6e99b6afd3d12d2c",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/da/index.js": {
+					"match": false,
+					"packageHash": "c257b4a66901c08d9182e3fcbc5c1415baa2e3df10b66e955fbfad25d97b84f9",
+					"size": 322,
+					"status": "missing-in-source"
+				},
+				"locale/de/index.js": {
+					"match": false,
+					"packageHash": "48d39573633eea90452c324d58627da9cab361c5656522c41b08a8d7829e8334",
+					"size": 403,
+					"status": "missing-in-source"
+				},
+				"locale/dsb/index.js": {
+					"match": false,
+					"packageHash": "aa8e89725dd5ab0f60f774985f2a33b2b8afac20243ed03e1972f9e49ef14f59",
+					"size": 231,
+					"status": "missing-in-source"
+				},
+				"locale/dz/index.js": {
+					"match": false,
+					"packageHash": "2b2486f5f982357d767c790199c575fd615fed21f167ed617d7b346821edde33",
+					"size": 186,
+					"status": "missing-in-source"
+				},
+				"locale/ee/index.js": {
+					"match": false,
+					"packageHash": "b73455f22e0371937baaf55dee34f25e06caa6df65232d07b5acb3e1b90cadd7",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/el/index.js": {
+					"match": false,
+					"packageHash": "87814d676e45708f074ac8ec4a9253953ec11d88e7cdb821c42886e4149f8b90",
+					"size": 312,
+					"status": "missing-in-source"
+				},
+				"locale/en/index.js": {
+					"match": false,
+					"packageHash": "3e23238d55795bdace62d38a2fef285859fa539556f59fbab580e2ca347bc679",
+					"size": 616,
+					"status": "missing-in-source"
+				},
+				"locale/es/index.js": {
+					"match": false,
+					"packageHash": "561c18fdd8b1fc21e038221a583ddc3ab23db36cd0691ad0cc6c82d34d832ab6",
+					"size": 381,
+					"status": "missing-in-source"
+				},
+				"locale/es-AR/index.js": {
+					"match": false,
+					"packageHash": "7c66d56b66ad4f194f40f56593a9c94d2c3eb581a6d994f81e5fa1e379f4606d",
+					"size": 233,
+					"status": "missing-in-source"
+				},
+				"locale/es-MX/index.js": {
+					"match": false,
+					"packageHash": "f2b6ceadf7ccec21185862d7e010a06bec7f500b8068fbc98da09c157ce74df8",
+					"size": 233,
+					"status": "missing-in-source"
+				},
+				"locale/es-PY/index.js": {
+					"match": false,
+					"packageHash": "67b565aadf869287c972ec50637f0df0d13e2b71927f55886a62be06d8f3e651",
+					"size": 233,
+					"status": "missing-in-source"
+				},
+				"locale/es-SV/index.js": {
+					"match": false,
+					"packageHash": "2a592062a5fcc26ee2142bf97c5b74ab37dcef299b1a9b823029b8db9e24b7e2",
+					"size": 233,
+					"status": "missing-in-source"
+				},
+				"locale/es-US/index.js": {
+					"match": false,
+					"packageHash": "a3039d916131ef075595716726cf9c5266d147a1e3a7c825841693bd80df3447",
+					"size": 233,
+					"status": "missing-in-source"
+				},
+				"locale/et/index.js": {
+					"match": false,
+					"packageHash": "1c10ae267d59635240170f29c331b51b8ad2b781e5170a8ee8cc4d483d99d8bf",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/eu/index.js": {
+					"match": false,
+					"packageHash": "3ebbe17dabc70641283b1f5e6b2e7a49794cf1c2b83b1e3aa8cba9b5de1feab4",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/fa/index.js": {
+					"match": false,
+					"packageHash": "19a81d9efef05670969254df4ce41197f21fbb070788188d3e0cdedf44484984",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/fi/index.js": {
+					"match": false,
+					"packageHash": "8653f6dc62822cd2b7d700a7e36166da5089df49846f6ccdd9662a22051534e5",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/fil/index.js": {
+					"match": false,
+					"packageHash": "9db0a618d8e5b41ac25ff12ce51b2c24f395341fbd6f5f97067eeb6f2b98d547",
+					"size": 231,
+					"status": "missing-in-source"
+				},
+				"locale/fo/index.js": {
+					"match": false,
+					"packageHash": "8b6d4d6aa642d4e2ffebaca8885034bf917c219a57ffb661b20aed269e67a1a9",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/fr/index.js": {
+					"match": false,
+					"packageHash": "56bc487a1b3af9e195e9d81bb90d71aca2130277abe20669e73dfe773348c898",
+					"size": 322,
+					"status": "missing-in-source"
+				},
+				"locale/fr-CA/index.js": {
+					"match": false,
+					"packageHash": "c6d2d47d520783066361c99ce658c114fd3d85b4c9727886d9a93a01a84cda5f",
+					"size": 233,
+					"status": "missing-in-source"
+				},
+				"locale/fur/index.js": {
+					"match": false,
+					"packageHash": "c4741869637df560af65c315e7f061e2345fed5c6d3b64d64cdb4e57683251b3",
+					"size": 231,
+					"status": "missing-in-source"
+				},
+				"locale/fy/index.js": {
+					"match": false,
+					"packageHash": "7a5bb060f6650b52cb9287d74e84286ec61d5729a56c206708ca03ea4c4effef",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/ga/index.js": {
+					"match": false,
+					"packageHash": "25a3768c921af3ac859aa542a58d02a0336423d4178adb61a1da1dda3fc4204f",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/gd/index.js": {
+					"match": false,
+					"packageHash": "45eef74d67f7f41a68111f8fd8423a7d26b50fb0fb4154336c859109e5e8786a",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/gl/index.js": {
+					"match": false,
+					"packageHash": "f57a88d0cce9c8987e8028468bb501de355bb07b076c2dec53e0b22bd95866ba",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/gu/index.js": {
+					"match": false,
+					"packageHash": "8a393cf0a28cfa2e5d5c522edeaa70043e7ed6841b36013a9a294ad48804de87",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/he/index.js": {
+					"match": false,
+					"packageHash": "f8eed11d04b5ac138eb8e7f9508a51f471c3ae11afc658d2de1580527a4b44e0",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/hi/index.js": {
+					"match": false,
+					"packageHash": "53f0e85b98be431a4eecad428012605ea57124babb817a351bc62fcb579e4570",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/hr/index.js": {
+					"match": false,
+					"packageHash": "049a2c36e2ba0b3b49e1b2c63c47ec890d08a375ed05fe0dbd490c70b60528e5",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/hsb/index.js": {
+					"match": false,
+					"packageHash": "f9f2dcd325430e1c4ac72d48d8707c06109a63c3eb86c47beb0a849c1f4e8919",
+					"size": 231,
+					"status": "missing-in-source"
+				},
+				"locale/hu/index.js": {
+					"match": false,
+					"packageHash": "e2857d2da371341d048bc0001c43c0b90be371e67dec7482b9593d77f3d263c0",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/hy/index.js": {
+					"match": false,
+					"packageHash": "913a37e73ea1559feb13151c00e68a84c50f018cf86daaa8b67b93ccbe382ec0",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/ia/index.js": {
+					"match": false,
+					"packageHash": "f629041501b04edd5c215c54c07e1a8035356a1a97426f54903f9c7897cc41e5",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/id/index.js": {
+					"match": false,
+					"packageHash": "efbb11aaa52eb1016206c20a20e5d22d715ea0edba3c6e3e6eeb6c9d71e550e4",
+					"size": 186,
+					"status": "missing-in-source"
+				},
+				"locale/is/index.js": {
+					"match": false,
+					"packageHash": "c571b5fc5313e25e78c827bdfa6bf49d08f068e6b0a1505ad3d43ee712cc216b",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/it/index.js": {
+					"match": false,
+					"packageHash": "2b4f7645ee4d5ea60ea85ce7a21d72b6c7b6d8b57c2b31b2b0a3620794a88a3e",
+					"size": 322,
+					"status": "missing-in-source"
+				},
+				"locale/ja/index.js": {
+					"match": false,
+					"packageHash": "ee298d07991d07c275f5d9ecfb630ddb810bf45b5bcb7a9d2d9de0549cf39f71",
+					"size": 186,
+					"status": "missing-in-source"
+				},
+				"locale/jgo/index.js": {
+					"match": false,
+					"packageHash": "eed586d26903621b4ca362394cff69e6b79ebf6bb6b6bc92548f04e99851648b",
+					"size": 231,
+					"status": "missing-in-source"
+				},
+				"locale/jv/index.js": {
+					"match": false,
+					"packageHash": "5ff782a8ad17b5b74c9d2f663bc335b32d4352d6bf1aaaddde349fa55104a5e0",
+					"size": 186,
+					"status": "missing-in-source"
+				},
+				"locale/ka/index.js": {
+					"match": false,
+					"packageHash": "1c267cf05a8bfc501c83127f171a30e2aa9bb0a866c90330644c95d3c2f8966e",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/kea/index.js": {
+					"match": false,
+					"packageHash": "82e9db5190ec3180f49c329c6c6b428d53f6011188d485d5a125317456205f06",
+					"size": 187,
+					"status": "missing-in-source"
+				},
+				"locale/kk/index.js": {
+					"match": false,
+					"packageHash": "c2f099605b9bb696b51cacd02cf91d98fa459e204f965e3126ec39d6172948b5",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/kl/index.js": {
+					"match": false,
+					"packageHash": "04fd69d46798d1ea1b689e3b09791b16a2c7a3e507b6750204ce7516ac4f5a38",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/km/index.js": {
+					"match": false,
+					"packageHash": "4416fead0d18acaef9e21fd1ad64c3345e8023f69c2c014fcaed40a18e2a7bde",
+					"size": 186,
+					"status": "missing-in-source"
+				},
+				"locale/kn/index.js": {
+					"match": false,
+					"packageHash": "8c39f08caf965cd1985cc9bcb55f84c5f8a6a590080d6dbebd743d964b7d269e",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/ko/index.js": {
+					"match": false,
+					"packageHash": "7eecb1853fcf0f1e1e81db9e52f14dbe39bff69d6ebcc5590d411890c51c0a0c",
+					"size": 268,
+					"status": "missing-in-source"
+				},
+				"locale/kok/index.js": {
+					"match": false,
+					"packageHash": "7a5700a628a4ec211da7390642fe326b899ecf7b0c67f300ca22f5717b9a75a1",
+					"size": 187,
+					"status": "missing-in-source"
+				},
+				"locale/ksh/index.js": {
+					"match": false,
+					"packageHash": "5057ac3b14821c9537d5e396323e1fec1b9f73393c8792e173583a6eee6a85b0",
+					"size": 231,
+					"status": "missing-in-source"
+				},
+				"locale/ku/index.js": {
+					"match": false,
+					"packageHash": "f98bec08116076c0e92e29b6199dee58a47eec819609412a915b26484320d965",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/ky/index.js": {
+					"match": false,
+					"packageHash": "f4608ebfe85a5de200e1bc12fcfb4732ea0ade101656cb802db041bc3bd2d50b",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/lb/index.js": {
+					"match": false,
+					"packageHash": "98bf04c781f2a93c1419255863a214a0fa931394b4749d2e24b0ca316e4f03f4",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/lkt/index.js": {
+					"match": false,
+					"packageHash": "880d6af91c23a266d39c8d554afdd72c15d99bb0d9fe0fd42711279c99b5f5b5",
+					"size": 187,
+					"status": "missing-in-source"
+				},
+				"locale/lo/index.js": {
+					"match": false,
+					"packageHash": "77038f0d54462f66f41f7cb1f9dacb4fb0ea162df4582da747d3cc8440c0a1aa",
+					"size": 186,
+					"status": "missing-in-source"
+				},
+				"locale/lt/index.js": {
+					"match": false,
+					"packageHash": "53f7dfd4d1e5e5c9716b11f03381f35a8d018a88afb66258fc9811246f315aed",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/lv/index.js": {
+					"match": false,
+					"packageHash": "3fe8162edd174a967be49f7fb32ad06ff2ed4ac1e00acb75fbb963be9092bd9e",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/mk/index.js": {
+					"match": false,
+					"packageHash": "68b94eb942b1d089afa17aaefa8b99ed1cb4f11e7b525314e7a5efeb17b16691",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/ml/index.js": {
+					"match": false,
+					"packageHash": "dd04d94e50d25db2f9234444f12bdd573a124fa339a27830320568dfc536608d",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/mn/index.js": {
+					"match": false,
+					"packageHash": "00872cd613adb9ef1d90eeccd1638288aa92279bdb822447e5acbe8afcf65dd0",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/mr/index.js": {
+					"match": false,
+					"packageHash": "1f2aeb482763e5b0979b4dbc0b8a109bd59a00b66fd79d6113caab98c032b7b2",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/ms/index.js": {
+					"match": false,
+					"packageHash": "4c79bf4a49770b937b5ede6efd47c4776038f6e55468c50ad37cd55acb8cfdd8",
+					"size": 186,
+					"status": "missing-in-source"
+				},
+				"locale/mt/index.js": {
+					"match": false,
+					"packageHash": "b47a6753d3d50b733eb4e38d514f2e9a7db37ab74aeb953873d319f8c3281586",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/my/index.js": {
+					"match": false,
+					"packageHash": "60459c9d5247e9112009924c18a5f8eddcfed95b503126cdeecd04a37ce87a2e",
+					"size": 186,
+					"status": "missing-in-source"
+				},
+				"locale/mzn/index.js": {
+					"match": false,
+					"packageHash": "338b2187caeff29a085e55b971108ff809ab577d8e40a46145d8569d0e0c692e",
+					"size": 187,
+					"status": "missing-in-source"
+				},
+				"locale/nb/index.js": {
+					"match": false,
+					"packageHash": "602f5e7f6457f22d1fe7e50067145b1699383cb6661936399b79b2604154dee4",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/ne/index.js": {
+					"match": false,
+					"packageHash": "32f5d6cc95e7c9934da8ebacc7d0d307dbc0647bda2f803f14d3ee4302282b86",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/nl/index.js": {
+					"match": false,
+					"packageHash": "ea6946bc3c095fcc19813f57648bd62415506682ae98ac2f41e880993195a4b4",
+					"size": 322,
+					"status": "missing-in-source"
+				},
+				"locale/nn/index.js": {
+					"match": false,
+					"packageHash": "f18cc9f05c34fe832df9a75857b6743b03f9abd1d8f67f83c8805096d1e71b5b",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/or/index.js": {
+					"match": false,
+					"packageHash": "c630482600eb0e836737ae132a10aa0ea6fd76fba45e48ef34e3fbae1c7e6cc9",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/pa/index.js": {
+					"match": false,
+					"packageHash": "0f603c3075e5a32bba3265d785b89aa1b718fddf1d04c268a7f52b6c9c6ebdf4",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/pl/index.js": {
+					"match": false,
+					"packageHash": "62cc7723992468fc07a2b9cf555f37c6606998e0f514125c03407c430eb7373b",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/ps/index.js": {
+					"match": false,
+					"packageHash": "24c8543f70309b71097d3b4d09d4a495dbaf4162be1fd2c9c7b28cea0d3c696e",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/pt/index.js": {
+					"match": false,
+					"packageHash": "e11b2691c9c61082df9a3c62172d31f10d9987e0ab06be2acb584b2d8282fb9c",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/qu/index.js": {
+					"match": false,
+					"packageHash": "6bb7d079f96cddc7fbd585fcefd21ec33df9eb731b806c0c351adba65008b72e",
+					"size": 186,
+					"status": "missing-in-source"
+				},
+				"locale/ro/index.js": {
+					"match": false,
+					"packageHash": "62cf3b5ba3e66e5f55634219c58a6895ef0b4bcffd0f97da5e3293dea00bb8c3",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/ru/index.js": {
+					"match": false,
+					"packageHash": "c68492517077b9e2e34adbe79369c1074f13d2ae43db80ad75c628e18c572e63",
+					"size": 616,
+					"status": "missing-in-source"
+				},
+				"locale/sah/index.js": {
+					"match": false,
+					"packageHash": "6eba9c3e3de81b90ebb119f671a0cc33865ed6d895bf20c8a36a66fae205ef3e",
+					"size": 187,
+					"status": "missing-in-source"
+				},
+				"locale/sd/index.js": {
+					"match": false,
+					"packageHash": "f648238f771c2a6e0369c5de3493b309ea42fdc25ee3f17ea40008f9e6409b1b",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/se/index.js": {
+					"match": false,
+					"packageHash": "46861fa0daee2b71201585ba6cfcc7b7f4e3cdfbdd1da562b5a970ad7a45659a",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/se-FI/index.js": {
+					"match": false,
+					"packageHash": "b453f0901d6bac04af0143111e0012e0a06bbbea61c9dc0a215a7d9df9388bc5",
+					"size": 233,
+					"status": "missing-in-source"
+				},
+				"locale/si/index.js": {
+					"match": false,
+					"packageHash": "21ef86c2b01968cecb8c05cfc218b6e2c61936022ccaccfead361b3a48378f02",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/sk/index.js": {
+					"match": false,
+					"packageHash": "476c7cbbf27e628f17120eefbb43926b3eaea903ba6003817534cec2d42ed4e4",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/sl/index.js": {
+					"match": false,
+					"packageHash": "b0a2f580aa0502b6871193653246c9b3928c9ef931e449b2de25a86484e93dab",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/so/index.js": {
+					"match": false,
+					"packageHash": "60b151b6ee82150ff78d25ebaff8946ca52cfe739ee0a584adb46e7027959ce7",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/sq/index.js": {
+					"match": false,
+					"packageHash": "1cdbdacecabd8af6ee89550723a6edccc4e79bc5d340d67210accb1544414c8f",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/sr/index.js": {
+					"match": false,
+					"packageHash": "f40f60fefbd8b5dde9173f225f60bc271421e7d89ed32c2d651491bee77ede1c",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/sr-Latn/index.js": {
+					"match": false,
+					"packageHash": "cc309966e99edc497ce086911e3ea26966815fd91def3fd791152e134972fcf3",
+					"size": 235,
+					"status": "missing-in-source"
+				},
+				"locale/sv/index.js": {
+					"match": false,
+					"packageHash": "077a1e851e52a4c1403d76926ded7674881f0495d232ef81a2143fc54695bb9f",
+					"size": 322,
+					"status": "missing-in-source"
+				},
+				"locale/sw/index.js": {
+					"match": false,
+					"packageHash": "0b449cd57aa05f5f43994707b69059bf0b183cc233ed6e104c32d3582dcfae20",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/ta/index.js": {
+					"match": false,
+					"packageHash": "cc4c3255990b5858a24d52d9546e29f539a7f5ec2f99b6b47b0b074d0c34f9fa",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/te/index.js": {
+					"match": false,
+					"packageHash": "1a30d4020b47aae5ee744909939e54073ea629aefd6cffee81e7e0886f409ba6",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/th/index.js": {
+					"match": false,
+					"packageHash": "f2bc3e1f0a8fbd56b8e3129200336ca682f5e10d1e4ea278a3e4abe972a71601",
+					"size": 186,
+					"status": "missing-in-source"
+				},
+				"locale/ti/index.js": {
+					"match": false,
+					"packageHash": "ec320595d1ac59c1afcff1146f7d44bd244a0e7a5cb1a11df9f560fcde908576",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/tk/index.js": {
+					"match": false,
+					"packageHash": "d91c3ebf236a081049af27c26f68a5b67e8f88506ad2340cb549b9014397d19a",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/to/index.js": {
+					"match": false,
+					"packageHash": "9402dd95f201c4338bc5f6a9ea9f777e02878007c904ac962da0c9c98b3a79d2",
+					"size": 186,
+					"status": "missing-in-source"
+				},
+				"locale/tr/index.js": {
+					"match": false,
+					"packageHash": "c31991d5bb2ce40f099a4b3a500d3d687b22692b0a723070eb45e83251402d9b",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/ug/index.js": {
+					"match": false,
+					"packageHash": "ca46d10e82924c80687e1eb1f752bbdb038975b14bdde6d676872c5f7dc3e2c0",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/uk/index.js": {
+					"match": false,
+					"packageHash": "d5467d5670392a21bd2ee683101b7c90e2aba871982271b922d62b09e9117b52",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/ur/index.js": {
+					"match": false,
+					"packageHash": "3d612e765b89cd004d47d939493ecf9639c936e97f557692aeaa3899c2eb1d91",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/ur-IN/index.js": {
+					"match": false,
+					"packageHash": "337f52e9ab5fdd95789bbd7aba8ec9a6acf81696b9436af08aa1a47982aa4711",
+					"size": 233,
+					"status": "missing-in-source"
+				},
+				"locale/uz/index.js": {
+					"match": false,
+					"packageHash": "7efcb268b49cb6dbd17923a43d1deea16214d2bf4e66c3256140b9ee8786fdde",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/uz-Cyrl/index.js": {
+					"match": false,
+					"packageHash": "38366832b1dd6cb05391928a3cecabe7d2e40602d5931f9b26de14eb4d085883",
+					"size": 235,
+					"status": "missing-in-source"
+				},
+				"locale/vi/index.js": {
+					"match": false,
+					"packageHash": "3fbe77b7ec30a0033eba47c1be6dfab36eeba7ed869b2fbc9187fd1c54ae4168",
+					"size": 186,
+					"status": "missing-in-source"
+				},
+				"locale/wae/index.js": {
+					"match": false,
+					"packageHash": "0c0abccc677b15d7554835a85bbbc326f7672fcd99b4dc4547d73478459e10e1",
+					"size": 231,
+					"status": "missing-in-source"
+				},
+				"locale/yi/index.js": {
+					"match": false,
+					"packageHash": "b0318037553fea73f833d95137031894658b1d273c213c834a24eb44635283f3",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale/yue/index.js": {
+					"match": false,
+					"packageHash": "f5420a50a72e6bb8c30847ef22ac6ced34d20c963050b8efe176c170a52144a9",
+					"size": 187,
+					"status": "missing-in-source"
+				},
+				"locale/yue-Hans/index.js": {
+					"match": false,
+					"packageHash": "86111e414c97ca0af010f69c3b3087ed0f0644c69bfa81ac3ce600706a75d0a7",
+					"size": 192,
+					"status": "missing-in-source"
+				},
+				"locale/zh/index.js": {
+					"match": false,
+					"packageHash": "1c83ec5fc4d7611ed19e9dc3cb9c4169ba518ef8a127d1f179615e552d776223",
+					"size": 186,
+					"status": "missing-in-source"
+				},
+				"locale/zh-Hans-HK/index.js": {
+					"match": false,
+					"packageHash": "6911fc63af6e000882ad680f250ef018786dafe95f6d77b5886e1ba57128b8fa",
+					"size": 194,
+					"status": "missing-in-source"
+				},
+				"locale/zh-Hans-MO/index.js": {
+					"match": false,
+					"packageHash": "480ed09ac5c2e4ac60c3959d445e369c665101e218281f3a24db8fded07f3d76",
+					"size": 194,
+					"status": "missing-in-source"
+				},
+				"locale/zh-Hans-SG/index.js": {
+					"match": false,
+					"packageHash": "5bf5c1b5eef269dec7ba91cd56a885fe80c5e707612c560ab9e16fd3ea377725",
+					"size": 194,
+					"status": "missing-in-source"
+				},
+				"locale/zh-Hant/index.js": {
+					"match": false,
+					"packageHash": "b7f09d6ffc49e19349d919886ca92cb85f8a8320e0a34a8e340ec3ed1ab64422",
+					"size": 191,
+					"status": "missing-in-source"
+				},
+				"locale/zh-Hant-HK/index.js": {
+					"match": false,
+					"packageHash": "c01bb8f9412064fc036262de846f0aaca91d0df95b9c7afb26cdd69a90eab6c5",
+					"size": 194,
+					"status": "missing-in-source"
+				},
+				"locale/zh-Hant-MO/index.js": {
+					"match": false,
+					"packageHash": "3e256b4d1a64adc54f0fa93f87b7ca0cca5eff63ea50154088544862bb196c0a",
+					"size": 194,
+					"status": "missing-in-source"
+				},
+				"locale/zu/index.js": {
+					"match": false,
+					"packageHash": "d6dd5e2bb7b2b33c59416565183e3b6391819a8980231864ff9deb053ddf3b2f",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"locale-more-styles/da/long-time.json": {
+					"diff": "--- published/locale-more-styles/da/long-time.json\n+++ rebuilt/locale-more-styles/da/long-time.json\n@@ -1,34 +1,30 @@\n-{\r\n-  \"year\": {\r\n-    \"one\": \"{0} år\",\r\n-    \"other\": \"{0} år\"\r\n-  },\r\n-  \"month\": {\r\n-    \"one\": \"{0} måned\",\r\n-    \"other\": \"{0} måneder\"\r\n-  },\r\n-  \"week\": {\r\n-    \"one\": \"{0} uge\",\r\n-    \"other\": \"{0} uger\"\r\n-  },\r\n-  \"day\": {\r\n-    \"one\": \"{0} dag\",\r\n-    \"other\": \"{0} dage\"\r\n-  },\r\n-  \"hour\": {\r\n-    \"one\": \"{0} time\",\r\n-    \"other\": \"{0} timer\"\r\n-  },\r\n-  \"minute\": {\r\n-    \"one\": \"{0} minut\",\r\n-    \"other\": \"{0} minutter\"\r\n-  },\r\n-  \"second\": {\r\n-    \"one\": \"{0} sekund\",\r\n-    \"other\": \"{0} sekunder\"\r\n-  },\r\n-  \"now\": {\r\n-    \"future\": \"om et øjeblik\",\r\n-    \"past\": \"lige nu\"\r\n-  }\r\n-}\r\n+{\n+  \"year\": {\n+    \"one\": \"{0} år\",\n+    \"other\": \"{0} år\"\n+  },\n+  \"month\": {\n+    \"one\": \"{0} måned\",\n+    \"other\": \"{0} måneder\"\n+  },\n+  \"week\": {\n+    \"one\": \"{0} uge\",\n+    \"other\": \"{0} uger\"\n+  },\n+  \"day\": {\n+    \"one\": \"{0} dag\",\n+    \"other\": \"{0} dage\"\n+  },\n+  \"hour\": {\n+    \"one\": \"{0} time\",\n+    \"other\": \"{0} timer\"\n+  },\n+  \"minute\": {\n+    \"one\": \"{0} minut\",\n+    \"other\": \"{0} minutter\"\n+  },\n+  \"second\": {\n+    \"one\": \"{0} sekund\",\n+    \"other\": \"{0} sekunder\"\n+  }\n+}\n",
+					"match": false,
+					"packageHash": "bd06acfbf58380e755a644593b053b259aa78023aa90af3026d9d897b9704edf",
+					"size": 573,
+					"sourceHash": "00c5b1526d6c64e55c17e23970cc0bb7c681eefeb1c065882766663261d0d943",
+					"status": "content"
+				},
+				"locale-more-styles/de/long-convenient.json": {
+					"match": false,
+					"packageHash": "de4e72ff641072d1f3f328edc42dc9b0fc5e8a29c1f359cbca4be06cfd34069a",
+					"size": 2052,
+					"status": "missing-in-source"
+				},
+				"locale-more-styles/de/long-time.json": {
+					"diff": "--- published/locale-more-styles/de/long-time.json\n+++ rebuilt/locale-more-styles/de/long-time.json\n@@ -1,34 +1,30 @@\n-{\r\n-  \"year\": {\r\n-    \"one\": \"{0} Jahr\",\r\n-    \"other\": \"{0} Jahre\"\r\n-  },\r\n-  \"month\": {\r\n-    \"one\": \"{0} Monat\",\r\n-    \"other\": \"{0} Monate\"\r\n-  },\r\n-  \"week\": {\r\n-    \"one\": \"{0} Woche\",\r\n-    \"other\": \"{0} Wochen\"\r\n-  },\r\n-  \"day\": {\r\n-    \"one\": \"{0} Tag\",\r\n-    \"other\": \"{0} Tage\"\r\n-  },\r\n-  \"hour\": {\r\n-    \"one\": \"{0} Stunde\",\r\n-    \"other\": \"{0} Stunden\"\r\n-  },\r\n-  \"minute\": {\r\n-    \"one\": \"{0} Minute\",\r\n-    \"other\": \"{0} Minuten\"\r\n-  },\r\n-  \"second\": {\r\n-    \"one\": \"{0} Sekunde\",\r\n-    \"other\": \"{0} Sekunden\"\r\n-  },\r\n-  \"now\": {\r\n-    \"future\": \"in einem Moment\",\r\n-    \"past\": \"gerade jetzt\"\r\n-  }\r\n+{\n+  \"year\": {\n+    \"one\": \"{0} Jahr\",\n+    \"other\": \"{0} Jahre\"\n+  },\n+  \"month\": {\n+    \"one\": \"{0} Monat\",\n+    \"other\": \"{0} Monate\"\n+  },\n+  \"week\": {\n+    \"one\": \"{0} Woche\",\n+    \"other\": \"{0} Wochen\"\n+  },\n+  \"day\": {\n+    \"one\": \"{0} Tag\",\n+    \"other\": \"{0} Tage\"\n+  },\n+  \"hour\": {\n+    \"one\": \"{0} Stunde\",\n+    \"other\": \"{0} Stunden\"\n+  },\n+  \"minute\": {\n+    \"one\": \"{0} Minute\",\n+    \"other\": \"{0} Minuten\"\n+  },\n+  \"second\": {\n+    \"one\": \"{0} Sekunde\",\n+    \"other\": \"{0} Sekunden\"\n+  }\n }\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "44eb8df620209abb9748d186545874660ef5709a5f45d435d62c40fd43903bbd",
+					"size": 586,
+					"sourceHash": "4ee496a7d258fcdde3ca192b327e41d86ad0cbe04fcecccc4dd1ae209e0019e8",
+					"status": "content"
+				},
+				"locale-more-styles/el/tiny.json": {
+					"match": false,
+					"packageHash": "3290284c0c003384a7712979d72010bca6ae0c6ffc885954784cda618e73bc38",
+					"size": 184,
+					"status": "missing-in-source"
+				},
+				"locale-more-styles/en/long-convenient.json": {
+					"match": false,
+					"packageHash": "0e42fab085dc09c734a15a57eb48ae12d3a39f6a0b6cec421613ffa21ae0c2dd",
+					"size": 1881,
+					"status": "missing-in-source"
+				},
+				"locale-more-styles/en/long-time.json": {
+					"diff": "--- published/locale-more-styles/en/long-time.json\n+++ rebuilt/locale-more-styles/en/long-time.json\n@@ -1,34 +1,30 @@\n-{\r\n-\t\"year\": {\r\n-\t\t\"one\": \"{0} year\",\r\n-\t\t\"other\": \"{0} years\"\r\n-\t},\r\n-\t\"month\": {\r\n-\t\t\"one\": \"{0} month\",\r\n-\t\t\"other\": \"{0} months\"\r\n-\t},\r\n-\t\"week\": {\r\n-\t\t\"one\": \"{0} week\",\r\n-\t\t\"other\": \"{0} weeks\"\r\n-\t},\r\n-\t\"day\": {\r\n-\t\t\"one\": \"{0} day\",\r\n-\t\t\"other\": \"{0} days\"\r\n-\t},\r\n-\t\"hour\": {\r\n-\t\t\"one\": \"{0} hour\",\r\n-\t\t\"other\": \"{0} hours\"\r\n-\t},\r\n-\t\"minute\": {\r\n-\t\t\"one\": \"{0} minute\",\r\n-\t\t\"other\": \"{0} minutes\"\r\n-\t},\r\n-\t\"second\": {\r\n-\t\t\"one\": \"{0} second\",\r\n-\t\t\"other\": \"{0} seconds\"\r\n-\t},\r\n-\t\"now\": {\r\n-\t\t\"future\": \"in a moment\",\r\n-\t\t\"past\": \"just now\"\r\n-\t}\r\n+{\n+\t\"year\": {\n+\t\t\"one\": \"{0} year\",\n+\t\t\"other\": \"{0} years\"\n+\t},\n+\t\"month\": {\n+\t\t\"one\": \"{0} month\",\n+\t\t\"other\": \"{0} months\"\n+\t},\n+\t\"week\": {\n+\t\t\"one\": \"{0} week\",\n+\t\t\"other\": \"{0} weeks\"\n+\t},\n+\t\"day\": {\n+\t\t\"one\": \"{0} day\",\n+\t\t\"other\": \"{0} days\"\n+\t},\n+\t\"hour\": {\n+\t\t\"one\": \"{0} hour\",\n+\t\t\"other\": \"{0} hours\"\n+\t},\n+\t\"minute\": {\n+\t\t\"one\": \"{0} minute\",\n+\t\t\"other\": \"{0} minutes\"\n+\t},\n+\t\"second\": {\n+\t\t\"one\": \"{0} second\",\n+\t\t\"other\": \"{0} seconds\"\n+\t}\n }\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "fe2188e64c00507aaf2dd6b56d3b975ef571562261649d3e3587cc6b946c6165",
+					"size": 522,
+					"sourceHash": "872578c7fec808dbff94cfd53da0441b4044b0a41878253fb0ed958af715b6c9",
+					"status": "content"
+				},
+				"locale-more-styles/en/short-convenient.json": {
+					"match": false,
+					"packageHash": "47d8b4df9ee8e47466623e85f7e73785d27e74e4c491c3a95e1b543fc0b257ee",
+					"size": 1280,
+					"status": "missing-in-source"
+				},
+				"locale-more-styles/en/short-time.json": {
+					"diff": "--- published/locale-more-styles/en/short-time.json\n+++ rebuilt/locale-more-styles/en/short-time.json\n@@ -1,13 +1,12 @@\n- {\r\n-\t\"year\": \"{0} yr.\",\r\n-\t\"month\": \"{0} mo.\",\r\n-\t\"week\": \"{0} wk.\",\r\n-\t\"day\": {\r\n-\t\t\"one\": \"{0} day\",\r\n-\t\t\"other\": \"{0} days\"\r\n-\t},\r\n-\t\"hour\": \"{0} hr.\",\r\n-\t\"minute\": \"{0} min.\",\r\n-\t\"second\": \"{0} sec.\",\r\n-\t\"now\": \"now\"\r\n+ {\n+\t\"year\": \"{0} yr.\",\n+\t\"month\": \"{0} mo.\",\n+\t\"week\": \"{0} wk.\",\n+\t\"day\": {\n+\t\t\"one\": \"{0} day\",\n+\t\t\"other\": \"{0} days\"\n+\t},\n+\t\"hour\": \"{0} hr.\",\n+\t\"minute\": \"{0} min.\",\n+\t\"second\": \"{0} sec.\"\n }\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "51aa7c55858bc0d30b320ee15bf7ff785dd6228ea65d40f1f818f334c1634312",
+					"size": 213,
+					"sourceHash": "fbb4d0c5bfcfa3b98ced0b0fabaee456360edf8470094ae75540c5a58e37ae51",
+					"status": "content"
+				},
+				"locale-more-styles/en/tiny.json": {
+					"match": false,
+					"packageHash": "ec6f406edb515651e4b2a0850590283f85c139fc40e9873d67d46e945037c396",
+					"size": 152,
+					"status": "missing-in-source"
+				},
+				"locale-more-styles/es/long-time.json": {
+					"diff": "--- published/locale-more-styles/es/long-time.json\n+++ rebuilt/locale-more-styles/es/long-time.json\n@@ -1,34 +1,30 @@\n-{\r\n-    \"year\": {\r\n-        \"one\": \"{0} año\",\r\n-        \"other\": \"{0} años\"\r\n-    },\r\n-    \"month\": {\r\n-        \"one\": \"{0} mes\",\r\n-        \"other\": \"{0} meses\"\r\n-    },\r\n-    \"week\": {\r\n-        \"one\": \"{0} semana\",\r\n-        \"other\": \"{0} semanas\"\r\n-    },\r\n-    \"day\": {\r\n-        \"one\": \"{0} día\",\r\n-        \"other\": \"{0} días\"\r\n-    },\r\n-    \"hour\": {\r\n-        \"one\": \"{0} hora\",\r\n-        \"other\": \"{0} horas\"\r\n-    },\r\n-    \"minute\": {\r\n-        \"one\": \"{0} minuto\",\r\n-        \"other\": \"{0} minutos\"\r\n-    },\r\n-    \"second\": {\r\n-        \"one\": \"{0} segundo\",\r\n-        \"other\": \"{0} segundos\"\r\n-    },\r\n-    \"now\": {\r\n-        \"future\": \"enseguida\",\r\n-        \"past\": \"ahora mismo\"\r\n-    }\r\n+{\n+    \"year\": {\n+        \"one\": \"{0} año\",\n+        \"other\": \"{0} años\"\n+    },\n+    \"month\": {\n+        \"one\": \"{0} mes\",\n+        \"other\": \"{0} meses\"\n+    },\n+    \"week\": {\n+        \"one\": \"{0} semana\",\n+        \"other\": \"{0} semanas\"\n+    },\n+    \"day\": {\n+        \"one\": \"{0} día\",\n+        \"other\": \"{0} días\"\n+    },\n+    \"hour\": {\n+        \"one\": \"{0} hora\",\n+        \"other\": \"{0} horas\"\n+    },\n+    \"minute\": {\n+        \"one\": \"{0} minuto\",\n+        \"other\": \"{0} minutos\"\n+    },\n+    \"second\": {\n+        \"one\": \"{0} segundo\",\n+        \"other\": \"{0} segundos\"\n+    }\n }\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "16f59497b82f95e34c10e9fead4a42f6380dd7106213e8e75372847006040bec",
+					"size": 672,
+					"sourceHash": "4750bdfde30061787191902fffa0c6b107b459246c772bbd4a8c047e227d3484",
+					"status": "content"
+				},
+				"locale-more-styles/es/tiny.json": {
+					"match": false,
+					"packageHash": "b861cab6424507edb13dff71d7355e363a74e4550f5407a2e805ac0e91c29e71",
+					"size": 159,
+					"status": "missing-in-source"
+				},
+				"locale-more-styles/fr/long-time.json": {
+					"diff": "--- published/locale-more-styles/fr/long-time.json\n+++ rebuilt/locale-more-styles/fr/long-time.json\n@@ -1,34 +1,30 @@\n-{\r\n-    \"year\": {\r\n-        \"one\": \"{0} an\",\r\n-        \"other\": \"{0} ans\"\r\n-    },\r\n-    \"month\": {\r\n-        \"one\": \"{0} mois\",\r\n-        \"other\": \"{0} mois\"\r\n-    },\r\n-    \"week\": {\r\n-        \"one\": \"{0} semaine\",\r\n-        \"other\": \"{0} semaines\"\r\n-    },\r\n-    \"day\": {\r\n-        \"one\": \"{0} jour\",\r\n-        \"other\": \"{0} jours\"\r\n-    },\r\n-    \"hour\": {\r\n-        \"one\": \"{0} heure\",\r\n-        \"other\": \"{0} heures\"\r\n-    },\r\n-    \"minute\": {\r\n-        \"one\": \"{0} minute\",\r\n-        \"other\": \"{0} minutes\"\r\n-    },\r\n-    \"second\": {\r\n-        \"one\": \"{0} seconde\",\r\n-        \"other\": \"{0} secondes\"\r\n-    },\r\n-    \"now\": {\r\n-        \"future\": \"dans un instant\",\r\n-        \"past\": \"à l'instant\"\r\n-    }\r\n+{\n+    \"year\": {\n+        \"one\": \"{0} an\",\n+        \"other\": \"{0} ans\"\n+    },\n+    \"month\": {\n+        \"one\": \"{0} mois\",\n+        \"other\": \"{0} mois\"\n+    },\n+    \"week\": {\n+        \"one\": \"{0} semaine\",\n+        \"other\": \"{0} semaines\"\n+    },\n+    \"day\": {\n+        \"one\": \"{0} jour\",\n+        \"other\": \"{0} jours\"\n+    },\n+    \"hour\": {\n+        \"one\": \"{0} heure\",\n+        \"other\": \"{0} heures\"\n+    },\n+    \"minute\": {\n+        \"one\": \"{0} minute\",\n+        \"other\": \"{0} minutes\"\n+    },\n+    \"second\": {\n+        \"one\": \"{0} seconde\",\n+        \"other\": \"{0} secondes\"\n+    }\n }\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "20deee4c94fdd167440109829db9971e760ddff91e158ac996b0422f6f8b3bf5",
+					"size": 679,
+					"sourceHash": "50fbb6b37cf4fed02e5f866cb6c6b0cfd8a8e9140dee5e4561634e18a38cff6c",
+					"status": "content"
+				},
+				"locale-more-styles/it/long-time.json": {
+					"diff": "--- published/locale-more-styles/it/long-time.json\n+++ rebuilt/locale-more-styles/it/long-time.json\n@@ -1,34 +1,30 @@\n-{\r\n-\t\"year\": {\r\n-\t\t\"one\": \"{0} anno\",\r\n-\t\t\"other\": \"{0} anni\"\r\n-\t},\r\n-\t\"month\": {\r\n-\t\t\"one\": \"{0} mese\",\r\n-\t\t\"other\": \"{0} mesi\"\r\n-\t},\r\n-\t\"week\": {\r\n-\t\t\"one\": \"{0} settimana\",\r\n-\t\t\"other\": \"{0} settimane\"\r\n-\t},\r\n-\t\"day\": {\r\n-\t\t\"one\": \"{0} giorno\",\r\n-\t\t\"other\": \"{0} giorni\"\r\n-\t},\r\n-\t\"hour\": {\r\n-\t\t\"one\": \"{0} ora\",\r\n-\t\t\"other\": \"{0} ore\"\r\n-\t},\r\n-\t\"minute\": {\r\n-\t\t\"one\": \"{0} minuto\",\r\n-\t\t\"other\": \"{0} minuti\"\r\n-\t},\r\n-\t\"second\": {\r\n-\t\t\"one\": \"{0} secondo\",\r\n-\t\t\"other\": \"{0} secondi\"\r\n-\t},\r\n-\t\"now\": {\r\n-\t\t\"future\": \"tra poco\",\r\n-\t\t\"past\": \"proprio ora\"\r\n-\t}\r\n+{\n+\t\"year\": {\n+\t\t\"one\": \"{0} anno\",\n+\t\t\"other\": \"{0} anni\"\n+\t},\n+\t\"month\": {\n+\t\t\"one\": \"{0} mese\",\n+\t\t\"other\": \"{0} mesi\"\n+\t},\n+\t\"week\": {\n+\t\t\"one\": \"{0} settimana\",\n+\t\t\"other\": \"{0} settimane\"\n+\t},\n+\t\"day\": {\n+\t\t\"one\": \"{0} giorno\",\n+\t\t\"other\": \"{0} giorni\"\n+\t},\n+\t\"hour\": {\n+\t\t\"one\": \"{0} ora\",\n+\t\t\"other\": \"{0} ore\"\n+\t},\n+\t\"minute\": {\n+\t\t\"one\": \"{0} minuto\",\n+\t\t\"other\": \"{0} minuti\"\n+\t},\n+\t\"second\": {\n+\t\t\"one\": \"{0} secondo\",\n+\t\t\"other\": \"{0} secondi\"\n+\t}\n }\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "e69bfd45d710bfe31cc405b45eb5c9c820f2390613e776b8fe40501c9baee1fb",
+					"size": 529,
+					"sourceHash": "1e9f22ed13226163e9cdc6944d920d73c5fa8d6b13b080589dd8c2a22505c6e9",
+					"status": "content"
+				},
+				"locale-more-styles/ko/tiny.json": {
+					"match": false,
+					"packageHash": "8ed6cfc7bd24224c8452031b053abb053162c4362789310912e203c134395870",
+					"size": 198,
+					"status": "missing-in-source"
+				},
+				"locale-more-styles/nl/long-time.json": {
+					"diff": "--- published/locale-more-styles/nl/long-time.json\n+++ rebuilt/locale-more-styles/nl/long-time.json\n@@ -1,34 +1,30 @@\n-{\r\n-    \"year\": {\r\n-        \"one\": \"{0} jaar\",\r\n-        \"other\": \"{0} jaar\"\r\n-    },\r\n-    \"month\": {\r\n-        \"one\": \"{0} maand\",\r\n-        \"other\": \"{0} maanden\"\r\n-    },\r\n-    \"week\": {\r\n-        \"one\": \"{0} week\",\r\n-        \"other\": \"{0} weken\"\r\n-    },\r\n-    \"day\": {\r\n-        \"one\": \"{0} dag\",\r\n-        \"other\": \"{0} dagen\"\r\n-    },\r\n-    \"hour\": {\r\n-        \"one\": \"{0} uur\",\r\n-        \"other\": \"{0} uur\"\r\n-    },\r\n-    \"minute\": {\r\n-        \"one\": \"{0} minuut\",\r\n-        \"other\": \"{0} minuten\"\r\n-    },\r\n-    \"second\": {\r\n-        \"one\": \"{0} seconde\",\r\n-        \"other\": \"{0} seconden\"\r\n-    },\r\n-    \"now\": {\r\n-        \"future\": \"zometeen\",\r\n-        \"past\": \"zojuist\"\r\n-    }\r\n+{\n+    \"year\": {\n+        \"one\": \"{0} jaar\",\n+        \"other\": \"{0} jaar\"\n+    },\n+    \"month\": {\n+        \"one\": \"{0} maand\",\n+        \"other\": \"{0} maanden\"\n+    },\n+    \"week\": {\n+        \"one\": \"{0} week\",\n+        \"other\": \"{0} weken\"\n+    },\n+    \"day\": {\n+        \"one\": \"{0} dag\",\n+        \"other\": \"{0} dagen\"\n+    },\n+    \"hour\": {\n+        \"one\": \"{0} uur\",\n+        \"other\": \"{0} uur\"\n+    },\n+    \"minute\": {\n+        \"one\": \"{0} minuut\",\n+        \"other\": \"{0} minuten\"\n+    },\n+    \"second\": {\n+        \"one\": \"{0} seconde\",\n+        \"other\": \"{0} seconden\"\n+    }\n }\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "7278b3fdd0f568441ac02c4ddb8c44ab3eb6955e87dea2b910422d23aca72abd",
+					"size": 662,
+					"sourceHash": "3c137390ba1556615b10a70be0126b51aa72556fc846eca44696d8489e961f08",
+					"status": "content"
+				},
+				"locale-more-styles/ru/long-convenient.json": {
+					"match": false,
+					"packageHash": "3219456da9228b2dd36d7090c01d4b418f19bb09e7575008199eabb0f0b9b6fe",
+					"size": 3290,
+					"status": "missing-in-source"
+				},
+				"locale-more-styles/ru/long-time.json": {
+					"diff": "--- published/locale-more-styles/ru/long-time.json\n+++ rebuilt/locale-more-styles/ru/long-time.json\n@@ -1,41 +1,37 @@\n-{\r\n-\t\"year\": {\r\n-\t\t\"one\": \"{0} год\",\r\n-\t\t\"many\": \"{0} лет\",\r\n-\t\t\"other\": \"{0} года\"\r\n-\t},\r\n-\t\"month\": {\r\n-\t\t\"one\": \"{0} месяц\",\r\n-\t\t\"many\": \"{0} месяцев\",\r\n-\t\t\"other\": \"{0} месяца\"\r\n-\t},\r\n-\t\"week\": {\r\n-\t\t\"one\": \"{0} неделю\",\r\n-\t\t\"many\": \"{0} недель\",\r\n-\t\t\"other\": \"{0} недели\"\r\n-\t},\r\n-\t\"day\": {\r\n-\t\t\"one\": \"{0} день\",\r\n-\t\t\"few\": \"{0} дня\",\r\n-\t\t\"other\": \"{0} дней\"\r\n-\t},\r\n-\t\"hour\": {\r\n-\t\t\"one\": \"{0} час\",\r\n-\t\t\"many\": \"{0} часов\",\r\n-\t\t\"other\": \"{0} часа\"\r\n-\t},\r\n-\t\"minute\": {\r\n-\t\t\"one\": \"{0} минута\",\r\n-\t\t\"many\": \"{0} минут\",\r\n-\t\t\"other\": \"{0} минуты\"\r\n-\t},\r\n-\t\"second\": {\r\n-\t\t\"one\": \"{0} секунда\",\r\n-\t\t\"many\": \"{0} секунд\",\r\n-\t\t\"other\": \"{0} секунды\"\r\n-\t},\r\n-\t\"now\": {\r\n-\t\t\"past\": \"только что\",\r\n-\t\t\"future\": \"сейчас\"\r\n-\t}\r\n+{\n+\t\"year\": {\n+\t\t\"one\": \"{0} год\",\n+\t\t\"many\": \"{0} лет\",\n+\t\t\"other\": \"{0} года\"\n+\t},\n+\t\"month\": {\n+\t\t\"one\": \"{0} месяц\",\n+\t\t\"many\": \"{0} месяцев\",\n+\t\t\"other\": \"{0} месяца\"\n+\t},\n+\t\"week\": {\n+\t\t\"one\": \"{0} неделю\",\n+\t\t\"many\": \"{0} недель\",\n+\t\t\"other\": \"{0} недели\"\n+\t},\n+\t\"day\": {\n+\t\t\"one\": \"{0} день\",\n+\t\t\"few\": \"{0} дня\",\n+\t\t\"other\": \"{0} дней\"\n+\t},\n+\t\"hour\": {\n+\t\t\"one\": \"{0} час\",\n+\t\t\"many\": \"{0} часов\",\n+\t\t\"other\": \"{0} часа\"\n+\t},\n+\t\"minute\": {\n+\t\t\"one\": \"{0} минута\",\n+\t\t\"many\": \"{0} минут\",\n+\t\t\"other\": \"{0} минуты\"\n+\t},\n+\t\"second\": {\n+\t\t\"one\": \"{0} секунда\",\n+\t\t\"many\": \"{0} секунд\",\n+\t\t\"other\": \"{0} секунды\"\n+\t}\n }\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "2f61620ec80ea15e5931dfacf607d2cd4debebb6851b7dcc48890a39bf112200",
+					"size": 807,
+					"sourceHash": "43530b21e00c7d038955580b51b18b940ce38e73a74def06d6bad44cd4b1ca3b",
+					"status": "content"
+				},
+				"locale-more-styles/ru/short-convenient.json": {
+					"match": false,
+					"packageHash": "ef92eac207cf27b6179a38d42a80eebcecd0b92690c5855c7a6d9f043783fab9",
+					"size": 1691,
+					"status": "missing-in-source"
+				},
+				"locale-more-styles/ru/short-time.json": {
+					"diff": "--- published/locale-more-styles/ru/short-time.json\n+++ rebuilt/locale-more-styles/ru/short-time.json\n@@ -1,19 +1,15 @@\n-{\r\n-\t\"year\": {\r\n-\t\t\"many\": \"{0} л.\",\r\n-\t\t\"other\": \"{0} г.\"\r\n-\t},\r\n-\t\"month\": \"{0} мес.\",\r\n-\t\"week\": \"{0} нед.\",\r\n-\t\"day\": {\r\n-\t\t\"one\": \"{0} д.\",\r\n-\t\t\"other\": \"{0} дн.\"\r\n-\t},\r\n-\t\"hour\": \"{0} ч.\",\r\n-\t\"minute\": \"{0} мин.\",\r\n-\t\"second\": \"{0} сек.\",\r\n-\t\"now\": {\r\n-\t\t\"past\": \"только что\",\r\n-\t\t\"future\": \"сейчас\"\r\n-\t}\r\n+{\n+\t\"year\": {\n+\t\t\"many\": \"{0} л.\",\n+\t\t\"other\": \"{0} г.\"\n+\t},\n+\t\"month\": \"{0} мес.\",\n+\t\"week\": \"{0} нед.\",\n+\t\"day\": {\n+\t\t\"one\": \"{0} д.\",\n+\t\t\"other\": \"{0} дн.\"\n+\t},\n+\t\"hour\": \"{0} ч.\",\n+\t\"minute\": \"{0} мин.\",\n+\t\"second\": \"{0} сек.\"\n }\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "0be7044a65ce8027fc8c6e88b7e2974837118ea73edb2efa83b54dc851924768",
+					"size": 329,
+					"sourceHash": "efca9691b32689712f1c63aa24cfa0beb653cf4dca2fb744259ebd6537dcb7d4",
+					"status": "content"
+				},
+				"locale-more-styles/ru/tiny.json": {
+					"match": false,
+					"packageHash": "604cca555df1abc2573cd56e045f76c5903d0de8cfb9d6dd0fdb86c6d2158f6f",
+					"size": 148,
+					"status": "missing-in-source"
+				},
+				"locale-more-styles/sv/long-time.json": {
+					"diff": "--- published/locale-more-styles/sv/long-time.json\n+++ rebuilt/locale-more-styles/sv/long-time.json\n@@ -1,34 +1,30 @@\n-{\r\n-    \"year\": {\r\n-        \"one\": \"{0} år\",\r\n-        \"other\": \"{0} år\"\r\n-    },\r\n-    \"month\": {\r\n-        \"one\": \"{0} månad\",\r\n-        \"other\": \"{0} månader\"\r\n-    },\r\n-    \"week\": {\r\n-        \"one\": \"{0} vecka\",\r\n-        \"other\": \"{0} veckor\"\r\n-    },\r\n-    \"day\": {\r\n-        \"one\": \"{0} dag\",\r\n-        \"other\": \"{0} dagar\"\r\n-    },\r\n-    \"hour\": {\r\n-        \"one\": \"{0} timme\",\r\n-        \"other\": \"{0} timmar\"\r\n-    },\r\n-    \"minute\": {\r\n-        \"one\": \"{0} minut\",\r\n-        \"other\": \"{0} minuter\"\r\n-    },\r\n-    \"second\": {\r\n-        \"one\": \"{0} sekund\",\r\n-        \"other\": \"{0} sekunder\"\r\n-    },\r\n-    \"now\": {\r\n-        \"future\": \"om ett ögonblick\",\r\n-        \"past\": \"alldeles nyss\"\r\n-    }\r\n+{\n+    \"year\": {\n+        \"one\": \"{0} år\",\n+        \"other\": \"{0} år\"\n+    },\n+    \"month\": {\n+        \"one\": \"{0} månad\",\n+        \"other\": \"{0} månader\"\n+    },\n+    \"week\": {\n+        \"one\": \"{0} vecka\",\n+        \"other\": \"{0} veckor\"\n+    },\n+    \"day\": {\n+        \"one\": \"{0} dag\",\n+        \"other\": \"{0} dagar\"\n+    },\n+    \"hour\": {\n+        \"one\": \"{0} timme\",\n+        \"other\": \"{0} timmar\"\n+    },\n+    \"minute\": {\n+        \"one\": \"{0} minut\",\n+        \"other\": \"{0} minuter\"\n+    },\n+    \"second\": {\n+        \"one\": \"{0} sekund\",\n+        \"other\": \"{0} sekunder\"\n+    }\n }\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "947fccc5c33a888a8ad04990d26c81dce0d736633530e84d37bfde92693b626d",
+					"size": 682,
+					"sourceHash": "e83f774abc687ac69f5b4d84613ff3dc448c923f7ad84f0ae690ca1aeddccaa5",
+					"status": "content"
+				},
+				"modules/JavascriptTimeAgo.js": {
+					"match": false,
+					"packageHash": "b7d6bbcb707b112e5eb0d962e297638c165b52dac6c0b1bbd8e9994019f655de",
+					"size": 16642,
+					"status": "missing-in-source"
+				},
+				"modules/JavascriptTimeAgo.js.map": {
+					"match": false,
+					"packageHash": "e889e5ce86c05a2c3b1d27abaecbdba136fa53edc6993b23f869da41f2cc883b",
+					"size": 23558,
+					"status": "missing-in-source"
+				},
+				"modules/JavascriptTimeAgo.test.js": {
+					"match": false,
+					"packageHash": "6665fefdc89846ef513d80ba6f03b8469579cb7cdc361c28758b47aba49aeafd",
+					"size": 14892,
+					"status": "missing-in-source"
+				},
+				"modules/JavascriptTimeAgo.test.js.map": {
+					"match": false,
+					"packageHash": "dbc70b6ace6c996b186c34ae265b9bee9cf711983b275e641f8bd4f4d7f45dd7",
+					"size": 30466,
+					"status": "missing-in-source"
+				},
+				"modules/LocaleDataStore.js": {
+					"match": false,
+					"packageHash": "db59052c5b88930e1b870dd77cb36d8186d764f80a7dbd66b233735190e862c4",
+					"size": 638,
+					"status": "missing-in-source"
+				},
+				"modules/LocaleDataStore.js.map": {
+					"match": false,
+					"packageHash": "1ce9ac0216f93a2fa592b6b7944dd681824db2799173731612d0d5465c83d232",
+					"size": 1221,
+					"status": "missing-in-source"
+				},
+				"modules/PropTypes.js": {
+					"match": false,
+					"packageHash": "77fd492138eef589ac90cc5eb5568f8c29a4f8021476171ceb88c6101259e365",
+					"size": 797,
+					"status": "missing-in-source"
+				},
+				"modules/PropTypes.js.map": {
+					"match": false,
+					"packageHash": "25e180be7b38b4f3d17123278ed094104e56c65502b08455219b65489a68a6ae",
+					"size": 2004,
+					"status": "missing-in-source"
+				},
+				"modules/cache.js": {
+					"match": false,
+					"packageHash": "efff06315309a390738bb4afe1a71c9c94b8e85bb2bf13b6e3e5110d1f07f0f0",
+					"size": 2711,
+					"status": "missing-in-source"
+				},
+				"modules/cache.js.map": {
+					"match": false,
+					"packageHash": "8265317607e6bf70b9fd9dd712a8eabaca39726c1e414b343966399125ca09f2",
+					"size": 1746,
+					"status": "missing-in-source"
+				},
+				"modules/cache.test.js": {
+					"match": false,
+					"packageHash": "21460a87fb7167442b1aaf55907b3293c9f54fe478f51aae7dd0aa1d5224601c",
+					"size": 415,
+					"status": "missing-in-source"
+				},
+				"modules/cache.test.js.map": {
+					"match": false,
+					"packageHash": "de67aed14f62de3d3051c30223a5871fd7d7388beeb6e7298734b9a841fcaa25",
+					"size": 1279,
+					"status": "missing-in-source"
+				},
+				"modules/gradation/canonical.js": {
+					"match": false,
+					"packageHash": "3f967b6ad55260123d92f5a5b07b5ad4d6add2bcf08c8869bc109e71197f9319",
+					"size": 929,
+					"status": "missing-in-source"
+				},
+				"modules/gradation/canonical.js.map": {
+					"match": false,
+					"packageHash": "60b7ea1a005ab043ae9bead5a27a2e711a3a78f13a593bea7dfa2012626b423e",
+					"size": 2347,
+					"status": "missing-in-source"
+				},
+				"modules/gradation/canonical.test.js": {
+					"match": false,
+					"packageHash": "774a9b3929729e7582a647130663fe157f0c3d3c718dbf7be4d4456a27ca8421",
+					"size": 942,
+					"status": "missing-in-source"
+				},
+				"modules/gradation/canonical.test.js.map": {
+					"match": false,
+					"packageHash": "6b094afab26962ec1d584e5d869fa6a316264701ed9c8767ad1e08018dc6678e",
+					"size": 2719,
+					"status": "missing-in-source"
+				},
+				"modules/gradation/convenient.js": {
+					"match": false,
+					"packageHash": "e82ad55ab03654854a1f0c4d03c831d3f789ced5988a92bb5a93ce614969121f",
+					"size": 1099,
+					"status": "missing-in-source"
+				},
+				"modules/gradation/convenient.js.map": {
+					"match": false,
+					"packageHash": "b9ca1a0e05e6d0a4930ddb12ceec403e469bb3db0aa907d66fc54d78d7ee93f1",
+					"size": 2900,
+					"status": "missing-in-source"
+				},
+				"modules/gradation/convenient.test.js": {
+					"match": false,
+					"packageHash": "fbcae8b2a8592d35a191ec1de443b1c31f5e6ee4e767a9b4602aa1ce86423357",
+					"size": 1360,
+					"status": "missing-in-source"
+				},
+				"modules/gradation/convenient.test.js.map": {
+					"match": false,
+					"packageHash": "aa436679093c822cb9088982c69f2d2ddd1d33aea1c8ef3999a3a7c86e255a55",
+					"size": 4040,
+					"status": "missing-in-source"
+				},
+				"modules/gradation/helpers.js": {
+					"match": false,
+					"packageHash": "e4075c4791aa2977a0aa282bf568e98de3272d578e410e315b2af7ef330a519b",
+					"size": 1218,
+					"status": "missing-in-source"
+				},
+				"modules/gradation/helpers.js.map": {
+					"match": false,
+					"packageHash": "efd9faed252bc4fa6626a380d9b5f4af01e095628b143cb95d2e93eb9fdeed4e",
+					"size": 1782,
+					"status": "missing-in-source"
+				},
+				"modules/gradation/helpers.test.js": {
+					"match": false,
+					"packageHash": "13b46376ad34fc3d03714a34010d743abc7b145873f14f9dd7d9aa58cd647bf0",
+					"size": 340,
+					"status": "missing-in-source"
+				},
+				"modules/gradation/helpers.test.js.map": {
+					"match": false,
+					"packageHash": "fe3800a78224dc4c6bebb3897a52f55c5a6df8b342568e4a16832da592a6a773",
+					"size": 905,
+					"status": "missing-in-source"
+				},
+				"modules/gradation/index.js": {
+					"match": false,
+					"packageHash": "3a9087f43ad4393b5bacdefcc89c1bed919f2a7d45d3711ab711a7263ea4de8b",
+					"size": 1514,
+					"status": "missing-in-source"
+				},
+				"modules/gradation/index.js.map": {
+					"match": false,
+					"packageHash": "04e87e6550ffb7c5299be3f6b8594898b7dd6bcc35e63766afbc0de491aa4ce2",
+					"size": 2169,
+					"status": "missing-in-source"
+				},
+				"modules/grade.js": {
+					"match": false,
+					"packageHash": "c145e65007390659c5e577d834e0baa4def8a02ffcabe5352e5e120dd0ef8568",
+					"size": 5420,
+					"status": "missing-in-source"
+				},
+				"modules/grade.js.map": {
+					"match": false,
+					"packageHash": "57810323e71ecc797632e83ec83061866a791829a6c0cc6dee79154a772ccabd",
+					"size": 7989,
+					"status": "missing-in-source"
+				},
+				"modules/grade.test.js": {
+					"match": false,
+					"packageHash": "123231558296956d251bb483769da597bfa2f8cac91c4d18807c4abe1f6d8fb0",
+					"size": 1281,
+					"status": "missing-in-source"
+				},
+				"modules/grade.test.js.map": {
+					"match": false,
+					"packageHash": "b3b053beaefe003f993c8fc566659efdcf74b8f464f6fabcfb2283129a503288",
+					"size": 2919,
+					"status": "missing-in-source"
+				},
+				"modules/locale.js": {
+					"match": false,
+					"packageHash": "124ba21b9564051d861d96689ae90ed7c6acf45597a081db5ebb13cfda5783e0",
+					"size": 2701,
+					"status": "missing-in-source"
+				},
+				"modules/locale.js.map": {
+					"match": false,
+					"packageHash": "e0163f02242fa899b480446c95cdeb7b44bdf885e99d7510c60daf50af811e89",
+					"size": 3381,
+					"status": "missing-in-source"
+				},
+				"modules/locale.test.js": {
+					"match": false,
+					"packageHash": "bbb989c4b0631ccb10177b5689a67b296a67b4b3d007eaa270d7ebf52afff3d2",
+					"size": 1617,
+					"status": "missing-in-source"
+				},
+				"modules/locale.test.js.map": {
+					"match": false,
+					"packageHash": "d1119a53ebdf947a8607e8136d83614c79d6fbd80a4ffd99ff04dbf3f308374a",
+					"size": 3743,
+					"status": "missing-in-source"
+				},
+				"modules/style/default.js": {
+					"match": false,
+					"packageHash": "e3ae8d0c98b711dcd40f5c613edddbe55f0ab212a7f3a3026160f54ffbcfc789",
+					"size": 230,
+					"status": "missing-in-source"
+				},
+				"modules/style/default.js.map": {
+					"match": false,
+					"packageHash": "00c1350dbbce767281a934b31ee02e592812746c234bb87a81ede5ad18d8941a",
+					"size": 658,
+					"status": "missing-in-source"
+				},
+				"modules/style/index.js": {
+					"match": false,
+					"packageHash": "52d1e95ef92dbb998e1fd0cb6c5150d4a786c6de0826f10d63be50eb1ae4f51d",
+					"size": 413,
+					"status": "missing-in-source"
+				},
+				"modules/style/index.js.map": {
+					"match": false,
+					"packageHash": "8a057ebcb75f13230979c7a84f212d564936dbb8dd918a652461c90238e62177",
+					"size": 712,
+					"status": "missing-in-source"
+				},
+				"modules/style/time.js": {
+					"match": false,
+					"packageHash": "59ac92f94430265137a060bd7d0b5af364dfe5970d8db1ecebd24b73f63e0a62",
+					"size": 501,
+					"status": "missing-in-source"
+				},
+				"modules/style/time.js.map": {
+					"match": false,
+					"packageHash": "e6bc30d8c507d8234bac02c8aa3477c663d8d470cb11ffa9da35e7eef56642d8",
+					"size": 1091,
+					"status": "missing-in-source"
+				},
+				"modules/style/time.test.js": {
+					"match": false,
+					"packageHash": "06d888d2ad8a83e2828d306860290c8fe5327a3f7c2d31406239ff5412b91540",
+					"size": 2037,
+					"status": "missing-in-source"
+				},
+				"modules/style/time.test.js.map": {
+					"match": false,
+					"packageHash": "236b8e95d642a1ab61f573263a2c5684da476596438b4ebe503da1ffeafa6006",
+					"size": 5121,
+					"status": "missing-in-source"
+				},
+				"modules/style/twitter.js": {
+					"match": false,
+					"packageHash": "15280bd1f2348016b81fbc0b6e0698ac98102aeab21b9025c0ab129ea0bc8281",
+					"size": 3725,
+					"status": "missing-in-source"
+				},
+				"modules/style/twitter.js.map": {
+					"match": false,
+					"packageHash": "b78aaf155ef8397b761c50bf623e72c814557f2922e1d97b250d9db07011bbcd",
+					"size": 5938,
+					"status": "missing-in-source"
+				},
+				"modules/style/twitter.test.js": {
+					"match": false,
+					"packageHash": "303150fd38cfbce524a69ad6bb1be4647c5e9e7b067d078a06ee21591079471e",
+					"size": 3623,
+					"status": "missing-in-source"
+				},
+				"modules/style/twitter.test.js.map": {
+					"match": false,
+					"packageHash": "6afde782d0f9d9518de3434619e1ec9e749e5dc5115ad857d0806b97e6e097d9",
+					"size": 6826,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,74 +1,3472 @@\n-{\r\n-  \"name\": \"javascript-time-ago\",\r\n-  \"version\": \"2.0.8\",\r\n-  \"description\": \"International highly customizable relative date/time formatting\",\r\n-  \"main\": \"index.commonjs.js\",\r\n-  \"module\": \"index.js\",\r\n-  \"sideEffects\": false,\r\n-  \"dependencies\": {\r\n-    \"relative-time-format\": \"^0.1.3\"\r\n-  },\r\n-  \"devDependencies\": {\r\n-    \"@babel/cli\": \"^7.2.3\",\r\n-    \"@babel/core\": \"^7.2.2\",\r\n-    \"@babel/node\": \"^7.2.2\",\r\n-    \"@babel/plugin-proposal-class-properties\": \"^7.2.3\",\r\n-    \"@babel/plugin-proposal-object-rest-spread\": \"^7.2.0\",\r\n-    \"@babel/plugin-transform-destructuring\": \"^7.1.2\",\r\n-    \"@babel/plugin-transform-for-of\": \"^7.2.0\",\r\n-    \"@babel/polyfill\": \"^7.0.0\",\r\n-    \"@babel/preset-env\": \"^7.0.0\",\r\n-    \"@babel/register\": \"^7.0.0\",\r\n-    \"babel-eslint\": \"^9.0.0\",\r\n-    \"babel-loader\": \"^8.0.1\",\r\n-    \"babel-plugin-istanbul\": \"^5.1.1\",\r\n-    \"chai\": \"^3.5.0\",\r\n-    \"cross-env\": \"^5.1.4\",\r\n-    \"esm\": \"^3.0.84\",\r\n-    \"fs-extra\": \"^5.0.0\",\r\n-    \"intl\": \"^1.2.4\",\r\n-    \"intl-locales-supported\": \"^1.0.0\",\r\n-    \"mkdirp\": \"^0.5.1\",\r\n-    \"mocha\": \"^5.0.5\",\r\n-    \"npm-run-all\": \"^1.4.0\",\r\n-    \"nyc\": \"^14.1.1\",\r\n-    \"prop-types\": \"^15.6.0\",\r\n-    \"rimraf\": \"^2.5.0\",\r\n-    \"uglify-js\": \"^3.3.5\",\r\n-    \"webpack\": \"^4.28.4\",\r\n-    \"webpack-cli\": \"^3.2.1\"\r\n-  },\r\n-  \"scripts\": {\r\n-    \"test\": \"mocha --bail --require @babel/register --require esm --require ./test/setup.js \\\"source/**/*.test.js\\\" \\\"test/**/*.test.js\\\"\",\r\n-    \"test-coverage\": \"cross-env NODE_ENV=test nyc mocha --require esm --bail --require ./test/setup.js \\\"source/**/*.test.js\\\" \\\"test/**/*.test.js\\\"\",\r\n-    \"coveralls\": \"nyc report --reporter=text-lcov | coveralls\",\r\n-    \"browser-build\": \"webpack --mode production --progress --colors\",\r\n-    \"clean-for-build\": \"rimraf ./commonjs/**/* ./modules/**/*\",\r\n-    \"build-commonjs-modules\": \"cross-env babel ./source --out-dir ./commonjs --source-maps --ignore *.test.js\",\r\n-    \"build-es6-modules\": \"cross-env BABEL_ENV=es6 babel ./source --out-dir ./modules --source-maps --ignore *.test.js\",\r\n-    \"build\": \"npm-run-all clean-for-build build-commonjs-modules build-es6-modules browser-build\",\r\n-    \"prepublish\": \"npm-run-all generate-locales build test\",\r\n-    \"update-relative-time-format\": \"npm install relative-time-format@^0.1 --save\",\r\n-    \"delete-locales\": \"rimraf ./locale/**/*\",\r\n-    \"create-locales-directory\": \"mkdirp locale\",\r\n-    \"generate-locale-messages\": \"babel-node bin/generate-locale-messages\",\r\n-    \"generate-load-all-locales\": \"babel-node bin/generate-load-all-locales\",\r\n-    \"generate-locales\": \"npm-run-all update-relative-time-format delete-locales create-locales-directory generate-locale-messages generate-load-all-locales\"\r\n-  },\r\n-  \"repository\": {\r\n-    \"type\": \"git\",\r\n-    \"url\": \"git+https://github.com/catamphetamine/javascript-time-ago.git\"\r\n-  },\r\n-  \"keywords\": [\r\n-    \"time\",\r\n-    \"ago\",\r\n-    \"relative\",\r\n-    \"format\"\r\n-  ],\r\n-  \"author\": \"catamphetamine <purecatamphetamine@gmail.com>\",\r\n-  \"license\": \"MIT\",\r\n-  \"bugs\": {\r\n-    \"url\": \"https://github.com/catamphetamine/javascript-time-ago/issues\"\r\n-  },\r\n-  \"homepage\": \"https://github.com/catamphetamine/javascript-time-ago#readme\"\r\n-}\r\n+{\n+  \"name\": \"javascript-time-ago\",\n+  \"version\": \"2.6.4\",\n+  \"description\": \"Localized relative date/time formatting\",\n+  \"main\": \"index.cjs\",\n+  \"module\": \"index.js\",\n+  \"type\": \"module\",\n+  \"exports\": {\n+    \".\": {\n+      \"types\": \"./index.d.ts\",\n+      \"import\": \"./index.js\",\n+      \"require\": \"./index.cjs\"\n+    },\n+    \"./cache\": {\n+      \"import\": \"./cache/index.js\",\n+      \"require\": \"./cache/index.cjs\"\n+    },\n+    \"./gradation\": {\n+      \"import\": \"./gradation/index.js\",\n+      \"require\": \"./gradation/index.cjs\"\n+    },\n+    \"./steps\": {\n+      \"types\": \"./steps/index.d.ts\",\n",
+					"match": false,
+					"packageHash": "e3cffc0ac3b54c30a9f958dcd1d30aaebf5847d1d1fda3166d8ce29b074bad8f",
+					"size": 3109,
+					"sourceHash": "7384e68434bc29abd3d294c4fc3f7bdae4c45657d8b151808a50628b472a590d",
+					"status": "content"
+				},
+				"prop-types/index.commonjs.js": {
+					"match": false,
+					"packageHash": "e6c83afca598eece553d0df00b93265f5b54bb23ac65d770c89fd71e31d72c75",
+					"size": 114,
+					"status": "missing-in-source"
+				},
+				"prop-types/index.js": {
+					"diff": "--- published/prop-types/index.js\n+++ rebuilt/prop-types/index.js\n@@ -1 +1 @@\n-export * from '../modules/PropTypes'\n\\ No newline at end of file\n+export * from '../modules/PropTypes.js'\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "726b5f84868c9f5ae0fdc8f6a77c3020a07234483d85dcffcced3ac3454c4f82",
+					"size": 36,
+					"sourceHash": "757c134beb99985d65f97fc1963f03a67021bdd01c64176c4c42eff3b15f8d9e",
+					"status": "content"
+				},
+				"prop-types/package.json": {
+					"diff": "--- published/prop-types/package.json\n+++ rebuilt/prop-types/package.json\n@@ -1,8 +1,14 @@\n-{\r\n-  \"private\": true,\r\n-  \"name\": \"javascript-time-ago-prop-types\",\r\n-  \"version\": \"1.0.0\",\r\n-  \"main\": \"index.commonjs.js\",\r\n-  \"module\": \"index.js\",\r\n-  \"sideEffects\": false\r\n+{\n+  \"private\": true,\n+  \"name\": \"javascript-time-ago/prop-types\",\n+  \"main\": \"index.cjs\",\n+  \"module\": \"index.js\",\n+  \"type\": \"module\",\n+  \"exports\": {\n+    \".\": {\n+      \"import\": \"./index.js\",\n+      \"require\": \"./index.cjs\"\n+    }\n+  },\n+  \"sideEffects\": false\n }\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "e4c0b7d5ef60ff49386d71ec2be0d583ef43207327cde13525c690a91868223c",
+					"size": 173,
+					"sourceHash": "bf78da7661a0e275b720bbb58805539bdb4b8ebf79b0ed64f2f313e3fc0e345d",
+					"status": "content"
+				},
+				"CODE_OF_CONDUCT.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"cache/index.cjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"cache/index.cjs.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"full-date-formatter/index.cjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"full-date-formatter/index.cjs.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"full-date-formatter/index.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"full-date-formatter/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"full-date-formatter/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gradation/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gradation/index.cjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"gradation/index.cjs.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"index.cjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"index.cjs.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"index.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"load-all-locales/index.cjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"load-all-locales/index.cjs.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"load-all-locales/index.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"load-all-locales/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"load-all-locales/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/ckb/long-time.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/ckb/mini.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/ckb/now.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/ckb/short-time.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/da/mini.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/da/now.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/de/mini.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/de/now.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/el/mini.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/el/now.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/en/mini.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/en/now.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/eo/long-time.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/eo/mini.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/eo/now.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/eo/short-time.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/es/mini.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/es/now.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/fr/mini.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/fr/now.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/hi/mini.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/hi/now.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/id/long-time.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/id/mini.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/id/now.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/id/short-time.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/it/mini.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/it/now.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/ko/mini.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/ko/now.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/nl/mini.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/nl/now.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/pl/long-time.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/pl/mini.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/pl/now.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/pl/short-time.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/pt/long-time.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/pt/mini.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/pt/now.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/ro/long-time.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/ro/mini.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/ro/now.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/ru/mini.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/ru/now.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/sv/mini.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/sv/now.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/zh/mini.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"locale-more-styles/zh/now.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"prop-types/index.cjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"prop-types/index.cjs.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"rollup.config.mjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/create-commonjs-package-json.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/generate-load-all-locales.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/generate-locale-messages.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"steps/index.cjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"steps/index.cjs.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"steps/index.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"steps/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"steps/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 21,
+				"matchingFiles": 3,
+				"missingInPackage": 79,
+				"missingInSource": 245,
+				"score": 0.008620689655172414,
+				"totalFiles": 348
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "relative-time-format",
+				"version": "1.1.12"
+			}
+		]
+	}
+]
