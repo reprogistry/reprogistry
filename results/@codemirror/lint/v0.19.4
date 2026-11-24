@@ -1,0 +1,116 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T08:43:36.314Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:8.1.2",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "@codemirror/lint@0.19.4",
+			"name": "@codemirror/lint",
+			"version": "0.19.4",
+			"location": "https://registry.npmjs.org/@codemirror/lint/-/lint-0.19.4.tgz",
+			"integrity": "sha512-29/Wid7X58PMpuD1OrdsIUZYOftCBfIzJwZJUa917CTYbP8WdrZulVtWW2U0J68/6Xzq48d58OxIGa/y7vxjqQ==",
+			"publishedAt": "2022-02-25T11:33:07.613Z",
+			"publishedWith": {
+				"node": "16.13.1",
+				"npm": "8.4.0"
+			},
+			"dependencies": {
+				"crelt": "^1.0.5",
+				"@codemirror/view": "^0.19.22",
+				"@codemirror/panel": "^0.19.0",
+				"@codemirror/state": "^0.19.4",
+				"@codemirror/gutter": "^0.19.4",
+				"@codemirror/tooltip": "^0.19.5",
+				"@codemirror/rangeset": "^0.19.1"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/codemirror/lint.git",
+			"spec": "github:codemirror/lint#b81c485346a2c738a9d6431efc9acfed179dc4a8"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"dist/index.cjs": {
+					"diff": "--- published/dist/index.cjs\n+++ rebuilt/dist/index.cjs\n@@ -596,8 +596,8 @@\n function trackHoverOn(view, marker) {\n     let mousemove = (event) => {\n         let rect = marker.getBoundingClientRect();\n-        if (event.clientX > rect.left - 10 /* Margin */ && event.clientX < rect.right + 10 /* Margin */ &&\n-            event.clientY > rect.top - 10 /* Margin */ && event.clientY < rect.bottom + 10 /* Margin */)\n+        if (event.clientX > rect.left - 10 /* Hover.Margin */ && event.clientX < rect.right + 10 /* Hover.Margin */ &&\n+            event.clientY > rect.top - 10 /* Hover.Margin */ && event.clientY < rect.bottom + 10 /* Hover.Margin */)\n             return;\n         for (let target = event.target; target; target = target.parentNode) {\n             if (target.nodeType == 1 && target.classList.contains(\"cm-tooltip-lint\"))\n@@ -705,7 +705,7 @@\n const lintGutterConfig = state.Facet.define({\n     combine(configs) {\n         return state.combineConfig(configs, {\n-            hoverTime: 300 /* Time */,\n+            hoverTime: 300 /* Hover.Time */,\n         });\n     }\n });\n",
+					"match": false,
+					"packageHash": "25f98e7108c2d9d20c704057a00d596eac8affca4fba985b8245a70bb6ac88f1",
+					"size": 27288,
+					"sourceHash": "3a98d6014169433bc2d8d124a062a0981253bc50b5f5b6e8e30e178a00f8e5d7",
+					"status": "content"
+				},
+				"dist/index.d.ts": {
+					"diff": "--- published/dist/index.d.ts\n+++ rebuilt/dist/index.d.ts\n@@ -91,7 +91,7 @@\n - F8: [`nextDiagnostic`](https://codemirror.net/6/docs/ref/#lint.nextDiagnostic)\n */\n declare const lintKeymap: readonly KeyBinding[];\n-declare type LintSource = (view: EditorView) => readonly Diagnostic[] | Promise<readonly Diagnostic[]>;\n+type LintSource = (view: EditorView) => readonly Diagnostic[] | Promise<readonly Diagnostic[]>;\n /**\n Given a diagnostic source, this function returns an extension that\n enables linting with that source. It will be called whenever the\n",
+					"match": false,
+					"packageHash": "cb3290c892217967fd623665d7d97949dd506e03ef5090b8aff6a22c321dedf4",
+					"size": 3865,
+					"sourceHash": "f65fcad9be9b538bc60f0649639801ff40bb7fd7788c75ceb3a9817de45b55e6",
+					"status": "content"
+				},
+				"dist/index.js": {
+					"diff": "--- published/dist/index.js\n+++ rebuilt/dist/index.js\n@@ -1,6 +1,6 @@\n import { Decoration, EditorView, ViewPlugin, logException, WidgetType } from '@codemirror/view';\n import { StateEffect, StateField, Facet, combineConfig } from '@codemirror/state';\n-import { hoverTooltip, showTooltip } from '@codemirror/tooltip';\n+import { showTooltip, hoverTooltip } from '@codemirror/tooltip';\n import { showPanel, getPanel } from '@codemirror/panel';\n import { gutter, GutterMarker } from '@codemirror/gutter';\n import { RangeSet } from '@codemirror/rangeset';\n@@ -588,8 +588,8 @@\n function trackHoverOn(view, marker) {\n     let mousemove = (event) => {\n         let rect = marker.getBoundingClientRect();\n-        if (event.clientX > rect.left - 10 /* Margin */ && event.clientX < rect.right + 10 /* Margin */ &&\n-            event.clientY > rect.top - 10 /* Margin */ && event.clientY < rect.bottom + 10 /* Margin */)\n+        if (event.clientX > rect.left - 10 /* Hover.Margin */ && event.clientX < rect.right + 10 /* Hover.Margin */ &&\n+            event.clientY > rect.top - 10 /* Hover.Margin */ && event.clientY < rect.bottom + 10 /* Hover.Margin */)\n             return;\n         for (let target = event.target; target; target = target.parentNode) {\n             if (target.nodeType == 1 && target.classList.contains(\"cm-tooltip-lint\"))\n@@ -697,7 +697,7 @@\n const lintGutterConfig = /*@__PURE__*/Facet.define({\n     combine(configs) {\n         return combineConfig(configs, {\n-            hoverTime: 300 /* Time */,\n+            hoverTime: 300 /* Hover.Time */,\n         });\n     }\n });\n",
+					"match": false,
+					"packageHash": "015c272a77da9de26f8ab6af7e18661fc32c2e49872855b8dc07351085f1ba04",
+					"size": 26804,
+					"sourceHash": "c36d67097904f03d312f18ecef39203090c4da9b315d31c42b9cbd513220be6a",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 3,
+				"matchingFiles": 5,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.625,
+				"totalFiles": 8
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "@codemirror/gutter",
+				"version": "0.19.9"
+			},
+			{
+				"name": "@codemirror/panel",
+				"version": "0.19.1"
+			},
+			{
+				"name": "@codemirror/rangeset",
+				"version": "0.19.9"
+			},
+			{
+				"name": "@codemirror/state",
+				"version": "0.19.9"
+			},
+			{
+				"name": "@codemirror/text",
+				"version": "0.19.6"
+			},
+			{
+				"name": "@codemirror/tooltip",
+				"version": "0.19.16"
+			},
+			{
+				"name": "@codemirror/view",
+				"version": "0.19.48"
+			},
+			{
+				"name": "crelt",
+				"version": "1.0.7"
+			},
+			{
+				"name": "style-mod",
+				"version": "4.1.5"
+			},
+			{
+				"name": "w3c-keyname",
+				"version": "2.2.8"
+			}
+		]
+	}
+]

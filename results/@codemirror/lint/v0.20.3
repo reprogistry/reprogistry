@@ -1,0 +1,92 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T08:43:27.453Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:8.1.2",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "@codemirror/lint@0.20.3",
+			"name": "@codemirror/lint",
+			"version": "0.20.3",
+			"location": "https://registry.npmjs.org/@codemirror/lint/-/lint-0.20.3.tgz",
+			"integrity": "sha512-06xUScbbspZ8mKoODQCEx6hz1bjaq9m8W8DxdycWARMiiX1wMtfCh/MoHpaL7ws/KUMwlsFFfp2qhm32oaCvVA==",
+			"publishedAt": "2022-05-25T05:48:53.964Z",
+			"publishedWith": {
+				"node": "16.13.1",
+				"npm": "8.10.0"
+			},
+			"dependencies": {
+				"crelt": "^1.0.5",
+				"@codemirror/view": "^0.20.2",
+				"@codemirror/state": "^0.20.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/codemirror/lint.git",
+			"spec": "github:codemirror/lint#d671cfb7e2bcc871d10a5361a7a3b91de67452fc"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"dist/index.cjs": {
+					"diff": "--- published/dist/index.cjs\n+++ rebuilt/dist/index.cjs\n@@ -611,8 +611,8 @@\n function trackHoverOn(view, marker) {\n     let mousemove = (event) => {\n         let rect = marker.getBoundingClientRect();\n-        if (event.clientX > rect.left - 10 /* Margin */ && event.clientX < rect.right + 10 /* Margin */ &&\n-            event.clientY > rect.top - 10 /* Margin */ && event.clientY < rect.bottom + 10 /* Margin */)\n+        if (event.clientX > rect.left - 10 /* Hover.Margin */ && event.clientX < rect.right + 10 /* Hover.Margin */ &&\n+            event.clientY > rect.top - 10 /* Hover.Margin */ && event.clientY < rect.bottom + 10 /* Hover.Margin */)\n             return;\n         for (let target = event.target; target; target = target.parentNode) {\n             if (target.nodeType == 1 && target.classList.contains(\"cm-tooltip-lint\"))\n@@ -722,7 +722,7 @@\n const lintGutterConfig = state.Facet.define({\n     combine(configs) {\n         return state.combineConfig(configs, {\n-            hoverTime: 300 /* Time */,\n+            hoverTime: 300 /* Hover.Time */,\n             markerFilter: null,\n             tooltipFilter: null\n         });\n",
+					"match": false,
+					"packageHash": "f7152ec696519ac796d9a999a6713924635651c7d1d6f8895a4239676428c0cc",
+					"size": 28212,
+					"sourceHash": "ca6b966322430c1af6fbaf0b2b59bcdb40e70af87104c699fa202aaadbae4e12",
+					"status": "content"
+				},
+				"dist/index.d.ts": {
+					"diff": "--- published/dist/index.d.ts\n+++ rebuilt/dist/index.d.ts\n@@ -56,7 +56,7 @@\n     */\n     apply: (view: EditorView, from: number, to: number) => void;\n }\n-declare type DiagnosticFilter = (diagnostics: readonly Diagnostic[]) => Diagnostic[];\n+type DiagnosticFilter = (diagnostics: readonly Diagnostic[]) => Diagnostic[];\n interface LintConfig {\n     /**\n     Time to wait (in milliseconds) after a change before running\n@@ -127,7 +127,7 @@\n /**\n The type of a function that produces diagnostics.\n */\n-declare type LintSource = (view: EditorView) => readonly Diagnostic[] | Promise<readonly Diagnostic[]>;\n+type LintSource = (view: EditorView) => readonly Diagnostic[] | Promise<readonly Diagnostic[]>;\n /**\n Given a diagnostic source, this function returns an extension that\n enables linting with that source. It will be called whenever the\n",
+					"match": false,
+					"packageHash": "ecbc0cb60fbefc512399878e1469ff7117dcfd73350a8c069cca955a486d5e58",
+					"size": 4834,
+					"sourceHash": "3c485afe4346b64709fa21df8031fedf41633a5d509de39630f11210a4946885",
+					"status": "content"
+				},
+				"dist/index.js": {
+					"diff": "--- published/dist/index.js\n+++ rebuilt/dist/index.js\n@@ -1,4 +1,4 @@\n-import { Decoration, showPanel, EditorView, ViewPlugin, hoverTooltip, logException, gutter, showTooltip, getPanel, WidgetType, GutterMarker } from '@codemirror/view';\n+import { Decoration, showPanel, EditorView, ViewPlugin, logException, gutter, showTooltip, getPanel, WidgetType, hoverTooltip, GutterMarker } from '@codemirror/view';\n import { StateEffect, StateField, Facet, combineConfig, RangeSet } from '@codemirror/state';\n import elt from 'crelt';\n \n@@ -603,8 +603,8 @@\n function trackHoverOn(view, marker) {\n     let mousemove = (event) => {\n         let rect = marker.getBoundingClientRect();\n-        if (event.clientX > rect.left - 10 /* Margin */ && event.clientX < rect.right + 10 /* Margin */ &&\n-            event.clientY > rect.top - 10 /* Margin */ && event.clientY < rect.bottom + 10 /* Margin */)\n+        if (event.clientX > rect.left - 10 /* Hover.Margin */ && event.clientX < rect.right + 10 /* Hover.Margin */ &&\n+            event.clientY > rect.top - 10 /* Hover.Margin */ && event.clientY < rect.bottom + 10 /* Hover.Margin */)\n             return;\n         for (let target = event.target; target; target = target.parentNode) {\n             if (target.nodeType == 1 && target.classList.contains(\"cm-tooltip-lint\"))\n@@ -714,7 +714,7 @@\n const lintGutterConfig = /*@__PURE__*/Facet.define({\n     combine(configs) {\n         return combineConfig(configs, {\n-            hoverTime: 300 /* Time */,\n+            hoverTime: 300 /* Hover.Time */,\n             markerFilter: null,\n             tooltipFilter: null\n         });\n",
+					"match": false,
+					"packageHash": "d13beab2d613b408775065fe883e18f01deb30acaab68a3c7275dd2e8b4c841f",
+					"size": 27766,
+					"sourceHash": "996f7b8cf44c167622fabef10fc5b1c765025161d62b321fb233862dabd23ae2",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 3,
+				"matchingFiles": 5,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.625,
+				"totalFiles": 8
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "@codemirror/state",
+				"version": "0.20.1"
+			},
+			{
+				"name": "@codemirror/view",
+				"version": "0.20.7"
+			},
+			{
+				"name": "crelt",
+				"version": "1.0.7"
+			},
+			{
+				"name": "style-mod",
+				"version": "4.1.5"
+			},
+			{
+				"name": "w3c-keyname",
+				"version": "2.2.8"
+			}
+		]
+	}
+]

@@ -1,0 +1,92 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T08:46:24.121Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:8.1.2",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "@codemirror/lint@0.20.2",
+			"name": "@codemirror/lint",
+			"version": "0.20.2",
+			"location": "https://registry.npmjs.org/@codemirror/lint/-/lint-0.20.2.tgz",
+			"integrity": "sha512-xEH3wlzoFLEhPEeMVRNoQIhoTCMEtXhVxemGh3FYjLfl/CL3B2Wz+CU7ooP5SKhN1le7JqUNSfiTArFP+IzFuw==",
+			"publishedAt": "2022-05-02T06:28:35.682Z",
+			"publishedWith": {
+				"node": "16.13.1",
+				"npm": "8.4.0"
+			},
+			"dependencies": {
+				"crelt": "^1.0.5",
+				"@codemirror/view": "^0.20.2",
+				"@codemirror/state": "^0.20.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/codemirror/lint.git",
+			"spec": "github:codemirror/lint#8672fe7e0221efddba6c933d731389ae112a6ad5"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"dist/index.cjs": {
+					"diff": "--- published/dist/index.cjs\n+++ rebuilt/dist/index.cjs\n@@ -611,8 +611,8 @@\n function trackHoverOn(view, marker) {\n     let mousemove = (event) => {\n         let rect = marker.getBoundingClientRect();\n-        if (event.clientX > rect.left - 10 /* Margin */ && event.clientX < rect.right + 10 /* Margin */ &&\n-            event.clientY > rect.top - 10 /* Margin */ && event.clientY < rect.bottom + 10 /* Margin */)\n+        if (event.clientX > rect.left - 10 /* Hover.Margin */ && event.clientX < rect.right + 10 /* Hover.Margin */ &&\n+            event.clientY > rect.top - 10 /* Hover.Margin */ && event.clientY < rect.bottom + 10 /* Hover.Margin */)\n             return;\n         for (let target = event.target; target; target = target.parentNode) {\n             if (target.nodeType == 1 && target.classList.contains(\"cm-tooltip-lint\"))\n@@ -722,7 +722,7 @@\n const lintGutterConfig = state.Facet.define({\n     combine(configs) {\n         return state.combineConfig(configs, {\n-            hoverTime: 300 /* Time */,\n+            hoverTime: 300 /* Hover.Time */,\n             markerFilter: null,\n             tooltipFilter: null\n         });\n",
+					"match": false,
+					"packageHash": "52760f5ca605833816ac4caf409250eebe73ecb06efce76f5d557e5a3a2615bc",
+					"size": 28156,
+					"sourceHash": "86117777bfa311fa1dea25fdca1bc9fb83be51b90fe1e172a57e5ea5567f03c5",
+					"status": "content"
+				},
+				"dist/index.d.ts": {
+					"diff": "--- published/dist/index.d.ts\n+++ rebuilt/dist/index.d.ts\n@@ -51,7 +51,7 @@\n     */\n     apply: (view: EditorView, from: number, to: number) => void;\n }\n-declare type DiagnosticFilter = (diagnostics: readonly Diagnostic[]) => Diagnostic[];\n+type DiagnosticFilter = (diagnostics: readonly Diagnostic[]) => Diagnostic[];\n interface LintConfig {\n     /**\n     Time to wait (in milliseconds) after a change before running\n@@ -122,7 +122,7 @@\n /**\n The type of a function that produces diagnostics.\n */\n-declare type LintSource = (view: EditorView) => readonly Diagnostic[] | Promise<readonly Diagnostic[]>;\n+type LintSource = (view: EditorView) => readonly Diagnostic[] | Promise<readonly Diagnostic[]>;\n /**\n Given a diagnostic source, this function returns an extension that\n enables linting with that source. It will be called whenever the\n",
+					"match": false,
+					"packageHash": "a3a3b70581f97de64b88b64abccf282ffd504bb79df3836490dae595c677a239",
+					"size": 4700,
+					"sourceHash": "9927c2b92abefcb69b82aa734cedad614322af00bc1783954e7ae4f4c2580966",
+					"status": "content"
+				},
+				"dist/index.js": {
+					"diff": "--- published/dist/index.js\n+++ rebuilt/dist/index.js\n@@ -1,4 +1,4 @@\n-import { Decoration, showPanel, EditorView, ViewPlugin, hoverTooltip, logException, gutter, showTooltip, getPanel, WidgetType, GutterMarker } from '@codemirror/view';\n+import { Decoration, showPanel, EditorView, ViewPlugin, logException, gutter, showTooltip, getPanel, WidgetType, hoverTooltip, GutterMarker } from '@codemirror/view';\n import { StateEffect, StateField, Facet, combineConfig, RangeSet } from '@codemirror/state';\n import elt from 'crelt';\n \n@@ -603,8 +603,8 @@\n function trackHoverOn(view, marker) {\n     let mousemove = (event) => {\n         let rect = marker.getBoundingClientRect();\n-        if (event.clientX > rect.left - 10 /* Margin */ && event.clientX < rect.right + 10 /* Margin */ &&\n-            event.clientY > rect.top - 10 /* Margin */ && event.clientY < rect.bottom + 10 /* Margin */)\n+        if (event.clientX > rect.left - 10 /* Hover.Margin */ && event.clientX < rect.right + 10 /* Hover.Margin */ &&\n+            event.clientY > rect.top - 10 /* Hover.Margin */ && event.clientY < rect.bottom + 10 /* Hover.Margin */)\n             return;\n         for (let target = event.target; target; target = target.parentNode) {\n             if (target.nodeType == 1 && target.classList.contains(\"cm-tooltip-lint\"))\n@@ -714,7 +714,7 @@\n const lintGutterConfig = /*@__PURE__*/Facet.define({\n     combine(configs) {\n         return combineConfig(configs, {\n-            hoverTime: 300 /* Time */,\n+            hoverTime: 300 /* Hover.Time */,\n             markerFilter: null,\n             tooltipFilter: null\n         });\n",
+					"match": false,
+					"packageHash": "1fdbad6647ef25c7550ed915a0bf77d6ed6089f28ed4e9c2ed99d4a79c45ffc9",
+					"size": 27710,
+					"sourceHash": "2f2e0525b7908f0a2729599df782496982d4090aefda31b53b3ed28626a05d9f",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 3,
+				"matchingFiles": 5,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.625,
+				"totalFiles": 8
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "@codemirror/state",
+				"version": "0.20.1"
+			},
+			{
+				"name": "@codemirror/view",
+				"version": "0.20.7"
+			},
+			{
+				"name": "crelt",
+				"version": "1.0.7"
+			},
+			{
+				"name": "style-mod",
+				"version": "4.1.5"
+			},
+			{
+				"name": "w3c-keyname",
+				"version": "2.2.8"
+			}
+		]
+	}
+]

@@ -1,0 +1,102 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T08:46:27.510Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:7.3.0",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "@codemirror/lint@0.18.1",
+			"name": "@codemirror/lint",
+			"version": "0.18.1",
+			"location": "https://registry.npmjs.org/@codemirror/lint/-/lint-0.18.1.tgz",
+			"integrity": "sha512-2Ueg/ojU56vF5thxMdS67XQzvHNcBnPKw2zgbDVmL/Z+84SMjP7EKvHV5FlbrKFNGZiwnaAKk5MZRYUwBY3f0g==",
+			"publishedAt": "2021-03-15T16:31:59.262Z",
+			"publishedWith": {
+				"node": "15.5.0",
+				"npm": "7.5.3"
+			},
+			"dependencies": {
+				"crelt": "^1.0.5",
+				"@codemirror/view": "^0.18.0",
+				"@codemirror/panel": "^0.18.1",
+				"@codemirror/state": "^0.18.0",
+				"@codemirror/tooltip": "^0.18.4"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/codemirror/lint.git",
+			"spec": "github:codemirror/lint#8caa4866dec7f5feecd2333c19cab830e22ac247"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"dist/index.cjs": {
+					"diff": "--- published/dist/index.cjs\n+++ rebuilt/dist/index.cjs\n@@ -120,7 +120,7 @@\n         end: stackEnd,\n         above: view.state.doc.lineAt(stackStart).to < stackEnd,\n         create() {\n-            return { dom: elt__default['default'](\"ul\", { class: \"cm-tooltip-lint\" }, found.map(d => renderDiagnostic(view, d, false))) };\n+            return { dom: elt__default[\"default\"](\"ul\", { class: \"cm-tooltip-lint\" }, found.map(d => renderDiagnostic(view, d, false))) };\n         }\n     };\n }\n@@ -232,7 +232,7 @@\n function renderDiagnostic(view, diagnostic, inPanel) {\n     var _a;\n     let keys = inPanel ? assignKeys(diagnostic.actions) : [];\n-    return elt__default['default'](\"li\", { class: \"cm-diagnostic cm-diagnostic-\" + diagnostic.severity }, elt__default['default'](\"span\", { class: \"cm-diagnosticText\" }, diagnostic.message), (_a = diagnostic.actions) === null || _a === void 0 ? void 0 : _a.map((action, i) => {\n+    return elt__default[\"default\"](\"li\", { class: \"cm-diagnostic cm-diagnostic-\" + diagnostic.severity }, elt__default[\"default\"](\"span\", { class: \"cm-diagnosticText\" }, diagnostic.message), (_a = diagnostic.actions) === null || _a === void 0 ? void 0 : _a.map((action, i) => {\n         let click = (e) => {\n             e.preventDefault();\n             let found = findDiagnostic(view.state.field(lintState).diagnostics, diagnostic);\n@@ -241,15 +241,15 @@\n         };\n         let { name } = action, keyIndex = keys[i] ? name.indexOf(keys[i]) : -1;\n         let nameElt = keyIndex < 0 ? name : [name.slice(0, keyIndex),\n-            elt__default['default'](\"u\", name.slice(keyIndex, keyIndex + 1)),\n+            elt__default[\"default\"](\"u\", name.slice(keyIndex, keyIndex + 1)),\n             name.slice(keyIndex + 1)];\n-        return elt__default['default'](\"button\", {\n+        return elt__default[\"default\"](\"button\", {\n             class: \"cm-diagnosticAction\",\n             onclick: click,\n             onmousedown: click,\n             \"aria-label\": ` Action: ${name}${keyIndex < 0 ? \"\" : ` (access key \"${keys[i]})\"`}.`\n         }, nameElt);\n-    }), diagnostic.source && elt__default['default'](\"div\", { class: \"cm-diagnosticSource\" }, diagnostic.source));\n+    }), diagnostic.source && elt__default[\"default\"](\"div\", { class: \"cm-diagnosticSource\" }, diagnostic.source));\n }\n class DiagnosticWidget extends view.WidgetType {\n     constructor(diagnostic) {\n@@ -258,7 +258,7 @@\n     }\n     eq(other) { return other.diagnostic == this.diagnostic; }\n     toDOM() {\n-        return elt__default['default'](\"span\", { class: \"cm-lintPoint cm-lintPoint-\" + this.diagnostic.severity });\n+        return elt__default[\"default\"](\"span\", { class: \"cm-lintPoint cm-lintPoint-\" + this.diagnostic.severity });\n     }\n }\n class PanelItem {\n@@ -314,14 +314,14 @@\n                     this.moveSelection(i);\n             }\n         };\n-        this.list = elt__default['default'](\"ul\", {\n+        this.list = elt__default[\"default\"](\"ul\", {\n             tabIndex: 0,\n             role: \"listbox\",\n             \"aria-label\": this.view.state.phrase(\"Diagnostics\"),\n             onkeydown,\n             onclick\n         });\n-        this.dom = elt__default['default'](\"div\", { class: \"cm-panel-lint\" }, this.list, elt__default['default'](\"button\", {\n+        this.dom = elt__default[\"default\"](\"div\", { class: \"cm-panel-lint\" }, this.list, elt__default[\"default\"](\"button\", {\n             name: \"close\",\n             \"aria-label\": this.view.state.phrase(\"close\"),\n             onclick: () => closeLintPanel(this.view)\n",
+					"match": false,
+					"packageHash": "47316f0d474ca6f96b4f0ec11ea531933bd3f4b4637b52dd5244dbf5db619236",
+					"size": 20320,
+					"sourceHash": "9620f0c05fb84d8f2e0963d2e64d53a1ab89818b703dd51847194c189b2f2ceb",
+					"status": "content"
+				},
+				"dist/index.js": {
+					"diff": "--- published/dist/index.js\n+++ rebuilt/dist/index.js\n@@ -1,4 +1,4 @@\n-import { EditorView, Decoration, ViewPlugin, logException, WidgetType } from '@codemirror/view';\n+import { Decoration, EditorView, WidgetType, ViewPlugin, logException } from '@codemirror/view';\n import { StateEffect, StateField } from '@codemirror/state';\n import { hoverTooltip } from '@codemirror/tooltip';\n import { showPanel, getPanel } from '@codemirror/panel';\n@@ -50,10 +50,10 @@\n         effects: maybeEnableLint(state, [setDiagnosticsEffect.of(diagnostics)])\n     };\n }\n-const setDiagnosticsEffect = StateEffect.define();\n-const togglePanel = StateEffect.define();\n-const movePanelSelection = StateEffect.define();\n-const lintState = StateField.define({\n+const setDiagnosticsEffect = /*@__PURE__*/StateEffect.define();\n+const togglePanel = /*@__PURE__*/StateEffect.define();\n+const movePanelSelection = /*@__PURE__*/StateEffect.define();\n+const lintState = /*@__PURE__*/StateField.define({\n     create() {\n         return new LintState(Decoration.none, null, null);\n     },\n@@ -93,7 +93,7 @@\n     provide: f => [showPanel.from(f, val => val.panel),\n         EditorView.decorations.from(f, s => s.diagnostics)]\n });\n-const activeMark = Decoration.mark({ class: \"cm-lintRange cm-lintRange-active\" });\n+const activeMark = /*@__PURE__*/Decoration.mark({ class: \"cm-lintRange cm-lintRange-active\" });\n function lintTooltip(view, pos, side) {\n     let { diagnostics } = view.state.field(lintState);\n     let found = [], stackStart = 2e8, stackEnd = 0;\n@@ -441,7 +441,7 @@\n   </svg>`;\n     return `url('data:image/svg+xml;base64,${btoa(svg)}')`;\n }\n-const baseTheme = EditorView.baseTheme({\n+const baseTheme = /*@__PURE__*/EditorView.baseTheme({\n     \".cm-diagnostic\": {\n         padding: \"3px 6px 3px 8px\",\n         marginLeft: \"-1px\",\n@@ -467,9 +467,9 @@\n         backgroundPosition: \"left bottom\",\n         backgroundRepeat: \"repeat-x\"\n     },\n-    \".cm-lintRange-error\": { backgroundImage: underline(\"#d11\") },\n-    \".cm-lintRange-warning\": { backgroundImage: underline(\"orange\") },\n-    \".cm-lintRange-info\": { backgroundImage: underline(\"#999\") },\n+    \".cm-lintRange-error\": { backgroundImage: /*@__PURE__*/underline(\"#d11\") },\n+    \".cm-lintRange-warning\": { backgroundImage: /*@__PURE__*/underline(\"orange\") },\n+    \".cm-lintRange-info\": { backgroundImage: /*@__PURE__*/underline(\"#999\") },\n     \".cm-lintRange-active\": { backgroundColor: \"#ffdd9980\" },\n     \".cm-lintPoint\": {\n         position: \"relative\",\n",
+					"match": false,
+					"packageHash": "89637765b6b5abd4980606d7810c2d07aa7b9c4700983e71d821beb595bca938",
+					"size": 19707,
+					"sourceHash": "27f53fb598c9ec1868d17c289de5905d1bc43cfdf3da5df02a67588c47de7159",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 6,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.75,
+				"totalFiles": 8
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "@codemirror/panel",
+				"version": "0.18.2"
+			},
+			{
+				"name": "@codemirror/rangeset",
+				"version": "0.18.5"
+			},
+			{
+				"name": "@codemirror/state",
+				"version": "0.18.7"
+			},
+			{
+				"name": "@codemirror/text",
+				"version": "0.18.1"
+			},
+			{
+				"name": "@codemirror/tooltip",
+				"version": "0.18.4"
+			},
+			{
+				"name": "@codemirror/view",
+				"version": "0.18.19"
+			},
+			{
+				"name": "crelt",
+				"version": "1.0.7"
+			},
+			{
+				"name": "style-mod",
+				"version": "4.1.5"
+			},
+			{
+				"name": "w3c-keyname",
+				"version": "2.2.8"
+			}
+		]
+	}
+]

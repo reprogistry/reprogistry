@@ -1,0 +1,104 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T08:47:14.199Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:10.9.3",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "@codemirror/lint@6.9.3",
+			"name": "@codemirror/lint",
+			"version": "6.9.3",
+			"location": "https://registry.npmjs.org/@codemirror/lint/-/lint-6.9.3.tgz",
+			"integrity": "sha512-y3YkYhdnhjDBAe0VIA0c4wVoFOvnp8CnAvfLqi0TqotIv92wIlAAP7HELOpLBsKwjAX6W92rSflA6an/2zBvXw==",
+			"publishedAt": "2026-01-27T18:37:58.125Z",
+			"publishedWith": {
+				"node": "22.20.0",
+				"npm": "11.7.0"
+			},
+			"dependencies": {
+				"crelt": "^1.0.5",
+				"@codemirror/view": "^6.35.0",
+				"@codemirror/state": "^6.0.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/codemirror/lint.git",
+			"spec": "github:codemirror/lint#ee432ca1c386dabdba198590805a01db8a4e3684"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"dist/index.cjs": {
+					"diff": "--- published/dist/index.cjs\n+++ rebuilt/dist/index.cjs\n@@ -347,23 +347,20 @@\n }\n const lintConfig = state.Facet.define({\n     combine(input) {\n-        return {\n-            sources: input.map(i => i.source).filter(x => x != null),\n-            ...state.combineConfig(input.map(i => i.config), {\n-                delay: 750,\n-                markerFilter: null,\n-                tooltipFilter: null,\n-                needsRefresh: null,\n-                hideOn: () => null,\n-            }, {\n-                delay: Math.max,\n-                markerFilter: combineFilter,\n-                tooltipFilter: combineFilter,\n-                needsRefresh: (a, b) => !a ? b : !b ? a : u => a(u) || b(u),\n-                hideOn: (a, b) => !a ? b : !b ? a : (t, x, y) => a(t, x, y) || b(t, x, y),\n-                autoPanel: (a, b) => a || b\n-            })\n-        };\n+        return Object.assign({ sources: input.map(i => i.source).filter(x => x != null) }, state.combineConfig(input.map(i => i.config), {\n+            delay: 750,\n+            markerFilter: null,\n+            tooltipFilter: null,\n+            needsRefresh: null,\n+            hideOn: () => null,\n+        }, {\n+            delay: Math.max,\n+            markerFilter: combineFilter,\n+            tooltipFilter: combineFilter,\n+            needsRefresh: (a, b) => !a ? b : !b ? a : u => a(u) || b(u),\n+            hideOn: (a, b) => !a ? b : !b ? a : (t, x, y) => a(t, x, y) || b(t, x, y),\n+            autoPanel: (a, b) => a || b\n+        }));\n     }\n });\n function combineFilter(a, b) {\n@@ -854,7 +851,7 @@\n     create() { return null; },\n     update(tooltip, tr) {\n         if (tooltip && tr.docChanged)\n-            tooltip = hideTooltip(tr, tooltip) ? null : { ...tooltip, pos: tr.changes.mapPos(tooltip.pos) };\n+            tooltip = hideTooltip(tr, tooltip) ? null : Object.assign(Object.assign({}, tooltip), { pos: tr.changes.mapPos(tooltip.pos) });\n         return tr.effects.reduce((t, e) => e.is(setLintGutterTooltip) ? e.value : t, tooltip);\n     },\n     provide: field => view.showTooltip.from(field)\n",
+					"match": false,
+					"packageHash": "1f21e8f19ee306cd96de923e6f0c0bd48a9d5d4b6d4a40d64486b867da64c33b",
+					"size": 35920,
+					"sourceHash": "2553ece05d31a71b9908c675717c9b078cd4fb322f16fc47673df263e832dfef",
+					"status": "content"
+				},
+				"dist/index.d.cts": {
+					"diff": "--- published/dist/index.d.cts\n+++ rebuilt/dist/index.d.cts\n@@ -1,5 +1,5 @@\n import * as _codemirror_state from '@codemirror/state';\n-import { EditorState, TransactionSpec, Extension, Transaction } from '@codemirror/state';\n+import { EditorState, Extension, Transaction, TransactionSpec } from '@codemirror/state';\n import { EditorView, Command, KeyBinding, ViewUpdate } from '@codemirror/view';\n \n type Severity = \"hint\" | \"info\" | \"warning\" | \"error\";\n@@ -192,4 +192,5 @@\n */\n declare function forEachDiagnostic(state: EditorState, f: (d: Diagnostic, from: number, to: number) => void): void;\n \n-export { type Action, type Diagnostic, type LintSource, closeLintPanel, diagnosticCount, forEachDiagnostic, forceLinting, lintGutter, lintKeymap, linter, nextDiagnostic, openLintPanel, previousDiagnostic, setDiagnostics, setDiagnosticsEffect };\n+export { closeLintPanel, diagnosticCount, forEachDiagnostic, forceLinting, lintGutter, lintKeymap, linter, nextDiagnostic, openLintPanel, previousDiagnostic, setDiagnostics, setDiagnosticsEffect };\n+export type { Action, Diagnostic, LintSource };\n",
+					"match": false,
+					"packageHash": "b35f88c4ae41d4b085da718dde3ddff0b176337470275fee82ad0aa84858db07",
+					"size": 6700,
+					"sourceHash": "293b7ebfe5f5ef2c874e0f9849298467b6ea1ceaf9abc4deb175f54ff40daeb8",
+					"status": "content"
+				},
+				"dist/index.d.ts": {
+					"diff": "--- published/dist/index.d.ts\n+++ rebuilt/dist/index.d.ts\n@@ -1,5 +1,5 @@\n import * as _codemirror_state from '@codemirror/state';\n-import { EditorState, TransactionSpec, Extension, Transaction } from '@codemirror/state';\n+import { EditorState, Extension, Transaction, TransactionSpec } from '@codemirror/state';\n import { EditorView, Command, KeyBinding, ViewUpdate } from '@codemirror/view';\n \n type Severity = \"hint\" | \"info\" | \"warning\" | \"error\";\n@@ -192,4 +192,5 @@\n */\n declare function forEachDiagnostic(state: EditorState, f: (d: Diagnostic, from: number, to: number) => void): void;\n \n-export { type Action, type Diagnostic, type LintSource, closeLintPanel, diagnosticCount, forEachDiagnostic, forceLinting, lintGutter, lintKeymap, linter, nextDiagnostic, openLintPanel, previousDiagnostic, setDiagnostics, setDiagnosticsEffect };\n+export { closeLintPanel, diagnosticCount, forEachDiagnostic, forceLinting, lintGutter, lintKeymap, linter, nextDiagnostic, openLintPanel, previousDiagnostic, setDiagnostics, setDiagnosticsEffect };\n+export type { Action, Diagnostic, LintSource };\n",
+					"match": false,
+					"packageHash": "b35f88c4ae41d4b085da718dde3ddff0b176337470275fee82ad0aa84858db07",
+					"size": 6700,
+					"sourceHash": "293b7ebfe5f5ef2c874e0f9849298467b6ea1ceaf9abc4deb175f54ff40daeb8",
+					"status": "content"
+				},
+				"dist/index.js": {
+					"diff": "--- published/dist/index.js\n+++ rebuilt/dist/index.js\n@@ -1,4 +1,4 @@\n-import { Decoration, showPanel, EditorView, ViewPlugin, gutter, showTooltip, hoverTooltip, getPanel, logException, WidgetType, GutterMarker } from '@codemirror/view';\n+import { showPanel, EditorView, Decoration, ViewPlugin, gutter, showTooltip, hoverTooltip, logException, GutterMarker, WidgetType, getPanel } from '@codemirror/view';\n import { StateEffect, StateField, Facet, combineConfig, RangeSet, RangeSetBuilder } from '@codemirror/state';\n import elt from 'crelt';\n \n@@ -345,23 +345,20 @@\n }\n const lintConfig = /*@__PURE__*/Facet.define({\n     combine(input) {\n-        return {\n-            sources: input.map(i => i.source).filter(x => x != null),\n-            ...combineConfig(input.map(i => i.config), {\n-                delay: 750,\n-                markerFilter: null,\n-                tooltipFilter: null,\n-                needsRefresh: null,\n-                hideOn: () => null,\n-            }, {\n-                delay: Math.max,\n-                markerFilter: combineFilter,\n-                tooltipFilter: combineFilter,\n-                needsRefresh: (a, b) => !a ? b : !b ? a : u => a(u) || b(u),\n-                hideOn: (a, b) => !a ? b : !b ? a : (t, x, y) => a(t, x, y) || b(t, x, y),\n-                autoPanel: (a, b) => a || b\n-            })\n-        };\n+        return Object.assign({ sources: input.map(i => i.source).filter(x => x != null) }, combineConfig(input.map(i => i.config), {\n+            delay: 750,\n+            markerFilter: null,\n+            tooltipFilter: null,\n+            needsRefresh: null,\n+            hideOn: () => null,\n+        }, {\n+            delay: Math.max,\n+            markerFilter: combineFilter,\n+            tooltipFilter: combineFilter,\n+            needsRefresh: (a, b) => !a ? b : !b ? a : u => a(u) || b(u),\n+            hideOn: (a, b) => !a ? b : !b ? a : (t, x, y) => a(t, x, y) || b(t, x, y),\n+            autoPanel: (a, b) => a || b\n+        }));\n     }\n });\n function combineFilter(a, b) {\n@@ -852,7 +849,7 @@\n     create() { return null; },\n     update(tooltip, tr) {\n         if (tooltip && tr.docChanged)\n-            tooltip = hideTooltip(tr, tooltip) ? null : { ...tooltip, pos: tr.changes.mapPos(tooltip.pos) };\n+            tooltip = hideTooltip(tr, tooltip) ? null : Object.assign(Object.assign({}, tooltip), { pos: tr.changes.mapPos(tooltip.pos) });\n         return tr.effects.reduce((t, e) => e.is(setLintGutterTooltip) ? e.value : t, tooltip);\n     },\n     provide: field => showTooltip.from(field)\n",
+					"match": false,
+					"packageHash": "f0b5d1771cd8cc00cfe5e00956b53ccbad3d19e9607aea167997019cb0bd23ba",
+					"size": 35893,
+					"sourceHash": "ede4f6f0b3e2c97f56496e1a40879c7c198b568b033b91c627eab6830c1af898",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 4,
+				"matchingFiles": 5,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.5555555555555556,
+				"totalFiles": 9
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "@codemirror/state",
+				"version": "6.7.6"
+			},
+			{
+				"name": "@codemirror/view",
+				"version": "6.43.15"
+			},
+			{
+				"name": "@marijn/find-cluster-break",
+				"version": "1.0.4"
+			},
+			{
+				"name": "crelt",
+				"version": "1.0.7"
+			},
+			{
+				"name": "style-mod",
+				"version": "4.1.5"
+			},
+			{
+				"name": "w3c-keyname",
+				"version": "2.2.8"
+			}
+		]
+	}
+]

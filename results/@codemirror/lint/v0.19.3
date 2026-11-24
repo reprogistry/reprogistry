@@ -1,0 +1,116 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T08:47:33.682Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:7.18.1",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "@codemirror/lint@0.19.3",
+			"name": "@codemirror/lint",
+			"version": "0.19.3",
+			"location": "https://registry.npmjs.org/@codemirror/lint/-/lint-0.19.3.tgz",
+			"integrity": "sha512-+c39s05ybD2NjghxkPFsUbH/qBL0cdzKmtHbzUm0RVspeL2OiP7uHYJ6J5+Qr9RjMIPWzcqSauRqxfmCrctUfg==",
+			"publishedAt": "2021-11-09T11:25:09.317Z",
+			"publishedWith": {
+				"node": "16.4.0",
+				"npm": "7.18.1"
+			},
+			"dependencies": {
+				"crelt": "^1.0.5",
+				"@codemirror/view": "^0.19.0",
+				"@codemirror/panel": "^0.19.0",
+				"@codemirror/state": "^0.19.4",
+				"@codemirror/gutter": "^0.19.4",
+				"@codemirror/tooltip": "^0.19.5",
+				"@codemirror/rangeset": "^0.19.1"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/codemirror/lint.git",
+			"spec": "github:codemirror/lint#ed6fd5b2b79d93a09e19e3f8efd66d063eb853cd"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"dist/index.cjs": {
+					"diff": "--- published/dist/index.cjs\n+++ rebuilt/dist/index.cjs\n@@ -143,7 +143,7 @@\n     };\n }\n function diagnosticsTooltip(view, diagnostics) {\n-    return elt__default['default'](\"ul\", { class: \"cm-tooltip-lint\" }, diagnostics.map(d => renderDiagnostic(view, d, false)));\n+    return elt__default[\"default\"](\"ul\", { class: \"cm-tooltip-lint\" }, diagnostics.map(d => renderDiagnostic(view, d, false)));\n }\n /**\n Command to open and focus the lint panel.\n@@ -282,7 +282,7 @@\n function renderDiagnostic(view, diagnostic, inPanel) {\n     var _a;\n     let keys = inPanel ? assignKeys(diagnostic.actions) : [];\n-    return elt__default['default'](\"li\", { class: \"cm-diagnostic cm-diagnostic-\" + diagnostic.severity }, elt__default['default'](\"span\", { class: \"cm-diagnosticText\" }, diagnostic.message), (_a = diagnostic.actions) === null || _a === void 0 ? void 0 : _a.map((action, i) => {\n+    return elt__default[\"default\"](\"li\", { class: \"cm-diagnostic cm-diagnostic-\" + diagnostic.severity }, elt__default[\"default\"](\"span\", { class: \"cm-diagnosticText\" }, diagnostic.message), (_a = diagnostic.actions) === null || _a === void 0 ? void 0 : _a.map((action, i) => {\n         let click = (e) => {\n             e.preventDefault();\n             let found = findDiagnostic(view.state.field(lintState).diagnostics, diagnostic);\n@@ -291,16 +291,16 @@\n         };\n         let { name } = action, keyIndex = keys[i] ? name.indexOf(keys[i]) : -1;\n         let nameElt = keyIndex < 0 ? name : [name.slice(0, keyIndex),\n-            elt__default['default'](\"u\", name.slice(keyIndex, keyIndex + 1)),\n+            elt__default[\"default\"](\"u\", name.slice(keyIndex, keyIndex + 1)),\n             name.slice(keyIndex + 1)];\n-        return elt__default['default'](\"button\", {\n+        return elt__default[\"default\"](\"button\", {\n             type: \"button\",\n             class: \"cm-diagnosticAction\",\n             onclick: click,\n             onmousedown: click,\n             \"aria-label\": ` Action: ${name}${keyIndex < 0 ? \"\" : ` (access key \"${keys[i]})\"`}.`\n         }, nameElt);\n-    }), diagnostic.source && elt__default['default'](\"div\", { class: \"cm-diagnosticSource\" }, diagnostic.source));\n+    }), diagnostic.source && elt__default[\"default\"](\"div\", { class: \"cm-diagnosticSource\" }, diagnostic.source));\n }\n class DiagnosticWidget extends view.WidgetType {\n     constructor(diagnostic) {\n@@ -309,7 +309,7 @@\n     }\n     eq(other) { return other.diagnostic == this.diagnostic; }\n     toDOM() {\n-        return elt__default['default'](\"span\", { class: \"cm-lintPoint cm-lintPoint-\" + this.diagnostic.severity });\n+        return elt__default[\"default\"](\"span\", { class: \"cm-lintPoint cm-lintPoint-\" + this.diagnostic.severity });\n     }\n }\n class PanelItem {\n@@ -365,14 +365,14 @@\n                     this.moveSelection(i);\n             }\n         };\n-        this.list = elt__default['default'](\"ul\", {\n+        this.list = elt__default[\"default\"](\"ul\", {\n             tabIndex: 0,\n             role: \"listbox\",\n             \"aria-label\": this.view.state.phrase(\"Diagnostics\"),\n             onkeydown,\n             onclick\n         });\n-        this.dom = elt__default['default'](\"div\", { class: \"cm-panel-lint\" }, this.list, elt__default['default'](\"button\", {\n+        this.dom = elt__default[\"default\"](\"div\", { class: \"cm-panel-lint\" }, this.list, elt__default[\"default\"](\"button\", {\n             type: \"button\",\n             name: \"close\",\n             \"aria-label\": this.view.state.phrase(\"close\"),\n@@ -598,8 +598,8 @@\n function trackHoverOn(view, marker) {\n     let mousemove = (event) => {\n         let rect = marker.getBoundingClientRect();\n-        if (event.clientX > rect.left - 10 /* Margin */ && event.clientX < rect.right + 10 /* Margin */ &&\n-            event.clientY > rect.top - 10 /* Margin */ && event.clientY < rect.bottom + 10 /* Margin */)\n+        if (event.clientX > rect.left - 10 /* Hover.Margin */ && event.clientX < rect.right + 10 /* Hover.Margin */ &&\n+            event.clientY > rect.top - 10 /* Hover.Margin */ && event.clientY < rect.bottom + 10 /* Hover.Margin */)\n             return;\n         for (let target = event.target; target; target = target.parentNode) {\n             if (target.nodeType == 1 && target.classList.contains(\"cm-tooltip-lint\"))\n@@ -630,14 +630,14 @@\n         marker.onmouseout = marker.onmousemove = null;\n         trackHoverOn(view, marker);\n     }\n-    let hoverTimeout = setTimeout(hovered, 600 /* Time */);\n+    let hoverTimeout = setTimeout(hovered, 600 /* Hover.Time */);\n     marker.onmouseout = () => {\n         clearTimeout(hoverTimeout);\n         marker.onmouseout = marker.onmousemove = null;\n     };\n     marker.onmousemove = () => {\n         clearTimeout(hoverTimeout);\n-        hoverTimeout = setTimeout(hovered, 600 /* Time */);\n+        hoverTimeout = setTimeout(hovered, 600 /* Hover.Time */);\n     };\n }\n function markersForDiagnostics(doc, diagnostics) {\n",
+					"match": false,
+					"packageHash": "4af94ad3a9dbe2fd8ce162c10bf694b9985269dfccef74a43b2052e5eee60e31",
+					"size": 27223,
+					"sourceHash": "77e35c19c41db2ee60e3794a28878a92180648f45810b450e6555f2f1679ec6e",
+					"status": "content"
+				},
+				"dist/index.d.ts": {
+					"diff": "--- published/dist/index.d.ts\n+++ rebuilt/dist/index.d.ts\n@@ -85,7 +85,7 @@\n - F8: [`nextDiagnostic`](https://codemirror.net/6/docs/ref/#lint.nextDiagnostic)\n */\n declare const lintKeymap: readonly KeyBinding[];\n-declare type LintSource = (view: EditorView) => readonly Diagnostic[] | Promise<readonly Diagnostic[]>;\n+type LintSource = (view: EditorView) => readonly Diagnostic[] | Promise<readonly Diagnostic[]>;\n /**\n Given a diagnostic source, this function returns an extension that\n enables linting with that source. It will be called whenever the\n",
+					"match": false,
+					"packageHash": "294e8b64cba04b116289d9e7a0a998956ceb9cb95306ae88ec5ed8197efc1be5",
+					"size": 3690,
+					"sourceHash": "b2e2832f63e14166bd87a93421a4736562f84c6f81442bbd2d08c6305360014c",
+					"status": "content"
+				},
+				"dist/index.js": {
+					"diff": "--- published/dist/index.js\n+++ rebuilt/dist/index.js\n@@ -1,6 +1,6 @@\n import { Decoration, EditorView, ViewPlugin, logException, WidgetType } from '@codemirror/view';\n import { StateEffect, StateField, Facet } from '@codemirror/state';\n-import { hoverTooltip, showTooltip } from '@codemirror/tooltip';\n+import { showTooltip, hoverTooltip } from '@codemirror/tooltip';\n import { showPanel, getPanel } from '@codemirror/panel';\n import { gutter, GutterMarker } from '@codemirror/gutter';\n import { RangeSet } from '@codemirror/rangeset';\n@@ -590,8 +590,8 @@\n function trackHoverOn(view, marker) {\n     let mousemove = (event) => {\n         let rect = marker.getBoundingClientRect();\n-        if (event.clientX > rect.left - 10 /* Margin */ && event.clientX < rect.right + 10 /* Margin */ &&\n-            event.clientY > rect.top - 10 /* Margin */ && event.clientY < rect.bottom + 10 /* Margin */)\n+        if (event.clientX > rect.left - 10 /* Hover.Margin */ && event.clientX < rect.right + 10 /* Hover.Margin */ &&\n+            event.clientY > rect.top - 10 /* Hover.Margin */ && event.clientY < rect.bottom + 10 /* Hover.Margin */)\n             return;\n         for (let target = event.target; target; target = target.parentNode) {\n             if (target.nodeType == 1 && target.classList.contains(\"cm-tooltip-lint\"))\n@@ -622,14 +622,14 @@\n         marker.onmouseout = marker.onmousemove = null;\n         trackHoverOn(view, marker);\n     }\n-    let hoverTimeout = setTimeout(hovered, 600 /* Time */);\n+    let hoverTimeout = setTimeout(hovered, 600 /* Hover.Time */);\n     marker.onmouseout = () => {\n         clearTimeout(hoverTimeout);\n         marker.onmouseout = marker.onmousemove = null;\n     };\n     marker.onmousemove = () => {\n         clearTimeout(hoverTimeout);\n-        hoverTimeout = setTimeout(hovered, 600 /* Time */);\n+        hoverTimeout = setTimeout(hovered, 600 /* Hover.Time */);\n     };\n }\n function markersForDiagnostics(doc, diagnostics) {\n",
+					"match": false,
+					"packageHash": "1d9c04b4ef928289a47c583cbc5ffcd53488873a315a7bfc21eba3fa4b89c979",
+					"size": 26723,
+					"sourceHash": "bb77c34bf8d3750c77a4b86ed307dc1b4e2062f0594e8ccc2f4e48a311849c91",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 3,
+				"matchingFiles": 5,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.625,
+				"totalFiles": 8
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "@codemirror/gutter",
+				"version": "0.19.9"
+			},
+			{
+				"name": "@codemirror/panel",
+				"version": "0.19.1"
+			},
+			{
+				"name": "@codemirror/rangeset",
+				"version": "0.19.9"
+			},
+			{
+				"name": "@codemirror/state",
+				"version": "0.19.9"
+			},
+			{
+				"name": "@codemirror/text",
+				"version": "0.19.6"
+			},
+			{
+				"name": "@codemirror/tooltip",
+				"version": "0.19.16"
+			},
+			{
+				"name": "@codemirror/view",
+				"version": "0.19.48"
+			},
+			{
+				"name": "crelt",
+				"version": "1.0.7"
+			},
+			{
+				"name": "style-mod",
+				"version": "4.1.5"
+			},
+			{
+				"name": "w3c-keyname",
+				"version": "2.2.8"
+			}
+		]
+	}
+]

@@ -1,0 +1,92 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-24T08:47:17.512Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:8.1.2",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "@codemirror/lint@0.20.1",
+			"name": "@codemirror/lint",
+			"version": "0.20.1",
+			"location": "https://registry.npmjs.org/@codemirror/lint/-/lint-0.20.1.tgz",
+			"integrity": "sha512-aWbeicDiNe5tb2aZuXs7sKk3hQ89Z1YcUuUX8ngQu23tT6EY4kcY2cayDjizvkLn8iHkObNf97uSudjNmUon2Q==",
+			"publishedAt": "2022-04-22T10:46:23.989Z",
+			"publishedWith": {
+				"node": "16.13.1",
+				"npm": "8.4.0"
+			},
+			"dependencies": {
+				"crelt": "^1.0.5",
+				"@codemirror/view": "^0.20.2",
+				"@codemirror/state": "^0.20.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/codemirror/lint.git",
+			"spec": "github:codemirror/lint#a60957a1e8012afe4991eb0d594bff955cfd7303"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"dist/index.cjs": {
+					"diff": "--- published/dist/index.cjs\n+++ rebuilt/dist/index.cjs\n@@ -595,8 +595,8 @@\n function trackHoverOn(view, marker) {\n     let mousemove = (event) => {\n         let rect = marker.getBoundingClientRect();\n-        if (event.clientX > rect.left - 10 /* Margin */ && event.clientX < rect.right + 10 /* Margin */ &&\n-            event.clientY > rect.top - 10 /* Margin */ && event.clientY < rect.bottom + 10 /* Margin */)\n+        if (event.clientX > rect.left - 10 /* Hover.Margin */ && event.clientX < rect.right + 10 /* Hover.Margin */ &&\n+            event.clientY > rect.top - 10 /* Hover.Margin */ && event.clientY < rect.bottom + 10 /* Hover.Margin */)\n             return;\n         for (let target = event.target; target; target = target.parentNode) {\n             if (target.nodeType == 1 && target.classList.contains(\"cm-tooltip-lint\"))\n@@ -701,7 +701,7 @@\n const lintGutterConfig = state.Facet.define({\n     combine(configs) {\n         return state.combineConfig(configs, {\n-            hoverTime: 300 /* Time */,\n+            hoverTime: 300 /* Hover.Time */,\n         });\n     }\n });\n",
+					"match": false,
+					"packageHash": "edf2d9ba4c0da09fccab332dd17e43fd86f33fa9a35f9b6ed862c2fa7d15f848",
+					"size": 27136,
+					"sourceHash": "74942818b9f4a6b86eb23c221c9ba3114ad7253f184f5a6a1f64cab9e47015d4",
+					"status": "content"
+				},
+				"dist/index.d.ts": {
+					"diff": "--- published/dist/index.d.ts\n+++ rebuilt/dist/index.d.ts\n@@ -91,7 +91,7 @@\n - F8: [`nextDiagnostic`](https://codemirror.net/6/docs/ref/#lint.nextDiagnostic)\n */\n declare const lintKeymap: readonly KeyBinding[];\n-declare type LintSource = (view: EditorView) => readonly Diagnostic[] | Promise<readonly Diagnostic[]>;\n+type LintSource = (view: EditorView) => readonly Diagnostic[] | Promise<readonly Diagnostic[]>;\n /**\n Given a diagnostic source, this function returns an extension that\n enables linting with that source. It will be called whenever the\n",
+					"match": false,
+					"packageHash": "5ff745db74af078caa56825e08538a37458521a976be63be4a7fd414df409313",
+					"size": 3866,
+					"sourceHash": "3c5c48e4020e9f1ab5dcb2f4f832502fc681930721640378fdbb8f18cec08790",
+					"status": "content"
+				},
+				"dist/index.js": {
+					"diff": "--- published/dist/index.js\n+++ rebuilt/dist/index.js\n@@ -1,4 +1,4 @@\n-import { Decoration, showPanel, EditorView, ViewPlugin, hoverTooltip, logException, gutter, showTooltip, getPanel, WidgetType, GutterMarker } from '@codemirror/view';\n+import { Decoration, showPanel, EditorView, ViewPlugin, logException, gutter, showTooltip, getPanel, WidgetType, hoverTooltip, GutterMarker } from '@codemirror/view';\n import { StateEffect, StateField, Facet, RangeSet, combineConfig } from '@codemirror/state';\n import elt from 'crelt';\n \n@@ -587,8 +587,8 @@\n function trackHoverOn(view, marker) {\n     let mousemove = (event) => {\n         let rect = marker.getBoundingClientRect();\n-        if (event.clientX > rect.left - 10 /* Margin */ && event.clientX < rect.right + 10 /* Margin */ &&\n-            event.clientY > rect.top - 10 /* Margin */ && event.clientY < rect.bottom + 10 /* Margin */)\n+        if (event.clientX > rect.left - 10 /* Hover.Margin */ && event.clientX < rect.right + 10 /* Hover.Margin */ &&\n+            event.clientY > rect.top - 10 /* Hover.Margin */ && event.clientY < rect.bottom + 10 /* Hover.Margin */)\n             return;\n         for (let target = event.target; target; target = target.parentNode) {\n             if (target.nodeType == 1 && target.classList.contains(\"cm-tooltip-lint\"))\n@@ -693,7 +693,7 @@\n const lintGutterConfig = /*@__PURE__*/Facet.define({\n     combine(configs) {\n         return combineConfig(configs, {\n-            hoverTime: 300 /* Time */,\n+            hoverTime: 300 /* Hover.Time */,\n         });\n     }\n });\n",
+					"match": false,
+					"packageHash": "3956b2edbe90012ebca83ffe6b7208231ba3b601ed85cce6d57913f5e4a0dbb4",
+					"size": 26696,
+					"sourceHash": "4dafb0ebc033282f912cf20403a689f61c4439b7b69e2dda3855e9f3f93d60f7",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 3,
+				"matchingFiles": 5,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.625,
+				"totalFiles": 8
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "@codemirror/state",
+				"version": "0.20.1"
+			},
+			{
+				"name": "@codemirror/view",
+				"version": "0.20.7"
+			},
+			{
+				"name": "crelt",
+				"version": "1.0.7"
+			},
+			{
+				"name": "style-mod",
+				"version": "4.1.5"
+			},
+			{
+				"name": "w3c-keyname",
+				"version": "2.2.8"
+			}
+		]
+	}
+]
