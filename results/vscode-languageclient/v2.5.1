@@ -1,0 +1,858 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-25T02:49:46.483Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:3.10.3",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "vscode-languageclient@2.5.1",
+			"name": "vscode-languageclient",
+			"version": "2.5.1",
+			"location": "https://registry.npmjs.org/vscode-languageclient/-/vscode-languageclient-2.5.1.tgz",
+			"integrity": "sha512-fOuepUjyz+loNIZJJdNTfWPfyyyXiT0GX+K/yyT+sIW13iEFp9dDz9KwS+gNYuPTmNU3HoQJRkxKoQfZ7dIieg==",
+			"publishedAt": "2016-10-12T16:38:16.930Z",
+			"publishedWith": {
+				"node": "6.5.0",
+				"npm": "3.10.8"
+			},
+			"dependencies": {
+				"vscode-jsonrpc": "^2.4.0",
+				"vscode-languageserver-types": "^1.0.3"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/Microsoft/vscode-languageserver-node.git",
+			"spec": "github:Microsoft/vscode-languageserver-node#HEAD"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".npmignore": {
+					"match": false,
+					"packageHash": "1b13d6fb4b2ee1eae081bd9a382e54717e01fe3b835adb0b390968ce96ac564d",
+					"size": 81,
+					"status": "missing-in-source"
+				},
+				"License.txt": {
+					"diff": "--- published/License.txt\n+++ rebuilt/License.txt\n@@ -1,11 +1,18 @@\n-Copyright (c) Microsoft Corporation\r\n-\r\n-All rights reserved. \r\n-\r\n-MIT License\r\n-\r\n-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\r\n-\r\n-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\r\n-\r\n-THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\r\n+\n+Copyright (c) Microsoft Corporation\n+\n+All rights reserved.\n+\n+MIT License\n+\n+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation\n+files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy,\n+modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software\n+is furnished to do so, subject to the following conditions:\n+\n+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n+\n+THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES\n+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS\n+BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT\n+OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "b850c1e24b7df4792f824f31c3096617f1f34c0d701ed62fdf1c3274d7370eb7",
+					"size": 1107,
+					"sourceHash": "05b6af84f5acd7186f031cf389c722350d2780608d24e6c237cf2d2d85d139bd",
+					"status": "content"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,10 +1,572 @@\n-# VSCode Language Server - Client Module\n+# VSCode Language Server - Node\n \n+This repository contains the code for the following npm modules:\n+\n+\n+* _vscode-languageclient_: npm module to talk to a VSCode language server from a VSCode extension:<br>\n [![NPM Version](https://img.shields.io/npm/v/vscode-languageclient.svg)](https://npmjs.org/package/vscode-languageclient)\n [![NPM Downloads](https://img.shields.io/npm/dm/vscode-languageclient.svg)](https://npmjs.org/package/vscode-languageclient)\n-[![Build Status](https://travis-ci.org/Microsoft/vscode-languageserver-node.svg?branch=master)](https://travis-ci.org/Microsoft/vscode-languageserver-node)\n+* _vscode-languageserver_: npm module to implement a VSCode language server using [Node.js](https://nodejs.org/) as a runtime:<br>\n+[![NPM Version](https://img.shields.io/npm/v/vscode-languageserver.svg)](https://npmjs.org/package/vscode-languageserver)\n+[![NPM Downloads](https://img.shields.io/npm/dm/vscode-languageserver.svg)](https://npmjs.org/package/vscode-languageserver)\n+* _vscode-languageserver-textdocument_: npm module to implement text documents usable in a LSP server using [Node.js](https://nodejs.org/) as a runtime:<br>\n+[![NPM Version](https://img.shields.io/npm/v/vscode-languageserver-textdocument.svg)](https://npmjs.org/package/vscode-languageserver-textdocument)\n+[![NPM Downloads](https://img.shields.io/npm/dm/vscode-languageserver-textdocument.svg)](https://npmjs.org/package/vscode-languageserver-textdocument)\n+* _vscode-languageserver-protocol_: the actual language server protocol definition in TypeScript:<br>\n+[![NPM Version](https://img.shields.io/npm/v/vscode-languageserver-protocol.svg)](https://npmjs.org/package/vscode-languageserver-protocol)\n+[![NPM Downloads](https://img.shields.io/npm/dm/vscode-languageserver-protocol.svg)](https://npmjs.org/package/vscode-languageserver-protocol)\n+* _vscode-languageserver-types_: data types used by the language server client and server:<br>\n+[![NPM Version](https://img.shields.io/npm/v/vscode-languageserver-types.svg)](https://npmjs.org/package/vscode-languageserver-types)\n+[![NPM Downloads](https://img.shields.io/npm/dm/vscode-languageserver-types.svg)](https://npmjs.org/package/vscode-languageserver-types)\n+* _vscode-jsonrpc_: the underlying message protocol to communicate between a client and a server:<br>\n+[![NPM Version](https://img.shields.io/npm/v/vscode-jsonrpc.svg)](https://npmjs.org/package/vscode-jsonrpc)\n+[![NPM Downloads](https://img.shields.io/npm/dm/vscode-jsonrpc.svg)](https://npmjs.org/package/vscode-jsonrpc)\n+\n+All npm modules are built using one Azure Pipeline. Its status is:\n+\n+[![Build Status](https://dev.azure.com/vscode/vscode-languageserver-node/_apis/build/status%2Fvscode-languageserver-node?branchName=main)](https://dev.azure.com/vscode/vscode-languageserver-node/_build/latest?definitionId=52&branchName=main)\n+\n+Click [here](https://code.visualstudio.com/docs/extensions/example-language-server) for a detailed document on how to use these npm modules to implement\n+language servers for [VSCode](https://code.visualstudio.com/).\n+\n+## Contributing\n+\n+After cloning the repository, run `npm install` to install dependencies and `npm run symlink` to point packages in this repository to each other.\n+\n+See [CONTRIBUTING.md](./CONTRIBUTING.md) for the repository map, focused build and test commands, generated-file workflows, and maintenance hazards. AI coding agents should also read [AGENTS.md](./AGENTS.md).\n+\n+## History\n+\n+## 3.18.6 Protocol, 10.0.1 JSON-RPC, 11.0.1 Client and 11.0.1 Server.\n+\n+[Fixed issues](https://github.com/microsoft/vscode-languageserver-node/issues?q=is%3Aissue%20is%3Aclosed%20reason%3Acompleted%20milestone%3A%223.18.6%22%20sort%3Aupdated-desc) | [Merged pull requests](https://github.com/microsoft/vscode-languageserver-node/pulls?q=is%3Apr%20is%3Amerged%20milestone%3A%223.18.6%22%20sort%3Aupdated-desc)\n+\n+### Compatibility\n+\n+- No protocol requests, notifications, or responses changed. The protocol package is a patch release with updated JSON-RPC and types dependencies.\n+- Client: when initialization is retried through `initializationFailedHandler` or the Retry message of an `InitializeError`, `start()` now resolves or rejects with the outcome of the last attempt. For a retryable `InitializeError` without a handler, `start()` stays pending until the user answers the Retry message.\n+- Client: document formatting requests now forward additional formatting options provided by VS Code to the server.\n+- Type guards in the types and protocol packages now return `false` for `null`, `undefined`, and other non-object values instead of throwing.\n+- Text document 1.0.16 is unchanged.\n+\n+### Bug fixes and improvements\n+\n+- Client: dispose workspace diagnostic progress handlers on all paths, skip workspace diagnostic reports that fail to convert, report the correct failed request, and reset the error counter after a successful workspace pull.\n+- Client: refresh dependent notebook cell diagnostics after text changes and cancel pending change deliveries when the client stops.\n+- JSON-RPC 10.0.1: `LinkedMap.delete` and `LRUCache.delete` now return `true` for existing falsy values.\n+- Protocol 3.18.6: `NotebookDocumentFilter.is` accepts relative patterns.\n+- Server: only track server-created work done progress reporters and ignore failed progress sends.\n+- Types 3.18.6: keep existing change annotations when `WorkspaceChange` wraps a `WorkspaceEdit`.\n+\n+## 3.18.5 Protocol, 10.0.0 JSON-RPC, 11.0.0 Client and 11.0.0 Server.\n+\n+[Fixed issues](https://github.com/microsoft/vscode-languageserver-node/issues?q=is%3Aissue%20is%3Aclosed%20reason%3Acompleted%20milestone%3A%223.18.5%22%20sort%3Aupdated-desc) | [Merged pull requests](https://github.com/microsoft/vscode-languageserver-node/pulls?q=is%3Apr%20is%3Amerged%20milestone%3A%223.18.5%22%20sort%3Aupdated-desc)\n+\n+### Compatibility\n+\n+- JSON-RPC now requires Node.js 14.17.0 or newer.\n+- The exported `PipeTransport` and `SocketTransport` interfaces now require a `close()` method to release listeners when a server fails before connecting. The built-in transport factories provide this method. These interfaces are also re-exported by the client and server Node.js entry points.\n+- UUID generation is centralized in the JSON-RPC runtime abstraction layer. `RAL` is implemented by the npm module; external implementations are not supported.\n+- No protocol requests, notifications, or responses changed. The protocol package remains a patch release with updated JSON-RPC and types dependencies.\n+\n+### Bug fixes and improvements\n+\n+- Client: fix startup and shutdown failures, connection-close races, and cleanup when a server process exits before connecting.\n+- Client: preserve document-open notification ordering, dispose duplicate file-watcher registrations, and avoid relying on `Promise.prototype.finally` during startup and shutdown.\n+- Client: allow diagnostic pulls to recover after failures and refresh notebook diagnostics after cell reordering.\n+- JSON-RPC: release parallel dispatch slots after rejected messages, fire missing IPC writer and port reader close events, and correct buffer slicing.\n+- Server: remove deleted notebook cells from the cell map and avoid Windows command-spawning deprecation warnings.\n+- Types 3.18.5: correct the `ColorPresentation.is` and `FoldingRange.is` type guards.\n+- Text document 1.0.16: correct line offsets when incremental edits form CRLF across edit boundaries.\n+\n+## 3.18.4 Protocol, 9.0.3 JSON-RPC, 10.1.2 Client and 10.1.2 Server.\n+\n+[Bug fixes and small improvements](https://github.com/microsoft/vscode-languageserver-node/issues?q=is%3Aclosed%20milestone%3A%223.18.4%22)\n+\n+\n+## 3.18.3 Protocol, 9.0.1 JSON-RPC, 10.1.1 Client and 10.1.1 Server.\n+\n+[Bug fixes and small improvements](https://github.com/microsoft/vscode-languageserver-node/issues?q=is%3Aclosed%20milestone%3A%223.18.3%22)\n+\n+\n+\n+## 3.18.1 Protocol, 9.0.0 JSON-RPC, 10.0.1 Client and 10.0.1 Server.\n+\n+- [textDocumentContent capability/feature is still behind a proposed gate even though in 3.18 it's not flagged as proposed anymore](https://github.com/microsoft/vscode-languageserver-node/issues/1795)\n",
+					"match": false,
+					"packageHash": "22fedd5d78ebf6500dddab1c7a38267f5a96bacd16e0a316ed49353667b633fa",
+					"size": 823,
+					"sourceHash": "711180f6aaa38342e1375f47864181b364c7d54271103f9f617e1d914a8ad243",
+					"status": "content"
+				},
+				"lib/codeConverter.d.ts": {
+					"match": false,
+					"packageHash": "97ba05fdc5b98b8c71aee170303f666fa4838dee4f0b428648b207e7518a03e9",
+					"size": 4257,
+					"status": "missing-in-source"
+				},
+				"lib/codeConverter.js": {
+					"match": false,
+					"packageHash": "aebe23a8d164ee79a51ac88165a9ad25af0fb318b2eabc60c9ecb1f471e0dfb1",
+					"size": 10598,
+					"status": "missing-in-source"
+				},
+				"lib/main.d.ts": {
+					"match": false,
+					"packageHash": "354c456cfe16a2e4d42fbdaaaee8b30cc610a6035252ad5aaacc8d9ac80f7a59",
+					"size": 8485,
+					"status": "missing-in-source"
+				},
+				"lib/main.js": {
+					"match": false,
+					"packageHash": "ff7bb98f6da81ab24e5da7717b51226c97b7fe73b3a9c7dcc8fe1d00f1d794e8",
+					"size": 60686,
+					"status": "missing-in-source"
+				},
+				"lib/protocol.d.ts": {
+					"match": false,
+					"packageHash": "b2d4adc1d1d7f16f57f8185bd4cad40dedd5aad6771bea7e819ed10221b1d11c",
+					"size": 20924,
+					"status": "missing-in-source"
+				},
+				"lib/protocol.js": {
+					"match": false,
+					"packageHash": "80f1a703370f80cba17f2fcb01c4846a8c465294fab7cc8b919b58513b4d758f",
+					"size": 15889,
+					"status": "missing-in-source"
+				},
+				"lib/protocolCodeLens.d.ts": {
+					"match": false,
+					"packageHash": "03028f55d8469f1047dc90659f9f7a16cdfcf65ffda48266993303d3b24aee2f",
+					"size": 152,
+					"status": "missing-in-source"
+				},
+				"lib/protocolCodeLens.js": {
+					"match": false,
+					"packageHash": "822d8b8234ec6f252bf16825c42f9525995773e661d7102c964c9528fc0b3b59",
+					"size": 983,
+					"status": "missing-in-source"
+				},
+				"lib/protocolCompletionItem.d.ts": {
+					"match": false,
+					"packageHash": "a8719226cae8e29c0477a291d5ac8a78a0321f116d48baeeb6fef2e8d93425c4",
+					"size": 160,
+					"status": "missing-in-source"
+				},
+				"lib/protocolCompletionItem.js": {
+					"match": false,
+					"packageHash": "4bcc22ea9564513e8ea9074f72eca0e2dc8c62aa57ef70dce93af5720881ea49",
+					"size": 1019,
+					"status": "missing-in-source"
+				},
+				"lib/protocolConverter.d.ts": {
+					"match": false,
+					"packageHash": "8f6fd620eb9bdc7562e6108407cd432e3ae5a1032c9d08136f080bb00eee7729",
+					"size": 4875,
+					"status": "missing-in-source"
+				},
+				"lib/protocolConverter.js": {
+					"match": false,
+					"packageHash": "555c77bca8d86a0e53328500929e7d948d97cd0fd8eac20219cb7b7a27d733c7",
+					"size": 11567,
+					"status": "missing-in-source"
+				},
+				"lib/utils/async.d.ts": {
+					"match": false,
+					"packageHash": "137507a1725da22fa0292612bddc9844d357b6ab661676920c440874486de22a",
+					"size": 409,
+					"status": "missing-in-source"
+				},
+				"lib/utils/async.js": {
+					"match": false,
+					"packageHash": "b390a318c4c19a986a37971caed60130b0c7ce034bd49fb46954a9c0761771f5",
+					"size": 2374,
+					"status": "missing-in-source"
+				},
+				"lib/utils/electron.d.ts": {
+					"match": false,
+					"packageHash": "ba97f58cde88fe9c8e3558662cf917cbeb88575b45c983f662a4c3d9d0c633c1",
+					"size": 309,
+					"status": "missing-in-source"
+				},
+				"lib/utils/electron.js": {
+					"match": false,
+					"packageHash": "99da505e54f4c3bab397e0d30cce62746312d2801b0e53f9c56a72f4e1e43fd6",
+					"size": 3554,
+					"status": "missing-in-source"
+				},
+				"lib/utils/electronForkStart.d.ts": {
+					"match": false,
+					"packageHash": "4e351d9c5aed635671043bdf1a5ec649c988303230eb7cbadb62a535af1a2ab9",
+					"size": 199,
+					"status": "missing-in-source"
+				},
+				"lib/utils/electronForkStart.js": {
+					"match": false,
+					"packageHash": "090a93cdf41813a2a1beccc744f4e1abe3950337b6eb16de127d0a8b25aceba7",
+					"size": 6143,
+					"status": "missing-in-source"
+				},
+				"lib/utils/is.d.ts": {
+					"match": false,
+					"packageHash": "afb127080eba50788a3cc1bf228309e4a3dd2239432055415a382ad6ca75bf8e",
+					"size": 773,
+					"status": "missing-in-source"
+				},
+				"lib/utils/is.js": {
+					"match": false,
+					"packageHash": "2dc5bf8a1a05f99fac77ed497d4a5d2c6002ad36671853b51862ec1cd034c7b2",
+					"size": 1702,
+					"status": "missing-in-source"
+				},
+				"lib/utils/processes.d.ts": {
+					"match": false,
+					"packageHash": "bde33f4295e48edfe202c04e68bbf98dcf6e7fc912f4bf5b5fc11a73693dec5f",
+					"size": 160,
+					"status": "missing-in-source"
+				},
+				"lib/utils/processes.js": {
+					"match": false,
+					"packageHash": "98217d2513980233f85cb2e014fccfcc09940053be550aeef57cae08a7a554b6",
+					"size": 1651,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,12 +1,10 @@\n {\n-\t\"name\": \"vscode-languageclient\",\n-\t\"description\": \"VSCode Language client implementation\",\n-\t\"version\": \"2.5.1\",\n+\t\"private\": true,\n+\t\"name\": \"vscode-lsp\",\n+\t\"description\": \"VSCode Language Server Protocol Implementation\",\n+\t\"version\": \"1.0.0\",\n \t\"author\": \"Microsoft Corporation\",\n \t\"license\": \"MIT\",\n-\t\"engines\": {\n-\t\t\"vscode\": \"^0.10.7\"\n-\t},\n \t\"repository\": {\n \t\t\"type\": \"git\",\n \t\t\"url\": \"https://github.com/Microsoft/vscode-languageserver-node.git\"\n@@ -14,20 +12,58 @@\n \t\"bugs\": {\n \t\t\"url\": \"https://github.com/Microsoft/vscode-languageserver-node/issues\"\n \t},\n-\t\"main\": \"./lib/main.js\",\n-\t\"typings\": \"./lib/main\",\n \t\"devDependencies\": {\n-\t\t\"typescript\": \"^1.8.10\",\n-\t\t\"vscode\": \"^0.11.10\"\n-\t},\n-\t\"dependencies\": {\n-\t\t\"vscode-jsonrpc\": \"^2.4.0\",\n-\t\t\"vscode-languageserver-types\": \"^1.0.3\"\n+\t\t\"@types/assert\": \"^1.5.11\",\n+\t\t\"@types/mocha\": \"^10.0.10\",\n+\t\t\"@types/node\": \"22.13.14\",\n+\t\t\"@stylistic/eslint-plugin\": \"^5.10.0\",\n+\t\t\"assert\": \"^2.1.0\",\n+\t\t\"eslint\": \"^10.8.1\",\n+\t\t\"globals\": \"^17.6.0\",\n+\t\t\"typescript-eslint\": \"^8.67.0\",\n+\t\t\"http-server\": \"^14.1.1\",\n+\t\t\"mocha\": \"^12.0.3\",\n+\t\t\"playwright\": \"^1.65.1\",\n+\t\t\"rimraf\": \"^6.1.3\",\n+\t\t\"shelljs\": \"^0.10.0\",\n+\t\t\"shx\": \"^0.4.0\",\n+\t\t\"source-map-support\": \"^0.5.21\",\n+\t\t\"ts-json-schema-generator\": \"^2.9.0\",\n+\t\t\"typescript\": \"^6.0.3\",\n+\t\t\"webpack\": \"^5.107.2\",\n+\t\t\"webpack-cli\": \"^7.0.2\",\n+\t\t\"node-polyfill-webpack-plugin\": \"^4.1.0\"\n \t},\n \t\"scripts\": {\n-\t\t\"prepublish\": \"node ./node_modules/vscode/bin/install && tsc -p ./src\",\n-\t\t\"compile\": \"tsc -p ./src\",\n-\t\t\"watch\": \"tsc -w -p ./src\",\n-\t\t\"update-vscode\": \"node ./node_modules/vscode/bin/install\"\n+\t\t\"postinstall\": \"node ./build/bin/all.js install && cd testbed && npm install && cd .. && npm run symlink:testbed && npx playwright install\",\n+\t\t\"test\": \"npm run test:build && node ./build/bin/all.js run test\",\n+\t\t\"test:build\": \"mocha --ui tdd \\\"build/test/**/*.test.js\\\"\",\n+\t\t\"clean\": \"node ./build/bin/all.js run clean\",\n+\t\t\"symlink\": \"node ./build/bin/symlink.js\",\n+\t\t\"symlink:tests\": \"node ./build/bin/symlink-tests.js\",\n+\t\t\"symlink:testbed\": \"node ./build/bin/symlink-testbed.js\",\n+\t\t\"compile\": \"tsc -b tsconfig.json\",\n+\t\t\"compile:types\": \"tsc -b ./types/tsconfig.json\",\n+\t\t\"compile:textDocument\": \"tsc -b ./textDocument/tsconfig.json\",\n+\t\t\"compile:jsonrpc\": \"tsc -b ./jsonrpc/tsconfig.json\",\n+\t\t\"compile:protocol\": \"tsc -b ./protocol/tsconfig.json\",\n+\t\t\"compile:server\": \"tsc -b ./server/tsconfig.json\",\n+\t\t\"compile:client\": \"tsc -b ./client/tsconfig.json\",\n+\t\t\"compile:client-node-tests\": \"tsc -b ./client-node-tests/tsconfig.json\",\n+\t\t\"compile:testbed\": \"tsc -b ./testbed/tsconfig.json\",\n+\t\t\"compile:tsconfig-gen\": \"tsc -b ./tsconfig-gen/tsconfig.json\",\n+\t\t\"watch\": \"tsc -b tsconfig.watch.json -w\",\n+\t\t\"watch:testbed\": \"tsc -b ./testbed/tsconfig.json -w\",\n+\t\t\"watch:tsconfig-gen\": \"tsc -b ./tsconfig-gen/tsconfig.json -w\",\n+\t\t\"lint\": \"node ./build/bin/all.js run lint\",\n+\t\t\"all\": \"npm run symlink && npm run compile && npm run test\",\n+\t\t\"rebuildAll\": \"npm run clean && npm run symlink && npm run compile && npm run test\",\n+\t\t\"audit:all\": \"node ./build/bin/all.js audit\",\n+\t\t\"audit:all:fix\": \"node ./build/bin/all.js audit fix\",\n+\t\t\"generate:metaModel\": \"cd protocol && npm run generate:metaModel && cd ..\",\n+\t\t\"generate:metaModelSchema\": \"cd protocol && npm run generate:metaModelSchema && cd ..\",\n+\t\t\"validate:version\": \"node ./tools/lib/validate-main.js\",\n+\t\t\"update:lock\": \"git clean -xfd . && npm install && cd ./client && npm run updateVSCodeVersion && cd ..\",\n+\t\t\"tsconfig-gen\": \"cd tsconfig-gen && npm run compile && cd .. && node ./tsconfig-gen/lib/main.js -f .tsconfigrc.js\"\n \t}\n-}\n\\ No newline at end of file\n+}\n",
+					"match": false,
+					"packageHash": "4e82b912e2ab686c89681ebb4cff0b6886b1d5e05294e1634919c8856548320a",
+					"size": 841,
+					"sourceHash": "d7cf7d978edca925da166fe6def2e6fb38bde27b834800ecc58aab313489dcaf",
+					"status": "content"
+				},
+				"thirdpartynotices.txt": {
+					"match": false,
+					"packageHash": "fab7fe6ff9546c18911f54b93fcfe10afd6c0ccde83507cf8ac498947ae2a943",
+					"size": 1862,
+					"status": "missing-in-source"
+				},
+				".gitattributes": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/commands.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/locker.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/needs_more_info.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/skills/prepare-release/SKILL.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/build.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".lsifrc.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".tsconfigrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".vscode/launch.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".vscode/settings.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".vscode/tasks.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"AGENTS.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"CONTRIBUTING.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"SECURITY.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"build/azure-pipelines/pipeline.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"build/azure-pipelines/templates/pack-steps.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"build/azure-pipelines/templates/test-steps.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"build/bin/all.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"build/bin/fix-esm.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"build/bin/linking.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"build/bin/runBrowserTests.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"build/bin/symlink-client-tests-publish.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"build/bin/symlink-testbed.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"build/bin/symlink-tests.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"build/bin/symlink.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"build/bin/tsc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"build/bin/webpack.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"build/npm/fail.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"build/npm/post-publish.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"build/test/all.test.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"changes/3.17.0-3.18.0.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"changes/impl-spec-diff-2026-5-20.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"changes/impl-spec-diff-2026-5-21.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client/License.txt": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client/eslint.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client/package-lock.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client/typings/vscode.proposed.codeActionAI.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client-node-tests/.mocharc.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client-node-tests/bin/runTests.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client-node-tests/eslint.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client-node-tests/extension.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client-node-tests/package-lock.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client-node-tests/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client-node-tests/src/converter.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client-node-tests/src/helpers.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client-node-tests/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client-node-tests/src/integration.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client-node-tests/src/memoryFileSystemProvider.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client-node-tests/src/runTests.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client-node-tests/src/servers/crashOnInitializeServer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client-node-tests/src/servers/crashOnShutdownServer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client-node-tests/src/servers/crashServer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client-node-tests/src/servers/customServer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client-node-tests/src/servers/exitBeforeConnectServer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client-node-tests/src/servers/exitOnInitializeRetryServer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client-node-tests/src/servers/failInitializeServer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client-node-tests/src/servers/fullNotebookServer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client-node-tests/src/servers/nullServer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client-node-tests/src/servers/retryInitializeServer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client-node-tests/src/servers/retryThenFailInitializeServer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client-node-tests/src/servers/simpleNotebookServer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client-node-tests/src/servers/startStopServer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client-node-tests/src/servers/testServer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client-node-tests/src/servers/textSyncServer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client-node-tests/src/servers/timeoutOnShutdownServer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client-node-tests/src/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client-node-tests/src/tsconfig.publish.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client-node-tests/src/tsconfig.watch.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client-node-tests/src/workspaceFolder.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client-node-tests/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client-node-tests/tsconfig.publish.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"client-node-tests/tsconfig.watch.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"eslint.config.base.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"eslint.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"favicon.ico": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"jsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"jsonrpc/License.txt": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"jsonrpc/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"jsonrpc/eslint.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"jsonrpc/package-lock.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"jsonrpc/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"jsonrpc/thirdpartynotices.txt": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"jsonrpc/tsconfig.tsbuildinfo": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"jsonrpc/typings/thenable.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"protocol/License.txt": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"protocol/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"protocol/eslint.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"protocol/metaModel.schema.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"protocol/package-lock.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"protocol/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"protocol/thirdpartynotices.txt": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"server/License.txt": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"server/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"server/bin/installServerIntoExtension": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"server/eslint.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"server/package-lock.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"server/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"server/thirdpartynotices.txt": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"server/typings/thenable.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"testbed/client/package-lock.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"testbed/client/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"testbed/client/src/extension.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"testbed/client/src/measure.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"testbed/client/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"testbed/eslint.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"testbed/package-lock.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"testbed/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"testbed/server/package-lock.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"testbed/server/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"testbed/server/src/fullNotebookServer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"testbed/server/src/server.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"testbed/server/src/simpleNotebookServer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"testbed/server/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"testbed/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"testbed/workspace/.vscode/settings.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"testbed/workspace/bug.bat": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"testbed/workspace/bug.ipynb": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"testbed/workspace/bug2.bat": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"testbed/workspace/peek.bat": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"testbed/workspace/python.ipynb": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"testbed/workspace/test.bat": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"testbed/workspace/test.github-issues": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"testbed/workspace/test.ipynb": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"testbed/workspace/test.txt": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"testbed/workspace/test2.bat": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"testbed/workspace/test3.bat": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"testbed/workspace/test4.bat": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"textDocument/License.txt": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"textDocument/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"textDocument/eslint.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"textDocument/package-lock.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"textDocument/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"textDocument/thirdpartynotices.txt": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tools/eslint.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tools/package-lock.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tools/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tools/src/generator-main.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tools/src/metaModel.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tools/src/typescripts.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tools/src/validate-main.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tools/src/visitor.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tools/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tools/tsconfig.watch.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tsconfig-gen/LICENSE.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tsconfig-gen/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tsconfig-gen/SECURITY.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tsconfig-gen/ThirdPartyNotices.txt": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tsconfig-gen/bin/tsconfig-gen": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tsconfig-gen/eslint.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tsconfig-gen/package-lock.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tsconfig-gen/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tsconfig.watch.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"types/License.txt": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"types/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"types/eslint.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"types/package-lock.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"types/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"types/thirdpartynotices.txt": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 3,
+				"matchingFiles": 0,
+				"missingInPackage": 161,
+				"missingInSource": 24,
+				"score": 0,
+				"totalFiles": 188
+			}
+		},
+		"prodDependencies": []
+	}
+]
