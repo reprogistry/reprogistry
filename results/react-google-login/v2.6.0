@@ -1,0 +1,68 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-25T20:38:44.101Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:3.10.8",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "react-google-login@2.6.0",
+			"name": "react-google-login",
+			"version": "2.6.0",
+			"location": "https://registry.npmjs.org/react-google-login/-/react-google-login-2.6.0.tgz",
+			"integrity": "sha512-8aYoZOlzf6Y+BSDmHD5nLDfq4y7jJ8AjGoW0eRklUdU1JWjcIJyShkkjrn4ix2e7e+ZjmcQ3UPn4QzQw2NCnTQ==",
+			"publishedAt": "2017-01-08T22:54:18.450Z",
+			"publishedWith": {
+				"node": "6.9.1",
+				"npm": "3.10.8"
+			},
+			"dependencies": {
+				"@types/react": "*"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/anthonyjgrove/react-google-login.git",
+			"spec": "github:anthonyjgrove/react-google-login#3bbfe7f0e814a2dbc325d5f8454edf8e3a704233"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".npmignore": {
+					"match": false,
+					"packageHash": "5502218b665235463bca7d912deb089939a9e083a94b956879364b389496901e",
+					"size": 80,
+					"status": "missing-in-source"
+				},
+				"webpack.config.dist.js": {
+					"diff": "--- published/webpack.config.dist.js\n+++ rebuilt/webpack.config.dist.js\n@@ -24,7 +24,7 @@\n     'react-dom': 'ReactDOM',\n   },\n   resolve: {\n-    extensions: ['.js'],\n+    extensions: ['*', '.js'],\n   },\n   plugins: [\n     new webpack.DefinePlugin({\n@@ -36,5 +36,13 @@\n       minimize: true,\n       debug: false,\n     }),\n+    new webpack.optimize.UglifyJsPlugin({\n+      minimize: true,\n+      sourceMap: true,\n+      mangle: false,\n+      compress: {\n+        warnings: false,\n+      },\n+    }),\n   ],\n };\n",
+					"match": false,
+					"packageHash": "4fdec2cc97864b9424a91e8f661beb712949b04d7680ae8325a85ee3f43375f8",
+					"size": 768,
+					"sourceHash": "92e6e0d2fb8c1b6fdfe83a41fe63c7002711bfbd1dc3262564b5cdee7319b864",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 1,
+				"matchingFiles": 13,
+				"missingInPackage": 0,
+				"missingInSource": 1,
+				"score": 0.8666666666666667,
+				"totalFiles": 15
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "@types/react",
+				"version": "19.3.3"
+			},
+			{
+				"name": "csstype",
+				"version": "3.2.4"
+			}
+		]
+	}
+]

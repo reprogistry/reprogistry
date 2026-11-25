@@ -1,0 +1,165 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-25T21:48:33.381Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:6.14.4",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "react-google-login@5.1.20",
+			"name": "react-google-login",
+			"version": "5.1.20",
+			"location": "https://registry.npmjs.org/react-google-login/-/react-google-login-5.1.20.tgz",
+			"integrity": "sha512-/5vDx8Hy7Wo1fO1VC/0e5D6/ZGWgIgvcscI8mYZUQ653QOFf0c4GhTnKkebX5uE7m5rAB/2bzzZIUlIesGqWig==",
+			"publishedAt": "2020-05-17T22:25:35.396Z",
+			"publishedWith": {
+				"node": "12.16.3",
+				"npm": "6.14.4"
+			},
+			"dependencies": {
+				"@types/react": "*",
+				"prop-types": "^15.6.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/anthonyjgrove/react-google-login.git",
+			"spec": "github:anthonyjgrove/react-google-login#0cee49771eb5fae42b9c16cd944bde49161431fd"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,3 +1,7 @@\n+```diff\n+- This package is no longer maintained.\n+```\n+\n # React Google Login\n \n > A Google oAUth Sign-in / Log-in Component for React\n@@ -7,7 +11,7 @@\n [Demo Link](https://anthonyjgrove.github.io/react-google-login/)\n \n ## Install\n-``` \n+```\n npm install react-google-login\n ```\n \n@@ -113,7 +117,8 @@\n \n If responseType is not 'code', callback will return the GoogleAuth object.\n \n-If responseType is 'code', callback will return the offline token for use on your server.\n+If responseType is 'code', callback will return the authorization code that can\n+be used to retrieve a refresh token from the server.\n \n If you use the hostedDomain param, make sure to validate the id_token (a JSON web token) returned by Google on your backend server:\n  1. In the `responseGoogle(response) {...}` callback function, you should get back a standard JWT located at `response.tokenId` or `res.getAuthResponse().id_token`\n@@ -139,13 +144,14 @@\n |    params    |   value  |             default value            |   description    |\n |:------------:|:--------:|:------------------------------------:|:----------------:|\n |    clientId  |  string  |               REQUIRED               | You can create a clientID by creating a [new project on Google developers website.](https://developers.google.com/identity/sign-in/web/sign-in) |\n-|    jsSrc     |  string  |                   -                  |                  |\n-| hostedDomain |  string  |                   -                  | URL of the Javascript file normally hosted by Google |\n+|    jsSrc     |  string  |https://apis.google.com/js/api.js|URL of the Javascript file normally hosted by Google|\n+| hostedDomain |  string  |                   -                  |The G Suite domain to which users must belong to sign in|\n |     scope    |  string  |             profile email            |                  |\n | responseType |  string  |              permission              | Can be either space-delimited 'id_token', to retrieve an ID Token + 'permission' (or 'token'), to retrieve an Access Token, or 'code', to retrieve an Authorization Code.\n-| accessType   |  string  |              online                  | Can be either 'online' or 'offline'. Use offline with responseType 'code' to retrieve a refresh token |\n+| accessType   |  string  |              online                  | Can be either 'online' or 'offline'. Use offline with responseType 'code' to retrieve an authorization code for fetching a refresh token  |\n |   onSuccess  | function |               REQUIRED               |                  |\n |   onFailure  | function |               REQUIRED               |                  |\n+|   onScriptLoadFailure  | function |         -                  | If defined, will be called when loading the 'google-login' script fails (otherwise onFailure will be called) |\n |   onRequest  | function |                   -                  |                  |\n |   onAutoLoadFinished  | function |                   -         |                  |\n |   buttonText |  string  |             Login with Google        |                  |\n@@ -173,13 +179,14 @@\n |    params    |   value  |             default value            |   description    |\n |:------------:|:--------:|:------------------------------------:|:----------------:|\n |    clientId  |  string  |               REQUIRED               | You can create a clientID by creating a [new project on Google developers website.](https://developers.google.com/identity/sign-in/web/sign-in) |\n-|    jsSrc     |  string  |                   -                  |                  |\n-| hostedDomain |  string  |                   -                  | URL of the Javascript file normally hosted by Google |\n+|    jsSrc     |  string  | https://apis.google.com/js/api.js | URL of the Javascript file normally hosted by Google |\n+| hostedDomain |  string  |                   -                  | The G Suite domain to which users must belong to sign in |\n |     scope    |  string  |             profile email            |                  |\n-| accessType   |  string  |              online                  | Can be either 'online' or 'offline'. Use offline with responseType 'code' to retrieve a refresh token |\n+| accessType   |  string  |              online                  | Can be either 'online' or 'offline'. Use offline with responseType 'code' to retrieve an authorization code for fetching a refresh token |\n |   onLogoutSuccess  | function |               REQUIRED               |                  |\n |   onFailure  | function |               REQUIRED               |                  |\n-|   buttonText |  string  |             Login with Google        |                  |\n+|   onScriptLoadFailure  | function |         -                  | If defined, will be called when loading the 'google-login' script fails (otherwise onFailure will be called) |\n+|   buttonText |  string  |             Logout of Google        |                  |\n |   className  |  string  |                   -                  |                  |\n | disabledStyle|  object  |                   -                  |                  |\n |   loginHint  |  string  |                   -                  |                  |\n",
+					"match": false,
+					"packageHash": "3be02fda282cec3378910e02dffdb23f6600c9ea8fd5ae537df202f49d869fc3",
+					"size": 13369,
+					"sourceHash": "ad87a97d01165f77d47dbb1e85a888f7ebbaa13227a2a65ecdb02b223b9bb986",
+					"status": "content"
+				},
+				"dist/google-login.js": {
+					"match": false,
+					"packageHash": "a1fff96c03df9d73220949f21019702b5631c5b36a762b743f2b76f02ab8b9c3",
+					"size": 13747,
+					"status": "missing-in-source"
+				},
+				"index.d.ts": {
+					"diff": "--- published/index.d.ts\n+++ rebuilt/index.d.ts\n@@ -1,3 +1,4 @@\n+/* eslint-disable max-classes-per-file */\n // Type definitions for react-google-login v2.5.4\n // Project: https://github.com/anthonyjgrove/react-google-login\n // Definitions by: Ruslan Ibragimov <https://github.com/IRus>\n@@ -27,7 +28,7 @@\n // Based on https://developers.google.com/identity/sign-in/web/reference\n export interface GoogleLoginResponse {\n   getBasicProfile(): BasicProfile;\n-  getAuthResponse(): AuthResponse;\n+  getAuthResponse(includeAuthorizationData?: boolean): AuthResponse;\n   reloadAuthResponse(): Promise<AuthResponse>;\n   getGrantedScopes(): string;\n   getHostedDomain(): string;\n@@ -43,6 +44,7 @@\n   tokenObj: AuthResponse;\n   tokenId: string;\n   accessToken: string;\n+  readonly code?: string;//does not exist but here to satisfy typescript compatibility\n   profileObj: {\n     googleId: string;\n     imageUrl: string;\n@@ -70,9 +72,10 @@\n }\n \n export interface GoogleLoginProps {\n-  readonly onSuccess: (response: GoogleLoginResponse | GoogleLoginResponseOffline) => void,\n+  readonly onSuccess?: (response: GoogleLoginResponse | GoogleLoginResponseOffline) => void,\n   readonly onAutoLoadFinished?: (successLogin: boolean) => void,\n-  readonly onFailure: (error: any) => void,\n+  readonly onFailure?: (error: any) => void,\n+  readonly onScriptLoadFailure?: (error: any) => void,\n   readonly onRequest?: () => void,\n   readonly clientId: string,\n   readonly jsSrc?: string,\n@@ -101,7 +104,7 @@\n   readonly render?: (props: { onClick: () => void, disabled?: boolean }) => JSX.Element;\n }\n \n-export class GoogleLogin extends Component<GoogleLoginProps, {}> {\n+export class GoogleLogin extends Component<GoogleLoginProps, unknown> {\n   public signIn(e?: Event): void;\n }\n \n@@ -114,13 +117,14 @@\n   readonly children?: ReactNode;\n   readonly jsSrc?: string;\n   readonly style?: CSSProperties;\n+  readonly icon?: boolean,\n   readonly disabled?: boolean;\n   readonly disabledStyle?: CSSProperties;\n   readonly tag?: string;\n   readonly render?: (props: { onClick: () => void, disabled?: boolean }) => JSX.Element;\n }\n \n-export class GoogleLogout extends Component<GoogleLogoutProps, {}> {\n+export class GoogleLogout extends Component<GoogleLogoutProps, unknown> {\n   public signOut(): void;\n }\n \n@@ -153,8 +157,9 @@\n }\n \n export interface UseGoogleLoginProps { \n-  readonly onSuccess: (response: GoogleLoginResponse | GoogleLoginResponseOffline) => void,\n-  readonly onFailure: (error: any) => void,\n+  readonly onSuccess?: (response: GoogleLoginResponse | GoogleLoginResponseOffline) => void,\n+  readonly onFailure?: (error: any) => void,\n+  readonly onScriptLoadFailure?: (error: any) => void,\n   readonly onAutoLoadFinished?: (successLogin: boolean) => void,\n   readonly clientId: string,\n   readonly jsSrc?: string,\n",
+					"match": false,
+					"packageHash": "1634192e4aa197ae709fbe00f82be84401b9239e240ed86f9771789c68c36f66",
+					"size": 5344,
+					"sourceHash": "7ac161455cac1b10287a1902078cde22795ac30bdf08336af77304ce3fd8ef8f",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,6 +1,6 @@\n {\n   \"name\": \"react-google-login\",\n-  \"version\": \"5.1.20\",\n+  \"version\": \"5.1.3\",\n   \"description\": \"A Google Login Component for React\",\n   \"main\": \"dist/google-login.js\",\n   \"scripts\": {\n@@ -85,8 +85,8 @@\n     \"webpack-dev-server\": \"^3.2.1\"\n   },\n   \"peerDependencies\": {\n-    \"react\": \"^16.0.0\",\n-    \"react-dom\": \"^16.0.0\"\n+    \"react\": \"^16 || ^17\",\n+    \"react-dom\": \"^16 || ^17\"\n   },\n   \"types\": \"./index.d.ts\",\n   \"babel\": {\n",
+					"match": false,
+					"packageHash": "078f882bce836e62b78e377ab4c7665cc8bff4a4d2c906a057611bb6447ebb2c",
+					"size": 3052,
+					"sourceHash": "d9dd52d1cebdfdc2d112f4be5c9902bc3e1e231b140ecedb109e635fb8e3295d",
+					"status": "content"
+				},
+				"src/google-login.js": {
+					"diff": "--- published/src/google-login.js\n+++ rebuilt/src/google-login.js\n@@ -12,6 +12,7 @@\n     onAutoLoadFinished,\n     onRequest,\n     onFailure,\n+    onScriptLoadFailure,\n     tag,\n     type,\n     className,\n@@ -44,6 +45,7 @@\n     onAutoLoadFinished,\n     onRequest,\n     onFailure,\n+    onScriptLoadFailure,\n     clientId,\n     cookiePolicy,\n     loginHint,\n@@ -141,6 +143,7 @@\n GoogleLogin.propTypes = {\n   onSuccess: PropTypes.func.isRequired,\n   onFailure: PropTypes.func.isRequired,\n+  onScriptLoadFailure: PropTypes.func,\n   clientId: PropTypes.string.isRequired,\n   jsSrc: PropTypes.string,\n   onRequest: PropTypes.func,\n",
+					"match": false,
+					"packageHash": "87b6674591db91a7ebdbd696c5e7e2b8242c0d801e67a897e8607f7a5868af96",
+					"size": 4240,
+					"sourceHash": "a41edc2feebe9d80284c720f33a989c5803cd09c0e6439306dacedfd05d01a72",
+					"status": "content"
+				},
+				"src/google-logout.js": {
+					"diff": "--- published/src/google-logout.js\n+++ rebuilt/src/google-logout.js\n@@ -27,6 +27,7 @@\n     redirectUri,\n     discoveryDocs,\n     onFailure,\n+    onScriptLoadFailure,\n     uxMode,\n     scope,\n     accessType,\n@@ -36,6 +37,7 @@\n   const { signOut, loaded } = useGoogleLogout({\n     jsSrc,\n     onFailure,\n+    onScriptLoadFailure,\n     clientId,\n     cookiePolicy,\n     loginHint,\n@@ -138,7 +140,9 @@\n   type: PropTypes.string,\n   render: PropTypes.func,\n   theme: PropTypes.string,\n-  icon: PropTypes.bool\n+  icon: PropTypes.bool,\n+  onFailure: PropTypes.func,\n+  onScriptLoadFailure: PropTypes.func\n }\n \n GoogleLogout.defaultProps = {\n",
+					"match": false,
+					"packageHash": "76f93153ea01e14c4e56567e958acda1f363602baba06dd16dfac9cfde4b6f9f",
+					"size": 3392,
+					"sourceHash": "f5df55b6f258a876dc51a3e8b998bdee0dd1098ef47503d092e7aa10b3b50056",
+					"status": "content"
+				},
+				"src/load-script.js": {
+					"diff": "--- published/src/load-script.js\n+++ rebuilt/src/load-script.js\n@@ -1,4 +1,4 @@\n-export default (d, s, id, jsSrc, cb) => {\n+export default (d, s, id, jsSrc, cb, onError) => {\n   const element = d.getElementsByTagName(s)[0]\n   const fjs = element\n   let js = element\n@@ -10,5 +10,6 @@\n   } else {\n     d.head.appendChild(js)\n   }\n+  js.onerror = onError\n   js.onload = cb\n }\n",
+					"match": false,
+					"packageHash": "74f68129ed8ff399bbf053dc4416133636e48fca5b306f4ed851c8f46a8ffecd",
+					"size": 319,
+					"sourceHash": "9e4032edb5ccc62246e835083dac7d9e521e61ee17b37211c32d26ec9110c6a5",
+					"status": "content"
+				},
+				"src/use-google-login.js": {
+					"diff": "--- published/src/use-google-login.js\n+++ rebuilt/src/use-google-login.js\n@@ -7,6 +7,7 @@\n   onAutoLoadFinished = () => {},\n   onFailure = () => {},\n   onRequest = () => {},\n+  onScriptLoadFailure,\n   clientId,\n   cookiePolicy,\n   loginHint,\n@@ -30,7 +31,7 @@\n       offer renamed response keys to names that match use\n     */\n     const basicProfile = res.getBasicProfile()\n-    const authResponse = res.getAuthResponse()\n+    const authResponse = res.getAuthResponse(true)\n     res.googleId = basicProfile.getId()\n     res.tokenObj = authResponse\n     res.tokenId = authResponse.id_token\n@@ -72,54 +73,76 @@\n \n   useEffect(() => {\n     let unmounted = false\n-    loadScript(document, 'script', 'google-login', jsSrc, () => {\n-      const params = {\n-        client_id: clientId,\n-        cookie_policy: cookiePolicy,\n-        login_hint: loginHint,\n-        hosted_domain: hostedDomain,\n-        fetch_basic_profile: fetchBasicProfile,\n-        discoveryDocs,\n-        ux_mode: uxMode,\n-        redirect_uri: redirectUri,\n-        scope,\n-        access_type: accessType\n-      }\n+    const onLoadFailure = onScriptLoadFailure || onFailure\n+    loadScript(\n+      document,\n+      'script',\n+      'google-login',\n+      jsSrc,\n+      () => {\n+        const params = {\n+          client_id: clientId,\n+          cookie_policy: cookiePolicy,\n+          login_hint: loginHint,\n+          hosted_domain: hostedDomain,\n+          fetch_basic_profile: fetchBasicProfile,\n+          discoveryDocs,\n+          ux_mode: uxMode,\n+          redirect_uri: redirectUri,\n+          scope,\n+          access_type: accessType\n+        }\n \n-      if (responseType === 'code') {\n-        params.access_type = 'offline'\n-      }\n+        if (responseType === 'code') {\n+          params.access_type = 'offline'\n+        }\n \n-      window.gapi.load('auth2', () => {\n-        const GoogleAuth = window.gapi.auth2.getAuthInstance()\n-        if (!GoogleAuth) {\n-          window.gapi.auth2.init(params).then(\n-            res => {\n-              if (!unmounted) {\n+        window.gapi.load('auth2', () => {\n+          const GoogleAuth = window.gapi.auth2.getAuthInstance()\n+          if (!GoogleAuth) {\n+            window.gapi.auth2.init(params).then(\n+              res => {\n+                if (!unmounted) {\n+                  setLoaded(true)\n+                  const signedIn = isSignedIn && res.isSignedIn.get()\n+                  onAutoLoadFinished(signedIn)\n+                  if (signedIn) {\n+                    handleSigninSuccess(res.currentUser.get())\n+                  }\n+                }\n+              },\n+              err => {\n                 setLoaded(true)\n-                const signedIn = isSignedIn && res.isSignedIn.get()\n-                onAutoLoadFinished(signedIn)\n-                if (signedIn) {\n-                  handleSigninSuccess(res.currentUser.get())\n+                onAutoLoadFinished(false)\n+                onLoadFailure(err)\n+              }\n+            )\n+          } else {\n+            GoogleAuth.then(\n+              () => {\n+                if (unmounted) {\n+                  return\n+                }\n+                if (isSignedIn && GoogleAuth.isSignedIn.get()) {\n",
+					"match": false,
+					"packageHash": "4f4bd21db11c3d553532c1d4b9fffbdc7c8dbf4ec313a4dcd8481b7bdcc39173",
+					"size": 3549,
+					"sourceHash": "280a9b9870c21fed19ff1289d6dc7a2f30aadbe3276deec044ad410ce407f6dc",
+					"status": "content"
+				},
+				"src/use-google-logout.js": {
+					"diff": "--- published/src/use-google-logout.js\n+++ rebuilt/src/use-google-logout.js\n@@ -1,10 +1,11 @@\n-import { useState, useEffect } from 'react'\n+import { useState, useEffect, useCallback } from 'react'\n import loadScript from './load-script'\n import removeScript from './remove-script'\n \n const useGoogleLogout = ({\n   jsSrc = 'https://apis.google.com/js/api.js',\n   onFailure,\n+  onScriptLoadFailure,\n   clientId,\n   cookiePolicy,\n   loginHint,\n@@ -19,40 +20,58 @@\n }) => {\n   const [loaded, setLoaded] = useState(false)\n \n-  const signOut = () => {\n+  const signOut = useCallback(() => {\n     if (window.gapi) {\n       const auth2 = window.gapi.auth2.getAuthInstance()\n       if (auth2 != null) {\n-        auth2.signOut().then(auth2.disconnect().then(onLogoutSuccess))\n+        auth2.then(\n+          () => {\n+            auth2.signOut().then(() => {\n+              auth2.disconnect()\n+              onLogoutSuccess()\n+            })\n+          },\n+          err => onFailure(err)\n+        )\n       }\n     }\n-  }\n+  }, [onLogoutSuccess])\n \n   useEffect(() => {\n-    loadScript(document, 'script', 'google-login', jsSrc, () => {\n-      const params = {\n-        client_id: clientId,\n-        cookie_policy: cookiePolicy,\n-        login_hint: loginHint,\n-        hosted_domain: hostedDomain,\n-        fetch_basic_profile: fetchBasicProfile,\n-        discoveryDocs,\n-        ux_mode: uxMode,\n-        redirect_uri: redirectUri,\n-        scope,\n-        access_type: accessType\n-      }\n-      window.gapi.load('auth2', () => {\n-        if (!window.gapi.auth2.getAuthInstance()) {\n-          window.gapi.auth2.init(params).then(\n-            () => setLoaded(true),\n-            err => onFailure(err)\n-          )\n-        } else {\n-          setLoaded(true)\n+    const onLoadFailure = onScriptLoadFailure || onFailure\n+    loadScript(\n+      document,\n+      'script',\n+      'google-login',\n+      jsSrc,\n+      () => {\n+        const params = {\n+          client_id: clientId,\n+          cookie_policy: cookiePolicy,\n+          login_hint: loginHint,\n+          hosted_domain: hostedDomain,\n+          fetch_basic_profile: fetchBasicProfile,\n+          discoveryDocs,\n+          ux_mode: uxMode,\n+          redirect_uri: redirectUri,\n+          scope,\n+          access_type: accessType\n         }\n-      })\n-    })\n+        window.gapi.load('auth2', () => {\n+          if (!window.gapi.auth2.getAuthInstance()) {\n+            window.gapi.auth2.init(params).then(\n+              () => setLoaded(true),\n+              err => onLoadFailure(err)\n+            )\n+          } else {\n+            setLoaded(true)\n+          }\n+        })\n+      },\n+      err => {\n+        onLoadFailure(err)\n+      }\n+    )\n \n     return () => {\n       removeScript(document, 'google-login')\n",
+					"match": false,
+					"packageHash": "a8f2ce674f0ea93b14546e718003d0a50856c52ee44e317703bf0a0ef3548436",
+					"size": 1514,
+					"sourceHash": "3c97d3fc8e1670e323bd1cf0ff771206efd41c7efdacda4999244e04f7a346c4",
+					"status": "content"
+				},
+				"stories/google-login-notes.md": {
+					"diff": "--- published/stories/google-login-notes.md\n+++ rebuilt/stories/google-login-notes.md\n@@ -57,8 +57,8 @@\n |    params    |   value  |             default value            |   description    |\n |:------------:|:--------:|:------------------------------------:|:----------------:|\n |    clientId  |  string  |               REQUIRED               | You can create a clientID by creating a [new project on Google developers website.](https://developers.google.com/identity/sign-in/web/sign-in) |\n-|    jsSrc     |  string  |                   -                  |                  |\n-| hostedDomain |  string  |                   -                  | URL of the Javascript file normally hosted by Google |\n+|    jsSrc     |  string  | https://apis.google.com/js/api.js |URL of the Javascript file normally hosted by Google|\n+| hostedDomain |  string  |                   -                  | The G Suite domain to which users must belong to sign in|\n |     scope    |  string  |             profile email            |                  |\n | responseType |  string  |              permission              | Can be either space-delimited 'id_token', to retrieve an ID Token + 'permission' (or 'token'), to retrieve an Access Token, or 'code', to retrieve an Authorization Code.\n | accessType   |  string  |              online                  | Can be either 'online' or 'offline'. Use offline with responseType 'code' to retrieve a refresh token |\n",
+					"match": false,
+					"packageHash": "4e685842a78ad0aa3cd0b4540f8dd9dd806c2868e403c3714fbbed3b623888e3",
+					"size": 8180,
+					"sourceHash": "fdbe93234981c3ff25bad62b1cf3bf75f9cbeb86214b7980186d2137035138f9",
+					"status": "content"
+				},
+				"stories/google-logout-notes.md": {
+					"diff": "--- published/stories/google-logout-notes.md\n+++ rebuilt/stories/google-logout-notes.md\n@@ -71,8 +71,8 @@\n |    params    |   value  |             default value            |   description    |\n |:------------:|:--------:|:------------------------------------:|:----------------:|\n |    clientId  |  string  |               REQUIRED               | You can create a clientID by creating a [new project on Google developers website.](https://developers.google.com/identity/sign-in/web/sign-in) |\n-|    jsSrc     |  string  |                   -                  |                  |\n-| hostedDomain |  string  |                   -                  | URL of the Javascript file normally hosted by Google |\n+|    jsSrc     |  string  | https://apis.google.com/js/api.js | URL of the Javascript file normally hosted by Google |\n+| hostedDomain |  string  |                   -                  |  The G Suite domain to which users must belong to sign in |\n |     scope    |  string  |             profile email            |                  |\n | accessType   |  string  |              online                  | Can be either 'online' or 'offline'. Use offline with responseType 'code' to retrieve a refresh token |\n |   onLogoutSuccess  | function |               REQUIRED               |                  |\n",
+					"match": false,
+					"packageHash": "fe425db23bd4c9e389f49cbcb6f7e2fd5a27d2fd11f969524a4a71a7de7791e0",
+					"size": 7931,
+					"sourceHash": "4181e350cf19892e84578ac43589685792cd1c06735c0afe445525aca1acb240",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 10,
+				"matchingFiles": 25,
+				"missingInPackage": 0,
+				"missingInSource": 1,
+				"score": 0.6944444444444444,
+				"totalFiles": 36
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "@types/prop-types",
+				"version": "15.7.3"
+			},
+			{
+				"name": "@types/react",
+				"version": "16.9.34"
+			},
+			{
+				"name": "csstype",
+				"version": "2.6.10"
+			},
+			{
+				"name": "js-tokens",
+				"version": "4.0.0"
+			},
+			{
+				"name": "loose-envify",
+				"version": "1.4.0"
+			},
+			{
+				"name": "object-assign",
+				"version": "4.1.1"
+			},
+			{
+				"name": "prop-types",
+				"version": "15.7.2"
+			},
+			{
+				"name": "react-is",
+				"version": "16.13.1"
+			}
+		]
+	}
+]

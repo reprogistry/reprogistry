@@ -1,0 +1,141 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-25T21:48:00.273Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:6.14.8",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "react-google-login@5.1.24",
+			"name": "react-google-login",
+			"version": "5.1.24",
+			"location": "https://registry.npmjs.org/react-google-login/-/react-google-login-5.1.24.tgz",
+			"integrity": "sha512-1LyPK9FipvDa9FulIQURwOylfhvat14C65pTOcyXS/kaM0lW5flfErTI1RB0bcRDl1xH9gkdgw/Rl28z7sviXQ==",
+			"publishedAt": "2020-11-21T19:03:28.368Z",
+			"publishedWith": {
+				"node": "12.19.0",
+				"npm": "6.14.8"
+			},
+			"dependencies": {
+				"@types/react": "*",
+				"prop-types": "^15.6.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/anthonyjgrove/react-google-login.git",
+			"spec": "github:anthonyjgrove/react-google-login#bcde621342651a7340c4af0236125b9ac923d8b4"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,3 +1,7 @@\n+```diff\n+- This package is no longer maintained.\n+```\n+\n # React Google Login\n \n > A Google oAUth Sign-in / Log-in Component for React\n@@ -147,6 +151,7 @@\n | accessType   |  string  |              online                  | Can be either 'online' or 'offline'. Use offline with responseType 'code' to retrieve an authorization code for fetching a refresh token  |\n |   onSuccess  | function |               REQUIRED               |                  |\n |   onFailure  | function |               REQUIRED               |                  |\n+|   onScriptLoadFailure  | function |         -                  | If defined, will be called when loading the 'google-login' script fails (otherwise onFailure will be called) |\n |   onRequest  | function |                   -                  |                  |\n |   onAutoLoadFinished  | function |                   -         |                  |\n |   buttonText |  string  |             Login with Google        |                  |\n@@ -180,6 +185,7 @@\n | accessType   |  string  |              online                  | Can be either 'online' or 'offline'. Use offline with responseType 'code' to retrieve an authorization code for fetching a refresh token |\n |   onLogoutSuccess  | function |               REQUIRED               |                  |\n |   onFailure  | function |               REQUIRED               |                  |\n+|   onScriptLoadFailure  | function |         -                  | If defined, will be called when loading the 'google-login' script fails (otherwise onFailure will be called) |\n |   buttonText |  string  |             Logout of Google        |                  |\n |   className  |  string  |                   -                  |                  |\n | disabledStyle|  object  |                   -                  |                  |\n",
+					"match": false,
+					"packageHash": "88a2cada538306720f09591535b24e6b10ab4c6a4890555f25731158e23d4a20",
+					"size": 13549,
+					"sourceHash": "ad87a97d01165f77d47dbb1e85a888f7ebbaa13227a2a65ecdb02b223b9bb986",
+					"status": "content"
+				},
+				"dist/google-login.js": {
+					"match": false,
+					"packageHash": "f68f450278c33377e522b67d85965c629a156f98e7d083e7ccfdac43b3aac56d",
+					"size": 13939,
+					"status": "missing-in-source"
+				},
+				"index.d.ts": {
+					"diff": "--- published/index.d.ts\n+++ rebuilt/index.d.ts\n@@ -28,7 +28,7 @@\n // Based on https://developers.google.com/identity/sign-in/web/reference\n export interface GoogleLoginResponse {\n   getBasicProfile(): BasicProfile;\n-  getAuthResponse(): AuthResponse;\n+  getAuthResponse(includeAuthorizationData?: boolean): AuthResponse;\n   reloadAuthResponse(): Promise<AuthResponse>;\n   getGrantedScopes(): string;\n   getHostedDomain(): string;\n@@ -75,6 +75,7 @@\n   readonly onSuccess?: (response: GoogleLoginResponse | GoogleLoginResponseOffline) => void,\n   readonly onAutoLoadFinished?: (successLogin: boolean) => void,\n   readonly onFailure?: (error: any) => void,\n+  readonly onScriptLoadFailure?: (error: any) => void,\n   readonly onRequest?: () => void,\n   readonly clientId: string,\n   readonly jsSrc?: string,\n@@ -158,6 +159,7 @@\n export interface UseGoogleLoginProps { \n   readonly onSuccess?: (response: GoogleLoginResponse | GoogleLoginResponseOffline) => void,\n   readonly onFailure?: (error: any) => void,\n+  readonly onScriptLoadFailure?: (error: any) => void,\n   readonly onAutoLoadFinished?: (successLogin: boolean) => void,\n   readonly clientId: string,\n   readonly jsSrc?: string,\n",
+					"match": false,
+					"packageHash": "14701ba53e0890a4493f2f28a68fbe76dc592f6adbd0b3295cfd5ca56e0f7db7",
+					"size": 5514,
+					"sourceHash": "7ac161455cac1b10287a1902078cde22795ac30bdf08336af77304ce3fd8ef8f",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,6 +1,6 @@\n {\n   \"name\": \"react-google-login\",\n-  \"version\": \"5.1.24\",\n+  \"version\": \"5.1.3\",\n   \"description\": \"A Google Login Component for React\",\n   \"main\": \"dist/google-login.js\",\n   \"scripts\": {\n",
+					"match": false,
+					"packageHash": "7932803a7d90e28cd3755673b60c603e0dc13c48899a899b5f25c333ecfac070",
+					"size": 3058,
+					"sourceHash": "d9dd52d1cebdfdc2d112f4be5c9902bc3e1e231b140ecedb109e635fb8e3295d",
+					"status": "content"
+				},
+				"src/google-login.js": {
+					"diff": "--- published/src/google-login.js\n+++ rebuilt/src/google-login.js\n@@ -12,6 +12,7 @@\n     onAutoLoadFinished,\n     onRequest,\n     onFailure,\n+    onScriptLoadFailure,\n     tag,\n     type,\n     className,\n@@ -44,6 +45,7 @@\n     onAutoLoadFinished,\n     onRequest,\n     onFailure,\n+    onScriptLoadFailure,\n     clientId,\n     cookiePolicy,\n     loginHint,\n@@ -141,6 +143,7 @@\n GoogleLogin.propTypes = {\n   onSuccess: PropTypes.func.isRequired,\n   onFailure: PropTypes.func.isRequired,\n+  onScriptLoadFailure: PropTypes.func,\n   clientId: PropTypes.string.isRequired,\n   jsSrc: PropTypes.string,\n   onRequest: PropTypes.func,\n",
+					"match": false,
+					"packageHash": "87b6674591db91a7ebdbd696c5e7e2b8242c0d801e67a897e8607f7a5868af96",
+					"size": 4240,
+					"sourceHash": "a41edc2feebe9d80284c720f33a989c5803cd09c0e6439306dacedfd05d01a72",
+					"status": "content"
+				},
+				"src/google-logout.js": {
+					"diff": "--- published/src/google-logout.js\n+++ rebuilt/src/google-logout.js\n@@ -27,6 +27,7 @@\n     redirectUri,\n     discoveryDocs,\n     onFailure,\n+    onScriptLoadFailure,\n     uxMode,\n     scope,\n     accessType,\n@@ -36,6 +37,7 @@\n   const { signOut, loaded } = useGoogleLogout({\n     jsSrc,\n     onFailure,\n+    onScriptLoadFailure,\n     clientId,\n     cookiePolicy,\n     loginHint,\n@@ -138,7 +140,9 @@\n   type: PropTypes.string,\n   render: PropTypes.func,\n   theme: PropTypes.string,\n-  icon: PropTypes.bool\n+  icon: PropTypes.bool,\n+  onFailure: PropTypes.func,\n+  onScriptLoadFailure: PropTypes.func\n }\n \n GoogleLogout.defaultProps = {\n",
+					"match": false,
+					"packageHash": "76f93153ea01e14c4e56567e958acda1f363602baba06dd16dfac9cfde4b6f9f",
+					"size": 3392,
+					"sourceHash": "f5df55b6f258a876dc51a3e8b998bdee0dd1098ef47503d092e7aa10b3b50056",
+					"status": "content"
+				},
+				"src/use-google-login.js": {
+					"diff": "--- published/src/use-google-login.js\n+++ rebuilt/src/use-google-login.js\n@@ -7,6 +7,7 @@\n   onAutoLoadFinished = () => {},\n   onFailure = () => {},\n   onRequest = () => {},\n+  onScriptLoadFailure,\n   clientId,\n   cookiePolicy,\n   loginHint,\n@@ -72,6 +73,7 @@\n \n   useEffect(() => {\n     let unmounted = false\n+    const onLoadFailure = onScriptLoadFailure || onFailure\n     loadScript(\n       document,\n       'script',\n@@ -112,7 +114,7 @@\n               err => {\n                 setLoaded(true)\n                 onAutoLoadFinished(false)\n-                onFailure(err)\n+                onLoadFailure(err)\n               }\n             )\n           } else {\n@@ -138,7 +140,7 @@\n         })\n       },\n       err => {\n-        onFailure(err)\n+        onLoadFailure(err)\n       }\n     )\n \n",
+					"match": false,
+					"packageHash": "aed7aa9b04fddf36217d3db2fa879ef50e7c66201c15d0a8bdbf4d1e910c5856",
+					"size": 4010,
+					"sourceHash": "280a9b9870c21fed19ff1289d6dc7a2f30aadbe3276deec044ad410ce407f6dc",
+					"status": "content"
+				},
+				"src/use-google-logout.js": {
+					"diff": "--- published/src/use-google-logout.js\n+++ rebuilt/src/use-google-logout.js\n@@ -5,6 +5,7 @@\n const useGoogleLogout = ({\n   jsSrc = 'https://apis.google.com/js/api.js',\n   onFailure,\n+  onScriptLoadFailure,\n   clientId,\n   cookiePolicy,\n   loginHint,\n@@ -37,6 +38,7 @@\n   }, [onLogoutSuccess])\n \n   useEffect(() => {\n+    const onLoadFailure = onScriptLoadFailure || onFailure\n     loadScript(\n       document,\n       'script',\n@@ -59,7 +61,7 @@\n           if (!window.gapi.auth2.getAuthInstance()) {\n             window.gapi.auth2.init(params).then(\n               () => setLoaded(true),\n-              err => onFailure(err)\n+              err => onLoadFailure(err)\n             )\n           } else {\n             setLoaded(true)\n@@ -67,7 +69,7 @@\n         })\n       },\n       err => {\n-        onFailure(err)\n+        onLoadFailure(err)\n       }\n     )\n \n",
+					"match": false,
+					"packageHash": "3b8d0af4940726cdc083e00111daeb919a5cca59eccdbefef8cd87cc8a317adb",
+					"size": 1831,
+					"sourceHash": "3c97d3fc8e1670e323bd1cf0ff771206efd41c7efdacda4999244e04f7a346c4",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 7,
+				"matchingFiles": 28,
+				"missingInPackage": 0,
+				"missingInSource": 1,
+				"score": 0.7777777777777778,
+				"totalFiles": 36
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "@types/prop-types",
+				"version": "15.7.3"
+			},
+			{
+				"name": "@types/react",
+				"version": "16.9.34"
+			},
+			{
+				"name": "csstype",
+				"version": "2.6.10"
+			},
+			{
+				"name": "js-tokens",
+				"version": "4.0.0"
+			},
+			{
+				"name": "loose-envify",
+				"version": "1.4.0"
+			},
+			{
+				"name": "object-assign",
+				"version": "4.1.1"
+			},
+			{
+				"name": "prop-types",
+				"version": "15.7.2"
+			},
+			{
+				"name": "react-is",
+				"version": "16.13.1"
+			}
+		]
+	}
+]

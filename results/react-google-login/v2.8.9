@@ -1,0 +1,84 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-25T20:40:41.131Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:2.15.9",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "react-google-login@2.8.9",
+			"name": "react-google-login",
+			"version": "2.8.9",
+			"location": "https://registry.npmjs.org/react-google-login/-/react-google-login-2.8.9.tgz",
+			"integrity": "sha512-c0JBVXDM1tNt/WXyy2IaadRb+x9eCrEq07dzacGYo9YF8wWbGciUgU0SrYl9OMBLlp6Vz82TUTEERxbgmc95Bw==",
+			"publishedAt": "2017-04-23T18:31:38.252Z",
+			"publishedWith": {
+				"node": "4.6.1",
+				"npm": "2.15.9"
+			},
+			"dependencies": {
+				"@types/react": "*"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/anthonyjgrove/react-google-login.git",
+			"spec": "github:anthonyjgrove/react-google-login#15073d4b7230b7513a70a0f8e304fac9c0225831"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".npmignore": {
+					"match": false,
+					"packageHash": "be39160fec31f7c6971f047a24aa6c273829a833f6767151c1af538d133802f4",
+					"size": 135,
+					"status": "missing-in-source"
+				},
+				"demo/index.js": {
+					"diff": "--- published/demo/index.js\n+++ rebuilt/demo/index.js\n@@ -20,12 +20,38 @@\n   <div>\n     <GoogleLogin\n         clientId='658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com'\n+        scope='https://www.googleapis.com/auth/analytics'\n         onSuccess={success}\n         onFailure={error}\n         onRequest={loading}\n-        buttonText=\"Login\"\n-        redirectUri=\"https://react-google-login-th3legend.c9users.io/google\"\n-    />\n+        offline={false}\n+        approvalPrompt=\"force\"\n+        responseType=\"id_token\"\n+        // disabled\n+        // prompt=\"consent\"\n+        // className='button'\n+        // style={{ color: 'red' }}\n+    >\n+      <span>Analytics</span>\n+    </GoogleLogin>\n+\n+    <GoogleLogin\n+        clientId='658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com'\n+        scope='https://www.googleapis.com/auth/adwords'\n+        onSuccess={success}\n+        onFailure={error}\n+        onRequest={loading}\n+        offline={true}\n+        approvalPrompt=\"force\"\n+        // uxMode=\"redirect\"\n+        // redirectUri=\"http://google.com\"\n+        // disabled\n+        // prompt=\"consent\"\n+        // className='button'\n+        // style={{ color: 'red' }}\n+    >\n+      <span>Adwords</span>\n+    </GoogleLogin>\n   </div>,\n   document.getElementById('google-login')\n );\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "9c24730ce6e7619c94a7956be8866e4b85be4a67abcbe79b28905558e115ac49",
+					"size": 758,
+					"sourceHash": "91e5e4386c1ee194edb602f37cfef5153179011653baa9d21ce7aeb45e47d302",
+					"status": "content"
+				},
+				"dist/google-login.js": {
+					"diff": "--- published/dist/google-login.js\n+++ rebuilt/dist/google-login.js\n@@ -1,2 +1,2 @@\n-!function(e,t){\"object\"==typeof exports&&\"object\"==typeof module?module.exports=t(require(\"react\")):\"function\"==typeof define&&define.amd?define([\"react\"],t):\"object\"==typeof exports?exports.GoogleLogin=t(require(\"react\")):e.GoogleLogin=t(e.react)}(this,function(e){return function(e){function t(o){if(n[o])return n[o].exports;var i=n[o]={i:o,l:!1,exports:{}};return e[o].call(i.exports,i,i.exports,t),i.l=!0,i.exports}var n={};return t.m=e,t.c=n,t.i=function(e){return e},t.d=function(e,n,o){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:o})},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,\"a\",n),n},t.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},t.p=\"\",t(t.s=2)}([function(e,t,n){\"use strict\";function o(e,t){if(!(e instanceof t))throw new TypeError(\"Cannot call a class as a function\")}function i(e,t){if(!e)throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\");return!t||\"object\"!=typeof t&&\"function\"!=typeof t?e:t}function r(e,t){if(\"function\"!=typeof t&&null!==t)throw new TypeError(\"Super expression must either be null or a function, not \"+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(t,\"__esModule\",{value:!0});var a=n(1),c=n.n(a),s=function(){function e(e,t){for(var n=0;n<t.length;n++){var o=t[n];o.enumerable=o.enumerable||!1,o.configurable=!0,\"value\"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}return function(t,n,o){return n&&e(t.prototype,n),o&&e(t,o),t}}(),u=function(e){function t(e){o(this,t);var n=i(this,(t.__proto__||Object.getPrototypeOf(t)).call(this,e));return n.signIn=n.signIn.bind(n),n.state={disabled:!0},n}return r(t,e),s(t,[{key:\"componentDidMount\",value:function(){var e=this,t=this.props,n=t.clientId,o=t.cookiePolicy,i=t.loginHint,r=t.hostedDomain,a=t.autoLoad,c=t.fetchBasicProfile,s=t.redirectUri,u=t.discoveryDocs,l=t.onFailure,f=t.uxMode;!function(e,t,n,o){var i=e.getElementsByTagName(t)[0],r=i,a=i;a=e.createElement(t),a.id=n,a.src=\"//apis.google.com/js/client:platform.js\",r.parentNode.insertBefore(a,r),a.onload=o}(document,\"script\",\"google-login\",function(){var t={client_id:n,cookiepolicy:o,login_hint:i,hosted_domain:r,fetch_basic_profile:c,discoveryDocs:u,ux_mode:f,redirect_uri:s};window.gapi.load(\"auth2\",function(){e.setState({disabled:!1}),window.gapi.auth2.getAuthInstance()||window.gapi.auth2.init(t).then(function(){},function(e){return l(e)}),a&&e.signIn()})})}},{key:\"signIn\",value:function(e){if(e&&e.preventDefault(),!this.state.disabled){var t=window.gapi.auth2.getAuthInstance(),n=this.props,o=n.offline,i=n.redirectUri,r=n.onSuccess,a=n.onRequest,c=n.fetchBasicProfile,s=n.onFailure,u=n.prompt,l=n.scope,f=n.responseType,p={response_type:f,redirect_uri:i,fetch_basic_profile:c,prompt:u,scope:l};a(),o?t.grantOfflineAccess(p).then(function(e){return r(e)},function(e){return s(e)}):t.signIn(p).then(function(e){var t=e.getBasicProfile(),n=e.getAuthResponse();e.googleId=t.getId(),e.tokenObj=n,e.tokenId=n.id_token,e.accessToken=n.access_token,e.profileObj={googleId:t.getId(),imageUrl:t.getImageUrl(),email:t.getEmail(),name:t.getName(),givenName:t.getGivenName(),familyName:t.getFamilyName()},r(e)},function(e){return s(e)})}}},{key:\"render\",value:function(){var e=this.props,t=e.tag,n=e.style,o=e.className,i=e.disabledStyle,r=e.buttonText,a=e.children,s=this.state.disabled||this.props.disabled,u={display:\"inline-block\",background:\"#d14836\",color:\"#fff\",width:190,paddingTop:10,paddingBottom:10,borderRadius:2,border:\"1px solid transparent\",fontSize:16,fontWeight:\"bold\",fontFamily:\"Roboto\"},l=function(){return n||(o&&!n?{}:u)}(),f=function(){return s?Object.assign({},l,i):l}();return c.a.createElement(t,{onClick:this.signIn,style:f,disabled:s,className:o},a||r)}}]),t}(a.Component);u.defaultProps={tag:\"button\",buttonText:\"Login with Google\",scope:\"profile email\",responseType:\"permission\",prompt:\"\",cookiePolicy:\"single_host_origin\",fetchBasicProfile:!0,uxMode:\"popup\",disabledStyle:{opacity:.6},onRequest:function(){},offline:!1},t.default=u},function(t,n){t.exports=e},function(e,t,n){e.exports=n(0)}])});\n+!function(e,t){\"object\"==typeof exports&&\"object\"==typeof module?module.exports=t(require(\"react\")):\"function\"==typeof define&&define.amd?define([\"react\"],t):\"object\"==typeof exports?exports.GoogleLogin=t(require(\"react\")):e.GoogleLogin=t(e.react)}(this,function(e){return function(e){function t(o){if(n[o])return n[o].exports;var i=n[o]={i:o,l:!1,exports:{}};return e[o].call(i.exports,i,i.exports,t),i.l=!0,i.exports}var n={};return t.m=e,t.c=n,t.i=function(e){return e},t.d=function(e,n,o){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:o})},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,\"a\",n),n},t.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},t.p=\"\",t(t.s=2)}([function(e,t,n){\"use strict\";function o(e,t){if(!(e instanceof t))throw new TypeError(\"Cannot call a class as a function\")}function i(e,t){if(!e)throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\");return!t||\"object\"!=typeof t&&\"function\"!=typeof t?e:t}function r(e,t){if(\"function\"!=typeof t&&null!==t)throw new TypeError(\"Super expression must either be null or a function, not \"+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(t,\"__esModule\",{value:!0});var a=n(1),c=n.n(a),s=function(){function e(e,t){for(var n=0;n<t.length;n++){var o=t[n];o.enumerable=o.enumerable||!1,o.configurable=!0,\"value\"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}return function(t,n,o){return n&&e(t.prototype,n),o&&e(t,o),t}}(),u=function(e){function t(e){o(this,t);var n=i(this,(t.__proto__||Object.getPrototypeOf(t)).call(this,e));return n.signIn=n.signIn.bind(n),n.state={disabled:!0},n}return r(t,e),s(t,[{key:\"componentDidMount\",value:function(){var e=this,t=this.props,n=t.clientId,o=t.cookiePolicy,i=t.loginHint,r=t.hostedDomain,a=t.autoLoad,c=t.fetchBasicProfile,s=t.redirectUri,u=t.discoveryDocs,l=t.onFailure,f=t.uxMode;!function(e,t,n,o){var i=e.getElementsByTagName(t)[0],r=i,a=i;a=e.createElement(t),a.id=n,a.src=\"//apis.google.com/js/client:platform.js\",r.parentNode.insertBefore(a,r),a.onload=o}(document,\"script\",\"google-login\",function(){var t={client_id:n,cookiepolicy:o,login_hint:i,hosted_domain:r,fetch_basic_profile:c,discoveryDocs:u,ux_mode:f,redirect_uri:s};window.gapi.load(\"auth2\",function(){e.setState({disabled:!1}),window.gapi.auth2.getAuthInstance()||window.gapi.auth2.init(t).then(function(){},function(e){return l(e)}),a&&e.signIn()})})}},{key:\"signIn\",value:function(e){if(e&&e.preventDefault(),!this.state.disabled){var t=window.gapi.auth2.getAuthInstance(),n=this.props,o=n.offline,i=n.redirectUri,r=n.onSuccess,a=n.onRequest,c=n.fetchBasicProfile,s=n.onFailure,u=n.prompt,l=n.scope,f=n.responseType,p={response_type:f,redirect_uri:i,fetch_basic_profile:c,prompt:u,scope:l};a(),o?t.grantOfflineAccess(p).then(function(e){return r(e)},function(e){return s(e)}):t.signIn(p).then(function(e){var t=e.getBasicProfile(),n=e.getAuthResponse();e.googleId=t.getId(),e.tokenObj=n,e.tokenId=n.id_token,e.accessToken=n.access_token,e.profileObj={googleId:t.getId(),imageUrl:t.getImageUrl(),email:t.getEmail(),name:t.getName(),givenName:t.getGivenName(),familyName:t.getFamilyName()},r(e)},function(e){return s(e)})}}},{key:\"render\",value:function(){var e=this.props,t=e.tag,n=e.style,o=e.className,i=e.disabledStyle,r=e.buttonText,a=e.children,s=this.state.disabled||this.props.disabled,u={display:\"inline-block\",background:\"#d14836\",color:\"#fff\",width:190,paddingTop:10,paddingBottom:10,borderRadius:2,border:\"1px solid transparent\",fontSize:16,fontWeight:\"bold\",fontFamily:\"Roboto\"},l=function(){return n||(o&&!n?{}:u)}(),f=function(){return s?Object.assign({},l,i):l}();return c.a.createElement(t,{onClick:this.signIn,style:f,disabled:s,className:o},a||r)}}]),t}(a.Component);u.defaultProps={tag:\"button\",buttonText:\"Login with Google\",scope:\"profile email\",redirectUri:\"postmessage\",responseType:\"permission\",prompt:\"\",cookiePolicy:\"single_host_origin\",fetchBasicProfile:!0,uxMode:\"popup\",disabledStyle:{opacity:.6},onRequest:function(){},offline:!1},t.default=u},function(t,n){t.exports=e},function(e,t,n){e.exports=n(0)}])});\n //# sourceMappingURL=google-login.js.map\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "8149f81d05f286f583a0776a2fd223376e19473d8f06dc29d16ac2ce99d5cc7f",
+					"size": 4323,
+					"sourceHash": "d0d78a4cca0a99f762635cbf28006432451e1e5fc1982fd6054acf3f4bbf2ee8",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,6 +1,6 @@\n {\n   \"name\": \"react-google-login\",\n-  \"version\": \"2.8.9\",\n+  \"version\": \"2.8.8\",\n   \"description\": \"A Google Login Component for React\",\n   \"main\": \"dist/google-login.js\",\n   \"scripts\": {\n",
+					"match": false,
+					"packageHash": "607fcd317976e5d824cd665564616935742b78e1467496275a7aa66c31a26e26",
+					"size": 2756,
+					"sourceHash": "e4525ff551c3dcfcc84b0c35e84648060b5f8b0fb8b304dd4e771a3ea568e424",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 3,
+				"matchingFiles": 12,
+				"missingInPackage": 0,
+				"missingInSource": 1,
+				"score": 0.75,
+				"totalFiles": 16
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "@types/react",
+				"version": "19.3.3"
+			},
+			{
+				"name": "csstype",
+				"version": "3.2.4"
+			}
+		]
+	}
+]
