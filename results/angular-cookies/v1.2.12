@@ -1,0 +1,63 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-25T07:36:46.194Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:12.2.3",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "angular-cookies@1.2.12",
+			"name": "angular-cookies",
+			"version": "1.2.12",
+			"location": "https://registry.npmjs.org/angular-cookies/-/angular-cookies-1.2.12.tgz",
+			"integrity": "sha512-yRL872PEzCf3xO10LfZHvUhaEO+nT6uzLOyOGCNuJDzNArpR4zyBv9hsqizA/F3i2LA7ikZKYZ5R1Rn/85NZHA==",
+			"publishedAt": "2014-07-12T05:38:22.976Z",
+			"publishedWith": {
+				"node": null,
+				"npm": "1.4.14"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "https://github.com/petermelias/angular-cookies-npm",
+			"spec": "github:petermelias/angular-cookies-npm#e6726bb6d3864833548ab1c1d0dd9edc56d973e2"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,6 +1,6 @@\n {\n   \"name\": \"angular-cookies\",\n-  \"version\": \"1.2.12\",\n+  \"version\": \"1.2.20\",\n   \"description\": \"AngularJS Cookie Module\",\n   \"main\": \"src/angular-cookies.js\",\n   \"scripts\": {\n",
+					"match": false,
+					"packageHash": "dabee1e2ae30f2b4c40dca640fee6e31143e2b49f4d804d28508924b9016014b",
+					"size": 590,
+					"sourceHash": "ac24fcfec7a2fe3985d4f41b9366782a9452bda9e12cf8f6364b469c2604af9c",
+					"status": "content"
+				},
+				"src/angular-cookies.js": {
+					"diff": "--- published/src/angular-cookies.js\n+++ rebuilt/src/angular-cookies.js\n@@ -1,20 +1,19 @@\n /**\n- * @license AngularJS v1.2.12\n+ * @license AngularJS v1.2.20\n  * (c) 2010-2014 Google, Inc. http://angularjs.org\n  * License: MIT\n  */\n (function(window, angular, undefined) {'use strict';\n \n /**\n- * @ngdoc overview\n+ * @ngdoc module\n  * @name ngCookies\n  * @description\n  *\n  * # ngCookies\n  *\n- * The `ngCookies` module provides a convenient wrapper for reading and writing browser cookies. \n+ * The `ngCookies` module provides a convenient wrapper for reading and writing browser cookies.\n  *\n- * {@installModule cookies}\n  *\n  * <div doc-module-components=\"ngCookies\"></div>\n  *\n@@ -25,31 +24,29 @@\n \n angular.module('ngCookies', ['ng']).\n   /**\n-   * @ngdoc object\n-   * @name ngCookies.$cookies\n-   * @requires $browser\n+   * @ngdoc service\n+   * @name $cookies\n    *\n    * @description\n    * Provides read/write access to browser's cookies.\n    *\n-   * Only a simple Object is exposed and by adding or removing properties to/from\n-   * this object, new cookies are created/deleted at the end of current $eval.\n+   * Only a simple Object is exposed and by adding or removing properties to/from this object, new\n+   * cookies are created/deleted at the end of current $eval.\n+   * The object's properties can only be strings.\n    *\n    * Requires the {@link ngCookies `ngCookies`} module to be installed.\n    *\n    * @example\n-   <doc:example>\n-     <doc:source>\n-       <script>\n-         function ExampleController($cookies) {\n-           // Retrieving a cookie\n-           var favoriteCookie = $cookies.myFavorite;\n-           // Setting a cookie\n-           $cookies.myFavorite = 'oatmeal';\n-         }\n-       </script>\n-     </doc:source>\n-   </doc:example>\n+   *\n+   * ```js\n+   * angular.module('cookiesExample', ['ngCookies'])\n+   *   .controller('ExampleController', ['$cookies', function($cookies) {\n+   *     // Retrieving a cookie\n+   *     var favoriteCookie = $cookies.myFavorite;\n+   *     // Setting a cookie\n+   *     $cookies.myFavorite = 'oatmeal';\n+   *   }]);\n+   * ```\n    */\n    factory('$cookies', ['$rootScope', '$browser', function ($rootScope, $browser) {\n       var cookies = {},\n@@ -101,12 +98,10 @@\n         for(name in cookies) {\n           value = cookies[name];\n           if (!angular.isString(value)) {\n-            if (angular.isDefined(lastCookies[name])) {\n-              cookies[name] = lastCookies[name];\n-            } else {\n-              delete cookies[name];\n-            }\n-          } else if (value !== lastCookies[name]) {\n+            value = '' + value;\n+            cookies[name] = value;\n+          }\n+          if (value !== lastCookies[name]) {\n             $browser.cookies(name, value);\n             updated = true;\n           }\n@@ -134,8 +129,8 @@\n \n \n   /**\n-   * @ngdoc object\n-   * @name ngCookies.$cookieStore\n+   * @ngdoc service\n+   * @name $cookieStore\n    * @requires $cookies\n    *\n",
+					"match": false,
+					"packageHash": "580c697f2bc8dc228e5b9738a2aadd21365a89b4952546753ebd5baf902e7535",
+					"size": 5711,
+					"sourceHash": "ea6f53a8231828204459c3b3f6fcfe2ae5a363159755e05f8731cfa6f40bf70b",
+					"status": "content"
+				},
+				"README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 0,
+				"missingInPackage": 1,
+				"missingInSource": 0,
+				"score": 0,
+				"totalFiles": 3
+			}
+		},
+		"prodDependencies": []
+	}
+]
