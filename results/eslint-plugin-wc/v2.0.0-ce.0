@@ -1,0 +1,355 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-25T02:35:28.009Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:9.6.7",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "eslint-plugin-wc@2.0.0-ce.0",
+			"name": "eslint-plugin-wc",
+			"version": "2.0.0-ce.0",
+			"location": "https://registry.npmjs.org/eslint-plugin-wc/-/eslint-plugin-wc-2.0.0-ce.0.tgz",
+			"integrity": "sha512-aHYg/MTMw3qjkSRaOhhvdpNqVFSco2u4LGoCb+SeU1JxFqeGKiC9sIFVvnH0Ryax/SVZAJKAxDhlODWwHzRYew==",
+			"publishedAt": "2023-08-22T18:42:11.070Z",
+			"publishedWith": {
+				"node": "20.3.0",
+				"npm": "9.6.7"
+			},
+			"dependencies": {
+				"js-levenshtein-esm": "^1.2.0",
+				"is-valid-element-name": "^1.0.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/43081j/eslint-plugin-wc.git",
+			"spec": "github:43081j/eslint-plugin-wc#23cba474e5b6e37b1cc0702710e660bad4cc3617"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -36,6 +36,22 @@\n }\n ```\n \n+Or if you're using ESLint flat configs, add this to your `eslint.config.js`:\n+\n+```ts\n+import {configs} from 'eslint-plugin-wc';\n+\n+export default [\n+  configs['flat/recommended'],\n+\n+  // or if you want to specify `files`, or other options\n+  {\n+    ...configs['flat/recommended'],\n+    files: ['test/**/*.js']\n+  }\n+];\n+```\n+\n You should also specify settings that will be shared across all the plugin rules. ([More about eslint shared settings](https://eslint.org/docs/user-guide/configuring/configuration-files#adding-shared-settings))\n \n ```jsonc\n",
+					"match": false,
+					"packageHash": "2b26824a02be5b88f804b3b5d04f464d707243828ae6c2ebd06ff5d11b41f345",
+					"size": 4279,
+					"sourceHash": "a5a87e55720adea666b036d789dbd75626d97afb90f69b93291239899abfc39d",
+					"status": "content"
+				},
+				"lib/index.d.ts": {
+					"diff": "--- published/lib/index.d.ts\n+++ rebuilt/lib/index.d.ts\n@@ -1,7 +1,10 @@\n+import type { ESLint } from 'eslint';\n export declare const rules: {\n     'attach-shadow-constructor': import(\"eslint\").Rule.RuleModule;\n+    'define-tag-after-class-definition': import(\"eslint\").Rule.RuleModule;\n+    'expose-class-on-global': import(\"eslint\").Rule.RuleModule;\n     'file-name-matches-element': import(\"eslint\").Rule.RuleModule;\n-    'guard-define': import(\"eslint\").Rule.RuleModule;\n+    'guard-define-call': import(\"eslint\").Rule.RuleModule;\n     'guard-super-call': import(\"eslint\").Rule.RuleModule;\n     'max-elements-per-file': import(\"eslint\").Rule.RuleModule;\n     'no-child-traversal-in-attributechangedcallback': import(\"eslint\").Rule.RuleModule;\n@@ -20,32 +23,11 @@\n     'require-listener-teardown': import(\"eslint\").Rule.RuleModule;\n     'tag-name-matches-class': import(\"eslint\").Rule.RuleModule;\n };\n+declare const plugin: ESLint.Plugin;\n export declare const configs: {\n-    recommended: {\n-        plugins: string[];\n-        parserOptions: {\n-            sourceType: string;\n-        };\n-        rules: {\n-            'wc/no-constructor-attributes': string;\n-            'wc/no-invalid-element-name': string;\n-            'wc/no-self-class': string;\n-        };\n-    };\n-    'best-practice': {\n-        extends: string[];\n-        plugins: string[];\n-        rules: {\n-            'wc/attach-shadow-constructor': string;\n-            'wc/guard-super-call': string;\n-            'wc/no-child-traversal-in-attributechangedcallback': string;\n-            'wc/no-child-traversal-in-connectedcallback': string;\n-            'wc/no-closed-shadow-root': string;\n-            'wc/no-constructor-params': string;\n-            'wc/no-customized-built-in-elements': string;\n-            'wc/no-invalid-extends': string;\n-            'wc/no-typos': string;\n-            'wc/require-listener-teardown': string;\n-        };\n-    };\n+    recommended: ESLint.ConfigData<import(\"eslint\").Linter.RulesRecord>;\n+    'best-practice': ESLint.ConfigData<import(\"eslint\").Linter.RulesRecord>;\n+    'flat/recommended': import(\"eslint\").Linter.FlatConfig<import(\"eslint\").Linter.RulesRecord>;\n+    'flat/best-practice': import(\"eslint\").Linter.FlatConfig<import(\"eslint\").Linter.RulesRecord>;\n };\n+export default plugin;\n",
+					"match": false,
+					"packageHash": "b7b2d9d97dee9c6c424f46fb935ed6048baa16bd94ecae266ef78fbcae6f746c",
+					"size": 2285,
+					"sourceHash": "fc0ed1729e2d8e64cde47ca2172052fd5dc620862ec94114ee185ca070acd387",
+					"status": "content"
+				},
+				"lib/index.js": {
+					"diff": "--- published/lib/index.js\n+++ rebuilt/lib/index.js\n@@ -1,51 +1,59 @@\n-\"use strict\";\n-Object.defineProperty(exports, \"__esModule\", { value: true });\n-exports.configs = exports.rules = void 0;\n-const attach_shadow_constructor_1 = require(\"./rules/attach-shadow-constructor\");\n-const best_practice_1 = require(\"./configs/best-practice\");\n-const file_name_matches_element_1 = require(\"./rules/file-name-matches-element\");\n-const guard_define_call_1 = require(\"./rules/guard-define-call\");\n-const guard_super_call_1 = require(\"./rules/guard-super-call\");\n-const max_elements_per_file_1 = require(\"./rules/max-elements-per-file\");\n-const no_child_traversal_in_attributechangedcallback_1 = require(\"./rules/no-child-traversal-in-attributechangedcallback\");\n-const no_child_traversal_in_connectedcallback_1 = require(\"./rules/no-child-traversal-in-connectedcallback\");\n-const no_closed_shadow_root_1 = require(\"./rules/no-closed-shadow-root\");\n-const no_constructor_1 = require(\"./rules/no-constructor\");\n-const no_constructor_attributes_1 = require(\"./rules/no-constructor-attributes\");\n-const no_constructor_params_1 = require(\"./rules/no-constructor-params\");\n-const no_customized_built_in_elements_1 = require(\"./rules/no-customized-built-in-elements\");\n-const no_exports_with_element_1 = require(\"./rules/no-exports-with-element\");\n-const no_invalid_element_name_1 = require(\"./rules/no-invalid-element-name\");\n-const no_invalid_extends_1 = require(\"./rules/no-invalid-extends\");\n-const no_method_prefixed_with_on_1 = require(\"./rules/no-method-prefixed-with-on\");\n-const no_self_class_1 = require(\"./rules/no-self-class\");\n-const no_typos_1 = require(\"./rules/no-typos\");\n-const recommended_1 = require(\"./configs/recommended\");\n-const require_listener_teardown_1 = require(\"./rules/require-listener-teardown\");\n-const tag_name_matches_class_1 = require(\"./rules/tag-name-matches-class\");\n-exports.rules = {\n-    'attach-shadow-constructor': attach_shadow_constructor_1.default,\n-    'file-name-matches-element': file_name_matches_element_1.default,\n-    'guard-define': guard_define_call_1.default,\n-    'guard-super-call': guard_super_call_1.default,\n-    'max-elements-per-file': max_elements_per_file_1.default,\n-    'no-child-traversal-in-attributechangedcallback': no_child_traversal_in_attributechangedcallback_1.default,\n-    'no-child-traversal-in-connectedcallback': no_child_traversal_in_connectedcallback_1.default,\n-    'no-closed-shadow-root': no_closed_shadow_root_1.default,\n-    'no-constructor': no_constructor_1.default,\n-    'no-constructor-attributes': no_constructor_attributes_1.default,\n-    'no-constructor-params': no_constructor_params_1.default,\n-    'no-customized-built-in-elements': no_customized_built_in_elements_1.default,\n-    'no-exports-with-element': no_exports_with_element_1.default,\n-    'no-invalid-element-name': no_invalid_element_name_1.default,\n-    'no-invalid-extends': no_invalid_extends_1.default,\n-    'no-method-prefixed-with-on': no_method_prefixed_with_on_1.default,\n-    'no-self-class': no_self_class_1.default,\n-    'no-typos': no_typos_1.default,\n-    'require-listener-teardown': require_listener_teardown_1.default,\n-    'tag-name-matches-class': tag_name_matches_class_1.default\n+import attachShadowConstructor from './rules/attach-shadow-constructor.js';\n+import defineTagAfterClassDef from './rules/define-tag-after-class-definition.js';\n+import exposeClassOnGlobal from './rules/expose-class-on-global.js';\n+import filenameMatches from './rules/file-name-matches-element.js';\n+import guardDefine from './rules/guard-define-call.js';\n+import guardSuperCall from './rules/guard-super-call.js';\n+import maxElementsPerFile from './rules/max-elements-per-file.js';\n+import noChildInAttrChange from './rules/no-child-traversal-in-attributechangedcallback.js';\n+import noChildInConnected from './rules/no-child-traversal-in-connectedcallback.js';\n+import noClosedShadowRoot from './rules/no-closed-shadow-root.js';\n+import noConstructor from './rules/no-constructor.js';\n+import noConstructorAttrs from './rules/no-constructor-attributes.js';\n+import noConstructorParams from './rules/no-constructor-params.js';\n+import noCustomizedBuiltInElements from './rules/no-customized-built-in-elements.js';\n+import noExports from './rules/no-exports-with-element.js';\n+import noInvalidElementName from './rules/no-invalid-element-name.js';\n+import noInvalidExtends from './rules/no-invalid-extends.js';\n+import noOnPrefix from './rules/no-method-prefixed-with-on.js';\n+import noSelfClass from './rules/no-self-class.js';\n+import noTypos from './rules/no-typos.js';\n+import { configFactory as configRecommended } from './configs/recommended.js';\n+import { configFactory as configBestPractice } from './configs/best-practice.js';\n+import { config as configLegacyRecommended } from './configs/legacy-recommended.js';\n+import { config as configLegacyBestPractice } from './configs/legacy-best-practice.js';\n+import requireListenerTeardown from './rules/require-listener-teardown.js';\n+import tagMatchesClass from './rules/tag-name-matches-class.js';\n+export const rules = {\n+    'attach-shadow-constructor': attachShadowConstructor,\n+    'define-tag-after-class-definition': defineTagAfterClassDef,\n+    'expose-class-on-global': exposeClassOnGlobal,\n+    'file-name-matches-element': filenameMatches,\n+    'guard-define-call': guardDefine,\n+    'guard-super-call': guardSuperCall,\n+    'max-elements-per-file': maxElementsPerFile,\n+    'no-child-traversal-in-attributechangedcallback': noChildInAttrChange,\n+    'no-child-traversal-in-connectedcallback': noChildInConnected,\n+    'no-closed-shadow-root': noClosedShadowRoot,\n+    'no-constructor': noConstructor,\n+    'no-constructor-attributes': noConstructorAttrs,\n+    'no-constructor-params': noConstructorParams,\n+    'no-customized-built-in-elements': noCustomizedBuiltInElements,\n+    'no-exports-with-element': noExports,\n+    'no-invalid-element-name': noInvalidElementName,\n+    'no-invalid-extends': noInvalidExtends,\n+    'no-method-prefixed-with-on': noOnPrefix,\n+    'no-self-class': noSelfClass,\n+    'no-typos': noTypos,\n+    'require-listener-teardown': requireListenerTeardown,\n+    'tag-name-matches-class': tagMatchesClass\n };\n-exports.configs = {\n",
+					"match": false,
+					"packageHash": "66d8a44b1b63968414ee68238f078ecf10599250915c670b6b3dc384378a7b8c",
+					"size": 3234,
+					"sourceHash": "5d1bfe6733d965ce3d6ddd6ab42b6ea078dbe5bd08b2c6e5cd18c0c3ddb69514",
+					"status": "content"
+				},
+				"lib/util.d.ts": {
+					"diff": "--- published/lib/util.d.ts\n+++ rebuilt/lib/util.d.ts\n@@ -14,15 +14,26 @@\n  * @return {boolean}\n  */\n export declare function isCustomElementDecorator(node: DecoratorNode): boolean;\n+export interface Settings {\n+    elementBaseClasses?: string[];\n+}\n+export declare function getSettings(context: Rule.RuleContext): Settings | undefined;\n+/**\n+ * Retrieves the configured element base class list\n+ *\n+ * @param {Rule.RuleContext} context ESLint rule context\n+ * @return {string[]}\n+ */\n+export declare function getElementBaseClasses(context: Rule.RuleContext): string[];\n /**\n  * Determines if a node is an element class or not.\n  *\n  * @param {Rule.RuleContext} context ESLint rule context\n  * @param {ESTree.Class} node Node to test\n- * @param {AST.Token=} jsdoc JSDoc to parse\n+ * @param {ESTree.Comment[]} comments Comments before the node\n  * @return {boolean}\n  */\n-export declare function isCustomElement(context: Rule.RuleContext, node: ESTree.Class, jsdoc?: ESTree.Comment | null): boolean;\n+export declare function isCustomElement(context: Rule.RuleContext, node: ESTree.Class, comments: ESTree.Comment[]): boolean;\n /**\n  * Determines if a node is an extension of HTMLElement class or not.\n  *\n",
+					"match": false,
+					"packageHash": "84cd03bc0ab01ed8e08da80064cfe41264a85a50d5ebcb6cdded62677fa76f72",
+					"size": 1274,
+					"sourceHash": "457cb8ee507c466f389a45a514f5e6cfc9014f5a5054a818b8c4a5229bfaa242",
+					"status": "content"
+				},
+				"lib/util.js": {
+					"diff": "--- published/lib/util.js\n+++ rebuilt/lib/util.js\n@@ -1,6 +1,3 @@\n-\"use strict\";\n-Object.defineProperty(exports, \"__esModule\", { value: true });\n-exports.coerceArray = exports.isNativeCustomElement = exports.isCustomElement = exports.isCustomElementDecorator = void 0;\n const customElementsCache = new WeakMap();\n /**\n  * Determines if a given decorator is the `@customElement` decorator\n@@ -8,38 +5,68 @@\n  * @param {DecoratorNode} node Decorator to test\n  * @return {boolean}\n  */\n-function isCustomElementDecorator(node) {\n+export function isCustomElementDecorator(node) {\n     return ((node.expression.type === 'CallExpression' &&\n         node.expression.callee.type === 'Identifier' &&\n         node.expression.callee.name === 'customElement') ||\n         (node.expression.type === 'Identifier' &&\n             node.expression.name === 'customElement'));\n }\n-exports.isCustomElementDecorator = isCustomElementDecorator;\n+const knownModuleBaseClasses = new Map([\n+    ['lit', new Set(['LitElement'])]\n+]);\n+export function getSettings(context) {\n+    return context.settings.wc;\n+}\n+/**\n+ * Retrieves the configured element base class list\n+ *\n+ * @param {Rule.RuleContext} context ESLint rule context\n+ * @return {string[]}\n+ */\n+export function getElementBaseClasses(context) {\n+    const bases = new Set(['HTMLElement']);\n+    for (const [moduleName, moduleClasses] of knownModuleBaseClasses) {\n+        try {\n+            require.resolve(moduleName, { paths: [context.cwd] });\n+            for (const moduleClass of moduleClasses) {\n+                bases.add(moduleClass);\n+            }\n+        }\n+        catch (_err) {\n+            // do nothing, lit didn't exist\n+        }\n+    }\n+    const settings = getSettings(context);\n+    if (Array.isArray(settings?.elementBaseClasses)) {\n+        const configuredBases = settings.elementBaseClasses;\n+        for (const base of configuredBases) {\n+            bases.add(base);\n+        }\n+    }\n+    return [...bases];\n+}\n /**\n  * Determines if a node is an element class or not.\n  *\n  * @param {Rule.RuleContext} context ESLint rule context\n  * @param {ESTree.Class} node Node to test\n- * @param {AST.Token=} jsdoc JSDoc to parse\n+ * @param {ESTree.Comment[]} comments Comments before the node\n  * @return {boolean}\n  */\n-function isCustomElement(context, node, jsdoc) {\n+export function isCustomElement(context, node, comments) {\n     const asDecorated = node;\n-    const customElementBases = ['HTMLElement'];\n+    const customElementBases = getElementBaseClasses(context);\n     const cached = customElementsCache.get(node);\n     if (cached !== undefined) {\n         return cached;\n     }\n-    if (Array.isArray(context.settings.wc?.elementBaseClasses)) {\n-        customElementBases.push(...context.settings.wc.elementBaseClasses);\n-    }\n     if (node.superClass?.type === 'Identifier' &&\n         customElementBases.includes(node.superClass.name)) {\n         customElementsCache.set(node, true);\n         return true;\n     }\n-    if (jsdoc?.value.includes('@customElement')) {\n+    if (comments.some((c) => c.value.includes('@customElement'))) {\n         customElementsCache.set(node, true);\n         return true;\n     }\n@@ -50,24 +77,21 @@\n     customElementsCache.set(node, false);\n     return false;\n }\n-exports.isCustomElement = isCustomElement;\n /**\n  * Determines if a node is an extension of HTMLElement class or not.\n  *\n  * @param {ESTree.Class} node Node to test\n  * @return {boolean}\n  */\n-function isNativeCustomElement(node) {\n+export function isNativeCustomElement(node) {\n",
+					"match": false,
+					"packageHash": "ca4dbdef1f471e268c21398d269ff76c3ef20820b5fed608b4a7a4e1f3d7150a",
+					"size": 2526,
+					"sourceHash": "ead2368109f0e94fb05ca6d643b5442fe58948aeb4f6016faecdbc39295f1bfb",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,23 +1,23 @@\n {\n   \"name\": \"eslint-plugin-wc\",\n-  \"version\": \"2.0.0-ce.0\",\n+  \"version\": \"0.0.0-dev\",\n   \"description\": \"ESLint plugin for Web Components\",\n   \"main\": \"lib/index.js\",\n+  \"type\": \"module\",\n   \"files\": [\n-    \"lib/!(test)\",\n+    \"lib/\",\n+    \"!lib/test\",\n     \"docs/\"\n   ],\n   \"scripts\": {\n-    \"clean\": \"rimraf ./lib\",\n+    \"clean\": \"premove ./lib\",\n     \"lint\": \"eslint \\\"src/**/*.ts\\\"\",\n     \"prebuild\": \"npm run clean\",\n     \"build\": \"tsc\",\n-    \"start\": \"nodemon --watch src --ext ts --exec \\\"npm run dev\\\"\",\n     \"dev\": \"npm run lint && npm run build && npm run test\",\n-    \"test\": \"nyc --reporter=html --reporter=text-summary --reporter=lcov mocha \\\"lib/test/**/*_test.js\\\"\",\n+    \"test\": \"c8 --reporter=html --reporter=text-summary --reporter=lcov mocha \\\"lib/test/**/*_test.js\\\"\",\n     \"format\": \"prettier --write \\\"src/**/*.ts\\\"\",\n-    \"prepare\": \"npm run build\",\n-    \"prepublishOnly\": \"npm run lint && npm run test\"\n+    \"prepare\": \"npm run build\"\n   },\n   \"repository\": {\n     \"type\": \"git\",\n@@ -37,29 +37,26 @@\n   \"homepage\": \"https://github.com/43081j/eslint-plugin-wc#readme\",\n   \"dependencies\": {\n     \"is-valid-element-name\": \"^1.0.0\",\n-    \"js-levenshtein-esm\": \"^1.2.0\"\n+    \"js-levenshtein-esm\": \"^2.0.0\"\n   },\n   \"peerDependencies\": {\n-    \"eslint\": \">=5\"\n+    \"eslint\": \">=8.40.0\"\n   },\n   \"devDependencies\": {\n-    \"@types/chai\": \"^4.3.5\",\n+    \"@eslint/js\": \"^9.36.0\",\n+    \"@types/chai\": \"^5.2.2\",\n     \"@types/eslint\": \"^8.44.2\",\n     \"@types/estree\": \"^1.0.1\",\n     \"@types/mocha\": \"^10.0.1\",\n-    \"@types/node\": \"^20.5.2\",\n-    \"@typescript-eslint/eslint-plugin\": \"^6.4.1\",\n-    \"@typescript-eslint/parser\": \"^6.4.1\",\n-    \"chai\": \"^4.3.4\",\n-    \"coveralls\": \"^3.1.0\",\n-    \"eslint\": \"^8.47.0\",\n-    \"eslint-config-google\": \"^0.14.0\",\n+    \"@types/node\": \"^22.13.10\",\n+    \"c8\": \"^10.1.3\",\n+    \"chai\": \"^6.2.0\",\n+    \"eslint\": \"^9.36.0\",\n     \"espree\": \"^9.4.1\",\n-    \"mocha\": \"^10.2.0\",\n-    \"nodemon\": \"^3.0.1\",\n-    \"nyc\": \"^15.1.0\",\n+    \"mocha\": \"^12.0.0\",\n+    \"premove\": \"^4.0.0\",\n     \"prettier\": \"^3.0.2\",\n-    \"rimraf\": \"^5.0.1\",\n-    \"typescript\": \"^5.1.6\"\n+    \"typescript\": \"^5.1.6\",\n+    \"typescript-eslint\": \"^8.45.0\"\n   }\n }\n",
+					"match": false,
+					"packageHash": "4c03a5653c5f77062499d3f3a883145566dd6667bc1ce565c37681626d8f6ea3",
+					"size": 1820,
+					"sourceHash": "71e427dba301749b992bf418b844a929e7b60fb5c29e86a9546dec8fd3d5df80",
+					"status": "content"
+				},
+				"lib/configs/best-practice.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/configs/best-practice.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/configs/legacy-best-practice.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/configs/legacy-best-practice.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/configs/legacy-recommended.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/configs/legacy-recommended.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/configs/recommended.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/configs/recommended.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/attach-shadow-constructor.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/attach-shadow-constructor.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/define-tag-after-class-definition.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/define-tag-after-class-definition.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/expose-class-on-global.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/expose-class-on-global.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/file-name-matches-element.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/file-name-matches-element.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/guard-define-call.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/guard-define-call.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/guard-super-call.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/guard-super-call.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/max-elements-per-file.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/max-elements-per-file.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/no-child-traversal-in-attributechangedcallback.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/no-child-traversal-in-attributechangedcallback.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/no-child-traversal-in-connectedcallback.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/no-child-traversal-in-connectedcallback.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/no-closed-shadow-root.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/no-closed-shadow-root.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/no-constructor-attributes.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/no-constructor-attributes.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/no-constructor-params.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/no-constructor-params.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/no-constructor.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/no-constructor.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/no-customized-built-in-elements.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/no-customized-built-in-elements.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/no-exports-with-element.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/no-exports-with-element.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/no-invalid-element-name.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/no-invalid-element-name.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/no-invalid-extends.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/no-invalid-extends.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/no-method-prefixed-with-on.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/no-method-prefixed-with-on.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/no-self-class.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/no-self-class.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/no-typos.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/no-typos.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/require-listener-teardown.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/require-listener-teardown.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/tag-name-matches-class.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/rules/tag-name-matches-class.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/util/ast.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/util/ast.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/util/customElements.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/util/customElements.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/util/dom.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/util/dom.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/util/tag-names.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/util/tag-names.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/util/text.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lib/util/text.js": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 6,
+				"matchingFiles": 23,
+				"missingInPackage": 62,
+				"missingInSource": 0,
+				"score": 0.25274725274725274,
+				"totalFiles": 91
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "is-potential-custom-element-name",
+				"version": "1.0.1"
+			},
+			{
+				"name": "is-valid-element-name",
+				"version": "1.0.0"
+			},
+			{
+				"name": "js-levenshtein-esm",
+				"version": "2.0.0"
+			}
+		]
+	}
+]
