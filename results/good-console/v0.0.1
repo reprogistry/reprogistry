@@ -1,0 +1,112 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-25T14:22:26.244Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:12.2.3",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "good-console@0.0.1",
+			"name": "good-console",
+			"version": "0.0.1",
+			"location": "https://registry.npmjs.org/good-console/-/good-console-0.0.1.tgz",
+			"integrity": "sha512-MUS821QJe4cad3xqKIKfDgO1xp6jA3Sy0JJ+HTdtfmDz0spLeY/pRAKwItW99iZXPtdHjP0ikTk3zo7ekkTbaw==",
+			"publishedAt": "2014-10-31T20:15:15.182Z",
+			"publishedWith": {
+				"node": null,
+				"npm": "1.4.28"
+			},
+			"dependencies": {
+				"good-reporter": "2.x.x",
+				"hoek": "2.x.x",
+				"json-stringify-safe": "5.0.x"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git://github.com/hapijs/good-console",
+			"spec": "github:hapijs/good-console#defc25744716c97ad0245a5d132ac3aa2165e425"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".npmignore": {
+					"match": false,
+					"packageHash": "7a8e222b755309c8ba27f3ed40dd9d71aaf429b71f5ab293b0afedffb2981f92",
+					"size": 176,
+					"status": "missing-in-source"
+				},
+				"LICENSE": {
+					"match": false,
+					"packageHash": "58932468915e3ddd5a1e9772bba9449ef65c9e6f6951a3e2f907501ec5abc84f",
+					"size": 1659,
+					"status": "missing-in-source"
+				},
+				"Makefile": {
+					"match": false,
+					"packageHash": "561f1e818ad2e2f372f9394cb1811aa16ecaffc3678aa3e2866f562bae7dc022",
+					"size": 195,
+					"status": "missing-in-source"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,11 +1,19 @@\n-# good-console\n+<a href=\"https://hapi.dev\"><img src=\"https://raw.githubusercontent.com/hapijs/assets/master/images/family.png\" width=\"180px\" align=\"right\" /></a>\n \n-Console broadcasting for Good process monitor\n+# @hapi/good-console\n \n-// Build status and npm version badges\n+#### Console reporting for good console monitor.\n \n-Lead Maintainer: [Adam Bretz](https://github.com/arb)\n+**good-console** is part of the **hapi** ecosystem and was designed to work seamlessly with the [hapi web framework](https://hapi.dev) and its other components (but works great on its own or with other frameworks). If you are using a different web framework and find this module useful, check out [hapi](https://hapi.dev) – they work even better together.\n \n-## Usage\n+### Visit the [hapi.dev](https://hapi.dev) Developer Portal for tutorials, documentation, and support\n \n-`good-console` is a [good-reporter](https://github.com/hapijs/good-reporter) implementation to write [hapi](http://hapijs.com/) server events to the console.\n+## Useful resources\n+\n+- [Documentation and API](https://hapi.dev/family/good-console/)\n+- [Version status](https://hapi.dev/resources/status/#good-console) (builds, dependencies, node versions, licenses, eol)\n+- [Changelog](https://hapi.dev/family/good-console/changelog/)\n+- [Project policies](https://hapi.dev/policies/)\n+- [Free and commercial support options](https://hapi.dev/support/)\n+\n+## Note: this module is being deprecated on December 31st, 2020 due to lack to available support resources. Please consider using [another logging plugin](https://hapi.dev/plugins/#logging).\n",
+					"match": false,
+					"packageHash": "fc7ca1d1bba21c7fa2b984390cd1e8f821db97496fd76d682612ddab9d15ce99",
+					"size": 326,
+					"sourceHash": "23cc2b7e92db3f4e0fa7b88082d3129eb78288d67590d16dcf7ba36ae90d1c19",
+					"status": "content"
+				},
+				"index.js": {
+					"match": false,
+					"packageHash": "4fe91c6ebb2d58fc683ec224b6f569190bcb3cdfffb7e44415f179ec9ea1baf9",
+					"size": 35,
+					"status": "missing-in-source"
+				},
+				"lib/index.js": {
+					"diff": "--- published/lib/index.js\n+++ rebuilt/lib/index.js\n@@ -0,0 +1,192 @@\n+'use strict';\n+\n+const Stream = require('stream');\n+\n+const Hoek = require('@hapi/hoek');\n+const Moment = require('moment');\n+const SafeStringify = require('json-stringify-safe');\n+\n+\n+const internals = {\n+    defaults: {\n+        format: 'YYMMDD/HHmmss.SSS',\n+        utc: true,\n+        color: true\n+    }\n+};\n+\n+\n+module.exports = internals.GoodConsole = class extends Stream.Transform {\n+\n+    constructor(config) {\n+\n+        super({ objectMode: true });\n+\n+        config = config || {};\n+        this._settings = Hoek.applyToDefaults(internals.defaults, config);\n+    }\n+\n+    _transform(data, enc, next) {\n+\n+        const eventName = data.event;\n+        let tags = [];\n+\n+        if (Array.isArray(data.tags)) {\n+            tags = data.tags.concat([]);\n+        }\n+        else if (data.tags) {\n+            tags = [data.tags];\n+        }\n+\n+        tags.unshift(eventName);\n+\n+        if (eventName === 'error' || data.error instanceof Error) {\n+            return next(null, internals.formatError(data, tags, this._settings));\n+        }\n+\n+        if (eventName === 'ops') {\n+            return next(null, internals.formatOps(data, tags, this._settings));\n+        }\n+\n+        if (eventName === 'response') {\n+            return next(null, internals.formatResponse(data, tags, this._settings));\n+        }\n+\n+        if (!data.data) {\n+            data.data = '(none)';\n+        }\n+\n+        return next(null, internals.formatDefault(data, tags, this._settings));\n+    }\n+};\n+\n+\n+internals.formatOutput = function (event, settings) {\n+\n+    let timestamp = Moment(parseInt(event.timestamp, 10));\n+\n+    if (settings.utc) {\n+        timestamp = timestamp.utc();\n+    }\n+\n+    timestamp = timestamp.format(settings.format);\n+\n+    event.tags = event.tags.toString();\n+    const tags = ` [${event.tags}] `;\n+\n+    // Add event id information if available, typically for 'request' events\n+\n+    const id = event.id ? ` (${event.id})` : '';\n+\n+    return `${timestamp},${id}${tags}${event.data}\\n`;\n+};\n+\n+\n+internals.formatMethod = function (method, settings) {\n+\n+    const methodColors = {\n+        get: 32,\n+        delete: 31,\n+        put: 36,\n+        post: 33\n+    };\n+\n+    let formattedMethod = method.toLowerCase();\n+    if (settings.color) {\n+        const color = methodColors[method.toLowerCase()] || 34;\n+        formattedMethod = `\\x1b[1;${color}m${formattedMethod}\\x1b[0m`;\n",
+					"match": false,
+					"packageHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+					"size": 0,
+					"sourceHash": "f67996a98c181dc2f4f4a02e56ad16be8f8b8680cc75b625dcd85b78935ef011",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,27 +1,24 @@\n {\n-  \"name\": \"good-console\",\n-  \"version\": \"0.0.1\",\n+  \"name\": \"@hapi/good-console\",\n+  \"version\": \"9.0.1\",\n   \"repository\": \"git://github.com/hapijs/good-console\",\n   \"description\": \"Console broadcasting for Good process monitor\",\n-  \"main\": \"index.js\",\n-  \"scripts\": {\n-    \"test\": \"make test-cov\"\n-  },\n+  \"main\": \"lib/index.js\",\n+  \"files\": [\n+    \"lib\"\n+  ],\n   \"dependencies\": {\n-    \"good-reporter\": \"2.x.x\",\n-    \"hoek\": \"2.x.x\",\n-    \"json-stringify-safe\": \"5.0.x\"\n+    \"@hapi/hoek\": \"9.x.x\",\n+    \"json-stringify-safe\": \"5.x.x\",\n+    \"moment\": \"2.x.x\"\n   },\n   \"devDependencies\": {\n-    \"lab\": \"4.x.x\"\n+    \"@hapi/code\": \"8.x.x\",\n+    \"@hapi/lab\": \"24.x.x\",\n+    \"@hapi/teamwork\": \"5.x.x\"\n   },\n-  \"engines\": {\n-    \"node\": \">=0.10.x\"\n+  \"scripts\": {\n+    \"test\": \"lab -t 100 -L -a @hapi/code\"\n   },\n-  \"licenses\": [\n-    {\n-      \"type\": \"BSD\",\n-      \"url\": \"http://github.com/hapijs/good-console/raw/master/LICENSE\"\n-    }\n-  ]\n+  \"license\": \"BSD-3-Clause\"\n }\n",
+					"match": false,
+					"packageHash": "7a741d7313bb3e0577d47a17bdf63d658fc413339d26189f928a3ce032c33f56",
+					"size": 570,
+					"sourceHash": "12eeaa29bd4389d924ba3e94edb55f1d2073ee6a2a8c53c8f8c8da9ad041d0e2",
+					"status": "content"
+				},
+				"LICENSE.md": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 3,
+				"matchingFiles": 0,
+				"missingInPackage": 1,
+				"missingInSource": 4,
+				"score": 0,
+				"totalFiles": 8
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "@hapi/hoek",
+				"version": "9.3.0"
+			},
+			{
+				"name": "json-stringify-safe",
+				"version": "5.0.1"
+			},
+			{
+				"name": "moment",
+				"version": "2.31.0"
+			}
+		]
+	}
+]
