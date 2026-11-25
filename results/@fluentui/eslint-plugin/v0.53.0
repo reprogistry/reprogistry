@@ -1,0 +1,238 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-25T09:12:48.534Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:6.14.4",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "@fluentui/eslint-plugin@0.53.0",
+			"name": "@fluentui/eslint-plugin",
+			"version": "0.53.0",
+			"location": "https://registry.npmjs.org/@fluentui/eslint-plugin/-/eslint-plugin-0.53.0.tgz",
+			"integrity": "sha512-n26LJwXNyRphg5nCJIwS6ItRexLEvRppK7eRZSmGvIiKrR9Qm9eFs81ZyLQonxXWqv7GujUgX4ezC9kcdPcHEw==",
+			"publishedAt": "2020-07-15T12:37:04.693Z",
+			"publishedWith": {
+				"node": "10.21.0",
+				"npm": "6.14.4"
+			},
+			"dependencies": {
+				"jju": "^1.4.0",
+				"eslint-plugin-jest": "^23.13.2",
+				"eslint-plugin-react": "^7.20.0",
+				"eslint-config-airbnb": "^18.1.0",
+				"eslint-plugin-import": "^2.21.0",
+				"eslint-config-prettier": "^6.11.0",
+				"eslint-plugin-jsx-a11y": "^6.2.3",
+				"@typescript-eslint/parser": "^3.4.0",
+				"eslint-plugin-deprecation": "^1.1.0",
+				"eslint-plugin-react-hooks": "^4.0.4",
+				"@typescript-eslint/eslint-plugin": "^3.4.0",
+				"eslint-import-resolver-typescript": "^2.0.0",
+				"@typescript-eslint/experimental-utils": "^3.4.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/microsoft/fluentui.git",
+			"spec": "github:microsoft/fluentui#v0.53.0"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"CHANGELOG.json": {
+					"match": false,
+					"packageHash": "98f750ed27791c87a007ecee259b0837448168d789776be7647c7c2038a4e4b6",
+					"size": 2143,
+					"status": "missing-in-source"
+				},
+				"CHANGELOG.md": {
+					"match": false,
+					"packageHash": "9765ad4503f74fe3be34dc23c1f4acf193d937fc7397780d7dfabd75b8e6ada2",
+					"size": 1810,
+					"status": "missing-in-source"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,73 +1,111 @@\n-# @fluentui/eslint-plugin\n-\n-**ESLint configuration and custom rules for Fluent UI**\n-\n-## Configs\n-\n-Usage: in your [ESLint config file](https://eslint.org/docs/user-guide/configuring), add `{ \"extends\": [\"plugin:@fluentui/<name>\"] }` or `{ \"extends\": [\"plugin:@fluentui/eslint-plugin/<name>\"] }` (the two are equivalent).\n-\n-- `react`: For `@fluentui/react` (`office-ui-fabric-react`) and related packages\n-  - `react--legacy`: Like `react` but requiring an `I` prefix for interfaces\n-  - `node`: Like `react` but for packages which run in a Node environment (not the browser)\n-  - `node--legacy`: Like `node` but requiring an `I` prefix for interfaces\n-- `react-northstar`: For `@fluentui/react-northstar` and related packages\n-\n-Helpers for customizing configuration are exported under a `configHelpers` object.\n-\n-## Rules\n-\n-### `ban-imports`\n-\n-Ban importing from certain paths or modules. You can either ban the entire path, or only certain names. (Inspired by TSLint's [`import-blacklist`](https://palantir.github.io/tslint/rules/import-blacklist/).)\n-\n-Requires one or more options objects. Either `path` or `pathRegex` is required.\n-\n-- `path` (`string`): Path or module to ban importing from (non-regex)\n-- `pathRegex` (`string`): Regex for path or module to ban importing from\n-- `names` (`string[]`, optional): If provided, only ban imports of these names. Otherwise, ban all imports from the path.\n-- `message` (`string[]`, optional): Custom message to show with errors\n-\n-Example:\n-\n-```\n-\"@fluentui/ban-imports\": [\n-  \"error\",\n-  { \"path\": \"lodash\" },\n-  { \"path\": \"foo\", \"names\": [\"bar\", \"baz\"] },\n-  { \"pathRegex\": \"^\\.\", message: \"no relative imports\" },\n-  { \"pathRegex\": \"^\\.\\./(foo|bar)$\", \"names\": [\"baz\"] }\n-]\n-```\n-\n-### `deprecated-keyboard-event-props`\n-\n-Prevent using deprecated `KeyboardEvent` props `which` and `keyCode`, and recommend using `@fluentui/keyboard-key` instead.\n-\n-### `max-len`\n-\n-Enforces max line length, more performantly than [ESLint's `max-len`](https://eslint.org/docs/rules/max-len).\n-\n-This rule is significantly faster than the default `max-len` rule because it **does not** support:\n-\n-- Expanding tabs (only handles spaces for indentation)\n-- Multi-byte unicode characters (they will be counted as multiple characters)\n-- Extra options for handling comments, strings, or URLs\n-\n-(Skipping these extra features lets us do a basic string length check before running any regular expressions or other extra logic, which makes the huge majority of line length checks very fast.)\n-\n-#### Options\n-\n-The rule requires an options object containing:\n-\n-- `max` (required): the maximum line length\n-- `ignorePatterns` (optional): ignore the line if it matches any of these regular expressions\n-\n-### `no-tslint-comments`\n-\n-Ban `tslint:disable` and `tslint:enable` comments.\n-\n-### `no-visibility-modifiers`\n-\n-Prevent visibility modifiers (`public`, `protected`, `private`) from being specified on class members/methods.\n-\n-Used in Fluent UI only by [`@fluentui/react-northstar`](https://aka.ms/fluent-ui), not `@fluentui/react`.\n+# [Office UI Fabric React](http://dev.office.com/fabric)\r\n+\r\n+##### The React-based front-end framework for building experiences for Office and Office 365.\r\n+\r\n+Fabric React is a responsive, mobile-first collection of robust components designed to make it quick and simple for you to create web experiences using the Office Design Language.\r\n+\r\n+**This project is in a pre-v1 state**, so we encourage you to check out the [Roadmap](#roadmap) to see what we're working towards and what this means for your usage of the control library.\r\n+\r\n+## Contents\r\n+\r\n+- [View the docs](#view-the-docs)\r\n+- [Get started](#get-started)\r\n+- [Advanced usage](#advanced-usage)\r\n+- [Roadmap](#roadmap)\r\n+- [Trello board](#trello-board)\r\n+- [Browser support](#browser-support)\r\n+- [Contribute to Fabric React](#contribute-to-fabric-react)\r\n+- [Licenses](#licenses)\r\n+- [Changelog](#changelog)\r\n+\r\n+\r\n+## View the docs\r\n+\r\n+Before you get started, make sure you have [node.js](https://nodejs.org/), [gulp](http://gulpjs.com/), and [git](https://git-scm.com/) installed. To view the documentation including examples, contracts, component status, and to add functionality or fix issues locally, you can:\r\n",
+					"match": false,
+					"packageHash": "adfaf75cd516855eb70263a98166a36b511dfcc725f6e799695a33fc02decb64",
+					"size": 3007,
+					"sourceHash": "b2d68d84638d027fbb1afe07810487d9110b89fb685c369c2d15b4c6ee72a803",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,41 +1,45 @@\n {\n-  \"name\": \"@fluentui/eslint-plugin\",\n+  \"name\": \"office-ui-fabric-react\",\n   \"version\": \"0.53.0\",\n-  \"description\": \"ESLint configuration and custom rules for Fluent UI\",\n-  \"main\": \"src/index.js\",\n+  \"description\": \"Reusable React components for building experiences for Office 365.\",\n+  \"main\": \"lib/index.js\",\n+  \"typings\": \"lib/index.d.ts\",\n   \"repository\": {\n     \"type\": \"git\",\n-    \"url\": \"https://github.com/microsoft/fluentui\"\n+    \"url\": \"https://github.com/OfficeDev/office-ui-fabric-react\"\n   },\n   \"license\": \"MIT\",\n   \"scripts\": {\n-    \"lint\": \"eslint --ext .js src\"\n-  },\n-  \"dependencies\": {\n-    \"@typescript-eslint/eslint-plugin\": \"^3.4.0\",\n-    \"@typescript-eslint/experimental-utils\": \"^3.4.0\",\n-    \"@typescript-eslint/parser\": \"^3.4.0\",\n-    \"eslint-config-airbnb\": \"^18.1.0\",\n-    \"eslint-config-prettier\": \"^6.11.0\",\n-    \"eslint-import-resolver-typescript\": \"^2.0.0\",\n-    \"eslint-plugin-deprecation\": \"^1.1.0\",\n-    \"eslint-plugin-import\": \"^2.21.0\",\n-    \"eslint-plugin-jest\": \"^23.13.2\",\n-    \"eslint-plugin-jsx-a11y\": \"^6.2.3\",\n-    \"eslint-plugin-react\": \"^7.20.0\",\n-    \"eslint-plugin-react-hooks\": \"^4.0.4\",\n-    \"jju\": \"^1.4.0\"\n+    \"start\": \"gulp serve\",\n+    \"test\": \"gulp test\"\n   },\n   \"devDependencies\": {\n-    \"@types/eslint\": \"^7.2.0\",\n-    \"eslint\": \"^7.1.0\",\n-    \"typescript\": \"3.7.2\"\n+    \"@microsoft/web-library-build\": \"^0.4.0\",\n+    \"es6-promise\": \"3.2.1\",\n+    \"git-rev\": \"0.2.1\",\n+    \"gulp\": \"~3.9.1\",\n+    \"gulp-debug\": \"2.1.2\",\n+    \"gulp-prompt\": \"^0.2.0\",\n+    \"gulp-util\": \"3.0.7\",\n+    \"gutil\": \"1.6.4\",\n+    \"highlight.js\": \"9.6.0\",\n+    \"office-ui-fabric-core\": \"^4.0.0\",\n+    \"react-addons-test-utils\": \"^15.1.0\",\n+    \"react-highlight\": \"0.8.0\",\n+    \"source-map-loader\": \"0.1.5\",\n+    \"tslint\": \"^3.15.1\",\n+    \"tslint-microsoft-contrib\": \"^2.0.9\",\n+    \"typescript\": \"^1.8.10\",\n+    \"vinyl-ftp\": \"0.4.5\",\n+    \"webpack-split-by-path\": \"0.0.10\",\n+    \"webpack-visualizer-plugin\": \"0.1.5\"\n   },\n   \"peerDependencies\": {\n-    \"eslint\": \"^6.0.0 || ^7.0.0\",\n-    \"typescript\": \"^3.5.0\"\n+    \"react\": \"^0.14.0 || ^15.0.1\",\n+    \"react-dom\": \"^0.14.0 || ^15.0.1\"\n   },\n-  \"files\": [\n-    \"src\"\n-  ]\n+  \"dependencies\": {\n+    \"color-functions\": \"^1.1.0\",\n+    \"@microsoft/load-themed-styles\": \"^1.2.2\"\n+  }\n }\n",
+					"match": false,
+					"packageHash": "23983d29890e24c06bc35a30bf26482a90165b647915f4697262a8f3bcb0b08f",
+					"size": 1121,
+					"sourceHash": "8ef18c4e930a19bd88c73c191a858504223b883ec42c4b608d30cd674758b1f5",
+					"status": "content"
+				},
+				"src/configs/node-legacy.js": {
+					"match": false,
+					"packageHash": "6a5ffad912f4cee23deb8e668de73a4c535b7a09f116749a5ddaf089a5638b20",
+					"size": 299,
+					"status": "missing-in-source"
+				},
+				"src/configs/node.js": {
+					"match": false,
+					"packageHash": "4f0144e7f7559dfd5618259bf29f99393dd00a1d993dbb06ccf88a0cb19e89ba",
+					"size": 198,
+					"status": "missing-in-source"
+				},
+				"src/configs/react-legacy.js": {
+					"match": false,
+					"packageHash": "014c653c2b20a6ac9f9d96f75183f177e6f30c51569a2c284e062d74780e79a9",
+					"size": 300,
+					"status": "missing-in-source"
+				},
+				"src/configs/react-northstar.js": {
+					"match": false,
+					"packageHash": "ea8e126c9e55cba7e467e99f4fce4d3c850ed97ba1ebffb5b17779832332b9ea",
+					"size": 5286,
+					"status": "missing-in-source"
+				},
+				"src/configs/react.js": {
+					"match": false,
+					"packageHash": "81bdc8abcc1da798ff8f0481ea5ec007b4b2e7accd0b8f384bdfcc62577e79d5",
+					"size": 12604,
+					"status": "missing-in-source"
+				},
+				"src/index.js": {
+					"match": false,
+					"packageHash": "57e717cf981aeb63d1cc3cee69d7c16c70c36a7575d37ba389a83e92906ee777",
+					"size": 745,
+					"status": "missing-in-source"
+				},
+				"src/rules/ban-imports.js": {
+					"match": false,
+					"packageHash": "cf650ecbd99b7519a412347c501085bb1df426bcaef898c50e686d71b9393693",
+					"size": 4240,
+					"status": "missing-in-source"
+				},
+				"src/rules/deprecated-keyboard-event-props.js": {
+					"match": false,
+					"packageHash": "26f78f683f4e81ee82ae93d2b8cdba36f7e03b58784544e791d305802dece812",
+					"size": 1830,
+					"status": "missing-in-source"
+				},
+				"src/rules/max-len.js": {
+					"match": false,
+					"packageHash": "2dabd7cb510c47e0198d4d89cc68ffb567c665da203dd68426aec1e0fd60a872",
+					"size": 2031,
+					"status": "missing-in-source"
+				},
+				"src/rules/no-tslint-comments.js": {
+					"match": false,
+					"packageHash": "96d6423b655dc4bd0287510ed0a8bc4042ef5c8abe3a615ece782e97cc2311ce",
+					"size": 1037,
+					"status": "missing-in-source"
+				},
+				"src/rules/no-visibility-modifiers.js": {
+					"match": false,
+					"packageHash": "0d6f05094fdf57c8ae85693bf2f8e52bb92486afc910bb686268a8b0ff66b0fa",
+					"size": 4395,
+					"status": "missing-in-source"
+				},
+				"src/utils/configHelpers.d.ts": {
+					"match": false,
+					"packageHash": "08fd22b916eda1251082647330ad0e28318d999a5a346177092ed7898c5924f3",
+					"size": 1948,
+					"status": "missing-in-source"
+				},
+				"src/utils/configHelpers.js": {
+					"match": false,
+					"packageHash": "8017dc8458c6dad120ff3e8de41fcfc35ad22daa1d53a61771193296759cbd98",
+					"size": 4717,
+					"status": "missing-in-source"
+				},
+				"src/utils/createRule.js": {
+					"match": false,
+					"packageHash": "d463ede9e3495c6a8e402d45a4a5439e1cdbf56a6265eba01c59661469d1bd9e",
+					"size": 224,
+					"status": "missing-in-source"
+				},
+				"LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"Third Party Notices.txt": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"ghdocs/ADVANCED.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"ghdocs/BESTPRACTICES.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"ghdocs/BROWSERSUPPORT.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"ghdocs/CONTRIBUTING.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"ghdocs/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"ghdocs/images/avatarkat.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"ghdocs/images/create-react-app-created.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"ghdocs/images/create-react-app-preview.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"ghdocs/images/documentpreview.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"ghdocs/images/iconppt.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"ghdocs/images/react-app-doccard-preview.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"images/persona-female.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"images/persona-male.png": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 0,
+				"missingInPackage": 15,
+				"missingInSource": 16,
+				"score": 0,
+				"totalFiles": 33
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "@microsoft/load-themed-styles",
+				"version": "1.10.295"
+			},
+			{
+				"name": "color-functions",
+				"version": "1.2.0"
+			}
+		]
+	}
+]
