@@ -1,0 +1,75 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-26T01:20:34.102Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:3.3.6",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "assign-deep@0.4.1",
+			"name": "assign-deep",
+			"version": "0.4.1",
+			"location": "https://registry.npmjs.org/assign-deep/-/assign-deep-0.4.1.tgz",
+			"integrity": "sha512-qL4IDDjPbwouyYtSUVJ8P4juB5/aKkQzRm7gyquNIC+SI7pJHadISnJUaVwcx2PkacVvhq9MdeU/0Yfgg/ikHg==",
+			"publishedAt": "2015-11-06T18:55:03.135Z",
+			"publishedWith": {
+				"node": "5.0.0",
+				"npm": "3.3.6"
+			},
+			"dependencies": {
+				"assign-symbols": "^0.1.1",
+				"kind-of": "^2.0.1"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/jonschlinkert/assign-deep.git",
+			"spec": "github:jonschlinkert/assign-deep#cac52406079d7e8c30dd026293c26e77f8d217f2"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"index.js": {
+					"diff": "--- published/index.js\n+++ rebuilt/index.js\n@@ -36,7 +36,9 @@\n     if (hasOwn(obj, key)) {\n       var val = obj[key];\n       if (isObject(val)) {\n-        target[key] = assign(target[key] || {}, val);\n+        target[key] = target[key] || {};\n+        assignSymbols(target[key], val);\n+        extend(target[key], val);\n       } else {\n         target[key] = val;\n       }\n",
+					"match": false,
+					"packageHash": "6e3dd0a332b5a1fdb297c2ad36c78543cfc8413738814a8193833e2f51827938",
+					"size": 1227,
+					"sourceHash": "b3ea0aff219d7bd0bbb9d01bd1ea02cc14ed2da8df3fddf12d6f30657fd36d0f",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,7 +1,7 @@\n {\n   \"name\": \"assign-deep\",\n   \"description\": \"Deeply assign the enumerable properties and/or es6 Symbol properies of source objects to the target (first) object.\",\n-  \"version\": \"0.4.1\",\n+  \"version\": \"0.4.0\",\n   \"homepage\": \"https://github.com/jonschlinkert/assign-deep\",\n   \"author\": \"Jon Schlinkert (https://github.com/jonschlinkert)\",\n   \"repository\": \"jonschlinkert/assign-deep\",\n",
+					"match": false,
+					"packageHash": "974e3d4a94ed86d4e908b6b0884a944d2e98367a3a90936b52e8bdb250befa96",
+					"size": 1062,
+					"sourceHash": "20e2a3233f64e69edfb993ed1f04a0ed5a11e8893016987948ee62434b4de7d1",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 2,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.5,
+				"totalFiles": 4
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "assign-symbols",
+				"version": "0.1.1"
+			},
+			{
+				"name": "is-buffer",
+				"version": "1.1.6"
+			},
+			{
+				"name": "kind-of",
+				"version": "2.0.1"
+			}
+		]
+	}
+]
