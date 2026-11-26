@@ -1,0 +1,1146 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-26T15:53:02.287Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:6.4.1",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "nexe@3.2.1",
+			"name": "nexe",
+			"version": "3.2.1",
+			"location": "https://registry.npmjs.org/nexe/-/nexe-3.2.1.tgz",
+			"integrity": "sha512-LPRWXY0v5helpVf56YIa0vTQe5TcCtfyYAY2gZOMyB87/4PIWBXpj9MZIZdFwLFhQC1VXpsi7WlZ/LhWe/DEDQ==",
+			"publishedAt": "2019-05-28T23:05:36.199Z",
+			"publishedWith": {
+				"node": "10.15.1",
+				"npm": "6.4.1"
+			},
+			"dependencies": {
+				"caw": "^2.0.1",
+				"got": "^9.6.0",
+				"ora": "^3.4.0",
+				"pify": "^4.0.1",
+				"chalk": "^2.4.2",
+				"cherow": "1.6.9",
+				"globby": "^9.2.0",
+				"mkdirp": "^0.5.1",
+				"rimraf": "^2.6.3",
+				"download": "^7.1.0",
+				"minimist": "^1.2.0",
+				"app-builder": "^5.2.0",
+				"multistream": "^2.1.1",
+				"@calebboyd/semaphore": "^1.3.1",
+				"resolve-dependencies": "^2.2.3"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git://github.com/nexe/nexe.git",
+			"spec": "github:nexe/nexe#e62d728624b5ff75ff8ff6f0d8a843c5d36194e5"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"CHANGELOG.md": {
+					"match": false,
+					"packageHash": "06850eebf14eca7210539bed43258c2a33e221141956033b0c5a6f5d20c21088",
+					"size": 2718,
+					"status": "missing-in-source"
+				},
+				"lib/patches/third-party-main.js": {
+					"diff": "--- published/lib/patches/third-party-main.js\n+++ rebuilt/lib/patches/third-party-main.js\n@@ -1,103 +1,103 @@\n-\"use strict\";\r\n-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {\r\n-    return new (P || (P = Promise))(function (resolve, reject) {\r\n-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }\r\n-        function rejected(value) { try { step(generator[\"throw\"](value)); } catch (e) { reject(e); } }\r\n-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }\r\n-        step((generator = generator.apply(thisArg, _arguments || [])).next());\r\n-    });\r\n-};\r\n-var __generator = (this && this.__generator) || function (thisArg, body) {\r\n-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;\r\n-    return g = { next: verb(0), \"throw\": verb(1), \"return\": verb(2) }, typeof Symbol === \"function\" && (g[Symbol.iterator] = function() { return this; }), g;\r\n-    function verb(n) { return function (v) { return step([n, v]); }; }\r\n-    function step(op) {\r\n-        if (f) throw new TypeError(\"Generator is already executing.\");\r\n-        while (_) try {\r\n-            if (f = 1, y && (t = op[0] & 2 ? y[\"return\"] : op[0] ? y[\"throw\"] || ((t = y[\"return\"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;\r\n-            if (y = 0, t) op = [op[0] & 2, t.value];\r\n-            switch (op[0]) {\r\n-                case 0: case 1: t = op; break;\r\n-                case 4: _.label++; return { value: op[1], done: false };\r\n-                case 5: _.label++; y = op[1]; op = [0]; continue;\r\n-                case 7: op = _.ops.pop(); _.trys.pop(); continue;\r\n-                default:\r\n-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }\r\n-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }\r\n-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }\r\n-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }\r\n-                    if (t[2]) _.ops.pop();\r\n-                    _.trys.pop(); continue;\r\n-            }\r\n-            op = body.call(thisArg, _);\r\n-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }\r\n-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };\r\n-    }\r\n-};\r\n-Object.defineProperty(exports, \"__esModule\", { value: true });\r\n-var cherow_1 = require(\"cherow\");\r\n-var util_1 = require(\"../util\");\r\n-function walkSome(node, visit) {\r\n-    if (!node || typeof node.type !== 'string' || node._visited) {\r\n-        return false;\r\n-    }\r\n-    visit(node);\r\n-    node._visited = true;\r\n-    for (var childNode in node) {\r\n-        var child = node[childNode];\r\n-        if (Array.isArray(child)) {\r\n-            for (var i = 0; i < child.length; i++) {\r\n-                if (walkSome(child[i], visit)) {\r\n-                    return true;\r\n-                }\r\n-            }\r\n-        }\r\n-        else if (walkSome(child, visit)) {\r\n-            return true;\r\n-        }\r\n-    }\r\n-    return false;\r\n-}\r\n-function main(compiler, next) {\r\n-    return __awaiter(this, void 0, void 0, function () {\r\n-        var bootFile, version, file, ast, location, fileLines;\r\n-        return __generator(this, function (_a) {\r\n-            switch (_a.label) {\r\n-                case 0:\r\n-                    bootFile = 'lib/internal/bootstrap_node.js';\r\n-                    version = compiler.target.version;\r\n-                    if (version.startsWith('4.')) {\r\n-                        bootFile = 'src/node.js';\r\n-                    }\r\n-                    else if (util_1.semverGt(version, '9.10.1')) {\r\n-                        bootFile = 'lib/internal/bootstrap/node.js';\r\n-                    }\r\n-                    return [4 /*yield*/, compiler.readFileAsync(bootFile)];\r\n-                case 1:\r\n-                    file = _a.sent(), ast = cherow_1.parse(file.contents, {\r\n-                        loc: true,\r\n-                        tolerant: true,\r\n-                        next: true,\r\n-                        globalReturn: true,\r\n-                        node: true,\r\n-                        skipShebang: true\r\n-                    }), location = { start: { line: 0 } };\r\n-                    walkSome(ast, function (node) {\r\n-                        if (!location.start.line && node.type === 'BlockStatement') {\r\n-                            //Find the first block statement and mark the location\r\n-                            Object.assign(location, node.loc);\r\n-                            return true;\r\n-                        }\r\n-                    });\r\n-                    fileLines = file.contents.split('\\n');\r\n-                    fileLines.splice(location.start.line, 0, \"if (true) {\\n  const __nexe_patches = (process.nexe = { patches: {} }).patches\\n  const slice = [].slice\\n  const __nexe_noop_patch = function (original) {\\n    const args = slice.call(arguments, 1)\\n    return original.apply(this, args)\\n  }\\n  const __nexe_patch = function (obj, method, patch) {\\n    const original = obj[method]\\n    if (!original) return\\n    __nexe_patches[method] = patch\\n    obj[method] = function() {\\n      const args = [original].concat(slice.call(arguments))\\n      return __nexe_patches[method].apply(this, args)\\n    }\\n  }\\n  __nexe_patch((process).binding('fs'), 'internalModuleReadFile', __nexe_noop_patch)\\n  __nexe_patch((process).binding('fs'), 'internalModuleReadJSON', __nexe_noop_patch)\\n  __nexe_patch((process).binding('fs'), 'internalModuleStat', __nexe_noop_patch)\\n}\\n\" + '\\n');\r\n-                    file.contents = fileLines.join('\\n');\r\n-                    return [4 /*yield*/, compiler.setFileContentsAsync('lib/_third_party_main.js', \"\\\"use strict\\\";\\r\\nvar fs = require('fs'), fd = fs.openSync(process.execPath, 'r'), stat = fs.statSync(process.execPath), tailSize = Math.min(stat.size, 16000), tailWindow = Buffer.from(Array(tailSize));\\r\\nfs.readSync(fd, tailWindow, 0, tailSize, stat.size - tailSize);\\r\\nvar footerPosition = tailWindow.indexOf('<nexe~~sentinel>');\\r\\nif (footerPosition == -1) {\\r\\n    throw 'Invalid Nexe binary';\\r\\n}\\r\\nvar footer = tailWindow.slice(footerPosition, footerPosition + 32), contentSize = footer.readDoubleLE(16), resourceSize = footer.readDoubleLE(24), contentStart = stat.size - tailSize + footerPosition - resourceSize - contentSize, resourceStart = contentStart + contentSize;\\r\\nObject.defineProperty(process, '__nexe', (function () {\\r\\n    var nexeHeader = null;\\r\\n    return {\\r\\n        get: function () {\\r\\n            return nexeHeader;\\r\\n        },\\r\\n        set: function (value) {\\r\\n            if (nexeHeader) {\\r\\n                throw new Error('This property is readonly');\\r\\n            }\\r\\n            nexeHeader = Object.assign({}, value, {\\r\\n                blobPath: process.execPath,\\r\\n                layout: {\\r\\n                    stat: stat,\\r\\n                    contentSize: contentSize,\\r\\n                    contentStart: contentStart,\\r\\n                    resourceSize: resourceSize,\\r\\n                    resourceStart: resourceStart\\r\\n                }\\r\\n            });\\r\\n            Object.freeze(nexeHeader);\\r\\n        },\\r\\n        enumerable: false,\\r\\n        configurable: false\\r\\n    };\\r\\n})());\\r\\nvar contentBuffer = Buffer.from(Array(contentSize)), Module = require('module');\\r\\nfs.readSync(fd, contentBuffer, 0, contentSize, contentStart);\\r\\nfs.closeSync(fd);\\r\\nnew Module(process.execPath, null)._compile(contentBuffer.toString(), process.execPath);\\r\\n\")];\r\n-                case 2:\r\n-                    _a.sent();\r\n",
+					"match": false,
+					"packageHash": "692ac5f3298b6df58e923304a803ba03a6de65909b8f673ed274c8df741cc7b4",
+					"size": 7803,
+					"sourceHash": "9d74f5d7d2051080bae16a30a5daed1d4d52500092c8bd69ee27f91f89413031",
+					"status": "content"
+				},
+				"lib/steps/shim.js": {
+					"diff": "--- published/lib/steps/shim.js\n+++ rebuilt/lib/steps/shim.js\n@@ -1,15 +1,15 @@\n-\"use strict\";\r\n-Object.defineProperty(exports, \"__esModule\", { value: true });\r\n-var util_1 = require(\"../util\");\r\n-function default_1(compiler, next) {\r\n-    compiler.shims.push(util_1.wrap(\"process.__nexe = \" + JSON.stringify(compiler.binaryConfiguration) + \";\\n\" +\r\n-        \"\\\"use strict\\\";\\r\\nObject.defineProperty(exports, \\\"__esModule\\\", { value: true });\\r\\nvar originalFsMethods = null;\\r\\nvar lazyRestoreFs = function () { };\\r\\nfunction shimFs(binary, fs) {\\r\\n    if (fs === void 0) { fs = require('fs'); }\\r\\n    if (originalFsMethods !== null) {\\r\\n        return;\\r\\n    }\\r\\n    originalFsMethods = Object.assign({}, fs);\\r\\n    var blobPath = binary.blobPath, manifest = binary.resources, _a = binary.layout, resourceStart = _a.resourceStart, stat = _a.stat, directories = {}, notAFile = '!@#$%^&*', isWin = process.platform.startsWith('win'), isString = function (x) { return typeof x === 'string' || x instanceof String; }, noop = function () { }, path = require('path'), baseDir = path.dirname(process.execPath);\\r\\n    var log = function (_) { return true; };\\r\\n    if ((process.env.DEBUG || '').toLowerCase().includes('nexe:require')) {\\r\\n        log = function (text) { return process.stderr.write('[nexe] - ' + text + '\\\\n'); };\\r\\n    }\\r\\n    var winPath = function (key) {\\r\\n        if (isWin && key.substr(1, 2) === ':\\\\\\\\') {\\r\\n            key = key[0].toUpperCase() + key.substr(1);\\r\\n        }\\r\\n        return key;\\r\\n    };\\r\\n    var getKey = function getKey(filepath) {\\r\\n        if (Buffer.isBuffer(filepath)) {\\r\\n            filepath = filepath.toString();\\r\\n        }\\r\\n        if (!isString(filepath)) {\\r\\n            return notAFile;\\r\\n        }\\r\\n        var key = path.resolve(baseDir, filepath);\\r\\n        return winPath(key);\\r\\n    };\\r\\n    var statTime = function () {\\r\\n        return {\\r\\n            dev: 0,\\r\\n            ino: 0,\\r\\n            nlink: 0,\\r\\n            rdev: 0,\\r\\n            uid: 123,\\r\\n            gid: 500,\\r\\n            blksize: 4096,\\r\\n            blocks: 0,\\r\\n            atime: new Date(stat.atime),\\r\\n            atimeMs: stat.atime.getTime(),\\r\\n            mtime: new Date(stat.mtime),\\r\\n            mtimeMs: stat.mtime.getTime(),\\r\\n            ctime: new Date(stat.ctime),\\r\\n            ctimMs: stat.ctime.getTime(),\\r\\n            birthtime: new Date(stat.birthtime),\\r\\n            birthtimeMs: stat.birthtime.getTime()\\r\\n        };\\r\\n    };\\r\\n    var createStat = function (extensions) {\\r\\n        return Object.assign(new fs.Stats(), binary.layout.stat, statTime(), extensions);\\r\\n    };\\r\\n    var ownStat = function (filepath) {\\r\\n        setupManifest();\\r\\n        var key = getKey(filepath);\\r\\n        if (directories[key]) {\\r\\n            var mode = binary.layout.stat.mode;\\r\\n            mode |= fs.constants.S_IFDIR;\\r\\n            mode &= ~fs.constants.S_IFREG;\\r\\n            return createStat({ mode: mode, size: 0 });\\r\\n        }\\r\\n        if (manifest[key]) {\\r\\n            return createStat({ size: manifest[key][1] });\\r\\n        }\\r\\n    };\\r\\n    function makeLong(filepath) {\\r\\n        return path._makeLong && path._makeLong(filepath);\\r\\n    }\\r\\n    function fileOpts(options) {\\r\\n        return !options ? {} : isString(options) ? { encoding: options } : options;\\r\\n    }\\r\\n    var setupManifest = function () {\\r\\n        Object.keys(manifest).forEach(function (filepath) {\\r\\n            var entry = manifest[filepath];\\r\\n            var absolutePath = getKey(filepath);\\r\\n            var longPath = makeLong(absolutePath);\\r\\n            var normalizedPath = winPath(path.normalize(filepath));\\r\\n            if (!manifest[absolutePath]) {\\r\\n                manifest[absolutePath] = entry;\\r\\n            }\\r\\n            if (longPath && !manifest[longPath]) {\\r\\n                manifest[longPath] = entry;\\r\\n            }\\r\\n            if (!manifest[normalizedPath]) {\\r\\n                manifest[normalizedPath] = manifest[filepath];\\r\\n            }\\r\\n            var currentDir = path.dirname(absolutePath);\\r\\n            var prevDir = absolutePath;\\r\\n            while (currentDir !== prevDir) {\\r\\n                directories[currentDir] = directories[currentDir] || {};\\r\\n                directories[currentDir][path.basename(prevDir)] = true;\\r\\n                var longDir = makeLong(currentDir);\\r\\n                if (longDir && !directories[longDir]) {\\r\\n                    directories[longDir] = directories[currentDir];\\r\\n                }\\r\\n                prevDir = currentDir;\\r\\n                currentDir = path.dirname(currentDir);\\r\\n            }\\r\\n        });\\r\\n        manifest[notAFile] = false;\\r\\n        directories[notAFile] = false;\\r\\n        setupManifest = noop;\\r\\n    };\\r\\n    //naive patches intended to work for most use cases\\r\\n    var nfs = {\\r\\n        existsSync: function existsSync(filepath) {\\r\\n            setupManifest();\\r\\n            var key = getKey(filepath);\\r\\n            if (manifest[key] || directories[key]) {\\r\\n                return true;\\r\\n            }\\r\\n            return originalFsMethods.existsSync.apply(fs, arguments);\\r\\n        },\\r\\n        realpath: function realpath(filepath, options, cb) {\\r\\n            setupManifest();\\r\\n            var key = getKey(filepath);\\r\\n            if (isString(filepath) && (manifest[filepath] || manifest[key])) {\\r\\n                return process.nextTick(function () { return cb(null, filepath); });\\r\\n            }\\r\\n            return originalFsMethods.realpath.call(fs, filepath, options, cb);\\r\\n        },\\r\\n        realpathSync: function realpathSync(filepath, options) {\\r\\n            setupManifest();\\r\\n            var key = getKey(filepath);\\r\\n            if (manifest[key]) {\\r\\n                return filepath;\\r\\n            }\\r\\n            return originalFsMethods.realpathSync.call(fs, filepath, options);\\r\\n        },\\r\\n        readdir: function readdir(filepath, options, callback) {\\r\\n            setupManifest();\\r\\n            var dir = directories[getKey(filepath)];\\r\\n            if (dir) {\\r\\n                if ('function' === typeof options) {\\r\\n                    callback = options;\\r\\n                    options = { encoding: 'utf8' };\\r\\n                }\\r\\n                process.nextTick(function () { return callback(null, Object.keys(dir)); });\\r\\n            }\\r\\n            else {\\r\\n                return originalFsMethods.readdir.apply(fs, arguments);\\r\\n            }\\r\\n        },\\r\\n        readdirSync: function readdirSync(filepath, options) {\\r\\n            setupManifest();\\r\\n            var dir = directories[getKey(filepath)];\\r\\n            if (dir) {\\r\\n                return Object.keys(dir);\\r\\n            }\\r\\n            return originalFsMethods.readdirSync.apply(fs, arguments);\\r\\n        },\\r\\n        readFile: function readFile(filepath, options, callback) {\\r\\n            setupManifest();\\r\\n            var entry = manifest[getKey(filepath)];\\r\\n            if (!entry) {\\r\\n                return originalFsMethods.readFile.apply(fs, arguments);\\r\\n            }\\r\\n            var offset = entry[0], length = entry[1];\\r\\n            var resourceOffset = resourceStart + offset;\\r\\n            var encoding = fileOpts(options).encoding;\\r\\n            callback = typeof options === 'function' ? options : callback;\\r\\n            fs.open(blobPath, 'r', function (err, fd) {\\r\\n                if (err)\\r\\n                    return callback(err, null);\\r\\n                fs.read(fd, Buffer.alloc(length), 0, length, resourceOffset, function (error, bytesRead, result) {\\r\\n                    if (error) {\\r\\n                        return fs.close(fd, function () {\\r\\n                            callback(error, null);\\r\\n                        });\\r\\n                    }\\r\\n                    fs.close(fd, function (err) {\\r\\n                        if (err) {\\r\\n                            return callback(err, result);\\r\\n                        }\\r\\n                        callback(err, encoding ? result.toString(encoding) : result);\\r\\n                    });\\r\\n                });\\r\\n            });\\r\\n        },\\r\\n        createReadStream: function createReadStream(filepath, options) {\\r\\n            setupManifest();\\r\\n            var entry = manifest[getKey(filepath)];\\r\\n            if (!entry) {\\r\\n                return originalFsMethods.createReadStream.apply(fs, arguments);\\r\\n            }\\r\\n            var offset = entry[0], length = entry[1];\\r\\n            var resourceOffset = resourceStart + offset;\\r\\n            var opts = fileOpts(options);\\r\\n            return fs.createReadStream(blobPath, Object.assign({}, opts, {\\r\\n                start: resourceOffset,\\r\\n                end: resourceOffset + length - 1\\r\\n            }));\\r\\n        },\\r\\n        readFileSync: function readFileSync(filepath, options) {\\r\\n            setupManifest();\\r\\n            var entry = manifest[getKey(filepath)];\\r\\n            if (!entry) {\\r\\n                return originalFsMethods.readFileSync.apply(fs, arguments);\\r\\n            }\\r\\n            var offset = entry[0], length = entry[1];\\r\\n            var resourceOffset = resourceStart + offset;\\r\\n            var encoding = fileOpts(options).encoding;\\r\\n            var fd = fs.openSync(process.execPath, 'r');\\r\\n            var result = Buffer.alloc(length);\\r\\n            fs.readSync(fd, result, 0, length, resourceOffset);\\r\\n            fs.closeSync(fd);\\r\\n            return encoding ? result.toString(encoding) : result;\\r\\n        },\\r\\n        statSync: function statSync(filepath) {\\r\\n            var stat = ownStat(filepath);\\r\\n            if (stat) {\\r\\n                return stat;\\r\\n            }\\r\\n            return originalFsMethods.statSync.apply(fs, arguments);\\r\\n        },\\r\\n        stat: function stat(filepath, callback) {\\r\\n            var stat = ownStat(filepath);\\r\\n            if (stat) {\\r\\n                process.nextTick(function () {\\r\\n                    callback(null, stat);\\r\\n                });\\r\\n            }\\r\\n            else {\\r\\n                return originalFsMethods.stat.apply(fs, arguments);\\r\\n            }\\r\\n        }\\r\\n    };\\r\\n    if (typeof fs.exists === 'function') {\\r\\n        nfs.exists = function (filepath, cb) {\\r\\n            cb = cb || noop;\\r\\n            var exists = nfs.existsSync(filepath);\\r\\n            process.nextTick(function () { return cb(exists); });\\r\\n        };\\r\\n    }\\r\\n    var patches = process.nexe.patches || {};\\r\\n    delete process.nexe;\\r\\n    patches.internalModuleReadFile = function (original) {\\r\\n        var args = [];\\r\\n        for (var _i = 1; _i < arguments.length; _i++) {\\r\\n            args[_i - 1] = arguments[_i];\\r\\n        }\\r\\n        var filepath = args[0];\\r\\n        setupManifest();\\r\\n        if (manifest[filepath]) {\\r\\n            log('read     (hit)              ' + filepath);\\r\\n            return nfs.readFileSync(filepath, 'utf-8');\\r\\n        }\\r\\n        log('read          (miss)       ' + filepath);\\r\\n        return original.call.apply(original, [this].concat(args));\\r\\n    };\\r\\n    patches.internalModuleReadJSON = patches.internalModuleReadFile;\\r\\n    patches.internalModuleStat = function (original) {\\r\\n        var args = [];\\r\\n        for (var _i = 1; _i < arguments.length; _i++) {\\r\\n            args[_i - 1] = arguments[_i];\\r\\n        }\\r\\n        setupManifest();\\r\\n        var filepath = args[0];\\r\\n        if (manifest[filepath]) {\\r\\n            log('stat     (hit)              ' + filepath + '   ' + 0);\\r\\n            return 0;\\r\\n        }\\r\\n        if (directories[filepath]) {\\r\\n            log('stat dir (hit)              ' + filepath + '   ' + 1);\\r\\n            return 1;\\r\\n        }\\r\\n        var res = original.call.apply(original, [this].concat(args));\\r\\n        if (res === 0) {\\r\\n            log('stat          (miss)        ' + filepath + '   ' + res);\\r\\n        }\\r\\n        else if (res === 1) {\\r\\n            log('stat dir      (miss)        ' + filepath + '   ' + res);\\r\\n        }\\r\\n        else {\\r\\n            log('stat                 (fail) ' + filepath + '   ' + res);\\r\\n        }\\r\\n        return res;\\r\\n    };\\r\\n    if (typeof fs.exists === 'function') {\\r\\n        nfs.exists = function (filepath, cb) {\\r\\n            cb = cb || noop;\\r\\n            var exists = nfs.existsSync(filepath);\\r\\n            if (!exists) {\\r\\n                return originalFsMethods.exists(filepath, cb);\\r\\n            }\\r\\n            process.nextTick(function () { return cb(exists); });\\r\\n        };\\r\\n    }\\r\\n    if (typeof fs.copyFile === 'function') {\\r\\n        nfs.copyFile = function (filepath, dest, flags, callback) {\\r\\n            setupManifest();\\r\\n            var entry = manifest[getKey(filepath)];\\r\\n            if (!entry) {\\r\\n                return originalFsMethods.copyFile.apply(fs, arguments);\\r\\n            }\\r\\n            if (typeof flags === 'function') {\\r\\n                callback = flags;\\r\\n                flags = 0;\\r\\n            }\\r\\n            nfs.readFile(filepath, function (err, buffer) {\\r\\n                if (err) {\\r\\n                    return callback(err);\\r\\n                }\\r\\n                originalFsMethods.writeFile(dest, buffer, function (err) {\\r\\n                    if (err) {\\r\\n                        return callback(err);\\r\\n                    }\\r\\n                    callback(null);\\r\\n                });\\r\\n            });\\r\\n        };\\r\\n        nfs.copyFileSync = function (filepath, dest) {\\r\\n            setupManifest();\\r\\n            var entry = manifest[getKey(filepath)];\\r\\n            if (!entry) {\\r\\n                return originalFsMethods.copyFileSync.apply(fs, arguments);\\r\\n            }\\r\\n            return originalFsMethods.writeFileSync(dest, nfs.readFileSync(filepath));\\r\\n        };\\r\\n    }\\r\\n    Object.assign(fs, nfs);\\r\\n    lazyRestoreFs = function () {\\r\\n        Object.keys(nfs).forEach(function (key) {\\r\\n            fs[key] = originalFsMethods[key];\\r\\n        });\\r\\n        lazyRestoreFs = function () { };\\r\\n    };\\r\\n    return true;\\r\\n}\\r\\nexports.shimFs = shimFs;\\r\\nfunction restoreFs() {\\r\\n    lazyRestoreFs();\\r\\n}\\r\\nexports.restoreFs = restoreFs;\\r\\n\" +\r\n-        '\\nshimFs(process.__nexe)' +\r\n-        (\"\\n\" + (compiler.options.fs ? '' : 'restoreFs()'))\r\n-    //TODO support only restoring specific methods\r\n-    ));\r\n-    compiler.shims.push(util_1.wrap(\"\\n    if (process.argv[1] && process.env.NODE_UNIQUE_ID) {\\n      const cluster = require('cluster')\\n      cluster._setupWorker()\\n      delete process.env.NODE_UNIQUE_ID\\n    }\\n  \"));\r\n-    compiler.shims.push(util_1.wrap(\"\\n      if (!process.send) {\\n        const path = require('path')\\n        const entry = path.resolve(path.dirname(process.execPath),\" + JSON.stringify(compiler.entrypoint) + \")\\n        process.argv.splice(1,0, entry)\\n      }\\n    \"));\r\n-    return next();\r\n-}\r\n-exports.default = default_1;\r\n+\"use strict\";\n+Object.defineProperty(exports, \"__esModule\", { value: true });\n+var util_1 = require(\"../util\");\n+function default_1(compiler, next) {\n+    compiler.shims.push(util_1.wrap(\"process.__nexe = \" + JSON.stringify(compiler.binaryConfiguration) + \";\\n\" +\n+        \"\\\"use strict\\\";\\nObject.defineProperty(exports, \\\"__esModule\\\", { value: true });\\nvar originalFsMethods = null;\\nvar lazyRestoreFs = function () { };\\nfunction shimFs(binary, fs) {\\n    if (fs === void 0) { fs = require('fs'); }\\n    if (originalFsMethods !== null) {\\n        return;\\n    }\\n    originalFsMethods = Object.assign({}, fs);\\n    var blobPath = binary.blobPath, manifest = binary.resources, _a = binary.layout, resourceStart = _a.resourceStart, stat = _a.stat, directories = {}, notAFile = '!@#$%^&*', isWin = process.platform.startsWith('win'), isString = function (x) { return typeof x === 'string' || x instanceof String; }, noop = function () { }, path = require('path'), baseDir = path.dirname(process.execPath);\\n    var log = function (_) { return true; };\\n    if ((process.env.DEBUG || '').toLowerCase().includes('nexe:require')) {\\n        log = function (text) { return process.stderr.write('[nexe] - ' + text + '\\\\n'); };\\n    }\\n    var winPath = function (key) {\\n        if (isWin && key.substr(1, 2) === ':\\\\\\\\') {\\n            key = key[0].toUpperCase() + key.substr(1);\\n        }\\n        return key;\\n    };\\n    var getKey = function getKey(filepath) {\\n        if (Buffer.isBuffer(filepath)) {\\n            filepath = filepath.toString();\\n        }\\n        if (!isString(filepath)) {\\n            return notAFile;\\n        }\\n        var key = path.resolve(baseDir, filepath);\\n        return winPath(key);\\n    };\\n    var statTime = function () {\\n        return {\\n            dev: 0,\\n            ino: 0,\\n            nlink: 0,\\n            rdev: 0,\\n            uid: 123,\\n            gid: 500,\\n            blksize: 4096,\\n            blocks: 0,\\n            atime: new Date(stat.atime),\\n            atimeMs: stat.atime.getTime(),\\n            mtime: new Date(stat.mtime),\\n            mtimeMs: stat.mtime.getTime(),\\n            ctime: new Date(stat.ctime),\\n            ctimMs: stat.ctime.getTime(),\\n            birthtime: new Date(stat.birthtime),\\n            birthtimeMs: stat.birthtime.getTime()\\n        };\\n    };\\n    var createStat = function (extensions) {\\n        return Object.assign(new fs.Stats(), binary.layout.stat, statTime(), extensions);\\n    };\\n    var ownStat = function (filepath) {\\n        setupManifest();\\n        var key = getKey(filepath);\\n        if (directories[key]) {\\n            var mode = binary.layout.stat.mode;\\n            mode |= fs.constants.S_IFDIR;\\n            mode &= ~fs.constants.S_IFREG;\\n            return createStat({ mode: mode, size: 0 });\\n        }\\n        if (manifest[key]) {\\n            return createStat({ size: manifest[key][1] });\\n        }\\n    };\\n    function makeLong(filepath) {\\n        return path._makeLong && path._makeLong(filepath);\\n    }\\n    function fileOpts(options) {\\n        return !options ? {} : isString(options) ? { encoding: options } : options;\\n    }\\n    var setupManifest = function () {\\n        Object.keys(manifest).forEach(function (filepath) {\\n            var entry = manifest[filepath];\\n            var absolutePath = getKey(filepath);\\n            var longPath = makeLong(absolutePath);\\n            var normalizedPath = winPath(path.normalize(filepath));\\n            if (!manifest[absolutePath]) {\\n                manifest[absolutePath] = entry;\\n            }\\n            if (longPath && !manifest[longPath]) {\\n                manifest[longPath] = entry;\\n            }\\n            if (!manifest[normalizedPath]) {\\n                manifest[normalizedPath] = manifest[filepath];\\n            }\\n            var currentDir = path.dirname(absolutePath);\\n            var prevDir = absolutePath;\\n            while (currentDir !== prevDir) {\\n                directories[currentDir] = directories[currentDir] || {};\\n                directories[currentDir][path.basename(prevDir)] = true;\\n                var longDir = makeLong(currentDir);\\n                if (longDir && !directories[longDir]) {\\n                    directories[longDir] = directories[currentDir];\\n                }\\n                prevDir = currentDir;\\n                currentDir = path.dirname(currentDir);\\n            }\\n        });\\n        manifest[notAFile] = false;\\n        directories[notAFile] = false;\\n        setupManifest = noop;\\n    };\\n    //naive patches intended to work for most use cases\\n    var nfs = {\\n        existsSync: function existsSync(filepath) {\\n            setupManifest();\\n            var key = getKey(filepath);\\n            if (manifest[key] || directories[key]) {\\n                return true;\\n            }\\n            return originalFsMethods.existsSync.apply(fs, arguments);\\n        },\\n        realpath: function realpath(filepath, options, cb) {\\n            setupManifest();\\n            var key = getKey(filepath);\\n            if (isString(filepath) && (manifest[filepath] || manifest[key])) {\\n                return process.nextTick(function () { return cb(null, filepath); });\\n            }\\n            return originalFsMethods.realpath.call(fs, filepath, options, cb);\\n        },\\n        realpathSync: function realpathSync(filepath, options) {\\n            setupManifest();\\n            var key = getKey(filepath);\\n            if (manifest[key]) {\\n                return filepath;\\n            }\\n            return originalFsMethods.realpathSync.call(fs, filepath, options);\\n        },\\n        readdir: function readdir(filepath, options, callback) {\\n            setupManifest();\\n            var dir = directories[getKey(filepath)];\\n            if (dir) {\\n                if ('function' === typeof options) {\\n                    callback = options;\\n                    options = { encoding: 'utf8' };\\n                }\\n                process.nextTick(function () { return callback(null, Object.keys(dir)); });\\n            }\\n            else {\\n                return originalFsMethods.readdir.apply(fs, arguments);\\n            }\\n        },\\n        readdirSync: function readdirSync(filepath, options) {\\n            setupManifest();\\n            var dir = directories[getKey(filepath)];\\n            if (dir) {\\n                return Object.keys(dir);\\n            }\\n            return originalFsMethods.readdirSync.apply(fs, arguments);\\n        },\\n        readFile: function readFile(filepath, options, callback) {\\n            setupManifest();\\n            var entry = manifest[getKey(filepath)];\\n            if (!entry) {\\n                return originalFsMethods.readFile.apply(fs, arguments);\\n            }\\n            var offset = entry[0], length = entry[1];\\n            var resourceOffset = resourceStart + offset;\\n            var encoding = fileOpts(options).encoding;\\n            callback = typeof options === 'function' ? options : callback;\\n            fs.open(blobPath, 'r', function (err, fd) {\\n                if (err)\\n                    return callback(err, null);\\n                fs.read(fd, Buffer.alloc(length), 0, length, resourceOffset, function (error, bytesRead, result) {\\n                    if (error) {\\n                        return fs.close(fd, function () {\\n                            callback(error, null);\\n                        });\\n                    }\\n                    fs.close(fd, function (err) {\\n                        if (err) {\\n                            return callback(err, result);\\n                        }\\n                        callback(err, encoding ? result.toString(encoding) : result);\\n                    });\\n                });\\n            });\\n        },\\n        createReadStream: function createReadStream(filepath, options) {\\n            setupManifest();\\n            var entry = manifest[getKey(filepath)];\\n            if (!entry) {\\n                return originalFsMethods.createReadStream.apply(fs, arguments);\\n            }\\n            var offset = entry[0], length = entry[1];\\n            var resourceOffset = resourceStart + offset;\\n            var opts = fileOpts(options);\\n            return fs.createReadStream(blobPath, Object.assign({}, opts, {\\n                start: resourceOffset,\\n                end: resourceOffset + length - 1\\n            }));\\n        },\\n        readFileSync: function readFileSync(filepath, options) {\\n            setupManifest();\\n            var entry = manifest[getKey(filepath)];\\n            if (!entry) {\\n                return originalFsMethods.readFileSync.apply(fs, arguments);\\n            }\\n            var offset = entry[0], length = entry[1];\\n            var resourceOffset = resourceStart + offset;\\n            var encoding = fileOpts(options).encoding;\\n            var fd = fs.openSync(process.execPath, 'r');\\n            var result = Buffer.alloc(length);\\n            fs.readSync(fd, result, 0, length, resourceOffset);\\n            fs.closeSync(fd);\\n            return encoding ? result.toString(encoding) : result;\\n        },\\n        statSync: function statSync(filepath) {\\n            var stat = ownStat(filepath);\\n            if (stat) {\\n                return stat;\\n            }\\n            return originalFsMethods.statSync.apply(fs, arguments);\\n        },\\n        stat: function stat(filepath, callback) {\\n            var stat = ownStat(filepath);\\n            if (stat) {\\n                process.nextTick(function () {\\n                    callback(null, stat);\\n                });\\n            }\\n            else {\\n                return originalFsMethods.stat.apply(fs, arguments);\\n            }\\n        }\\n    };\\n    if (typeof fs.exists === 'function') {\\n        nfs.exists = function (filepath, cb) {\\n            cb = cb || noop;\\n            var exists = nfs.existsSync(filepath);\\n            process.nextTick(function () { return cb(exists); });\\n        };\\n    }\\n    var patches = process.nexe.patches || {};\\n    delete process.nexe;\\n    patches.internalModuleReadFile = function (original) {\\n        var args = [];\\n        for (var _i = 1; _i < arguments.length; _i++) {\\n            args[_i - 1] = arguments[_i];\\n        }\\n        var filepath = args[0];\\n        setupManifest();\\n        if (manifest[filepath]) {\\n            log('read     (hit)              ' + filepath);\\n            return nfs.readFileSync(filepath, 'utf-8');\\n        }\\n        log('read          (miss)       ' + filepath);\\n        return original.call.apply(original, [this].concat(args));\\n    };\\n    patches.internalModuleReadJSON = patches.internalModuleReadFile;\\n    patches.internalModuleStat = function (original) {\\n        var args = [];\\n        for (var _i = 1; _i < arguments.length; _i++) {\\n            args[_i - 1] = arguments[_i];\\n        }\\n        setupManifest();\\n        var filepath = args[0];\\n        if (manifest[filepath]) {\\n            log('stat     (hit)              ' + filepath + '   ' + 0);\\n            return 0;\\n        }\\n        if (directories[filepath]) {\\n            log('stat dir (hit)              ' + filepath + '   ' + 1);\\n            return 1;\\n        }\\n        var res = original.call.apply(original, [this].concat(args));\\n        if (res === 0) {\\n            log('stat          (miss)        ' + filepath + '   ' + res);\\n        }\\n        else if (res === 1) {\\n            log('stat dir      (miss)        ' + filepath + '   ' + res);\\n        }\\n        else {\\n            log('stat                 (fail) ' + filepath + '   ' + res);\\n        }\\n        return res;\\n    };\\n    if (typeof fs.exists === 'function') {\\n        nfs.exists = function (filepath, cb) {\\n            cb = cb || noop;\\n            var exists = nfs.existsSync(filepath);\\n            if (!exists) {\\n                return originalFsMethods.exists(filepath, cb);\\n            }\\n            process.nextTick(function () { return cb(exists); });\\n        };\\n    }\\n    if (typeof fs.copyFile === 'function') {\\n        nfs.copyFile = function (filepath, dest, flags, callback) {\\n            setupManifest();\\n            var entry = manifest[getKey(filepath)];\\n            if (!entry) {\\n                return originalFsMethods.copyFile.apply(fs, arguments);\\n            }\\n            if (typeof flags === 'function') {\\n                callback = flags;\\n                flags = 0;\\n            }\\n            nfs.readFile(filepath, function (err, buffer) {\\n                if (err) {\\n                    return callback(err);\\n                }\\n                originalFsMethods.writeFile(dest, buffer, function (err) {\\n                    if (err) {\\n                        return callback(err);\\n                    }\\n                    callback(null);\\n                });\\n            });\\n        };\\n        nfs.copyFileSync = function (filepath, dest) {\\n            setupManifest();\\n            var entry = manifest[getKey(filepath)];\\n            if (!entry) {\\n                return originalFsMethods.copyFileSync.apply(fs, arguments);\\n            }\\n            return originalFsMethods.writeFileSync(dest, nfs.readFileSync(filepath));\\n        };\\n    }\\n    Object.assign(fs, nfs);\\n    lazyRestoreFs = function () {\\n        Object.keys(nfs).forEach(function (key) {\\n            fs[key] = originalFsMethods[key];\\n        });\\n        lazyRestoreFs = function () { };\\n    };\\n    return true;\\n}\\nexports.shimFs = shimFs;\\nfunction restoreFs() {\\n    lazyRestoreFs();\\n}\\nexports.restoreFs = restoreFs;\\n\" +\n+        '\\nshimFs(process.__nexe)' +\n+        (\"\\n\" + (compiler.options.fs ? '' : 'restoreFs()'))\n+    //TODO support only restoring specific methods\n+    ));\n+    compiler.shims.push(util_1.wrap(\"\\n    if (process.argv[1] && process.env.NODE_UNIQUE_ID) {\\n      const cluster = require('cluster')\\n      cluster._setupWorker()\\n      delete process.env.NODE_UNIQUE_ID\\n    }\\n  \"));\n+    compiler.shims.push(util_1.wrap(\"\\n      if (!process.send) {\\n        const path = require('path')\\n        const entry = path.resolve(path.dirname(process.execPath),\" + JSON.stringify(compiler.entrypoint) + \")\\n        process.argv.splice(1,0, entry)\\n      }\\n    \"));\n+    return next();\n+}\n+exports.default = default_1;\n",
+					"match": false,
+					"packageHash": "dd1d81fe3f222bd9dafd0defdef21415c366ffffe7123463074995ce552345c7",
+					"size": 15042,
+					"sourceHash": "1b462a260fb26846adecc39f55287e5041feb384a0c33af206f7ffb02d62271a",
+					"status": "content"
+				},
+				"lib/fs/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 56,
+				"missingInPackage": 1,
+				"missingInSource": 1,
+				"score": 0.9333333333333333,
+				"totalFiles": 60
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "@calebboyd/semaphore",
+				"version": "1.3.1"
+			},
+			{
+				"name": "@mrmlnc/readdir-enhanced",
+				"version": "2.2.1"
+			},
+			{
+				"name": "@nodelib/fs.stat",
+				"version": "1.1.3"
+			},
+			{
+				"name": "@sindresorhus/is",
+				"version": "0.7.0"
+			},
+			{
+				"name": "@szmarczak/http-timer",
+				"version": "1.1.2"
+			},
+			{
+				"name": "@types/events",
+				"version": "1.2.0"
+			},
+			{
+				"name": "@types/minimatch",
+				"version": "3.0.3"
+			},
+			{
+				"name": "@types/node",
+				"version": "10.5.7"
+			},
+			{
+				"name": "acorn",
+				"version": "6.1.1"
+			},
+			{
+				"name": "ansi-regex",
+				"version": "4.1.0"
+			},
+			{
+				"name": "ansi-styles",
+				"version": "3.2.1"
+			},
+			{
+				"name": "app-builder",
+				"version": "5.2.0"
+			},
+			{
+				"name": "archive-type",
+				"version": "4.0.0"
+			},
+			{
+				"name": "file-type",
+				"version": "4.4.0"
+			},
+			{
+				"name": "arr-diff",
+				"version": "4.0.0"
+			},
+			{
+				"name": "arr-flatten",
+				"version": "1.1.0"
+			},
+			{
+				"name": "arr-union",
+				"version": "3.1.0"
+			},
+			{
+				"name": "array-union",
+				"version": "1.0.2"
+			},
+			{
+				"name": "array-uniq",
+				"version": "1.0.3"
+			},
+			{
+				"name": "array-unique",
+				"version": "0.3.2"
+			},
+			{
+				"name": "assign-symbols",
+				"version": "1.0.0"
+			},
+			{
+				"name": "atob",
+				"version": "2.1.2"
+			},
+			{
+				"name": "balanced-match",
+				"version": "1.0.0"
+			},
+			{
+				"name": "base",
+				"version": "0.11.2"
+			},
+			{
+				"name": "define-property",
+				"version": "1.0.0"
+			},
+			{
+				"name": "is-accessor-descriptor",
+				"version": "1.0.0"
+			},
+			{
+				"name": "is-data-descriptor",
+				"version": "1.0.0"
+			},
+			{
+				"name": "is-descriptor",
+				"version": "1.0.2"
+			},
+			{
+				"name": "base64-js",
+				"version": "0.0.8"
+			},
+			{
+				"name": "bl",
+				"version": "1.2.2"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "1.1.11"
+			},
+			{
+				"name": "braces",
+				"version": "2.3.2"
+			},
+			{
+				"name": "extend-shallow",
+				"version": "2.0.1"
+			},
+			{
+				"name": "buffer",
+				"version": "3.6.0"
+			},
+			{
+				"name": "buffer-alloc",
+				"version": "1.2.0"
+			},
+			{
+				"name": "buffer-alloc-unsafe",
+				"version": "1.1.0"
+			},
+			{
+				"name": "buffer-crc32",
+				"version": "0.2.13"
+			},
+			{
+				"name": "buffer-fill",
+				"version": "1.0.0"
+			},
+			{
+				"name": "cache-base",
+				"version": "1.0.1"
+			},
+			{
+				"name": "cacheable-request",
+				"version": "2.1.4"
+			},
+			{
+				"name": "lowercase-keys",
+				"version": "1.0.0"
+			},
+			{
+				"name": "call-me-maybe",
+				"version": "1.0.1"
+			},
+			{
+				"name": "caw",
+				"version": "2.0.1"
+			},
+			{
+				"name": "chalk",
+				"version": "2.4.2"
+			},
+			{
+				"name": "cherow",
+				"version": "1.6.9"
+			},
+			{
+				"name": "class-utils",
+				"version": "0.3.6"
+			},
+			{
+				"name": "define-property",
+				"version": "0.2.5"
+			},
+			{
+				"name": "cli-cursor",
+				"version": "2.1.0"
+			},
+			{
+				"name": "cli-spinners",
+				"version": "2.0.0"
+			},
+			{
+				"name": "clone",
+				"version": "1.0.4"
+			},
+			{
+				"name": "clone-response",
+				"version": "1.0.2"
+			},
+			{
+				"name": "collection-visit",
+				"version": "1.0.0"
+			},
+			{
+				"name": "color-convert",
+				"version": "1.9.3"
+			},
+			{
+				"name": "color-name",
+				"version": "1.1.3"
+			},
+			{
+				"name": "component-emitter",
+				"version": "1.2.1"
+			},
+			{
+				"name": "concat-map",
+				"version": "0.0.1"
+			},
+			{
+				"name": "config-chain",
+				"version": "1.1.11"
+			},
+			{
+				"name": "content-disposition",
+				"version": "0.5.2"
+			},
+			{
+				"name": "copy-descriptor",
+				"version": "0.1.1"
+			},
+			{
+				"name": "core-util-is",
+				"version": "1.0.2"
+			},
+			{
+				"name": "debug",
+				"version": "2.6.9"
+			},
+			{
+				"name": "decode-uri-component",
+				"version": "0.2.0"
+			},
+			{
+				"name": "decompress",
+				"version": "4.2.0"
+			},
+			{
+				"name": "decompress-response",
+				"version": "3.3.0"
+			},
+			{
+				"name": "decompress-tar",
+				"version": "4.1.1"
+			},
+			{
+				"name": "file-type",
+				"version": "5.2.0"
+			},
+			{
+				"name": "decompress-tarbz2",
+				"version": "4.1.1"
+			},
+			{
+				"name": "file-type",
+				"version": "6.2.0"
+			},
+			{
+				"name": "decompress-targz",
+				"version": "4.1.1"
+			},
+			{
+				"name": "decompress-unzip",
+				"version": "4.0.1"
+			},
+			{
+				"name": "file-type",
+				"version": "3.9.0"
+			},
+			{
+				"name": "get-stream",
+				"version": "2.3.1"
+			},
+			{
+				"name": "pify",
+				"version": "2.3.0"
+			},
+			{
+				"name": "defaults",
+				"version": "1.0.3"
+			},
+			{
+				"name": "defer-to-connect",
+				"version": "1.0.2"
+			},
+			{
+				"name": "define-property",
+				"version": "2.0.2"
+			},
+			{
+				"name": "dir-glob",
+				"version": "2.2.2"
+			},
+			{
+				"name": "download",
+				"version": "7.1.0"
+			},
+			{
+				"name": "got",
+				"version": "8.3.2"
+			},
+			{
+				"name": "pify",
+				"version": "3.0.0"
+			},
+			{
+				"name": "duplexer3",
+				"version": "0.1.4"
+			},
+			{
+				"name": "end-of-stream",
+				"version": "1.4.1"
+			},
+			{
+				"name": "enhanced-resolve",
+				"version": "4.1.0"
+			},
+			{
+				"name": "errno",
+				"version": "0.1.7"
+			},
+			{
+				"name": "escape-string-regexp",
+				"version": "1.0.5"
+			},
+			{
+				"name": "expand-brackets",
+				"version": "2.1.4"
+			},
+			{
+				"name": "ext-list",
+				"version": "2.2.2"
+			},
+			{
+				"name": "ext-name",
+				"version": "5.0.0"
+			},
+			{
+				"name": "extend-shallow",
+				"version": "3.0.2"
+			},
+			{
+				"name": "is-extendable",
+				"version": "1.0.1"
+			},
+			{
+				"name": "extglob",
+				"version": "2.0.4"
+			},
+			{
+				"name": "fast-glob",
+				"version": "2.2.6"
+			},
+			{
+				"name": "fd-slicer",
+				"version": "1.1.0"
+			},
+			{
+				"name": "file-type",
+				"version": "8.1.0"
+			},
+			{
+				"name": "filename-reserved-regex",
+				"version": "2.0.0"
+			},
+			{
+				"name": "filenamify",
+				"version": "2.1.0"
+			},
+			{
+				"name": "fill-range",
+				"version": "4.0.0"
+			},
+			{
+				"name": "for-in",
+				"version": "1.0.2"
+			},
+			{
+				"name": "fragment-cache",
+				"version": "0.2.1"
+			},
+			{
+				"name": "from2",
+				"version": "2.3.0"
+			},
+			{
+				"name": "fs-constants",
+				"version": "1.0.0"
+			},
+			{
+				"name": "fs.realpath",
+				"version": "1.0.0"
+			},
+			{
+				"name": "get-proxy",
+				"version": "2.1.0"
+			},
+			{
+				"name": "get-stream",
+				"version": "3.0.0"
+			},
+			{
+				"name": "get-value",
+				"version": "2.0.6"
+			},
+			{
+				"name": "glob",
+				"version": "7.1.3"
+			},
+			{
+				"name": "glob-parent",
+				"version": "3.1.0"
+			},
+			{
+				"name": "is-glob",
+				"version": "3.1.0"
+			},
+			{
+				"name": "glob-to-regexp",
+				"version": "0.3.0"
+			},
+			{
+				"name": "globby",
+				"version": "9.2.0"
+			},
+			{
+				"name": "@types/glob",
+				"version": "7.1.1"
+			},
+			{
+				"name": "got",
+				"version": "9.6.0"
+			},
+			{
+				"name": "@sindresorhus/is",
+				"version": "0.14.0"
+			},
+			{
+				"name": "cacheable-request",
+				"version": "6.0.0"
+			},
+			{
+				"name": "get-stream",
+				"version": "4.1.0"
+			},
+			{
+				"name": "http-cache-semantics",
+				"version": "4.0.3"
+			},
+			{
+				"name": "normalize-url",
+				"version": "3.3.0"
+			},
+			{
+				"name": "p-cancelable",
+				"version": "1.1.0"
+			},
+			{
+				"name": "graceful-fs",
+				"version": "4.1.11"
+			},
+			{
+				"name": "graceful-readlink",
+				"version": "1.0.1"
+			},
+			{
+				"name": "has-flag",
+				"version": "3.0.0"
+			},
+			{
+				"name": "has-symbol-support-x",
+				"version": "1.4.2"
+			},
+			{
+				"name": "has-to-string-tag-x",
+				"version": "1.4.1"
+			},
+			{
+				"name": "has-value",
+				"version": "1.0.0"
+			},
+			{
+				"name": "has-values",
+				"version": "1.0.0"
+			},
+			{
+				"name": "kind-of",
+				"version": "4.0.0"
+			},
+			{
+				"name": "http-cache-semantics",
+				"version": "3.8.1"
+			},
+			{
+				"name": "ieee754",
+				"version": "1.1.12"
+			},
+			{
+				"name": "ignore",
+				"version": "4.0.6"
+			},
+			{
+				"name": "inflight",
+				"version": "1.0.6"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.3"
+			},
+			{
+				"name": "ini",
+				"version": "1.3.5"
+			},
+			{
+				"name": "into-stream",
+				"version": "3.1.0"
+			},
+			{
+				"name": "is-accessor-descriptor",
+				"version": "0.1.6"
+			},
+			{
+				"name": "kind-of",
+				"version": "3.2.2"
+			},
+			{
+				"name": "is-buffer",
+				"version": "1.1.6"
+			},
+			{
+				"name": "is-data-descriptor",
+				"version": "0.1.4"
+			},
+			{
+				"name": "is-descriptor",
+				"version": "0.1.6"
+			},
+			{
+				"name": "kind-of",
+				"version": "5.1.0"
+			},
+			{
+				"name": "is-extendable",
+				"version": "0.1.1"
+			},
+			{
+				"name": "is-extglob",
+				"version": "2.1.1"
+			},
+			{
+				"name": "is-glob",
+				"version": "4.0.1"
+			},
+			{
+				"name": "is-natural-number",
+				"version": "4.0.1"
+			},
+			{
+				"name": "is-number",
+				"version": "3.0.0"
+			},
+			{
+				"name": "is-object",
+				"version": "1.0.1"
+			},
+			{
+				"name": "is-plain-obj",
+				"version": "1.1.0"
+			},
+			{
+				"name": "is-plain-object",
+				"version": "2.0.4"
+			},
+			{
+				"name": "is-retry-allowed",
+				"version": "1.1.0"
+			},
+			{
+				"name": "is-stream",
+				"version": "1.1.0"
+			},
+			{
+				"name": "is-windows",
+				"version": "1.0.2"
+			},
+			{
+				"name": "isarray",
+				"version": "1.0.0"
+			},
+			{
+				"name": "isobject",
+				"version": "3.0.1"
+			},
+			{
+				"name": "isurl",
+				"version": "1.0.0"
+			},
+			{
+				"name": "json-buffer",
+				"version": "3.0.0"
+			},
+			{
+				"name": "keyv",
+				"version": "3.0.0"
+			},
+			{
+				"name": "kind-of",
+				"version": "6.0.2"
+			},
+			{
+				"name": "log-symbols",
+				"version": "2.2.0"
+			},
+			{
+				"name": "lowercase-keys",
+				"version": "1.0.1"
+			},
+			{
+				"name": "make-dir",
+				"version": "1.3.0"
+			},
+			{
+				"name": "map-cache",
+				"version": "0.2.2"
+			},
+			{
+				"name": "map-visit",
+				"version": "1.0.0"
+			},
+			{
+				"name": "memory-fs",
+				"version": "0.4.1"
+			},
+			{
+				"name": "merge2",
+				"version": "1.2.3"
+			},
+			{
+				"name": "micromatch",
+				"version": "3.1.10"
+			},
+			{
+				"name": "mime-db",
+				"version": "1.35.0"
+			},
+			{
+				"name": "mimic-fn",
+				"version": "1.2.0"
+			},
+			{
+				"name": "mimic-response",
+				"version": "1.0.1"
+			},
+			{
+				"name": "minimatch",
+				"version": "3.0.4"
+			},
+			{
+				"name": "minimist",
+				"version": "1.2.0"
+			},
+			{
+				"name": "mixin-deep",
+				"version": "1.3.1"
+			},
+			{
+				"name": "mkdirp",
+				"version": "0.5.1"
+			},
+			{
+				"name": "minimist",
+				"version": "0.0.8"
+			},
+			{
+				"name": "ms",
+				"version": "2.0.0"
+			},
+			{
+				"name": "multistream",
+				"version": "2.1.1"
+			},
+			{
+				"name": "nanomatch",
+				"version": "1.2.13"
+			},
+			{
+				"name": "normalize-url",
+				"version": "2.0.1"
+			},
+			{
+				"name": "sort-keys",
+				"version": "2.0.0"
+			},
+			{
+				"name": "npm-conf",
+				"version": "1.1.3"
+			},
+			{
+				"name": "object-assign",
+				"version": "4.1.1"
+			},
+			{
+				"name": "object-copy",
+				"version": "0.1.0"
+			},
+			{
+				"name": "object-visit",
+				"version": "1.0.1"
+			},
+			{
+				"name": "object.pick",
+				"version": "1.3.0"
+			},
+			{
+				"name": "once",
+				"version": "1.4.0"
+			},
+			{
+				"name": "onetime",
+				"version": "2.0.1"
+			},
+			{
+				"name": "ora",
+				"version": "3.4.0"
+			},
+			{
+				"name": "p-cancelable",
+				"version": "0.4.1"
+			},
+			{
+				"name": "p-event",
+				"version": "2.1.0"
+			},
+			{
+				"name": "p-finally",
+				"version": "1.0.0"
+			},
+			{
+				"name": "p-is-promise",
+				"version": "1.1.0"
+			},
+			{
+				"name": "p-timeout",
+				"version": "2.0.1"
+			},
+			{
+				"name": "pascalcase",
+				"version": "0.1.1"
+			},
+			{
+				"name": "path-dirname",
+				"version": "1.0.2"
+			},
+			{
+				"name": "path-is-absolute",
+				"version": "1.0.1"
+			},
+			{
+				"name": "path-type",
+				"version": "3.0.0"
+			},
+			{
+				"name": "pend",
+				"version": "1.2.0"
+			},
+			{
+				"name": "pify",
+				"version": "4.0.1"
+			},
+			{
+				"name": "pinkie",
+				"version": "2.0.4"
+			},
+			{
+				"name": "pinkie-promise",
+				"version": "2.0.1"
+			},
+			{
+				"name": "posix-character-classes",
+				"version": "0.1.1"
+			},
+			{
+				"name": "prepend-http",
+				"version": "2.0.0"
+			},
+			{
+				"name": "process-nextick-args",
+				"version": "2.0.0"
+			},
+			{
+				"name": "proto-list",
+				"version": "1.2.4"
+			},
+			{
+				"name": "prr",
+				"version": "1.0.1"
+			},
+			{
+				"name": "pump",
+				"version": "3.0.0"
+			},
+			{
+				"name": "query-string",
+				"version": "5.1.1"
+			},
+			{
+				"name": "readable-stream",
+				"version": "2.3.6"
+			},
+			{
+				"name": "regex-not",
+				"version": "1.0.2"
+			},
+			{
+				"name": "repeat-element",
+				"version": "1.1.3"
+			},
+			{
+				"name": "repeat-string",
+				"version": "1.6.1"
+			},
+			{
+				"name": "resolve-dependencies",
+				"version": "2.2.3"
+			},
+			{
+				"name": "resolve-url",
+				"version": "0.2.1"
+			},
+			{
+				"name": "responselike",
+				"version": "1.0.2"
+			},
+			{
+				"name": "restore-cursor",
+				"version": "2.0.0"
+			},
+			{
+				"name": "ret",
+				"version": "0.1.15"
+			},
+			{
+				"name": "rimraf",
+				"version": "2.6.3"
+			},
+			{
+				"name": "safe-buffer",
+				"version": "5.1.2"
+			},
+			{
+				"name": "safe-regex",
+				"version": "1.1.0"
+			},
+			{
+				"name": "seek-bzip",
+				"version": "1.0.5"
+			},
+			{
+				"name": "commander",
+				"version": "2.8.1"
+			},
+			{
+				"name": "set-value",
+				"version": "2.0.0"
+			},
+			{
+				"name": "signal-exit",
+				"version": "3.0.2"
+			},
+			{
+				"name": "slash",
+				"version": "2.0.0"
+			},
+			{
+				"name": "snapdragon",
+				"version": "0.8.2"
+			},
+			{
+				"name": "snapdragon-node",
+				"version": "2.1.1"
+			},
+			{
+				"name": "snapdragon-util",
+				"version": "3.0.1"
+			},
+			{
+				"name": "sort-keys",
+				"version": "1.1.2"
+			},
+			{
+				"name": "sort-keys-length",
+				"version": "1.0.1"
+			},
+			{
+				"name": "source-map",
+				"version": "0.5.7"
+			},
+			{
+				"name": "source-map-resolve",
+				"version": "0.5.2"
+			},
+			{
+				"name": "source-map-url",
+				"version": "0.4.0"
+			},
+			{
+				"name": "split-string",
+				"version": "3.1.0"
+			},
+			{
+				"name": "static-extend",
+				"version": "0.1.2"
+			},
+			{
+				"name": "strict-uri-encode",
+				"version": "1.1.0"
+			},
+			{
+				"name": "string_decoder",
+				"version": "1.1.1"
+			},
+			{
+				"name": "strip-ansi",
+				"version": "5.2.0"
+			},
+			{
+				"name": "strip-dirs",
+				"version": "2.1.0"
+			},
+			{
+				"name": "strip-outer",
+				"version": "1.0.1"
+			},
+			{
+				"name": "supports-color",
+				"version": "5.5.0"
+			},
+			{
+				"name": "tapable",
+				"version": "1.1.3"
+			},
+			{
+				"name": "tar-stream",
+				"version": "1.6.1"
+			},
+			{
+				"name": "through",
+				"version": "2.3.8"
+			},
+			{
+				"name": "timed-out",
+				"version": "4.0.1"
+			},
+			{
+				"name": "to-buffer",
+				"version": "1.1.1"
+			},
+			{
+				"name": "to-object-path",
+				"version": "0.3.0"
+			},
+			{
+				"name": "to-readable-stream",
+				"version": "1.0.0"
+			},
+			{
+				"name": "to-regex",
+				"version": "3.0.2"
+			},
+			{
+				"name": "to-regex-range",
+				"version": "2.1.1"
+			},
+			{
+				"name": "trim-repeated",
+				"version": "1.0.0"
+			},
+			{
+				"name": "tunnel-agent",
+				"version": "0.6.0"
+			},
+			{
+				"name": "unbzip2-stream",
+				"version": "1.2.5"
+			},
+			{
+				"name": "union-value",
+				"version": "1.0.0"
+			},
+			{
+				"name": "set-value",
+				"version": "0.4.3"
+			},
+			{
+				"name": "unset-value",
+				"version": "1.0.0"
+			},
+			{
+				"name": "has-value",
+				"version": "0.3.1"
+			},
+			{
+				"name": "isobject",
+				"version": "2.1.0"
+			},
+			{
+				"name": "has-values",
+				"version": "0.1.4"
+			},
+			{
+				"name": "urix",
+				"version": "0.1.0"
+			},
+			{
+				"name": "url-parse-lax",
+				"version": "3.0.0"
+			},
+			{
+				"name": "url-to-options",
+				"version": "1.0.1"
+			},
+			{
+				"name": "use",
+				"version": "3.1.1"
+			},
+			{
+				"name": "util-deprecate",
+				"version": "1.0.2"
+			},
+			{
+				"name": "wcwidth",
+				"version": "1.0.1"
+			},
+			{
+				"name": "wrappy",
+				"version": "1.0.2"
+			},
+			{
+				"name": "xtend",
+				"version": "4.0.1"
+			},
+			{
+				"name": "yauzl",
+				"version": "2.10.0"
+			}
+		]
+	}
+]

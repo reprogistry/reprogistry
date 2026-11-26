@@ -1,0 +1,1434 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-26T15:32:38.318Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:3.10.10",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "nexe@2.0.0-rc.19",
+			"name": "nexe",
+			"version": "2.0.0-rc.19",
+			"location": "https://registry.npmjs.org/nexe/-/nexe-2.0.0-rc.19.tgz",
+			"integrity": "sha512-ighRmSyF0LVo/DXk3qo0mZd8J8mB5LKZ14eVGyisiNMh/s0OfRWpZ6mb26iiPZcWombj1Zs+vD4tLuGdoNWgnw==",
+			"publishedAt": "2017-10-28T02:22:19.950Z",
+			"publishedWith": {
+				"node": "6.11.5",
+				"npm": "3.10.10"
+			},
+			"dependencies": {
+				"ora": "^1.2.0",
+				"pifi": "1.0.0",
+				"chalk": "^1.1.3",
+				"globby": "^6.1.0",
+				"mkdirp": "^0.5.1",
+				"rimraf": "^2.6.1",
+				"download": "^6.2.0",
+				"fuse-box": "^2.3.4-beta.11",
+				"minimist": "^1.2.0",
+				"uglify-js": "3.0.28",
+				"app-builder": "^5.1.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git://github.com/nexe/nexe.git",
+			"spec": "github:nexe/nexe#3d18eae18a6ce92f6e03fc29c487b64707a59dcb"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"CHANGELOG.md": {
+					"match": false,
+					"packageHash": "06850eebf14eca7210539bed43258c2a33e221141956033b0c5a6f5d20c21088",
+					"size": 2718,
+					"status": "missing-in-source"
+				},
+				"lib/bundling/embed-node.js": {
+					"diff": "--- published/lib/bundling/embed-node.js\n+++ rebuilt/lib/bundling/embed-node.js\n@@ -1,40 +1,41 @@\n-\"use strict\";\r\n-Object.defineProperty(exports, \"__esModule\", { value: true });\r\n-var crypto_1 = require(\"crypto\");\r\n-var path = require(\"path\");\r\n-function hashName(name) {\r\n-    return crypto_1.createHash('md5')\r\n-        .update(name)\r\n-        .digest('hex')\r\n-        .toString()\r\n-        .slice(0, 8);\r\n-}\r\n-function embedDotNode(options, file) {\r\n-    var contents = fs.readFileSync(file.absPath);\r\n-    var modulePathParts = file.absPath.split(path.sep).reverse();\r\n-    var module = modulePathParts[modulePathParts.findIndex(function (x) { return x === 'node_modules'; }) - 1];\r\n-    var bindingName = path.basename(file.absPath);\r\n-    var settings = options[module];\r\n-    var moduleDir = hashName(contents);\r\n-    file.contents = \"\\n  var fs=require('fs');var path=require('path');var binding='\" + contents.toString('base64') + \"';function mkdirp(r,t){t=t||null,r=path.resolve(r);try{fs.mkdirSync(r),t=t||r}catch(c){if(\\\"ENOENT\\\"===c.code)t=mkdirp(path.dirname(r),t),mkdirp(r,t);else{var i;try{i=fs.statSync(r)}catch(r){throw c}if(!i.isDirectory())throw c}}return t};\";\r\n-    if (!settings || settings === true) {\r\n-        file.contents += (\"\\n      mkdirp('\" + moduleDir + \"');\\n      var bindingPath = path.join(process.cwd(), '\" + moduleDir + \"', '\" + bindingName + \"')\\n      \\n      require('fs').writeFileSync(bindingPath, Buffer.from(binding, 'base64'))\\n      process.dlopen(module, bindingPath)\\n    \").trim();\r\n-        return {};\r\n-    }\r\n-    var depth = 0;\r\n-    settings.additionalFiles.forEach(function (file) {\r\n-        var ownDepth = 0;\r\n-        file.split('/').forEach(function (x) { return x === '..' && ownDepth++; });\r\n-        depth = ownDepth > depth ? ownDepth : depth;\r\n-    });\r\n-    var segments = [moduleDir];\r\n-    while (depth--) {\r\n-        segments.push(hashName(moduleDir + depth));\r\n-    }\r\n-    segments.push(bindingName);\r\n-    file.contents += \"\\n    var cwd = process.cwd()\\n    var bindingFileParts = \" + JSON.stringify(segments) + \";\\n    var bindingFile = path.join.apply(path, [cwd].concat(bindingFileParts));\\n    mkdirp(path.dirname(bindingFile));\\n    fs.writeFileSync(bindingFile, Buffer.from(binding, 'base64'));\\n    \" + settings.additionalFiles.reduce(function (code, filename, i) {\r\n-        var contents = fs.readFileSync(path.join(path.dirname(file.absPath), filename));\r\n-        return (code += \"\\n        var file\" + i + \" = '\" + contents.toString('base64') + \"';\\n        var filePath\" + i + \" = path.join(cwd, bindingFileParts[0], '\" + filename.split('../').join('') + \"');\\n        mkdirp(path.dirname(filePath\" + i + \"));\\n        fs.writeFileSync(filePath\" + i + \", Buffer.from(file\" + i + \", 'base64'));\\n      \");\r\n-    }, '') + \";\\n    process.dlopen(module, bindingFile)\\n  \";\r\n-}\r\n-exports.embedDotNode = embedDotNode;\r\n+\"use strict\";\n+Object.defineProperty(exports, \"__esModule\", { value: true });\n+var crypto_1 = require(\"crypto\");\n+var path = require(\"path\");\n+var fs = require(\"fs\");\n+function hashName(name) {\n+    return crypto_1.createHash('md5')\n+        .update(name)\n+        .digest('hex')\n+        .toString()\n+        .slice(0, 8);\n+}\n+function embedDotNode(options, file) {\n+    var contents = fs.readFileSync(file.absPath);\n+    var modulePathParts = file.absPath.split(path.sep).reverse();\n+    var module = modulePathParts[modulePathParts.findIndex(function (x) { return x === 'node_modules'; }) - 1];\n+    var bindingName = path.basename(file.absPath);\n+    var settings = options[module];\n+    var moduleDir = hashName(contents);\n+    file.contents = \"\\n  var fs=require('fs');var path=require('path');var binding='\" + contents.toString('base64') + \"';function mkdirp(r,t){t=t||null,r=path.resolve(r);try{fs.mkdirSync(r),t=t||r}catch(c){if(\\\"ENOENT\\\"===c.code)t=mkdirp(path.dirname(r),t),mkdirp(r,t);else{var i;try{i=fs.statSync(r)}catch(r){throw c}if(!i.isDirectory())throw c}}return t};\";\n+    if (!settings || settings === true) {\n+        file.contents += (\"\\n      mkdirp('\" + moduleDir + \"');\\n      var bindingPath = path.join(process.cwd(), '\" + moduleDir + \"', '\" + bindingName + \"')\\n      \\n      require('fs').writeFileSync(bindingPath, Buffer.from(binding, 'base64'))\\n      process.dlopen(module, bindingPath)\\n    \").trim();\n+        return {};\n+    }\n+    var depth = 0;\n+    settings.additionalFiles.forEach(function (file) {\n+        var ownDepth = 0;\n+        file.split('/').forEach(function (x) { return x === '..' && ownDepth++; });\n+        depth = ownDepth > depth ? ownDepth : depth;\n+    });\n+    var segments = [moduleDir];\n+    while (depth--) {\n+        segments.push(hashName(moduleDir + depth));\n+    }\n+    segments.push(bindingName);\n+    file.contents += \"\\n    var cwd = process.cwd()\\n    var bindingFileParts = \" + JSON.stringify(segments) + \";\\n    var bindingFile = path.join.apply(path, [cwd].concat(bindingFileParts));\\n    mkdirp(path.dirname(bindingFile));\\n    fs.writeFileSync(bindingFile, Buffer.from(binding, 'base64'));\\n    \" + settings.additionalFiles.reduce(function (code, filename, i) {\n+        var contents = fs.readFileSync(path.join(path.dirname(file.absPath), filename));\n+        return (code += \"\\n        var file\" + i + \" = '\" + contents.toString('base64') + \"';\\n        var filePath\" + i + \" = path.join(cwd, bindingFileParts[0], '\" + filename.split('../').join('') + \"');\\n        mkdirp(path.dirname(filePath\" + i + \"));\\n        fs.writeFileSync(filePath\" + i + \", Buffer.from(file\" + i + \", 'base64'));\\n      \");\n+    }, '') + \";\\n    process.dlopen(module, bindingFile)\\n  \";\n+}\n+exports.embedDotNode = embedDotNode;\n",
+					"match": false,
+					"packageHash": "e1ab860599d29c6d4c8ad3c1f58f1072b205a7ad69417ca01acca748d64e46c8",
+					"size": 2761,
+					"sourceHash": "332b20dcaa906831caa03d5845ad0b5dab2ecc151c0db0e98d71ed520697f31b",
+					"status": "content"
+				},
+				"lib/options.js": {
+					"diff": "--- published/lib/options.js\n+++ rebuilt/lib/options.js\n@@ -1,181 +1,181 @@\n-\"use strict\";\r\n-var __assign = (this && this.__assign) || Object.assign || function(t) {\r\n-    for (var s, i = 1, n = arguments.length; i < n; i++) {\r\n-        s = arguments[i];\r\n-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))\r\n-            t[p] = s[p];\r\n-    }\r\n-    return t;\r\n-};\r\n-Object.defineProperty(exports, \"__esModule\", { value: true });\r\n-var parseArgv = require(\"minimist\");\r\n-var util_1 = require(\"./util\");\r\n-var path_1 = require(\"path\");\r\n-var target_1 = require(\"./target\");\r\n-var os_1 = require(\"os\");\r\n-var c = require(\"chalk\");\r\n-exports.version = \"2.0.0-rc.17\";\r\n-var defaults = {\r\n-    flags: [],\r\n-    cwd: process.cwd(),\r\n-    configure: [],\r\n-    make: [],\r\n-    targets: [],\r\n-    vcBuild: util_1.isWindows ? ['nosign', 'release'] : [],\r\n-    enableNodeCli: false,\r\n-    compress: false,\r\n-    build: false,\r\n-    bundle: true,\r\n-    patches: [],\r\n-    plugins: []\r\n-};\r\n-var alias = {\r\n-    i: 'input',\r\n-    o: 'output',\r\n-    v: 'version',\r\n-    t: 'target',\r\n-    b: 'build',\r\n-    n: 'name',\r\n-    r: 'resource',\r\n-    a: 'resource',\r\n-    p: 'python',\r\n-    f: 'flag',\r\n-    c: 'configure',\r\n-    m: 'make',\r\n-    h: 'help',\r\n-    l: 'loglevel',\r\n-    'fake-argv': 'fakeArgv'\r\n-};\r\n-var argv = parseArgv(process.argv, { alias: alias, default: __assign({}, defaults, { enableStdIn: true }) });\r\n-exports.argv = argv;\r\n-var g = c.gray;\r\n-var help = (\"\\n\" + c.bold('nexe <entry-file> [options]') + \"\\n\\n   \" + c.underline.bold('Options:') + \"\\n\\n  -i   --input                      -- application entry point\\n  -o   --output                     -- path to output file\\n  -t   --target                     -- node version description\\n  -n   --name                       -- main app module name\\n  -r   --resource                   -- *embed files (glob) within the binary\\n       --plugin                     -- extend nexe runtime behavior\\n\\n   \" + c.underline.bold('Building from source:') + \"\\n\\n  -b   --build                      -- build from source\\n  -p   --python                     -- python2 (as python) executable path\\n  -f   --flag                       -- *v8 flags to include during compilation\\n  -c   --configure                  -- *arguments to the configure step\\n  -m   --make                       -- *arguments to the make/build step\\n       --snapshot                   -- path to a warmup snapshot\\n       --ico                        -- file name for alternate icon file (windows)\\n       --rc-*                       -- populate rc file options (windows)\\n       --sourceUrl                  -- pass an alternate source (node.tar.gz) url\\n       --enableNodeCli              -- enable node cli enforcement (blocks app cli)\\n\\n   \" + c.underline.bold('Other options:') + \"\\n\\n       --bundle                     -- custom bundling module with 'createBundle' export\\n       --temp                       -- temp file storage default '~/.nexe'\\n       --cwd                        -- set the current working directory for the command\\n       --fake-argv                  -- fake argv[1] with entry file\\n       --clean                      -- force download of sources\\n       --silent                     -- disable logging\\n       --verbose                    -- set logging to verbose\\n\\n       -* variable key name         * option can be used more than once\").trim();\r\n-exports.help = help;\r\n-exports.help = help = os_1.EOL + help + os_1.EOL;\r\n-function flatten() {\r\n-    var args = [];\r\n-    for (var _i = 0; _i < arguments.length; _i++) {\r\n-        args[_i] = arguments[_i];\r\n-    }\r\n-    return (_a = []).concat.apply(_a, args).filter(function (x) { return x; });\r\n-    var _a;\r\n-}\r\n-/**\r\n- * Extract keys such as { \"rc-CompanyName\": \"Node.js\" } to\r\n- * { CompanyName: \"Node.js\" }\r\n- * @param {*} match\r\n- * @param {*} options\r\n- */\r\n-function extractCliMap(match, options) {\r\n-    return Object.keys(options)\r\n-        .filter(function (x) { return match.test(x); })\r\n-        .reduce(function (map, option) {\r\n-        var key = option.split('-')[1];\r\n-        map[key] = options[option];\r\n-        delete options[option];\r\n-        return map;\r\n-    }, {});\r\n-}\r\n-function tryResolveMainFileName(cwd) {\r\n-    var filename;\r\n-    try {\r\n-        var file = require.resolve(cwd);\r\n-        filename = path_1.basename(file).replace(path_1.extname(file), '');\r\n-    }\r\n-    catch (_) { }\r\n-    return filename ? filename : 'nexe_' + Date.now();\r\n-}\r\n-function extractLogLevel(options) {\r\n-    if (options.loglevel)\r\n-        return options.loglevel;\r\n-    if (options.silent)\r\n-        return 'silent';\r\n-    if (options.verbose)\r\n-        return 'verbose';\r\n-    return 'info';\r\n-}\r\n-function isName(name) {\r\n",
+					"match": false,
+					"packageHash": "c2e54594afd3f4a3a08277cd3771d0898e9a64e8f037dea8e9fd561ed65ee93e",
+					"size": 7877,
+					"sourceHash": "2b62194a659cd77ab99460f406a73447948a3c42c296584ef7bb81eee7883a73",
+					"status": "content"
+				},
+				"lib/patches/third-party-main.js": {
+					"diff": "--- published/lib/patches/third-party-main.js\n+++ rebuilt/lib/patches/third-party-main.js\n@@ -1,50 +1,50 @@\n-\"use strict\";\r\n-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {\r\n-    return new (P || (P = Promise))(function (resolve, reject) {\r\n-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }\r\n-        function rejected(value) { try { step(generator[\"throw\"](value)); } catch (e) { reject(e); } }\r\n-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }\r\n-        step((generator = generator.apply(thisArg, _arguments || [])).next());\r\n-    });\r\n-};\r\n-var __generator = (this && this.__generator) || function (thisArg, body) {\r\n-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;\r\n-    return g = { next: verb(0), \"throw\": verb(1), \"return\": verb(2) }, typeof Symbol === \"function\" && (g[Symbol.iterator] = function() { return this; }), g;\r\n-    function verb(n) { return function (v) { return step([n, v]); }; }\r\n-    function step(op) {\r\n-        if (f) throw new TypeError(\"Generator is already executing.\");\r\n-        while (_) try {\r\n-            if (f = 1, y && (t = y[op[0] & 2 ? \"return\" : op[0] ? \"throw\" : \"next\"]) && !(t = t.call(y, op[1])).done) return t;\r\n-            if (y = 0, t) op = [0, t.value];\r\n-            switch (op[0]) {\r\n-                case 0: case 1: t = op; break;\r\n-                case 4: _.label++; return { value: op[1], done: false };\r\n-                case 5: _.label++; y = op[1]; op = [0]; continue;\r\n-                case 7: op = _.ops.pop(); _.trys.pop(); continue;\r\n-                default:\r\n-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }\r\n-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }\r\n-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }\r\n-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }\r\n-                    if (t[2]) _.ops.pop();\r\n-                    _.trys.pop(); continue;\r\n-            }\r\n-            op = body.call(thisArg, _);\r\n-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }\r\n-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };\r\n-    }\r\n-};\r\n-Object.defineProperty(exports, \"__esModule\", { value: true });\r\n-function main(compiler, next) {\r\n-    return __awaiter(this, void 0, void 0, function () {\r\n-        return __generator(this, function (_a) {\r\n-            switch (_a.label) {\r\n-                case 0: return [4 /*yield*/, compiler.setFileContentsAsync('lib/_third_party_main.js', \"\\\"use strict\\\";\\r\\nvar fs = require('fs');\\r\\nvar fd = fs.openSync(process.execPath, 'r');\\r\\nvar stat = fs.statSync(process.execPath);\\r\\nvar footer = Buffer.from(Array(32));\\r\\nfs.readSync(fd, footer, 0, 32, stat.size - 32);\\r\\nif (!footer.slice(0, 16).equals(Buffer.from('<nexe~~sentinel>'))) {\\r\\n    throw 'Invalid Nexe binary';\\r\\n}\\r\\nvar contentSize = footer.readDoubleLE(16);\\r\\nvar resourceSize = footer.readDoubleLE(24);\\r\\nvar contentStart = stat.size - 32 - resourceSize - contentSize;\\r\\nvar resourceStart = contentStart + contentSize;\\r\\nObject.defineProperty(process, '__nexe', (function () {\\r\\n    var nexeHeader = null;\\r\\n    return {\\r\\n        get: function () {\\r\\n            return nexeHeader;\\r\\n        },\\r\\n        set: function (value) {\\r\\n            if (nexeHeader) {\\r\\n                throw new Error('__nexe cannot be reconfigured');\\r\\n            }\\r\\n            nexeHeader = Object.assign({}, value, {\\r\\n                layout: {\\r\\n                    stat: stat,\\r\\n                    contentSize: contentSize,\\r\\n                    contentStart: contentStart,\\r\\n                    resourceSize: resourceSize,\\r\\n                    resourceStart: resourceStart\\r\\n                }\\r\\n            });\\r\\n            Object.freeze(nexeHeader);\\r\\n        },\\r\\n        enumerable: false,\\r\\n        configurable: false\\r\\n    };\\r\\n})());\\r\\nvar contentBuffer = Buffer.from(Array(contentSize));\\r\\nfs.readSync(fd, contentBuffer, 0, contentSize, contentStart);\\r\\nfs.closeSync(fd);\\r\\nvar Module = require('module');\\r\\nprocess.mainModule = new Module(process.execPath, null);\\r\\nprocess.mainModule.loaded = true;\\r\\nprocess.mainModule._compile(contentBuffer.toString(), process.execPath);\\r\\n\")];\r\n-                case 1:\r\n-                    _a.sent();\r\n-                    return [2 /*return*/, next()];\r\n-            }\r\n-        });\r\n-    });\r\n-}\r\n-exports.default = main;\r\n+\"use strict\";\n+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {\n+    return new (P || (P = Promise))(function (resolve, reject) {\n+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }\n+        function rejected(value) { try { step(generator[\"throw\"](value)); } catch (e) { reject(e); } }\n+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }\n+        step((generator = generator.apply(thisArg, _arguments || [])).next());\n+    });\n+};\n+var __generator = (this && this.__generator) || function (thisArg, body) {\n+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;\n+    return g = { next: verb(0), \"throw\": verb(1), \"return\": verb(2) }, typeof Symbol === \"function\" && (g[Symbol.iterator] = function() { return this; }), g;\n+    function verb(n) { return function (v) { return step([n, v]); }; }\n+    function step(op) {\n+        if (f) throw new TypeError(\"Generator is already executing.\");\n+        while (_) try {\n+            if (f = 1, y && (t = y[op[0] & 2 ? \"return\" : op[0] ? \"throw\" : \"next\"]) && !(t = t.call(y, op[1])).done) return t;\n+            if (y = 0, t) op = [0, t.value];\n+            switch (op[0]) {\n+                case 0: case 1: t = op; break;\n+                case 4: _.label++; return { value: op[1], done: false };\n+                case 5: _.label++; y = op[1]; op = [0]; continue;\n+                case 7: op = _.ops.pop(); _.trys.pop(); continue;\n+                default:\n+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }\n+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }\n+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }\n+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }\n+                    if (t[2]) _.ops.pop();\n+                    _.trys.pop(); continue;\n+            }\n+            op = body.call(thisArg, _);\n+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }\n+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };\n+    }\n+};\n+Object.defineProperty(exports, \"__esModule\", { value: true });\n+function main(compiler, next) {\n+    return __awaiter(this, void 0, void 0, function () {\n+        return __generator(this, function (_a) {\n+            switch (_a.label) {\n+                case 0: return [4 /*yield*/, compiler.setFileContentsAsync('lib/_third_party_main.js', \"\\\"use strict\\\";\\nvar fs = require('fs');\\nvar fd = fs.openSync(process.execPath, 'r');\\nvar stat = fs.statSync(process.execPath);\\nvar footer = Buffer.from(Array(32));\\nfs.readSync(fd, footer, 0, 32, stat.size - 32);\\nif (!footer.slice(0, 16).equals(Buffer.from('<nexe~~sentinel>'))) {\\n    throw 'Invalid Nexe binary';\\n}\\nvar contentSize = footer.readDoubleLE(16);\\nvar resourceSize = footer.readDoubleLE(24);\\nvar contentStart = stat.size - 32 - resourceSize - contentSize;\\nvar resourceStart = contentStart + contentSize;\\nObject.defineProperty(process, '__nexe', (function () {\\n    var nexeHeader = null;\\n    return {\\n        get: function () {\\n            return nexeHeader;\\n        },\\n        set: function (value) {\\n            if (nexeHeader) {\\n                throw new Error('__nexe cannot be reconfigured');\\n            }\\n            nexeHeader = Object.assign({}, value, {\\n                layout: {\\n                    stat: stat,\\n                    contentSize: contentSize,\\n                    contentStart: contentStart,\\n                    resourceSize: resourceSize,\\n                    resourceStart: resourceStart\\n                }\\n            });\\n            Object.freeze(nexeHeader);\\n        },\\n        enumerable: false,\\n        configurable: false\\n    };\\n})());\\nvar contentBuffer = Buffer.from(Array(contentSize));\\nfs.readSync(fd, contentBuffer, 0, contentSize, contentStart);\\nfs.closeSync(fd);\\nvar Module = require('module');\\nprocess.mainModule = new Module(process.execPath, null);\\nprocess.mainModule.loaded = true;\\nprocess.mainModule._compile(contentBuffer.toString(), process.execPath);\\n\")];\n+                case 1:\n+                    _a.sent();\n+                    return [2 /*return*/, next()];\n+            }\n+        });\n",
+					"match": false,
+					"packageHash": "0564efe57c306e5c8189ffb753d110fb1549dcf02a336726c856abaa7b12d31d",
+					"size": 4653,
+					"sourceHash": "89ffa4c06e5c2689470a193422aa97d6b4c05d8db3fc13fca2febba696158610",
+					"status": "content"
+				},
+				"lib/steps/shim.js": {
+					"diff": "--- published/lib/steps/shim.js\n+++ rebuilt/lib/steps/shim.js\n@@ -1,20 +1,20 @@\n-\"use strict\";\r\n-Object.defineProperty(exports, \"__esModule\", { value: true });\r\n-function wrap(code) {\r\n-    return '!(function () {' + code + '})();';\r\n-}\r\n-function default_1(compiler, next) {\r\n-    compiler.shims.push(wrap(compiler.getHeader()));\r\n-    compiler.shims.push(wrap(\"\\n    if (process.argv[1] && process.env.NODE_UNIQUE_ID) {\\n      const cluster = require('cluster')\\n      cluster._setupWorker()\\n      delete process.env.NODE_UNIQUE_ID\\n    }\\n  \"));\r\n-    if (compiler.options.resources.length) {\r\n-        compiler.shims.push(wrap(\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports, \\\"__esModule\\\", { value: true });\\r\\nvar assert_1 = require(\\\"assert\\\");\\r\\nvar path_1 = require(\\\"path\\\");\\r\\nvar binary = process.__nexe;\\r\\nassert_1.ok(binary);\\r\\nvar manifest = binary.resources;\\r\\nvar directories = {};\\r\\nvar isString = function (x) { return typeof x === 'string' || x instanceof String; };\\r\\nvar isNotFile = function () { return false; };\\r\\nvar isNotDirectory = isNotFile;\\r\\nvar isFile = function () { return true; };\\r\\nvar isDirectory = isFile;\\r\\nif (Object.keys(manifest).length) {\\r\\n    var fs_1 = require('fs');\\r\\n    var originalReadFile_1 = fs_1.readFile;\\r\\n    var originalReadFileSync_1 = fs_1.readFileSync;\\r\\n    var originalReaddir_1 = fs_1.readdir;\\r\\n    var originalReaddirSync_1 = fs_1.readdirSync;\\r\\n    var originalStatSync_1 = fs_1.statSync;\\r\\n    var originalStat_1 = fs_1.stat;\\r\\n    var resourceStart_1 = binary.layout.resourceStart;\\r\\n    var statTime_1 = function () {\\r\\n        var stat = binary.layout.stat;\\r\\n        return {\\r\\n            dev: 0,\\r\\n            ino: 0,\\r\\n            nlink: 0,\\r\\n            rdev: 0,\\r\\n            uid: 123,\\r\\n            gid: 500,\\r\\n            blksize: 4096,\\r\\n            blocks: 0,\\r\\n            atime: new Date(stat.atime),\\r\\n            atimeMs: stat.atime.getTime(),\\r\\n            mtime: new Date(stat.mtime),\\r\\n            mtimeMs: stat.mtime.getTime(),\\r\\n            ctime: new Date(stat.ctime),\\r\\n            ctimMs: stat.ctime.getTime(),\\r\\n            birthtime: new Date(stat.birthtime),\\r\\n            birthtimeMs: stat.birthtime.getTime()\\r\\n        };\\r\\n    };\\r\\n    var createStat_1 = function (directoryExtensions, fileExtensions) {\\r\\n        if (!fileExtensions) {\\r\\n            return Object.assign({}, binary.layout.stat, directoryExtensions, { size: 0 }, statTime_1());\\r\\n        }\\r\\n        var size = directoryExtensions[1];\\r\\n        return Object.assign({}, binary.layout.stat, fileExtensions, { size: size }, statTime_1());\\r\\n    };\\r\\n    var ownStat_1 = function (path) {\\r\\n        var key = path_1.resolve(path);\\r\\n        if (directories[key]) {\\r\\n            return createStat_1({ isDirectory: isDirectory, isFile: isNotFile });\\r\\n        }\\r\\n        if (manifest[key]) {\\r\\n            return createStat_1(manifest[key], { isFile: isFile, isDirectory: isNotDirectory });\\r\\n        }\\r\\n    };\\r\\n    var setupManifest_1 = function () {\\r\\n        Object.keys(manifest).forEach(function (key) {\\r\\n            var absolutePath = path_1.resolve(key);\\r\\n            var dirPath = path_1.dirname(absolutePath);\\r\\n            directories[dirPath] = directories[dirPath] || {};\\r\\n            directories[dirPath][path_1.basename(absolutePath)] = true;\\r\\n            if (!manifest[absolutePath]) {\\r\\n                manifest[absolutePath] = manifest[key];\\r\\n            }\\r\\n            var normalizedPath = path_1.normalize(key);\\r\\n            if (!manifest[normalizedPath]) {\\r\\n                manifest[normalizedPath] = manifest[key];\\r\\n            }\\r\\n        });\\r\\n        setupManifest_1 = function () { };\\r\\n    };\\r\\n    //naive patches intended to work for most use cases\\r\\n    var nfs = {\\r\\n        readdir: function readdir(path, options, callback) {\\r\\n            setupManifest_1();\\r\\n            path = path.toString();\\r\\n            if ('function' === typeof options) {\\r\\n                callback = options;\\r\\n                options = { encoding: 'utf8' };\\r\\n            }\\r\\n            var dir = directories[path_1.resolve(path)];\\r\\n            if (dir) {\\r\\n                process.nextTick(function () {\\r\\n                    callback(null, Object.keys(dir));\\r\\n                });\\r\\n            }\\r\\n            else {\\r\\n                return originalReaddir_1.apply(fs_1, arguments);\\r\\n            }\\r\\n        },\\r\\n        readdirSync: function readdirSync(path, options) {\\r\\n            setupManifest_1();\\r\\n            path = path.toString();\\r\\n            var dir = directories[path_1.resolve(path)];\\r\\n            if (dir) {\\r\\n                return Object.keys(dir);\\r\\n            }\\r\\n            return originalReaddirSync_1.apply(fs_1, arguments);\\r\\n        },\\r\\n        readFile: function readFile(file, options, callback) {\\r\\n            setupManifest_1();\\r\\n            var entry = manifest[file];\\r\\n            if (!entry || !isString(file)) {\\r\\n                return originalReadFile_1.apply(fs_1, arguments);\\r\\n            }\\r\\n            var offset = entry[0], length = entry[1];\\r\\n            var resourceOffset = resourceStart_1 + offset;\\r\\n            var encoding = isString(options) ? options : null;\\r\\n            callback = typeof options === 'function' ? options : callback;\\r\\n            fs_1.open(process.execPath, 'r', function (err, fd) {\\r\\n                if (err)\\r\\n                    return callback(err, null);\\r\\n                fs_1.read(fd, Buffer.alloc(length), 0, length, resourceOffset, function (error, bytesRead, result) {\\r\\n                    if (error) {\\r\\n                        return fs_1.close(fd, function () {\\r\\n                            callback(error, null);\\r\\n                        });\\r\\n                    }\\r\\n                    fs_1.close(fd, function (err) {\\r\\n                        if (err) {\\r\\n                            return callback(err, result);\\r\\n                        }\\r\\n                        callback(err, encoding ? result.toString(encoding) : result);\\r\\n                    });\\r\\n                });\\r\\n            });\\r\\n        },\\r\\n        readFileSync: function readFileSync(file, options) {\\r\\n            setupManifest_1();\\r\\n            var entry = manifest[file];\\r\\n            if (!entry || !isString(file)) {\\r\\n                return originalReadFileSync_1.apply(fs_1, arguments);\\r\\n            }\\r\\n            var offset = entry[0], length = entry[1];\\r\\n            var resourceOffset = resourceStart_1 + offset;\\r\\n            var encoding = isString(options) ? options : null;\\r\\n            var fd = fs_1.openSync(process.execPath, 'r');\\r\\n            var result = Buffer.alloc(length);\\r\\n            fs_1.readSync(fd, result, 0, length, resourceOffset);\\r\\n            fs_1.closeSync(fd);\\r\\n            return encoding ? result.toString(encoding) : result;\\r\\n        },\\r\\n        statSync: function statSync(path) {\\r\\n            var stat = ownStat_1(path);\\r\\n            if (stat) {\\r\\n                return stat;\\r\\n            }\\r\\n            return originalStatSync_1.apply(fs_1, arguments);\\r\\n        },\\r\\n        stat: function stat(path, callback) {\\r\\n            var stat = ownStat_1(path);\\r\\n            if (stat) {\\r\\n                process.nextTick(function () {\\r\\n                    callback(null, stat);\\r\\n                });\\r\\n            }\\r\\n            else {\\r\\n                return originalStat_1.apply(fs_1, arguments);\\r\\n            }\\r\\n        }\\r\\n    };\\r\\n    Object.assign(fs_1, nfs);\\r\\n}\\r\\n\"));\r\n-    }\r\n-    //compiler.shims.push(wrap('{/{replace:lib/steps/shim-require.js}}'))\r\n-    if (compiler.options.fakeArgv !== false) {\r\n-        var nty = !process.stdin.isTTY;\r\n-        var input = nty ? '[stdin]' : compiler.options.input;\r\n-        compiler.shims.push(wrap(\"\\n      var r = require('path').resolve; \\n      process.argv.splice(1,0, \" + (nty ? \"'\" + input + \"'\" : \"r(\\\"\" + input + \"\\\")\") + \");\"));\r\n-    }\r\n-    return next();\r\n-}\r\n-exports.default = default_1;\r\n+\"use strict\";\n+Object.defineProperty(exports, \"__esModule\", { value: true });\n+function wrap(code) {\n+    return '!(function () {' + code + '})();';\n+}\n+function default_1(compiler, next) {\n+    compiler.shims.push(wrap(compiler.getHeader()));\n+    compiler.shims.push(wrap(\"\\n    if (process.argv[1] && process.env.NODE_UNIQUE_ID) {\\n      const cluster = require('cluster')\\n      cluster._setupWorker()\\n      delete process.env.NODE_UNIQUE_ID\\n    }\\n  \"));\n+    if (compiler.options.resources.length) {\n+        compiler.shims.push(wrap(\"\\\"use strict\\\";\\nObject.defineProperty(exports, \\\"__esModule\\\", { value: true });\\nvar assert_1 = require(\\\"assert\\\");\\nvar path_1 = require(\\\"path\\\");\\nvar binary = process.__nexe;\\nassert_1.ok(binary);\\nvar manifest = binary.resources;\\nvar directories = {};\\nvar isString = function (x) { return typeof x === 'string' || x instanceof String; };\\nvar isNotFile = function () { return false; };\\nvar isNotDirectory = isNotFile;\\nvar isFile = function () { return true; };\\nvar isDirectory = isFile;\\nif (Object.keys(manifest).length) {\\n    var fs_1 = require('fs');\\n    var originalReadFile_1 = fs_1.readFile;\\n    var originalReadFileSync_1 = fs_1.readFileSync;\\n    var originalReaddir_1 = fs_1.readdir;\\n    var originalReaddirSync_1 = fs_1.readdirSync;\\n    var originalStatSync_1 = fs_1.statSync;\\n    var originalStat_1 = fs_1.stat;\\n    var resourceStart_1 = binary.layout.resourceStart;\\n    var statTime_1 = function () {\\n        var stat = binary.layout.stat;\\n        return {\\n            dev: 0,\\n            ino: 0,\\n            nlink: 0,\\n            rdev: 0,\\n            uid: 123,\\n            gid: 500,\\n            blksize: 4096,\\n            blocks: 0,\\n            atime: new Date(stat.atime),\\n            atimeMs: stat.atime.getTime(),\\n            mtime: new Date(stat.mtime),\\n            mtimeMs: stat.mtime.getTime(),\\n            ctime: new Date(stat.ctime),\\n            ctimMs: stat.ctime.getTime(),\\n            birthtime: new Date(stat.birthtime),\\n            birthtimeMs: stat.birthtime.getTime()\\n        };\\n    };\\n    var createStat_1 = function (directoryExtensions, fileExtensions) {\\n        if (!fileExtensions) {\\n            return Object.assign({}, binary.layout.stat, directoryExtensions, { size: 0 }, statTime_1());\\n        }\\n        var size = directoryExtensions[1];\\n        return Object.assign({}, binary.layout.stat, fileExtensions, { size: size }, statTime_1());\\n    };\\n    var ownStat_1 = function (path) {\\n        var key = path_1.resolve(path);\\n        if (directories[key]) {\\n            return createStat_1({ isDirectory: isDirectory, isFile: isNotFile });\\n        }\\n        if (manifest[key]) {\\n            return createStat_1(manifest[key], { isFile: isFile, isDirectory: isNotDirectory });\\n        }\\n    };\\n    var setupManifest_1 = function () {\\n        Object.keys(manifest).forEach(function (key) {\\n            var absolutePath = path_1.resolve(key);\\n            var dirPath = path_1.dirname(absolutePath);\\n            directories[dirPath] = directories[dirPath] || {};\\n            directories[dirPath][path_1.basename(absolutePath)] = true;\\n            if (!manifest[absolutePath]) {\\n                manifest[absolutePath] = manifest[key];\\n            }\\n            var normalizedPath = path_1.normalize(key);\\n            if (!manifest[normalizedPath]) {\\n                manifest[normalizedPath] = manifest[key];\\n            }\\n        });\\n        setupManifest_1 = function () { };\\n    };\\n    //naive patches intended to work for most use cases\\n    var nfs = {\\n        readdir: function readdir(path, options, callback) {\\n            setupManifest_1();\\n            path = path.toString();\\n            if ('function' === typeof options) {\\n                callback = options;\\n                options = { encoding: 'utf8' };\\n            }\\n            var dir = directories[path_1.resolve(path)];\\n            if (dir) {\\n                process.nextTick(function () {\\n                    callback(null, Object.keys(dir));\\n                });\\n            }\\n            else {\\n                return originalReaddir_1.apply(fs_1, arguments);\\n            }\\n        },\\n        readdirSync: function readdirSync(path, options) {\\n            setupManifest_1();\\n            path = path.toString();\\n            var dir = directories[path_1.resolve(path)];\\n            if (dir) {\\n                return Object.keys(dir);\\n            }\\n            return originalReaddirSync_1.apply(fs_1, arguments);\\n        },\\n        readFile: function readFile(file, options, callback) {\\n            setupManifest_1();\\n            var entry = manifest[file];\\n            if (!entry || !isString(file)) {\\n                return originalReadFile_1.apply(fs_1, arguments);\\n            }\\n            var offset = entry[0], length = entry[1];\\n            var resourceOffset = resourceStart_1 + offset;\\n            var encoding = isString(options) ? options : null;\\n            callback = typeof options === 'function' ? options : callback;\\n            fs_1.open(process.execPath, 'r', function (err, fd) {\\n                if (err)\\n                    return callback(err, null);\\n                fs_1.read(fd, Buffer.alloc(length), 0, length, resourceOffset, function (error, bytesRead, result) {\\n                    if (error) {\\n                        return fs_1.close(fd, function () {\\n                            callback(error, null);\\n                        });\\n                    }\\n                    fs_1.close(fd, function (err) {\\n                        if (err) {\\n                            return callback(err, result);\\n                        }\\n                        callback(err, encoding ? result.toString(encoding) : result);\\n                    });\\n                });\\n            });\\n        },\\n        readFileSync: function readFileSync(file, options) {\\n            setupManifest_1();\\n            var entry = manifest[file];\\n            if (!entry || !isString(file)) {\\n                return originalReadFileSync_1.apply(fs_1, arguments);\\n            }\\n            var offset = entry[0], length = entry[1];\\n            var resourceOffset = resourceStart_1 + offset;\\n            var encoding = isString(options) ? options : null;\\n            var fd = fs_1.openSync(process.execPath, 'r');\\n            var result = Buffer.alloc(length);\\n            fs_1.readSync(fd, result, 0, length, resourceOffset);\\n            fs_1.closeSync(fd);\\n            return encoding ? result.toString(encoding) : result;\\n        },\\n        statSync: function statSync(path) {\\n            var stat = ownStat_1(path);\\n            if (stat) {\\n                return stat;\\n            }\\n            return originalStatSync_1.apply(fs_1, arguments);\\n        },\\n        stat: function stat(path, callback) {\\n            var stat = ownStat_1(path);\\n            if (stat) {\\n                process.nextTick(function () {\\n                    callback(null, stat);\\n                });\\n            }\\n            else {\\n                return originalStat_1.apply(fs_1, arguments);\\n            }\\n        }\\n    };\\n    Object.assign(fs_1, nfs);\\n}\\n\"));\n+    }\n+    //compiler.shims.push(wrap('{/{replace:lib/steps/shim-require.js}}'))\n+    if (compiler.options.fakeArgv !== false) {\n+        var nty = !process.stdin.isTTY;\n+        var input = nty ? '[stdin]' : compiler.options.input;\n+        compiler.shims.push(wrap(\"\\n      var r = require('path').resolve; \\n      process.argv.splice(1,0, \" + (nty ? \"'\" + input + \"'\" : \"r(\\\"\" + input + \"\\\")\") + \");\"));\n+    }\n+    return next();\n+}\n+exports.default = default_1;\n",
+					"match": false,
+					"packageHash": "1956b6c271ad400982d1d26bb9261fbf7b9f340402a581cba6ea9aec1e102e92",
+					"size": 8046,
+					"sourceHash": "19198b4b5c0ccce59ec521eefc808f409e205adc703a28e759f62fd8cce46943",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 4,
+				"matchingFiles": 59,
+				"missingInPackage": 0,
+				"missingInSource": 1,
+				"score": 0.921875,
+				"totalFiles": 64
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "accepts",
+				"version": "1.3.4"
+			},
+			{
+				"name": "acorn",
+				"version": "5.1.2"
+			},
+			{
+				"name": "acorn-jsx",
+				"version": "4.0.1"
+			},
+			{
+				"name": "ajax-request",
+				"version": "1.2.3"
+			},
+			{
+				"name": "ajv",
+				"version": "5.2.3"
+			},
+			{
+				"name": "ansi",
+				"version": "0.3.1"
+			},
+			{
+				"name": "ansi-escapes",
+				"version": "3.0.0"
+			},
+			{
+				"name": "ansi-regex",
+				"version": "2.1.1"
+			},
+			{
+				"name": "ansi-styles",
+				"version": "2.2.1"
+			},
+			{
+				"name": "anymatch",
+				"version": "1.3.2"
+			},
+			{
+				"name": "app-builder",
+				"version": "5.1.0"
+			},
+			{
+				"name": "app-root-path",
+				"version": "2.0.1"
+			},
+			{
+				"name": "arr-diff",
+				"version": "2.0.0"
+			},
+			{
+				"name": "arr-flatten",
+				"version": "1.1.0"
+			},
+			{
+				"name": "array-flatten",
+				"version": "1.1.1"
+			},
+			{
+				"name": "array-union",
+				"version": "1.0.2"
+			},
+			{
+				"name": "array-uniq",
+				"version": "1.0.3"
+			},
+			{
+				"name": "array-unique",
+				"version": "0.2.1"
+			},
+			{
+				"name": "asn1",
+				"version": "0.2.3"
+			},
+			{
+				"name": "assert-plus",
+				"version": "1.0.0"
+			},
+			{
+				"name": "async-each",
+				"version": "1.0.1"
+			},
+			{
+				"name": "asynckit",
+				"version": "0.4.0"
+			},
+			{
+				"name": "aws-sign2",
+				"version": "0.7.0"
+			},
+			{
+				"name": "aws4",
+				"version": "1.6.0"
+			},
+			{
+				"name": "babel-polyfill",
+				"version": "6.23.0"
+			},
+			{
+				"name": "babel-runtime",
+				"version": "6.26.0"
+			},
+			{
+				"name": "regenerator-runtime",
+				"version": "0.11.0"
+			},
+			{
+				"name": "balanced-match",
+				"version": "1.0.0"
+			},
+			{
+				"name": "base64-img",
+				"version": "1.0.3"
+			},
+			{
+				"name": "base64-js",
+				"version": "1.2.1"
+			},
+			{
+				"name": "bcrypt-pbkdf",
+				"version": "1.0.1"
+			},
+			{
+				"name": "binary-extensions",
+				"version": "1.10.0"
+			},
+			{
+				"name": "bl",
+				"version": "1.2.1"
+			},
+			{
+				"name": "body-parser",
+				"version": "1.18.2"
+			},
+			{
+				"name": "boom",
+				"version": "4.3.1"
+			},
+			{
+				"name": "brace-expansion",
+				"version": "1.1.8"
+			},
+			{
+				"name": "braces",
+				"version": "1.8.5"
+			},
+			{
+				"name": "buffer",
+				"version": "3.6.0"
+			},
+			{
+				"name": "buffer-crc32",
+				"version": "0.2.13"
+			},
+			{
+				"name": "base64-js",
+				"version": "0.0.8"
+			},
+			{
+				"name": "bytes",
+				"version": "3.0.0"
+			},
+			{
+				"name": "caseless",
+				"version": "0.12.0"
+			},
+			{
+				"name": "caw",
+				"version": "2.0.1"
+			},
+			{
+				"name": "chain-able",
+				"version": "1.0.1"
+			},
+			{
+				"name": "chalk",
+				"version": "1.1.3"
+			},
+			{
+				"name": "chokidar",
+				"version": "1.7.0"
+			},
+			{
+				"name": "cli-cursor",
+				"version": "2.1.0"
+			},
+			{
+				"name": "cli-spinners",
+				"version": "1.0.1"
+			},
+			{
+				"name": "cli-width",
+				"version": "2.2.0"
+			},
+			{
+				"name": "co",
+				"version": "4.6.0"
+			},
+			{
+				"name": "color-convert",
+				"version": "1.9.0"
+			},
+			{
+				"name": "color-name",
+				"version": "1.1.3"
+			},
+			{
+				"name": "combined-stream",
+				"version": "1.0.5"
+			},
+			{
+				"name": "concat-map",
+				"version": "0.0.1"
+			},
+			{
+				"name": "concat-with-sourcemaps",
+				"version": "1.0.4"
+			},
+			{
+				"name": "config-chain",
+				"version": "1.1.11"
+			},
+			{
+				"name": "content-disposition",
+				"version": "0.5.2"
+			},
+			{
+				"name": "content-type",
+				"version": "1.0.4"
+			},
+			{
+				"name": "cookie",
+				"version": "0.3.1"
+			},
+			{
+				"name": "cookie-signature",
+				"version": "1.0.6"
+			},
+			{
+				"name": "core-js",
+				"version": "2.5.1"
+			},
+			{
+				"name": "core-util-is",
+				"version": "1.0.2"
+			},
+			{
+				"name": "cryptiles",
+				"version": "3.1.2"
+			},
+			{
+				"name": "boom",
+				"version": "5.2.0"
+			},
+			{
+				"name": "dashdash",
+				"version": "1.14.1"
+			},
+			{
+				"name": "debug",
+				"version": "2.6.9"
+			},
+			{
+				"name": "decompress",
+				"version": "4.2.0"
+			},
+			{
+				"name": "decompress-response",
+				"version": "3.3.0"
+			},
+			{
+				"name": "decompress-tar",
+				"version": "4.1.1"
+			},
+			{
+				"name": "decompress-tarbz2",
+				"version": "4.1.1"
+			},
+			{
+				"name": "file-type",
+				"version": "6.2.0"
+			},
+			{
+				"name": "decompress-targz",
+				"version": "4.1.1"
+			},
+			{
+				"name": "decompress-unzip",
+				"version": "4.0.1"
+			},
+			{
+				"name": "file-type",
+				"version": "3.9.0"
+			},
+			{
+				"name": "get-stream",
+				"version": "2.3.1"
+			},
+			{
+				"name": "pify",
+				"version": "2.3.0"
+			},
+			{
+				"name": "deep-is",
+				"version": "0.1.3"
+			},
+			{
+				"name": "delayed-stream",
+				"version": "1.0.0"
+			},
+			{
+				"name": "depd",
+				"version": "1.1.1"
+			},
+			{
+				"name": "destroy",
+				"version": "1.0.4"
+			},
+			{
+				"name": "download",
+				"version": "6.2.5"
+			},
+			{
+				"name": "duplexer3",
+				"version": "0.1.4"
+			},
+			{
+				"name": "ecc-jsbn",
+				"version": "0.1.1"
+			},
+			{
+				"name": "ee-first",
+				"version": "1.1.1"
+			},
+			{
+				"name": "encodeurl",
+				"version": "1.0.1"
+			},
+			{
+				"name": "encoding",
+				"version": "0.1.12"
+			},
+			{
+				"name": "end-of-stream",
+				"version": "1.4.0"
+			},
+			{
+				"name": "escape-html",
+				"version": "1.0.3"
+			},
+			{
+				"name": "escape-string-regexp",
+				"version": "1.0.5"
+			},
+			{
+				"name": "escodegen",
+				"version": "1.9.0"
+			},
+			{
+				"name": "esprima",
+				"version": "3.1.3"
+			},
+			{
+				"name": "estraverse",
+				"version": "4.2.0"
+			},
+			{
+				"name": "esutils",
+				"version": "2.0.2"
+			},
+			{
+				"name": "etag",
+				"version": "1.8.1"
+			},
+			{
+				"name": "exec-sh",
+				"version": "0.2.1"
+			},
+			{
+				"name": "expand-brackets",
+				"version": "0.1.5"
+			},
+			{
+				"name": "expand-range",
+				"version": "1.8.2"
+			},
+			{
+				"name": "express",
+				"version": "4.16.2"
+			},
+			{
+				"name": "ext-list",
+				"version": "2.2.2"
+			},
+			{
+				"name": "ext-name",
+				"version": "5.0.0"
+			},
+			{
+				"name": "extend",
+				"version": "3.0.1"
+			},
+			{
+				"name": "external-editor",
+				"version": "2.0.5"
+			},
+			{
+				"name": "extglob",
+				"version": "0.3.2"
+			},
+			{
+				"name": "extsprintf",
+				"version": "1.3.0"
+			},
+			{
+				"name": "fast-deep-equal",
+				"version": "1.0.0"
+			},
+			{
+				"name": "fast-levenshtein",
+				"version": "2.0.6"
+			},
+			{
+				"name": "fd-slicer",
+				"version": "1.0.1"
+			},
+			{
+				"name": "figures",
+				"version": "2.0.0"
+			},
+			{
+				"name": "file-match",
+				"version": "1.0.2"
+			},
+			{
+				"name": "file-system",
+				"version": "2.2.2"
+			},
+			{
+				"name": "file-type",
+				"version": "5.2.0"
+			},
+			{
+				"name": "filename-regex",
+				"version": "2.0.1"
+			},
+			{
+				"name": "filename-reserved-regex",
+				"version": "2.0.0"
+			},
+			{
+				"name": "filenamify",
+				"version": "2.0.0"
+			},
+			{
+				"name": "fill-range",
+				"version": "2.2.3"
+			},
+			{
+				"name": "finalhandler",
+				"version": "1.1.0"
+			},
+			{
+				"name": "fliplog",
+				"version": "0.3.13"
+			},
+			{
+				"name": "for-in",
+				"version": "1.0.2"
+			},
+			{
+				"name": "for-own",
+				"version": "0.1.5"
+			},
+			{
+				"name": "forever-agent",
+				"version": "0.6.1"
+			},
+			{
+				"name": "form-data",
+				"version": "2.3.1"
+			},
+			{
+				"name": "forwarded",
+				"version": "0.1.2"
+			},
+			{
+				"name": "fresh",
+				"version": "0.5.2"
+			},
+			{
+				"name": "fs-extra",
+				"version": "2.1.2"
+			},
+			{
+				"name": "fs.realpath",
+				"version": "1.0.0"
+			},
+			{
+				"name": "fsevents",
+				"version": "1.1.2"
+			},
+			{
+				"name": "fuse-box",
+				"version": "2.3.4-beta.11"
+			},
+			{
+				"name": "fuse-tools",
+				"version": "1.0.5"
+			},
+			{
+				"name": "get-proxy",
+				"version": "2.1.0"
+			},
+			{
+				"name": "get-stream",
+				"version": "3.0.0"
+			},
+			{
+				"name": "getpass",
+				"version": "0.1.7"
+			},
+			{
+				"name": "glob",
+				"version": "7.1.2"
+			},
+			{
+				"name": "glob-base",
+				"version": "0.3.0"
+			},
+			{
+				"name": "glob-parent",
+				"version": "2.0.0"
+			},
+			{
+				"name": "globby",
+				"version": "6.1.0"
+			},
+			{
+				"name": "got",
+				"version": "7.1.0"
+			},
+			{
+				"name": "graceful-fs",
+				"version": "4.1.11"
+			},
+			{
+				"name": "graceful-readlink",
+				"version": "1.0.1"
+			},
+			{
+				"name": "har-schema",
+				"version": "2.0.0"
+			},
+			{
+				"name": "har-validator",
+				"version": "5.0.3"
+			},
+			{
+				"name": "has-ansi",
+				"version": "2.0.0"
+			},
+			{
+				"name": "has-flag",
+				"version": "2.0.0"
+			},
+			{
+				"name": "has-symbol-support-x",
+				"version": "1.4.1"
+			},
+			{
+				"name": "has-to-string-tag-x",
+				"version": "1.4.1"
+			},
+			{
+				"name": "hawk",
+				"version": "6.0.2"
+			},
+			{
+				"name": "hoek",
+				"version": "4.2.0"
+			},
+			{
+				"name": "http-errors",
+				"version": "1.6.2"
+			},
+			{
+				"name": "setprototypeof",
+				"version": "1.0.3"
+			},
+			{
+				"name": "http-signature",
+				"version": "1.2.0"
+			},
+			{
+				"name": "iconv-lite",
+				"version": "0.4.19"
+			},
+			{
+				"name": "ieee754",
+				"version": "1.1.8"
+			},
+			{
+				"name": "inflight",
+				"version": "1.0.6"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.3"
+			},
+			{
+				"name": "ini",
+				"version": "1.3.4"
+			},
+			{
+				"name": "inquirer",
+				"version": "3.3.0"
+			},
+			{
+				"name": "ansi-regex",
+				"version": "3.0.0"
+			},
+			{
+				"name": "ansi-styles",
+				"version": "3.2.0"
+			},
+			{
+				"name": "chalk",
+				"version": "2.1.0"
+			},
+			{
+				"name": "strip-ansi",
+				"version": "4.0.0"
+			},
+			{
+				"name": "supports-color",
+				"version": "4.4.0"
+			},
+			{
+				"name": "ipaddr.js",
+				"version": "1.5.2"
+			},
+			{
+				"name": "is-binary-path",
+				"version": "1.0.1"
+			},
+			{
+				"name": "is-buffer",
+				"version": "1.1.5"
+			},
+			{
+				"name": "is-dotfile",
+				"version": "1.0.3"
+			},
+			{
+				"name": "is-equal-shallow",
+				"version": "0.1.3"
+			},
+			{
+				"name": "is-extendable",
+				"version": "0.1.1"
+			},
+			{
+				"name": "is-extglob",
+				"version": "1.0.0"
+			},
+			{
+				"name": "is-fullwidth-code-point",
+				"version": "2.0.0"
+			},
+			{
+				"name": "is-glob",
+				"version": "2.0.1"
+			},
+			{
+				"name": "is-natural-number",
+				"version": "4.0.1"
+			},
+			{
+				"name": "is-number",
+				"version": "2.1.0"
+			},
+			{
+				"name": "is-object",
+				"version": "1.0.1"
+			},
+			{
+				"name": "is-plain-obj",
+				"version": "1.1.0"
+			},
+			{
+				"name": "is-posix-bracket",
+				"version": "0.1.1"
+			},
+			{
+				"name": "is-primitive",
+				"version": "2.0.0"
+			},
+			{
+				"name": "is-promise",
+				"version": "2.1.0"
+			},
+			{
+				"name": "is-retry-allowed",
+				"version": "1.1.0"
+			},
+			{
+				"name": "is-stream",
+				"version": "1.1.0"
+			},
+			{
+				"name": "is-typedarray",
+				"version": "1.0.0"
+			},
+			{
+				"name": "isarray",
+				"version": "1.0.0"
+			},
+			{
+				"name": "isobject",
+				"version": "2.1.0"
+			},
+			{
+				"name": "isstream",
+				"version": "0.1.2"
+			},
+			{
+				"name": "isurl",
+				"version": "1.0.0"
+			},
+			{
+				"name": "jsbn",
+				"version": "0.1.1"
+			},
+			{
+				"name": "jschardet",
+				"version": "1.5.1"
+			},
+			{
+				"name": "json-schema",
+				"version": "0.2.3"
+			},
+			{
+				"name": "json-schema-traverse",
+				"version": "0.3.1"
+			},
+			{
+				"name": "json-stable-stringify",
+				"version": "1.0.1"
+			},
+			{
+				"name": "json-stringify-safe",
+				"version": "5.0.1"
+			},
+			{
+				"name": "jsonfile",
+				"version": "2.4.0"
+			},
+			{
+				"name": "jsonify",
+				"version": "0.0.0"
+			},
+			{
+				"name": "jsprim",
+				"version": "1.4.1"
+			},
+			{
+				"name": "kind-of",
+				"version": "3.2.2"
+			},
+			{
+				"name": "lego-api",
+				"version": "1.0.8"
+			},
+			{
+				"name": "chain-able",
+				"version": "3.0.0"
+			},
+			{
+				"name": "levn",
+				"version": "0.3.0"
+			},
+			{
+				"name": "lodash",
+				"version": "4.17.4"
+			},
+			{
+				"name": "log-symbols",
+				"version": "1.0.2"
+			},
+			{
+				"name": "lowercase-keys",
+				"version": "1.0.0"
+			},
+			{
+				"name": "make-dir",
+				"version": "1.0.0"
+			},
+			{
+				"name": "media-typer",
+				"version": "0.3.0"
+			},
+			{
+				"name": "merge",
+				"version": "1.2.0"
+			},
+			{
+				"name": "merge-descriptors",
+				"version": "1.0.1"
+			},
+			{
+				"name": "methods",
+				"version": "1.1.2"
+			},
+			{
+				"name": "micromatch",
+				"version": "2.3.11"
+			},
+			{
+				"name": "mime",
+				"version": "1.4.1"
+			},
+			{
+				"name": "mime-db",
+				"version": "1.30.0"
+			},
+			{
+				"name": "mime-types",
+				"version": "2.1.17"
+			},
+			{
+				"name": "mimic-fn",
+				"version": "1.1.0"
+			},
+			{
+				"name": "mimic-response",
+				"version": "1.0.0"
+			},
+			{
+				"name": "minimatch",
+				"version": "3.0.4"
+			},
+			{
+				"name": "minimist",
+				"version": "1.2.0"
+			},
+			{
+				"name": "mkdirp",
+				"version": "0.5.1"
+			},
+			{
+				"name": "minimist",
+				"version": "0.0.8"
+			},
+			{
+				"name": "ms",
+				"version": "2.0.0"
+			},
+			{
+				"name": "mustache",
+				"version": "2.3.0"
+			},
+			{
+				"name": "mute-stream",
+				"version": "0.0.7"
+			},
+			{
+				"name": "nan",
+				"version": "2.7.0"
+			},
+			{
+				"name": "nanoseconds",
+				"version": "0.1.0"
+			},
+			{
+				"name": "negotiator",
+				"version": "0.6.1"
+			},
+			{
+				"name": "node-fetch",
+				"version": "1.6.3"
+			},
+			{
+				"name": "normalize-path",
+				"version": "2.1.1"
+			},
+			{
+				"name": "npm-conf",
+				"version": "1.1.2"
+			},
+			{
+				"name": "oauth-sign",
+				"version": "0.8.2"
+			},
+			{
+				"name": "object-assign",
+				"version": "4.1.1"
+			},
+			{
+				"name": "object.omit",
+				"version": "2.0.1"
+			},
+			{
+				"name": "on-finished",
+				"version": "2.3.0"
+			},
+			{
+				"name": "once",
+				"version": "1.4.0"
+			},
+			{
+				"name": "onetime",
+				"version": "2.0.1"
+			},
+			{
+				"name": "opencollective",
+				"version": "1.0.3"
+			},
+			{
+				"name": "ansi-escapes",
+				"version": "1.4.0"
+			},
+			{
+				"name": "inquirer",
+				"version": "3.0.6"
+			},
+			{
+				"name": "opn",
+				"version": "4.0.2"
+			},
+			{
+				"name": "optionator",
+				"version": "0.8.2"
+			},
+			{
+				"name": "options",
+				"version": "0.0.6"
+			},
+			{
+				"name": "ora",
+				"version": "1.3.0"
+			},
+			{
+				"name": "os-tmpdir",
+				"version": "1.0.2"
+			},
+			{
+				"name": "p-cancelable",
+				"version": "0.3.0"
+			},
+			{
+				"name": "p-event",
+				"version": "1.3.0"
+			},
+			{
+				"name": "p-finally",
+				"version": "1.0.0"
+			},
+			{
+				"name": "p-timeout",
+				"version": "1.2.0"
+			},
+			{
+				"name": "parse-glob",
+				"version": "3.0.4"
+			},
+			{
+				"name": "parseurl",
+				"version": "1.3.2"
+			},
+			{
+				"name": "path-is-absolute",
+				"version": "1.0.1"
+			},
+			{
+				"name": "path-to-regexp",
+				"version": "0.1.7"
+			},
+			{
+				"name": "pend",
+				"version": "1.2.0"
+			},
+			{
+				"name": "performance-now",
+				"version": "2.1.0"
+			},
+			{
+				"name": "pifi",
+				"version": "1.0.0"
+			},
+			{
+				"name": "pify",
+				"version": "3.0.0"
+			},
+			{
+				"name": "pinkie",
+				"version": "2.0.4"
+			},
+			{
+				"name": "pinkie-promise",
+				"version": "2.0.1"
+			},
+			{
+				"name": "postcss",
+				"version": "6.0.13"
+			},
+			{
+				"name": "source-map",
+				"version": "0.6.1"
+			},
+			{
+				"name": "prelude-ls",
+				"version": "1.1.2"
+			},
+			{
+				"name": "prepend-http",
+				"version": "1.0.4"
+			},
+			{
+				"name": "preserve",
+				"version": "0.2.0"
+			},
+			{
+				"name": "pretty-time",
+				"version": "0.2.0"
+			},
+			{
+				"name": "prettysize",
+				"version": "0.0.3"
+			},
+			{
+				"name": "process-nextick-args",
+				"version": "1.0.7"
+			},
+			{
+				"name": "proto-list",
+				"version": "1.2.4"
+			},
+			{
+				"name": "proxy-addr",
+				"version": "2.0.2"
+			},
+			{
+				"name": "punycode",
+				"version": "1.4.1"
+			},
+			{
+				"name": "qs",
+				"version": "6.5.1"
+			},
+			{
+				"name": "randomatic",
+				"version": "1.1.7"
+			},
+			{
+				"name": "is-number",
+				"version": "3.0.0"
+			},
+			{
+				"name": "kind-of",
+				"version": "4.0.0"
+			},
+			{
+				"name": "range-parser",
+				"version": "1.2.0"
+			},
+			{
+				"name": "raw-body",
+				"version": "2.3.2"
+			},
+			{
+				"name": "readable-stream",
+				"version": "2.3.3"
+			},
+			{
+				"name": "readdirp",
+				"version": "2.1.0"
+			},
+			{
+				"name": "realm-utils",
+				"version": "1.0.8"
+			},
+			{
+				"name": "app-root-path",
+				"version": "1.4.0"
+			},
+			{
+				"name": "regenerator-runtime",
+				"version": "0.10.5"
+			},
+			{
+				"name": "regex-cache",
+				"version": "0.4.4"
+			},
+			{
+				"name": "remove-trailing-separator",
+				"version": "1.1.0"
+			},
+			{
+				"name": "repeat-element",
+				"version": "1.1.2"
+			},
+			{
+				"name": "repeat-string",
+				"version": "1.6.1"
+			},
+			{
+				"name": "request",
+				"version": "2.83.0"
+			},
+			{
+				"name": "restore-cursor",
+				"version": "2.0.0"
+			},
+			{
+				"name": "rimraf",
+				"version": "2.6.2"
+			},
+			{
+				"name": "run-async",
+				"version": "2.3.0"
+			},
+			{
+				"name": "rx",
+				"version": "4.1.0"
+			},
+			{
+				"name": "rx-lite",
+				"version": "4.0.8"
+			},
+			{
+				"name": "rx-lite-aggregates",
+				"version": "4.0.8"
+			},
+			{
+				"name": "safe-buffer",
+				"version": "5.1.1"
+			},
+			{
+				"name": "seek-bzip",
+				"version": "1.0.5"
+			},
+			{
+				"name": "commander",
+				"version": "2.8.1"
+			},
+			{
+				"name": "send",
+				"version": "0.16.1"
+			},
+			{
+				"name": "serve-static",
+				"version": "1.13.1"
+			},
+			{
+				"name": "set-immediate-shim",
+				"version": "1.0.1"
+			},
+			{
+				"name": "setprototypeof",
+				"version": "1.1.0"
+			},
+			{
+				"name": "shorthash",
+				"version": "0.0.2"
+			},
+			{
+				"name": "signal-exit",
+				"version": "3.0.2"
+			},
+			{
+				"name": "sntp",
+				"version": "2.0.2"
+			},
+			{
+				"name": "sort-keys",
+				"version": "1.1.2"
+			},
+			{
+				"name": "sort-keys-length",
+				"version": "1.0.1"
+			},
+			{
+				"name": "source-map",
+				"version": "0.5.7"
+			},
+			{
+				"name": "sshpk",
+				"version": "1.13.1"
+			},
+			{
+				"name": "statuses",
+				"version": "1.3.1"
+			},
+			{
+				"name": "string_decoder",
+				"version": "1.0.3"
+			},
+			{
+				"name": "string-width",
+				"version": "2.1.1"
+			},
+			{
+				"name": "stringstream",
+				"version": "0.0.5"
+			},
+			{
+				"name": "strip-ansi",
+				"version": "3.0.1"
+			},
+			{
+				"name": "strip-dirs",
+				"version": "2.0.0"
+			},
+			{
+				"name": "strip-outer",
+				"version": "1.0.0"
+			},
+			{
+				"name": "supports-color",
+				"version": "2.0.0"
+			},
+			{
+				"name": "tar-stream",
+				"version": "1.5.4"
+			},
+			{
+				"name": "through",
+				"version": "2.3.8"
+			},
+			{
+				"name": "timed-out",
+				"version": "4.0.1"
+			},
+			{
+				"name": "tmp",
+				"version": "0.0.33"
+			},
+			{
+				"name": "tough-cookie",
+				"version": "2.3.3"
+			},
+			{
+				"name": "trim-repeated",
+				"version": "1.0.0"
+			},
+			{
+				"name": "tunnel-agent",
+				"version": "0.6.0"
+			},
+			{
+				"name": "tweetnacl",
+				"version": "0.14.5"
+			},
+			{
+				"name": "type-check",
+				"version": "0.3.2"
+			},
+			{
+				"name": "type-is",
+				"version": "1.6.15"
+			},
+			{
+				"name": "uglify-js",
+				"version": "3.0.28"
+			},
+			{
+				"name": "commander",
+				"version": "2.11.0"
+			},
+			{
+				"name": "ultron",
+				"version": "1.0.2"
+			},
+			{
+				"name": "unbzip2-stream",
+				"version": "1.2.5"
+			},
+			{
+				"name": "unpipe",
+				"version": "1.0.0"
+			},
+			{
+				"name": "url-parse-lax",
+				"version": "1.0.0"
+			},
+			{
+				"name": "url-to-options",
+				"version": "1.0.1"
+			},
+			{
+				"name": "util-deprecate",
+				"version": "1.0.2"
+			},
+			{
+				"name": "utils-extend",
+				"version": "1.0.8"
+			},
+			{
+				"name": "utils-merge",
+				"version": "1.0.1"
+			},
+			{
+				"name": "uuid",
+				"version": "3.1.0"
+			},
+			{
+				"name": "vary",
+				"version": "1.1.2"
+			},
+			{
+				"name": "verror",
+				"version": "1.10.0"
+			},
+			{
+				"name": "watch",
+				"version": "1.0.2"
+			},
+			{
+				"name": "wordwrap",
+				"version": "1.0.0"
+			},
+			{
+				"name": "wrappy",
+				"version": "1.0.2"
+			},
+			{
+				"name": "ws",
+				"version": "1.1.4"
+			},
+			{
+				"name": "xtend",
+				"version": "4.0.1"
+			},
+			{
+				"name": "yauzl",
+				"version": "2.8.0"
+			}
+		]
+	}
+]
