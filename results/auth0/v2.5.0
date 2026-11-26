@@ -1,0 +1,263 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-26T03:42:20.446Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:2.14.12",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "auth0@2.5.0",
+			"name": "auth0",
+			"version": "2.5.0",
+			"location": "https://registry.npmjs.org/auth0/-/auth0-2.5.0.tgz",
+			"integrity": "sha512-QfB92Xrv7WjAr7jtoEVMkr2ICnHzzyfXyrbTMhppQWwnO0cU/3K9cAGYoJmPjpNL4+zKAD3EKL52+T6MvnTL7w==",
+			"publishedAt": "2016-10-07T17:09:15.306Z",
+			"publishedWith": {
+				"node": "4.2.4",
+				"npm": "2.15.3"
+			},
+			"dependencies": {
+				"request": "^2.75.0",
+				"bluebird": "^2.10.2",
+				"url-join": "0.0.1",
+				"rest-facade": "^1.2.7"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/auth0/node-auth0.git",
+			"spec": "github:auth0/node-auth0#bdeb2044f66eeebf2f073635dc617d58efc87d14"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"LICENSE": {
+					"diff": "--- published/LICENSE\n+++ rebuilt/LICENSE\n@@ -1,21 +1,21 @@\n-The MIT License (MIT)\n- \n-Copyright (c) 2015 Auth0, Inc. <support@auth0.com> (http://auth0.com)\n- \n+MIT License\n+\n+Copyright (c) 2026 Auth0.\n+\n Permission is hereby granted, free of charge, to any person obtaining a copy\n of this software and associated documentation files (the \"Software\"), to deal\n in the Software without restriction, including without limitation the rights\n to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n copies of the Software, and to permit persons to whom the Software is\n furnished to do so, subject to the following conditions:\n- \n+\n The above copyright notice and this permission notice shall be included in all\n copies or substantial portions of the Software.\n- \n+\n THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n-SOFTWARE.\n+SOFTWARE.\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "2144eb6894cb440fde6b2b3aaae3b617c8f1dc9bb19813079dcf62ec6c517042",
+					"size": 1121,
+					"sourceHash": "9429618b1b1802a0605e13fa7bad02ae77c4521c031c3600c3b16492209aa869",
+					"status": "content"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,107 +1,731 @@\n-[![Coverage Status](https://coveralls.io/repos/github/auth0/node-auth0/badge.svg?branch=master)](https://coveralls.io/github/auth0/node-auth0?branch=master) [![Build Status](https://travis-ci.org/auth0/node-auth0.svg)](https://travis-ci.org/auth0/node-auth0)\n+![Node.js client library for Auth0](https://cdn.auth0.com/website/sdks/banner/node-auth0-banner.png)\n \n-Node.js client library for the [Auth0](https://auth0.com) platform.\n+![Release](https://img.shields.io/npm/v/auth0)\n+[![Codecov](https://img.shields.io/codecov/c/github/auth0/node-auth0)](https://codecov.io/gh/auth0/node-auth0)\n+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/auth0/node-auth0)\n+![Downloads](https://img.shields.io/npm/dw/auth0)\n+[![License](https://img.shields.io/:license-mit-blue.svg?style=flat)](https://opensource.org/licenses/MIT)\n+[![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2Fauth0%2Fnode-auth0)\n \n-# Installation\n-\n-~~~\n-  npm install auth0\n-~~~\n+📚 [Documentation](#documentation) - 🚀 [Getting Started](#getting-started) - 💻 [API Reference](#api-reference) - 💬 [Feedback](#feedback)\n \n ## Documentation\n-For more information on how to use this library you must build the docs. You can do so by running: `npm run docs-build`.\n \n-The *docs-build* script will generate all the documentation in HTML format under the `docs` folder. Open `docs/index.html` in any web browser to see the documentation.\n+- [Docs Site](https://auth0.com/docs) - explore our docs site and learn more about Auth0\n+- [SDK Documentation](http://auth0.github.io/node-auth0/) - explore the SDK documentation\n+- [API Reference](https://github.com/auth0/node-auth0/blob/master/reference.md) - full reference for this library\n+- [v6 Migration Guide](https://github.com/auth0/node-auth0/blob/master/v6_MIGRATION_GUIDE.md) - upgrade from v5 to v6\n+- [v7 Migration Guide](https://github.com/auth0/node-auth0/blob/master/v7_MIGRATION_GUIDE.md) - upgrade from v6 to v7\n+- [Authentication Migration Guide](https://github.com/auth0/node-auth0/tree/master/auth-migration) - migrate the Authentication API layer to `@auth0/auth0-auth-js` / `@auth0/auth0-server-js`\n+\n+## Getting Started\n+\n+### Requirements\n+\n+This library supports the following tooling versions:\n+\n+- Node.js: `^20.19.0 || ^22.12.0 || ^24.0.0 || ^26.0.0`\n+\n+### Installation\n+\n+Using [npm](https://npmjs.org) in your project directory run the following command:\n+\n+```bash\n+npm install auth0\n+```\n+\n+> [!NOTE]\n+> **Release channels.** Endpoints move through three maturity tiers: Generally Available, Early Access, and Beta. This package is published on two channels. The stable channel (`npm install auth0`) includes the Generally Available and Early Access endpoints. The beta channel (`npm install auth0@beta`) is a superset that includes all three tiers.\n+>\n+> Beta prereleases can introduce breaking changes between versions, so pin an exact version if you need reproducible installs.\n+\n+### Configure the SDK\n+\n+#### Authentication\n+\n+For authentication operations (OAuth flows, token management, user sign-up), use [`@auth0/auth0-auth-js`](https://github.com/auth0/auth0-auth-js/tree/main/packages/auth0-auth-js). As of v7, node-auth0 no longer ships `AuthenticationClient` in its main entrypoint. The authentication layer has been separated into a dedicated package.\n+\n+```js\n+import { AuthClient } from \"@auth0/auth0-auth-js\";\n+\n+const auth = new AuthClient({\n+    domain: \"{YOUR_TENANT_AND REGION}.auth0.com\",\n+    clientId: \"{YOUR_CLIENT_ID}\",\n+    clientSecret: \"{OPTIONAL_CLIENT_SECRET}\",\n+});\n+```\n+\n+See the [auth0-auth-js documentation](https://github.com/auth0/auth0-auth-js/tree/main/packages/auth0-auth-js) for full API reference.\n+\n+#### Management API Client\n \n-## Management API Client\n The Auth0 Management API is meant to be used by back-end servers or trusted parties performing administrative tasks. Generally speaking, anything that can be done through the Auth0 dashboard (and more) can also be done through this API.\n \n+Initialize your client class with a domain and token:\n+\n+```js\n+import { ManagementClient } from \"auth0\";\n \n-Initialize your client class with an API v2 token (you can generate one [here](https://auth0.com/docs/apiv2)) and a domain.\n+const management = new ManagementClient({\n+    domain: \"{YOUR_TENANT_AND REGION}.auth0.com\",\n+    token: \"{YOUR_API_V2_TOKEN}\",\n+});\n+```\n+\n+Or use client credentials:\n \n-~~~js\n-var ManagementClient = require('auth0').ManagementClient;\n+```js\n+import { ManagementClient } from \"auth0\";\n \n-var management = new ManagementClient({\n-  token: '{YOUR_API_V2_TOKEN}',\n-  domain: '{YOUR_ACCOUNT}.auth0.com'\n+const management = new ManagementClient({\n+    domain: \"{YOUR_TENANT_AND REGION}.auth0.com\",\n",
+					"match": false,
+					"packageHash": "a81446952b134cc0d5b4f75787472e6622cd2746ddf6b137011c01caea94b26b",
+					"size": 3995,
+					"sourceHash": "8ddc2a2aa3d42e8e9854180088a7ca064cc031484fa888a9b6b829f4b80e6014",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,44 +1,1866 @@\n {\n-  \"name\": \"auth0\",\n-  \"version\": \"2.5.0\",\n-  \"description\": \"SDK for Auth0 API v2\",\n-  \"main\": \"src/index.js\",\n-  \"scripts\": {\n-    \"test\": \"istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec $(find ./test -name *.tests.js) && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage\",\n-    \"test-watch\": \"NODE_ENV=test mocha --timeout 5000 $(find ./test -name *.tests.js) --watch\",\n-    \"docs-build\": \"jsdoc src/**/*.js -d docs -t node_modules/latodoc -R README.md\"\n-  },\n-  \"repository\": {\n-    \"type\": \"git\",\n-    \"url\": \"https://github.com/auth0/node-auth0\"\n-  },\n-  \"keywords\": [\n-    \"auth0\",\n-    \"api\"\n-  ],\n-  \"author\": \"Auth0\",\n-  \"license\": \"MIT\",\n-  \"bugs\": {\n-    \"url\": \"https://github.com/auth0/node-auth0/issues\"\n-  },\n-  \"homepage\": \"https://github.com/auth0/node-auth0\",\n-  \"dependencies\": {\n-    \"bluebird\": \"^2.10.2\",\n-    \"request\": \"^2.75.0\",\n-    \"rest-facade\": \"^1.2.7\",\n-    \"url-join\": \"0.0.1\"\n-  },\n-  \"devDependencies\": {\n-    \"chai\": \"^2.2.0\",\n-    \"coveralls\": \"^2.11.4\",\n-    \"istanbul\": \"^0.4.0\",\n-    \"jsdoc\": \"^3.4.0\",\n-    \"json-loader\": \"^0.5.4\",\n-    \"latodoc\": \"smeijer/latodoc\",\n-    \"mocha\": \"^2.2.4\",\n-    \"nock\": \"^3.1.1\",\n-    \"sinon\": \"^1.17.1\",\n-    \"string-replace-webpack-plugin\": \"0.0.3\",\n-    \"webpack\": \"^1.12.14\"\n-  }\n+    \"name\": \"auth0\",\n+    \"version\": \"7.9.0\",\n+    \"private\": false,\n+    \"repository\": {\n+        \"type\": \"git\",\n+        \"url\": \"git+https://github.com/auth0/node-auth0.git\"\n+    },\n+    \"license\": \"MIT\",\n+    \"type\": \"commonjs\",\n+    \"main\": \"./dist/cjs/index.js\",\n+    \"module\": \"./dist/esm/index.mjs\",\n+    \"types\": \"./dist/cjs/index.d.ts\",\n+    \"exports\": {\n+        \".\": {\n+            \"import\": {\n+                \"types\": \"./dist/esm/index.d.mts\",\n+                \"default\": \"./dist/esm/index.mjs\"\n+            },\n+            \"require\": {\n+                \"types\": \"./dist/cjs/index.d.ts\",\n+                \"default\": \"./dist/cjs/index.js\"\n+            },\n+            \"default\": \"./dist/cjs/index.js\"\n+        },\n+        \"./actions\": {\n+            \"import\": {\n+                \"types\": \"./dist/esm/management/api/resources/actions/exports.d.mts\",\n+                \"default\": \"./dist/esm/management/api/resources/actions/exports.mjs\"\n+            },\n+            \"require\": {\n+                \"types\": \"./dist/cjs/management/api/resources/actions/exports.d.ts\",\n+                \"default\": \"./dist/cjs/management/api/resources/actions/exports.js\"\n+            },\n+            \"default\": \"./dist/cjs/management/api/resources/actions/exports.js\"\n+        },\n+        \"./agents\": {\n+            \"import\": {\n+                \"types\": \"./dist/esm/management/api/resources/agents/exports.d.mts\",\n+                \"default\": \"./dist/esm/management/api/resources/agents/exports.mjs\"\n+            },\n+            \"require\": {\n+                \"types\": \"./dist/cjs/management/api/resources/agents/exports.d.ts\",\n+                \"default\": \"./dist/cjs/management/api/resources/agents/exports.js\"\n+            },\n+            \"default\": \"./dist/cjs/management/api/resources/agents/exports.js\"\n+        },\n+        \"./branding\": {\n+            \"import\": {\n+                \"types\": \"./dist/esm/management/api/resources/branding/exports.d.mts\",\n+                \"default\": \"./dist/esm/management/api/resources/branding/exports.mjs\"\n+            },\n+            \"require\": {\n+                \"types\": \"./dist/cjs/management/api/resources/branding/exports.d.ts\",\n+                \"default\": \"./dist/cjs/management/api/resources/branding/exports.js\"\n",
+					"match": false,
+					"packageHash": "433ab244b228b913f7b2867849fbeb514488269600878e206804933e5dfd890d",
+					"size": 1290,
+					"sourceHash": "369e43cff4d5d3447573d1c04e98c014fffd4287ca11ec2ecfbe73780f14ff70",
+					"status": "content"
+				},
+				"src/auth/DatabaseAuthenticator.js": {
+					"match": false,
+					"packageHash": "b5ec5b9ff78fe9e09a8ea6d9712ebae3bbf3968007c0c6a98b81753a37f8a17b",
+					"size": 9054,
+					"status": "missing-in-source"
+				},
+				"src/auth/OAuthAuthenticator.js": {
+					"match": false,
+					"packageHash": "b98817282ca1b3a865ae45efb71b96e04ed80c91b0f7598ff64908f68088e016",
+					"size": 4856,
+					"status": "missing-in-source"
+				},
+				"src/auth/PasswordlessAuthenticator.js": {
+					"match": false,
+					"packageHash": "7f73b107616835fe499df66c5a19bd232a3e07e04f0b1ea1b37dc33be3036ac2",
+					"size": 6806,
+					"status": "missing-in-source"
+				},
+				"src/auth/TokensManager.js": {
+					"match": false,
+					"packageHash": "98e1f3055433415ba7968bfa24c3076ea3b61b94c21f90aee4a4cc3eadc71934",
+					"size": 4886,
+					"status": "missing-in-source"
+				},
+				"src/auth/UsersManager.js": {
+					"match": false,
+					"packageHash": "a2539f6cdf6ebd9d05d9733e81b4b20b97e23a9fe774abff675e200814a34c50",
+					"size": 4732,
+					"status": "missing-in-source"
+				},
+				"src/auth/index.js": {
+					"match": false,
+					"packageHash": "a5c14212def1dfe608cfb7b4b0047ac800dd7dcfba31b48d81e79ff764542d74",
+					"size": 14246,
+					"status": "missing-in-source"
+				},
+				"src/exceptions/ApiError.js": {
+					"match": false,
+					"packageHash": "ada0216500e6998786831ad18c7f3b57ab546b2076b9a6e063448b941b07af7a",
+					"size": 226,
+					"status": "missing-in-source"
+				},
+				"src/exceptions/ArgumentError.js": {
+					"match": false,
+					"packageHash": "b996982dfb4167f2c3785781025755a075cfc316a695f757f2cad7363f993714",
+					"size": 170,
+					"status": "missing-in-source"
+				},
+				"src/exceptions/index.js": {
+					"match": false,
+					"packageHash": "d2eafdb15ee539f7bd9d3e56254ebca9c0f516028c394a235b449d6b89f4a088",
+					"size": 107,
+					"status": "missing-in-source"
+				},
+				"src/index.js": {
+					"match": false,
+					"packageHash": "a0b0ccd989b924a8fbcf0f9bae96528474293523105b4386129bedd1def8abe5",
+					"size": 244,
+					"status": "missing-in-source"
+				},
+				"src/management/BlacklistedTokensManager.js": {
+					"match": false,
+					"packageHash": "cb41cda20ba1f0c2745050aadccb4046e9870045e5cb0d1d921b4bf4a9d1a012",
+					"size": 2625,
+					"status": "missing-in-source"
+				},
+				"src/management/ClientsManager.js": {
+					"match": false,
+					"packageHash": "8ffb55cce72bf7f17a65dd543324a90ff4546e952eb65dcc2b644b0b5792be9a",
+					"size": 4395,
+					"status": "missing-in-source"
+				},
+				"src/management/ConnectionsManager.js": {
+					"match": false,
+					"packageHash": "bbe3ed703246d310cb893f9150ba3b26565c19ea6d27be1bf28a33fa1848d53a",
+					"size": 4321,
+					"status": "missing-in-source"
+				},
+				"src/management/DeviceCredentialsManager.js": {
+					"match": false,
+					"packageHash": "d4811d6fe5dce936c21776f8287cc1e8fc8f7c0c32396816a2d90eb147382ced",
+					"size": 3239,
+					"status": "missing-in-source"
+				},
+				"src/management/EmailProviderManager.js": {
+					"match": false,
+					"packageHash": "ec4c3920d3ed2e652e11788036be4773d6740cffd2eac609bc30ce75ae09900e",
+					"size": 3481,
+					"status": "missing-in-source"
+				},
+				"src/management/JobsManager.js": {
+					"match": false,
+					"packageHash": "e0c10526de53395d56e3b2c9aae6a5c4ec2f0223611a96d360b6641bfcc3c0ee",
+					"size": 5566,
+					"status": "missing-in-source"
+				},
+				"src/management/LogsManager.js": {
+					"match": false,
+					"packageHash": "0dd7fbf3a9f1a96e7a624477e3e7588401f6e80a0f0de986f32c4aef46fe4e4d",
+					"size": 2312,
+					"status": "missing-in-source"
+				},
+				"src/management/RulesManager.js": {
+					"match": false,
+					"packageHash": "82ee3ddb4ccb872375bea6b76fbe0625f18fcb737779295b4ac69883c0d6ccf8",
+					"size": 4430,
+					"status": "missing-in-source"
+				},
+				"src/management/StatsManager.js": {
+					"match": false,
+					"packageHash": "5e9f3ead1898b8f4cf2c1c0b09fd1bb8c59c179900b622a8e21f67113986ebde",
+					"size": 2969,
+					"status": "missing-in-source"
+				},
+				"src/management/TenantManager.js": {
+					"match": false,
+					"packageHash": "cd33ecc2f321c82bafe70f4b2906e9ce4015fc1e1de12d29e9d0d34d34a5952b",
+					"size": 2568,
+					"status": "missing-in-source"
+				},
+				"src/management/TicketsManager.js": {
+					"match": false,
+					"packageHash": "c413bb4788024ee5e4d3c04d6c5be255c054eb174d536c22d88644de9204e9c8",
+					"size": 2636,
+					"status": "missing-in-source"
+				},
+				"src/management/UsersManager.js": {
+					"match": false,
+					"packageHash": "400ac9d206bab6560f9085903e865fa902373b7d6d8787eeb99fe1f78ddd8042",
+					"size": 11263,
+					"status": "missing-in-source"
+				},
+				"src/management/index.js": {
+					"match": false,
+					"packageHash": "0ae49d83d63e3be1f2447d960fc188055bfad9cdf17f7af7ea5ce07b29181cc9",
+					"size": 32641,
+					"status": "missing-in-source"
+				},
+				"src/utils.js": {
+					"match": false,
+					"packageHash": "a00515df13f45eb3530885d033b3efacd7f01af486af95f9e27c9bbe4c103120",
+					"size": 1680,
+					"status": "missing-in-source"
+				},
+				"webpack.config.js": {
+					"match": false,
+					"packageHash": "1955f37817e476c3f2eb32111489f7019031eaaa9bff153f95e52e7f60346052",
+					"size": 1198,
+					"status": "missing-in-source"
+				},
+				"legacy/exports/index.d.mts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"legacy/exports/index.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"legacy/exports/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"legacy/exports/index.mjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"reference.md": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 3,
+				"matchingFiles": 0,
+				"missingInPackage": 5,
+				"missingInSource": 25,
+				"score": 0,
+				"totalFiles": 33
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "auth0-legacy",
+				"version": "4.37.2"
+			},
+			{
+				"name": "jose",
+				"version": "4.15.9"
+			},
+			{
+				"name": "jose",
+				"version": "5.10.0"
+			},
+			{
+				"name": "undici-types",
+				"version": "6.21.0"
+			},
+			{
+				"name": "uuid",
+				"version": "11.1.1"
+			}
+		]
+	}
+]

@@ -1,0 +1,144 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-26T02:49:08.719Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:12.2.3",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "auth0@0.1.10",
+			"name": "auth0",
+			"version": "0.1.10",
+			"location": "https://registry.npmjs.org/auth0/-/auth0-0.1.10.tgz",
+			"integrity": "sha512-D9hSXjAKFfA4iH1IZyZJPp5N/aRt156RqtHlPfzc6gCl839gPx3okORnYns55TYVwXynnr4kyLw7IZFHdGqokA==",
+			"publishedAt": "2013-05-06T03:08:09.774Z",
+			"publishedWith": {
+				"node": null,
+				"npm": "1.2.18"
+			},
+			"dependencies": {
+				"xtend": "~1.0.3",
+				"request": "~2.12.0",
+				"parse-links": "0.0.1"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git://github.com/auth0/node-auth0.git",
+			"spec": "github:auth0/node-auth0#HEAD"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".npmignore": {
+					"match": false,
+					"packageHash": "c2fbc37621df3976801c0cbb8761f7dcda02de03122d96c3f27c2a88ce9b24fd",
+					"size": 32,
+					"status": "missing-in-source"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,119 +1,731 @@\n-Node.js client library for the Auth0 platform.\n+![Node.js client library for Auth0](https://cdn.auth0.com/website/sdks/banner/node-auth0-banner.png)\n \n-## Installation\n+![Release](https://img.shields.io/npm/v/auth0)\n+[![Codecov](https://img.shields.io/codecov/c/github/auth0/node-auth0)](https://codecov.io/gh/auth0/node-auth0)\n+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/auth0/node-auth0)\n+![Downloads](https://img.shields.io/npm/dw/auth0)\n+[![License](https://img.shields.io/:license-mit-blue.svg?style=flat)](https://opensource.org/licenses/MIT)\n+[![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2Fauth0%2Fnode-auth0)\n \n-\tnpm install auth0\n+📚 [Documentation](#documentation) - 🚀 [Getting Started](#getting-started) - 💻 [API Reference](#api-reference) - 💬 [Feedback](#feedback)\n \n-## Usage\n+## Documentation\n+\n+- [Docs Site](https://auth0.com/docs) - explore our docs site and learn more about Auth0\n+- [SDK Documentation](http://auth0.github.io/node-auth0/) - explore the SDK documentation\n+- [API Reference](https://github.com/auth0/node-auth0/blob/master/reference.md) - full reference for this library\n+- [v6 Migration Guide](https://github.com/auth0/node-auth0/blob/master/v6_MIGRATION_GUIDE.md) - upgrade from v5 to v6\n+- [v7 Migration Guide](https://github.com/auth0/node-auth0/blob/master/v7_MIGRATION_GUIDE.md) - upgrade from v6 to v7\n+- [Authentication Migration Guide](https://github.com/auth0/node-auth0/tree/master/auth-migration) - migrate the Authentication API layer to `@auth0/auth0-auth-js` / `@auth0/auth0-server-js`\n+\n+## Getting Started\n+\n+### Requirements\n+\n+This library supports the following tooling versions:\n+\n+- Node.js: `^20.19.0 || ^22.12.0 || ^24.0.0 || ^26.0.0`\n+\n+### Installation\n+\n+Using [npm](https://npmjs.org) in your project directory run the following command:\n+\n+```bash\n+npm install auth0\n+```\n+\n+> [!NOTE]\n+> **Release channels.** Endpoints move through three maturity tiers: Generally Available, Early Access, and Beta. This package is published on two channels. The stable channel (`npm install auth0`) includes the Generally Available and Early Access endpoints. The beta channel (`npm install auth0@beta`) is a superset that includes all three tiers.\n+>\n+> Beta prereleases can introduce breaking changes between versions, so pin an exact version if you need reproducible installs.\n \n-Initialize your client class with the credentials in the [settings section](https://app.auth0.com/#/settings) of the dashboard.\n+### Configure the SDK\n \n-~~~js\n-var Auth0 = require('auth0');\n+#### Authentication\n \n-var client = new Auth0({\n-  domain:       'yourdomain.auth0.com',\n-  clientID:     'your-client-id',\n-  clientSecret: 'your-client-secret'\n+For authentication operations (OAuth flows, token management, user sign-up), use [`@auth0/auth0-auth-js`](https://github.com/auth0/auth0-auth-js/tree/main/packages/auth0-auth-js). As of v7, node-auth0 no longer ships `AuthenticationClient` in its main entrypoint. The authentication layer has been separated into a dedicated package.\n+\n+```js\n+import { AuthClient } from \"@auth0/auth0-auth-js\";\n+\n+const auth = new AuthClient({\n+    domain: \"{YOUR_TENANT_AND REGION}.auth0.com\",\n+    clientId: \"{YOUR_CLIENT_ID}\",\n+    clientSecret: \"{OPTIONAL_CLIENT_SECRET}\",\n });\n-~~~\n+```\n+\n+See the [auth0-auth-js documentation](https://github.com/auth0/auth0-auth-js/tree/main/packages/auth0-auth-js) for full API reference.\n+\n+#### Management API Client\n+\n+The Auth0 Management API is meant to be used by back-end servers or trusted parties performing administrative tasks. Generally speaking, anything that can be done through the Auth0 dashboard (and more) can also be done through this API.\n \n-### client.getConnections(callback)\n+Initialize your client class with a domain and token:\n \n-Return a list of all the connections in your application:\n+```js\n+import { ManagementClient } from \"auth0\";\n \n-~~~js\n-client.getConnections(function (err, connections){\n-  //.....\n+const management = new ManagementClient({\n+    domain: \"{YOUR_TENANT_AND REGION}.auth0.com\",\n+    token: \"{YOUR_API_V2_TOKEN}\",\n });\n-~~~\n+```\n \n-Additionally there is a ```getSocialConnections``` and ```getEnterpriseConnections```.\n+Or use client credentials:\n \n-### client.createConnection(callback)\n+```js\n",
+					"match": false,
+					"packageHash": "75bd4f547121095139b6039b5dc74ffcfdf1206506bf40064563fb79bbdbc005",
+					"size": 4291,
+					"sourceHash": "8ddc2a2aa3d42e8e9854180088a7ca064cc031484fa888a9b6b829f4b80e6014",
+					"status": "content"
+				},
+				"lib/Client.js": {
+					"match": false,
+					"packageHash": "421e06065751ac677e0d6dedc9e4e783936c13bf37400bb216bf912415206717",
+					"size": 1248,
+					"status": "missing-in-source"
+				},
+				"lib/Connection.js": {
+					"match": false,
+					"packageHash": "628e4f1cd9fd5a223eb65254f4ab4737a88128abd1e7ba6f927be41dafef4ce3",
+					"size": 215,
+					"status": "missing-in-source"
+				},
+				"lib/api.js": {
+					"match": false,
+					"packageHash": "314bee440139e29e817a30f7f48b6792f6ac2b96a35b92f4c7a0ad4ab8ee9482",
+					"size": 7139,
+					"status": "missing-in-source"
+				},
+				"lib/index.js": {
+					"match": false,
+					"packageHash": "102be7eb94363353010ba2ee7e47ef984e8ce14994219e334d57d66afa07aedd",
+					"size": 37,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,24 +1,1866 @@\n {\n-  \"name\": \"auth0\",\n-  \"version\": \"0.1.10\",\n-  \"description\": \"Client library for the Auth0 platform\",\n-  \"main\": \"lib/index.js\",\n-  \"scripts\": {\n-    \"test\": \"mocha\"\n-  },\n-  \"repository\": {\n-    \"type\": \"git\",\n-    \"url\": \"git://github.com/auth0/node-auth0.git\"\n-  },\n-  \"author\": \"Auth0\",\n-  \"license\": \"MIT\",\n-  \"devDependencies\": {\n-    \"mocha\": \"~1.7.0\",\n-    \"should\": \"~1.2.1\"\n-  },\n-  \"dependencies\": {\n-    \"xtend\": \"~1.0.3\",\n-    \"request\": \"~2.12.0\",\n-    \"parse-links\": \"0.0.1\"\n-  }\n+    \"name\": \"auth0\",\n+    \"version\": \"7.9.0\",\n+    \"private\": false,\n+    \"repository\": {\n+        \"type\": \"git\",\n+        \"url\": \"git+https://github.com/auth0/node-auth0.git\"\n+    },\n+    \"license\": \"MIT\",\n+    \"type\": \"commonjs\",\n+    \"main\": \"./dist/cjs/index.js\",\n+    \"module\": \"./dist/esm/index.mjs\",\n+    \"types\": \"./dist/cjs/index.d.ts\",\n+    \"exports\": {\n+        \".\": {\n+            \"import\": {\n+                \"types\": \"./dist/esm/index.d.mts\",\n+                \"default\": \"./dist/esm/index.mjs\"\n+            },\n+            \"require\": {\n+                \"types\": \"./dist/cjs/index.d.ts\",\n+                \"default\": \"./dist/cjs/index.js\"\n+            },\n+            \"default\": \"./dist/cjs/index.js\"\n+        },\n+        \"./actions\": {\n+            \"import\": {\n+                \"types\": \"./dist/esm/management/api/resources/actions/exports.d.mts\",\n+                \"default\": \"./dist/esm/management/api/resources/actions/exports.mjs\"\n+            },\n+            \"require\": {\n+                \"types\": \"./dist/cjs/management/api/resources/actions/exports.d.ts\",\n+                \"default\": \"./dist/cjs/management/api/resources/actions/exports.js\"\n+            },\n+            \"default\": \"./dist/cjs/management/api/resources/actions/exports.js\"\n+        },\n+        \"./agents\": {\n+            \"import\": {\n+                \"types\": \"./dist/esm/management/api/resources/agents/exports.d.mts\",\n+                \"default\": \"./dist/esm/management/api/resources/agents/exports.mjs\"\n+            },\n+            \"require\": {\n+                \"types\": \"./dist/cjs/management/api/resources/agents/exports.d.ts\",\n+                \"default\": \"./dist/cjs/management/api/resources/agents/exports.js\"\n+            },\n+            \"default\": \"./dist/cjs/management/api/resources/agents/exports.js\"\n+        },\n+        \"./branding\": {\n+            \"import\": {\n+                \"types\": \"./dist/esm/management/api/resources/branding/exports.d.mts\",\n+                \"default\": \"./dist/esm/management/api/resources/branding/exports.mjs\"\n+            },\n+            \"require\": {\n+                \"types\": \"./dist/cjs/management/api/resources/branding/exports.d.ts\",\n+                \"default\": \"./dist/cjs/management/api/resources/branding/exports.js\"\n+            },\n+            \"default\": \"./dist/cjs/management/api/resources/branding/exports.js\"\n+        },\n+        \"./clientGrants\": {\n+            \"import\": {\n+                \"types\": \"./dist/esm/management/api/resources/clientGrants/exports.d.mts\",\n+                \"default\": \"./dist/esm/management/api/resources/clientGrants/exports.mjs\"\n+            },\n+            \"require\": {\n+                \"types\": \"./dist/cjs/management/api/resources/clientGrants/exports.d.ts\",\n+                \"default\": \"./dist/cjs/management/api/resources/clientGrants/exports.js\"\n+            },\n+            \"default\": \"./dist/cjs/management/api/resources/clientGrants/exports.js\"\n+        },\n+        \"./clientProfiles\": {\n+            \"import\": {\n+                \"types\": \"./dist/esm/management/api/resources/clientProfiles/exports.d.mts\",\n+                \"default\": \"./dist/esm/management/api/resources/clientProfiles/exports.mjs\"\n+            },\n+            \"require\": {\n",
+					"match": false,
+					"packageHash": "bd9b518d6404a10522bad5d275c295262727dd6c7a12f17877fd0ad1d1903f82",
+					"size": 478,
+					"sourceHash": "369e43cff4d5d3447573d1c04e98c014fffd4287ca11ec2ecfbe73780f14ff70",
+					"status": "content"
+				},
+				"test/mocha.opts": {
+					"match": false,
+					"packageHash": "18e1cbaecfc83f0fc099556e2831b8ea7377857822cbf2e9df8819d3176b454b",
+					"size": 16,
+					"status": "missing-in-source"
+				},
+				"LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"legacy/exports/index.d.mts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"legacy/exports/index.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"legacy/exports/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"legacy/exports/index.mjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"reference.md": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 0,
+				"missingInPackage": 6,
+				"missingInSource": 6,
+				"score": 0,
+				"totalFiles": 14
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "auth0-legacy",
+				"version": "4.37.2"
+			},
+			{
+				"name": "jose",
+				"version": "4.15.9"
+			},
+			{
+				"name": "jose",
+				"version": "5.10.0"
+			},
+			{
+				"name": "undici-types",
+				"version": "6.21.0"
+			},
+			{
+				"name": "uuid",
+				"version": "11.1.1"
+			}
+		]
+	}
+]

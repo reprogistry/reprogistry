@@ -1,0 +1,166 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-26T02:48:48.725Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:12.2.3",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "auth0@0.3.1",
+			"name": "auth0",
+			"version": "0.3.1",
+			"location": "https://registry.npmjs.org/auth0/-/auth0-0.3.1.tgz",
+			"integrity": "sha512-lI0ZB0nd28Ll0eL6INMyggBi9+8EU1oEotIFNBGHlpDcxXhn+ivS4NU2mz6+fM6aUblMtIxaJe+5FDpZhJA0qQ==",
+			"publishedAt": "2014-01-30T23:24:45.089Z",
+			"publishedWith": {
+				"node": null,
+				"npm": "1.2.30"
+			},
+			"dependencies": {
+				"xtend": "~1.0.3",
+				"request": "~2.27.0",
+				"parse-links": "0.0.1"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git://github.com/auth0/node-auth0.git",
+			"spec": "github:auth0/node-auth0#HEAD"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".jshintrc": {
+					"match": false,
+					"packageHash": "2efc866b3ec6666956aac4680104432af3ffe9a7f95c291a98bf24c84d560164",
+					"size": 588,
+					"status": "missing-in-source"
+				},
+				".npmignore": {
+					"match": false,
+					"packageHash": "c2fbc37621df3976801c0cbb8761f7dcda02de03122d96c3f27c2a88ce9b24fd",
+					"size": 32,
+					"status": "missing-in-source"
+				},
+				"LICENSE": {
+					"diff": "--- published/LICENSE\n+++ rebuilt/LICENSE\n@@ -1,7 +1,21 @@\n-Copyright (C) 2013 AUTH10 LLC\n+MIT License\n \n-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n+Copyright (c) 2026 Auth0.\n \n-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n+Permission is hereby granted, free of charge, to any person obtaining a copy\n+of this software and associated documentation files (the \"Software\"), to deal\n+in the Software without restriction, including without limitation the rights\n+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n+copies of the Software, and to permit persons to whom the Software is\n+furnished to do so, subject to the following conditions:\n \n-THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\\ No newline at end of file\n+The above copyright notice and this permission notice shall be included in all\n+copies or substantial portions of the Software.\n+\n+THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n+SOFTWARE.\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "f57272b0d0554ac561d46f0c249aff9cfb52e53ccb08cd845d363e23ca49c38f",
+					"size": 1053,
+					"sourceHash": "9429618b1b1802a0605e13fa7bad02ae77c4521c031c3600c3b16492209aa869",
+					"status": "content"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,276 +1,731 @@\n-Node.js client library for the Auth0 platform.\n+![Node.js client library for Auth0](https://cdn.auth0.com/website/sdks/banner/node-auth0-banner.png)\n \n-## Installation\n+![Release](https://img.shields.io/npm/v/auth0)\n+[![Codecov](https://img.shields.io/codecov/c/github/auth0/node-auth0)](https://codecov.io/gh/auth0/node-auth0)\n+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/auth0/node-auth0)\n+![Downloads](https://img.shields.io/npm/dw/auth0)\n+[![License](https://img.shields.io/:license-mit-blue.svg?style=flat)](https://opensource.org/licenses/MIT)\n+[![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2Fauth0%2Fnode-auth0)\n \n-\tnpm install auth0\n+📚 [Documentation](#documentation) - 🚀 [Getting Started](#getting-started) - 💻 [API Reference](#api-reference) - 💬 [Feedback](#feedback)\n \n-## Usage\n+## Documentation\n \n-Initialize your client class with the credentials in the [settings section](https://app.auth0.com/#/settings) of the dashboard.\n+- [Docs Site](https://auth0.com/docs) - explore our docs site and learn more about Auth0\n+- [SDK Documentation](http://auth0.github.io/node-auth0/) - explore the SDK documentation\n+- [API Reference](https://github.com/auth0/node-auth0/blob/master/reference.md) - full reference for this library\n+- [v6 Migration Guide](https://github.com/auth0/node-auth0/blob/master/v6_MIGRATION_GUIDE.md) - upgrade from v5 to v6\n+- [v7 Migration Guide](https://github.com/auth0/node-auth0/blob/master/v7_MIGRATION_GUIDE.md) - upgrade from v6 to v7\n+- [Authentication Migration Guide](https://github.com/auth0/node-auth0/tree/master/auth-migration) - migrate the Authentication API layer to `@auth0/auth0-auth-js` / `@auth0/auth0-server-js`\n \n-~~~js\n-var Auth0 = require('auth0');\n+## Getting Started\n \n-var api = new Auth0({\n-  domain:       'yourdomain.auth0.com',\n-  clientID:     'your-client-id',\n-  clientSecret: 'your-client-secret'\n-});\n-~~~\n+### Requirements\n \n-### api.getConnections(callback)\n+This library supports the following tooling versions:\n \n-Return a list of all the connections in your application:\n+- Node.js: `^20.19.0 || ^22.12.0 || ^24.0.0 || ^26.0.0`\n \n-~~~js\n-api.getConnections(function (err, connections){\n-  //.....\n-});\n-~~~\n+### Installation\n \n-Additionally there is a ```getSocialConnections``` and ```getEnterpriseConnections```.\n+Using [npm](https://npmjs.org) in your project directory run the following command:\n \n-### api.createConnection(callback)\n+```bash\n+npm install auth0\n+```\n \n-Let's say one of your customers wants to use its own directory to authenticate to your app. You will have to create a **connection** in Auth0 for this customer and if you want to automate that for N customers, you will want to use the API. Typically, you will ask the customer domain name and depending on the directory you are connecting to, some metadata. Together with other information, like the attributes your app needs, a set of credentials, etc. you can call the API.\n+> [!NOTE]\n+> **Release channels.** Endpoints move through three maturity tiers: Generally Available, Early Access, and Beta. This package is published on two channels. The stable channel (`npm install auth0`) includes the Generally Available and Early Access endpoints. The beta channel (`npm install auth0@beta`) is a superset that includes all three tiers.\n+>\n+> Beta prereleases can introduce breaking changes between versions, so pin an exact version if you need reproducible installs.\n \n-~~~js\n-var myNewConnection =  {\n-    //a friendly name to identify the connection\n-    'name': 'thesuperstore-connection',\n+### Configure the SDK\n \n-    //this is the strategy: office365, google-apps, adfs\n-    'strategy': 'office365', \n-    \n-    'options': {\n-      // depending on the strategy, you will need a set of credentials to authenticate \n-      // your app against the directory (office365 and google apps use this)\n-      'tenant_domain': 'bigcompany.com or bicompany.onmicrosoft.com'\n-    };\n+#### Authentication\n+\n+For authentication operations (OAuth flows, token management, user sign-up), use [`@auth0/auth0-auth-js`](https://github.com/auth0/auth0-auth-js/tree/main/packages/auth0-auth-js). As of v7, node-auth0 no longer ships `AuthenticationClient` in its main entrypoint. The authentication layer has been separated into a dedicated package.\n+\n+```js\n+import { AuthClient } from \"@auth0/auth0-auth-js\";\n \n-api.createConnection(myNewConnection, function (err, connection) {\n-  //.....\n+const auth = new AuthClient({\n+    domain: \"{YOUR_TENANT_AND REGION}.auth0.com\",\n+    clientId: \"{YOUR_CLIENT_ID}\",\n+    clientSecret: \"{OPTIONAL_CLIENT_SECRET}\",\n });\n-~~~\n+```\n+\n+See the [auth0-auth-js documentation](https://github.com/auth0/auth0-auth-js/tree/main/packages/auth0-auth-js) for full API reference.\n+\n",
+					"match": false,
+					"packageHash": "9c10fcc042f7ebfac16803edbd9159c81375cd9c31b9f71f69cc8607669023e8",
+					"size": 6662,
+					"sourceHash": "8ddc2a2aa3d42e8e9854180088a7ca064cc031484fa888a9b6b829f4b80e6014",
+					"status": "content"
+				},
+				"lib/Client.js": {
+					"match": false,
+					"packageHash": "d1f92165cc8ad2fb63b92d6ca039991f7032d4c8bb26072bdd0da46ee023472c",
+					"size": 2115,
+					"status": "missing-in-source"
+				},
+				"lib/Connection.js": {
+					"match": false,
+					"packageHash": "628e4f1cd9fd5a223eb65254f4ab4737a88128abd1e7ba6f927be41dafef4ce3",
+					"size": 215,
+					"status": "missing-in-source"
+				},
+				"lib/api.js": {
+					"match": false,
+					"packageHash": "fa7f348788d1e1374ac03f0793a6e70a4df0378c751fdf45f042f7984e7bae12",
+					"size": 14998,
+					"status": "missing-in-source"
+				},
+				"lib/errors/ApiError.js": {
+					"match": false,
+					"packageHash": "8f52163be10e67a8ffc7ab6da8ad4e8c6eb7e10710a1ff155aa043b418dff847",
+					"size": 277,
+					"status": "missing-in-source"
+				},
+				"lib/index.js": {
+					"match": false,
+					"packageHash": "102be7eb94363353010ba2ee7e47ef984e8ce14994219e334d57d66afa07aedd",
+					"size": 37,
+					"status": "missing-in-source"
+				},
+				"my.js": {
+					"match": false,
+					"packageHash": "406d6516e97d243b8278eceb114a73953cf4746c283a73459cb6afc69f4dfefc",
+					"size": 506,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,32 +1,1866 @@\n {\n-  \"name\": \"auth0\",\n-  \"version\": \"0.3.1\",\n-  \"description\": \"Client library for the Auth0 platform\",\n-  \"main\": \"lib/index.js\",\n-  \"scripts\": {\n-    \"test\": \"mocha test\"\n-  },\n-  \"repository\": {\n-    \"type\": \"git\",\n-    \"url\": \"git://github.com/auth0/node-auth0.git\"\n-  },\n-  \"author\": \"Auth0\",\n-  \"contributors\": [\n-    {\n-      \"name\": \"Conrad Pankoff\",\n-      \"email\": \"deoxxa@fknsrs.biz\",\n-      \"url\": \"http://www.fknsrs.biz/\"\n+    \"name\": \"auth0\",\n+    \"version\": \"7.9.0\",\n+    \"private\": false,\n+    \"repository\": {\n+        \"type\": \"git\",\n+        \"url\": \"git+https://github.com/auth0/node-auth0.git\"\n+    },\n+    \"license\": \"MIT\",\n+    \"type\": \"commonjs\",\n+    \"main\": \"./dist/cjs/index.js\",\n+    \"module\": \"./dist/esm/index.mjs\",\n+    \"types\": \"./dist/cjs/index.d.ts\",\n+    \"exports\": {\n+        \".\": {\n+            \"import\": {\n+                \"types\": \"./dist/esm/index.d.mts\",\n+                \"default\": \"./dist/esm/index.mjs\"\n+            },\n+            \"require\": {\n+                \"types\": \"./dist/cjs/index.d.ts\",\n+                \"default\": \"./dist/cjs/index.js\"\n+            },\n+            \"default\": \"./dist/cjs/index.js\"\n+        },\n+        \"./actions\": {\n+            \"import\": {\n+                \"types\": \"./dist/esm/management/api/resources/actions/exports.d.mts\",\n+                \"default\": \"./dist/esm/management/api/resources/actions/exports.mjs\"\n+            },\n+            \"require\": {\n+                \"types\": \"./dist/cjs/management/api/resources/actions/exports.d.ts\",\n+                \"default\": \"./dist/cjs/management/api/resources/actions/exports.js\"\n+            },\n+            \"default\": \"./dist/cjs/management/api/resources/actions/exports.js\"\n+        },\n+        \"./agents\": {\n+            \"import\": {\n+                \"types\": \"./dist/esm/management/api/resources/agents/exports.d.mts\",\n+                \"default\": \"./dist/esm/management/api/resources/agents/exports.mjs\"\n+            },\n+            \"require\": {\n+                \"types\": \"./dist/cjs/management/api/resources/agents/exports.d.ts\",\n+                \"default\": \"./dist/cjs/management/api/resources/agents/exports.js\"\n+            },\n+            \"default\": \"./dist/cjs/management/api/resources/agents/exports.js\"\n+        },\n+        \"./branding\": {\n+            \"import\": {\n+                \"types\": \"./dist/esm/management/api/resources/branding/exports.d.mts\",\n+                \"default\": \"./dist/esm/management/api/resources/branding/exports.mjs\"\n+            },\n+            \"require\": {\n+                \"types\": \"./dist/cjs/management/api/resources/branding/exports.d.ts\",\n+                \"default\": \"./dist/cjs/management/api/resources/branding/exports.js\"\n+            },\n+            \"default\": \"./dist/cjs/management/api/resources/branding/exports.js\"\n+        },\n+        \"./clientGrants\": {\n+            \"import\": {\n+                \"types\": \"./dist/esm/management/api/resources/clientGrants/exports.d.mts\",\n+                \"default\": \"./dist/esm/management/api/resources/clientGrants/exports.mjs\"\n+            },\n+            \"require\": {\n+                \"types\": \"./dist/cjs/management/api/resources/clientGrants/exports.d.ts\",\n+                \"default\": \"./dist/cjs/management/api/resources/clientGrants/exports.js\"\n+            },\n+            \"default\": \"./dist/cjs/management/api/resources/clientGrants/exports.js\"\n+        },\n+        \"./clientProfiles\": {\n+            \"import\": {\n+                \"types\": \"./dist/esm/management/api/resources/clientProfiles/exports.d.mts\",\n+                \"default\": \"./dist/esm/management/api/resources/clientProfiles/exports.mjs\"\n+            },\n+            \"require\": {\n+                \"types\": \"./dist/cjs/management/api/resources/clientProfiles/exports.d.ts\",\n+                \"default\": \"./dist/cjs/management/api/resources/clientProfiles/exports.js\"\n+            },\n+            \"default\": \"./dist/cjs/management/api/resources/clientProfiles/exports.js\"\n+        },\n",
+					"match": false,
+					"packageHash": "60f3d10cdb3ca75c99f2102010f122999ba6ece34f2858ff2e126686f9bbce89",
+					"size": 647,
+					"sourceHash": "369e43cff4d5d3447573d1c04e98c014fffd4287ca11ec2ecfbe73780f14ff70",
+					"status": "content"
+				},
+				"test/api.js": {
+					"match": false,
+					"packageHash": "8b3375e726d56f930109bf8fb96d1eb459729c0a1b98b78481fb04378855822e",
+					"size": 3546,
+					"status": "missing-in-source"
+				},
+				"legacy/exports/index.d.mts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"legacy/exports/index.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"legacy/exports/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"legacy/exports/index.mjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"reference.md": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 3,
+				"matchingFiles": 0,
+				"missingInPackage": 5,
+				"missingInSource": 9,
+				"score": 0,
+				"totalFiles": 17
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "auth0-legacy",
+				"version": "4.37.2"
+			},
+			{
+				"name": "jose",
+				"version": "4.15.9"
+			},
+			{
+				"name": "jose",
+				"version": "5.10.0"
+			},
+			{
+				"name": "undici-types",
+				"version": "6.21.0"
+			},
+			{
+				"name": "uuid",
+				"version": "11.1.1"
+			}
+		]
+	}
+]
