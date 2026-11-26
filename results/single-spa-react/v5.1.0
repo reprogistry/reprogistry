@@ -1,0 +1,58 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-26T10:21:46.568Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:9.5.1",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "single-spa-react@5.1.0",
+			"name": "single-spa-react",
+			"version": "5.1.0",
+			"location": "https://registry.npmjs.org/single-spa-react/-/single-spa-react-5.1.0.tgz",
+			"integrity": "sha512-MZiGSKB9AOoHWZiJH+IXDvmpbVCDCk5yuGTuJ1zCjjY4vwuDX7F4KiNDOAw6MSoveLk4YSQqKw4hPfgRztji+g==",
+			"publishedAt": "2023-06-16T20:33:38.614Z",
+			"publishedWith": {
+				"node": "18.16.0",
+				"npm": "9.5.1"
+			},
+			"dependencies": {
+				"browserslist-config-single-spa": "^1.0.1"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/joeldenning/single-spa-react.git",
+			"spec": "github:joeldenning/single-spa-react#v5.1.0"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -26,6 +26,19 @@\n     \"directory\": \"src\"\n   },\n   \"types\": \"types/single-spa-react.d.ts\",\n+  \"scripts\": {\n+    \"build\": \"concurrently pnpm:build:*\",\n+    \"build:rollup\": \"rollup -c\",\n+    \"build:types\": \"rimraf parcel && copyfiles -f types/parcel/index.d.ts ./parcel\",\n+    \"lint\": \"eslint src\",\n+    \"test\": \"concurrently pnpm:test:*\",\n+    \"test:browser\": \"cross-env BABEL_ENV=test NODE_OPTIONS=--experimental-vm-modules jest --coverage\",\n+    \"test:types\": \"tsd\",\n+    \"watch-build\": \"rollup -cw\",\n+    \"format\": \"prettier --write .\",\n+    \"check-format\": \"prettier --check .\",\n+    \"prepare\": \"husky install\"\n+  },\n   \"browserslist\": [\n     \"extends browserslist-config-single-spa\"\n   ],\n@@ -105,17 +118,5 @@\n       \"npm\",\n       \"released\"\n     ]\n-  },\n-  \"scripts\": {\n-    \"build\": \"concurrently pnpm:build:*\",\n-    \"build:rollup\": \"rollup -c\",\n-    \"build:types\": \"rimraf parcel && copyfiles -f types/parcel/index.d.ts ./parcel\",\n-    \"lint\": \"eslint src\",\n-    \"test\": \"concurrently pnpm:test:*\",\n-    \"test:browser\": \"cross-env BABEL_ENV=test NODE_OPTIONS=--experimental-vm-modules jest --coverage\",\n-    \"test:types\": \"tsd\",\n-    \"watch-build\": \"rollup -cw\",\n-    \"format\": \"prettier --write .\",\n-    \"check-format\": \"prettier --check .\"\n   }\n-}\n\\ No newline at end of file\n+}\n",
+					"match": false,
+					"packageHash": "a67d78fbc219072e02dbea91ffb8c70b7f1c22313bafd05ea0f811b8ebb34a19",
+					"size": 3208,
+					"sourceHash": "192763bcb312fba5e4fad90c78b3fda4eaaae20c8403af09db7aa88641fa7a51",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 1,
+				"matchingFiles": 3,
+				"missingInPackage": 0,
+				"missingInSource": 0,
+				"score": 0.75,
+				"totalFiles": 4
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "browserslist-config-single-spa",
+				"version": "1.0.1"
+			}
+		]
+	}
+]

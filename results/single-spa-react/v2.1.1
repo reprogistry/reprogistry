@@ -1,0 +1,91 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-26T08:59:57.905Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:12.2.3",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "single-spa-react@2.1.1",
+			"name": "single-spa-react",
+			"version": "2.1.1",
+			"location": "https://registry.npmjs.org/single-spa-react/-/single-spa-react-2.1.1.tgz",
+			"integrity": "sha512-+N7uRPciwkMhIqvT9tZ1M3M6OFYdtN+Kha727QBjuEhgJxvysX4yswqt314HefmK5qWmDkKkai3sZHKPz23Pxg==",
+			"publishedAt": "2018-01-18T20:00:21.917Z",
+			"publishedWith": {
+				"node": null,
+				"npm": null
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/joeldenning/single-spa-react.git",
+			"spec": "github:joeldenning/single-spa-react#HEAD"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".babelrc": {
+					"match": false,
+					"packageHash": "6cd4dd2a7510228cde69c82426c6c2c8851c43c4441b78d0b0b634ceb09dd512",
+					"size": 74,
+					"status": "missing-in-source"
+				},
+				"LICENSE": {
+					"diff": "--- published/LICENSE\n+++ rebuilt/LICENSE\n@@ -1,6 +1,4 @@\n-The MIT License (MIT)\n-\n-Copyright (c) 2015 Joel Denning\n+Copyright (c) 2025 Jolyn Denning\n \n Permission is hereby granted, free of charge, to any person obtaining a copy\n of this software and associated documentation files (the \"Software\"), to deal\n",
+					"match": false,
+					"packageHash": "7d1daa21ef11a9e5aae0519cc12df8a85712fdfed18b2ab346f86e89cfeb476a",
+					"size": 1080,
+					"sourceHash": "afac0776c4a69ea92423ace63beff446418c4b96544b5ab023319280d61e1499",
+					"status": "content"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,52 +1,13 @@\n # single-spa-react\n \n-Generic lifecycle hooks for React applications that are registered as [child applications](https://github.com/CanopyTax/single-spa/blob/master/docs/child-applications.md) of [single-spa](https://github.com/CanopyTax/single-spa).\n+[![Build Status](https://travis-ci.com/single-spa/single-spa-react.svg?branch=master)](https://travis-ci.com/single-spa/single-spa-react)\n \n-## Example\n-In addition to this Readme, example usage of single-spa-react can be found in the [single-spa-examples](https://github.com/CanopyTax/single-spa-examples/blob/master/src/react/react.app.js) project.\n+Generic lifecycle hooks for React applications that are registered as either [single-spa applications](https://github.com/single-spa/single-spa/blob/master/docs/applications.md#registered-applications) or [single-spa](https://github.com/single-spa/single-spa) parcels.\n \n-## Quickstart\n+[Full documentation](https://single-spa.js.org/docs/ecosystem-react.html)\n \n-First, in the child application, run `npm install --save single-spa-react` (or `jspm install npm:single-spa-react` if your child application is managed by jspm). Then, in your [child app's entry file](https://github.com/CanopyTax/single-spa/blob/docs-1/docs/configuring-child-applications.md#the-entry-file), do the following:\n+## Contributing\n \n-```js\n-import React from 'react';\n-import ReactDOM from 'react-dom';\n-import rootComponent from './path-to-root-component.js';\n-import singleSpaReact from 'single-spa-react';\n-\n-const reactLifecycles = singleSpaReact({\n-  React,\n-  ReactDOM,\n-  rootComponent,\n-  domElementGetter: () => document.getElementById('main-content'),\n-});\n-\n-export const bootstrap = [\n-  reactLifecycles.bootstrap,\n-];\n-\n-export const mount = [\n-  reactLifecycles.mount,\n-];\n-\n-export const unmount = [\n-  reactLifecycles.unmount,\n-];\n-```\n-\n-## Options\n-\n-All options are passed to single-spa-react via the `opts` parameter when calling `singleSpaReact(opts)`. The following options are available:\n-\n-- `React`: (required) The main React object, which is generally either exposed onto the window or is available via `require('react')` `import React from 'react'`.\n-- `ReactDOM`: (required) The main ReactDOMbject, which is available via `require('react-dom')` `import ReactDOM from 'react-dom'`.\n-- `rootComponent`: (required) The top level React component which will be rendered\n-- `domElementGetter`: (required) A function that takes in no arguments and returns a DOMElement. This dom element is where the React application will be bootstrapped, mounted, and unmounted.\n-- `suppressComponentDidCatchWarning`: (optional) A boolean that indicates if single-spa-react should warn when the rootComponent does not implement componentDidCatch. Defaults to false.\n-\n-## Notes\n-\n-For react@>=16, it is best practice to have each single-spa application's root application implement componentDidCatch in order to avoid\n-the entire application unmounting unexpectedly when an error occurs. single-spa-react will warn to the console if componentDidCatch is not\n-implemented. See https://reactjs.org/blog/2017/07/26/error-handling-in-react-16.html for more details.\n+Make sure you commit a changeset with `pnpm changeset` before you open a PR.\n+This will allow to automatically bump the version and maintain the CHANGELOG\n+once released.\n",
+					"match": false,
+					"packageHash": "ccd8db86c62c9e74bc6fc93fc864a5e9ef96d20156b504e841ec35ca3cb32a10",
+					"size": 2597,
+					"sourceHash": "f6383ead595c12015481ad57961beb6e76eb52741fcbce8419fa4f65e9c4021b",
+					"status": "content"
+				},
+				"lib/single-spa-react.js": {
+					"match": false,
+					"packageHash": "c3489be2f7a23ffa34b31506acab7583d3cad29e187028ef787abb6bcb17bc20",
+					"size": 3011,
+					"status": "missing-in-source"
+				},
+				"lib/single-spa-react.js.map": {
+					"match": false,
+					"packageHash": "856573b128309de72108190a6579f74d5819808682b3e26e1a0638ce9f7b738d",
+					"size": 4967,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,15 +1,35 @@\n {\n   \"name\": \"single-spa-react\",\n-  \"version\": \"2.1.1\",\n-  \"description\": \"A single spa plugin for React apps\",\n-  \"main\": \"lib/single-spa-react.js\",\n+  \"version\": \"7.0.0-beta.0\",\n+  \"description\": \"Single-spa lifecycles helper for React apps\",\n+  \"type\": \"module\",\n+  \"exports\": {\n+    \"./package.json\": \"./package.json\",\n+    \".\": {\n+      \"types\": \"./lib/single-spa-react.d.ts\",\n+      \"default\": \"./lib/single-spa-react.js\"\n+    },\n+    \"./parcel\": {\n+      \"types\": \"./lib/parcel.d.ts\",\n+      \"default\": \"./lib/parcel.js\"\n+    }\n+  },\n+  \"packageManager\": \"pnpm@10.15.1\",\n+  \"files\": [\n+    \"lib\",\n+    \"README.md\"\n+  ],\n   \"scripts\": {\n-    \"build\": \"babel src --out-dir lib --source-maps\",\n-    \"prepublish\": \"yarn build\"\n+    \"build\": \"rollup -c rollup.config.ts && tsc\",\n+    \"test\": \"cross-env NODE_OPTIONS=\\\"--experimental-vm-modules\\\" jest\",\n+    \"format\": \"prettier --write .\",\n+    \"check-format\": \"prettier --check .\",\n+    \"prepublishOnly\": \"pnpm run build\",\n+    \"prepare\": \"husky\"\n   },\n   \"repository\": {\n     \"type\": \"git\",\n-    \"url\": \"git+https://github.com/joeldenning/single-spa-react.git\"\n+    \"url\": \"git+https://github.com/single-spa/single-spa-react.git\"\n   },\n   \"keywords\": [\n     \"single\",\n@@ -18,15 +38,42 @@\n     \"spa\",\n     \"react\"\n   ],\n-  \"author\": \"Joel Denning\",\n+  \"author\": \"Jolyn Denning\",\n   \"license\": \"MIT\",\n   \"bugs\": {\n-    \"url\": \"https://github.com/joeldenning/single-spa-react/issues\"\n+    \"url\": \"https://github.com/single-spa/single-spa-react/issues\"\n   },\n-  \"homepage\": \"https://github.com/joeldenning/single-spa-react#readme\",\n+  \"homepage\": \"https://github.com/single-spa/single-spa-react#readme\",\n   \"devDependencies\": {\n-    \"babel-cli\": \"^6.26.0\",\n-    \"babel-plugin-transform-object-rest-spread\": \"^6.26.0\",\n-    \"babel-preset-es2015\": \"^6.24.1\"\n+    \"@babel/core\": \"^7.28.4\",\n+    \"@babel/preset-env\": \"^7.28.3\",\n+    \"@babel/preset-react\": \"^7.27.1\",\n+    \"@babel/preset-typescript\": \"^7.27.1\",\n+    \"@jest/globals\": \"^30.1.2\",\n+    \"@rollup/plugin-babel\": \"^6.0.4\",\n+    \"@rollup/plugin-commonjs\": \"^28.0.6\",\n+    \"@rollup/plugin-node-resolve\": \"^16.0.1\",\n+    \"@rollup/plugin-terser\": \"^0.4.4\",\n+    \"@testing-library/react\": \"^16.3.0\",\n+    \"@types/react\": \"^19.1.12\",\n+    \"@types/react-dom\": \"^19.1.9\",\n+    \"cross-env\": \"^10.0.0\",\n+    \"dom-element-getter-helpers\": \"^2.1.0\",\n+    \"heeler\": \"^4.0.0\",\n+    \"husky\": \"^9.1.7\",\n+    \"jest\": \"^30.1.3\",\n+    \"jest-cli\": \"^30.1.3\",\n+    \"jest-environment-jsdom\": \"^30.1.2\",\n+    \"prettier\": \"^3.6.2\",\n+    \"pretty-quick\": \"^4.2.2\",\n+    \"react\": \"^19.1.1\",\n+    \"react-dom\": \"^19.1.1\",\n+    \"rollup\": \"^4.50.0\",\n+    \"rollup-plugin-delete\": \"^3.0.1\",\n+    \"single-spa\": \"7.0.0-beta.9\"\n+  },\n+  \"peerDependencies\": {\n+    \"react\": \">=19\",\n+    \"react-dom\": \">=19\"\n   }\n }\n",
+					"match": false,
+					"packageHash": "d4b722496251c6de8d0d9f465c047fcd00120e5782ece963e6c7756425b3db56",
+					"size": 810,
+					"sourceHash": "f3aa9f6c8805999a1f28dca999d97d4e444e9febfa086d3a8964dffca5426253",
+					"status": "content"
+				},
+				"src/single-spa-react.js": {
+					"match": false,
+					"packageHash": "b08cb27d8e2fdfefedc5490343fd6b92fb0a5fc3a0a6b8e34129217916741f1e",
+					"size": 2296,
+					"status": "missing-in-source"
+				}
+			},
+			"summary": {
+				"differentFiles": 3,
+				"matchingFiles": 0,
+				"missingInPackage": 0,
+				"missingInSource": 4,
+				"score": 0,
+				"totalFiles": 7
+			}
+		},
+		"prodDependencies": []
+	}
+]

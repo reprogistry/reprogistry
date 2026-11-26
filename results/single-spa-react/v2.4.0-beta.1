@@ -1,0 +1,63 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-26T09:00:01.245Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:12.2.3",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "single-spa-react@2.4.0-beta.1",
+			"name": "single-spa-react",
+			"version": "2.4.0-beta.1",
+			"location": "https://registry.npmjs.org/single-spa-react/-/single-spa-react-2.4.0-beta.1.tgz",
+			"integrity": "sha512-9dcBzhWjI9twyHlO9yHJB4fkuJ1YDv6YmPJEQsYN3bBkyQb6Or4WaWtgY+v9lP46SG8fj+KsTB3SZn7WoJvz/Q==",
+			"publishedAt": "2018-03-20T20:28:28.367Z",
+			"publishedWith": {
+				"node": null,
+				"npm": null
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/joeldenning/single-spa-react.git",
+			"spec": "github:joeldenning/single-spa-react#v2.4.0-beta.1"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"lib/single-spa-react.js": {
+					"match": false,
+					"packageHash": "2a3bea5606566e7684653dc80ee034f65cd9de6e4d3173ba5871fc29eee20c94",
+					"size": 4125,
+					"status": "missing-in-source"
+				},
+				"lib/single-spa-react.js.map": {
+					"match": false,
+					"packageHash": "0b4e18b0de2f073cd9d5f7b7c037aa139e3f30191ac80842787f5e10c6b26ed9",
+					"size": 6593,
+					"status": "missing-in-source"
+				},
+				"src/single-spa-react.js": {
+					"diff": "--- published/src/single-spa-react.js\n+++ rebuilt/src/single-spa-react.js\n@@ -98,11 +98,5 @@\n }\n \n function chooseDomElementGetter(opts, props) {\n-  if (props && props.customProps && props.customProps.domElement) {\n-    return () => props.customProps.domElement\n-  } else if (props && props.customProps && props.customProps.domElementGetter) {\n-    return props.customProps.domElementGetter\n-  } else {\n-    return opts.domElementGetter\n-  }\n+  return props && props.customProps && props.customProps.domElementGetter ? props.customProps.domElementGetter : opts.domElementGetter\n }\n",
+					"match": false,
+					"packageHash": "874dda647944d92a80322da3b9ca1a625fa6a5d11ec04b230492e58565e8c5be",
+					"size": 3198,
+					"sourceHash": "1ecd5f11e74d2e81200e67afdda55c61c2c639d8d1ec9d25a3cf0f57017b6a58",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 1,
+				"matchingFiles": 4,
+				"missingInPackage": 0,
+				"missingInSource": 2,
+				"score": 0.5714285714285714,
+				"totalFiles": 7
+			}
+		},
+		"prodDependencies": []
+	}
+]
