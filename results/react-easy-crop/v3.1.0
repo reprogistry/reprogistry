@@ -1,0 +1,372 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-27T02:47:16.186Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:12.2.3",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "react-easy-crop@3.1.0",
+			"name": "react-easy-crop",
+			"version": "3.1.0",
+			"location": "https://registry.npmjs.org/react-easy-crop/-/react-easy-crop-3.1.0.tgz",
+			"integrity": "sha512-bAJxqau48Y4KyvKT+kANE83F/+mpZo0XUVKfWtE2EVqS0f+hqfQ2CEl43lRUx34j/WCdUFh/nw0pcf4Dqq5CNw==",
+			"publishedAt": "2020-06-24T15:49:59.940Z",
+			"publishedWith": {
+				"node": null,
+				"npm": null
+			},
+			"dependencies": {
+				"tslib": "1.11.2"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "https://github.com/ricardo-ch/react-easy-crop",
+			"spec": "github:ricardo-ch/react-easy-crop#v3.1.0"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"helpers.d.ts": {
+					"match": false,
+					"packageHash": "fa090bb30c86bca3c88d2e7b50d340bf4f5491ca8931f7dc5e63bda4388297b1",
+					"size": 1998,
+					"status": "missing-in-source"
+				},
+				"helpers.d.ts.map": {
+					"match": false,
+					"packageHash": "e0dff28725fc430fa0de167e2d36ce5677952745505242153eace95ef3a8c8d4",
+					"size": 1454,
+					"status": "missing-in-source"
+				},
+				"helpers.test.d.ts": {
+					"match": false,
+					"packageHash": "4c3fb84c08392ddc55adf2715e596510cbc0430889845161f7a3ed60d0c660d4",
+					"size": 54,
+					"status": "missing-in-source"
+				},
+				"helpers.test.d.ts.map": {
+					"match": false,
+					"packageHash": "79d828cb6ef892a426fd449151bc019853cdd687b72c39e5f837dff1bc5d68c8",
+					"size": 115,
+					"status": "missing-in-source"
+				},
+				"index.d.ts": {
+					"match": false,
+					"packageHash": "716b02575c1b3d4a59da737355c24d109bee00e664942e66780ab5e0de1ca835",
+					"size": 3783,
+					"status": "missing-in-source"
+				},
+				"index.d.ts.map": {
+					"match": false,
+					"packageHash": "83979c662b0254b8f8d9f5b52e491e49a848f0100791d00c8ba9094068558eb3",
+					"size": 2658,
+					"status": "missing-in-source"
+				},
+				"index.js": {
+					"match": false,
+					"packageHash": "2bb1d4f3677ff9339e2bdca861441efbcb91aa2c6b93ef046a0171a71d4f90b2",
+					"size": 25366,
+					"status": "missing-in-source"
+				},
+				"index.js.map": {
+					"match": false,
+					"packageHash": "778857a2fc0d0c9aab21bc4985736f9ead42fdb67a2fd166469f4eb909fa8b7c",
+					"size": 46831,
+					"status": "missing-in-source"
+				},
+				"index.module.js": {
+					"match": false,
+					"packageHash": "a6d23df25febd73b5f56ef572c139f7be034d561199580086e785008c0ca64b6",
+					"size": 25163,
+					"status": "missing-in-source"
+				},
+				"index.module.js.map": {
+					"match": false,
+					"packageHash": "75deb50f428ec1bfcc94a9746da8b93518e554c6c2e01ff170c2ff25320c5e8e",
+					"size": 46834,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -13,6 +13,28 @@\n   \"author\": \"Ricardo.ch\",\n   \"license\": \"MIT\",\n   \"sideEffects\": false,\n+  \"scripts\": {\n+    \"start\": \"webpack-dev-server --mode development\",\n+    \"build\": \"yarn-or-npm bili && yarn-or-npm build:copy-files\",\n+    \"docs:start\": \"cd docs && yarn-or-npm develop\",\n+    \"docs:deploy\": \"cd docs && yarn-or-npm deploy\",\n+    \"test\": \"yarn-or-npm unit && yarn-or-npm e2e && yarn-or-npm lint\",\n+    \"unit\": \"jest src\",\n+    \"unit:watch\": \"jest --watchAll src\",\n+    \"start:ci\": \"webpack-dev-server --mode production\",\n+    \"e2e\": \"start-server-and-test start http://localhost:3001 cy:run\",\n+    \"e2e:ci\": \"start-server-and-test start:ci http://localhost:3001 cy:ci\",\n+    \"cy:open\": \"cypress open\",\n+    \"cy:run\": \"cypress run\",\n+    \"cy:ci\": \"cypress run --record\",\n+    \"lint\": \"eslint --ext .ts,.tsx ./examples ./src\",\n+    \"prebuild\": \"rimraf dist\",\n+    \"build:copy-files\": \"babel-node ./scripts/copy-build-files.js\",\n+    \"prepublishOnly\": \"yarn-or-npm build\",\n+    \"precommit\": \"lint-staged\",\n+    \"format\": \"prettier --write src/**/*.ts* docs/src/**/*.{js,css}\",\n+    \"npm:publish\": \"np --contents=dist\"\n+  },\n   \"peerDependencies\": {\n     \"react\": \">=16.4.0\",\n     \"react-dom\": \">=16.4.0\"\n@@ -20,12 +42,62 @@\n   \"dependencies\": {\n     \"tslib\": \"1.11.2\"\n   },\n-  \"main\": \"./index.js\",\n-  \"umd:main\": \"./umd/react-easy-crop.js\",\n-  \"unpkg\": \"./umd/react-easy-crop.js\",\n-  \"jsdelivr\": \"./umd/react-easy-crop.js\",\n-  \"module\": \"./index.module.js\",\n-  \"jsnext:main\": \"./index.module.js\",\n-  \"react-native\": \"./index.module.js\",\n-  \"types\": \"./index.d.ts\"\n+  \"devDependencies\": {\n+    \"@babel/core\": \"^7.3.4\",\n+    \"@babel/node\": \"^7.7.7\",\n+    \"@babel/plugin-proposal-class-properties\": \"^7.3.4\",\n+    \"@babel/plugin-proposal-object-rest-spread\": \"^7.3.4\",\n+    \"@babel/preset-env\": \"^7.3.4\",\n+    \"@babel/preset-react\": \"^7.0.0\",\n+    \"@types/jest\": \"^24.0.24\",\n+    \"@types/react\": \"^16.9.17\",\n+    \"@types/react-dom\": \"^16.9.4\",\n+    \"@typescript-eslint/eslint-plugin\": \"2.x\",\n+    \"@typescript-eslint/parser\": \"2.x\",\n+    \"all-contributors-cli\": \"^6.4.0\",\n+    \"babel-eslint\": \"10.x\",\n+    \"babel-loader\": \"^8.0.5\",\n+    \"bili\": \"^4.8.1\",\n+    \"copy-webpack-plugin\": \"^5.0.0\",\n+    \"css-loader\": \"^2.1.1\",\n+    \"cypress\": \"^3.2.0\",\n+    \"eslint\": \"6.x\",\n+    \"eslint-config-prettier\": \"^6.9.0\",\n+    \"eslint-config-react-app\": \"^5.1.0\",\n+    \"eslint-plugin-flowtype\": \"3.x\",\n+    \"eslint-plugin-import\": \"2.x\",\n+    \"eslint-plugin-jsx-a11y\": \"6.x\",\n+    \"eslint-plugin-react\": \"7.x\",\n+    \"eslint-plugin-react-hooks\": \"1.x\",\n+    \"html-webpack-plugin\": \"^3.2.0\",\n+    \"husky\": \"^1.3.1\",\n+    \"jest\": \"24.3.1\",\n+    \"lint-staged\": \"^8.1.5\",\n+    \"np\": \"^4.0.2\",\n+    \"prettier\": \"^1.19.1\",\n+    \"query-string\": \"^6.1.0\",\n+    \"raw-loader\": \"^4.0.1\",\n+    \"react\": \"^16.4.1\",\n+    \"react-dom\": \"^16.4.1\",\n+    \"rimraf\": \"^3.0.0\",\n+    \"rollup-plugin-typescript2\": \"^0.27.1\",\n+    \"start-server-and-test\": \"^1.4.1\",\n+    \"style-loader\": \"^0.23.1\",\n+    \"ts-jest\": \"^24.2.0\",\n+    \"ts-loader\": \"^6.2.1\",\n+    \"typescript\": \"^3.7.4\",\n+    \"webpack\": \"^4.41.4\",\n+    \"webpack-cli\": \"^3.3.10\",\n+    \"webpack-dev-server\": \"^3.10.1\",\n+    \"yarn-or-npm\": \"^3.0.1\"\n+  },\n+  \"lint-staged\": {\n+    \"*.+(ts|tsx|js|css)\": [\n+      \"prettier --write\",\n+      \"git add\"\n+    ]\n+  },\n+  \"jest\": {\n+    \"preset\": \"ts-jest\"\n",
+					"match": false,
+					"packageHash": "6d9ef2689eeb998b857f1e3d30aacd1610f8a58f7c15af504cbba0f74d63208b",
+					"size": 856,
+					"sourceHash": "3fcf7dfc9ca25e0b96b0b30fabc850d25111f761aca51d8444c1780a1ca813e5",
+					"status": "content"
+				},
+				"react-easy-crop.css": {
+					"match": false,
+					"packageHash": "e357df631db8ed96c451a4bfadf7c72b3837844670a0dcf7d1137456f0d893d6",
+					"size": 1252,
+					"status": "missing-in-source"
+				},
+				"types.d.ts": {
+					"match": false,
+					"packageHash": "12149a714c53de7d6b577b1c36d24a8f142bdafc4c9c086ad175a1a7f5618c5b",
+					"size": 419,
+					"status": "missing-in-source"
+				},
+				"types.d.ts.map": {
+					"match": false,
+					"packageHash": "95592bf56024e2ac709bb350e68bc4023150b9513c885d0a337f23d098268707",
+					"size": 530,
+					"status": "missing-in-source"
+				},
+				"umd/react-easy-crop.js": {
+					"match": false,
+					"packageHash": "13d132e4627ab8453617c9d4302736be1a5bf993c14505ea6d0a33a15dd50c54",
+					"size": 29803,
+					"status": "missing-in-source"
+				},
+				"umd/react-easy-crop.js.map": {
+					"match": false,
+					"packageHash": "57d9fb0f281805fe9f08cddfe3dcf4259ae082686702294dd27e4e7b671d6b26",
+					"size": 61732,
+					"status": "missing-in-source"
+				},
+				"umd/react-easy-crop.min.js": {
+					"match": false,
+					"packageHash": "c9ece048dce7f67037753c9ba6e3a9859b524b04f64894d3c11d1570e0d8a01d",
+					"size": 13692,
+					"status": "missing-in-source"
+				},
+				"umd/react-easy-crop.min.js.map": {
+					"match": false,
+					"packageHash": "42cfdca067091545c128f358383c3772732784ae03da22dfade88d9c26092bc4",
+					"size": 49010,
+					"status": "missing-in-source"
+				},
+				".all-contributorsrc": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".babelrc": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".circleci/config.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".codesandbox/ci.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".eslintrc.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/CONTRIBUTING.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/FUNDING.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/ISSUE_TEMPLATE/issue-template.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/ISSUE_TEMPLATE.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/PULL_REQUEST_TEMPLATE.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".prettierrc": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".vscode/settings.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"CODE_OF_CONDUCT.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"bili.config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"cypress/integration/basic_spec.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"cypress/integration/mouse_spec.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"cypress/integration/touch_spec.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"cypress/plugins/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"cypress/support/commands.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"cypress/support/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"cypress.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/.prettierrc": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/gatsby-config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/src/components/CodeSandboxes/index.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/src/components/Demo/ImgDialog/index.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/src/components/Demo/cropImage.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/src/components/Demo/dog.jpeg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/src/components/Demo/index.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/src/components/Header/index.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/src/components/Layout/index.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/src/components/Seo/index.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/src/pages/index.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/typings/images/index.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/yarn.lock": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/src/images/cat.jpeg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/src/images/dog.jpeg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/src/index.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/src/index.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/src/styles.css": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/copy-build-files.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/declarations.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/helpers.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/helpers.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/index.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/styles.css": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"webpack.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 1,
+				"matchingFiles": 1,
+				"missingInPackage": 53,
+				"missingInSource": 17,
+				"score": 0.013888888888888888,
+				"totalFiles": 72
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "tslib",
+				"version": "1.11.2"
+			}
+		]
+	}
+]

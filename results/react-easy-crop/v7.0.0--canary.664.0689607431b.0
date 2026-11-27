@@ -1,0 +1,434 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-27T03:31:21.948Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:11.16.0",
+		"reproduced": false,
+		"attested": true,
+		"package": {
+			"spec": "react-easy-crop@7.0.0--canary.664.0689607431b.0",
+			"name": "react-easy-crop",
+			"version": "7.0.0--canary.664.0689607431b.0",
+			"location": "https://registry.npmjs.org/react-easy-crop/-/react-easy-crop-7.0.0--canary.664.0689607431b.0.tgz",
+			"integrity": "sha512-MQh9KFE2rJJo+62cKZpW47K4kdUHRrf8cFJUYxs59UfKWTRjnyN0M4cLuqFayKN3N0ilv1arTb3owkilBRpZAw==",
+			"publishedAt": "2026-08-11T10:40:54.608Z",
+			"publishedWith": {
+				"node": "24.18.0",
+				"npm": "11.16.0"
+			},
+			"dependencies": {
+				"normalize-wheel": "^1.0.1"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/ValentinH/react-easy-crop.git",
+			"spec": "github:ValentinH/react-easy-crop#0689607431bffc3358356c86c82dc7590b3e79ab"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"index.d.mts": {
+					"match": false,
+					"packageHash": "1d51ed5c84491f40d8d2c14640ab4a8fd60265b49663254e522ff59f2147c85b",
+					"size": 3440,
+					"status": "missing-in-source"
+				},
+				"index.d.mts.map": {
+					"match": false,
+					"packageHash": "50aa0297dd34439179647889bf4bf441d234e01adf4e230bf5edae1d5b4d6e9d",
+					"size": 1928,
+					"status": "missing-in-source"
+				},
+				"index.d.ts": {
+					"match": false,
+					"packageHash": "0701054c2951e37ab38dc311d3494cf075e75f4f66541e91511e375c2c735937",
+					"size": 3439,
+					"status": "missing-in-source"
+				},
+				"index.d.ts.map": {
+					"match": false,
+					"packageHash": "900496b2305791ab89e2fc03a871864662c0767a229f979525ca4ed53d3bbe35",
+					"size": 1927,
+					"status": "missing-in-source"
+				},
+				"index.js": {
+					"match": false,
+					"packageHash": "89d8db753315c07c358f94d9be0324bb1dfc53b4616a77ecd1bb61e53d8ca6e3",
+					"size": 74332,
+					"status": "missing-in-source"
+				},
+				"index.js.map": {
+					"match": false,
+					"packageHash": "ece6ae76804ab3fd72ea26cfbec39c6fb970e7c197c6824ba447eb1dd1bf2592",
+					"size": 115459,
+					"status": "missing-in-source"
+				},
+				"index.module.mjs": {
+					"match": false,
+					"packageHash": "49ab49b36c443f03db12991de77ac762a851fae3b294c033d49315fd57a8d548",
+					"size": 72795,
+					"status": "missing-in-source"
+				},
+				"index.module.mjs.map": {
+					"match": false,
+					"packageHash": "8eebb432eb71fa91b23336d2c7eeda9e08a08c97c3405ca8fe7e1cc642ae1827",
+					"size": 115209,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,6 +1,6 @@\n {\n   \"name\": \"react-easy-crop\",\n-  \"version\": \"7.0.0--canary.664.0689607431b.0\",\n+  \"version\": \"6.2.3\",\n   \"description\": \"A React component to crop images/videos with easy interactions\",\n   \"homepage\": \"https://ValentinH.github.io/react-easy-crop/\",\n   \"keywords\": [\n@@ -18,38 +18,93 @@\n   },\n   \"author\": \"Valentin Hervieu <valentin@hervi.eu>\",\n   \"license\": \"MIT\",\n+  \"packageManager\": \"pnpm@11.5.2\",\n   \"sideEffects\": false,\n+  \"scripts\": {\n+    \"start\": \"vite ./examples --config ./vite.config.mts --port 3001 --clearScreen false\",\n+    \"auto\": \"auto\",\n+    \"postversion\": \"pnpm build\",\n+    \"build\": \"tsdown && pnpm build:copy-files && pnpm test:build-types\",\n+    \"test:build-types\": \"node ./scripts/check-build-types.js\",\n+    \"docs:start\": \"pnpm --dir docs start\",\n+    \"docs:build\": \"pnpm --dir docs build\",\n+    \"docs:deploy\": \"pnpm --dir docs deploy\",\n+    \"test\": \"pnpm unit && pnpm e2e && pnpm lint\",\n+    \"unit\": \"vitest run src\",\n+    \"unit:watch\": \"vitest src\",\n+    \"start:ci\": \"vite ./examples --config ./vite.config.mts --port 3001 --mode production\",\n+    \"e2e\": \"start-server-and-test start http://localhost:3001 cy:run\",\n+    \"e2e:ci\": \"start-server-and-test start:ci http://localhost:3001 cy:ci\",\n+    \"cy:open\": \"cypress open\",\n+    \"cy:run\": \"cypress run\",\n+    \"cy:ci\": \"percy exec -- cypress run --record\",\n+    \"lint\": \"eslint --ext .ts,.tsx ./examples ./src\",\n+    \"type-check\": \"tsc --noEmit\",\n+    \"prebuild\": \"rimraf dist\",\n+    \"build:copy-files\": \"node ./scripts/copy-build-files.js\",\n+    \"precommit\": \"lint-staged\",\n+    \"format\": \"prettier --write src/**/*.ts* docs/src/**/*.{js,css}\"\n+  },\n   \"peerDependencies\": {\n     \"react\": \"^19.2.0\"\n   },\n   \"dependencies\": {\n     \"normalize-wheel\": \"^1.0.1\"\n   },\n-  \"main\": \"./index.js\",\n-  \"module\": \"./index.module.mjs\",\n-  \"types\": \"./index.d.ts\",\n-  \"typesVersions\": {\n-    \"*\": {\n-      \"react-easy-crop.css\": [\n-        \"./react-easy-crop.css.d.ts\"\n-      ]\n-    }\n-  },\n-  \"exports\": {\n-    \".\": {\n-      \"import\": {\n-        \"types\": \"./index.d.mts\",\n-        \"default\": \"./index.module.mjs\"\n-      },\n-      \"require\": {\n-        \"types\": \"./index.d.ts\",\n-        \"default\": \"./index.js\"\n-      },\n-      \"default\": \"./index.module.mjs\"\n-    },\n-    \"./react-easy-crop.css\": {\n-      \"types\": \"./react-easy-crop.css.d.ts\",\n-      \"default\": \"./react-easy-crop.css\"\n-    }\n+  \"devDependencies\": {\n+    \"@auto-it/all-contributors\": \"11.3.6\",\n+    \"@auto-it/first-time-contributor\": \"11.3.6\",\n+    \"@auto-it/released\": \"11.3.6\",\n+    \"@babel/core\": \"^7.29.7\",\n+    \"@percy/cli\": \"^1.31.14\",\n+    \"@percy/cypress\": \"^3.1.1\",\n+    \"@rolldown/plugin-babel\": \"^0.2.3\",\n+    \"@testing-library/dom\": \"^10.4.1\",\n+    \"@testing-library/react\": \"^16.3.2\",\n+    \"@types/babel__core\": \"^7.20.5\",\n+    \"@types/lodash.debounce\": \"^4.0.6\",\n+    \"@types/node\": \"^25.9.2\",\n+    \"@types/react\": \"^19.2.0\",\n+    \"@types/react-dom\": \"^19.2.0\",\n+    \"@typescript-eslint/eslint-plugin\": \"^5.51.0\",\n+    \"@typescript-eslint/parser\": \"^5.51.0\",\n+    \"@vitejs/plugin-react\": \"^6.0.5\",\n+    \"all-contributors-cli\": \"^6.4.0\",\n+    \"auto\": \"11.3.6\",\n+    \"babel-plugin-react-compiler\": \"1.0.0\",\n+    \"cypress\": \"^15.17.0\",\n+    \"eslint\": \"^8.34.0\",\n+    \"eslint-config-prettier\": \"^8.6.0\",\n+    \"eslint-config-react-app\": \"^7.0.1\",\n+    \"eslint-plugin-cypress\": \"^2.12.1\",\n+    \"eslint-plugin-flowtype\": \"^8.0.3\",\n",
+					"match": false,
+					"packageHash": "c371fd8f6c11f13cfedeeb412576c291f24120464a124254190981d4aa6baca1",
+					"size": 1276,
+					"sourceHash": "4020030adaf6ae5897a8e8190559e83a6b7a6ae09abebf66d0060b52991ff24e",
+					"status": "content"
+				},
+				"react-easy-crop.css": {
+					"match": false,
+					"packageHash": "8f94799dbe8f402ced3c8a35cdff4f23cf87934d991c522a3f309bde41490f85",
+					"size": 1578,
+					"status": "missing-in-source"
+				},
+				"react-easy-crop.css.d.ts": {
+					"match": false,
+					"packageHash": "7992a39d6cde5e050eb78461a8bf9ad986175a94826e835c110b3967290bd249",
+					"size": 10,
+					"status": "missing-in-source"
+				},
+				".all-contributorsrc": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".codesandbox/ci.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".eslintrc.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/CONTRIBUTING.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/FUNDING.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/ISSUE_TEMPLATE/bug_report.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/ISSUE_TEMPLATE/feature_request.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/ISSUE_TEMPLATE.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/PULL_REQUEST_TEMPLATE.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/deploy-docs.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/quality-gate.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/release.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".prettierrc": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".vscode/settings.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"CODE_OF_CONDUCT.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"auto.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"cypress/integration/basic_spec.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"cypress/integration/iframe_spec.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"cypress/integration/mouse_spec.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"cypress/integration/touch_spec.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"cypress/support/commands.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"cypress/support/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"cypress.config.cjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/docs/advanced.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/docs/callbacks.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/docs/examples/basic.mdx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/docs/examples/output.mdx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/docs/examples/restore.mdx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/docs/examples/round.mdx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/docs/examples/upload.mdx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/docs/examples/video.mdx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/docs/getting-started.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/docs/known-issues.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/docs/migration-v7.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/docs/props.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/docs/styling.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/docusaurus.config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/pnpm-lock.yaml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/sidebars.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/src/components/CropperExample.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/src/components/ExampleFrame.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/src/components/RestoreCropExample.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/src/components/cropImage.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/src/css/custom.css": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/src/examples/code.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/src/pages/index.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/static/img/dog.jpeg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/images/1000x600.jpeg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/images/2000x1200.jpeg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/images/cat.jpeg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/images/dog.jpeg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/images/flower.jpeg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/index.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/src/iframe.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/src/index.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/src/styles.css": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"pnpm-workspace.yaml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/check-build-types.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/copy-build-files.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/Cropper.ssr.test.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/Cropper.test.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/Cropper.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/declarations.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/helpers.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/helpers.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/styles.css": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"src/useCropper.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tests/build-types/cjs/index.tsx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tests/build-types/esm/index.mts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tsdown.config.mts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vite.config.mts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"vitest.config.mts": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 1,
+				"matchingFiles": 2,
+				"missingInPackage": 79,
+				"missingInSource": 10,
+				"score": 0.021739130434782608,
+				"totalFiles": 92
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "normalize-wheel",
+				"version": "1.0.1"
+			}
+		]
+	}
+]
