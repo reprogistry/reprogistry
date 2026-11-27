@@ -1,0 +1,103 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-27T02:01:56.443Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:5.5.1",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "react-navigation-stack@1.0.0-alpha.5",
+			"name": "react-navigation-stack",
+			"version": "1.0.0-alpha.5",
+			"location": "https://registry.npmjs.org/react-navigation-stack/-/react-navigation-stack-1.0.0-alpha.5.tgz",
+			"integrity": "sha512-8CQ9/aDuODwwmOPDZAfDugbdnYI/BHNq0IOUE0A5rWc8o8r3oQa4ZYm+p11lPNwDX99/9pStBdv7NIAuLwO7rA==",
+			"publishedAt": "2018-09-26T17:01:16.927Z",
+			"publishedWith": {
+				"node": "9.2.0",
+				"npm": "6.4.1"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/react-navigation/react-navigation-stack.git",
+			"spec": "github:react-navigation/react-navigation-stack#6e95ceea1fe28d54d7b79388adb407b7df6d3d95"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"dist/routers/KeyGenerator.js": {
+					"match": false,
+					"packageHash": "9a7f6833073fc5c1a52dbd7957df7f6f5c5ddf401c795de33e6c18511de8683d",
+					"size": 227,
+					"status": "missing-in-source"
+				},
+				"dist/routers/StackActions.js": {
+					"match": false,
+					"packageHash": "b2ff014efc5355cdd3d051b1fc7036cdcb66deaee6c062ba63f8438a88b6e1ec",
+					"size": 800,
+					"status": "missing-in-source"
+				},
+				"dist/routers/StackRouter.js": {
+					"match": false,
+					"packageHash": "079931d0f7af950423e1558a4034c23c39139730053f06c3358758836da49fdc",
+					"size": 18420,
+					"status": "missing-in-source"
+				},
+				"dist/utils/GestureContext.js": {
+					"match": false,
+					"packageHash": "561418abd5f7fc8f843477d035827832f5b53eb90684d915ba0453a633508a1a",
+					"size": 108,
+					"status": "missing-in-source"
+				},
+				"dist/views/.DS_Store": {
+					"match": false,
+					"packageHash": "4cc5111ede9fe940d4acf605b47a6635bc37c485e3ad045f0b6cf8740e2f3279",
+					"size": 6148,
+					"status": "missing-in-source"
+				},
+				"dist/views/StackView/createPointerEventsContainer.js": {
+					"diff": "--- published/dist/views/StackView/createPointerEventsContainer.js\n+++ rebuilt/dist/views/StackView/createPointerEventsContainer.js\n@@ -12,20 +12,22 @@\n   class Container extends React.Component {\n     constructor(props, context) {\n       super(props, context);\n-      this._pointerEvents = this._computePointerEvents();\n+      // this._pointerEvents = this._computePointerEvents();\n     }\n \n     componentWillUnmount() {\n-      this._positionListener && this._positionListener.remove();\n+      // this._positionListener && this._positionListener.remove();\n     }\n \n     render() {\n-      this._bindPosition();\n-      this._pointerEvents = this._computePointerEvents();\n+      // this._bindPosition();\n+      // this._pointerEvents = this._computePointerEvents();\n \n       const { navigation, scene } = this.props;\n \n-      return <Component {...this.props} pointerEvents={this._pointerEvents} onComponentRef={this._onComponentRef} />;\n+      return <Component {...this.props} pointerEvents={scene.index === navigation.state.index ? 'auto' : 'none'}\n+      // pointerEvents={this._pointerEvents}\n+      onComponentRef={this._onComponentRef} />;\n     }\n \n     _onComponentRef = component => {\n@@ -36,42 +38,41 @@\n     };\n \n     _bindPosition() {\n-      this._positionListener && this._positionListener.remove();\n-      this._positionListener = new AnimatedValueSubscription(this.props.realPosition, this._onPositionChange);\n+      // this._positionListener && this._positionListener.remove();\n+      // this._positionListener = new AnimatedValueSubscription(\n+      //   this.props.realPosition,\n+      //   () => {}\n+      // );\n     }\n \n     _onPositionChange = ({ value }) => {\n-      // This should log each frame when releasing the gesture or when\n-      // pressing the back button! If not, something has gone wrong with the\n-      // animated value subscription\n-      // console.log(value);\n-\n-      if (this._component) {\n-        const pointerEvents = this._computePointerEvents();\n-        if (this._pointerEvents !== pointerEvents) {\n-          this._pointerEvents = pointerEvents;\n-          this._component.setNativeProps({ pointerEvents });\n-        }\n-      }\n+      // console.log({ value });\n+      // if (this._component) {\n+      //   const pointerEvents = this._computePointerEvents();\n+      //   if (this._pointerEvents !== pointerEvents) {\n+      //     this._pointerEvents = pointerEvents;\n+      //     this._component.setNativeProps({ pointerEvents });\n+      //   }\n+      // }\n     };\n \n     _computePointerEvents() {\n-      const { navigation, realPosition, scene } = this.props;\n-\n-      if (scene.isStale || navigation.state.index !== scene.index) {\n-        // The scene isn't focused.\n-        return scene.index > navigation.state.index ? 'box-only' : 'none';\n-      }\n+      // const { navigation, realPosition, scene } = this.props;\n \n-      const offset = realPosition.__getAnimatedValue() - navigation.state.index;\n-      if (Math.abs(offset) > MIN_POSITION_OFFSET) {\n-        // The positon is still away from scene's index.\n-        // Scene's children should not receive touches until the position\n-        // is close enough to scene's index.\n-        return 'box-only';\n-      }\n+      // if (scene.isStale || navigation.state.index !== scene.index) {\n+      //   // The scene isn't focused.\n+      //   return scene.index > navigation.state.index ? 'box-only' : 'none';\n+      // }\n+\n+      // const offset = realPosition.__getAnimatedValue() - navigation.state.index;\n+      // if (Math.abs(offset) > MIN_POSITION_OFFSET) {\n+      //   // The positon is still away from scene's index.\n+      //   // Scene's children should not receive touches until the position\n+      //   // is close enough to scene's index.\n+      //   return 'box-only';\n+      // }\n \n-      return 'auto';\n+      // return 'auto';\n     }\n   }\n   return Container;\n",
+					"match": false,
+					"packageHash": "8e1cff1fda85412bb9c60adc4cbec93d36c53cb80b6a8ae96d34c8b563b1a112",
+					"size": 2740,
+					"sourceHash": "de5a318b3a6121953468dbe59e45e704cc7bb927e9d5aa21a13b51453cc0f761",
+					"status": "content"
+				},
+				"dist/views/StackView/screens.js": {
+					"match": false,
+					"packageHash": "8c5881a2d82fac22dd82840aa110ff08db45f02d32fb15757e50a5080336b1a8",
+					"size": 566,
+					"status": "missing-in-source"
+				},
+				"dist/views/Transitioner.js": {
+					"diff": "--- published/dist/views/Transitioner.js\n+++ rebuilt/dist/views/Transitioner.js\n@@ -27,13 +27,9 @@\n \n     const position = new Animated.Value(this.props.navigation.state.index);\n     this._positionListener = position.addListener(({ value }) => {\n-      // This should work until we detach position from a view! so we have to be\n-      // careful to not ever detach it, thus the gymnastics in _getPosition in\n-      // StackViewLayout\n-      // This should log each frame when releasing the gesture or when pressing\n-      // the back button! If not, something has gone wrong with the animated\n-      // value subscription\n-      // console.log(value);\n+      // this works until we detach position from a view!\n+      // after that it only updates when we call setValue\n+      console.log(value);\n     });\n \n     this.state = {\n",
+					"match": false,
+					"packageHash": "7e5b0b479b0843a9e947fd81a4cd34f7b86135bc67f0496edbff5e523bbbb648",
+					"size": 7054,
+					"sourceHash": "66efce3c20b489736ad79bbd41e5259d408cc1ffae485dc5fb48e38c92bc64ba",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,6 +1,6 @@\n {\n   \"name\": \"react-navigation-stack\",\n-  \"version\": \"1.0.0-alpha.5\",\n+  \"version\": \"1.0.0-alpha.2\",\n   \"description\": \"Stack navigator component for React Navigation\",\n   \"main\": \"dist/index.js\",\n   \"files\": [\n",
+					"match": false,
+					"packageHash": "36acb7318a4b52a77617130b1ab5371bb312593d9cb9b5df044b0907a87c5d3e",
+					"size": 2529,
+					"sourceHash": "c88d6c7b686a4c462bdbd02d72546b80f39c53f2b7d6f2b6029a4164d5415729",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 3,
+				"matchingFiles": 35,
+				"missingInPackage": 0,
+				"missingInSource": 6,
+				"score": 0.7954545454545454,
+				"totalFiles": 44
+			}
+		},
+		"prodDependencies": []
+	}
+]
