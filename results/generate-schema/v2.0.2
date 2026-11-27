@@ -1,0 +1,102 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-27T14:22:57.403Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:1.4.9",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "generate-schema@2.0.2",
+			"name": "generate-schema",
+			"version": "2.0.2",
+			"location": "https://registry.npmjs.org/generate-schema/-/generate-schema-2.0.2.tgz",
+			"integrity": "sha512-NkaGR5FMBscyLgjhTgaMpZBQ7gqFCEhCswP5zjiYExt8g1T10FUwgi/G8/eu32tXnE18QzNHy1KL5srbrSFO5w==",
+			"publishedAt": "2015-02-20T22:00:52.030Z",
+			"publishedWith": {
+				"node": "0.10.28",
+				"npm": "2.1.8"
+			},
+			"dependencies": {
+				"type-of-is": "^3.4.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "https://github.com/Nijikokun/generate-schema",
+			"spec": "github:Nijikokun/generate-schema#8826b77a1e82d0b988378682bb4b8e5171258fcb"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".npmignore": {
+					"match": false,
+					"packageHash": "dba27c31aad935787bb275c3e5e4e957708f15386de599eff1db476022cd7e4c",
+					"size": 12,
+					"status": "missing-in-source"
+				},
+				"src/schemas/generic.js": {
+					"diff": "--- published/src/schemas/generic.js\n+++ rebuilt/src/schemas/generic.js\n@@ -1,7 +1,6 @@\n-// Modules\n var Type = require('type-of-is')\n \n-module.exports = function GenericSchemaGenerator (object) {\n+function generateGenericSchema (object) {\n   for (var key in object) {\n     var value = object[key]\n     var type = Type.string(value).toLowerCase()\n@@ -15,10 +14,12 @@\n         type: type\n       }\n     } else {\n-      object[key] = GenericSchemaGenerator(object[key])\n+      object[key] = generateJsonSchema(object[key])\n       object[key].type = type\n     }\n   }\n \n   return object\n-}\n\\ No newline at end of file\n+}\n+\n+module.exports = generateGenericSchema\n\\ No newline at end of file\n",
+					"match": false,
+					"packageHash": "6a7713ad14c8707387200074983a303be61a57fad210740258d468974bc4d17b",
+					"size": 474,
+					"sourceHash": "c5e1f6582b81e0f3609cd4fd561a18bfb228c9e05c94a689e6c7839248615a6e",
+					"status": "content"
+				},
+				"src/schemas/json.js": {
+					"diff": "--- published/src/schemas/json.js\n+++ rebuilt/src/schemas/json.js\n@@ -1,8 +1,5 @@\n-// Modules\n var Type = require('type-of-is')\n-\n-// Constants\n-var DRAFT = \"http://json-schema.org/draft-04/schema#\"\n+var Draft = \"http://json-schema.org/draft-04/schema#\"\n \n function getUniqueKeys (a, b, c) {\n   var a = Object.keys(a)\n@@ -140,7 +137,7 @@\n module.exports = function (title, object) {\n   var processOutput\n   var output = {\n-    $schema: DRAFT\n+    $schema: Draft\n   }\n \n   // Determine title exists\n",
+					"match": false,
+					"packageHash": "1031d106585d9372ac779eba16548207f3d927ab7f817f098ca6d90ed78ab7cd",
+					"size": 3985,
+					"sourceHash": "eef30bd7b4790239a818fdd3b21cf526ae45eac6ef6a90d0877d2506339f3b0f",
+					"status": "content"
+				},
+				"tests/fixtures/advanced.js": {
+					"match": false,
+					"packageHash": "66b2112bb6f743a69996ba2da8fdefb5d5f6fc736642ebb63f7da8e4ad498abc",
+					"size": 534,
+					"status": "missing-in-source"
+				},
+				"tests/fixtures/simple.js": {
+					"match": false,
+					"packageHash": "9a4fb516ac7a7260dc54e0ad3617b0130f61a55de288c9fbc9d1522337ccedfc",
+					"size": 260,
+					"status": "missing-in-source"
+				},
+				"tests/generic.js": {
+					"match": false,
+					"packageHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+					"size": 0,
+					"status": "missing-in-source"
+				},
+				"tests/json.js": {
+					"match": false,
+					"packageHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+					"size": 0,
+					"status": "missing-in-source"
+				},
+				"tests/mocha.opts": {
+					"match": false,
+					"packageHash": "bb3902b91f33ae67fe47d8bfc45d8e2cb1a3a2b34edecf97680bf8deaead40ef",
+					"size": 54,
+					"status": "missing-in-source"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 5,
+				"missingInPackage": 0,
+				"missingInSource": 6,
+				"score": 0.38461538461538464,
+				"totalFiles": 13
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "type-of-is",
+				"version": "3.5.1"
+			}
+		]
+	}
+]
