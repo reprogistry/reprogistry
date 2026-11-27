@@ -1,0 +1,1652 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-27T11:05:11.357Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:10.9.2",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "@dfinity/agent@3.0.2",
+			"name": "@dfinity/agent",
+			"version": "3.0.2",
+			"location": "https://registry.npmjs.org/@dfinity/agent/-/agent-3.0.2.tgz",
+			"integrity": "sha512-G3mrG6Yvdj9kPsCBcLNZiPt56YLscxoLFhHmEPPiKKXsvB74uprC5veGVFSC3RCCRbOrALAibWNie0f/n6ybGw==",
+			"publishedAt": "2025-07-23T12:38:54.262Z",
+			"publishedWith": {
+				"node": "22.17.1",
+				"npm": "10.9.2"
+			},
+			"dependencies": {
+				"@dfinity/cbor": "^0.2.2",
+				"@noble/curves": "^1.9.2"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/dfinity/agent-js.git",
+			"spec": "github:dfinity/agent-js#v3.0.2::path:packages/agent"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,114 +1,44 @@\n-# @dfinity/agent\n+# icp-js-core\n \n-JavaScript and TypeScript library to interact with the [Internet Computer](https://dfinity.org/) for Node.js and browser applications.\n+[![NPM Version](https://img.shields.io/npm/v/%40icp-sdk%2Fcore)](https://www.npmjs.com/package/@icp-sdk/core)\n+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)\n \n-Do you want to know more about developing on the Internet Computer? Visit the [Developer Docs](https://internetcomputer.org/docs/home).\n+The source code repository for the `@icp-sdk/core` package - the official JavaScript SDK for building applications on the Internet Computer.\n \n-Additional API Documentation can be found [here](https://agent-js.icp.xyz/libs/agent/api).\n+## For Package Users\n \n----\n+If you're looking to use the `@icp-sdk/core` package in your project, visit:\n \n-## Installation\n+- **📦 Package Folder**: [packages/core](./packages/core)\n+- **📚 Full Documentation**: [js.icp.build/core/](https://js.icp.build/core/)\n \n-Using agent:\n+### Quick Start\n \n-```shell\n-npm i --save @dfinity/agent\n-```\n-\n-### In the browser:\n-\n-```ts\n-import * as agent from '@dfinity/agent';\n-```\n-\n-or using individual exports:\n-\n-```ts\n-import { Actor, HttpAgent } from '@dfinity/agent';\n-```\n-\n-### In Node.js\n-\n-```ts\n-const DfinityAgent = require('@dfinity/agent');\n-```\n-\n-or using individual exports:\n-\n-```ts\n-const { Actor, HttpAgent } = require('@dfinity/agent');\n-```\n-\n-## Using an Agent\n+```typescript\n+import { HttpAgent } from '@icp-sdk/core/agent';\n+import { Ed25519KeyIdentity } from '@icp-sdk/core/identity';\n+import { IDL } from '@icp-sdk/core/candid';\n+import { Principal } from '@icp-sdk/core/principal';\n \n-The agent is a low-level interface that the Actor uses to encode and decode messages to the Internet Computer. It provides `call`, `query` and `readState` methods to the Actor, as well as a few additional utilities. For the most part, calls through the agent are intended to be structured through an Actor, configured with a canister interface that can be automatically generated from a [Candid](https://github.com/dfinity/candid) interface.\n+const identity = Ed25519KeyIdentity.generate();\n+const canisterId = Principal.fromText('uqqxf-5h777-77774-qaaaa-cai');\n \n-## Initializing an Actor\n+const agent = await HttpAgent.create({\n+  host: 'https://icp-api.io',\n+  identity,\n+});\n \n-The most common use for the agent is to create an actor. This is done by calling the `Actor.createActor` constructor:\n-\n-```ts\n-Actor.createActor(interfaceFactory: InterfaceFactory, configuration: ActorConfig): ActorSubclass<T>\n+// Send an update call to the canister\n+await agent.call(canisterId, {\n+  methodName: 'greet',\n+  arg: IDL.encode([IDL.Text], ['world']),\n+});\n ```\n \n-The `interfaceFactory` is a function that returns a runtime interface that the Actor uses to strucure calls to a canister. The interfaceFactory can be written manually, but it is recommended to use the `dfx generate` command to generate the interface for your project, or to use the `didc` tool to generate the interface for your project.\n-\n-Actors can also be initialized to include the boundary node http headers, This is done by calling the `Actor.createActor` constructor:\n-\n-```ts\n-Actor.createActorWithHttpDetails(interfaceFactory: InterfaceFactory, configuration: ActorConfig): ActorSubclass<ActorMethodMappedWithHttpDetails<T>>\n-```\n+## Contributing\n \n-### Inspecting an actor's agent\n+This repository contains the source code for `@icp-sdk/core` and related packages. Contributions are welcome! Please refer to the [CONTRIBUTING.md](./.github/CONTRIBUTING.md) for details about setting up the development environment, running tests, and the review process.\n \n-Use the `Actor.agentOf` method to get the agent of an actor:\n+## License\n \n-```ts\n-const defaultAgent = Actor.agentOf(defaultActor);\n-```\n",
+					"match": false,
+					"packageHash": "a7c76905908577c86fe4f8f2f3c48af413482c057fe0d0fa41f1ab306493f33a",
+					"size": 4206,
+					"sourceHash": "25bb9fb6415634e0ee8c03562d7b168c21d76baa488792a7ed9d21d71c1eb966",
+					"status": "content"
+				},
+				"lib/cjs/actor.d.ts": {
+					"match": false,
+					"packageHash": "188fb28c9a7aeef75b13e074014091305c2f2320b32dcad78a889992c281bf1e",
+					"size": 6518,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/actor.js": {
+					"match": false,
+					"packageHash": "23c2b40decd64e6627269483a888a87c11d1f8ac2ecbcfded58f2597afe60bc1",
+					"size": 13846,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/actor.js.map": {
+					"match": false,
+					"packageHash": "7d4b4bceb23a2dcd7eaf4b7765c7779036ee88e23269a42292b336c90ff1a3a1",
+					"size": 27054,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/agent/api.d.ts": {
+					"match": false,
+					"packageHash": "5b22f587c18578f2412a8c9931d046d9547dd332b11536399e4b03c3a106a937",
+					"size": 8310,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/agent/api.js": {
+					"match": false,
+					"packageHash": "d97194ce88c74443e321fb5ad120b1392d6e9c179b1e568f76a5eca66e21a7e6",
+					"size": 1780,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/agent/api.js.map": {
+					"match": false,
+					"packageHash": "c0f53e0004e78edee9105cfacff02e73e78e0165403586dbe3b82940f2a201bc",
+					"size": 9244,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/agent/http/index.d.ts": {
+					"match": false,
+					"packageHash": "c6b7966ae52344b226989134dfed4f075261f5b1a1f6463bca9a414db7bb501f",
+					"size": 7537,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/agent/http/index.js": {
+					"match": false,
+					"packageHash": "14de644cf0b06a6d8bfaf5e4e80ecd65ebdec955499a9a3ec4ec11db054bff57",
+					"size": 49860,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/agent/http/index.js.map": {
+					"match": false,
+					"packageHash": "a10fdbb8f890516014494c6ca486f7cdf28b287d4ee11b64bb65468f880a748a",
+					"size": 82100,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/agent/http/transforms.d.ts": {
+					"match": false,
+					"packageHash": "a4f6ed2f8f26f8e164e3c057c4a420985866d2c7918ad6627261b5e1669e5ccb",
+					"size": 2195,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/agent/http/transforms.js": {
+					"match": false,
+					"packageHash": "297afd61188053c2cb54cf12401605a1394c107a31a84f6cd33dfb4bde5c9e9b",
+					"size": 5560,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/agent/http/transforms.js.map": {
+					"match": false,
+					"packageHash": "d893692bf76c8e0b39875d8941f3354c8f7e13a41c669ed9c02a8983def29ca8",
+					"size": 8664,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/agent/http/types.d.ts": {
+					"match": false,
+					"packageHash": "baf2303f240558e5698be9e6eb870e818053d67d09444772cb8a234af9e885bd",
+					"size": 2330,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/agent/http/types.js": {
+					"match": false,
+					"packageHash": "3703856c731360e0207e11c18ad0204d6c8be5f79ad7ce420a4cfaf3b8d67ff5",
+					"size": 1622,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/agent/http/types.js.map": {
+					"match": false,
+					"packageHash": "3dd173a27d968b76d51ebcaba16bcf5e345ef139b7e0a19c9688daffc613ac67",
+					"size": 4588,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/agent/index.d.ts": {
+					"match": false,
+					"packageHash": "c87b82d1f1f3576635b1e0fb2ae96e58d1e7ebc6546c9aff1917181f9576770d",
+					"size": 59,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/agent/index.js": {
+					"match": false,
+					"packageHash": "47407f7a1fd51a10281da58026e4fc96d696715513e3212edba613abb8a29513",
+					"size": 885,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/agent/index.js.map": {
+					"match": false,
+					"packageHash": "f48747629316a709906df351faf307bab6ffadf9b8eb8f4f946977a15900b744",
+					"size": 237,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/auth.d.ts": {
+					"match": false,
+					"packageHash": "1f96f925cb98c8b92e7888d3e4b213f2fc8307ff8349fe39caf57d0187037288",
+					"size": 2999,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/auth.js": {
+					"match": false,
+					"packageHash": "ab3f32bc6eb882975ebc5b95257c5687624a0dce65f8d27f34794b2a16803f97",
+					"size": 2351,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/auth.js.map": {
+					"match": false,
+					"packageHash": "a393246a39d3a2de4c18e4d83d929b78679c94d007f0575f8f23a05841412218",
+					"size": 6139,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/canisterStatus/index.d.ts": {
+					"match": false,
+					"packageHash": "55725a2b826aa68570b27cf30a3b29c83018e820b03871278c6f7c355389b331",
+					"size": 3858,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/canisterStatus/index.js": {
+					"match": false,
+					"packageHash": "112b1d6cda6c227dc317af603fd96ec7159aab0d195f87745ca1165a31168b8b",
+					"size": 14172,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/canisterStatus/index.js.map": {
+					"match": false,
+					"packageHash": "62b57ec3e3b6e8d4b61c18ebe76ec761ddf7022e6931d5e203d0069858c0f961",
+					"size": 21966,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/cbor.d.ts": {
+					"match": false,
+					"packageHash": "0986dc2f362f8b4bcc168e926199a87c28cb19fab51f4a9602f58ced956326b1",
+					"size": 905,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/cbor.js": {
+					"match": false,
+					"packageHash": "b1cc4f23a32b1a45feaf3a6dcaecc4db16a79c64865e73d2741f96d9434631a3",
+					"size": 3290,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/cbor.js.map": {
+					"match": false,
+					"packageHash": "ecde14f402cfd36f65bb54898a58b206571d89b8445b128e8dd887885ed8ab58",
+					"size": 3164,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/certificate.d.ts": {
+					"match": false,
+					"packageHash": "bb99a12143cf0c341303fa08aaab261a7f492052c42cb04dedfd85e133d0b0ca",
+					"size": 8236,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/certificate.js": {
+					"match": false,
+					"packageHash": "8c08a957d238d1926c730842e5cbfc3b3f04a0690114f50a9de17b1272781b44",
+					"size": 23585,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/certificate.js.map": {
+					"match": false,
+					"packageHash": "8a4326dea3e5ad98d0bf9b08e7133308b9daf2049267c21c1c3a6ccebcfc39f7",
+					"size": 39380,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/constants.d.ts": {
+					"match": false,
+					"packageHash": "70bf7c654d0ed2a3a1827952d60021b6ac73bf7a1e4a9dace12816dac37bda43",
+					"size": 601,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/constants.js": {
+					"match": false,
+					"packageHash": "0753cba00b729ff2b98dad225d1a2716abc39032cb8efe9b130fb00eb3364e24",
+					"size": 973,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/constants.js.map": {
+					"match": false,
+					"packageHash": "e2062f69ce21de357c7884a2edfe3d618d42df99cd44efc140ea6ea72b020772",
+					"size": 1172,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/der.d.ts": {
+					"match": false,
+					"packageHash": "49f0167f52d1e1dc0766eba0e5efe248413e3e74ae7ce263fa37166c8c566600",
+					"size": 1540,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/der.js": {
+					"match": false,
+					"packageHash": "7f7a9c95d1c5b382080299a347f98cd2156d0c52c50f7ca2c86fae559797ba1a",
+					"size": 6407,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/der.js.map": {
+					"match": false,
+					"packageHash": "53c06c20b8b77b2e6a7a795395672fdae8742d5bb309d67a091b8a08b7325fd6",
+					"size": 11899,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/errors.d.ts": {
+					"match": false,
+					"packageHash": "1b74c7b828dabb6f2331a37f0851876b6975f10f661275d0ac715029edbf2829",
+					"size": 11784,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/errors.js": {
+					"match": false,
+					"packageHash": "b10660fe9aee853f5b3ea56feb75c05bd7006ac628958aa83f78f31fe0c78d65",
+					"size": 26353,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/errors.js.map": {
+					"match": false,
+					"packageHash": "5dbc9661b4ab7fd4f8196a2190804bb2a64fa7e1bee7bac7f52b14e9253e2a0a",
+					"size": 39036,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/fetch_candid.d.ts": {
+					"match": false,
+					"packageHash": "5a10f1e413c10bd2866bcdf348a147be28f334ed54f80ea729146def7fb78807",
+					"size": 382,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/fetch_candid.js": {
+					"match": false,
+					"packageHash": "d5ac6dfecb7a5404695b9f262435daf0f08fa1cf01344d8b30fe5bf8a18ab234",
+					"size": 2831,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/fetch_candid.js.map": {
+					"match": false,
+					"packageHash": "0ee404ad222069b9691dbbec06cce35dc5a5539627a40bcfd627e7f00846af38",
+					"size": 2457,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/index.d.ts": {
+					"match": false,
+					"packageHash": "3709c655e3c7b3fd2a14d3efa4b540c26055c2e9b12e161e6c78ac39b116e45b",
+					"size": 1441,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/index.js": {
+					"match": false,
+					"packageHash": "b6fca3202a7d01f90e4961cb09f74213aeae2d212548f70ab73a545883987467",
+					"size": 4301,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/index.js.map": {
+					"match": false,
+					"packageHash": "ae6c95006ec921b8d55c91185ab309acaea2e9f9853fe5a2dad3d7dbe605a106",
+					"size": 2047,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/observable.d.ts": {
+					"match": false,
+					"packageHash": "79171b8e085db53a245902a3fb1ffa30631018b4f01e7cdd7f9fd63199967933",
+					"size": 766,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/observable.js": {
+					"match": false,
+					"packageHash": "ce7fef46253769e7ce4d358805d51048f56eee4f7d7e7c5cae9d60cfeb176e5f",
+					"size": 973,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/observable.js.map": {
+					"match": false,
+					"packageHash": "79ff7d22591d71e11560bffee540af513147d252f8be3fded250fad3bb7b3742",
+					"size": 2278,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/polling/backoff.d.ts": {
+					"match": false,
+					"packageHash": "0eeceaef1cd5f19def1654cf5180620b85903d918a24d81227832f57cd754e74",
+					"size": 1552,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/polling/backoff.js": {
+					"match": false,
+					"packageHash": "3bb6531b76c07fbe97e89ced20bb29502ca972f3b593d88a13b7b29fb6748d18",
+					"size": 3112,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/polling/backoff.js.map": {
+					"match": false,
+					"packageHash": "828fa5f6f15b5732e4a0e97bae2c2ebc09f7d8e35981dedfe88b3df0ab21b0f0",
+					"size": 6100,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/polling/index.d.ts": {
+					"match": false,
+					"packageHash": "61488674fd11081e7e1b873dccd12100fafc0de10af26f0aff9461685d75bc31",
+					"size": 2728,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/polling/index.js": {
+					"match": false,
+					"packageHash": "7ba3e7c89cb75f347d4afa69f178a6ef8fcd1d5f779ce705e1d2bdaca522a4f7",
+					"size": 8380,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/polling/index.js.map": {
+					"match": false,
+					"packageHash": "9b621f6d85229f49615ff9f4a0709b1a7cbf361e7170607887added7c77b0442",
+					"size": 12940,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/polling/strategy.d.ts": {
+					"match": false,
+					"packageHash": "5d91c3093b63d670d8f2cf575b172d948feb4096a75c85a676954a4773ad18b0",
+					"size": 2200,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/polling/strategy.js": {
+					"match": false,
+					"packageHash": "40e83a71f87dc2ed394eae82677f951335bdf97ba327599c9f44dcc4a4a6e38a",
+					"size": 3563,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/polling/strategy.js.map": {
+					"match": false,
+					"packageHash": "a08b49bf411def27897be2854bdf2c72b06a89881c0d5b66c5c766e38352695d",
+					"size": 6533,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/public_key.d.ts": {
+					"match": false,
+					"packageHash": "e79838331ebc7bd533e256e9b34870354825b943a7910748c8aae9288d301148",
+					"size": 573,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/public_key.js": {
+					"match": false,
+					"packageHash": "249129bfc755f90e34f16158a309de2734dbbbc4df0e0d63fb78dec25ca67f79",
+					"size": 1758,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/public_key.js.map": {
+					"match": false,
+					"packageHash": "92e4da314b39174c303f949ab7a6b5a94f57a35b2456f121494824c87ac473d9",
+					"size": 3383,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/request_id.d.ts": {
+					"match": false,
+					"packageHash": "6d93820629e083823d4fbe8cb6eddf0a8e4d5e9a154cf63b52dacc31b508cdbd",
+					"size": 841,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/request_id.js": {
+					"match": false,
+					"packageHash": "baf5b2e754bece2c346c9d93ad7c42860e55dee617c313fb6a0bf6e84e9be6f8",
+					"size": 3378,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/request_id.js.map": {
+					"match": false,
+					"packageHash": "f263ee19e52d69b3535aa067c42720073bfc42648b34e600b06920bd39cbd764",
+					"size": 5997,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/utils/bls.d.ts": {
+					"match": false,
+					"packageHash": "43a8aa66b2e7f5ed3a0be9d943f8a06692357e388558618ea5b04e5638042496",
+					"size": 322,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/utils/bls.js": {
+					"match": false,
+					"packageHash": "0f07a2c1fb46584e01f6f999910f8f46d8c1dc871a0ea66fad6097ac91d3dedb",
+					"size": 778,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/utils/bls.js.map": {
+					"match": false,
+					"packageHash": "a2eb5f9923694054375c8024d3db0a10321ce1dc583d2460722c16ef562d991f",
+					"size": 1342,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/utils/buffer.d.ts": {
+					"match": false,
+					"packageHash": "57a1799e9fb1e0bd8efb9da9d02d21db711fe4b8fa8a7256985af8f4cc34c3c0",
+					"size": 807,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/utils/buffer.js": {
+					"match": false,
+					"packageHash": "ac588054d964545d06ab352205c47debfabf664613a8c3da49aed79015189a17",
+					"size": 1540,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/utils/buffer.js.map": {
+					"match": false,
+					"packageHash": "3908b6ae8acb7b319193e6aaab912e9bb364996d5eba6038c7b078b9226901bd",
+					"size": 2791,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/utils/expirableMap.d.ts": {
+					"match": false,
+					"packageHash": "053832f42c67d9c2e65d665472d8af2ef9c6c02bcc0c97ad9f2920109c88bab0",
+					"size": 2597,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/utils/expirableMap.js": {
+					"match": false,
+					"packageHash": "8dadca899293e1bad2805a74fc3f704ed87a4571e4431547d3364a4a47d7f143",
+					"size": 4449,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/utils/expirableMap.js.map": {
+					"match": false,
+					"packageHash": "c67eb08f0dc38c9a367be86bf64464df4e06f0c9c501e44d3a7becc79738fa4f",
+					"size": 7331,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/utils/leb.d.ts": {
+					"match": false,
+					"packageHash": "258e30c181cfde5e63ff588e74590a01ca3c8548c0d394006424852bf831dde3",
+					"size": 124,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/utils/leb.js": {
+					"match": false,
+					"packageHash": "da42d5783d5c9d351e1c359163503b2212c380587b14a21f6cb8731995ef7802",
+					"size": 583,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/utils/leb.js.map": {
+					"match": false,
+					"packageHash": "bdc7429ad4a5321e94056ee6c39af1545cefd1f6a1f87c662fe98c92dd532d9f",
+					"size": 903,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/utils/random.d.ts": {
+					"match": false,
+					"packageHash": "382bf559020e1b8b7e5922c01d2a0efd0bcc78a18b5b28bb4fe4678e80a54afc",
+					"size": 165,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/utils/random.js": {
+					"match": false,
+					"packageHash": "50b40aced72a77b461baa7cc02deafacad924906f0b5b37cadf27d9be1b3fcac",
+					"size": 1110,
+					"status": "missing-in-source"
+				},
+				"lib/cjs/utils/random.js.map": {
+					"match": false,
+					"packageHash": "4b941be8220b13a9747bd396c2fa39fdaa9c456c233c8327e09008a19a078935",
+					"size": 1995,
+					"status": "missing-in-source"
+				},
+				"lib/esm/actor.d.ts": {
+					"match": false,
+					"packageHash": "188fb28c9a7aeef75b13e074014091305c2f2320b32dcad78a889992c281bf1e",
+					"size": 6518,
+					"status": "missing-in-source"
+				},
+				"lib/esm/actor.js": {
+					"match": false,
+					"packageHash": "b564ed6202ede2af6a98ccffa79d2d557d02662e5a232a0dcf39ed0a7bac6283",
+					"size": 13345,
+					"status": "missing-in-source"
+				},
+				"lib/esm/actor.js.map": {
+					"match": false,
+					"packageHash": "4f16e6b17bc069d98a195dd65524e937a7219c4722f8a6dd5707b29daf222772",
+					"size": 27378,
+					"status": "missing-in-source"
+				},
+				"lib/esm/agent/api.d.ts": {
+					"match": false,
+					"packageHash": "5b22f587c18578f2412a8c9931d046d9547dd332b11536399e4b03c3a106a937",
+					"size": 8310,
+					"status": "missing-in-source"
+				},
+				"lib/esm/agent/api.js": {
+					"match": false,
+					"packageHash": "34d214f17c0b9345c779f374776890c977cb405b33ce0bc70413ea8770bc9451",
+					"size": 1517,
+					"status": "missing-in-source"
+				},
+				"lib/esm/agent/api.js.map": {
+					"match": false,
+					"packageHash": "166f25282afcb9f3963975042063122fc7d56a4b4bc1dd3831a9f3897d569ae2",
+					"size": 9243,
+					"status": "missing-in-source"
+				},
+				"lib/esm/agent/http/index.d.ts": {
+					"match": false,
+					"packageHash": "c6b7966ae52344b226989134dfed4f075261f5b1a1f6463bca9a414db7bb501f",
+					"size": 7537,
+					"status": "missing-in-source"
+				},
+				"lib/esm/agent/http/index.js": {
+					"match": false,
+					"packageHash": "31393b6fb8eb6b5d612436c78ca42491e5abecdc81b392394e88fe7b9b09936a",
+					"size": 46983,
+					"status": "missing-in-source"
+				},
+				"lib/esm/agent/http/index.js.map": {
+					"match": false,
+					"packageHash": "dcdd6b7d04913437b4b670c8f195a931944de696f8fc70138b0b3d2a44a0188f",
+					"size": 82889,
+					"status": "missing-in-source"
+				},
+				"lib/esm/agent/http/transforms.d.ts": {
+					"match": false,
+					"packageHash": "a4f6ed2f8f26f8e164e3c057c4a420985866d2c7918ad6627261b5e1669e5ccb",
+					"size": 2195,
+					"status": "missing-in-source"
+				},
+				"lib/esm/agent/http/transforms.js": {
+					"match": false,
+					"packageHash": "b80bf4f19caf105bdf451e7990604a292a7d58ca2e33d38975d13f8151c8985f",
+					"size": 5210,
+					"status": "missing-in-source"
+				},
+				"lib/esm/agent/http/transforms.js.map": {
+					"match": false,
+					"packageHash": "f561b7a5945db0b0cf2cf8700cdc253a60abff6339054b546bab19420c43be94",
+					"size": 8736,
+					"status": "missing-in-source"
+				},
+				"lib/esm/agent/http/types.d.ts": {
+					"match": false,
+					"packageHash": "baf2303f240558e5698be9e6eb870e818053d67d09444772cb8a234af9e885bd",
+					"size": 2330,
+					"status": "missing-in-source"
+				},
+				"lib/esm/agent/http/types.js": {
+					"match": false,
+					"packageHash": "d59df6552f4d84999c82f5f5369a2990ed6aca49495fae8e74c05a718a6feb37",
+					"size": 1320,
+					"status": "missing-in-source"
+				},
+				"lib/esm/agent/http/types.js.map": {
+					"match": false,
+					"packageHash": "b06d7377eb07862a99827559bba3695aa2bd3d49a011e4ce388822fa676b6e68",
+					"size": 4609,
+					"status": "missing-in-source"
+				},
+				"lib/esm/agent/index.d.ts": {
+					"match": false,
+					"packageHash": "c87b82d1f1f3576635b1e0fb2ae96e58d1e7ebc6546c9aff1917181f9576770d",
+					"size": 59,
+					"status": "missing-in-source"
+				},
+				"lib/esm/agent/index.js": {
+					"match": false,
+					"packageHash": "3994d69be16e2726a3181152e48c2c4c40b0a5d4a696b5fd08034d0fcdc5eea2",
+					"size": 92,
+					"status": "missing-in-source"
+				},
+				"lib/esm/agent/index.js.map": {
+					"match": false,
+					"packageHash": "694954f4d79a017830eec9914947287b5f8e3a96068f5dee9f7a1f6a627573db",
+					"size": 239,
+					"status": "missing-in-source"
+				},
+				"lib/esm/auth.d.ts": {
+					"match": false,
+					"packageHash": "1f96f925cb98c8b92e7888d3e4b213f2fc8307ff8349fe39caf57d0187037288",
+					"size": 2999,
+					"status": "missing-in-source"
+				},
+				"lib/esm/auth.js": {
+					"match": false,
+					"packageHash": "a098ddca961d6fa1c6081585724ed7e3790e25c018e46defff8e10531ae3ba97",
+					"size": 2024,
+					"status": "missing-in-source"
+				},
+				"lib/esm/auth.js.map": {
+					"match": false,
+					"packageHash": "5d953534307f381c448b1db57651e0a992e58849950c516c0dd95f2812ae04e4",
+					"size": 6225,
+					"status": "missing-in-source"
+				},
+				"lib/esm/canisterStatus/index.d.ts": {
+					"match": false,
+					"packageHash": "55725a2b826aa68570b27cf30a3b29c83018e820b03871278c6f7c355389b331",
+					"size": 3858,
+					"status": "missing-in-source"
+				},
+				"lib/esm/canisterStatus/index.js": {
+					"match": false,
+					"packageHash": "1c21a20a5dac94d7be6cd2b1d23c1220a739010e95f506accacae384fcdf2279",
+					"size": 12198,
+					"status": "missing-in-source"
+				},
+				"lib/esm/canisterStatus/index.js.map": {
+					"match": false,
+					"packageHash": "2a7fd59daa55dc2e0950a9edc35a2c4e384009ab61acdfd1f866a948fc54a703",
+					"size": 22138,
+					"status": "missing-in-source"
+				},
+				"lib/esm/cbor.d.ts": {
+					"match": false,
+					"packageHash": "0986dc2f362f8b4bcc168e926199a87c28cb19fab51f4a9602f58ced956326b1",
+					"size": 905,
+					"status": "missing-in-source"
+				},
+				"lib/esm/cbor.js": {
+					"match": false,
+					"packageHash": "b8e46bbb930a9d09fafb8ab373b8d10d47267741e2b87b8f97ecd794f838e9ea",
+					"size": 1697,
+					"status": "missing-in-source"
+				},
+				"lib/esm/cbor.js.map": {
+					"match": false,
+					"packageHash": "5110ddcbbedd14cd58122622cac3f6b8558a02adf625d6b480d4e7e077d96472",
+					"size": 3246,
+					"status": "missing-in-source"
+				},
+				"lib/esm/certificate.d.ts": {
+					"match": false,
+					"packageHash": "bb99a12143cf0c341303fa08aaab261a7f492052c42cb04dedfd85e133d0b0ca",
+					"size": 8236,
+					"status": "missing-in-source"
+				},
+				"lib/esm/certificate.js": {
+					"match": false,
+					"packageHash": "b8e664468fb34e6b013d5eda5f1079d566efce7a26e22c477285fa5f5a591cbc",
+					"size": 21271,
+					"status": "missing-in-source"
+				},
+				"lib/esm/certificate.js.map": {
+					"match": false,
+					"packageHash": "0a2b020b69bed5022a0ef322c90a2d82360d7c5db723133545c0163c9585dda6",
+					"size": 39640,
+					"status": "missing-in-source"
+				},
+				"lib/esm/constants.d.ts": {
+					"match": false,
+					"packageHash": "70bf7c654d0ed2a3a1827952d60021b6ac73bf7a1e4a9dace12816dac37bda43",
+					"size": 601,
+					"status": "missing-in-source"
+				},
+				"lib/esm/constants.js": {
+					"match": false,
+					"packageHash": "27df9ad8a662f6a40b9678b1b2dee2eb3819e673884f76a2fb181ddaa6becbdf",
+					"size": 729,
+					"status": "missing-in-source"
+				},
+				"lib/esm/constants.js.map": {
+					"match": false,
+					"packageHash": "86035c36a284191b9ead1e47bd2361c2d6de3bfbf8d3436a4b3fe6feb612a80c",
+					"size": 1209,
+					"status": "missing-in-source"
+				},
+				"lib/esm/der.d.ts": {
+					"match": false,
+					"packageHash": "49f0167f52d1e1dc0766eba0e5efe248413e3e74ae7ce263fa37166c8c566600",
+					"size": 1540,
+					"status": "missing-in-source"
+				},
+				"lib/esm/der.js": {
+					"match": false,
+					"packageHash": "1da8e84a9c2b5cd51d3aceb7b861f37b464c2cc2bab01e28faa64958a47c122f",
+					"size": 5735,
+					"status": "missing-in-source"
+				},
+				"lib/esm/der.js.map": {
+					"match": false,
+					"packageHash": "fba9ed8e55b06c8a3169617295106d7d61cb5e926366db55d056d056e4c14e75",
+					"size": 11900,
+					"status": "missing-in-source"
+				},
+				"lib/esm/errors.d.ts": {
+					"match": false,
+					"packageHash": "1b74c7b828dabb6f2331a37f0851876b6975f10f661275d0ac715029edbf2829",
+					"size": 11784,
+					"status": "missing-in-source"
+				},
+				"lib/esm/errors.js": {
+					"match": false,
+					"packageHash": "a62f280237b193a1a18bc2811a0f91afb9309a404d85c150f21a8b85a0cedd50",
+					"size": 21990,
+					"status": "missing-in-source"
+				},
+				"lib/esm/errors.js.map": {
+					"match": false,
+					"packageHash": "668c470b0e8194579667272275b499ea952dd11dca8447b6aca57c48bae630de",
+					"size": 38714,
+					"status": "missing-in-source"
+				},
+				"lib/esm/fetch_candid.d.ts": {
+					"match": false,
+					"packageHash": "5a10f1e413c10bd2866bcdf348a147be28f334ed54f80ea729146def7fb78807",
+					"size": 382,
+					"status": "missing-in-source"
+				},
+				"lib/esm/fetch_candid.js": {
+					"match": false,
+					"packageHash": "1ef29951bcbab9d36a9e1c4f28c3e7de854b144eb27ca411881f9d1da55b4b37",
+					"size": 1308,
+					"status": "missing-in-source"
+				},
+				"lib/esm/fetch_candid.js.map": {
+					"match": false,
+					"packageHash": "b4a0f660264ad81613355963e6e12a49adf3eacfedae0d2298bcad2a3825d335",
+					"size": 2530,
+					"status": "missing-in-source"
+				},
+				"lib/esm/index.d.ts": {
+					"match": false,
+					"packageHash": "3709c655e3c7b3fd2a14d3efa4b540c26055c2e9b12e161e6c78ac39b116e45b",
+					"size": 1441,
+					"status": "missing-in-source"
+				},
+				"lib/esm/index.js": {
+					"match": false,
+					"packageHash": "c3397dd3d501646f7d5c4ed65e3137a8e63f15d48142c41d43a2e09e6bcaaa69",
+					"size": 1474,
+					"status": "missing-in-source"
+				},
+				"lib/esm/index.js.map": {
+					"match": false,
+					"packageHash": "ef8238e8e8008b064bc498c20a915b15147e7d69ce02173ebd365654e28a2384",
+					"size": 2211,
+					"status": "missing-in-source"
+				},
+				"lib/esm/observable.d.ts": {
+					"match": false,
+					"packageHash": "79171b8e085db53a245902a3fb1ffa30631018b4f01e7cdd7f9fd63199967933",
+					"size": 766,
+					"status": "missing-in-source"
+				},
+				"lib/esm/observable.js": {
+					"match": false,
+					"packageHash": "911d37a8b6e66fba47107ac60d38d2c036e8efb5153fb366fe80c4c37e3cfbae",
+					"size": 785,
+					"status": "missing-in-source"
+				},
+				"lib/esm/observable.js.map": {
+					"match": false,
+					"packageHash": "611f71d4e00e2e2b0a401503f535f227f13fcec10b3a256a11745df7bfdf211b",
+					"size": 2261,
+					"status": "missing-in-source"
+				},
+				"lib/esm/package.json": {
+					"match": false,
+					"packageHash": "6b91de8cd0baca43d2c3a0a29ccf86cb582eaa8a20bdf61e1ead35b0c447a351",
+					"size": 47,
+					"status": "missing-in-source"
+				},
+				"lib/esm/polling/backoff.d.ts": {
+					"match": false,
+					"packageHash": "0eeceaef1cd5f19def1654cf5180620b85903d918a24d81227832f57cd754e74",
+					"size": 1552,
+					"status": "missing-in-source"
+				},
+				"lib/esm/polling/backoff.js": {
+					"match": false,
+					"packageHash": "1b9cb414de9505febd12b4a470cecca5feaa3f875c5de45821bd50bf3ba1adcb",
+					"size": 2914,
+					"status": "missing-in-source"
+				},
+				"lib/esm/polling/backoff.js.map": {
+					"match": false,
+					"packageHash": "3ee2dc377b72880674b1cc6881e7446647e8e806395b93aea8e438764f5be13d",
+					"size": 6081,
+					"status": "missing-in-source"
+				},
+				"lib/esm/polling/index.d.ts": {
+					"match": false,
+					"packageHash": "61488674fd11081e7e1b873dccd12100fafc0de10af26f0aff9461685d75bc31",
+					"size": 2728,
+					"status": "missing-in-source"
+				},
+				"lib/esm/polling/index.js": {
+					"match": false,
+					"packageHash": "a17fde6119c33e36d5f61cbf6dfedf9ae3f098ac8ddb69bffd8e4749b5401445",
+					"size": 6475,
+					"status": "missing-in-source"
+				},
+				"lib/esm/polling/index.js.map": {
+					"match": false,
+					"packageHash": "bd1138c56b5df59c6b5aa9eb2b2fdaccdbc9272a376fddf98ca1acb5b20af933",
+					"size": 13170,
+					"status": "missing-in-source"
+				},
+				"lib/esm/polling/strategy.d.ts": {
+					"match": false,
+					"packageHash": "5d91c3093b63d670d8f2cf575b172d948feb4096a75c85a676954a4773ad18b0",
+					"size": 2200,
+					"status": "missing-in-source"
+				},
+				"lib/esm/polling/strategy.js": {
+					"match": false,
+					"packageHash": "cb7d9b71e4fa5cdc94467d1fa3130fc62ed453af74ada2f35d8e36ba6589ad47",
+					"size": 3281,
+					"status": "missing-in-source"
+				},
+				"lib/esm/polling/strategy.js.map": {
+					"match": false,
+					"packageHash": "5545f8a3e6f9bbffa28a8e6ac1116f18d6f9ac78248cf2dee4d256794e674832",
+					"size": 6509,
+					"status": "missing-in-source"
+				},
+				"lib/esm/public_key.d.ts": {
+					"match": false,
+					"packageHash": "e79838331ebc7bd533e256e9b34870354825b943a7910748c8aae9288d301148",
+					"size": 573,
+					"status": "missing-in-source"
+				},
+				"lib/esm/public_key.js": {
+					"match": false,
+					"packageHash": "0922b8f12913152866d6cb671e4b1450a94386ef1fea98729b309d41d5b625f4",
+					"size": 1554,
+					"status": "missing-in-source"
+				},
+				"lib/esm/public_key.js.map": {
+					"match": false,
+					"packageHash": "26307316f3e9b9051f520e980b73bc3f7335cd930fe83d67d14d4d57bf4f2775",
+					"size": 3443,
+					"status": "missing-in-source"
+				},
+				"lib/esm/request_id.d.ts": {
+					"match": false,
+					"packageHash": "6d93820629e083823d4fbe8cb6eddf0a8e4d5e9a154cf63b52dacc31b508cdbd",
+					"size": 841,
+					"status": "missing-in-source"
+				},
+				"lib/esm/request_id.js": {
+					"match": false,
+					"packageHash": "3d76ba9763571d8fbc9e211c988dff56b387002e1bcc799bc134ba4000246fb0",
+					"size": 3052,
+					"status": "missing-in-source"
+				},
+				"lib/esm/request_id.js.map": {
+					"match": false,
+					"packageHash": "ffedd551821cf7c4675d16ae63f9489a58872e65fd01efbf15fdd5055df3d851",
+					"size": 6065,
+					"status": "missing-in-source"
+				},
+				"lib/esm/utils/bls.d.ts": {
+					"match": false,
+					"packageHash": "43a8aa66b2e7f5ed3a0be9d943f8a06692357e388558618ea5b04e5638042496",
+					"size": 322,
+					"status": "missing-in-source"
+				},
+				"lib/esm/utils/bls.js": {
+					"match": false,
+					"packageHash": "2d99ed6209aecd64bb651ca1794b0dc7cb3ef08928cc2d3b5a8b05acb419d786",
+					"size": 619,
+					"status": "missing-in-source"
+				},
+				"lib/esm/utils/bls.js.map": {
+					"match": false,
+					"packageHash": "444f63cddf2770cd4137040606e092f13ed732914f1438ba37f9602df1db7e18",
+					"size": 1404,
+					"status": "missing-in-source"
+				},
+				"lib/esm/utils/buffer.d.ts": {
+					"match": false,
+					"packageHash": "57a1799e9fb1e0bd8efb9da9d02d21db711fe4b8fa8a7256985af8f4cc34c3c0",
+					"size": 807,
+					"status": "missing-in-source"
+				},
+				"lib/esm/utils/buffer.js": {
+					"match": false,
+					"packageHash": "97bfb7dc2db0a3c7e8064ff1e1c3a0efa6716bef43d281ecb9ff41f2b6b9f6b6",
+					"size": 1371,
+					"status": "missing-in-source"
+				},
+				"lib/esm/utils/buffer.js.map": {
+					"match": false,
+					"packageHash": "d868b711323f84425175aefe646ff642bd0773e20a745769db40881c87bb1170",
+					"size": 2766,
+					"status": "missing-in-source"
+				},
+				"lib/esm/utils/expirableMap.d.ts": {
+					"match": false,
+					"packageHash": "053832f42c67d9c2e65d665472d8af2ef9c6c02bcc0c97ad9f2920109c88bab0",
+					"size": 2597,
+					"status": "missing-in-source"
+				},
+				"lib/esm/utils/expirableMap.js": {
+					"match": false,
+					"packageHash": "cdd82df84f5b2ff7dcb1de731087545daec21d48f24ffeaf93929eb7667ec1b0",
+					"size": 4311,
+					"status": "missing-in-source"
+				},
+				"lib/esm/utils/expirableMap.js.map": {
+					"match": false,
+					"packageHash": "b1b5a55c8c773a91d11c3099d66b46ec7b443e9cfb4174fd507f257a908aff2a",
+					"size": 7320,
+					"status": "missing-in-source"
+				},
+				"lib/esm/utils/leb.d.ts": {
+					"match": false,
+					"packageHash": "258e30c181cfde5e63ff588e74590a01ca3c8548c0d394006424852bf831dde3",
+					"size": 124,
+					"status": "missing-in-source"
+				},
+				"lib/esm/utils/leb.js": {
+					"match": false,
+					"packageHash": "795dd9ecbd4d72b6e9c047663831f8c47b11ae10c66baab1c9ee3455b0b68a06",
+					"size": 379,
+					"status": "missing-in-source"
+				},
+				"lib/esm/utils/leb.js.map": {
+					"match": false,
+					"packageHash": "5ad22764d9c69ca1b9544185350c6bfcc77206a29006061b3653ee1433904772",
+					"size": 904,
+					"status": "missing-in-source"
+				},
+				"lib/esm/utils/random.d.ts": {
+					"match": false,
+					"packageHash": "382bf559020e1b8b7e5922c01d2a0efd0bcc78a18b5b28bb4fe4678e80a54afc",
+					"size": 165,
+					"status": "missing-in-source"
+				},
+				"lib/esm/utils/random.js": {
+					"match": false,
+					"packageHash": "d31b9442f78684f2d2c9204326faf37af516744c28279ebfc256ede4733583e1",
+					"size": 972,
+					"status": "missing-in-source"
+				},
+				"lib/esm/utils/random.js.map": {
+					"match": false,
+					"packageHash": "3268c2070b43ad5c9468a061dec52ebab58102c514931eb50978c7ac9e5f45bc",
+					"size": 1978,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,66 +1,91 @@\n {\n-  \"name\": \"@dfinity/agent\",\n-  \"version\": \"3.0.2\",\n-  \"author\": \"DFINITY Stiftung <sdk@dfinity.org>\",\n-  \"license\": \"Apache-2.0\",\n-  \"description\": \"JavaScript and TypeScript library to interact with the Internet Computer\",\n-  \"homepage\": \"https://agent-js.icp.xyz/libs/agent\",\n-  \"repository\": {\n-    \"type\": \"git\",\n-    \"url\": \"https://github.com/dfinity/agent-js.git\",\n-    \"directory\": \"packages/agent\"\n-  },\n-  \"bugs\": {\n-    \"url\": \"https://github.com/dfinity/agent-js/issues\"\n-  },\n-  \"keywords\": [\n-    \"internet computer\",\n-    \"internet-computer\",\n-    \"ic\",\n-    \"dfinity\",\n-    \"agent\",\n-    \"actor\",\n-    \"dfx\",\n-    \"canister\",\n-    \"candid\",\n-    \"motoko\",\n-    \"javascript\",\n-    \"typescript\",\n-    \"blockchain\",\n-    \"crypto\",\n-    \"distributed\",\n-    \"api\",\n-    \"sdk\"\n-  ],\n-  \"main\": \"./lib/cjs/index.js\",\n-  \"module\": \"./lib/esm/index.js\",\n-  \"default\": \"./lib/esm/index.js\",\n-  \"types\": \"./lib/esm/index.d.ts\",\n-  \"exports\": {\n-    \"types\": \"./lib/esm/index.d.ts\",\n-    \"import\": \"./lib/esm/index.js\",\n-    \"node\": \"./lib/cjs/index.js\",\n-    \"require\": \"./lib/cjs/index.js\",\n-    \"default\": \"./lib/esm/index.js\"\n-  },\n-  \"peerDependencies\": {\n-    \"@noble/hashes\": \"^1.8.0\",\n-    \"@dfinity/candid\": \"3.0.2\",\n-    \"@dfinity/principal\": \"3.0.2\"\n-  },\n-  \"dependencies\": {\n-    \"@dfinity/cbor\": \"^0.2.2\",\n-    \"@noble/curves\": \"^1.9.2\"\n-  },\n+  \"name\": \"icp-js-core\",\n+  \"version\": \"5.0.0\",\n+  \"private\": true,\n+  \"description\": \"Use an Agent to interact with the Internet Computer from your JavaScript program.\",\n+  \"type\": \"module\",\n   \"devDependencies\": {\n-    \"@dfinity/identity\": \"3.0.2\"\n+    \"@arethetypeswrong/cli\": \"^0.18.2\",\n+    \"@eslint/js\": \"^10.0.1\",\n+    \"@size-limit/esbuild\": \"^12.0.1\",\n+    \"@size-limit/preset-small-lib\": \"^12.0.1\",\n+    \"@tsconfig/node22\": \"^22.0.5\",\n+    \"@types/jest\": \"^30.0.0\",\n+    \"@types/node\": \"^25.5.0\",\n+    \"@typescript-eslint/eslint-plugin\": \"^8.57.2\",\n+    \"@typescript-eslint/parser\": \"^8.57.2\",\n+    \"dotenv\": \"^17.3.1\",\n+    \"esbuild\": \"^0.28.1\",\n+    \"eslint\": \"^10.1.0\",\n+    \"eslint-plugin-jsdoc\": \"^62.8.1\",\n+    \"jest\": \"^30.3.0\",\n+    \"prettier\": \"^3.8.1\",\n+    \"prettier-plugin-motoko\": \"^0.13.0\",\n+    \"pretty-quick\": \"^4.2.2\",\n+    \"size-limit\": \"^12.0.1\",\n+    \"size-limit-node-esbuild\": \"^0.4.0\",\n+    \"ts-jest\": \"^29.4.6\",\n+    \"tsx\": \"^4.21.0\",\n+    \"typedoc\": \"^0.28.18\",\n+    \"typescript\": \"5.9.3\",\n+    \"vite\": \"^8.1.0\",\n+    \"vitest\": \"^4.1.3\"\n+  },\n+  \"packageManager\": \"pnpm@10.30.3+sha512.c961d1e0a2d8e354ecaa5166b822516668b7f44cb5bd95122d590dd81922f606f5473b6d23ec4a5be05e7fcd18e8488d47d978bbe981872f1145d06e9a740017\",\n+  \"engines\": {\n+    \"node\": \"^20 || ^22 || ^24\",\n+    \"pnpm\": \">=10\",\n+    \"npm\": \"please use pnpm\"\n   },\n   \"scripts\": {\n-    \"build\": \"tsc -b && tsc -p tsconfig.cjs.json && cp src/package.json lib/esm/package.json\",\n-    \"build:watch\": \"tsc -b --watch\",\n-    \"bundle\": \"esbuild --bundle src/index.ts --outfile=dist/index.js --platform=browser\",\n",
+					"match": false,
+					"packageHash": "450ffbba55e9de68f953960ce24082658ea7433af72f4cbd80d69c999de2a8d0",
+					"size": 1709,
+					"sourceHash": "b62de3aee2e0242d09d5aee281c0b326a9720e5e3c84600a7448b47182298d2b",
+					"status": "content"
+				},
+				".claude/CLAUDE.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".claude/testing.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".cz.yaml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/CODEOWNERS": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/CODE_OF_CONDUCT.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/CONTRIBUTING.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/ISSUE_TEMPLATE/bug_report.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/ISSUE_TEMPLATE/feature_request.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/PULL_REQUEST_TEMPLATE.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/repo_policies/BOT_APPROVED_FILES": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/conventional-commits.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/create-release-pr.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/docs.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/e2e-tests.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/generate-changelog.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/lint.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/mitm.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/npm-audit.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/prettier.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/publish-docs.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/release.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/size-limit.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/unit-tests.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".node-version": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".prettierrc": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"SECURITY.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/scripts/split-index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/src/content/docs/_sidebar.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/src/content/docs/canister-environment.mdx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/src/content/docs/index.mdx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/src/content/docs/installation.mdx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/src/content/docs/library-development.mdx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/src/content/docs/quick-start.mdx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/src/content/docs/typescript.mdx": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/src/content/docs/upgrading/v3.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/src/content/docs/upgrading/v4.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/src/content/docs/upgrading/v5.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"docs/typedoc.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node/basic/__snapshots__/mainnet.test.ts.snap": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node/basic/__snapshots__/syncTime.test.ts.snap": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node/basic/basic.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node/basic/canisterStatus.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node/basic/counter.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node/basic/effectiveSubnetId.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node/basic/fetchSubnetKeys.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node/basic/identity.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node/basic/mainnet.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node/basic/mitm.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node/basic/queryExpiry.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node/basic/queryStrategy.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node/basic/readSubnetState.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node/basic/syncTime.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node/basic/trap.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node/canisters/counter.mo": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node/canisters/counter.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node/canisters/counter.wasm": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node/canisters/declarations/counter/counter.did": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node/canisters/declarations/counter/counter.did.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node/canisters/declarations/counter/counter.did.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node/canisters/declarations/counter/index.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node/canisters/declarations/counter/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node/canisters/trap.mo": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node/canisters/trap.wasm": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node/canisters/whoami.did": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node/canisters/whoami.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node/canisters/whoami.wasm": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node/global-setup.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node/pic-helpers.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node/setup-pic.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node/test-setup.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node/utils/agent.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node/utils/identity.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node/utils/mock-replica.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node/utils/tree.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node/vitest.config.mitm.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"e2e/node/vitest.config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"eslint.config.mjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"jest.config.base.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"jest.esm-transform.cjs": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/agent/actor.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/agent/agent/api.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/agent/agent/http/expiry.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/agent/agent/http/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/agent/agent/http/transforms.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/agent/agent/http/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/agent/agent/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/agent/auth.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/agent/canister-env/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/agent/canisterStatus/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/agent/cbor.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/agent/certificate.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/agent/constants.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/agent/der.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/agent/errors.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/agent/fetch_candid.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/agent/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/agent/observable.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/agent/polling/backoff.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/agent/polling/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/agent/polling/strategy.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/agent/polling/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/agent/public_key.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/agent/request_id.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/agent/subnetStatus/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/agent/utils/bls.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/agent/utils/buffer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/agent/utils/certificateReject.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/agent/utils/createExpirableStore.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/agent/utils/expirableStore.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/agent/utils/inMemoryExpirableStore.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/agent/utils/indexedDBExpirableStore.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/agent/utils/leb.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/agent/utils/random.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/agent/utils/readState.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/agent/utils/target.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/candid/candid-core.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/candid/candid-ui.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/candid/idl.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/candid/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/candid/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/candid/utils/bigint-math.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/candid/utils/buffer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/candid/utils/hash.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/candid/utils/leb128.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/identity/identity/attributes.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/identity/identity/delegation.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/identity/identity/ecdsa.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/identity/identity/ed25519.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/identity/identity/partial.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/identity/identity/webauthn.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/identity/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/identity/secp256k1/der.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/identity/secp256k1/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/identity/secp256k1/pem.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/identity/secp256k1/secp256k1.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/principal/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/principal/principal.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/principal/utils/base32.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/core/src/principal/utils/getCrc.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/migrate/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/migrate/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/migrate/src/code-migrator.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/migrate/src/constants.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/migrate/src/dependencies.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/migrate/src/dependency-manager.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/migrate/src/gitignore.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/migrate/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/migrate/src/migrator.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/migrate/src/package-manager.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/migrate/src/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/migrate/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"pnpm-workspace.yaml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tsconfig.base.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tsconfig.jest.json": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 1,
+				"missingInPackage": 162,
+				"missingInSource": 157,
+				"score": 0.003105590062111801,
+				"totalFiles": 322
+			}
+		},
+		"prodDependencies": []
+	}
+]
