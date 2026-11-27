@@ -1,0 +1,133 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-27T12:49:03.398Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:12.2.3",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "ffmpeg@0.0.2",
+			"name": "ffmpeg",
+			"version": "0.0.2",
+			"location": "https://registry.npmjs.org/ffmpeg/-/ffmpeg-0.0.2.tgz",
+			"integrity": "sha512-NC2/8dAmo/ssw5OI50RH7yPfBGiYF1TMq4ejkpwb6huwclPftR/oVMGlvnCXsHJV7e3NShc0g31R7jjFwQgfKg==",
+			"publishedAt": "2012-12-05T10:39:55.974Z",
+			"publishedWith": {
+				"node": null,
+				"npm": null
+			},
+			"dependencies": {
+				"when": ">= 0.0.1"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "https://github.com/damianociarla/node-ffmpeg.git",
+			"spec": "github:damianociarla/node-ffmpeg#HEAD"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".npmignore": {
+					"match": false,
+					"packageHash": "09fa504beca24fa0a1c70613964f8d27c3b9628552aeaeb671a4b685b323a5cb",
+					"size": 31,
+					"status": "missing-in-source"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,4 +1,225 @@\n-node-ffmpeg\n-===========\n+# node-ffmpeg\n \n-ffmpeg module for nodejs (UNDER CONSTRUCTION)\n\\ No newline at end of file\n+[Documentation](https://damianociarla.github.io/node-ffmpeg/) · [API reference](https://damianociarla.github.io/node-ffmpeg/api/video) · [Migration guide](https://damianociarla.github.io/node-ffmpeg/guide/migration)\n+\n+A small, typed Node.js wrapper around the FFmpeg and ffprobe command-line tools. It keeps the\n+original `ffmpeg` package API—Promise or callback construction, chainable setters, conversion,\n+frame extraction, audio extraction, and watermarks—while using modern Node.js primitives.\n+\n+## Requirements\n+\n+- Node.js 24 or newer\n+- `ffmpeg` and `ffprobe` on `PATH`, or explicit executable paths\n+\n+The package intentionally does not download binaries. This keeps installation small and lets the\n+application choose the FFmpeg build and codecs it needs.\n+\n+```sh\n+npm install ffmpeg\n+```\n+\n+## Quick start\n+\n+```ts\n+import ffmpeg from 'ffmpeg';\n+\n+const video = await ffmpeg('/media/input.mp4');\n+\n+video.on('progress', ({ percent, time }) => {\n+  console.log(percent === undefined ? `${time}s` : `${percent.toFixed(1)}% (${time}s)`);\n+});\n+\n+await video\n+  .setVideoCodec('libx264')\n+  .setVideoBitRate(2_000)\n+  .setAudioCodec('aac')\n+  .setAudioBitRate(192)\n+  .setVideoSize('1280x?', true, true, 'black')\n+  .save('/media/output.mp4');\n+```\n+\n+CommonJS remains callable, as in `0.0.4`:\n+\n+```js\n+const ffmpeg = require('ffmpeg');\n+const video = await new ffmpeg('/media/input.mp4');\n+await video.setVideoCodec('copy').setAudioCodec('copy').save('/media/copy.mp4');\n+```\n+\n+The legacy callback API also remains available:\n+\n+```js\n+new ffmpeg('/media/input.mp4', (error, video) => {\n+  if (error) return console.error(error);\n+  video.save('/media/output.mp4', (saveError, output) => {\n+    if (saveError) console.error(saveError);\n+    else console.log(output);\n+  });\n+});\n+```\n+\n+For new TypeScript code, the named factory is the clearest form:\n+\n+```ts\n+import { create } from 'ffmpeg';\n+\n+const video = await create('/media/input.mp4', {\n+  timeout: 120_000,\n+  overwrite: true,\n+});\n+```\n+\n+For services that process several files with one fixed FFmpeg installation, inspect capabilities\n+once with an isolated client:\n+\n+```ts\n+import { createClient } from 'ffmpeg';\n+\n+const client = await createClient({ overwrite: true, timeout: 120_000 });\n+const video = await client.open('/media/input.mp4');\n+```\n+\n+Client executable paths, environment, and working directory are snapshotted at creation. Per-open\n+settings may adjust timeout, buffering, overwrite behavior, encoding, and cancellation without\n+invalidating the cached capabilities.\n+\n+## Executable paths\n+\n+Set paths globally for legacy applications:\n+\n+```ts\n+ffmpeg.bin = '/opt/ffmpeg/bin/ffmpeg';\n+ffmpeg.ffprobeBin = '/opt/ffmpeg/bin/ffprobe';\n+```\n",
+					"match": false,
+					"packageHash": "1cb7238d454355508d94faa16e9e73c7e26f3d9641ccfb2d98155e1dc44e054d",
+					"size": 70,
+					"sourceHash": "ec8bee0edafe9c4f3be044fb1fef2242819ba08260d605ad5ad94d7fb1f378d7",
+					"status": "content"
+				},
+				"index.js": {
+					"match": false,
+					"packageHash": "f560f09e5983075f1b67ffad7b429ac9332bdc35ef57fd531054d121cdb39d83",
+					"size": 41,
+					"status": "missing-in-source"
+				},
+				"lib/configs.js": {
+					"match": false,
+					"packageHash": "14ce23a0516a6440ce3c62c46e0051ab98823ebb12f8e0bb1164ef439e47a4e8",
+					"size": 136,
+					"status": "missing-in-source"
+				},
+				"lib/errors.js": {
+					"match": false,
+					"packageHash": "430e8db9cab67b8bee055ffc128ecc9bb9fab69651b850667c3004386ee06947",
+					"size": 2247,
+					"status": "missing-in-source"
+				},
+				"lib/ffmpeg.js": {
+					"match": false,
+					"packageHash": "7c25d5b662e3c3a4b67075262cf5226662d12ac225a6e783fa6259e790dafebf",
+					"size": 8784,
+					"status": "missing-in-source"
+				},
+				"lib/presets.js": {
+					"match": false,
+					"packageHash": "3fdf4e34820e54c109f326f5a6fffa7f0e07f1ff64877a24a43c1213f2d83e13",
+					"size": 914,
+					"status": "missing-in-source"
+				},
+				"lib/utils.js": {
+					"match": false,
+					"packageHash": "4f62d3447a717eb6b96c000a3fb71b3a6bd06fe3c4fbcf9d2094babcff70c788",
+					"size": 3534,
+					"status": "missing-in-source"
+				},
+				"lib/video.js": {
+					"match": false,
+					"packageHash": "39f8119c9cf125bfffda12d8e1b095565e2f2390cf08dbfc0c652e229c31bccb",
+					"size": 28757,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,17 +1,94 @@\n {\n-\t\"name\": \"ffmpeg\",\n-\t\"description\": \"Utility for managing video streams using ffmpeg\",\n-\t\"version\": \"0.0.2\",\n-\t\"author\": {\n-\t\t\"name\": \"Damiano Ciarla\",\n-\t\t\"email\": \"damiano.ciarl@gmail.com\"\n-\t},\n-\t\"repository\": {\n-\t\t\"type\": \"git\",\n-\t\t\"url\": \"https://github.com/damianociarla/node-ffmpeg.git\"\n-\t},\n-\t\"main\": \"./index.js\",\n-\t\"dependencies\": {\n-\t\t\"when\" : \">= 0.0.1\"\n-\t}\n+  \"name\": \"ffmpeg\",\n+  \"version\": \"1.1.3\",\n+  \"description\": \"A modern, typed Node.js API for processing media with FFmpeg\",\n+  \"keywords\": [\n+    \"ffmpeg\",\n+    \"ffprobe\",\n+    \"video\",\n+    \"audio\",\n+    \"transcoding\",\n+    \"typescript\"\n+  ],\n+  \"author\": {\n+    \"name\": \"Damiano Ciarla\",\n+    \"email\": \"damiano.ciarla@gmail.com\"\n+  },\n+  \"license\": \"MIT\",\n+  \"repository\": {\n+    \"type\": \"git\",\n+    \"url\": \"git+https://github.com/damianociarla/node-ffmpeg.git\"\n+  },\n+  \"bugs\": {\n+    \"url\": \"https://github.com/damianociarla/node-ffmpeg/issues\"\n+  },\n+  \"homepage\": \"https://damianociarla.github.io/node-ffmpeg/\",\n+  \"type\": \"module\",\n+  \"main\": \"./index.cjs\",\n+  \"module\": \"./dist/index.js\",\n+  \"types\": \"./dist/index.d.ts\",\n+  \"exports\": {\n+    \".\": {\n+      \"types\": \"./dist/index.d.ts\",\n+      \"import\": \"./dist/index.js\",\n+      \"require\": \"./index.cjs\"\n+    },\n+    \"./package.json\": \"./package.json\"\n+  },\n+  \"files\": [\n+    \"dist\",\n+    \"index.cjs\",\n+    \"LICENSE\",\n+    \"README.md\",\n+    \"CHANGELOG.md\",\n+    \"SECURITY.md\",\n+    \"RELEASING.md\",\n+    \"AUDIT.md\"\n+  ],\n+  \"publishConfig\": {\n+    \"access\": \"public\"\n+  },\n+  \"engines\": {\n+    \"node\": \">=24\"\n+  },\n+  \"scripts\": {\n+    \"build\": \"tsup\",\n+    \"clean\": \"rimraf dist coverage\",\n+    \"docs:build\": \"vitepress build docs\",\n+    \"docs:dev\": \"vitepress dev docs\",\n+    \"docs:preview\": \"vitepress preview docs\",\n+    \"format\": \"prettier --write .\",\n+    \"format:check\": \"prettier --check .\",\n+    \"lint\": \"eslint . && tsc --noEmit\",\n+    \"test\": \"vitest run --coverage\",\n+    \"test:integration\": \"node test/run-integration.mjs\",\n+    \"test:watch\": \"vitest\",\n+    \"check\": \"npm run format:check && npm run lint && npm test && npm run build && npm run docs:build && npm run test:visual && npm run pack:check\",\n+    \"pack:check\": \"node test/cjs-smoke.cjs && npm pack --dry-run && node test/package-types.mjs\",\n+    \"test:visual\": \"playwright test\",\n+    \"prepublishOnly\": \"npm run check\"\n+  },\n+  \"devDependencies\": {\n+    \"@eslint/js\": \"10.0.1\",\n+    \"@playwright/test\": \"1.62.1\",\n+    \"@types/node\": \"26.2.0\",\n+    \"@vitest/coverage-v8\": \"4.1.11\",\n+    \"eslint\": \"10.8.1\",\n+    \"prettier\": \"3.9.6\",\n+    \"rimraf\": \"6.1.3\",\n+    \"tsup\": \"8.5.1\",\n+    \"typescript\": \"6.0.3\",\n+    \"typescript-eslint\": \"8.67.0\",\n+    \"vitepress\": \"1.6.4\",\n",
+					"match": false,
+					"packageHash": "d2258e3a5015f0523258cc8d3a93e59efd0ad342934a9abb486144488edc3bbe",
+					"size": 358,
+					"sourceHash": "7552642a2a7a136918d22095336d07303a59116171a1e9f5c2e21daae9ca46a2",
+					"status": "content"
+				},
+				"AUDIT.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"RELEASING.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"SECURITY.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"index.cjs": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 0,
+				"missingInPackage": 6,
+				"missingInSource": 8,
+				"score": 0,
+				"totalFiles": 16
+			}
+		},
+		"prodDependencies": []
+	}
+]
