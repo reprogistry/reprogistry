@@ -1,0 +1,82 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-27T02:32:39.464Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:6.13.4",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "neverthrow@2.5.0",
+			"name": "neverthrow",
+			"version": "2.5.0",
+			"location": "https://registry.npmjs.org/neverthrow/-/neverthrow-2.5.0.tgz",
+			"integrity": "sha512-bMe157gwAcwaYJPZv/9I0vxw/tRO6z0aBU/IRsXzVHIwDtlRPQsGBZjzzef7dvs5gTUXF0jf1ezPT4xAJN/ShQ==",
+			"publishedAt": "2020-06-29T17:55:46.104Z",
+			"publishedWith": {
+				"node": "12.16.1",
+				"npm": "6.14.5"
+			},
+			"dependencies": {}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/supermacro/neverthrow.git",
+			"spec": "github:supermacro/neverthrow#3b548573ad5716c15602f4d6bb4d3ecf7c3d1d32"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,25 +1,76 @@\n # NeverThrow 🙅\n \n-[![Build Status](https://travis-ci.com/supermacro/neverthrow.svg?branch=master)](https://travis-ci.com/supermacro/neverthrow)\n+[![GitHub Workflow Status](https://github.com/supermacro/neverthrow/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/supermacro/neverthrow/actions)\n \n ## Description\n \n Encode failure into your program.\n \n+![Demo](assets/demo.png)\n+\n This package contains a `Result` type that represents either success (`Ok`) or failure (`Err`).\n \n-For asynchronous tasks, `neverthrow` offers a `ResultAsync` class which wraps a `Promise<Result>` and enables chaining.  \n-`ResultAsync` is `thenable` meaning it behaves exactly like a native `Promise<Result>`: the underlying `Result` can be accessed using the `await` or `.then()` operators.\n+For asynchronous tasks, `neverthrow` offers a `ResultAsync` class which wraps a `Promise<Result<T, E>>` and gives you the same level of expressivity and control as a regular `Result<T, E>`.\n \n-`neverthrow` also exposes `chain(...)` methods for chaining asynchronous tasks in a functional style ([docs below](#chaining-api)). However, these methods might be deprecated in the future. It is advised to use the `ResultAsync` instead.\n+`ResultAsync` is `thenable` meaning it **behaves exactly like a native `Promise<Result>`** ... except you have access to the same methods that `Result` provides without having to `await` or `.then` the promise! Check out [the wiki](https://github.com/supermacro/neverthrow/wiki/Basic-Usage-Examples#asynchronous-api) for examples and best practices.\n \n-[Read the blog post](https://gdelgado.ca/type-safe-error-handling-in-typescript.html#title) which explains _why you'd want to use this package_.\n+> Need to see real-life examples of how to leverage this package for error handling? See this repo: https://github.com/parlez-vous/server\n \n-This package works for both JS and TypeScript. However, the types that this package provides will allow you to get compile-time guarantees around error handling if you are using TypeScript.\n+<div id=\"toc\"></div>\n \n-`neverthrow` draws inspiration from [Rust](https://doc.rust-lang.org/std/result/enum.Result.html), and [Elm](https://package.elm-lang.org/packages/elm/core/latest/Result). It is also a great companion to [fp-ts](https://gcanti.github.io/fp-ts/).\n+## Table Of Contents\n \n-> Need to see real-life examples of how to leverage this package for error handling? See this repo: https://github.com/parlez-vous/server\n+* [Installation](#installation)\n+* [Recommended: Use `eslint-plugin-neverthrow`](#recommended-use-eslint-plugin-neverthrow)\n+* [Top-Level API](#top-level-api)\n+* [API Documentation](#api-documentation)\n+  + [Synchronous API (`Result`)](#synchronous-api-result)\n+    - [`ok`](#ok)\n+    - [`err`](#err)\n+    - [`Result.isOk` (method)](#resultisok-method)\n+    - [`Result.isErr` (method)](#resultiserr-method)\n+    - [`Result.map` (method)](#resultmap-method)\n+    - [`Result.mapErr` (method)](#resultmaperr-method)\n+    - [`Result.unwrapOr` (method)](#resultunwrapor-method)\n+    - [`Result.andThen` (method)](#resultandthen-method)\n+    - [`Result.asyncAndThen` (method)](#resultasyncandthen-method)\n+    - [`Result.orElse` (method)](#resultorelse-method)\n+    - [`Result.match` (method)](#resultmatch-method)\n+    - [`Result.asyncMap` (method)](#resultasyncmap-method)\n+    - [`Result.andTee` (method)](#resultandtee-method)\n+    - [`Result.orTee` (method)](#resultortee-method)\n+    - [`Result.andThrough` (method)](#resultandthrough-method)\n+    - [`Result.asyncAndThrough` (method)](#resultasyncandthrough-method)\n+    - [`Result.fromThrowable` (static class method)](#resultfromthrowable-static-class-method)\n+    - [`Result.combine` (static class method)](#resultcombine-static-class-method)\n+    - [`Result.combineWithAllErrors` (static class method)](#resultcombinewithallerrors-static-class-method)\n+    - [`Result.safeUnwrap()`](#resultsafeunwrap)\n+  + [Asynchronous API (`ResultAsync`)](#asynchronous-api-resultasync)\n+    - [`okAsync`](#okasync)\n+    - [`errAsync`](#errasync)\n+    - [`ResultAsync.fromThrowable` (static class method)](#resultasyncfromthrowable-static-class-method)\n+    - [`ResultAsync.fromPromise` (static class method)](#resultasyncfrompromise-static-class-method)\n+    - [`ResultAsync.fromSafePromise` (static class method)](#resultasyncfromsafepromise-static-class-method)\n+    - [`ResultAsync.map` (method)](#resultasyncmap-method)\n+    - [`ResultAsync.mapErr` (method)](#resultasyncmaperr-method)\n+    - [`ResultAsync.unwrapOr` (method)](#resultasyncunwrapor-method)\n+    - [`ResultAsync.andThen` (method)](#resultasyncandthen-method)\n+    - [`ResultAsync.orElse` (method)](#resultasyncorelse-method)\n+    - [`ResultAsync.match` (method)](#resultasyncmatch-method)\n+    - [`ResultAsync.andTee` (method)](#resultasyncandtee-method)\n+    - [`ResultAsync.orTee` (method)](#resultasyncortee-method)\n+    - [`ResultAsync.andThrough` (method)](#resultasyncandthrough-method)\n+    - [`ResultAsync.combine` (static class method)](#resultasynccombine-static-class-method)\n+    - [`ResultAsync.combineWithAllErrors` (static class method)](#resultasynccombinewithallerrors-static-class-method)\n+    - [`ResultAsync.safeUnwrap()`](#resultasyncsafeunwrap)\n+  + [Utilities](#utilities)\n+    - [`fromThrowable`](#fromthrowable)\n+    - [`fromAsyncThrowable`](#fromasyncthrowable)\n+    - [`fromPromise`](#frompromise)\n+    - [`fromSafePromise`](#fromsafepromise)\n+    - [`safeTry`](#safetry)\n+  + [Testing](#testing)\n+* [A note on the Package Name](#a-note-on-the-package-name)\n \n ## Installation\n \n@@ -27,103 +78,26 @@\n > npm install neverthrow\n ```\n \n-## Usage\n-\n-### Synchronous API\n-\n-Create `Ok` or `Err` instances with the `ok` and `err` functions.\n-\n-```typescript\n-import { ok, err } from 'neverthrow'\n-\n",
+					"match": false,
+					"packageHash": "c3f64e6b68b0179e867a8ca2f65ca269d808ed0cb54501775e29814a700dc166",
+					"size": 25324,
+					"sourceHash": "b37f72e1b72d3ae9a3df65d24fcf93aa28dcad305a065056f06d89934b3168a9",
+					"status": "content"
+				},
+				"dist/index.cjs.js": {
+					"match": false,
+					"packageHash": "72deef3145d099f921325111f0a2313d7e03554bc94cdebe82217877151fa5d8",
+					"size": 15312,
+					"status": "missing-in-source"
+				},
+				"dist/index.d.ts": {
+					"match": false,
+					"packageHash": "279cbd83c306169c8d836ba4b254f7e6340814a39363d80e7abd95494d98c8a7",
+					"size": 4357,
+					"status": "missing-in-source"
+				},
+				"dist/index.es.js": {
+					"match": false,
+					"packageHash": "745696b92377d329581c678de3089d2e3e25a2e189ffa4e5fab6b229ddaff09f",
+					"size": 15013,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,17 +1,25 @@\n {\n   \"name\": \"neverthrow\",\n-  \"version\": \"2.5.0\",\n+  \"version\": \"8.2.0\",\n   \"description\": \"Stop throwing errors, and instead return Results!\",\n   \"main\": \"dist/index.cjs.js\",\n   \"module\": \"dist/index.es.js\",\n   \"types\": \"dist/index.d.ts\",\n+  \"files\": [\n+    \"dist\"\n+  ],\n   \"scripts\": {\n-    \"test\": \"jest\",\n+    \"local-ci\": \"npm run typecheck && npm run lint && npm run test && npm run format && npm run build\",\n+    \"test\": \"vitest run && npm run test-types\",\n+    \"test-types\": \"tsc --noEmit -p ./tests/tsconfig.tests.json\",\n     \"lint\": \"eslint ./src --ext .ts\",\n     \"format\": \"prettier --write 'src/**/*.ts?(x)' && npm run lint -- --fix\",\n     \"typecheck\": \"tsc --noEmit\",\n     \"clean\": \"rm -rf ./dist ./tmp\",\n-    \"build\": \"npm run clean && rollup --config && mv tmp/*.js dist\"\n+    \"build\": \"npm run clean && rollup --config && mv tmp/*.js dist && attw --pack .\",\n+    \"prepublishOnly\": \"npm run build\",\n+    \"release\": \"changeset publish\",\n+    \"version\": \"changeset version && npm i --lockfile-only\"\n   },\n   \"repository\": {\n     \"type\": \"git\",\n@@ -24,29 +32,35 @@\n   },\n   \"homepage\": \"https://github.com/supermacro/neverthrow#readme\",\n   \"devDependencies\": {\n-    \"@babel/core\": \"7.10.2\",\n-    \"@babel/preset-env\": \"7.10.2\",\n-    \"@babel/preset-typescript\": \"7.10.1\",\n-    \"@types/jest\": \"25.2.3\",\n-    \"@types/node\": \"14.0.10\",\n-    \"@typescript-eslint/eslint-plugin\": \"3.1.0\",\n-    \"@typescript-eslint/parser\": \"3.1.0\",\n-    \"babel-jest\": \"26.0.1\",\n-    \"eslint\": \"7.1.0\",\n-    \"eslint-config-prettier\": \"6.11.0\",\n-    \"eslint-plugin-prettier\": \"3.1.3\",\n-    \"jest\": \"26.0.1\",\n-    \"prettier\": \"2.0.5\",\n-    \"rollup\": \"2.17.0\",\n-    \"rollup-plugin-dts\": \"1.4.7\",\n-    \"rollup-plugin-typescript2\": \"0.27.1\",\n-    \"ts-jest\": \"26.1.0\",\n-    \"typescript\": \"3.9.5\"\n+    \"@arethetypeswrong/cli\": \"^0.17.3\",\n+    \"@changesets/changelog-github\": \"^0.5.0\",\n+    \"@changesets/cli\": \"^2.27.7\",\n+    \"@types/node\": \"^18.19.39\",\n+    \"@typescript-eslint/eslint-plugin\": \"4.28.1\",\n+    \"@typescript-eslint/parser\": \"4.28.1\",\n+    \"eslint\": \"7.30.0\",\n+    \"eslint-config-prettier\": \"7.1.0\",\n+    \"eslint-plugin-prettier\": \"3.4.0\",\n+    \"prettier\": \"2.2.1\",\n+    \"rollup\": \"^4.18.0\",\n+    \"rollup-plugin-dts\": \"^6.1.1\",\n+    \"rollup-plugin-typescript2\": \"^0.32.1\",\n+    \"testdouble\": \"3.20.2\",\n+    \"ts-toolbelt\": \"9.6.0\",\n+    \"typescript\": \"4.7.2\",\n+    \"vitest\": \"^2.1.3\"\n   },\n   \"keywords\": [\n     \"typescript\",\n     \"functional\",\n     \"fp\",\n     \"error\"\n-  ]\n+  ],\n+  \"engines\": {\n+    \"node\": \">=18\",\n+    \"npm\": \">=11\"\n+  },\n+  \"optionalDependencies\": {\n+    \"@rollup/rollup-linux-x64-gnu\": \"^4.24.0\"\n+  }\n }\n",
+					"match": false,
+					"packageHash": "8309a740c8ad358567e702a67a657b39d184e3a871cc567345363d1a17331b5b",
+					"size": 1494,
+					"sourceHash": "77482a0d2edde0bd1c4a9347f0adf64d8bb24c0b074a9e7e3d93269f138d3417",
+					"status": "content"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 1,
+				"missingInPackage": 0,
+				"missingInSource": 3,
+				"score": 0.16666666666666666,
+				"totalFiles": 6
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "@rollup/rollup-linux-x64-gnu",
+				"version": "4.24.0"
+			}
+		]
+	}
+]
