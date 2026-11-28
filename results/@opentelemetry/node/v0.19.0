@@ -1,0 +1,2746 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-28T04:15:40.266Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:6.14.7",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "@opentelemetry/node@0.19.0",
+			"name": "@opentelemetry/node",
+			"version": "0.19.0",
+			"location": "https://registry.npmjs.org/@opentelemetry/node/-/node-0.19.0.tgz",
+			"integrity": "sha512-mfUw4pEHoF6RLfO36yY3gv8BxNX1sItb16HwY27ipRO92BUKRZyclWI5XgpgPkBjZ07bbPwmru+mBOBVyadtOQ==",
+			"publishedAt": "2021-04-22T12:29:00.653Z",
+			"publishedWith": {
+				"node": "14.8.0",
+				"npm": "lerna/3.22.1/node@v14.8.0+x64 (darwin)"
+			},
+			"dependencies": {
+				"semver": "^7.1.3",
+				"@opentelemetry/core": "0.19.0",
+				"@opentelemetry/tracing": "0.19.0",
+				"@opentelemetry/propagator-b3": "0.19.0",
+				"@opentelemetry/propagator-jaeger": "0.19.0",
+				"@opentelemetry/context-async-hooks": "0.19.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git+https://github.com/open-telemetry/opentelemetry-js.git",
+			"spec": "github:open-telemetry/opentelemetry-js#0c15999dccd377294a03cf7d36085216d6e8c5c1"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,115 +1,408 @@\n-# OpenTelemetry Node SDK\n \n-[![NPM Published Version][npm-img]][npm-url]\n-[![dependencies][dependencies-image]][dependencies-url]\n-[![devDependencies][devDependencies-image]][devDependencies-url]\n-[![Apache License][license-image]][license-image]\n+---\n+<p align=\"center\">\n+  <strong>\n+    <a href=\"getting-started/README.md\">Getting Started<a/>\n+    &nbsp;&nbsp;&bull;&nbsp;&nbsp;\n+    <a href=\"https://open-telemetry.github.io/opentelemetry-js\">API Documentation<a/>\n+    &nbsp;&nbsp;&bull;&nbsp;&nbsp;\n+  </strong>\n+</p>\n \n-This module provides *automated instrumentation and tracing* for Node.js applications.\n+<p align=\"center\">\n+  <a href=\"https://github.com/open-telemetry/opentelemetry-js/releases\">\n+    <img alt=\"GitHub release (latest by date including pre-releases)\" src=\"https://img.shields.io/github/v/release/open-telemetry/opentelemetry-js?include_prereleases&style=for-the-badge\">\n+  </a>\n+  <a href=\"https://codecov.io/gh/open-telemetry/opentelemetry-js/branch/main/\">\n+    <img alt=\"Codecov Status\" src=\"https://img.shields.io/codecov/c/github/open-telemetry/opentelemetry-js?style=for-the-badge\">\n+  </a>\n+  <a href=\"https://github.com/open-telemetry/opentelemetry-js/blob/main/LICENSE\">\n+    <img alt=\"license\" src=\"https://img.shields.io/badge/license-Apache_2.0-green.svg?style=for-the-badge\">\n+  </a>\n+  <br/>\n+  <a href=\"https://circleci.com/gh/open-telemetry/opentelemetry-js\">\n+    <img alt=\"Build Status\" src=\"https://circleci.com/gh/open-telemetry/opentelemetry-js.svg?style=shield\">\n+  </a>\n+  <img alt=\"Beta\" src=\"https://img.shields.io/badge/status-beta-informational?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAIRlWElmTU0AKgAAAAgABQESAAMAAAABAAEAAAEaAAUAAAABAAAASgEbAAUAAAABAAAAUgEoAAMAAAABAAIAAIdpAAQAAAABAAAAWgAAAAAAAACQAAAAAQAAAJAAAAABAAOgAQADAAAAAQABAACgAgAEAAAAAQAAABigAwAEAAAAAQAAABgAAAAA8A2UOAAAAAlwSFlzAAAWJQAAFiUBSVIk8AAAAVlpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IlhNUCBDb3JlIDUuNC4wIj4KICAgPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICAgICAgPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIKICAgICAgICAgICAgeG1sbnM6dGlmZj0iaHR0cDovL25zLmFkb2JlLmNvbS90aWZmLzEuMC8iPgogICAgICAgICA8dGlmZjpPcmllbnRhdGlvbj4xPC90aWZmOk9yaWVudGF0aW9uPgogICAgICA8L3JkZjpEZXNjcmlwdGlvbj4KICAgPC9yZGY6UkRGPgo8L3g6eG1wbWV0YT4KTMInWQAABK5JREFUSA2dVm1sFEUYfmd2b/f2Pkqghn5eEQWKrRgjpkYgpoRCLC0oxV5apAiGUDEpJvwxEQ2raWPU+Kf8INU/RtEedwTCR9tYPloxGNJYTTQUwYqJ1aNpaLH3sXu3t7vjvFevpSqt7eSyM+/czvM8877PzB3APBoLgoDLsNePF56LBwqa07EKlDGg84CcWsI4CEbhNnDpAd951lXE2NkiNknCCTLv4HtzZuvPm1C/IKv4oDNXqNDHragety2XVzjECZsJARuBMyRzJrh1O0gQwLXuxofxsPSj4hG8fMLQo7bl9JJD8XZfC1E5yWFOMtd07dvX5kDwg6+2++Chq8txHGtfPoAp0gOFmhYoNFkHjn2TNUmrwRdna7W1QSkU8hvbGk4uThLrapaiLA2E6QY4u/lS9ItHfvJkxYsTMVtnAJLipYIWtVrcdX+8+b8IVnPl/R81prbuPZ1jpYw+0aEUGSkdFsgyBIaFTXCm6nyaxMtJ4n+TeDhJzGqZtQZcuYDgqDwDbqb0JF9oRpIG1Oea3bC1Y6N3x/WV8Zh83emhCs++hlaghDw+8w5UlYKq2lU7Pl8IkvS9KDqXmKmEwdMppVPKwGSEilmyAwJhRwWcq7wYC6z4wZ1rrEoMWxecdOjZWXeAQClBcYDN3NwVwD9pGwqUSyQgclcmxpNJqCuwLmDh3WtvPqXdlt+6Oz70HPGDNSNBee/EOen+rGbEFqDENBPDbtdCp0ukPANmzO0QQJYUpyS5IJJI3Hqt4maS+EB3199ozm8EDU/6fVNU2dQpdx3ZnKzeFXyaUTiasEV/gZMzJMjr3Z+WvAdQ+hs/zw9savimxUntDSaBdZ2f+Idbm1rlNY8esFffBit9HtK5/MejsrJVxikOXlb1Ukir2X+Rbdkd1KG2Ixfn2Ql4JRmELnYK9mEM8G36fAA3xEQ89fxXihC8q+sAKi9jhHxNqagY2hiaYgRCm0f0QP7H4Fp11LSXiuBY2aYFlh0DeDIVVFUJQn5rCnpiNI2gvLxHnASn9DIVHJJlm5rXvQAGEo4zvKq2w5G1NxENN7jrft1oxMdekETjxdH2Z3x+VTVYsPb+O0C/9/auN6v2hNZw5b2UOmSbG5/rkC3LBA+1PdxFxORjxpQ81GcxKc+ybVjEBvUJvaGJ7p7n5A5KSwe4AzkasA+crmzFtowoIVTiLjANm8GDsrWW35ScI3JY8Urv83tnkF8JR0yLvEt2hO/0qNyy3Jb3YKeHeHeLeOuVLRpNF+pkf85OW7/zJxWdXsbsKBUk2TC0BCPwMq5Q/CPvaJFkNS/1l1qUPe+uH3oD59erYGI/Y4sce6KaXYElAIOLt+0O3t2+/xJDF1XvOlWGC1W1B8VMszbGfOvT5qaRRAIFK3BCO164nZ0uYLH2YjNN8thXS2v2BK9gTfD7jHVxzHr4roOlEvYYz9QIz+Vl/sLDXInsctFsXjqIRnO2ZO387lxmIboLDZCJ59KLFliNIgh9ipt6tLg9SihpRPDO1ia5byw7de1aCQmF5geOQtK509rzfdwxaKOIq+73AvwCC5/5fcV4vo3+3LpMdtWHh0ywsJC/ZGoCb8/9D8F/ifgLLl8S8QWfU8cAAAAASUVORK5CYII=\">\n+</p>\n \n-For manual instrumentation see the\n-[@opentelemetry/tracing](https://github.com/open-telemetry/opentelemetry-js/tree/main/packages/opentelemetry-tracing) package.\n+<p align=\"center\">\n+  <strong>\n+    <a href=\"CONTRIBUTING.md\">Contributing<a/>\n+    &nbsp;&nbsp;&bull;&nbsp;&nbsp;\n+    <a href=\"doc/development-guide.md\">Development Guide<a/>\n+    &nbsp;&nbsp;&bull;&nbsp;&nbsp;\n+    <a href=\"benchmark/README.md\">Benchmarks<a/>\n+    &nbsp;&nbsp;&bull;&nbsp;&nbsp;\n+    <a href=\"examples/\">Examples<a/>\n+  </strong>\n+</p>\n \n-## How auto instrumentation works\n+---\n \n-This package exposes a `NodeTracerProvider`.\n-For loading instrumentations please use `registerInstrumentations` function from [opentelemetry-instrumentation](https://github.com/open-telemetry/opentelemetry-js/tree/master/packages/opentelemetry-instrumentation)\n+## About this project\n \n-OpenTelemetry comes with a growing number of instrumentation plugins for well know modules (see [supported modules](https://github.com/open-telemetry/opentelemetry-js#instrumentations)) and an API to create custom instrumentation (see [the instrumentation developer guide](https://github.com/open-telemetry/opentelemetry-js/blob/main/doc/instrumentation-guide.md)).\n+This is the JavaScript version of [OpenTelemetry](https://opentelemetry.io/), a framework for collecting traces and metrics from applications.\n \n-> **Please note:** This module does *not* bundle any plugins. They need to be installed separately.\n+## Compatibility Matrix\n \n-This is done by wrapping all tracing-relevant functions.\n+| API Version | Core version | Contrib Version         |\n+| ----------- |--------------|-------------------------|\n+| v1.0.0-rc.0 | 0.19.x       | ------                  |\n+| 0.18.x      | 0.18.x       | 0.14.x                  |\n+|             | 0.17.x       | ------                  |\n+|             | 0.16.x       | ------                  |\n+|             | 0.15.x       | 0.13.x                  |\n+|             | 0.14.x       | 0.12.x                  |\n+|             | 0.13.x       | ------                  |\n+|             | 0.12.x       | 0.11.x                  |\n+|             | 0.11.x       | 0.10.x                  |\n \n-This instrumentation code will automatically\n+## Quick start\n \n-- extract a trace-context identifier from inbound requests to allow distributed tracing (if applicable)\n-- make sure that this current trace-context is propagated while the transaction traverses an application (see [@opentelemetry/context-base](https://github.com/open-telemetry/opentelemetry-js/blob/main/packages/opentelemetry-context-base/README.md) for an in-depth explanation)\n-- add this trace-context identifier to outbound requests to allow continuing the distributed trace on the next hop (if applicable)\n-- create and end spans\n+### Application Owner\n \n-## Creating custom spans on top of auto-instrumentation\n+To get started tracing your own application, see the [Getting Started Guide](getting-started/README.md). For more information about automatic instrumentation see [@opentelemetry/node][otel-node], which provides auto-instrumentation for Node.js applications. If the automatic instrumentation does not suit your needs, or you would like to create manual traces, see [@opentelemetry/tracing][otel-tracing]\n \n-Additionally to automated instrumentation, `NodeTracerProvider` exposes the same API as [@opentelemetry/tracing](https://github.com/open-telemetry/opentelemetry-js/tree/main/packages/opentelemetry-tracing), allowing creating custom spans if needed.\n+### Library Author\n \n-## Installation\n+If you are a library author looking to build OpenTelemetry into your library, please see [the documentation][docs]. As a library author, it is important that you only depend on properties and methods published on the public API. If you use any properties or methods from the SDK that are not officially a part of the public API, your library may break if an [Application Owner](#application-owner) uses a different SDK implementation.\n \n-```bash\n-npm install --save @opentelemetry/api\n-npm install --save @opentelemetry/node\n+## Supported Runtimes\n \n",
+					"match": false,
+					"packageHash": "7aaa40b02d756b28e8afa2ffb2148a688aafd0badaa3319aa952d05b4cf4468d",
+					"size": 5748,
+					"sourceHash": "6455d36a3d3de02c481b7696075f4af323c3859695a6d9734f07ae62e88d0809",
+					"status": "content"
+				},
+				"build/src/NodeTracerProvider.d.ts": {
+					"match": false,
+					"packageHash": "f5d548b025163d678b4a6edd490ba94feea17e512d35e621002c44223deb90ab",
+					"size": 809,
+					"status": "missing-in-source"
+				},
+				"build/src/NodeTracerProvider.js": {
+					"match": false,
+					"packageHash": "8ad0b02d39d04aa30ba21cec60241be74d786758ed28099639b77ad101eb642b",
+					"size": 1938,
+					"status": "missing-in-source"
+				},
+				"build/src/NodeTracerProvider.js.map": {
+					"match": false,
+					"packageHash": "ee76a0584cb2484a307cc0cc802f869d1aa67aed4ca94c8cb0f8f35062e4d090",
+					"size": 1117,
+					"status": "missing-in-source"
+				},
+				"build/src/config.d.ts": {
+					"match": false,
+					"packageHash": "10a9bcc2e3f61ae8d27a0245dbce39af0709bb730ec056a692ffc9dc8bd719a0",
+					"size": 225,
+					"status": "missing-in-source"
+				},
+				"build/src/config.js": {
+					"match": false,
+					"packageHash": "6ff90f9c2c338aac06971ecdc3f00c7bb6d0d9e069192f4fb39392e29be82174",
+					"size": 717,
+					"status": "missing-in-source"
+				},
+				"build/src/config.js.map": {
+					"match": false,
+					"packageHash": "18ba5f509894edae2805516b21098826730aa9ba56162e357410f9f610c2d31e",
+					"size": 130,
+					"status": "missing-in-source"
+				},
+				"build/src/index.d.ts": {
+					"match": false,
+					"packageHash": "fcf851c14fb1356abfedeb0a291233f86d3fc3f5100af948a1c83a9e6f24594c",
+					"size": 118,
+					"status": "missing-in-source"
+				},
+				"build/src/index.js": {
+					"match": false,
+					"packageHash": "f99c98902aca14d42fa214e4f89046b1fda49ed4281c0c743e50219fcdba5c29",
+					"size": 1284,
+					"status": "missing-in-source"
+				},
+				"build/src/index.js.map": {
+					"match": false,
+					"packageHash": "58d6bef982d23cd9df335e6fb9187cfb20340a25044502af0e7441d727181d42",
+					"size": 151,
+					"status": "missing-in-source"
+				},
+				"build/src/version.d.ts": {
+					"match": false,
+					"packageHash": "e2aed92da2bd6e04c12fe02481e79cf4584206c4e05547929c73fbe4c7ffced3",
+					"size": 78,
+					"status": "missing-in-source"
+				},
+				"build/src/version.js": {
+					"match": false,
+					"packageHash": "343b920ffa9969db65cca93a5949989ae9870a31d236c59f9bda34293539733e",
+					"size": 833,
+					"status": "missing-in-source"
+				},
+				"build/src/version.js.map": {
+					"match": false,
+					"packageHash": "5ea3cd35bc038b24110bb1a7d30c3f7fa94f7b85574c5df7f4774114df1a663f",
+					"size": 177,
+					"status": "missing-in-source"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,74 +1,73 @@\n {\n-  \"name\": \"@opentelemetry/node\",\n-  \"version\": \"0.19.0\",\n-  \"description\": \"OpenTelemetry Node SDK provides automatic telemetry (tracing, metrics, etc) for Node.js applications\",\n+  \"name\": \"opentelemetry-base\",\n+  \"version\": \"0.18.2\",\n+  \"description\": \"OpenTelemetry is a distributed tracing and stats collection framework.\",\n   \"main\": \"build/src/index.js\",\n   \"types\": \"build/src/index.d.ts\",\n-  \"repository\": \"open-telemetry/opentelemetry-js\",\n   \"scripts\": {\n     \"compile\": \"tsc --build\",\n+    \"watch\": \"tsc --build --watch\",\n     \"clean\": \"tsc --build --clean\",\n-    \"test\": \"nyc ts-mocha -p tsconfig.json 'test/**/*.test.ts'\",\n-    \"tdd\": \"npm run test -- --watch-extensions ts --watch\",\n-    \"codecov\": \"nyc report --reporter=json && codecov -f coverage/*.json -p ../../\",\n-    \"lint\": \"eslint . --ext .ts\",\n-    \"lint:fix\": \"eslint . --ext .ts --fix\",\n-    \"version\": \"node ../../scripts/version-update.js\",\n-    \"watch\": \"tsc --build --watch\"\n+    \"bench\": \"node benchmark\",\n+    \"postinstall\": \"update-ts-references && npm run bootstrap\",\n+    \"postcompile\": \"npm run submodule && npm run protos:copy\",\n+    \"submodule\": \"git submodule sync --recursive && git submodule update --init --recursive\",\n+    \"protos:copy\": \"lerna run protos:copy\",\n+    \"version:update\": \"lerna run version:update\",\n+    \"test\": \"lerna run test\",\n+    \"test:browser\": \"lerna run test:browser\",\n+    \"test:backcompat\": \"lerna run test:backcompat\",\n+    \"bootstrap\": \"lerna bootstrap\",\n+    \"changelog\": \"lerna-changelog\",\n+    \"codecov\": \"lerna run codecov\",\n+    \"codecov:browser\": \"lerna run codecov:browser\",\n+    \"predocs-test\": \"npm run docs\",\n+    \"docs-test\": \"lerna run docs-test\",\n+    \"docs\": \"lerna run docs\",\n+    \"docs-deploy\": \"gh-pages --dist packages/opentelemetry-api/docs/out\",\n+    \"lint\": \"lerna run lint\",\n+    \"lint:changed\": \"lerna run --concurrency 1 --stream lint --since HEAD --exclude-dependents\",\n+    \"lint:fix\": \"lerna run lint:fix\",\n+    \"lint:fix:changed\": \"lerna run --concurrency 1 --stream lint:fix --since HEAD --exclude-dependents\",\n+    \"lint:examples\": \"eslint ./examples/**/*.js\",\n+    \"lint:examples:fix\": \"eslint ./examples/**/*.js --fix\",\n+    \"lint:markdown\": \"./node_modules/.bin/markdownlint $(git ls-files '*.md') -i ./CHANGELOG.md\",\n+    \"lint:markdown:fix\": \"./node_modules/.bin/markdownlint $(git ls-files '*.md') -i ./CHANGELOG.md --fix\"\n   },\n+  \"repository\": \"open-telemetry/opentelemetry-js\",\n   \"keywords\": [\n     \"opentelemetry\",\n     \"nodejs\",\n-    \"tracing\",\n     \"profiling\",\n     \"metrics\",\n     \"stats\"\n   ],\n   \"author\": \"OpenTelemetry Authors\",\n   \"license\": \"Apache-2.0\",\n-  \"engines\": {\n-    \"node\": \">=8.0.0\"\n-  },\n-  \"files\": [\n-    \"build/src/**/*.js\",\n-    \"build/src/**/*.js.map\",\n-    \"build/src/**/*.d.ts\",\n-    \"doc\",\n-    \"LICENSE\",\n-    \"README.md\"\n-  ],\n-  \"publishConfig\": {\n-    \"access\": \"public\"\n-  },\n   \"devDependencies\": {\n-    \"@opentelemetry/api\": \"^1.0.0-rc.0\",\n-    \"@opentelemetry/resources\": \"0.19.0\",\n-    \"@types/mocha\": \"8.2.2\",\n-    \"@types/node\": \"14.14.37\",\n-    \"@types/semver\": \"7.3.4\",\n-    \"@types/shimmer\": \"1.0.1\",\n-    \"@types/sinon\": \"9.0.11\",\n-    \"codecov\": \"3.8.1\",\n+    \"@commitlint/cli\": \"12.1.1\",\n+    \"@commitlint/config-conventional\": \"12.1.1\",\n+    \"@typescript-eslint/eslint-plugin\": \"4.22.0\",\n+    \"@typescript-eslint/parser\": \"4.22.0\",\n+    \"beautify-benchmark\": \"0.2.4\",\n+    \"benchmark\": \"2.1.4\",\n+    \"eslint\": \"7.24.0\",\n+    \"eslint-config-airbnb-base\": \"14.2.1\",\n+    \"eslint-plugin-header\": \"3.1.1\",\n+    \"eslint-plugin-import\": \"2.22.1\",\n+    \"gh-pages\": \"3.1.0\",\n     \"gts\": \"3.1.0\",\n-    \"mocha\": \"7.2.0\",\n-    \"nyc\": \"15.1.0\",\n-    \"rimraf\": \"3.0.2\",\n-    \"shimmer\": \"1.2.1\",\n",
+					"match": false,
+					"packageHash": "abebb1bbf13ef03fc4c44ea7f748c0172ba7656ec38bb8743f6dab2f155a5bfc",
+					"size": 2066,
+					"sourceHash": "6de4142774d237221dc8d7ef195359ef9b4680d98dcfc6d5e43d5784d5d1c8fb",
+					"status": "content"
+				},
+				".commitlintrc.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".editorconfig": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".gitattributes": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/CODEOWNERS": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/ISSUE_TEMPLATE/bug_report.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/ISSUE_TEMPLATE/discussion.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/ISSUE_TEMPLATE/feature_request.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/ISSUE_TEMPLATE/request_for_instrumentation.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/PULL_REQUEST_TEMPLATE.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/canary.yaml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/codeql-analysis.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/lint.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/peer-api.yaml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/unit-test.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".github/workflows/w3c-integration-test.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".gitmodules": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".markdownlint.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				".nycrc": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"CHANGELOG.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"CONTRIBUTING.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"RELEASING.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"backwards-compatability/node10/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"backwards-compatability/node10/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"backwards-compatability/node10/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"backwards-compatability/node12/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"backwards-compatability/node12/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"backwards-compatability/node12/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"backwards-compatability/node8/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"backwards-compatability/node8/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"backwards-compatability/node8/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"benchmark/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"benchmark/benchmark.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"benchmark/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"benchmark/propagator.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"benchmark/tracer.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"codecov.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"eslint.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/.eslintrc": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic-tracer-node/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic-tracer-node/docker/ot/collector-config.yaml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic-tracer-node/docker/ot/docker-compose.yaml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic-tracer-node/images/jaeger-ui-detail.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic-tracer-node/images/jaeger-ui-list.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic-tracer-node/images/zipkin-ui-detail.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic-tracer-node/images/zipkin-ui-list.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic-tracer-node/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/basic-tracer-node/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/collector-exporter-node/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/collector-exporter-node/docker/collector-config.yaml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/collector-exporter-node/docker/docker-compose.yaml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/collector-exporter-node/docker/prometheus.yaml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/collector-exporter-node/images/spans.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/collector-exporter-node/metrics.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/collector-exporter-node/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/collector-exporter-node/tracing.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/grpc/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/grpc/client.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/grpc/helloworld_grpc_pb.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/grpc/helloworld_pb.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/grpc/images/jaeger.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/grpc/images/zipkin.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/grpc/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/grpc/server.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/grpc/tracer.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/grpc-js/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/grpc-js/client.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/grpc-js/helloworld_grpc_pb.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/grpc-js/helloworld_pb.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/grpc-js/images/jaeger.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/grpc-js/images/zipkin.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/grpc-js/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/grpc-js/server.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/grpc-js/tracer.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/http/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/http/client.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/http/images/jaeger-ui.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/http/images/zipkin-ui.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/http/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/http/server.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/http/tracer.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/https/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/https/client.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/https/images/jaeger-ui.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/https/images/zipkin-ui.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/https/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/https/server-cert.pem": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/https/server-key.pem": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/https/server.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/https/tracer.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/metrics/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/metrics/metrics/observer.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/metrics/metrics/observer.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/metrics/metrics/observer_batch.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/metrics/metrics/observer_batch2.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/metrics/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/opentracing-shim/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/opentracing-shim/client.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/opentracing-shim/images/jaeger-ui.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/opentracing-shim/images/zipkin-ui.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/opentracing-shim/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/opentracing-shim/server.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/opentracing-shim/shim.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/opentracing-shim/utils.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/prometheus/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/prometheus/images/prom-counter.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/prometheus/images/prom-updowncounter.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/prometheus/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/prometheus/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/prometheus/prometheus.yml": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/tracer-web/.eslintrc": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/tracer-web/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/tracer-web/examples/fetch/index.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/tracer-web/examples/fetch/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/tracer-web/examples/metrics/index.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/tracer-web/examples/metrics/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/tracer-web/examples/xml-http-request/index.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/tracer-web/examples/xml-http-request/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/tracer-web/examples/zipkin/index.html": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/tracer-web/examples/zipkin/index.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/tracer-web/images/xml-http-request.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/tracer-web/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"examples/tracer-web/webpack.config.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"getting-started/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"getting-started/example/app.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"getting-started/example/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"getting-started/images/prometheus-graph.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"getting-started/images/prometheus.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"getting-started/images/zipkin-trace.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"getting-started/images/zipkin.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"getting-started/monitored-example/app.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"getting-started/monitored-example/monitoring.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"getting-started/monitored-example/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"getting-started/traced-example/app.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"getting-started/traced-example/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"getting-started/traced-example/tracing.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"getting-started/ts-example/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"getting-started/ts-example/example/app.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"getting-started/ts-example/example/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"getting-started/ts-example/monitored-example/app.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"getting-started/ts-example/monitored-example/monitoring.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"getting-started/ts-example/monitored-example/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"getting-started/ts-example/traced-example/app.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"getting-started/ts-example/traced-example/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"getting-started/ts-example/traced-example/tracing.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"integration-tests/propagation-validation-server/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"integration-tests/propagation-validation-server/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"integration-tests/propagation-validation-server/validation-server.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"integration-tests/tracecontext-integration-test.sh": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"karma.base.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"karma.webpack.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"lerna.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-api-metrics/.eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-api-metrics/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-api-metrics/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-api-metrics/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-api-metrics/karma.conf.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-api-metrics/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-api-metrics/src/NoopMeter.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-api-metrics/src/NoopMeterProvider.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-api-metrics/src/api/global-utils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-api-metrics/src/api/metrics.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-api-metrics/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-api-metrics/src/platform/browser/globalThis.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-api-metrics/src/platform/browser/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-api-metrics/src/platform/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-api-metrics/src/platform/node/globalThis.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-api-metrics/src/platform/node/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-api-metrics/src/types/BatchObserverResult.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-api-metrics/src/types/BoundInstrument.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-api-metrics/src/types/Meter.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-api-metrics/src/types/MeterProvider.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-api-metrics/src/types/Metric.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-api-metrics/src/types/Observation.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-api-metrics/src/types/ObserverResult.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-api-metrics/src/version.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-api-metrics/test/api/api.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-api-metrics/test/api/global.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-api-metrics/test/index-webpack.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-api-metrics/test/noop-implementations/noop-meter.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-api-metrics/tsconfig.docs.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-api-metrics/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-context-async-hooks/.eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-context-async-hooks/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-context-async-hooks/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-context-async-hooks/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-context-async-hooks/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-context-async-hooks/src/AbstractAsyncHooksContextManager.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-context-async-hooks/src/AsyncHooksContextManager.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-context-async-hooks/src/AsyncLocalStorageContextManager.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-context-async-hooks/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-context-async-hooks/src/version.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-context-async-hooks/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-context-zone/.eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-context-zone/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-context-zone/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-context-zone/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-context-zone/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-context-zone/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-context-zone/src/version.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-context-zone/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-context-zone-peer-dep/.eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-context-zone-peer-dep/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-context-zone-peer-dep/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-context-zone-peer-dep/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-context-zone-peer-dep/karma.conf.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-context-zone-peer-dep/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-context-zone-peer-dep/src/ZoneContextManager.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-context-zone-peer-dep/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-context-zone-peer-dep/src/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-context-zone-peer-dep/src/util.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-context-zone-peer-dep/src/version.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-context-zone-peer-dep/test/ZoneContextManager.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-context-zone-peer-dep/test/index-webpack.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-context-zone-peer-dep/test/utils.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-context-zone-peer-dep/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/.eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/karma.conf.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/src/ExportResult.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/src/baggage/propagation/HttpBaggage.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/src/common/attributes.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/src/common/global-error-handler.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/src/common/logging-error-handler.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/src/common/time.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/src/common/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/src/context/propagation/HttpTraceContext.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/src/context/propagation/composite.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/src/context/propagation/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/src/internal/validators.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/src/platform/browser/RandomIdGenerator.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/src/platform/browser/environment.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/src/platform/browser/hex-to-base64.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/src/platform/browser/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/src/platform/browser/performance.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/src/platform/browser/sdk-info.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/src/platform/browser/timer-util.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/src/platform/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/src/platform/node/RandomIdGenerator.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/src/platform/node/environment.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/src/platform/node/hex-to-base64.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/src/platform/node/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/src/platform/node/performance.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/src/platform/node/sdk-info.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/src/platform/node/timer-util.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/src/trace/IdGenerator.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/src/trace/TraceState.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/src/trace/sampler/AlwaysOffSampler.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/src/trace/sampler/AlwaysOnSampler.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/src/trace/sampler/ParentBasedSampler.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/src/trace/sampler/TraceIdRatioBasedSampler.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/src/utils/environment.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/src/utils/sampling.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/src/utils/url.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/src/utils/wrap.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/src/version.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-core/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector/.eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector/karma.conf.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector/src/CollectorExporterBase.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector/src/platform/browser/CollectorExporterBrowserBase.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector/src/platform/browser/CollectorMetricExporter.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector/src/platform/browser/CollectorTraceExporter.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector/src/platform/browser/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector/src/platform/browser/util.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector/src/platform/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector/src/platform/node/CollectorExporterNodeBase.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector/src/platform/node/CollectorMetricExporter.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector/src/platform/node/CollectorTraceExporter.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector/src/platform/node/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector/src/platform/node/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector/src/platform/node/util.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector/src/transform.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector/src/transformMetrics.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector/src/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector/src/util.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector/src/version.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector-grpc/.eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector-grpc/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector-grpc/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector-grpc/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector-grpc/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector-grpc/src/CollectorExporterNodeBase.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector-grpc/src/CollectorMetricExporter.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector-grpc/src/CollectorTraceExporter.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector-grpc/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector-grpc/src/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector-grpc/src/util.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector-grpc/src/version.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector-grpc/submodule.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector-grpc/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector-proto/.eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector-proto/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector-proto/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector-proto/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector-proto/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector-proto/src/CollectorExporterNodeBase.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector-proto/src/CollectorMetricExporter.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector-proto/src/CollectorTraceExporter.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector-proto/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector-proto/src/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector-proto/src/util.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector-proto/src/version.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector-proto/submodule.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-collector-proto/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-jaeger/.eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-jaeger/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-jaeger/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-jaeger/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-jaeger/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-jaeger/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-jaeger/src/jaeger.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-jaeger/src/transform.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-jaeger/src/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-jaeger/src/version.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-jaeger/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-prometheus/.eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-prometheus/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-prometheus/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-prometheus/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-prometheus/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-prometheus/src/PrometheusExporter.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-prometheus/src/PrometheusLabelsBatcher.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-prometheus/src/PrometheusSerializer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-prometheus/src/export/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-prometheus/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-prometheus/src/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-prometheus/src/version.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-prometheus/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-zipkin/.eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-zipkin/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-zipkin/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-zipkin/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-zipkin/karma.conf.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-zipkin/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-zipkin/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-zipkin/src/platform/browser/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-zipkin/src/platform/browser/util.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-zipkin/src/platform/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-zipkin/src/platform/node/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-zipkin/src/platform/node/util.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-zipkin/src/transform.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-zipkin/src/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-zipkin/src/utils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-zipkin/src/version.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-zipkin/src/zipkin.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-exporter-zipkin/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation/.eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation/karma.conf.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation/src/autoLoader.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation/src/autoLoaderUtils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation/src/instrumentation.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation/src/platform/browser/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation/src/platform/browser/instrumentation.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation/src/platform/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation/src/platform/node/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation/src/platform/node/instrumentation.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation/src/platform/node/instrumentationNodeModuleDefinition.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation/src/platform/node/instrumentationNodeModuleFile.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation/src/platform/node/require-in-the-middle.d.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation/src/platform/node/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation/src/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation/src/types_internal.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation/src/utils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation/src/version.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-fetch/.eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-fetch/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-fetch/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-fetch/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-fetch/images/trace1.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-fetch/images/trace2.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-fetch/images/trace3.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-fetch/karma.conf.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-fetch/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-fetch/src/enums/AttributeNames.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-fetch/src/fetch.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-fetch/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-fetch/src/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-fetch/src/version.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-fetch/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-grpc/.eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-grpc/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-grpc/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-grpc/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-grpc/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-grpc/src/enums.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-grpc/src/grpc/clientUtils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-grpc/src/grpc/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-grpc/src/grpc/serverUtils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-grpc/src/grpc/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-grpc/src/grpc-js/clientUtils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-grpc/src/grpc-js/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-grpc/src/grpc-js/serverUtils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-grpc/src/grpc-js/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-grpc/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-grpc/src/instrumentation.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-grpc/src/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-grpc/src/utils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-grpc/src/version.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-grpc/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-http/.eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-http/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-http/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-http/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-http/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-http/src/enums.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-http/src/http.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-http/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-http/src/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-http/src/utils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-http/src/version.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-http/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-xml-http-request/.eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-xml-http-request/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-xml-http-request/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-xml-http-request/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-xml-http-request/images/cors.jpg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-xml-http-request/images/main.jpg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-xml-http-request/images/request.jpg": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-xml-http-request/karma.conf.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-xml-http-request/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-xml-http-request/src/enums/AttributeNames.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-xml-http-request/src/enums/EventNames.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-xml-http-request/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-xml-http-request/src/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-xml-http-request/src/version.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-xml-http-request/src/xhr.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-instrumentation-xml-http-request/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-metrics/.eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-metrics/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-metrics/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-metrics/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-metrics/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-metrics/src/BaseObserverMetric.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-metrics/src/BatchObserver.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-metrics/src/BatchObserverResult.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-metrics/src/BoundInstrument.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-metrics/src/CounterMetric.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-metrics/src/Meter.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-metrics/src/MeterProvider.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-metrics/src/Metric.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-metrics/src/ObserverResult.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-metrics/src/SumObserverMetric.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-metrics/src/UpDownCounterMetric.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-metrics/src/UpDownSumObserverMetric.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-metrics/src/Utils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-metrics/src/ValueObserverMetric.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-metrics/src/ValueRecorderMetric.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-metrics/src/export/ConsoleMetricExporter.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-metrics/src/export/Controller.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-metrics/src/export/NoopExporter.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-metrics/src/export/Processor.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-metrics/src/export/aggregators/Histogram.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-metrics/src/export/aggregators/LastValue.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-metrics/src/export/aggregators/Sum.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-metrics/src/export/aggregators/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-metrics/src/export/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-metrics/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-metrics/src/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-metrics/src/version.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-metrics/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-node/.eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-node/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-node/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-node/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-node/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-node/src/NodeTracerProvider.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-node/src/config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-node/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-node/src/version.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-node/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-propagator-b3/.eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-propagator-b3/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-propagator-b3/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-propagator-b3/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-propagator-b3/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-propagator-b3/src/B3MultiPropagator.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-propagator-b3/src/B3Propagator.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-propagator-b3/src/B3SinglePropagator.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-propagator-b3/src/common.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-propagator-b3/src/constants.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-propagator-b3/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-propagator-b3/src/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-propagator-b3/src/version.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-propagator-b3/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-propagator-jaeger/.eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-propagator-jaeger/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-propagator-jaeger/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-propagator-jaeger/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-propagator-jaeger/jaeger-tracing.png": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-propagator-jaeger/karma.conf.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-propagator-jaeger/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-propagator-jaeger/src/JaegerHttpTracePropagator.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-propagator-jaeger/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-propagator-jaeger/src/version.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-propagator-jaeger/test/JaegerHttpTracePropagator.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-propagator-jaeger/test/index-webpack.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-propagator-jaeger/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resource-detector-aws/.eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resource-detector-aws/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resource-detector-aws/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resource-detector-aws/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resource-detector-aws/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resource-detector-aws/src/detectors/AwsBeanstalkDetector.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resource-detector-aws/src/detectors/AwsEc2Detector.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resource-detector-aws/src/detectors/AwsEcsDetector.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resource-detector-aws/src/detectors/AwsEksDetector.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resource-detector-aws/src/detectors/AwsLambdaDetector.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resource-detector-aws/src/detectors/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resource-detector-aws/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resource-detector-aws/src/version.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resource-detector-aws/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resource-detector-gcp/.eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resource-detector-gcp/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resource-detector-gcp/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resource-detector-gcp/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resource-detector-gcp/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resource-detector-gcp/src/detectors/GcpDetector.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resource-detector-gcp/src/detectors/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resource-detector-gcp/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resource-detector-gcp/src/version.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resource-detector-gcp/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resources/.eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resources/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resources/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resources/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resources/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resources/src/Resource.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resources/src/config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resources/src/constants.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resources/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resources/src/platform/browser/detect-resources.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resources/src/platform/browser/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resources/src/platform/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resources/src/platform/node/detect-resources.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resources/src/platform/node/detectors/EnvDetector.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resources/src/platform/node/detectors/ProcessDetector.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resources/src/platform/node/detectors/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resources/src/platform/node/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resources/src/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resources/src/version.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-resources/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-sdk-node/.eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-sdk-node/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-sdk-node/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-sdk-node/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-sdk-node/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-sdk-node/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-sdk-node/src/sdk.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-sdk-node/src/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-sdk-node/src/version.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-sdk-node/test/sdk.test.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-sdk-node/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-semantic-conventions/.eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-semantic-conventions/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-semantic-conventions/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-semantic-conventions/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-semantic-conventions/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-semantic-conventions/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-semantic-conventions/src/resource/ResourceAttributes.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-semantic-conventions/src/resource/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-semantic-conventions/src/trace/SemanticAttributes.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-semantic-conventions/src/trace/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-semantic-conventions/src/version.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-semantic-conventions/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-shim-opentracing/.eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-shim-opentracing/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-shim-opentracing/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-shim-opentracing/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-shim-opentracing/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-shim-opentracing/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-shim-opentracing/src/shim.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-shim-opentracing/src/version.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-shim-opentracing/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-tracing/.eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-tracing/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-tracing/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-tracing/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-tracing/karma.conf.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-tracing/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-tracing/src/BasicTracerProvider.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-tracing/src/MultiSpanProcessor.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-tracing/src/NoopSpanProcessor.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-tracing/src/Span.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-tracing/src/SpanProcessor.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-tracing/src/Tracer.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-tracing/src/config.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-tracing/src/enums.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-tracing/src/export/BatchSpanProcessor.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-tracing/src/export/ConsoleSpanExporter.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-tracing/src/export/InMemorySpanExporter.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-tracing/src/export/ReadableSpan.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-tracing/src/export/SimpleSpanProcessor.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-tracing/src/export/SpanExporter.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-tracing/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-tracing/src/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-tracing/src/utility.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-tracing/src/version.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-tracing/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-web/.eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-web/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-web/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-web/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-web/karma.conf.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-web/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-web/src/StackContextManager.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-web/src/WebTracerProvider.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-web/src/enums/PerformanceTimingNames.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-web/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-web/src/types.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-web/src/utils.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-web/src/version.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/opentelemetry-web/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/template/.eslintignore": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/template/.eslintrc.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/template/LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/template/README.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/template/karma.conf.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/template/package.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/template/src/index.ts": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"packages/template/tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"renovate.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/peer-api-check.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/semconv/generate.sh": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/semconv/templates/SemanticAttributes.ts.j2": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"scripts/version-update.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tsconfig.base.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tsconfig.es5.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"tsconfig.json": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"webpack.node-polyfills.js": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"website_docs/_index.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"website_docs/getting_started/_index.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"website_docs/getting_started/browser.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"website_docs/getting_started/nodejs.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"website_docs/instrumentation.md": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"website_docs/instrumentation_examples.md": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 1,
+				"missingInPackage": 652,
+				"missingInSource": 12,
+				"score": 0.0014992503748125937,
+				"totalFiles": 667
+			}
+		},
+		"prodDependencies": []
+	}
+]
