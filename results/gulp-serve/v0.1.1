@@ -1,0 +1,449 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-28T14:41:30.969Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:12.2.3",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "gulp-serve@0.1.1",
+			"name": "gulp-serve",
+			"version": "0.1.1",
+			"location": "https://registry.npmjs.org/gulp-serve/-/gulp-serve-0.1.1.tgz",
+			"integrity": "sha512-zF6fjhk/rfl/7wTv1NwHfAMJ1/30fTLdlfn6E25ZOJutdqXYqYAwsXWjmD9QURdU71kvqCEWZ0TdWQnV5PWZwQ==",
+			"publishedAt": "2014-02-02T22:48:26.707Z",
+			"publishedWith": {
+				"node": null,
+				"npm": "1.3.24"
+			},
+			"dependencies": {
+				"gulp-util": "~2.2.12",
+				"connect": "~2.12.0"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git://github.com/hell0w0rd/gulp-serve.git",
+			"spec": "github:hell0w0rd/gulp-serve#HEAD"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".npmignore": {
+					"match": false,
+					"packageHash": "b6d5281f2e97bd8507de6697c0d40a8d87be62d9efba7371e1d1749b58cbbe68",
+					"size": 5,
+					"status": "missing-in-source"
+				},
+				"README.md": {
+					"diff": "--- published/README.md\n+++ rebuilt/README.md\n@@ -1,5 +1,7 @@\n gulp-serve\n ==========\n+[![Circle CI](https://circleci.com/gh/nkt/gulp-serve/tree/master.svg?style=svg)](https://circleci.com/gh/nkt/gulp-serve/tree/master)\n+[![Downloads](https://img.shields.io/npm/dm/gulp-serve.svg)](https://www.npmjs.com/package/gulp-serve)\n \n Provide connect-server functionality, using [connect.static](http://www.senchalabs.org/connect/static.html)\n \n@@ -19,15 +21,53 @@\n gulp.task('serve', serve('public'));\n gulp.task('serve-build', serve(['public', 'build']));\n gulp.task('serve-prod', serve({\n-    root: ['public', 'build'],\n-    port: 80,\n-    middleware: function(req, res) {\n-        // custom optional middleware\n-    }\n+  root: ['public', 'build'],\n+  port: 80,\n+  hostname: 'localhost',\n+  middleware: function(req, res) {\n+    // custom optional middleware\n+  }\n+}));\n+```\n+\n+With HTTPS enabled (using built-in key and certificate for `localhost`):\n+```js\n+var gulp = require('gulp');\n+var serve = require('gulp-serve');\n+\n+gulp.task('serve', serve('public'));\n+gulp.task('serve-build', serve(['public', 'build']));\n+gulp.task('serve-prod', serve({\n+  root: ['public', 'build'],\n+  port: 443,\n+  https: true,\n+  middleware: function(req, res) {\n+    // custom optional middleware\n+  }\n+}));\n+```\n+\n+With HTTPS enabled (using self provided key and certificate):\n+```js\n+var gulp = require('gulp');\n+var serve = require('gulp-serve');\n+\n+gulp.task('serve', serve('public'));\n+gulp.task('serve-build', serve(['public', 'build']));\n+gulp.task('serve-prod', serve({\n+  root: ['public', 'build'],\n+  port: 443,\n+  https: {\n+    key: 'path/to/cert.key',\n+    cert: 'path/to/cert.pem'\n+  },\n+  middleware: function(req, res) {\n+    // custom optional middleware\n+  }\n }));\n ```\n \n License\n =====\n \n-[MIT](http://opensource.org/licenses/MIT)\n+[![MIT](https://img.shields.io/npm/l/express.svg)](LICENSE)\n",
+					"match": false,
+					"packageHash": "3a0d793cfef6265468126f01aab9a8b157c5e3b0b9c9fc1b1ff4fa28a2e38609",
+					"size": 620,
+					"sourceHash": "aa53e20c9771d617d13bb68b3849eda524352bb1089fb6738249ac7ea1325abe",
+					"status": "content"
+				},
+				"index.js": {
+					"diff": "--- published/index.js\n+++ rebuilt/index.js\n@@ -1,17 +1,35 @@\n+var http = require('http');\n+var https = require('https');\n+var fs = require('fs');\n+var path = require('path');\n var util = require('gulp-util');\n var connect = require('connect');\n-var http = require('http');\n+var serveStatic = require('serve-static');\n \n module.exports = function (config) {\n   config || (config = {});\n   return function () {\n     var app = connect();\n-    if (typeof config !== 'object') {\n-      config = {root: config};\n+    if (typeof config === 'string') {\n+      config = {\n+        root: [config]\n+      };\n+    }\n+\n+    if (Array.isArray(config)) {\n+      config = {\n+        root: config\n+      };\n     }\n+\n     if (!config.root) {\n       config.root = ['.'];\n     }\n+\n+    if (!config.hostname) {\n+      config.hostname = 'localhost';\n+    }\n+\n     if (typeof config.root === 'string') {\n       config.root = [config.root];\n     }\n@@ -19,22 +37,41 @@\n     if (!config.middlewares) {\n       config.middlewares = [];\n     }\n+\n     if (config.middleware) {\n       config.middlewares.push(config.middleware);\n     }\n+\n     config.middlewares.forEach(function(middleware) {\n       app.use(middleware);\n     });\n \n     config.root.forEach(function (path) {\n-      app.use(connect.static(path));\n+      app.use(serveStatic(path));\n     });\n+\n     if (!config.port) {\n       config.port = 3000;\n     }\n \n-    http.createServer(app).listen(config.port, function () {\n-      util.log(util.colors.bgGreen('Server started on ' + config.port + ' port'));\n-    });\n+    var serverInitFunction = function () {\n+      var addr = server.address();\n+      var address = addr.address;\n+      var port = addr.port;\n+      var scheme = 'http' + (config.https ? 's' : '');\n+      util.log(util.colors.blue('Server started at ' + scheme + '://' + address + ':' + port));\n+    };\n+\n+    if (config.https) {\n+      var opts = {\n+        key: fs.readFileSync(config.https.key  || path.join(__dirname, 'ssl/localhost.key')),\n+        cert: fs.readFileSync(config.https.cert  || path.join(__dirname, 'ssl/localhost.pem')),\n+        ciphers: config.https.ciphers || 'EDH+CAMELLIA:EDH+aRSA:EECDH+aRSA+AESGCM:EECDH+aRSA+SHA384:EECDH+aRSA+SHA256:EECDH:+CAMELLIA256:+AES256:+CAMELLIA128:+AES128:+SSLv3:!aNULL:!eNULL:!LOW:!3DES:!MD5:!EXP:!PSK:!DSS:!RC4:!SEED:!ECDSA:CAMELLIA256-SHA:AES256-SHA:CAMELLIA128-SHA:AES128-SHA' // Intermediat Ciphers from https://wiki.mozilla.org/Security/Server_Side_TLS\n+      };\n+\n+      var server = https.createServer(opts, app).listen(config.port, config.hostname, serverInitFunction);\n+    } else {\n+      var server = http.createServer(app).listen(config.port, config.hostname, serverInitFunction);\n+    }\n   };\n-};\n\\ No newline at end of file\n+};\n",
+					"match": false,
+					"packageHash": "51c18a1b986da4c7d25f619f33114273b955a5ee0ab5c3f829b7d6b4f1ea98ad",
+					"size": 971,
+					"sourceHash": "d72b12d527e50613afaf63f28c8f927b4e34b8f8b96c3ed2202536148b6c45b4",
+					"status": "content"
+				},
+				"package.json": {
+					"diff": "--- published/package.json\n+++ rebuilt/package.json\n@@ -1,11 +1,11 @@\n {\n   \"name\": \"gulp-serve\",\n-  \"version\": \"0.1.1\",\n+  \"version\": \"1.4.0\",\n   \"description\": \"Serve your assets\",\n   \"main\": \"index.js\",\n   \"repository\": {\n     \"type\": \"git\",\n-    \"url\": \"git://github.com/hell0w0rd/gulp-serve.git\"\n+    \"url\": \"git://github.com/nkt/gulp-serve.git\"\n   },\n   \"keywords\": [\n     \"gulpfriendly\",\n@@ -24,13 +24,14 @@\n   \"license\": \"MIT\",\n   \"readmeFilename\": \"README.md\",\n   \"dependencies\": {\n-    \"gulp-util\": \"~2.2.12\",\n-    \"connect\": \"~2.12.0\"\n+    \"connect\": \"^3.4.1\",\n+    \"gulp-util\": \"^3.0.7\",\n+    \"serve-static\": \"^1.11.1\"\n   },\n   \"devDependencies\": {\n-    \"mocha\": \"~1.17.0\",\n-    \"should\": \"~3.1.0\",\n-    \"connect-livereload\": \"~0.3.2\"\n+    \"connect-livereload\": \"^0.5.4\",\n+    \"mocha\": \"2.5.3\",\n+    \"should\": \"9.0.2\"\n   },\n   \"scripts\": {\n     \"test\": \"mocha\"\n",
+					"match": false,
+					"packageHash": "467648ec7d0cda74876dcb5b9f97ee164fc36777f99276b05de7c1cda137981a",
+					"size": 739,
+					"sourceHash": "cb931cde53205e66bea4c67a44d13e6644f665589ea039f32bfeb2521a2ae10c",
+					"status": "content"
+				},
+				"test/fixtures/modified-response.txt": {
+					"diff": "--- published/test/fixtures/modified-response.txt\n+++ rebuilt/test/fixtures/modified-response.txt\n@@ -1,3 +1 @@\n-<html><body>test-string\n-<script type=\"text/javascript\">document.write('<script src=\"' + (location.protocol || 'http:') + '//' + (location.hostname || 'localhost') + ':35729/livereload.js?snipver=1\" type=\"text/javascript\"><\\/script>')</script>\n-</body></html>\n+<html><body>test-string<script src=\"//localhost:35729/livereload.js?snipver=1\" async=\"\" defer=\"\"></script></body></html>\n",
+					"match": false,
+					"packageHash": "4eb61b7ea3555477c38ce2746c7ca2d5eed497261ad24def8bd3631a5c01daa8",
+					"size": 258,
+					"sourceHash": "05419d6d404da38ae76b21b05b02fe41d95c21f3ef7c0c89b27d17117f146449",
+					"status": "content"
+				},
+				"test/main.js": {
+					"diff": "--- published/test/main.js\n+++ rebuilt/test/main.js\n@@ -1,5 +1,6 @@\n var serve = require('../');\n var http = require('http');\n+var https = require('https');\n var fs = require('fs');\n var should = require('should');\n \n@@ -42,6 +43,61 @@\n           },\n           function(res) {\n             res.on('data', function(body) {\n+              body.toString().should.equal(fixture);\n+              done();\n+            });\n+          }\n+        )\n+        .end();\n+    });\n+\n+    it('should allow using a specific hostname', function(done) {\n+      var fixture = fs.readFileSync('./test/fixtures/raw-response.txt').toString();\n+\n+      serve({\n+        hostname: '127.0.0.1',\n+        root: './test/server/',\n+        port: 3002,\n+      })();\n+\n+      http\n+        .request(\n+          {\n+            hostname: '127.0.0.1',\n+            port: 3002,\n+            method: 'GET',\n+            headers: {'accept': 'text/html'}\n+          },\n+          function(res) {\n+            res.on('data', function(body) {\n+              body.toString().should.equal(fixture);\n+              done();\n+            });\n+          }\n+        )\n+        .end();\n+    });\n+\n+    it('should serve content over https', function(done) {\n+      var fixture = fs.readFileSync('./test/fixtures/raw-response.txt').toString();\n+\n+      serve({\n+        root: './test/server/',\n+        port: 3003,\n+        https: true\n+      })();\n+\n+      https\n+        .request(\n+          {\n+            hostname: 'localhost',\n+            port: 3003,\n+            method: 'GET',\n+            headers: {'accept': 'text/html'},\n+            rejectUnauthorized: false // trust self signed cert\n+          },\n+          function(res) {\n+            res.on('data', function(body) {\n               body.toString().should.equal(fixture);\n               done();\n             });\n",
+					"match": false,
+					"packageHash": "925c0dadbd3627e5e473e1f0c569535f2ff6386e82e7e54b3d3b4a8bf7c6e17c",
+					"size": 1302,
+					"sourceHash": "835f7e5f979d0ef9a19c49080c6f2904ffc67a2e90bd38f812fa3e0781b33fe9",
+					"status": "content"
+				},
+				"LICENSE": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"ssl/localhost.key": {
+					"match": false,
+					"status": "missing-in-package"
+				},
+				"ssl/localhost.pem": {
+					"match": false,
+					"status": "missing-in-package"
+				}
+			},
+			"summary": {
+				"differentFiles": 5,
+				"matchingFiles": 2,
+				"missingInPackage": 3,
+				"missingInSource": 1,
+				"score": 0.18181818181818182,
+				"totalFiles": 11
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "ansi-gray",
+				"version": "0.1.1"
+			},
+			{
+				"name": "ansi-regex",
+				"version": "2.1.1"
+			},
+			{
+				"name": "ansi-styles",
+				"version": "2.2.1"
+			},
+			{
+				"name": "ansi-wrap",
+				"version": "0.1.0"
+			},
+			{
+				"name": "array-differ",
+				"version": "1.0.0"
+			},
+			{
+				"name": "array-uniq",
+				"version": "1.0.3"
+			},
+			{
+				"name": "beeper",
+				"version": "1.1.1"
+			},
+			{
+				"name": "chalk",
+				"version": "1.1.3"
+			},
+			{
+				"name": "clone",
+				"version": "1.0.4"
+			},
+			{
+				"name": "clone-stats",
+				"version": "0.0.1"
+			},
+			{
+				"name": "color-support",
+				"version": "1.1.3"
+			},
+			{
+				"name": "connect",
+				"version": "3.7.0"
+			},
+			{
+				"name": "core-util-is",
+				"version": "1.0.3"
+			},
+			{
+				"name": "dateformat",
+				"version": "2.2.0"
+			},
+			{
+				"name": "debug",
+				"version": "2.6.9"
+			},
+			{
+				"name": "depd",
+				"version": "2.0.0"
+			},
+			{
+				"name": "destroy",
+				"version": "1.2.0"
+			},
+			{
+				"name": "duplexer2",
+				"version": "0.0.2"
+			},
+			{
+				"name": "ee-first",
+				"version": "1.1.1"
+			},
+			{
+				"name": "encodeurl",
+				"version": "1.0.4"
+			},
+			{
+				"name": "escape-html",
+				"version": "1.0.3"
+			},
+			{
+				"name": "escape-string-regexp",
+				"version": "1.0.5"
+			},
+			{
+				"name": "etag",
+				"version": "1.8.1"
+			},
+			{
+				"name": "fancy-log",
+				"version": "1.3.3"
+			},
+			{
+				"name": "finalhandler",
+				"version": "1.1.2"
+			},
+			{
+				"name": "fresh",
+				"version": "0.5.2"
+			},
+			{
+				"name": "glogg",
+				"version": "1.0.2"
+			},
+			{
+				"name": "gulp-util",
+				"version": "3.0.8"
+			},
+			{
+				"name": "gulplog",
+				"version": "1.0.0"
+			},
+			{
+				"name": "has-ansi",
+				"version": "2.0.0"
+			},
+			{
+				"name": "has-gulplog",
+				"version": "0.1.0"
+			},
+			{
+				"name": "http-errors",
+				"version": "2.0.1"
+			},
+			{
+				"name": "statuses",
+				"version": "2.0.2"
+			},
+			{
+				"name": "inherits",
+				"version": "2.0.4"
+			},
+			{
+				"name": "isarray",
+				"version": "0.0.1"
+			},
+			{
+				"name": "lodash._basecopy",
+				"version": "3.0.1"
+			},
+			{
+				"name": "lodash._basetostring",
+				"version": "3.0.1"
+			},
+			{
+				"name": "lodash._basevalues",
+				"version": "3.0.0"
+			},
+			{
+				"name": "lodash._getnative",
+				"version": "3.9.1"
+			},
+			{
+				"name": "lodash._isiterateecall",
+				"version": "3.0.9"
+			},
+			{
+				"name": "lodash._reescape",
+				"version": "3.0.0"
+			},
+			{
+				"name": "lodash._reevaluate",
+				"version": "3.0.0"
+			},
+			{
+				"name": "lodash._reinterpolate",
+				"version": "3.0.0"
+			},
+			{
+				"name": "lodash._root",
+				"version": "3.0.1"
+			},
+			{
+				"name": "lodash.escape",
+				"version": "3.2.0"
+			},
+			{
+				"name": "lodash.isarguments",
+				"version": "3.1.0"
+			},
+			{
+				"name": "lodash.isarray",
+				"version": "3.0.4"
+			},
+			{
+				"name": "lodash.keys",
+				"version": "3.1.2"
+			},
+			{
+				"name": "lodash.restparam",
+				"version": "3.6.1"
+			},
+			{
+				"name": "lodash.template",
+				"version": "3.6.2"
+			},
+			{
+				"name": "lodash.templatesettings",
+				"version": "3.1.1"
+			},
+			{
+				"name": "mime",
+				"version": "1.6.0"
+			},
+			{
+				"name": "minimist",
+				"version": "1.2.8"
+			},
+			{
+				"name": "ms",
+				"version": "2.0.0"
+			},
+			{
+				"name": "multipipe",
+				"version": "0.1.2"
+			},
+			{
+				"name": "object-assign",
+				"version": "3.0.0"
+			},
+			{
+				"name": "on-finished",
+				"version": "2.3.0"
+			},
+			{
+				"name": "parse-node-version",
+				"version": "1.0.1"
+			},
+			{
+				"name": "parseurl",
+				"version": "1.3.3"
+			},
+			{
+				"name": "process-nextick-args",
+				"version": "2.0.1"
+			},
+			{
+				"name": "range-parser",
+				"version": "1.2.1"
+			},
+			{
+				"name": "readable-stream",
+				"version": "1.1.14"
+			},
+			{
+				"name": "replace-ext",
+				"version": "0.0.1"
+			},
+			{
+				"name": "safe-buffer",
+				"version": "5.1.2"
+			},
+			{
+				"name": "send",
+				"version": "0.19.2"
+			},
+			{
+				"name": "encodeurl",
+				"version": "2.0.3"
+			},
+			{
+				"name": "ms",
+				"version": "2.1.3"
+			},
+			{
+				"name": "on-finished",
+				"version": "2.4.2"
+			},
+			{
+				"name": "serve-static",
+				"version": "1.16.3"
+			},
+			{
+				"name": "setprototypeof",
+				"version": "1.2.0"
+			},
+			{
+				"name": "sparkles",
+				"version": "1.0.1"
+			},
+			{
+				"name": "statuses",
+				"version": "1.5.0"
+			},
+			{
+				"name": "string_decoder",
+				"version": "0.10.31"
+			},
+			{
+				"name": "strip-ansi",
+				"version": "3.0.1"
+			},
+			{
+				"name": "supports-color",
+				"version": "2.0.0"
+			},
+			{
+				"name": "through2",
+				"version": "2.0.5"
+			},
+			{
+				"name": "isarray",
+				"version": "1.0.0"
+			},
+			{
+				"name": "readable-stream",
+				"version": "2.3.8"
+			},
+			{
+				"name": "string_decoder",
+				"version": "1.1.1"
+			},
+			{
+				"name": "time-stamp",
+				"version": "1.1.0"
+			},
+			{
+				"name": "toidentifier",
+				"version": "1.0.1"
+			},
+			{
+				"name": "unpipe",
+				"version": "1.0.0"
+			},
+			{
+				"name": "util-deprecate",
+				"version": "1.0.2"
+			},
+			{
+				"name": "utils-merge",
+				"version": "1.0.1"
+			},
+			{
+				"name": "vinyl",
+				"version": "0.5.3"
+			},
+			{
+				"name": "xtend",
+				"version": "4.0.2"
+			}
+		]
+	}
+]
