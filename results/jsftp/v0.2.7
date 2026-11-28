@@ -1,0 +1,178 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-28T14:41:02.290Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:2.15.11",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "jsftp@0.2.7",
+			"name": "jsftp",
+			"version": "0.2.7",
+			"location": "https://registry.npmjs.org/jsftp/-/jsftp-0.2.7.tgz",
+			"integrity": "sha512-zCVPEsp/UMfkE4oYNnV36lA7+iyIIUzGSsS8iEMhTuRLZjuQ0D82WSnF6lFXJA/N48pIxmnlPsFd0zzNTNpXCA==",
+			"publishedAt": "2012-05-04T12:37:06.523Z",
+			"publishedWith": {
+				"node": "v0.6.16",
+				"npm": "1.1.19"
+			},
+			"dependencies": {
+				"gab": ">=0.0.1"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git://github.com/sergi/jsftp.git",
+			"spec": "github:sergi/jsftp#v0.2.7"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".c9revisions/jsftp.js.c9save": {
+					"match": false,
+					"packageHash": "a05f15c2db3b7bd2d3b6b4ddd57acaaecf70093b5bffebd4b59c6e70e7aa0445",
+					"size": 127347,
+					"status": "missing-in-source"
+				},
+				".c9revisions/jsftp_test.js.c9save": {
+					"match": false,
+					"packageHash": "d809e4bb98de5ef31defe3c9445d2781bc927f2016c2160ce438e4c44a8cb44f",
+					"size": 82712,
+					"status": "missing-in-source"
+				},
+				".c9revisions/lib/ftpParser.js.c9save": {
+					"match": false,
+					"packageHash": "04132a2664b68068407606b06dc0dc56a67dc1c219b3fb89170077bde85c0543",
+					"size": 9264,
+					"status": "missing-in-source"
+				},
+				".c9revisions/lib/ftpPasv.js.c9save": {
+					"match": false,
+					"packageHash": "cee00be95a8e93966f1d55537847d63f31f6e75a869223261e20ac197a3f132c",
+					"size": 3757,
+					"status": "missing-in-source"
+				},
+				".c9revisions/package.json.c9save": {
+					"match": false,
+					"packageHash": "ac973a032e088607a124085c3c39f6b78d62e5771ae0a9b1501b82b1e959adbc",
+					"size": 1354,
+					"status": "missing-in-source"
+				},
+				".c9revisions/support/gab/gab.js.c9save": {
+					"match": false,
+					"packageHash": "28145077e9a0e6f9d3c1cbd8596ad681a5023ecfad0ac2f99bceed7d6830b95c",
+					"size": 11456,
+					"status": "missing-in-source"
+				},
+				".c9revisions/test.js.c9save": {
+					"match": false,
+					"packageHash": "f8232fd816928738dc0ea24b1f72c533fee08e3d5f18860fcd9752a70a724596",
+					"size": 571,
+					"status": "missing-in-source"
+				},
+				".npmignore": {
+					"match": false,
+					"packageHash": "9f17fbca036c7a1350fdb02d9184ab1080e057eb2153063179f1eca93761a62f",
+					"size": 15,
+					"status": "missing-in-source"
+				},
+				".settings": {
+					"match": false,
+					"packageHash": "ac4ecddc0e5895676f9821a67faf60d3a432b304d25cbea5b7b6eb4739b52ea4",
+					"size": 7114,
+					"status": "missing-in-source"
+				},
+				".settings.xml": {
+					"match": false,
+					"packageHash": "8abe8fde4bbca6ab13b62f399e3725335ec2853859ef10effe2c78e9966dd7cd",
+					"size": 4833,
+					"status": "missing-in-source"
+				},
+				"jsftp_test.js": {
+					"diff": "--- published/jsftp_test.js\n+++ rebuilt/jsftp_test.js\n@@ -17,10 +17,10 @@\n // FTP server. If you want to test against a remote server, simply change the\n // `host` and `port` properties as well.\n var FTPCredentials = {\n-    host: \"CN20081656.p-client.net\",\n-    user: \"danielatest\",\n+    host: \"\",\n+    user: \"\",\n     port: 21,\n-    pass: \"test1324\"\n+    pass: \"\"\n };\n \n var CWD = process.cwd();\n@@ -100,66 +100,66 @@\n \n     \"test print working directory\": function(next) {\n         var ftp = this.ftp;\n-        ftp.raw.pwd(function(err, res) {\n-            if (err) throw err;\n+            ftp.raw.pwd(function(err, res) {\n+                if (err) throw err;\n \n-            var code = parseInt(res.code, 10);\n-            assert.ok(code === 257, \"PWD command was not successful\");\n+                var code = parseInt(res.code, 10);\n+                assert.ok(code === 257, \"PWD command was not successful\");\n \n-            ftp.raw.quit(function(err, res) {\n-                if (err) throw err;\n+                ftp.raw.quit(function(err, res) {\n+                    if (err) throw err;\n \n-                next();\n+                    next();\n+                });\n             });\n-        });\n     },\n     \"test current working directory\": function(next) {\n         var ftp = this.ftp;\n-        ftp.raw.cwd(remoteCWD, function(err, res) {\n-            if (err) throw err;\n-\n-            var code = parseInt(res.code, 10);\n-            assert.ok(code === 200 || code === 250, \"CWD command was not successful\");\n-\n-            ftp.raw.pwd(function(err, res) {\n+            ftp.raw.cwd(remoteCWD, function(err, res) {\n                 if (err) throw err;\n \n                 var code = parseInt(res.code, 10);\n-                assert.ok(code === 257, \"PWD command was not successful\");\n-                assert.ok(res.text.indexOf(remoteCWD), \"Unexpected CWD\");\n-            });\n+                assert.ok(code === 200 || code === 250, \"CWD command was not successful\");\n \n-            ftp.raw.cwd(\"/unexistentDir/\", function(err, res) {\n-                  if (err)\n-                      assert.ok(err);\n-                  else {\n-                    code = parseInt(res.code, 10);\n-                    assert.ok(code === 550, \"A (wrong) CWD command was successful. It should have failed\");\n-                  }\n-                next();\n+                ftp.raw.pwd(function(err, res) {\n+                    if (err) throw err;\n+\n+                    var code = parseInt(res.code, 10);\n+                    assert.ok(code === 257, \"PWD command was not successful\");\n+                    assert.ok(res.text.indexOf(remoteCWD), \"Unexpected CWD\");\n+                });\n+\n+                ftp.raw.cwd(\"/unexistentDir/\", function(err, res) {\n+                \t  if (err)\n+                \t  \t  assert.ok(err);\n+                \t  else {\n+                        code = parseInt(res.code, 10);\n+                        assert.ok(code === 550, \"A (wrong) CWD command was successful. It should have failed\");\n+                \t  }\n+                    next();\n+                });\n             });\n-        });\n     },\n     \"test passive listing of current directory\": function(next) {\n         this.ftp.list(remoteCWD, function(err, res){\n-            assert.ok(!err, err);\n-            next();\n-        });\n+                assert.ok(!err, err);\n+                next();\n+            });\n     },\n \n     \"test ftp node stat\": function(next) {\n         var ftp = this.ftp;\n-        ftp.raw.pwd(function(err, res) {\n",
+					"match": false,
+					"packageHash": "464d7cc5f96efd0ffd37db3dcaa7a95972f05b1498c7dff287c5bf8f6ac6ce4f",
+					"size": 12306,
+					"sourceHash": "016362114180b41910411b4cd9b69e09403d417df6c7d60da31ad9ba49fded05",
+					"status": "content"
+				},
+				"support/gab/LICENSE": {
+					"match": false,
+					"packageHash": "2c966ac6859da6a9eb94f11744db7a374d3ab781473282bfcbf02e1e948a4f9f",
+					"size": 1097,
+					"status": "missing-in-source"
+				},
+				"support/gab/examples/ftp.js": {
+					"match": false,
+					"packageHash": "48c5017e562eb24dd41bc15d45ab6b3f6022ac79ad7adc9c26dbb676b1ff3543",
+					"size": 1089,
+					"status": "missing-in-source"
+				},
+				"support/gab/examples/jsftp.js": {
+					"match": false,
+					"packageHash": "291a689566e6e0a4b3978217e655266a3b1113e70c6d1709c2febd2e7fb35a6a",
+					"size": 6637,
+					"status": "missing-in-source"
+				},
+				"support/gab/gab.js": {
+					"match": false,
+					"packageHash": "231e56d67210ef51a622f9ad80dd9d6b48c0951c7f21f8773670346a2f66a9c1",
+					"size": 6119,
+					"status": "missing-in-source"
+				},
+				"support/gab/package.json": {
+					"match": false,
+					"packageHash": "05b3b39059dd9614cb0644708daa9d2ae42829ed8f465be83df33b92566d33a6",
+					"size": 713,
+					"status": "missing-in-source"
+				},
+				"test.js": {
+					"match": false,
+					"packageHash": "5217dbb98c0c78c13b407bba3483dc2a3c3b16592ccf877c1301ca816a780168",
+					"size": 367,
+					"status": "missing-in-source"
+				},
+				"testfile.txt": {
+					"match": false,
+					"packageHash": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+					"size": 4,
+					"status": "missing-in-source"
+				},
+				"testfile1.txt": {
+					"match": false,
+					"packageHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+					"size": 0,
+					"status": "missing-in-source"
+				},
+				"testfile2.txt": {
+					"match": false,
+					"packageHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+					"size": 0,
+					"status": "missing-in-source"
+				},
+				"testfile3.txt": {
+					"match": false,
+					"packageHash": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+					"size": 4,
+					"status": "missing-in-source"
+				}
+			},
+			"summary": {
+				"differentFiles": 1,
+				"matchingFiles": 7,
+				"missingInPackage": 0,
+				"missingInSource": 20,
+				"score": 0.25,
+				"totalFiles": 28
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "gab",
+				"version": "0.0.2"
+			}
+		]
+	}
+]

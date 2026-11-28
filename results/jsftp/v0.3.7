@@ -1,0 +1,160 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-28T14:39:59.181Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:12.2.3",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "jsftp@0.3.7",
+			"name": "jsftp",
+			"version": "0.3.7",
+			"location": "https://registry.npmjs.org/jsftp/-/jsftp-0.3.7.tgz",
+			"integrity": "sha512-diNV9dXrZHA31UwkhDWeGbWIOXZJJwlBDmW9+Dn5d/IXzeRrzGHHtnkZr1+6YrvvRdk2FbmdZW4VpXyV3Ie2ZA==",
+			"publishedAt": "2012-08-03T14:56:05.539Z",
+			"publishedWith": {
+				"node": null,
+				"npm": null
+			},
+			"dependencies": {
+				"streamer": "0.2.x"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "https://github.com/sergi/jsftp.git",
+			"spec": "github:sergi/jsftp#v0.3.7"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".c9revisions/README.md.c9save": {
+					"match": false,
+					"packageHash": "156fd3ba57a26a4268eee9620da83402c663333dfd9cf341a466afae3a87ef03",
+					"size": 6188,
+					"status": "missing-in-source"
+				},
+				".c9revisions/jsftp.js.c9save": {
+					"match": false,
+					"packageHash": "3c63d8f56972190dd4a786bf6f46f29ba56b535a80c6d2369bf2fede7795ed36",
+					"size": 247955,
+					"status": "missing-in-source"
+				},
+				".c9revisions/jsftp_test.js.c9save": {
+					"match": false,
+					"packageHash": "e2b687ac3c898811d3401a80825ea9df4e6be61f248f4b02dac4bb61fff068a0",
+					"size": 113530,
+					"status": "missing-in-source"
+				},
+				".c9revisions/lib/ftpParser.js.c9save": {
+					"match": false,
+					"packageHash": "04132a2664b68068407606b06dc0dc56a67dc1c219b3fb89170077bde85c0543",
+					"size": 9264,
+					"status": "missing-in-source"
+				},
+				".c9revisions/lib/ftpPasv.js.c9save": {
+					"match": false,
+					"packageHash": "cee00be95a8e93966f1d55537847d63f31f6e75a869223261e20ac197a3f132c",
+					"size": 3757,
+					"status": "missing-in-source"
+				},
+				".c9revisions/node_modules/gab/gab.js.c9save": {
+					"match": false,
+					"packageHash": "51cd552316a2b05adcb3d6479f9094bbc3674532bc4d725a66991e103353d8ce",
+					"size": 7341,
+					"status": "missing-in-source"
+				},
+				".c9revisions/package.json.c9save": {
+					"match": false,
+					"packageHash": "ac973a032e088607a124085c3c39f6b78d62e5771ae0a9b1501b82b1e959adbc",
+					"size": 1354,
+					"status": "missing-in-source"
+				},
+				".c9revisions/support/gab/gab.js.c9save": {
+					"match": false,
+					"packageHash": "28145077e9a0e6f9d3c1cbd8596ad681a5023ecfad0ac2f99bceed7d6830b95c",
+					"size": 11456,
+					"status": "missing-in-source"
+				},
+				".c9revisions/test.js.c9save": {
+					"match": false,
+					"packageHash": "f8232fd816928738dc0ea24b1f72c533fee08e3d5f18860fcd9752a70a724596",
+					"size": 571,
+					"status": "missing-in-source"
+				},
+				".npmignore": {
+					"match": false,
+					"packageHash": "9f17fbca036c7a1350fdb02d9184ab1080e057eb2153063179f1eca93761a62f",
+					"size": 15,
+					"status": "missing-in-source"
+				},
+				".settings": {
+					"match": false,
+					"packageHash": "13858dac14bfd0dc4bfc24f7f1c7eb3b069d6dd4a552e535a37377402e10b31f",
+					"size": 3401,
+					"status": "missing-in-source"
+				},
+				".settings.xml": {
+					"match": false,
+					"packageHash": "8abe8fde4bbca6ab13b62f399e3725335ec2853859ef10effe2c78e9966dd7cd",
+					"size": 4833,
+					"status": "missing-in-source"
+				},
+				"jsftp_test.js": {
+					"diff": "--- published/jsftp_test.js\n+++ rebuilt/jsftp_test.js\n@@ -17,10 +17,10 @@\n // FTP server. If you want to test against a remote server, simply change the\n // `host` and `port` properties as well.\n var FTPCredentials = {\n-    host: \"sergimansilla.com\",\n-    user: \"fjakobs\",\n+    host: \"localhost\",\n+    user: \"\",\n     port: 21,\n-    pass: \"cb43494\"\n+    pass: \"\"\n };\n \n var CWD = process.cwd();\n@@ -251,21 +251,21 @@\n         var localPath = CWD + \"/\" + fileName;\n         var remotePath = remoteCWD + \"/\" + fileName + \".test\";\n \n-        Fs.readFile(localPath, \"binary\", function(err, data) {\n-            var buffer = new Buffer(data, \"binary\");\n-            ftp.put(remotePath, buffer, function(err, res) {\n-                assert.ok(!err, err);\n-                ftp.get(remotePath, function(err, data) {\n+            Fs.readFile(localPath, \"binary\", function(err, data) {\n+                var buffer = new Buffer(data, \"binary\");\n+                ftp.put(remotePath, buffer, function(err, res) {\n                     assert.ok(!err, err);\n+                    ftp.get(remotePath, function(err, data) {\n+                        assert.ok(!err, err);\n \n-                    assert.equal(buffer.length, data.length);\n-                    ftp.raw.dele(remotePath, function(err, data) {\n-                        assert.ok(!err);\n-                        next();\n+                        assert.equal(buffer.length, data.length);\n+                        ftp.raw.dele(remotePath, function(err, data) {\n+                            assert.ok(!err);\n+                            next();\n+                        });\n                     });\n                 });\n             });\n-        });\n     },\n \n     \"test get two files synchronously\": function(next) {\n@@ -273,21 +273,21 @@\n         var filePath = remoteCWD + \"/testfile.txt\";\n         var counter = 0;\n \n-        ftp.put(filePath, new Buffer(\"test\"), handler);\n-        ftp.get(filePath, function(err, data) {\n-            assert.ok(!err, err);\n-            assert.ok(data);\n-        });\n+            ftp.put(filePath, new Buffer(\"test\"), handler);\n+            ftp.get(filePath, function(err, data) {\n+                assert.ok(!err, err);\n+                assert.ok(data);\n+            });\n \n-        ftp.put(filePath, new Buffer(\"test\"), handler);\n-        ftp.get(filePath, function(err, data) {\n-            assert.ok(!err, err);\n-            assert.ok(data);\n+            ftp.put(filePath, new Buffer(\"test\"), handler);\n+            ftp.get(filePath, function(err, data) {\n+                    assert.ok(!err, err);\n+                    assert.ok(data);\n             assert.equal(counter, 2);\n             next();\n-        });\n+            });\n \n-        function handler() { counter++;};\n+            function handler() { counter++; };\n     },\n \n     \"test get fileList array\": function(next) {\n",
+					"match": false,
+					"packageHash": "0736e1fd32f708d65ca6cc8694abb02f1e8ee8db39ba3d73ffaa27a7aa05a4a8",
+					"size": 13234,
+					"sourceHash": "a501108be9323d56236aa60d44e2485aad96db5ec5d81798890fd384fe38a2db",
+					"status": "content"
+				},
+				"test.js": {
+					"match": false,
+					"packageHash": "2bb5cc1a28ec86241beb1b1795c0ae9fce5a9e1330a4b6e32f74e6306577e6f4",
+					"size": 40,
+					"status": "missing-in-source"
+				},
+				"testfile.txt": {
+					"match": false,
+					"packageHash": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+					"size": 4,
+					"status": "missing-in-source"
+				},
+				"testfile1.txt": {
+					"match": false,
+					"packageHash": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+					"size": 4,
+					"status": "missing-in-source"
+				},
+				"testfile2.txt": {
+					"match": false,
+					"packageHash": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+					"size": 4,
+					"status": "missing-in-source"
+				},
+				"testfile3.txt": {
+					"match": false,
+					"packageHash": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+					"size": 4,
+					"status": "missing-in-source"
+				}
+			},
+			"summary": {
+				"differentFiles": 1,
+				"matchingFiles": 6,
+				"missingInPackage": 0,
+				"missingInSource": 17,
+				"score": 0.25,
+				"totalFiles": 24
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "streamer",
+				"version": "0.2.1"
+			}
+		]
+	}
+]

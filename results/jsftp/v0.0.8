@@ -1,0 +1,210 @@
+[
+	{
+		"reproduceVersion": "0.0.0-local",
+		"timestamp": "2026-11-28T14:39:35.640Z",
+		"os": "linux",
+		"arch": "x64",
+		"strategy": "npm:2.15.11",
+		"reproduced": false,
+		"attested": false,
+		"package": {
+			"spec": "jsftp@0.0.8",
+			"name": "jsftp",
+			"version": "0.0.8",
+			"location": "https://registry.npmjs.org/jsftp/-/jsftp-0.0.8.tgz",
+			"integrity": "sha512-2Y/YcgOAztHJ0r2NQnKRTeQSIsep5XISKPzVlC4g7Ct7q2AXyKo7iEGUYAa4xeZNOYhpZgE8e3s2XL/kyvr0ag==",
+			"publishedAt": "2011-08-10T10:33:12.805Z",
+			"publishedWith": {
+				"node": "v0.4.6",
+				"npm": "1.0.0rc8"
+			},
+			"dependencies": {
+				"streamer": "=0.0.4"
+			}
+		},
+		"source": {
+			"integrity": null,
+			"location": "git://github.com/sergi/jsftp.git",
+			"spec": "github:sergi/jsftp#0.0.8"
+		},
+		"comparisonHash": "9ef46a5bd31291e57cbab41e2f17c57bd6da0b5b",
+		"diff": {
+			"files": {
+				".gitignore": {
+					"match": false,
+					"packageHash": "9f17fbca036c7a1350fdb02d9184ab1080e057eb2153063179f1eca93761a62f",
+					"size": 15,
+					"status": "missing-in-source"
+				},
+				"jsftp.js": {
+					"diff": "--- published/jsftp.js\n+++ rebuilt/jsftp.js\n@@ -83,15 +83,8 @@\n      * once that one is received\n      */\n     this.push = function(command, callback) {\n-        var self = this;\n-        console.trace();\n         function send() {\n             cmd([command, callback]);\n-            console.log(\"THE COMMAND:\", \"'\"+command+\"'\");\n-            if (command === \"stat \"){\n-                console.trace();\n-                command = command+\"/\"\n-            }\n             socket.write(command + \"\\r\\n\");\n         }\n \n@@ -103,11 +96,7 @@\n             console.log(\"Reopening socket...\")\n             socket = this._createSocket(this.port, this.host, function() {\n                 createStreams();\n-\n-                if (self.authenticated)\n-                    self.auth(self.user, self.pass, function(err, data) {\n-                        if (!err) send();\n-                    });\n+                send()\n                 //self.auth(self.currentUser, self.currentPass, send);\n             });\n         }\n@@ -145,6 +134,7 @@\n     };\n \n     createStreams();\n+\n     this.cmd = cmd;\n };\n \n@@ -355,13 +345,10 @@\n                 if ([230, 331, 332].indexOf(res.code) > -1) {\n                     self.raw.pass(pass, function(err, res) {\n                         if ([230, 202].indexOf(res.code) > -1) {\n-                            this.authenticated = true;\n-                            this.user = user;\n-                            this.pass = pass;\n                             callback(null, res);\n                         }\n                         else if (res.code === 332) {\n-                            self.raw.acct(\"\"); // ACCT not really supported\n+                            self.raw.acct(\"noaccount\");\n                         }\n                         else {\n                             callback(new Error(\"Login not accepted\"));\n",
+					"match": false,
+					"packageHash": "1aea08057b61fb743c9ca3f29b5119fc447c8793117f076ac56274794d5de541",
+					"size": 16965,
+					"sourceHash": "ec6430bfb8df268fce808ec8b7822f571da1dcfb62c3bb4e7fbf4fcaef81dccd",
+					"status": "content"
+				},
+				"jsftp_test.js": {
+					"diff": "--- published/jsftp_test.js\n+++ rebuilt/jsftp_test.js\n@@ -14,10 +14,10 @@\n // FTP server. If you want to test against a remote server, simply change the\n // `host` and `port` properties as well.\n var FTPCredentials = {\n-    host: \"sergimansilla.com\",\n-    user: \"mrclash\",\n+    host: \"localhost\",\n+    user: \"\",\n     port: 21,\n-    pass: \"ketu48\"\n+    pass: \"\"\n };\n \n var CWD = process.cwd();\n@@ -83,7 +83,7 @@\n         });\n     },\n \n-    \">test print working directory\": function(next) {\n+    \"test print working directory\": function(next) {\n         var ftp = this.ftp;\n         ftp.auth(FTPCredentials.user, FTPCredentials.pass, function(err, res) {\n             ftp.raw.pwd(function(err, res) {\n",
+					"match": false,
+					"packageHash": "caab055421607ba72bab2ba29ead6053ee80c1f86d708434b126601125abe9d6",
+					"size": 9906,
+					"sourceHash": "37243fece1862716205aaed9b53dd84308aa478dab7651e99b8de77b51e555ad",
+					"status": "content"
+				},
+				"support/streamer/.gitignore": {
+					"match": false,
+					"packageHash": "dba27c31aad935787bb275c3e5e4e957708f15386de599eff1db476022cd7e4c",
+					"size": 12,
+					"status": "missing-in-source"
+				},
+				"support/streamer/History.md": {
+					"match": false,
+					"packageHash": "2112835f85e8845eb0ecf7dd9fceae6687489480a5d9448968629d8962c21de9",
+					"size": 551,
+					"status": "missing-in-source"
+				},
+				"support/streamer/Readme.md": {
+					"match": false,
+					"packageHash": "f91bfeec7136a3d814b2dc275c0b01eb03412aa7c8d459e715b8507b4450bbe6",
+					"size": 885,
+					"status": "missing-in-source"
+				},
+				"support/streamer/demos/axis.html": {
+					"match": false,
+					"packageHash": "b6d2d1b738846d94d1b1ca9d732ea83eb31ab454b8b73e74fc36c3de9b3aee85",
+					"size": 1817,
+					"status": "missing-in-source"
+				},
+				"support/streamer/docs/docco.css": {
+					"match": false,
+					"packageHash": "75f8cb448d0ab1d6b9d0fb9b430860387b3caf593ffdddcf313a95be97e454fd",
+					"size": 7101,
+					"status": "missing-in-source"
+				},
+				"support/streamer/docs/readme.html": {
+					"match": false,
+					"packageHash": "bc43a08b5cb8ada261f52dfa254837528150f62ba9746bb7640b6fa037ea7236",
+					"size": 60240,
+					"status": "missing-in-source"
+				},
+				"support/streamer/package.json": {
+					"match": false,
+					"packageHash": "9842f22108e39299ffa646261e55399733f70e9aa817044ff0524a6182f804c6",
+					"size": 823,
+					"status": "missing-in-source"
+				},
+				"support/streamer/readme.js": {
+					"match": false,
+					"packageHash": "d415e98900c2dacd22170fa13840aded4a9854d1d5bfe195f4d88db8b45222df",
+					"size": 13292,
+					"status": "missing-in-source"
+				},
+				"support/streamer/streamer.js": {
+					"match": false,
+					"packageHash": "3680a30f448fda209acb4ef0bdb62f6fae808fcd3edee2fe2290ee5f7da76641",
+					"size": 15036,
+					"status": "missing-in-source"
+				},
+				"support/streamer/tests/append.js": {
+					"match": false,
+					"packageHash": "0406c19cdad0cff6f36b04c5e2ce9826f11a32719455d38161ffa70df721a2cf",
+					"size": 3560,
+					"status": "missing-in-source"
+				},
+				"support/streamer/tests/assert.js": {
+					"match": false,
+					"packageHash": "b27f2df7030578aa8a103378d309734312b7313846e6f74f7b71898a6fcdab2f",
+					"size": 1334,
+					"status": "missing-in-source"
+				},
+				"support/streamer/tests/cache.js": {
+					"match": false,
+					"packageHash": "1f2d8f183cde3f9d56a6201685066ab0f50057a2370e94e8f06cb53e0a3f1036",
+					"size": 3804,
+					"status": "missing-in-source"
+				},
+				"support/streamer/tests/filter.js": {
+					"match": false,
+					"packageHash": "e1b54039fc543c76da5fe151455e7d173fa1a9a4eaf013a5ccca55ac4f35371a",
+					"size": 2564,
+					"status": "missing-in-source"
+				},
+				"support/streamer/tests/head.js": {
+					"match": false,
+					"packageHash": "83ea42f90916826334df4b157e801da680ae399283f1525b6dbaef5ab9b73c99",
+					"size": 2060,
+					"status": "missing-in-source"
+				},
+				"support/streamer/tests/hub.js": {
+					"match": false,
+					"packageHash": "9870e3c0dfcde14f9a7b43d91460b5b1061bd250b0c12f152ebc67f274cad2a4",
+					"size": 3168,
+					"status": "missing-in-source"
+				},
+				"support/streamer/tests/list.js": {
+					"match": false,
+					"packageHash": "27a1646c455b1e1b23cd07ff040d46dd88a1a26f0edabd8638c42e4f63b69c8d",
+					"size": 1263,
+					"status": "missing-in-source"
+				},
+				"support/streamer/tests/map.js": {
+					"match": false,
+					"packageHash": "caf15b2b2f911e7d1e9615d74fba9a34eb16d45a8a297cd603cb305b43efdfc5",
+					"size": 2531,
+					"status": "missing-in-source"
+				},
+				"support/streamer/tests/merge.js": {
+					"match": false,
+					"packageHash": "c747bc05afb9f636164d0cf52fd8909d4196f00eca2f7c837519c72d0ccc6803",
+					"size": 3612,
+					"status": "missing-in-source"
+				},
+				"support/streamer/tests/reduce.js": {
+					"match": false,
+					"packageHash": "acdbb7b27499f612e5cd3a788eb8eccac30ed749f4a054b48b67f2a4158ddff9",
+					"size": 1907,
+					"status": "missing-in-source"
+				},
+				"support/streamer/tests/tail.js": {
+					"match": false,
+					"packageHash": "711e576ac13f3eb39b209c65b473583084593ec08fa48985667cdf3462a0041d",
+					"size": 2255,
+					"status": "missing-in-source"
+				},
+				"support/streamer/tests/test-streamer.js": {
+					"match": false,
+					"packageHash": "18cd063ddb39327022573a89665ad2bccb0ebbbb9f6b03e96219eaa008178426",
+					"size": 880,
+					"status": "missing-in-source"
+				},
+				"support/streamer/tests/utils.js": {
+					"match": false,
+					"packageHash": "0339387f88ad07a983a706502d3a3558c508353634f32537ecbde35c88bf74be",
+					"size": 1152,
+					"status": "missing-in-source"
+				},
+				"support/streamer/tests/zip.js": {
+					"match": false,
+					"packageHash": "133e769cf6f74a128109bc6766529085c525a646670c3ce2384192f0fbe08348",
+					"size": 3157,
+					"status": "missing-in-source"
+				}
+			},
+			"summary": {
+				"differentFiles": 2,
+				"matchingFiles": 7,
+				"missingInPackage": 0,
+				"missingInSource": 24,
+				"score": 0.21212121212121213,
+				"totalFiles": 33
+			}
+		},
+		"prodDependencies": [
+			{
+				"name": "streamer",
+				"version": "0.0.4"
+			}
+		]
+	}
+]
